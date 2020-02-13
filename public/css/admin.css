@@ -1,0 +1,109 @@
+#admin-page {
+  background-color: #354149;
+}
+
+#admin-main {
+  background-color: #eeeeee;
+}
+
+#admin-page table.table tr td {
+  vertical-align: middle;
+}
+
+.row {
+  max-width: 100%;
+}
+
+#main-container.container-fluid {
+  padding: 0px;
+}
+
+.sidebar {
+  height: 100%;
+  background-color: #354149;
+  min-height: 100vh;
+  padding-right: 0px;
+}
+
+.sidebar-sub-list {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  background-color: #354149;
+  width: 150px;
+  padding: 5px 0;
+  z-index: 1;
+}
+
+.sidebar-sub-list .sidebar-list-item {
+  text-align: left;
+  padding: 5px 15px;
+}
+
+.sidebar-list {
+  padding: 0;
+}
+
+.sidebar-list-item {
+  cursor: pointer;
+  list-style: none;
+  color: #fff;
+  text-align: center;
+  font-size: 12px;
+  padding: 10px 15px 5px;
+  display: inline-block;
+  width: 100%;
+  position: relative;
+}
+
+.sidebar-list-item:hover ul.sidebar-sub-list,
+.sidebar-list-item ul.sidebar-sub-list:hover {
+  display: block;
+}
+
+.sidebar-list-item a {
+  color: #fff;
+}
+
+.sidebar-list-item .icon {
+  background: #fff;
+  width: 60%;
+  padding-bottom: 60%;
+  height: 0px;
+  margin: 0 auto 5px;
+  border-radius: 50%;
+}
+
+.sidebar-list-item:hover {
+  color: #ff9c00;
+}
+
+#version {
+  font-size: 10px;
+  text-align: center;
+  color: #fff;
+  margin-top: 80px;
+}
+
+#top-nav {
+  background: #f9f9f9;
+  height: 40px;
+  width: 100%;
+}
+
+.breadcrumbs ul {
+  padding: 0;
+}
+
+.breadcrumbs ul li {
+  display: inline-block;
+  list-style: none;
+  font-size: 12px;
+  padding: 10px;
+}
+
+.breadcrumbs ul li a {
+  color: #212529;
+}
+

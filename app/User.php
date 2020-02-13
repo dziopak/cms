@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Auth;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -16,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'file_id', 'role_id',
     ];
 
     /**
@@ -39,5 +40,27 @@ class User extends Authenticatable
 
     public function role() {
         return $this->belongsTo('App\Role');
+    }
+
+    public function photo() {
+        return $this->belongsTo('App\File', 'avatar');
+    }
+
+    public function hasAccess($permission) {
+        if (Auth::check()) {
+            $user = Auth::user();
+            if ($user->role_id == "99") {
+                return true;
+            } else {
+                $access = unserialize($user->role->access);
+                if (in_array($permission, $access)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        } else {
+            return false;
+        }
     }
 }

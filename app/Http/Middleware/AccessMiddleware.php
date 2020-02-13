@@ -16,16 +16,20 @@ class AccessMiddleware
      */
     public function handle($request, Closure $next, $permission)
     {
-        $user = Auth::user();
-        if ($user->role_id == "99") {
-            return $next($request);
-        } else {
-            $access = unserialize($user->role->access);
-            if (in_array($permission, $access)) {
+        if (Auth::check()) {
+            $user = Auth::user();
+            if ($user->role_id == "99") {
                 return $next($request);
             } else {
-                return redirect("/");
+                $access = unserialize($user->role->access);
+                if (in_array($permission, $access)) {
+                    return $next($request);
+                } else {
+                    return redirect("/");
+                }
             }
+        } else {
+            return redirect("/login");
         }
     }
 }
