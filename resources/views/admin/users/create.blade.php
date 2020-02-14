@@ -18,6 +18,8 @@
 
                 {!! Form::open(['method' => 'POST', 'action' => 'AdminUsersController@store', 'files' => 'true']) !!}
         
+                @include('admin.partials.validation')
+
                 <div class="form-group row">
                     <div class="col-sm-6">
                         {!! Form::label('name', 'Username: ') !!}
@@ -73,8 +75,6 @@
                 <div class="form-group">
                     {!! Form::submit('Create', ['class' => 'btn btn-success']) !!}
                 </div>
-
-                @include('admin.partials.validation')
 
                 {!! Form::close() !!}
             </div>
