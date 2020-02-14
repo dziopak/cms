@@ -42,7 +42,9 @@
                         <td>{{$user->created_at->diffForHumans()}}</td>
                         
                         @if (Auth::user()->hasAccess('USERS_EDIT'))
-                            <td>E</td>
+                            <td>
+                                <a href="{{route('admin.users.edit', $user->id)}}">E</a>
+                            </td>
                         @endif
 
                         @if (Auth::user()->hasAccess('USERS_DELETE'))
