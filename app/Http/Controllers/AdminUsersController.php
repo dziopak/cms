@@ -137,6 +137,16 @@ class AdminUsersController extends Controller
         return redirect(route('admin.users.index'));
     }
 
+
+    public function delete($id) {
+        $user = User::findOrFail($id);
+        $logs = $user->account_logs()->take(5)->orderBy('created_at', 'desc')->get();
+
+        $role = new Role;
+        $roles = $role->get_all_roles();
+        return view('admin.users.delete', compact('user', 'logs', 'roles'));
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -145,6 +155,8 @@ class AdminUsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect(route('admin.users.index'));
     }
 }

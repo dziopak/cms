@@ -33,7 +33,6 @@
             @if ($users)
                 @foreach($users as $user)
                     <tr>
-                        {{-- <td></td> --}}
                         <td><img width="60" src="/images/avatars/{{$user->photo->path}}" alt="avatar"></td>
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
@@ -48,7 +47,7 @@
                         @endif
 
                         @if (Auth::user()->hasAccess('USERS_DELETE'))
-                            <td>D</td>
+                            <td><a href="{{route('admin.users.delete', $user->id)}}">D</a></td>
                         @endif
                     </tr>
                 @endforeach

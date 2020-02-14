@@ -90,7 +90,7 @@
                     </div>
                 </div>
 
-                <div class="row py-3">
+                <div class="row py-3 pr-3">
                     @yield('content')
                 </div>
             </div>

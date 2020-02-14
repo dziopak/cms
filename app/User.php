@@ -71,4 +71,13 @@ class User extends Authenticatable
             return false;
         }
     }
+
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($user) {
+            $user->logs()->delete();
+            $user->account_logs()->delete();
+        });
+    }
 }

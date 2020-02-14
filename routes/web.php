@@ -17,12 +17,17 @@ Route::group(['prefix' => '/'], function () {
     });
 });
 
+//Backoffice routes
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'access:ADMIN_VIEW'], function () {
+    
     Route::get('/', function() {
         return view('admin.dashboard.index');
     })->name('dashboard.index');
     
-    Route::resource('/users', 'AdminUsersController');
+    //Users routes
+    Route::resource('/users', 'AdminUsersController', ['user' => 'user']);
+    Route::get('/{user_id}/delete', 'AdminUsersController@delete')->name('users.delete');
+
 });
 
 Auth::routes();
