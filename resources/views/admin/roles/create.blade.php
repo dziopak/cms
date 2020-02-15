@@ -10,7 +10,12 @@
 @endsection
 
 @section('content')
-    {!! Form::open(['method' => 'POST', 'action' => 'RolesController@store', 'class' => 'w-100 col-12']) !!}
+    @if (isset($role))
+        {!! Form::model($role, ['method' => 'POST', 'action' => 'RolesController@store', 'class' => 'w-100 col-12']) !!}
+    @else
+        {!! Form::open(['method' => 'POST', 'action' => 'RolesController@store', 'class' => 'w-100 col-12']) !!}
+    @endif
+
     <div class="row">
     <div class="col-lg-6 mb-3">
         <div class="card">

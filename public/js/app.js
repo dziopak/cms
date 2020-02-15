@@ -37054,6 +37054,22 @@ module.exports = function(module) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+$(document).ready(function () {
+  $('#filter-button').click(function () {
+    var crud = document.getElementById('log-crud').value;
+    var type = document.getElementById('log-type').value;
+    $("#logs-table .alert").each(function () {
+      if (($(this).attr('data-crud') == crud || crud == 0) && ($(this).attr('data-type') == type || type === 0)) {
+        $(this).show();
+      } else if (crud == 0 && type == 0) {
+        $(this).show();
+      } else {
+        $(this).hide();
+      }
+    });
+  });
+});
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":

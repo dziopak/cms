@@ -24,14 +24,34 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'access:ADM
         return view('admin.dashboard.index');
     })->name('dashboard.index');
     
-    //Users routes
+    ////////////////
+    //Users routes//
+    ////////////////
     Route::resource('/users', 'AdminUsersController')->except('show');
     Route::get('/{user_id}/delete', 'AdminUsersController@delete')->name('users.delete');
     Route::get('/{user_id}/disable', 'AdminUsersController@disable')->name('users.disable');
     Route::put('/{user_id}/block', 'AdminUsersController@block')->name('users.block');
-    
-    //Roles routes
+    //End of Users routes
+
+
+    ////////////////
+    //Roles routes//
+    ////////////////
     Route::resource('/users/roles', 'RolesController')->except('show');
+    Route::get('/users/roles/{role_id}/delete', 'RolesController@delete')->name('roles.delete');
+    Route::get('/users/roles/{role_id}/duplicate', 'RolesController@duplicate')->name('roles.duplicate');
+    //End of Roles routes
+
+    
+    Route::group(['prefix' => 'settings', 'as' => 'settings.'], function ()  {
+        
+        ///////////////
+        //Logs routes//
+        ///////////////
+        Route::get('/logs', 'LogsController@index')->name('logs.index');
+        //End of Logs routes
+
+    });
 });
 
 Auth::routes();

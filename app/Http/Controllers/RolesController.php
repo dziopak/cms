@@ -129,6 +129,24 @@ class RolesController extends Controller
         return redirect(route('admin.roles.index'));
     }
 
+    public function delete($id) {
+        Auth::user()->hasAccessOrRedirect('ROLE_DELETE');
+        $role = Role::findOrFail($id);
+        return view('admin.roles.delete', compact('role'));
+    }
+
+    public function duplicate($id) {
+        Auth::user()->hasAccessOrRedirect('ROLE_CREATE');
+        $role = Role::findOrFail($id);
+        $access = [];
+        foreach(unserialize($role->access) as $role_access) {
+            $access[$role_access] = 1;
+        }
+        $role->access = $access;
+        return view('admin.roles.create', compact('role'));
+    }
+
+
     /**
      * Remove the specified resource from storage.
      *
@@ -137,6 +155,21 @@ class RolesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $role = Role::findOrFail($id);
+
+        $log_data = [
+            'user_id' => Auth::user()->id,
+            'target_id' => '0',
+            'target_name' => $role->name,
+            'type' => 'ROLE',
+            'crud_action' => '3',
+            'message' => 'deleted access role'
+        ];
+        
+        Log::create($log_data);
+        Session::flash('crud', 'Role '.$role->name.' has been deleted successfully.');
+        
+        $role->delete();
+        return redirect(route('admin.roles.index'));
     }
 }
