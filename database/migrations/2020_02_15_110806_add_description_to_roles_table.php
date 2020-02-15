@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-
-class AddFileIdToUsersTable extends Migration
+class AddDescriptionToRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +13,8 @@ class AddFileIdToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->bigInteger('avatar')->default('1');
+        Schema::table('roles', function (Blueprint $table) {
+            $table->mediumText('description')->nullable();
         });
     }
 
@@ -26,8 +25,8 @@ class AddFileIdToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('avatar');
+        Schema::table('roles', function (Blueprint $table) {
+            $table->dropColumn('description');
         });
     }
 }

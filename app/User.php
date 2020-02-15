@@ -6,6 +6,7 @@ use Auth;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -47,7 +48,8 @@ class User extends Authenticatable
     }
 
     public function logs() {
-        return $this->hasMany('App\Log');
+        $logs = Log::where('user_id', $this->id)->orWhere('target_id', $this->id);
+        return $logs;
     }
 
     public function account_logs() {
@@ -57,7 +59,7 @@ class User extends Authenticatable
     public function hasAccess($permission) {
         if (Auth::check()) {
             $user = Auth::user();
-            if ($user->role_id == "99") {
+            if ($user->role_id == "0") {
                 return true;
             } else {
                 $access = unserialize($user->role->access);
@@ -72,12 +74,22 @@ class User extends Authenticatable
         }
     }
 
+    public function hasAccessOrRedirect($permission) {
+        if (!$this->hasAccess($permission)) {
+            return redirect(route('admin.dashboard.index'));
+        }
+    }
+
     public static function boot() {
         parent::boot();
 
         static::deleting(function($user) {
             $user->logs()->delete();
             $user->account_logs()->delete();
+            if ($user->avatar != "1") {
+                unlink(public_path() . '/images/avatars/'.$user->photo->path);
+                $user->photo()->delete();
+            }
         });
     }
 }

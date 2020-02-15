@@ -20,11 +20,7 @@
                 <th>Role</th>
                 <th>Created</th>
                 
-                @if (Auth::user()->hasAccess('USERS_EDIT'))
-                    <th></th>
-                @endif
-
-                @if (Auth::user()->hasAccess('USERS_DELETE'))
+                @if (Auth::user()->hasAccess('USERS_EDIT') || Auth::user()->hasAccess('USERS_DELETE'))
                     <th></th>
                 @endif
             </tr>
@@ -40,15 +36,17 @@
                         <td>{{$user->role->name}}</td>
                         <td>{{$user->created_at->diffForHumans()}}</td>
                         
-                        @if (Auth::user()->hasAccess('USERS_EDIT'))
+                        @if (Auth::user()->hasAccess('USERS_EDIT') || Auth::user()->hasAccess('USERS_DELETE'))
                             <td>
-                                <a href="{{route('admin.users.edit', $user->id)}}">E</a>
+                                @if (Auth::user()->hasAccess('USERS_EDIT'))
+                                    <a class="btn btn-success" href="{{route('admin.users.edit', $user->id)}}">E</a>
+                                    <a class="btn btn-warning" href="{{route('admin.users.disable', $user->id)}}">B</a>
+                                @endif
+                                @if (Auth::user()->hasAccess('USERS_DELETE'))
+                                    <a class="btn btn-danger" href="{{route('admin.users.delete', $user->id)}}">D</a>
+                                @endif
                             </td>
-                        @endif
-
-                        @if (Auth::user()->hasAccess('USERS_DELETE'))
-                            <td><a href="{{route('admin.users.delete', $user->id)}}">D</a></td>
-                        @endif
+                        @endif    
                     </tr>
                 @endforeach
             @endif

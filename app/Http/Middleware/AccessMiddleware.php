@@ -18,9 +18,10 @@ class AccessMiddleware
     {
         if (Auth::check()) {
             $user = Auth::user();
-            if ($user->role_id == "99") {
+            if ($user->role_id == "0") {
                 return $next($request);
             } else {
+                dd($user->role);
                 $access = unserialize($user->role->access);
                 if (in_array($permission, $access) && $user->active == 1) {
                     return $next($request);

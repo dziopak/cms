@@ -25,9 +25,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'access:ADM
     })->name('dashboard.index');
     
     //Users routes
-    Route::resource('/users', 'AdminUsersController', ['user' => 'user']);
+    Route::resource('/users', 'AdminUsersController')->except('show');
     Route::get('/{user_id}/delete', 'AdminUsersController@delete')->name('users.delete');
-
+    Route::get('/{user_id}/disable', 'AdminUsersController@disable')->name('users.disable');
+    Route::put('/{user_id}/block', 'AdminUsersController@block')->name('users.block');
+    
+    //Roles routes
+    Route::resource('/users/roles', 'RolesController')->except('show');
 });
 
 Auth::routes();

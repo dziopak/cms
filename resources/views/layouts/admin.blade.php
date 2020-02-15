@@ -23,81 +23,30 @@
 <body id="admin-page">
     <div id="main-container" class="container-fluid">
         <div class="row">
-            <div class="col-3 col-sm-3 col-md-2 col-lg-1 sidebar">
-                <ul class="sidebar-list">
-                    <li class="sidebar-list-item">
-                        <div class="icon"></div>
-                        Dashboard
-                    </li>
-                    <li class="sidebar-list-item">
-                        <div class="icon"></div>
-                        Pages
-                        <ul class="sidebar-sub-list">
-                            <li class="sidebar-list-item">List all</li>
-                            <li class="sidebar-list-item">Create new</li>
-                        </ul>
-                    </li>
-                    <li class="sidebar-list-item">
-                        <div class="icon"></div>
-                        Posts
-                        <ul class="sidebar-sub-list">
-                            <li class="sidebar-list-item">List all</li>
-                            <li class="sidebar-list-item">Create new</li>
-                        </ul>
-                    </li>
-                    <li class="sidebar-list-item">
-                        <div class="icon"></div>
-                        Users
-                        <ul class="sidebar-sub-list">
-                            <li class="sidebar-list-item"><a href="{{route('admin.users.index')}}">List all</a></li>
-                            <li class="sidebar-list-item"><a href="{{route('admin.users.create')}}">Create new</a></li>
-                        </ul>
-                    </li>
-                    <li class="sidebar-list-item">
-                        <div class="icon"></div>
-                        Newsletter
-                        <ul class="sidebar-sub-list">
-                            <li class="sidebar-list-item">Message templates</li>
-                            <li class="sidebar-list-item">Create new template</li>
-                            <li class="sidebar-list-item">Send message</li>
-                        </ul>
-                    </li>
-                    <li class="sidebar-list-item">
-                        <div class="icon"></div>
-                        Settings
-                        <ul class="sidebar-sub-list">
-                            <li class="sidebar-list-item">General settings</li>
-                            <li class="sidebar-list-item">SEO settings</li>
-                            <li class="sidebar-list-item">Mail settings</li>
-                        </ul>
-                    </li>
-                </ul>
-                <div id="version">DMS v1.0.0</div>
-            </div>
 
+            <!-- Left sidebar -->
+            @include('admin.partials.sidebar')
+            
             <div id="admin-main" class="col-9 col-sm-9 col-md-10 col-lg-11">
-                <div class="row">
-                    <div id="top-nav">
-                        <div class="col-9">
-                            <div class="breadcrumbs">
-                                @yield('breadcrumbs')
-                            </div>
-                        </div>
-
-                        <div class="col-3">
-                            
-                        </div>
-                    </div>
-                </div>
+                
+                <!-- Top navigation bar -->
+                @include('admin.partials.top-nav')
 
                 <div class="row py-3 pr-3">
+                    <!-- Action alert -->
+                    @if (Session::has('crud')) 
+                    <p class="alert alert-success mx-3 w-100">{{ session('crud') }}</p>
+                    @endif
+                    
+                    <!-- Module -->
                     @yield('content')
+
                 </div>
             </div>
         </div>
     </div>
 
-@yield('footer')
+    @yield('footer')
 </body>
 
 </html>

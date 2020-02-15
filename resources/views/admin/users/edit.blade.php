@@ -56,7 +56,7 @@
                 </div>
 
                 <div class="form-group">
-                    {!! Form::submit('Create', ['class' => 'btn btn-success']) !!}
+                    {!! Form::submit('Update', ['class' => 'btn btn-success']) !!}
                 </div>
                 <input type="hidden" value="{{$user->id}}" name="user_id" />
                 {!! Form::close() !!}
@@ -98,7 +98,7 @@
                 <div class="card mb-4">
                     <div class="card-body">
                         <div class="card-title">
-                            <strong>Recent Actions:</strong>
+                            <strong>Recent actions:</strong>
                         </div>
 
                         @include('admin.partials.logs')

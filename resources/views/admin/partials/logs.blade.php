@@ -17,8 +17,7 @@
                 <p class="alert alert-primary">
             @break;
         @endswitch
-
-            {{ '@'.$log->author->name }} {{$log->message}} {{'@'.$log->target->name}} </p>
+            {{ '@'.$log->author->name }} {{$log->message}} {{ $log->target_id !== 0 ? '@'.$log->target->name : ""}} </p>
     @endforeach
 @else
     <p class="alert alert-secondary">No actions yet.</p>
