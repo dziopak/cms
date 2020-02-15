@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Log extends Model
 {
-    protected $fillable = ['user_id', 'target_id', 'type', 'crud_action', 'message'];
+    protected $fillable = ['user_id', 'target_id', 'type', 'crud_action', 'message', 'target_name'];
     protected $table = 'logs';
 
     public function author() {
@@ -14,6 +14,14 @@ class Log extends Model
     }
 
     public function target() {
-        return $this->belongsTo('App\User', 'target_id', 'id');
+        switch($this->type) {
+            case 'USER':
+                return $this->belongsTo('App\User', 'target_id', 'id');
+            break;
+
+            case 'ROLE':
+                return $this->belongsTo('App\Role', 'target_id', 'id');
+            break;
+        }
     }
 }

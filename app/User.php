@@ -48,12 +48,12 @@ class User extends Authenticatable
     }
 
     public function logs() {
-        $logs = Log::where('user_id', $this->id)->orWhere('target_id', $this->id);
+        $logs = Log::where('user_id', $this->id)->orWhere(['target_id' => $this->id, 'type' => 'USER']);
         return $logs;
     }
 
     public function account_logs() {
-        return $this->hasMany('App\Log', 'target_id');
+        return $this->hasMany('App\Log', 'user_id');
     }
 
     public function hasAccess($permission) {
@@ -84,7 +84,6 @@ class User extends Authenticatable
         parent::boot();
 
         static::deleting(function($user) {
-            $user->logs()->delete();
             $user->account_logs()->delete();
             if ($user->avatar != "1") {
                 unlink(public_path() . '/images/avatars/'.$user->photo->path);

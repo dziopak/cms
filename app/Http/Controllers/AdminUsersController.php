@@ -64,6 +64,7 @@ class AdminUsersController extends Controller
         $log_data = [
             'user_id' => Auth::user()->id,
             'target_id' => $created_user_id,
+            'target_name' => $data['name'],
             'type' => 'USER',
             'crud_action' => '1',
             'message' => 'created new user'
@@ -137,6 +138,7 @@ class AdminUsersController extends Controller
         $log_data = [
             'user_id' => Auth::user()->id,
             'target_id' => $user->id,
+            'target_name' => $user->name,
             'type' => 'USER',
             'crud_action' => '2',
             'message' => 'modified user'
@@ -165,6 +167,7 @@ class AdminUsersController extends Controller
         $log_data = [
             'user_id' => Auth::user()->id,
             'target_id' => $user->id,
+            'target_name' => $user->name,
             'type' => 'USER',
             'crud_action' => '2',
             'message' => $is_active == 1 ? 'unblocked user' : 'blocked user'
@@ -192,16 +195,18 @@ class AdminUsersController extends Controller
     {
         Auth::user()->hasAccessOrRedirect('USER_DELETE');
         $user = User::findOrFail($id);
-        $user->delete();
         $log_data = [
             'user_id' => Auth::user()->id,
             'target_id' => '0',
+            'target_name' => $user->name,
             'type' => 'USER',
             'crud_action' => '3',
-            'message' => 'deleted account of '.$user->name.' - '.$user->email
+            'message' => 'deleted account of '
         ];
         Log::create($log_data);
         Session::flash('crud', "Account of ".$user->name." was deleted successfully.");
+        
+        $user->delete();
         return redirect(route('admin.users.index'));
     }
 }

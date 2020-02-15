@@ -54,6 +54,7 @@ class RolesController extends Controller
         $log_data = [
             'user_id' => Auth::user()->id,
             'target_id' => $id,
+            'target_name' => $data['name'],
             'type' => 'ROLE',
             'crud_action' => '1',
             'message' => 'created access role'
@@ -110,18 +111,21 @@ class RolesController extends Controller
                 array_push($access, $key);
             }
         }
-        $data['access'] = serialize($access);
         
-        $role->update($data);
-        $request->session()->flash('crud', 'Updated '.$data['name'].' role successfully.');
+        $data['access'] = serialize($access);
         $log_data = [
             'user_id' => Auth::user()->id,
             'target_id' => $id,
+            'target_name' => $data['name'],
             'type' => 'ROLE',
             'crud_action' => '2',
             'message' => 'updated access role'
         ];
+        
         Log::create($log_data);
+        $request->session()->flash('crud', 'Updated '.$data['name'].' role successfully.');
+        
+        $role->update($data);
         return redirect(route('admin.roles.index'));
     }
 

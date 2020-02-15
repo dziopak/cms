@@ -10,9 +10,9 @@
 @endsection
 
 @section('content')
-    {!! Form::open(['method' => 'POST', 'action' => 'RolesController@store', 'class' => 'w-100']) !!}
-    <div class="col row">
-    <div class="col-6">
+    {!! Form::open(['method' => 'POST', 'action' => 'RolesController@store', 'class' => 'w-100 col-12']) !!}
+    <div class="row">
+    <div class="col-lg-6 mb-3">
         <div class="card">
             <div class="card-body">
                 <div class="card-title">
@@ -41,7 +41,7 @@
             </div>
         </div>
     </div>
-    <div class="col-6">
+    <div class="col-lg-6">
         <div class="card">
             <div class="card-body">
                 <div class="card-title">
