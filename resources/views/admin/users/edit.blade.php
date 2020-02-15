@@ -36,14 +36,14 @@
 
                 <div class="form-group row">
                     <div class="col">
-                        {!! Form::label('role_id', 'User\'s role: ') !!}
+                        {!! Form::label('role_id', 'User\'s role*: ', ['class' => 'required']) !!}
                         {!! Form::select('role_id', $roles, null, ['class' => 'form-control']) !!}
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <div class="col">
-                        {!! Form::label('email', 'Email address: ') !!}
+                        {!! Form::label('email', 'Email address*: ', ['class' => 'required']) !!}
                         {!! Form::text('email', null, ['class' => 'form-control']) !!}
                     </div>
                 </div>

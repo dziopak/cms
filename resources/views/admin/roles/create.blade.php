@@ -28,7 +28,7 @@
                 
                 <div class="form-group row">
                     <div class="col">
-                        {!! Form::label('name', 'Role name: ') !!}
+                        {!! Form::label('name', 'Role name: ', ['class' => 'required']) !!}
                         {!! Form::text('name', null, ['class' => 'form-control']) !!}
                     </div>
                 </div>

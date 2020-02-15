@@ -10,14 +10,16 @@
             <ul class="sidebar-sub-list">
                 <li class="sidebar-list-item">List all</li>
                 <li class="sidebar-list-item">Create new</li>
+                <li class="sidebar-list-item">Categories</li>
             </ul>
         </li>
         <li class="sidebar-list-item">
             <div class="icon"></div>
             Posts
             <ul class="sidebar-sub-list">
-                <li class="sidebar-list-item">List all</li>
-                <li class="sidebar-list-item">Create new</li>
+                <li class="sidebar-list-item"><a href="{{ route('admin.posts.index') }}">List all</a></li>
+                <li class="sidebar-list-item"><a href="{{ route('admin.posts.create') }}">Create new</a></li>
+                <li class="sidebar-list-item">Categories</li>
             </ul>
         </li>
         <li class="sidebar-list-item">
@@ -45,6 +47,7 @@
                 <li class="sidebar-list-item">General settings</li>
                 <li class="sidebar-list-item">SEO settings</li>
                 <li class="sidebar-list-item">Mail settings</li>
+                <li class="sidebar-list-item"><a href="{{ route('admin.settings.logs.index') }}">System logs</a></li>
             </ul>
         </li>
     </ul>

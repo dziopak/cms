@@ -41,8 +41,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'access:ADM
     Route::get('/users/roles/{role_id}/delete', 'RolesController@delete')->name('roles.delete');
     Route::get('/users/roles/{role_id}/duplicate', 'RolesController@duplicate')->name('roles.duplicate');
     //End of Roles routes
-
     
+    ////////////////
+    //Posts routes//
+    ////////////////
+    Route::resource('/posts', 'AdminPostsController');
+    //End of Posts routes
+
     Route::group(['prefix' => 'settings', 'as' => 'settings.'], function ()  {
         
         ///////////////

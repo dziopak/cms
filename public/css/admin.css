@@ -103,3 +103,12 @@
   color: #212529;
 }
 
+.required {
+  font-weight: bold;
+}
+
+label {
+  font-size: 12px;
+  color: #888888;
+}
+
