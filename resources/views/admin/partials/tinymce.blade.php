@@ -1,0 +1,1 @@
+<script src="https://cdn.tinymce.com/4/tinymce.min.js" referrerpolicy="origin"></script>

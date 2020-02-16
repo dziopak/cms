@@ -86,7 +86,7 @@ class User extends Authenticatable
         static::deleting(function($user) {
             $user->account_logs()->delete();
             if ($user->avatar != "1") {
-                unlink(public_path() . '/images/avatars/'.$user->photo->path);
+                unlink(public_path() . '/images/'.$user->photo->path);
                 $user->photo()->delete();
             }
         });

@@ -102,7 +102,7 @@
                         </div>
 
                         <div class="form-group">
-                            {!! Form::textarea('content', null, ['class' => 'form-control']) !!}
+                            {!! Form::textarea('content', null, ['class' => 'form-control tinymce']) !!}
                         </div>
 
                         <div class="form-group">
@@ -114,4 +114,5 @@
         </div>
     {!! Form::close() !!}
     </div>
+    @include('admin.partials.tinymce')
 @endsection
