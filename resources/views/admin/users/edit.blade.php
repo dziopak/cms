@@ -86,14 +86,6 @@
                         </div>
                     </div>
                 </div>
-                
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <div class="card-title">
-                            <strong>Change password:</strong>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="card mb-4">
                     <div class="card-body">
@@ -102,6 +94,28 @@
                         </div>
 
                         @include('admin.partials.logs')
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <strong>Change password:</strong>
+                            {!! Form::open(['method' => 'PUT', 'action' => ['AdminUsersController@password', $user->id]]) !!}
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    {!! Form::label('password', 'Password: ', ['class' => 'required']) !!}
+                                    {!! Form::password('password', ['class' => 'form-control']) !!}
+                                </div>
+            
+                                <div class="col-sm-6">
+                                    {!! Form::label('repeat_password', 'Repeat password: ', ['class' => 'required']) !!}
+                                    {!! Form::password('repeat_password', ['class' => 'form-control']) !!}
+                                </div>
+                            </div>
+                            {!! Form::submit('Set password', ['class' => 'btn btn-primary']) !!}
+                            {!! Form::close() !!}
+                        </div>
                     </div>
                 </div>
             </div>

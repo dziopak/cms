@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\UsersCreateRequest;
 use App\Http\Requests\UsersEditRequest;
+use App\Http\Requests\NewPasswordRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Intervention\Image\ImageManagerStatic as Image;
 
 use App\User;
 use App\Role;
@@ -54,8 +56,10 @@ class AdminUsersController extends Controller
         $data['password'] = Hash::make($request->password);
         if ($avatar = $request->file('avatar')) {
             $name = time(). '_' .$avatar->getClientOriginalName();
-            $avatar->move('images/avatars', $name);
-            
+            $photo = $avatar->getClientOriginalName();
+            $photo = Image::make($avatar->getRealPath())->fit(100, 100);
+            $photo->save(public_path('images/avatars/' .$name));
+                        
             $photo = File::create(['path' => 'avatars/'.$name, 'type' => '1']);
             $data['avatar'] = $photo->id;
         }
@@ -127,8 +131,10 @@ class AdminUsersController extends Controller
                 $user->photo()->delete();
             }
             $name = time(). '_' .$avatar->getClientOriginalName();
-            $avatar->move('images/avatars', $name);
-            
+            $photo = $avatar->getClientOriginalName();
+            $photo = Image::make($avatar->getRealPath())->fit(100, 100);
+            $photo->save(public_path('images/avatars/' .$name));
+                        
             $photo = File::create(['path' => 'avatars/'.$name, 'type' => '1']);
             $data['avatar'] = $photo->id;
         }
@@ -142,6 +148,26 @@ class AdminUsersController extends Controller
             'type' => 'USER',
             'crud_action' => '2',
             'message' => 'modified user'
+        ];
+        Log::create($log_data);
+
+        return redirect(route('admin.users.index'));
+    }
+
+    public function password(NewPasswordRequest $request, $id) {
+        Auth::user()->hasAccessOrRedirect('USER_EDIT');
+
+        $user = User::findOrFail($id);
+        $user->update(['password' => Hash::make($request->password)]);
+        
+        $request->session()->flash('crud', 'Password of '.$user->name.' has been set successfully.');
+        $log_data = [
+            'user_id' => Auth::user()->id,
+            'target_id' => $user->id,
+            'target_name' => $user->name,
+            'type' => 'USER',
+            'crud_action' => '2',
+            'message' => 'changed password of user'
         ];
         Log::create($log_data);
 
