@@ -19,7 +19,7 @@
             <ul class="sidebar-sub-list">
                 <li class="sidebar-list-item"><a href="{{ route('admin.posts.index') }}">List all</a></li>
                 <li class="sidebar-list-item"><a href="{{ route('admin.posts.create') }}">Create new</a></li>
-                <li class="sidebar-list-item">Categories</li>
+                <li class="sidebar-list-item"><a href="{{ route('admin.posts.categories.index') }}">Categories</a></li>
             </ul>
         </li>
         <li class="sidebar-list-item">
@@ -28,7 +28,7 @@
             <ul class="sidebar-sub-list">
                 <li class="sidebar-list-item"><a href="{{route('admin.users.index')}}">List all</a></li>
                 <li class="sidebar-list-item"><a href="{{route('admin.users.create')}}">Create new</a></li>
-                <li class="sidebar-list-item"><a href="{{route('admin.roles.index')}}">Roles</a></li>
+                <li class="sidebar-list-item"><a href="{{route('admin.users.roles.index')}}">Roles</a></li>
             </ul>
         </li>
         <li class="sidebar-list-item">

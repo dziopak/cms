@@ -26,6 +26,10 @@ class Log extends Model
             case 'POST':
                 return $this->belongsTo('App\Post', 'target_id', 'id');
             break;
+
+            case 'POST_CATEGORY':
+                return $this->belongsTo('App\PostCategory', 'target_id', 'id');
+            break;
         }
     }
 }

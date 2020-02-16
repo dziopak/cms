@@ -4,7 +4,7 @@
     <ul>
         <li><a href="{{route('admin.dashboard.index')}}">Admin</a></li>
         <li><a href="{{route('admin.users.index')}}">Users</a></li>
-        <li><a href="{{route('admin.roles.index')}}">Roles</a></li>
+        <li><a href="{{route('admin.users.roles.index')}}">Roles</a></li>
         <li>Edit</li>
     </ul>
 @endsection
@@ -77,6 +77,22 @@
                         <div class="form-check">
                             {!! Form::checkbox('access[USER_DELETE]', '1', null, ['class' => 'form-check-input']) !!}
                             {!! Form::label('access[USER_DELETE]', 'Delete users', ['class' => 'form-check-label']) !!}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="text-primary">Categories rules:</span>
+                        <div class="form-check">
+                            {!! Form::checkbox('access[CATEGORY_CREATE]', '1', null, ['class' => 'form-check-input']) !!}
+                            {!! Form::label('access[CATEGORY_CREATE]', 'Create new categories', ['class' => 'form-check-label']) !!}
+                        </div>
+                        <div class="form-check">
+                            {!! Form::checkbox('access[CATEGORY_EDIT]', '1', null, ['class' => 'form-check-input']) !!}
+                            {!! Form::label('access[CATEGORY_EDIT]', 'Edit categories', ['class' => 'form-check-label']) !!}
+                        </div>
+                        <div class="form-check">
+                            {!! Form::checkbox('access[CATEGORY_DELETE]', '1', null, ['class' => 'form-check-input']) !!}
+                            {!! Form::label('access[CATEGORY_DELETE]', 'Delete categories', ['class' => 'form-check-label']) !!}
                         </div>
                     </div>
                     

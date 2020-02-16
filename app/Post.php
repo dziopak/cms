@@ -15,4 +15,8 @@ class Post extends Model
     public function thumbnail() {
         return $this->belongsTo('App\File', 'file_id');
     }
+
+    public function category() {
+        return $this->belongsTo('App\PostCategory', 'category_id');
+    }
 }

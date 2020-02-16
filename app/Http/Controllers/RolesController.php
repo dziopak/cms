@@ -17,7 +17,7 @@ class RolesController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
+        $roles = Role::paginate(15);
         return view('admin.roles.index', compact('roles'));
     }
 
@@ -60,7 +60,7 @@ class RolesController extends Controller
             'message' => 'created access role'
         ];
         Log::create($log_data);
-        return redirect(route('admin.roles.index'));
+        return redirect(route('admin.users.roles.index'));
     }
 
     /**
@@ -126,7 +126,7 @@ class RolesController extends Controller
         $request->session()->flash('crud', 'Updated '.$data['name'].' role successfully.');
         
         $role->update($data);
-        return redirect(route('admin.roles.index'));
+        return redirect(route('admin.users.roles.index'));
     }
 
     public function delete($id) {
@@ -170,6 +170,6 @@ class RolesController extends Controller
         Session::flash('crud', 'Role '.$role->name.' has been deleted successfully.');
         
         $role->delete();
-        return redirect(route('admin.roles.index'));
+        return redirect(route('admin.users.roles.index'));
     }
 }

@@ -8,6 +8,7 @@ use App\Http\Requests\PostsRequest;
 use App\Post;
 use App\Log;
 use App\File;
+use App\PostCategory;
 use Illuminate\Support\Facades\Session;
 use Auth;
 
@@ -20,7 +21,7 @@ class AdminPostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::paginate(15);
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -93,7 +94,10 @@ class AdminPostsController extends Controller
     {
         Auth::user()->hasAccessOrRedirect('POST_EDIT');
         $post = Post::findOrFail($id);
-        return view('admin.posts.edit', compact('post'));
+        $post_cat = new PostCategory;
+        $categories[0] = 'No category';
+        $categories = array_merge($categories, $post_cat->list_all());
+        return view('admin.posts.edit', compact('post', 'categories'));
     }
 
     /**

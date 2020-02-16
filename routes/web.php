@@ -1,21 +1,11 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::group(['prefix' => '/'], function () {
     Route::get('/', function () {
         return view('welcome');
     });
 });
+
+
 
 //Backoffice routes
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'access:ADMIN_VIEW'], function () {
@@ -24,30 +14,39 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'access:ADM
         return view('admin.dashboard.index');
     })->name('dashboard.index');
     
+
     ////////////////
     //Users routes//
     ////////////////
-    Route::resource('/users', 'AdminUsersController')->except('show');
-    Route::get('/{user_id}/delete', 'AdminUsersController@delete')->name('users.delete');
-    Route::get('/{user_id}/disable', 'AdminUsersController@disable')->name('users.disable');
-    Route::put('/{user_id}/block', 'AdminUsersController@block')->name('users.block');
+        Route::resource('/users', 'AdminUsersController')->except('show');
+        Route::get('/{user_id}/delete', 'AdminUsersController@delete')->name('users.delete');
+        Route::get('/{user_id}/disable', 'AdminUsersController@disable')->name('users.disable');
+        Route::put('/{user_id}/block', 'AdminUsersController@block')->name('users.block');
+            
+        //Roles routes//
+        Route::group(['prefix' => 'users', 'as' => 'users.'], function ()  {
+            Route::resource('/roles', 'RolesController')->except('show');
+        });
+        Route::get('/users/roles/{role_id}/delete', 'RolesController@delete')->name('users.roles.delete');
+        Route::get('/users/roles/{role_id}/duplicate', 'RolesController@duplicate')->name('users.roles.duplicate');
     //End of Users routes
-
-
-    ////////////////
-    //Roles routes//
-    ////////////////
-    Route::resource('/users/roles', 'RolesController')->except('show');
-    Route::get('/users/roles/{role_id}/delete', 'RolesController@delete')->name('roles.delete');
-    Route::get('/users/roles/{role_id}/duplicate', 'RolesController@duplicate')->name('roles.duplicate');
-    //End of Roles routes
     
+
+
     ////////////////
     //Posts routes//
     ////////////////
-    Route::resource('/posts', 'AdminPostsController');
-    Route::get('/posts/{post_id}/delete', 'AdminPostsController@delete')->name('posts.delete');
+        Route::resource('/posts', 'AdminPostsController')->except('show');
+        Route::get('/posts/{post_id}/delete', 'AdminPostsController@delete')->name('posts.delete');
+        
+        //Categories routes//
+        Route::group(['prefix' => 'posts', 'as' => 'posts.'], function ()  {
+            Route::resource('/categories', 'AdminPostCategoriesController');
+            Route::get('/categories/{category_id}/delete', 'AdminPostCategoriesController@delete')->name('categories.delete');
+        });
     //End of Posts routes
+
+
 
     Route::group(['prefix' => 'settings', 'as' => 'settings.'], function ()  {
         

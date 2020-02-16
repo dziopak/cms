@@ -59,6 +59,8 @@
                 @if (Auth::user()->hasAccess('POST_CREATE'))
                     <a href="{{ route('admin.posts.create') }}" class="btn btn-success">Create new</a>
                 @endif
+
+                <div class="float-right">{{ $posts->render() }}</div>
             </div>
         </div>
     </div>

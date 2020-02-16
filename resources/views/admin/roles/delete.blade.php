@@ -4,7 +4,7 @@
     <ul>
         <li><a href="{{route('admin.dashboard.index')}}">Admin</a></li>
         <li><a href="{{route('admin.users.index')}}">Users</a></li>
-        <li><a href="{{route('admin.roles.index')}}">Roles</a></li>
+        <li><a href="{{route('admin.users.roles.index')}}">Roles</a></li>
         <li>Delete</li>
     </ul>
 @endsection
@@ -34,7 +34,7 @@
                 {!! Form::open(['method' => 'DELETE', 'action' => ['RolesController@destroy', $role->id]]) !!}
                 
                 <div class="form-group">
-                    <a href="{{route('admin.roles.index')}}" role="button" class="btn btn-success">Go back</a>
+                    <a href="{{route('admin.users.roles.index')}}" role="button" class="btn btn-success">Go back</a>
                     {!! Form::submit('Delete permamently', ['class' => 'btn btn-danger']) !!}
                 </div>
                 {!! Form::close() !!}

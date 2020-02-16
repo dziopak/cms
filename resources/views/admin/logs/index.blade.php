@@ -27,6 +27,7 @@
                             <option value="0">All action types</option>
                             <option value="PAGE">Pages</option>
                             <option value="POST">Posts</option>
+                            <option value="POST_CATEGORY">Post categories</option>
                             <option value="USER">Users</option>
                             <option value="ROLE">Roles</option>
                             <option value="MAIL">Mails</option>
