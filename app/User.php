@@ -48,12 +48,12 @@ class User extends Authenticatable
     }
 
     public function logs() {
-        $logs = Log::where('user_id', $this->id)->orWhere(['target_id' => $this->id, 'type' => 'USER']);
+        $logs = \Modules\Logs\Entities\Log::where('user_id', $this->id)->orWhere('target_id', $this->id)->where('type', 'USER');
         return $logs;
     }
 
     public function account_logs() {
-        return $this->hasMany('App\Log', 'user_id');
+        return $this->hasMany('\Modules\Logs\Entities\Log', 'user_id', 'id');
     }
 
     public function hasAccess($permission) {

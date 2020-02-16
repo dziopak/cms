@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Session;
 use App\User;
 use App\Role;
 use App\File;
-use App\Log;
+use Modules\Logs\Entities\Log;
 use Auth;
 
 
