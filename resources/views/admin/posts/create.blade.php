@@ -24,7 +24,7 @@
 
                         <div class="form-group row">
                             <div class="col">
-                                {!! Form::label('name', 'Post\'s name': ', ['class' => 'required']) !!}
+                                {!! Form::label('name', 'Post\'s name: ', ['class' => 'required']) !!}
                                 {!! Form::text('name', null, ['class' => 'form-control']) !!}
                             </div>
                         </div>

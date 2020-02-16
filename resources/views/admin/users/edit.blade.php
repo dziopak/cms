@@ -71,7 +71,7 @@
                         </div>
                         
                         @if ($user->avatar)
-                            <img class="rounded-circle mr-4 float-left" width="100" src="/images/avatars/{{$user->photo->path}}">
+                            <img class="rounded-circle mr-4 float-left" width="100" src="/images/{{$user->photo->path}}">
                         @endif
 
                         <div style="display: inline-block;">

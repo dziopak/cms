@@ -20,13 +20,13 @@ class CreatePostsTable extends Migration
             $table->string('excerpt');
             $table->string('slug');
             $table->text('content');
-            $table->bigInteger('photo_id')->index()->nullable();
+            $table->bigInteger('file_id')->index()->nullable();
             $table->bigInteger('user_id')->index();
             $table->bigInteger('category_id')->index()->default(0);
             $table->string('meta_title')->nullable();
             $table->string('meta_description')->nullable();
-            $table->boolean('index')->default(true);
-            $table->boolean('follow')->default(true);
+            $table->boolean('index')->default(false);
+            $table->boolean('follow')->default(false);
         });
     }
 

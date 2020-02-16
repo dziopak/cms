@@ -46,6 +46,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'access:ADM
     //Posts routes//
     ////////////////
     Route::resource('/posts', 'AdminPostsController');
+    Route::get('/posts/{post_id}/delete', 'AdminPostsController@delete')->name('posts.delete');
     //End of Posts routes
 
     Route::group(['prefix' => 'settings', 'as' => 'settings.'], function ()  {

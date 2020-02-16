@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PostsRequest;
 use App\Post;
 use App\Log;
+use App\File;
 use Illuminate\Support\Facades\Session;
 use Auth;
 
@@ -30,6 +31,7 @@ class AdminPostsController extends Controller
      */
     public function create()
     {
+        Auth::user()->hasAccessOrRedirect('POST_CREATE');
         return view('admin.posts.create');
     }
 
@@ -41,10 +43,19 @@ class AdminPostsController extends Controller
      */
     public function store(PostsRequest $request)
     {
+        Auth::user()->hasAccessOrRedirect('POST_CREATE');
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
-        $id = Post::create($data)->id;
+        
+        if ($thumbnail = $request->file('thumbnail')) {
+            $name = time(). '_' .$thumbnail->getClientOriginalName();
+            $thumbnail->move('images/thumbnails', $name);
+            
+            $photo = File::create(['path' => 'thumbnails/'.$name, 'type' => '1']);
+            $data['file_id'] = $photo->id;
+        }
 
+        $id = Post::create($data)->id;
 
         $log_data = [
             'user_id' => $data['user_id'],
@@ -80,7 +91,9 @@ class AdminPostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        Auth::user()->hasAccessOrRedirect('POST_EDIT');
+        $post = Post::findOrFail($id);
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -90,9 +103,45 @@ class AdminPostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostsRequest $request, $id)
     {
-        //
+        Auth::user()->hasAccessOrRedirect('POST_EDIT');
+        
+        $post = Post::findOrFail($id);
+        $data = $request->all();
+        if (!isset($data['index'])) {
+            $data['index'] = 0;
+        }
+        if (!isset($data['follow'])) {
+            $data['follow'] = 0;
+        }
+        if ($thumbnail = $request->file('thumbnail')) {
+            $name = time(). '_' .$thumbnail->getClientOriginalName();
+            $thumbnail->move('images/thumbnails', $name);
+            
+            $photo = File::create(['path' => 'thumbnails/'.$name, 'type' => '1']);
+            $data['file_id'] = $photo->id;
+        }
+
+        $log_data = [
+            'user_id' => Auth::user()->id,
+            'target_id' => $post->id,
+            'target_name' => $data['name'],
+            'type' => 'POST',
+            'crud_action' => '2',
+            'message' => 'edited post'
+        ];
+        $post->update($data);
+        Log::create($log_data);
+        Session::flash('crud', 'Post "'.$data['name'].'" has been updated successfully.');
+
+        return redirect(route('admin.posts.index'));
+    }
+
+    public function delete($id) {
+        Auth::user()->hasAccessOrRedirect('POST_DELETE');
+        $post = Post::findOrFail($id);
+        return view('admin.posts.delete', compact('post'));
     }
 
     /**
@@ -103,6 +152,22 @@ class AdminPostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Auth::user()->hasAccessOrRedirect('POST_DELETE');
+        $post = Post::findOrFail($id);
+
+        $log_data = [
+            'user_id' => $post->user_id,
+            'target_id' => $post->id,
+            'target_name' => $post->name,
+            'type' => 'POST',
+            'crud_action' => '3',
+            'message' => 'deleted post'
+        ];
+        Session::flash('crud', 'Post "'.$post->name.'" has been deleted successfully.');
+        
+        $post->delete();
+        Log::create($log_data);
+        
+        return redirect(route('admin.posts.index'));
     }
 }

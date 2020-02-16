@@ -56,7 +56,7 @@ class AdminUsersController extends Controller
             $name = time(). '_' .$avatar->getClientOriginalName();
             $avatar->move('images/avatars', $name);
             
-            $photo = File::create(['path' => $name, 'type' => '1']);
+            $photo = File::create(['path' => 'avatars/'.$name, 'type' => '1']);
             $data['avatar'] = $photo->id;
         }
         $created_user_id = User::create($data)->id;
@@ -123,13 +123,13 @@ class AdminUsersController extends Controller
         
         if ($avatar = $request->file('avatar')) {
             if ($user->avatar != "1") {
-                unlink(public_path() . '/images/avatars/'.$user->photo->path);
+                unlink(public_path() . '/images/'.$user->photo->path);
                 $user->photo()->delete();
             }
             $name = time(). '_' .$avatar->getClientOriginalName();
             $avatar->move('images/avatars', $name);
             
-            $photo = File::create(['path' => $name, 'type' => '1']);
+            $photo = File::create(['path' => 'avatars/'.$name, 'type' => '1']);
             $data['avatar'] = $photo->id;
         }
 

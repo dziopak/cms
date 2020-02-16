@@ -27,7 +27,7 @@ class PostsRequest extends FormRequest
             'name' => 'string|required',
             'content' => 'string|required',
             'excerpt' => 'string|required',
-            'slug' => 'string|required',
+            'slug' => 'string|required|unique:posts,slug,'.$this->request->get('post_id'),
             'content' => 'string|required',
             'category_id' => 'numeric|required',
         ];

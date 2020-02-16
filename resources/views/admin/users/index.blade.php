@@ -35,7 +35,7 @@
                     @if ($users)
                         @foreach($users as $user)
                             <tr>
-                                <td><img width="60" src="/images/avatars/{{$user->photo->path}}" alt="avatar"></td>
+                                <td><img width="60" src="/images/{{$user->photo->path}}" alt="avatar"></td>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->is_active ? "Yes" : "No"}}</td>
