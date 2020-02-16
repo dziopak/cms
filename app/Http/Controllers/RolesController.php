@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Role;
-use Modules\Logs\Entities\Log;
+use App\Log;
 use Illuminate\Support\Facades\Session;
 use Auth;
 

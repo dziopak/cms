@@ -1,14 +1,12 @@
 <?php
 
-namespace Modules\Posts\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
 
-use Modules\Posts\Entities\Post;
-use Modules\Posts\Http\Requests\PostsRequest;
-use Modules\Logs\Entities\Log;
+use App\Http\Requests\PostsRequest;
+use App\Post;
+use App\Log;
 use Illuminate\Support\Facades\Session;
 use Auth;
 
@@ -22,7 +20,7 @@ class AdminPostsController extends Controller
     public function index()
     {
         $posts = Post::all();
-        return view('posts::admin.index', compact('posts'));
+        return view('admin.posts.index', compact('posts'));
     }
 
     /**
@@ -32,7 +30,7 @@ class AdminPostsController extends Controller
      */
     public function create()
     {
-        return view('posts::admin.create');
+        return view('admin.posts.create');
     }
 
     /**

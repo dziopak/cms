@@ -1,9 +1,8 @@
 <?php
 
-namespace Modules\Logs\Entities;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\User;
 
 class Log extends Model
 {
@@ -19,13 +18,13 @@ class Log extends Model
             case 'USER':
                 return $this->belongsTo('App\User', 'target_id', 'id');
             break;
-            
+
             case 'ROLE':
                 return $this->belongsTo('App\Role', 'target_id', 'id');
             break;
-            
+
             case 'POST':
-                return $this->belongsTo('Modules\Posts\Entities\Post', 'target_id', 'id');
+                return $this->belongsTo('App\Post', 'target_id', 'id');
             break;
         }
     }

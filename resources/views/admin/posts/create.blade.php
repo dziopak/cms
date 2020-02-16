@@ -10,8 +10,7 @@
 
 @section('content')
     <div class="col-12">
-        
-    {!! Form::open(['method' => 'POST', 'route' => 'admin.posts.store', 'class' => 'w-100 col-12', 'files' => 'true']) !!}
+    {!! Form::open(['method' => 'POST', 'action' => 'AdminPostsController@store', 'class' => 'w-100 col-12', 'files' => 'true']) !!}
 
         @include('admin.partials.validation')
     
@@ -25,7 +24,7 @@
 
                         <div class="form-group row">
                             <div class="col">
-                                {!! Form::label('name', 'Post\'s name: ', ['class' => 'required']) !!}
+                                {!! Form::label('name', 'Post\'s name': ', ['class' => 'required']) !!}
                                 {!! Form::text('name', null, ['class' => 'form-control']) !!}
                             </div>
                         </div>
