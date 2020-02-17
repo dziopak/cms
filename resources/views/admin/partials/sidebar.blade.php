@@ -8,8 +8,8 @@
             <div class="icon"></div>
             Pages
             <ul class="sidebar-sub-list">
-                <li class="sidebar-list-item">List all</li>
-                <li class="sidebar-list-item">Create new</li>
+                <li class="sidebar-list-item"><a href="{{ route('admin.pages.index') }}">List all</a></li>
+                <li class="sidebar-list-item"><a href="{{ route('admin.pages.create') }}">Create new</a></li>
                 <li class="sidebar-list-item">Categories</li>
             </ul>
         </li>

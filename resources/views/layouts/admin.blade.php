@@ -8,7 +8,6 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Admin</title>
-
     <link href="{{asset('css/app.css')}}" rel="stylesheet">
     <link href="{{asset('css/admin.css')}}" rel="stylesheet">
     <!--[if lt IE 9]>
@@ -16,6 +15,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script src="{{asset('js/app.js')}}"></script>
+    @yield('head')
 </head>
 
 <body id="admin-page">

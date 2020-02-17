@@ -37079,7 +37079,7 @@ $(document).ready(function () {
       file_browser_callback: function file_browser_callback(field_name, url, type, win) {
         var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
         var y = window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight;
-        var cmsURL = editor_config.path_absolute + 'filemanager?field_name=' + field_name;
+        var cmsURL = editor_config.path_absolute + 'admin/filemanager?field_name=' + field_name;
 
         if (type == 'image') {
           cmsURL = cmsURL + "&type=Images";

@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PagesRequest;
 use Illuminate\Http\Request;
-
-use App\Http\Requests\PostsRequest;
-use App\Post;
-use App\Log;
-use App\File;
-use App\PostCategory;
 use Illuminate\Support\Facades\Session;
+
+use App\Page;
+use App\File;
+use App\Log;
 use Auth;
 
-class AdminPostsController extends Controller
+class AdminPagesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,8 +20,8 @@ class AdminPostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(15);
-        return view('admin.posts.index', compact('posts'));
+        $pages = Page::paginate(15);
+        return view('admin.pages.index', compact('pages'));
     }
 
     /**
@@ -32,8 +31,8 @@ class AdminPostsController extends Controller
      */
     public function create()
     {
-        Auth::user()->hasAccessOrRedirect('POST_CREATE');
-        return view('admin.posts.create');
+        Auth::user()->hasAccessOrRedirect('PAGE_EDIT');
+        return view('admin.pages.create');
     }
 
     /**
@@ -42,11 +41,15 @@ class AdminPostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PostsRequest $request)
+    public function store(PagesRequest $request)
     {
-        Auth::user()->hasAccessOrRedirect('POST_CREATE');
+        Auth::user()->hasAccessOrRedirect('PAGE_EDIT');
+        
         $data = $request->all();
+
         $data['user_id'] = Auth::user()->id;
+        !isset($data['index']) ? $data['index'] = 0 : "";
+        !isset($data['follow']) ? $data['follow'] = 0 : "";
         
         if ($thumbnail = $request->file('thumbnail')) {
             $name = time(). '_' .$thumbnail->getClientOriginalName();
@@ -56,21 +59,21 @@ class AdminPostsController extends Controller
             $data['file_id'] = $photo->id;
         }
 
-        $id = Post::create($data)->id;
+        $id = Page::create($data)->id;
 
         $log_data = [
             'user_id' => $data['user_id'],
             'target_id' => $id,
             'target_name' => $data['name'],
-            'type' => 'POST',
+            'type' => 'PAGE',
             'crud_action' => '1',
-            'message' => 'created new post'
+            'message' => 'created new page'
         ];
 
         Log::create($log_data);
-        Session::flash('crud', 'Post "'.$data['name'].'" has been created successfully.');
+        Session::flash('crud', 'Page "'.$data['name'].'" has been created successfully.');
 
-        return redirect(route('admin.posts.index'));
+        return redirect(route('admin.pages.index'));
     }
 
     /**
@@ -92,12 +95,10 @@ class AdminPostsController extends Controller
      */
     public function edit($id)
     {
-        Auth::user()->hasAccessOrRedirect('POST_EDIT');
-        $post = Post::findOrFail($id);
-        $post_cat = new PostCategory;
+        Auth::user()->hasAccessOrRedirect('PAGE_EDIT');
+        $page = Page::findOrFail($id);
         $categories[0] = 'No category';
-        $categories = array_merge($categories, $post_cat->list_all());
-        return view('admin.posts.edit', compact('post', 'categories'));
+        return view('admin.pages.edit', compact('page', 'categories'));
     }
 
     /**
@@ -107,11 +108,11 @@ class AdminPostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PostsRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        Auth::user()->hasAccessOrRedirect('POST_EDIT');
+        Auth::user()->hasAccessOrRedirect('PAGE_EDIT');
         
-        $post = Post::findOrFail($id);
+        $page = Page::findOrFail($id);
         $data = $request->all();
         if ($thumbnail = $request->file('thumbnail')) {
             $name = time(). '_' .$thumbnail->getClientOriginalName();
@@ -123,23 +124,25 @@ class AdminPostsController extends Controller
 
         $log_data = [
             'user_id' => Auth::user()->id,
-            'target_id' => $post->id,
+            'target_id' => $page->id,
             'target_name' => $data['name'],
-            'type' => 'POST',
+            'type' => 'PAGE',
             'crud_action' => '2',
-            'message' => 'edited post'
+            'message' => 'edited page'
         ];
-        $post->update($data);
-        Log::create($log_data);
-        Session::flash('crud', 'Post "'.$data['name'].'" has been updated successfully.');
+        
+        $page->update($data);
 
-        return redirect(route('admin.posts.index'));
+        Log::create($log_data);
+        Session::flash('crud', 'Page "'.$data['name'].'" has been updated successfully.');
+
+        return redirect(route('admin.pages.index'));
     }
 
     public function delete($id) {
-        Auth::user()->hasAccessOrRedirect('POST_DELETE');
-        $post = Post::findOrFail($id);
-        return view('admin.posts.delete', compact('post'));
+        Auth::user()->hasAccessOrRedirect('PAGE_DELETE');
+        $page = Page::findOrFail($id);
+        return view('admin.pages.delete', compact('page'));
     }
 
     /**
@@ -150,22 +153,23 @@ class AdminPostsController extends Controller
      */
     public function destroy($id)
     {
-        Auth::user()->hasAccessOrRedirect('POST_DELETE');
-        $post = Post::findOrFail($id);
+        Auth::user()->hasAccessOrRedirect('PAGE_DELETE');
+        $page = Page::findOrFail($id);
 
         $log_data = [
-            'user_id' => $post->user_id,
-            'target_id' => $post->id,
-            'target_name' => $post->name,
-            'type' => 'POST',
+            'user_id' => $page->user_id,
+            'target_id' => $page->id,
+            'target_name' => $page->name,
+            'type' => 'PAGE',
             'crud_action' => '3',
-            'message' => 'deleted post'
+            'message' => 'deleted page'
         ];
-        Session::flash('crud', 'Post "'.$post->name.'" has been deleted successfully.');
-        
-        $post->delete();
+
+        Session::flash('crud', 'Page "'.$page->name.'" has been deleted successfully.');
         Log::create($log_data);
         
-        return redirect(route('admin.posts.index'));
+        $page->delete();
+        
+        return redirect(route('admin.pages.index'));
     }
 }

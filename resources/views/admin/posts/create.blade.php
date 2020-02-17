@@ -77,17 +77,6 @@
                                 {!! Form::textarea('meta_description', null, ['class' => 'form-control']) !!}
                             </div>
                         </div>
-                        
-                        <div class="form-group">
-                            <div class="form-check">
-                                {!! Form::checkbox('index', '1', true, ['class' => 'form-check-input']) !!}
-                                {!! Form::label('index', 'Index page', ['class' => 'form-check-label']) !!}
-                            </div>
-                            <div class="form-check">
-                                {!! Form::checkbox('follow', '1', true, ['class' => 'form-check-input']) !!}
-                                {!! Form::label('follow', 'Follow page', ['class' => 'form-check-label']) !!}
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
