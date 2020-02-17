@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 use App\Page;
 use App\File;
 use App\Log;
+use App\PageCategory;
 use Auth;
 
 class AdminPagesController extends Controller
@@ -20,7 +21,7 @@ class AdminPagesController extends Controller
      */
     public function index()
     {
-        $pages = Page::paginate(15);
+        $pages = Page::with('author', 'thumbnail')->paginate(15);
         return view('admin.pages.index', compact('pages'));
     }
 
@@ -32,7 +33,12 @@ class AdminPagesController extends Controller
     public function create()
     {
         Auth::user()->hasAccessOrRedirect('PAGE_EDIT');
-        return view('admin.pages.create');
+
+        $page_cat = new PageCategory;
+        $categories[0] = 'No category';
+        $categories = array_merge($categories, $page_cat->list_all());
+        
+        return view('admin.pages.create', compact('categories'));
     }
 
     /**
@@ -97,7 +103,9 @@ class AdminPagesController extends Controller
     {
         Auth::user()->hasAccessOrRedirect('PAGE_EDIT');
         $page = Page::findOrFail($id);
+        $page_cat = new PostCategory;
         $categories[0] = 'No category';
+        $categories = array_merge($categories, $page_cat->list_all());
         return view('admin.pages.edit', compact('page', 'categories'));
     }
 

@@ -21,7 +21,7 @@ class AdminPostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(15);
+        $posts = Post::with('author', 'thumbnail')->paginate(15);
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -33,7 +33,12 @@ class AdminPostsController extends Controller
     public function create()
     {
         Auth::user()->hasAccessOrRedirect('POST_CREATE');
-        return view('admin.posts.create');
+
+        $post_cat = new PostCategory;
+        $categories[0] = 'No category';
+        $categories = array_merge($categories, $post_cat->list_all());
+        
+        return view('admin.posts.create', compact('categories'));
     }
 
     /**
@@ -93,10 +98,12 @@ class AdminPostsController extends Controller
     public function edit($id)
     {
         Auth::user()->hasAccessOrRedirect('POST_EDIT');
+        
         $post = Post::findOrFail($id);
         $post_cat = new PostCategory;
         $categories[0] = 'No category';
         $categories = array_merge($categories, $post_cat->list_all());
+        
         return view('admin.posts.edit', compact('post', 'categories'));
     }
 
@@ -139,6 +146,7 @@ class AdminPostsController extends Controller
     public function delete($id) {
         Auth::user()->hasAccessOrRedirect('POST_DELETE');
         $post = Post::findOrFail($id);
+        
         return view('admin.posts.delete', compact('post'));
     }
 

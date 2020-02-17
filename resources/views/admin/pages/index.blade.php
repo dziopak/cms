@@ -56,12 +56,12 @@
                         @endif
                     </tbody>
                 </table>
-                @if (Auth::user()->hasAccess('POST_CREATE'))
-                    <a href="{{ route('admin.pages.create') }}" class="btn btn-success">Create new</a>
-                @endif
-
-                <div class="float-right">{{ $pages->render() }}</div>
             </div>
+            @if (Auth::user()->hasAccess('POST_CREATE'))
+                <a href="{{ route('admin.pages.create') }}" class="btn btn-success">Create new</a>
+            @endif
+
+            <div class="float-right">{{ $pages->render() }}</div>
         </div>
     </div>
 </div>

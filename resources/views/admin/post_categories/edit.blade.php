@@ -50,6 +50,7 @@
                         </div>
 
                         <div class="form-group">
+                            {!! Form::hidden('type', 'post') !!}
                             {!! Form::hidden('category_id', $category->id) !!}
                             {!! Form::submit('Update', ['class' => 'btn btn-success']) !!}
                         </div>

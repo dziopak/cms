@@ -21,7 +21,7 @@
         data-crud="{{ $log->crud_action }}" data-type={{ $log->type }}>
         
         {{ '@'.$log->author->name }} {{$log->message}}
-        {{$log->target && $log->target_id !== 0 ? '@'.$log->target->name : '"'.$log->target_name.'""' }}
+        {{$log->target && $log->target_id !== 0 ? '@'.$log->target->name : '"'.$log->target_name.'"' }}
     
         @endforeach
 @else

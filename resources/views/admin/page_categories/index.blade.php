@@ -3,8 +3,8 @@
 @section('breadcrumbs')
     <ul>
         <li><a href="{{route('admin.dashboard.index')}}">Admin</a></li>
-        <li><a href="{{route('admin.posts.index')}}">Posts</a></li>
-        <li><a href="{{route('admin.posts.categories.index')}}">Categories</a></li>
+        <li><a href="{{route('admin.pages.index')}}">Pages</a></li>
+        <li><a href="{{route('admin.pages.categories.index')}}">Categories</a></li>
         <li>List all</li>
     </ul>
 @endsection
@@ -39,11 +39,11 @@
                                 <td>{{$category->name}}</td>
                                 <td>
                                     @if (Auth::user()->hasAccess('CATEGORY_EDIT'))
-                                        <a class="btn btn-success" href="{{ route('admin.posts.categories.edit', $category->id) }}">Edit</a>                                    
+                                        <a class="btn btn-success" href="{{ route('admin.pages.categories.edit', $category->id) }}">Edit</a>                                    
                                     @endif
                                     
                                     @if (Auth::user()->hasAccess('CATEGORY_DELETE'))
-                                        <a class="btn btn-danger" href="{{ route('admin.posts.categories.delete', $category->id) }}">Delete</a></td>
+                                        <a class="btn btn-danger" href="{{ route('admin.pages.categories.delete', $category->id) }}">Delete</a></td>
                                     @endif
                                 </td>
                             </tr>
@@ -52,7 +52,7 @@
                 </table>
             </div>
             @if (Auth::user()->hasAccess('CATEGORY_CREATE'))
-                <a href="{{ route('admin.posts.categories.create') }}" class="btn btn-success">Create new</a>
+                <a href="{{ route('admin.pages.categories.create') }}" class="btn btn-success">Create new</a>
             @endif
 
             <div class="float-right">{{ $categories->render() }}</div>

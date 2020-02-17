@@ -1,21 +1,30 @@
 <div class="col-3 col-sm-3 col-md-2 col-lg-1 sidebar">
     <ul class="sidebar-list">
         <li class="sidebar-list-item">
-            <div class="icon"></div>
-            Dashboard
+            <a href="{{ route('admin.dashboard.index') }}">
+                <div class="icon fa fas fa-home"></div>
+                Dashboard
+            </a>
         </li>
         <li class="sidebar-list-item">
-            <div class="icon"></div>
-            Pages
+            <a href="{{ route('admin.pages.index') }}">
+                <div class="icon fa far fa-file"></div>
+                Pages
+            </a>
+
             <ul class="sidebar-sub-list">
                 <li class="sidebar-list-item"><a href="{{ route('admin.pages.index') }}">List all</a></li>
                 <li class="sidebar-list-item"><a href="{{ route('admin.pages.create') }}">Create new</a></li>
-                <li class="sidebar-list-item">Categories</li>
+                <li class="sidebar-list-item"><a href="{{ route('admin.pages.categories.index') }}">Categories</a></li>
             </ul>
         </li>
+
         <li class="sidebar-list-item">
-            <div class="icon"></div>
-            Posts
+            <a href="{{ route('admin.posts.index') }}">
+                <div class="icon fa fas fa-book"></div>
+                Posts
+            </a>
+
             <ul class="sidebar-sub-list">
                 <li class="sidebar-list-item"><a href="{{ route('admin.posts.index') }}">List all</a></li>
                 <li class="sidebar-list-item"><a href="{{ route('admin.posts.create') }}">Create new</a></li>
@@ -23,8 +32,11 @@
             </ul>
         </li>
         <li class="sidebar-list-item">
-            <div class="icon"></div>
-            Users
+            <a href="{{ route('admin.users.index') }}">
+                <div class="icon fa fas fa-user-circle"></div>
+                Users
+            </a>
+
             <ul class="sidebar-sub-list">
                 <li class="sidebar-list-item"><a href="{{route('admin.users.index')}}">List all</a></li>
                 <li class="sidebar-list-item"><a href="{{route('admin.users.create')}}">Create new</a></li>
@@ -32,21 +44,24 @@
             </ul>
         </li>
         <li class="sidebar-list-item">
-            <div class="icon"></div>
-            Newsletter
+            <a href="{{ route('admin.dashboard.index') }}">
+                <div class="icon fa fas fa-plug"></div>
+                Modules
+            </a>
+
             <ul class="sidebar-sub-list">
-                <li class="sidebar-list-item">Message templates</li>
-                <li class="sidebar-list-item">Create new template</li>
-                <li class="sidebar-list-item">Send message</li>
+                <li class="sidebar-list-item"><a href="">Browse modules</a></li>
             </ul>
         </li>
         <li class="sidebar-list-item">
-            <div class="icon"></div>
-            Settings
+            <a href="{{ route('admin.dashboard.index') }}">
+                <div class="icon fa fas fa-cogs"></div>
+                Settings
+            </a>
             <ul class="sidebar-sub-list">
-                <li class="sidebar-list-item">General settings</li>
-                <li class="sidebar-list-item">SEO settings</li>
-                <li class="sidebar-list-item">Mail settings</li>
+                <li class="sidebar-list-item"><a href="">General settings</a></li>
+                <li class="sidebar-list-item"><a href="">SEO settings</a></li>
+                <li class="sidebar-list-item"><a href="">Mail settings</a></li>
                 <li class="sidebar-list-item"><a href="{{ route('admin.settings.logs.index') }}">System logs</a></li>
             </ul>
         </li>

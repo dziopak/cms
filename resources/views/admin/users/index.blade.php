@@ -58,12 +58,12 @@
                     @endif
                     </tbody>
                 </table>
-                @if (Auth::user()->hasAccess('USER_CREATE'))
-                    <a href="{{ route('admin.users.create') }}" class="btn btn-success">Create new</a>
-                @endif
-
-                <div class="float-right">{{ $users->render() }}</div>
             </div>
+            @if (Auth::user()->hasAccess('USER_CREATE'))
+                <a href="{{ route('admin.users.create') }}" class="btn btn-success">Create new</a>
+            @endif
+
+            <div class="float-right">{{ $users->render() }}</div>
         </div>
     </div>
 @endsection

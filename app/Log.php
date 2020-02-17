@@ -34,6 +34,10 @@ class Log extends Model
             case 'PAGE':
                 return $this->belongsTo('App\Page', 'target_id', 'id');
             break;
+
+            case 'PAGE_CATEGORY':
+                return $this->belongsTo('App\PageCategory', 'target_id', 'id');
+            break;
         }
     }
 }

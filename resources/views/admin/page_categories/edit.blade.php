@@ -3,15 +3,15 @@
 @section('breadcrumbs')
     <ul>
         <li><a href="{{route('admin.dashboard.index')}}">Admin</a></li>
-        <li><a href="{{route('admin.posts.index')}}">Posts</a></li>
-        <li><a href="{{route('admin.posts.categories.index')}}">Posts</a></li>
-        <li>Create new</li>
+        <li><a href="{{route('admin.pages.index')}}">Pages</a></li>
+        <li><a href="{{route('admin.pages.categories.index')}}">Pages</a></li>
+        <li>Edit</li>
     </ul>
 @endsection
 
 @section('content')
     <div class="col-12">
-    {!! Form::open(['method' => 'POST', 'action' => 'AdminPostCategoriesController@store', 'class' => 'w-100 col-12', 'files' => 'true']) !!}
+    {!! Form::model($category, ['method' => 'PATCH', 'action' => ['AdminPageCategoriesController@update', $category->id], 'class' => 'w-100 col-12', 'files' => 'true']) !!}
 
         @include('admin.partials.validation')
     
@@ -25,7 +25,7 @@
 
                         <div class="form-group row">
                             <div class="col">
-                                {!! Form::label('name', 'Category name: ', ['class' => 'required']) !!}
+                                {!! Form::label('name', 'Page\'s name: ', ['class' => 'required']) !!}
                                 {!! Form::text('name', null, ['class' => 'form-control']) !!}
                             </div>
                         </div>
@@ -38,7 +38,7 @@
                         </div>
 
                         <div class="form-group">
-                            {!! Form::label('parent_id', 'Parent: ') !!}
+                            {!! Form::label('parent_id', 'Page\'s category: ') !!}
                             {!! Form::select('parent_id', $categories, null, ['class' => 'form-control']) !!}
                         </div>
 
@@ -50,8 +50,9 @@
                         </div>
 
                         <div class="form-group">
-                            {!! Form::hidden('type', 'post') !!}
-                            {!! Form::submit('Create category', ['class' => 'btn btn-success']) !!}
+                            {!! Form::hidden('type', 'page') !!}
+                            {!! Form::hidden('category_id', $category->id) !!}
+                            {!! Form::submit('Update', ['class' => 'btn btn-success']) !!}
                         </div>
                     </div>
                 </div>

@@ -50,12 +50,12 @@
                         @endforeach
                     </tbody>
                 </table>
-                @if (Auth::user()->hasAccess('ROLE_CREATE'))
-                    <a href="{{ route('admin.users.roles.create') }}" class="btn btn-success">Create new</a>
-                @endif
-
-                <div class="float-right">{{ $roles->render() }}</div>
             </div>
+            @if (Auth::user()->hasAccess('ROLE_CREATE'))
+                <a href="{{ route('admin.users.roles.create') }}" class="btn btn-success">Create new</a>
+            @endif
+
+            <div class="float-right">{{ $roles->render() }}</div>
         </div>
     </div>
 @endsection

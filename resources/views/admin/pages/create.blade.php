@@ -10,7 +10,7 @@
 
 @section('content')
     <div class="col-12">
-    {!! Form::open(['method' => 'PAGE', 'action' => 'AdminPagesController@store', 'class' => 'w-100 col-12', 'files' => 'true']) !!}
+    {!! Form::open(['method' => 'POST', 'action' => 'AdminPagesController@store', 'class' => 'w-100 col-12', 'files' => 'true']) !!}
 
         @include('admin.partials.validation')
     
@@ -38,7 +38,7 @@
 
                         <div class="form-group">
                             {!! Form::label('category_id', 'Page\'s category: ') !!}
-                            {!! Form::select('category_id', ['0' => 'No category'], null, ['class' => 'form-control']) !!}
+                            {!! Form::select('category_id', [$categories], null, ['class' => 'form-control']) !!}
                         </div>
 
                         <div class="form-group row">

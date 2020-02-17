@@ -3,15 +3,15 @@
 @section('breadcrumbs')
     <ul>
         <li><a href="{{route('admin.dashboard.index')}}">Admin</a></li>
-        <li><a href="{{route('admin.posts.index')}}">Posts</a></li>
-        <li><a href="{{route('admin.posts.categories.index')}}">Posts</a></li>
+        <li><a href="{{route('admin.pages.index')}}">Pages</a></li>
+        <li><a href="{{route('admin.pages.categories.index')}}">Pages</a></li>
         <li>Create new</li>
     </ul>
 @endsection
 
 @section('content')
     <div class="col-12">
-    {!! Form::open(['method' => 'POST', 'action' => 'AdminPostCategoriesController@store', 'class' => 'w-100 col-12', 'files' => 'true']) !!}
+    {!! Form::open(['method' => 'POST', 'action' => 'AdminPageCategoriesController@store', 'class' => 'w-100 col-12', 'files' => 'true']) !!}
 
         @include('admin.partials.validation')
     
@@ -50,7 +50,7 @@
                         </div>
 
                         <div class="form-group">
-                            {!! Form::hidden('type', 'post') !!}
+                            {!! Form::hidden('type', 'page') !!}
                             {!! Form::submit('Create category', ['class' => 'btn btn-success']) !!}
                         </div>
                     </div>

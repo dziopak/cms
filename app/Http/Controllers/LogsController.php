@@ -8,7 +8,7 @@ use App\Log;
 class LogsController extends Controller
 {
     public function index() {
-        $logs = Log::orderBy('created_at', 'desc')->get();
+        $logs = Log::with('author')->orderBy('created_at', 'desc')->get();
         return view('admin.logs.index', compact('logs'));
     }
 }
