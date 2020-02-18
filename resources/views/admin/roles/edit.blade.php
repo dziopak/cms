@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-    {!! Form::model($role, ['method' => 'PATCH', 'action' => ['RolesController@update', $role->id], 'class' => 'col-12']) !!}
+    {!! Form::model($role, ['method' => 'PATCH', 'action' => ['admin\RolesController@update', $role->id], 'class' => 'col-12']) !!}
     <div class="row">
         <div class="col-lg-6 mb-3">
             <div class="card">

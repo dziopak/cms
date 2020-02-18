@@ -10,7 +10,7 @@
 
 @section('content')
     <div class="col-12">
-    {!! Form::model($page, ['method' => 'PATCH', 'action' => ['AdminPagesController@update', $page->id], 'class' => 'w-100 col-12', 'files' => 'true']) !!}
+    {!! Form::model($page, ['method' => 'PATCH', 'action' => ['admin\PagesController@update', $page->id], 'class' => 'w-100 col-12', 'files' => 'true']) !!}
 
         @include('admin.partials.validation')
     

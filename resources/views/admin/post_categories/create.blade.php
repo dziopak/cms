@@ -11,7 +11,7 @@
 
 @section('content')
     <div class="col-12">
-    {!! Form::open(['method' => 'POST', 'action' => 'AdminPostCategoriesController@store', 'class' => 'w-100 col-12', 'files' => 'true']) !!}
+    {!! Form::open(['method' => 'POST', 'action' => 'admin\PostCategoriesController@store', 'class' => 'w-100 col-12', 'files' => 'true']) !!}
 
         @include('admin.partials.validation')
     

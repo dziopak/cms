@@ -40,7 +40,7 @@
 
                 <p class="alert alert-danger">Are you sure you want to permamently delete this account from system's database?</p>
                 
-                {!! Form::open(['method' => 'DELETE', 'action' => ['AdminUsersController@destroy', $user->id]]) !!}
+                {!! Form::open(['method' => 'DELETE', 'action' => ['admin\UsersController@destroy', $user->id]]) !!}
                 
                 <div class="form-group">
                     <a href="{{route('admin.users.index')}}" role="button" class="btn btn-success">Go back</a>

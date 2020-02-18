@@ -16,7 +16,7 @@
                     <strong>Basic data</strong>
                 </div>
 
-                {!! Form::model($user, ['method' => 'PATCH', 'action' => ['AdminUsersController@update', $user->id], 'files' => 'true']) !!}
+                {!! Form::model($user, ['method' => 'PATCH', 'action' => ['admin\UsersController@update', $user->id], 'files' => 'true']) !!}
                 
                 @include('admin.partials.validation')
                 
@@ -101,7 +101,7 @@
                     <div class="card-body">
                         <div class="card-title">
                             <strong>Change password:</strong>
-                            {!! Form::open(['method' => 'PUT', 'action' => ['AdminUsersController@password', $user->id]]) !!}
+                            {!! Form::open(['method' => 'PUT', 'action' => ['admin\UsersController@password', $user->id]]) !!}
                             <div class="form-group row">
                                 <div class="col-sm-6">
                                     {!! Form::label('password', 'Password: ', ['class' => 'required']) !!}

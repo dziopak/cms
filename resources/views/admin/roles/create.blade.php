@@ -11,9 +11,9 @@
 
 @section('content')
     @if (isset($role))
-        {!! Form::model($role, ['method' => 'POST', 'action' => 'RolesController@store', 'class' => 'w-100 col-12']) !!}
+        {!! Form::model($role, ['method' => 'POST', 'action' => 'admin\RolesController@store', 'class' => 'w-100 col-12']) !!}
     @else
-        {!! Form::open(['method' => 'POST', 'action' => 'RolesController@store', 'class' => 'w-100 col-12']) !!}
+        {!! Form::open(['method' => 'POST', 'action' => 'admin\RolesController@store', 'class' => 'w-100 col-12']) !!}
     @endif
 
     <div class="row">

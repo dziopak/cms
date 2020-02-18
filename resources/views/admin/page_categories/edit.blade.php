@@ -11,7 +11,7 @@
 
 @section('content')
     <div class="col-12">
-    {!! Form::model($category, ['method' => 'PATCH', 'action' => ['AdminPageCategoriesController@update', $category->id], 'class' => 'w-100 col-12', 'files' => 'true']) !!}
+    {!! Form::model($category, ['method' => 'PATCH', 'action' => ['admin\PageCategoriesController@update', $category->id], 'class' => 'w-100 col-12', 'files' => 'true']) !!}
 
         @include('admin.partials.validation')
     

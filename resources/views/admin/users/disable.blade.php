@@ -40,7 +40,7 @@
 
                 <p class="alert alert-warning">Are you sure you want to {{$user->is_active == 1 ? "block" : "unblock"}} user's account?</p>
                 
-                {!! Form::open(['method' => 'PUT', 'action' => ['AdminUsersController@block', $user->id]]) !!}
+                {!! Form::open(['method' => 'PUT', 'action' => ['admin\UsersController@block', $user->id]]) !!}
                 
                 <div class="form-group">
                     <a href="{{route('admin.users.index')}}" role="button" class="btn btn-primary">Go back</a>

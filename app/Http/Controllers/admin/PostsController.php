@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use App\Http\Requests\PostsRequest;
+use Illuminate\Support\Facades\Session;
+
 use App\Post;
 use App\Log;
 use App\File;
 use App\PostCategory;
-use Illuminate\Support\Facades\Session;
 use Auth;
 
-class AdminPostsController extends Controller
+class PostsController extends Controller
 {
     /**
      * Display a listing of the resource.

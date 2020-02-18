@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\PageCategory;
 use App\Http\Requests\CategoriesRequest;
 use Illuminate\Support\Facades\Session;
+
+use App\PostCategory;
 use App\Log;
 use Auth;
 
-
-class AdminPageCategoriesController extends Controller
+class PostCategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +20,8 @@ class AdminPageCategoriesController extends Controller
      */
     public function index()
     {
-        $categories = PageCategory::paginate(15);
-        return view('admin.page_categories.index', compact('categories'));
+        $categories = PostCategory::paginate(15);
+        return view('admin.post_categories.index', compact('categories'));
     }
 
     /**
@@ -32,11 +33,11 @@ class AdminPageCategoriesController extends Controller
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_CREATE');
 
-        $page_cat = new PageCategory;
+        $post_cat = new PostCategory;
         $categories[0] = 'No category';
-        $categories = array_merge($categories, $page_cat->list_all());
+        $categories = array_merge($categories, $post_cat->list_all());
         
-        return view('admin.page_categories.create', compact('categories'));
+        return view('admin.post_categories.create', compact('categories'));
     }
 
     /**
@@ -50,21 +51,21 @@ class AdminPageCategoriesController extends Controller
         Auth::user()->hasAccessOrRedirect('CATEGORY_CREATE');
 
         $data = $request->all();
-        $id = PageCategory::create($data)->id;
+        $id = PostCategory::create($data)->id;
 
         $log_data = [
             'user_id' => Auth::user()->id,
             'target_id' => $id,
             'target_name' => $data['name'],
-            'type' => 'PAGE_CATEGORY',
+            'type' => 'POST_CATEGORY',
             'crud_action' => '1',
-            'message' => 'created page category'
+            'message' => 'created post category'
         ];
 
         Log::create($log_data);
-        Session::flash('crud', 'Page category "'.$data['name'].'" has been created successfully.');
+        Session::flash('crud', 'Post category "'.$data['name'].'" has been created successfully.');
 
-        return redirect(route('admin.pages.categories.index'));
+        return redirect(route('admin.posts.categories.index'));
     }
 
     /**
@@ -87,13 +88,13 @@ class AdminPageCategoriesController extends Controller
     public function edit($id)
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_EDIT');
-        $category = new PageCategory;
+        $category = new PostCategory;
         
         $categories[0] = 'No category';
         $categories = array_merge($categories, $category->list_all());
 
         $category = $category::findOrFail($id);
-        return view('admin.page_categories.edit', compact('category', 'categories'));
+        return view('admin.post_categories.edit', compact('category', 'categories'));
     }
 
     /**
@@ -107,30 +108,30 @@ class AdminPageCategoriesController extends Controller
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_EDIT');
         
-        $category = PageCategory::findOrFail($id);
+        $category = PostCategory::findOrFail($id);
         $data = $request->all();
 
         $log_data = [
             'user_id' => Auth::user()->id,
             'target_id' => 0,
             'target_name' => $category->name,
-            'type' => 'PAGE_CATEGORY',
+            'type' => 'POST_CATEGORY',
             'crud_action' => '2',
-            'message' => 'updated page category'
+            'message' => 'updated post category'
         ];
 
         Log::create($log_data);
-        Session::flash('crud', 'Page category "'.$category->name.'" has been updated successfully.');
+        Session::flash('crud', 'Post category "'.$category->name.'" has been updated successfully.');
 
         $category->update($data);
-        return redirect(route('admin.pages.categories.index'));
+        return redirect(route('admin.posts.categories.index'));
     }
 
     public function delete($id) {
         Auth::user()->hasAccessOrRedirect('CATEGORY_DELETE');
-        $category = PageCategory::findOrFail($id);
+        $category = PostCategory::findOrFail($id);
         
-        return view('admin.page_categories.delete', compact('category'));
+        return view('admin.post_categories.delete', compact('category'));
     }
 
     /**
@@ -142,21 +143,21 @@ class AdminPageCategoriesController extends Controller
     public function destroy($id)
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_DELETE');
-        $category = PageCategory::findOrFail($id);
+        $category = PostCategory::findOrFail($id);
 
         $log_data = [
             'user_id' => Auth::user()->id,
             'target_id' => 0,
             'target_name' => $category->name,
-            'type' => 'PAGE_CATEGORY',
+            'type' => 'POST_CATEGORY',
             'crud_action' => '3',
-            'message' => 'deleted page category'
+            'message' => 'deleted post category'
         ];
 
         Log::create($log_data);
-        Session::flash('crud', 'Page category "'.$category->name.'" has been deleted successfully.');
+        Session::flash('crud', 'Post category "'.$category->name.'" has been deleted successfully.');
 
         $category->delete();
-        return redirect(route('admin.pages.categories.index'));
+        return redirect(route('admin.posts.categories.index'));
     }
 }

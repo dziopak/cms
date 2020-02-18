@@ -16,7 +16,7 @@
                     <strong>Basic data</strong>
                 </div>
 
-                {!! Form::open(['method' => 'POST', 'action' => 'AdminUsersController@store', 'files' => 'true']) !!}
+                {!! Form::open(['method' => 'POST', 'action' => 'admin\UsersController@store', 'files' => 'true']) !!}
         
                 @include('admin.partials.validation')
 

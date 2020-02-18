@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
-use App\Http\Requests\PagesRequest;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\PagesRequest;
 use Illuminate\Support\Facades\Session;
 
 use App\Page;
@@ -12,7 +13,7 @@ use App\Log;
 use App\PageCategory;
 use Auth;
 
-class AdminPagesController extends Controller
+class PagesController extends Controller
 {
     /**
      * Display a listing of the resource.

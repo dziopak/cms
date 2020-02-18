@@ -31,7 +31,7 @@
 
                 <p class="alert alert-danger">Are you sure you want to permamently delete this page from system's database? This action is irreversible.</p>
                 
-                {!! Form::open(['method' => 'DELETE', 'action' => ['AdminPagesController@destroy', $page->id]]) !!}
+                {!! Form::open(['method' => 'DELETE', 'action' => ['admin\PagesController@destroy', $page->id]]) !!}
                 
                 <div class="form-group">
                     <a href="{{route('admin.pages.index')}}" role="button" class="btn btn-success">Go back</a>

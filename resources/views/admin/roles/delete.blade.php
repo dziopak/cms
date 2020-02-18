@@ -31,7 +31,7 @@
 
                 <p class="alert alert-danger">Are you sure you want to permamently delete this role from system's database? This action is irreversible, and will change all {{$role->name}} accounts to regular user role.</p>
                 
-                {!! Form::open(['method' => 'DELETE', 'action' => ['RolesController@destroy', $role->id]]) !!}
+                {!! Form::open(['method' => 'DELETE', 'action' => ['admin\RolesController@destroy', $role->id]]) !!}
                 
                 <div class="form-group">
                     <a href="{{route('admin.users.roles.index')}}" role="button" class="btn btn-success">Go back</a>

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\UsersCreateRequest;
 use App\Http\Requests\UsersEditRequest;
@@ -16,8 +17,7 @@ use App\File;
 use App\Log;
 use Auth;
 
-
-class AdminUsersController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
