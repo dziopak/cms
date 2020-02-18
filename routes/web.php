@@ -14,6 +14,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'access:ADM
         return view('admin.dashboard.index');
     })->name('dashboard.index');
     
+    Route::get('/clear-cache', function() {
+        Artisan::call('cache:clear');
+        return redirect(route('admin.dashboard.index'));
+    });
+
+    Route::get('/menus', function() {
+        return view('admin.menus.index');
+    })->name('menus.index');
 
     //POSTS ROUTES
     require base_path('routes/web/admin/users.php');

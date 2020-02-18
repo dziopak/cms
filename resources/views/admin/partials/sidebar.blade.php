@@ -45,6 +45,18 @@
         </li>
         <li class="sidebar-list-item">
             <a href="{{ route('admin.dashboard.index') }}">
+                <div class="icon fa fas fa-columns"></div>
+                Appearance
+            </a>
+
+            <ul class="sidebar-sub-list">
+                <li class="sidebar-list-item"><a href="{{ route('admin.menus.index') }}">Menus</a></li>
+                <li class="sidebar-list-item"><a href="">Widgets</a></li>
+                <li class="sidebar-list-item"><a href="">Theme settings</a></li>
+            </ul>
+        </li>
+        <li class="sidebar-list-item">
+            <a href="{{ route('admin.dashboard.index') }}">
                 <div class="icon fa fas fa-plug"></div>
                 Modules
             </a>
