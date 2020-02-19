@@ -29,6 +29,8 @@ class EventServiceProvider extends ServiceProvider
     {
         $this->listen = array_merge(include('EventServiceProvider/CategoriesEventServiceProvider.php'), $this->listen);
         $this->listen = array_merge(include('EventServiceProvider/PagesEventServiceProvider.php'), $this->listen);
+        $this->listen = array_merge(include('EventServiceProvider/PostsEventServiceProvider.php'), $this->listen);
+        
         parent::boot();
     }
 }

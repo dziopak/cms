@@ -12,8 +12,6 @@ use App\Events\Pages\PageUpdateEvent;
 use App\Events\Pages\PageDestroyEvent;
 
 use App\Page;
-use App\File;
-use App\Log;
 use App\PageCategory;
 use Auth;
 
