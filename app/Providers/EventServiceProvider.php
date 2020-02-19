@@ -17,7 +17,7 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
-        ],
+        ]
     ];
 
     /**
@@ -27,8 +27,8 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->listen = array_merge(include('EventServiceProvider/CategoriesEventServiceProvider.php'), $this->listen);
+        $this->listen = array_merge(include('EventServiceProvider/PagesEventServiceProvider.php'), $this->listen);
         parent::boot();
-
-        //
     }
 }

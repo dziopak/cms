@@ -7,8 +7,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CategoriesRequest;
 use Illuminate\Support\Facades\Session;
 
+use App\Events\Categories\CategoryCreateEvent;
+use App\Events\Categories\CategoryUpdateEvent;
+use App\Events\Categories\CategoryDestroyEvent;
+
 use App\PostCategory;
-use App\Log;
 use Auth;
 
 class PostCategoriesController extends Controller
@@ -53,16 +56,7 @@ class PostCategoriesController extends Controller
         $data = $request->all();
         $id = PostCategory::create($data)->id;
 
-        $log_data = [
-            'user_id' => Auth::user()->id,
-            'target_id' => $id,
-            'target_name' => $data['name'],
-            'type' => 'POST_CATEGORY',
-            'crud_action' => '1',
-            'message' => 'created post category'
-        ];
-
-        Log::create($log_data);
+        event(new CategoryCreateEvent($category, 'POST'));
         Session::flash('crud', 'Post category "'.$data['name'].'" has been created successfully.');
 
         return redirect(route('admin.posts.categories.index'));
@@ -111,16 +105,7 @@ class PostCategoriesController extends Controller
         $category = PostCategory::findOrFail($id);
         $data = $request->all();
 
-        $log_data = [
-            'user_id' => Auth::user()->id,
-            'target_id' => 0,
-            'target_name' => $category->name,
-            'type' => 'POST_CATEGORY',
-            'crud_action' => '2',
-            'message' => 'updated post category'
-        ];
-
-        Log::create($log_data);
+        event(new CategoryUpdateEvent($category, 'POST'));
         Session::flash('crud', 'Post category "'.$category->name.'" has been updated successfully.');
 
         $category->update($data);
@@ -145,16 +130,7 @@ class PostCategoriesController extends Controller
         Auth::user()->hasAccessOrRedirect('CATEGORY_DELETE');
         $category = PostCategory::findOrFail($id);
 
-        $log_data = [
-            'user_id' => Auth::user()->id,
-            'target_id' => 0,
-            'target_name' => $category->name,
-            'type' => 'POST_CATEGORY',
-            'crud_action' => '3',
-            'message' => 'deleted post category'
-        ];
-
-        Log::create($log_data);
+        event(new CategoryDestroyEvent($category, 'POST'));
         Session::flash('crud', 'Post category "'.$category->name.'" has been deleted successfully.');
 
         $category->delete();

@@ -80,10 +80,12 @@
                         
                         <div class="form-group">
                             <div class="form-check">
+                                {!! Form::hidden('index', '0') !!}
                                 {!! Form::checkbox('index', '1', null, ['class' => 'form-check-input']) !!}
                                 {!! Form::label('index', 'Index page', ['class' => 'form-check-label']) !!}
                             </div>
                             <div class="form-check">
+                                {!! Form::hidden('follow', '0') !!}
                                 {!! Form::checkbox('follow', '1', null, ['class' => 'form-check-input']) !!}
                                 {!! Form::label('follow', 'Follow page', ['class' => 'form-check-label']) !!}
                             </div>

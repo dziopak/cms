@@ -7,8 +7,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CategoriesRequest;
 use Illuminate\Support\Facades\Session;
 
+use App\Events\Categories\CategoryCreateEvent;
+use App\Events\Categories\CategoryUpdateEvent;
+use App\Events\Categories\CategoryDestroyEvent;
+
 use App\PageCategory;
-use App\Log;
 use Auth;
 
 class PageCategoriesController extends Controller
@@ -51,18 +54,9 @@ class PageCategoriesController extends Controller
         Auth::user()->hasAccessOrRedirect('CATEGORY_CREATE');
 
         $data = $request->all();
-        $id = PageCategory::create($data)->id;
+        $category = PageCategory::create($data);
 
-        $log_data = [
-            'user_id' => Auth::user()->id,
-            'target_id' => $id,
-            'target_name' => $data['name'],
-            'type' => 'PAGE_CATEGORY',
-            'crud_action' => '1',
-            'message' => 'created page category'
-        ];
-
-        Log::create($log_data);
+        event(new CategoryCreateEvent($category, 'PAGE'));
         Session::flash('crud', 'Page category "'.$data['name'].'" has been created successfully.');
 
         return redirect(route('admin.pages.categories.index'));
@@ -107,23 +101,15 @@ class PageCategoriesController extends Controller
     public function update(CategoriesRequest $request, $id)
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_EDIT');
-        
-        $category = PageCategory::findOrFail($id);
+    
+        $category = PageCategory::findOrFail($id);    
         $data = $request->all();
 
-        $log_data = [
-            'user_id' => Auth::user()->id,
-            'target_id' => 0,
-            'target_name' => $category->name,
-            'type' => 'PAGE_CATEGORY',
-            'crud_action' => '2',
-            'message' => 'updated page category'
-        ];
-
-        Log::create($log_data);
-        Session::flash('crud', 'Page category "'.$category->name.'" has been updated successfully.');
-
         $category->update($data);
+        Session::flash('crud', 'Page category "'.$category->name.'" has been updated successfully.');
+        
+        event(new CategoryUpdateEvent($category, 'PAGE'));
+        
         return redirect(route('admin.pages.categories.index'));
     }
 
@@ -145,16 +131,7 @@ class PageCategoriesController extends Controller
         Auth::user()->hasAccessOrRedirect('CATEGORY_DELETE');
         $category = PageCategory::findOrFail($id);
 
-        $log_data = [
-            'user_id' => Auth::user()->id,
-            'target_id' => 0,
-            'target_name' => $category->name,
-            'type' => 'PAGE_CATEGORY',
-            'crud_action' => '3',
-            'message' => 'deleted page category'
-        ];
-
-        Log::create($log_data);
+        event(new CategoryDestroyEvent($category, 'PAGE'));
         Session::flash('crud', 'Page category "'.$category->name.'" has been deleted successfully.');
 
         $category->delete();
