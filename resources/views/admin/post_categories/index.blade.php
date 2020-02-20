@@ -1,4 +1,20 @@
-@extends('layouts.admin')
+@extends('layouts.admin.containers.full-width')
+
+<?php
+    $table_headers = ['Category name' => 'name'];
+    $table_actions = [
+        'Edit' => [
+            'url' => 'admin.posts.categories.edit',
+            'class' => 'success',
+            'access' => 'CATEGORY_EDIT'
+        ],
+        'Delete' => [
+            'url' => 'admin.posts.categories.delete',
+            'class' => 'danger',
+            'access' => 'CATEGORY_DELETE'
+        ]
+    ];
+?>
 
 @section('breadcrumbs')
     <ul>
@@ -10,52 +26,13 @@
 @endsection
 
 
-@section('content')
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <div class="card-title">
-                    <strong>Manage categories</strong>
-                </div>
-            <div class="table-responsive">
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th style="width: 20px;">
-                                <input type="checkbox" name="action[all]">
-                            </th>
-                            <th>Category name</th>
-                            
-                            @if (Auth::user()->hasAccess('CATEGORY_EDIT') || Auth::user()->hasAccess('CATEGORY_DELETE'))
-                                <th style="width: 260px;">Actions</th>
-                            @endif
-                        </tr>
-                    </thead>
-                    
-                    <tbody>
-                        @foreach($categories as $category)
-                            <tr>
-                                <td><input type="checkbox" name="action[{{$category->id}}]"></td>
-                                <td>{{$category->name}}</td>
-                                <td>
-                                    @if (Auth::user()->hasAccess('CATEGORY_EDIT'))
-                                        <a class="btn btn-success" href="{{ route('admin.posts.categories.edit', $category->id) }}">Edit</a>                                    
-                                    @endif
-                                    
-                                    @if (Auth::user()->hasAccess('CATEGORY_DELETE'))
-                                        <a class="btn btn-danger" href="{{ route('admin.posts.categories.delete', $category->id) }}">Delete</a></td>
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-            @if (Auth::user()->hasAccess('CATEGORY_CREATE'))
-                <a href="{{ route('admin.posts.categories.create') }}" class="btn btn-success">Create new</a>
-            @endif
+@section('module-content')
+    @wrapper('admin.partials.widget', ['title' => 'Manage categories'])    
+        @include('admin.partials.table', ['fields' => $categories])
+        @if (Auth::user()->hasAccess('CATEGORY_CREATE'))
+            <a href="{{ route('admin.posts.categories.create') }}" class="btn btn-success">Create new</a>
+        @endif
 
-            <div class="float-right">{{ $categories->render() }}</div>
-        </div>
-    </div>
+        <div class="float-right">{{ $categories->render() }}</div>
+    @endwrapper
 @endsection

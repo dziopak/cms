@@ -23,6 +23,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'access:ADM
         return view('admin.menus.index');
     })->name('menus.index');
 
+    Route::get('/modules', 'admin\ModulesController@index')->name('modules.index');
+
     //POSTS ROUTES
     require base_path('routes/web/admin/users.php');
 

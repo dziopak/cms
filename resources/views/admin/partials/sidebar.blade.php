@@ -58,11 +58,12 @@
         <li class="sidebar-list-item">
             <a href="{{ route('admin.dashboard.index') }}">
                 <div class="icon fa fas fa-plug"></div>
-                Modules
+                Addons
             </a>
 
             <ul class="sidebar-sub-list">
                 <li class="sidebar-list-item"><a href="">Browse modules</a></li>
+                <li class="sidebar-list-item"><a href="">Browse widgets</a></li>
             </ul>
         </li>
         <li class="sidebar-list-item">

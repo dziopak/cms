@@ -1,4 +1,21 @@
-@extends('layouts.admin')
+@extends('layouts.admin.containers.full-width')
+
+<?php
+    $table_headers = [' ' => 'thumbnail', 'Title' => 'name', 'Author' => 'author', 'Created at' => 'created_at'];
+    $table_data_types = ['thumbnail' => 'image', 'author' => 'name'];
+    $table_actions = [
+        'Edit' => [
+            'url' => 'admin.posts.edit',
+            'class' => 'success',
+            'access' => 'PAGE_EDIT'
+        ],
+        'Delete' => [
+            'url' => 'admin.posts.delete',
+            'class' => 'danger',
+            'access' => 'PAGE_DELETE'
+        ]
+    ];
+?>
 
 @section('breadcrumbs')
     <ul>
@@ -8,61 +25,15 @@
     </ul>
 @endsection
 
-@section('content')
-<div class="col-12">
-    <div class="card">
-        <div class="card-body">
-            <div class="card-title">
-                <strong>Manage posts</strong>
-            </div>
 
-            <div class="table-responsive">
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th style="width: 70px;"></th>
-                            <th></th>
-                            <th>Title</th>
-                            <th>Author</th>
-                            <th>Created at</th>
-                            <th style="width: 100px;"></th>
-                        </tr>
-                    </thead>
+@section('module-content')
+    @wrapper('admin.partials.widget', ['title' => 'Manage posts'])
+        @include('admin.partials.table', ['fields' => $posts])
+        
+        @if (Auth::user()->hasAccess('POST_CREATE'))
+            <a href="{{ route('admin.posts.create') }}" class="btn btn-success">Create new</a>
+        @endif
 
-                    <tbody>
-                        @if (count($posts) > 0)
-                            @foreach($posts as $post)
-                                <tr>
-                                    <td>
-                                        @if ($post->thumbnail)
-                                            <img src="/images/{{$post->thumbnail->path}}" alt="{{ $post->name }}" width="60">
-                                        @endif
-                                    </td>
-                                    <td></td>
-                                    <td>{{ $post->name }}</td>
-                                    <td>{{ $post->author->name }}</td>
-                                    <td>{{ $post->created_at->diffForHumans() }}</td>
-                                    <td>
-                                        @if (Auth::user()->hasAccess('POST_EDIT'))
-                                            <a href="{{ route('admin.posts.edit', $post->id) }}" class="btn btn-success">E</a>
-                                        @endif
-                                        
-                                        @if (Auth::user()->hasAccess('POST_DELETE'))
-                                            <a href="{{ route('admin.posts.delete', $post->id) }}" class="btn btn-danger">X</a>
-                                        @endif
-                                    </td>
-                                </tr>
-                            @endforeach
-                        @endif
-                    </tbody>
-                </table>
-            </div>
-            @if (Auth::user()->hasAccess('POST_CREATE'))
-                <a href="{{ route('admin.posts.create') }}" class="btn btn-success">Create new</a>
-            @endif
-
-            <div class="float-right">{{ $posts->render() }}</div>
-        </div>
-    </div>
-</div>
+        <div class="float-right">{{ $posts->render() }}</div>
+    @endwrapper
 @endsection

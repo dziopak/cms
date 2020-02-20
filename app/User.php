@@ -48,7 +48,7 @@ class User extends Authenticatable
     }
 
     public function logs() {
-        $logs = Log::where('user_id', $this->id)->orWhere(['target_id' => $this->id, 'type' => 'USER']);
+        $logs = Log::where('user_id', $this->id)->orWhere('target_id',$this->id)->where('type','USER');
         return $logs;
     }
 

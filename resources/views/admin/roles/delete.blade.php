@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.admin.containers.columns-6-6')
 
 @section('breadcrumbs')
     <ul>
@@ -9,45 +9,28 @@
     </ul>
 @endsection
 
-@section('content')
-    <div class="col-6">
-        <div class="card mb-4">
-            <div class="card-body">
-                <div class="card-title">
-                    <strong>Role's info</strong>
-                </div>
-                   
-                <div style="display: inline-block;">
-                    <strong>{{$role->name}} role</strong><br/>
-                    Created: {{$role->created_at}}<br/>
-                </div>
-            </div>
+@section('content-left')
+    @wrapper('admin.partials.widget', ['title' => 'Basic role data'])
+        <div style="display: inline-block;">
+            <strong>{{$role->name}} role</strong><br/>
+            Created: {{$role->created_at}}<br/>
         </div>
-        <div class="card">
-            <div class="card-body">
-                <div class="card-title">
-                    <strong>Remove role</strong>
-                </div>
+    @endwrapper
 
-                <p class="alert alert-danger">Are you sure you want to permamently delete this role from system's database? This action is irreversible, and will change all {{$role->name}} accounts to regular user role.</p>
-                
-                {!! Form::open(['method' => 'DELETE', 'action' => ['admin\RolesController@destroy', $role->id]]) !!}
-                
-                <div class="form-group">
-                    <a href="{{route('admin.users.roles.index')}}" role="button" class="btn btn-success">Go back</a>
-                    {!! Form::submit('Delete permamently', ['class' => 'btn btn-danger']) !!}
-                </div>
-                {!! Form::close() !!}
-            </div>
+    @wrapper('admin.partials.widget', ['title' => 'Remove role'])
+        <p class="alert alert-danger">Are you sure you want to permamently delete this role from system's database? This action is irreversible, and will change all {{$role->name}} accounts to regular user role.</p>
+        
+        {!! Form::open(['method' => 'DELETE', 'action' => ['admin\RolesController@destroy', $role->id]]) !!}
+        
+        <div class="form-group">
+            <a href="{{route('admin.users.roles.index')}}" role="button" class="btn btn-success">Go back</a>
+            {!! Form::submit('Delete permamently', ['class' => 'btn btn-danger']) !!}
         </div>
-    </div>
-    <div class="col-6">
-        <div class="card mb-4">
-            <div class="card-body">
-                <div class="card-title">
-                    <strong>{{ $role->name}} accounts:</strong>
-                </div>
-            </div>
-        </div>
-    </div>
+        {!! Form::close() !!}
+    @endwrapper
+@endsection
+
+@section('content-right')
+    @wrapper('admin.partials.widget', ['title' => 'Accounts with this role'])
+    @endwrapper
 @endsection

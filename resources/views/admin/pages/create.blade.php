@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.admin.containers.columns-8-4')
 
 @section('breadcrumbs')
     <ul>
@@ -8,113 +8,98 @@
     </ul>
 @endsection
 
-@section('content')
-    <div class="col-12">
-    {!! Form::open(['method' => 'POST', 'action' => 'admin\PagesController@store', 'class' => 'w-100 col-12', 'files' => 'true']) !!}
 
-        @include('admin.partials.validation')
-    
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <div class="card-title">
-                            <strong>Basic page data</strong>
-                        </div>
+@section('before')
+    {!! Form::open(['method' => 'POST', 'action' => 'admin\PagesController@store', 'class' => 'w-100', 'files' => 'true']) !!}
+    @include('admin.partials.validation')
+@endsection
 
-                        <div class="form-group row">
-                            <div class="col">
-                                {!! Form::label('name', 'Page\'s name: ', ['class' => 'required']) !!}
-                                {!! Form::text('name', null, ['class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        
-                        <div class="form-group row">
-                            <div class="col">
-                                {!! Form::label('slug', 'Slug: ', ['class' => 'required']) !!}
-                                {!! Form::text('slug', null, ['class' => 'form-control']) !!}
-                            </div>
-                        </div>
 
-                        <div class="form-group">
-                            {!! Form::label('category_id', 'Page\'s category: ') !!}
-                            {!! Form::select('category_id', [$categories], null, ['class' => 'form-control']) !!}
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col">
-                                {!! Form::label('excerpt', 'Excerpt: ', ['class' => 'required']) !!}
-                                {!! Form::textarea('excerpt', null, ['class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-4">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <div class="card-title">
-                            <strong>Page settings</strong>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col">
-                                {!! Form::label('thumbnail', 'Thumbnail: ') !!}
-                                {!! Form::file('thumbnail', ['class' => 'form-control']) !!}
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col">
-                                {!! Form::label('meta_title', 'Meta title: ') !!}
-                                {!! Form::text('meta_title', null, ['class' => 'form-control']) !!}
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col">
-                                {!! Form::label('meta_description', 'Meta description: ') !!}
-                                {!! Form::textarea('meta_description', null, ['class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <div class="form-check">
-                                {!! Form::hidden('index', '0') !!}
-                                {!! Form::checkbox('index', '1', true, ['class' => 'form-check-input']) !!}
-                                {!! Form::label('index', 'Index page', ['class' => 'form-check-label']) !!}
-                            </div>
-                            <div class="form-check">
-                                {!! Form::hidden('follow', '0') !!}
-                                {!! Form::checkbox('follow', '1', true, ['class' => 'form-check-input']) !!}
-                                {!! Form::label('follow', 'Follow page', ['class' => 'form-check-label']) !!}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+@section('module-content')
+    @wrapper('admin.partials.widget', ['title' => 'Basic page data'])
+        <div class="form-group row">
+            <div class="col">
+                {!! Form::label('name', 'Page\'s name: ', ['class' => 'required']) !!}
+                {!! Form::text('name', null, ['class' => 'form-control']) !!}
             </div>
         </div>
         
-        <div class="row">
+        <div class="form-group row">
             <div class="col">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <div class="card-title">
-                            <strong>Page content</strong>
-                        </div>
-
-                        <div class="form-group">
-                            {!! Form::textarea('content', null, ['class' => 'form-control tinymce']) !!}
-                        </div>
-
-                        <div class="form-group">
-                            {!! Form::submit('Create page', ['class' => 'btn btn-success']) !!}
-                        </div>
-                    </div>
-                </div>
+                {!! Form::label('slug', 'Slug: ', ['class' => 'required']) !!}
+                {!! Form::text('slug', null, ['class' => 'form-control']) !!}
             </div>
         </div>
-    {!! Form::close() !!}
+
+        <div class="form-group">
+            {!! Form::label('category_id', 'Page\'s category: ') !!}
+            {!! Form::select('category_id', $categories, null, ['class' => 'form-control']) !!}
+        </div>
+
+        <div class="form-group row">
+            <div class="col">
+                {!! Form::label('excerpt', 'Excerpt: ', ['class' => 'required']) !!}
+                {!! Form::textarea('excerpt', null, ['class' => 'form-control']) !!}
+            </div>
+        </div>
+    @endwrapper
+@endsection
+
+
+@section('content-right')
+    @wrapper('admin.partials.widget', ['title' => 'Page settings'])    
+        <div class="form-group row">
+            <div class="col">
+                {!! Form::label('thumbnail', 'Thumbnail: ') !!}
+                {!! Form::file('thumbnail', ['class' => 'form-control']) !!}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col">
+                {!! Form::label('meta_title', 'Meta title: ') !!}
+                {!! Form::text('meta_title', null, ['class' => 'form-control']) !!}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col">
+                {!! Form::label('meta_description', 'Meta description: ') !!}
+                {!! Form::textarea('meta_description', null, ['class' => 'form-control']) !!}
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="form-check">
+                {!! Form::hidden('index', '0') !!}
+                {!! Form::checkbox('index', '1', true, ['class' => 'form-check-input']) !!}
+                {!! Form::label('index', 'Index page', ['class' => 'form-check-label']) !!}
+            </div>
+            <div class="form-check">
+                {!! Form::hidden('follow', '0') !!}
+                {!! Form::checkbox('follow', '1', true, ['class' => 'form-check-input']) !!}
+                {!! Form::label('follow', 'Follow page', ['class' => 'form-check-label']) !!}
+            </div>
+        </div>
+    @endwrapper
+@endsection
+
+@section('content-bottom')
+    <div class="col">
+        @wrapper('admin.partials.widget', ['title' => 'Page content'])
+            <div class="form-group">
+                {!! Form::textarea('content', null, ['class' => 'form-control tinymce']) !!}
+            </div>
+
+            <div class="form-group">
+                {!! Form::submit('Create page', ['class' => 'btn btn-success']) !!}
+            </div>
+        @endwrapper
     </div>
+@endsection
+
+
+@section('after')
+    {!! Form::close() !!}
     @include('admin.partials.tinymce')
 @endsection

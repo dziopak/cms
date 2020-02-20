@@ -1,4 +1,26 @@
-@extends('layouts.admin')
+@extends('layouts.admin.containers.full-width')
+
+<?php
+    $table_headers = ['Role name' => 'name'];
+    $table_actions = [
+        'Edit' => [
+            'url' => 'admin.users.roles.edit',
+            'class' => 'success',
+            'access' => 'ROLE_EDIT'
+        ],
+        'Duplicate' => [
+            'url' => 'admin.users.roles.duplicate',
+            'class' => 'primary',
+            'access' => 'ROLE_CREATE'
+        ],
+        'Delete' => [
+            'url' => 'admin.users.roles.delete',
+            'class' => 'danger',
+            'disabled' => ['0', '1'],
+            'access' => 'ROLE_DELETE'
+        ],
+    ];
+?>
 
 @section('breadcrumbs')
     <ul>
@@ -9,53 +31,14 @@
     </ul>
 @endsection
 
+@section('module-content')
+    @wrapper('admin.partials.widget', ['title' => 'Manage user roles'])
+        @include('admin.partials.table', ['fields' => $roles])
 
-@section('content')
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <div class="card-title">
-                    <strong>Manage users roles</strong>
-                </div>
-            <div class="table-responsive">
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th style="width: 20px;">
-                                <input type="checkbox" name="action[all]">
-                            </th>
-                            <th>Role name</th>
-                            <th style="width: 260px;">Actions</th>
-                        </tr>
-                    </thead>
-                    
-                    <tbody>
-                        @foreach($roles as $role)
-                            <tr>
-                                <td><input type="checkbox" name="action[{{$role->id}}]"></td>
-                                <td>{{$role->name}}</td>
-                                <td>
-                                    <a class="btn btn-success" href="{{ route('admin.users.roles.edit', $role->id) }}">Edit</a>
-                                    @if (Auth::user()->hasAccess('ROLE_CREATE'))
-                                        <a class="btn btn-primary" href="{{ route('admin.users.roles.duplicate', $role->id) }}">Duplicate</a>
-                                    @endif
+        @if (Auth::user()->hasAccess('ROLE_CREATE'))
+            <a href="{{ route('admin.users.roles.create') }}" class="btn btn-success">Create new</a>
+        @endif
 
-                                    @if ($role->id > 1)
-                                        <a class="btn btn-danger" href="{{ route('admin.users.roles.delete', $role->id) }}">Delete</a></td>
-                                        @else
-                                        <a class="btn btn-danger disabled" href="#">LOCKED</a></td>
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-            @if (Auth::user()->hasAccess('ROLE_CREATE'))
-                <a href="{{ route('admin.users.roles.create') }}" class="btn btn-success">Create new</a>
-            @endif
-
-            <div class="float-right">{{ $roles->render() }}</div>
-        </div>
-    </div>
+        <div class="float-right">{{ $roles->render() }}</div>
+    @endwrapper
 @endsection

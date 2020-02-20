@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.admin.containers.columns-6-6')
 
 @section('breadcrumbs')
     <ul>
@@ -9,36 +9,23 @@
     </ul>
 @endsection
 
-@section('content')
-    <div class="col-6">
-        <div class="card mb-4">
-            <div class="card-body">
-                <div class="card-title">
-                    <strong>Category info</strong>
-                </div>
-                   
-                <div style="display: inline-block;">
-                    <strong>{{$category->name}} category</strong><br/>
-                    Created: {{$category->created_at}}<br/>
-                </div>
-            </div>
+@section('content-left')
+    @wrapper('admin.partials.widget', ['title' => 'Category info'])
+        <div style="display: inline-block;">
+            <strong>{{$category->name}} category</strong><br/>
+            Created: {{$category->created_at}}<br/>
         </div>
-        <div class="card">
-            <div class="card-body">
-                <div class="card-title">
-                    <strong>Remove category</strong>
-                </div>
+    @endwrapper
 
-                <p class="alert alert-danger">Are you sure you want to permamently delete this category from system's database? This action is irreversible.</p>
-                
-                {!! Form::open(['method' => 'DELETE', 'action' => ['admin\PageCategoriesController@destroy', $category->id]]) !!}
-                
-                <div class="form-group">
-                    <a href="{{route('admin.pages.categories.index')}}" role="button" class="btn btn-success">Go back</a>
-                    {!! Form::submit('Delete permamently', ['class' => 'btn btn-danger']) !!}
-                </div>
-                {!! Form::close() !!}
-            </div>
+    @wrapper('admin.partials.widget', ['title' => 'Remove category'])
+        <p class="alert alert-danger">Are you sure you want to permamently delete this category from system's database? This action is irreversible.</p>
+        
+        {!! Form::open(['method' => 'DELETE', 'action' => ['admin\PageCategoriesController@destroy', $category->id]]) !!}
+        
+        <div class="form-group">
+            <a href="{{route('admin.pages.categories.index')}}" role="button" class="btn btn-success">Go back</a>
+            {!! Form::submit('Delete permamently', ['class' => 'btn btn-danger']) !!}
         </div>
-    </div>
+        {!! Form::close() !!}
+    @endwrapper
 @endsection

@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.admin.containers.columns-6-6')
 
 @section('breadcrumbs')
     <ul>
@@ -8,57 +8,39 @@
     </ul>
 @endsection
 
-@section('content')
-    <div class="col-6">
-        <div class="card mb-4">
-            <div class="card-body">
-                <div class="card-title">
-                    <strong>User's info</strong>
-                </div>
-                
-                @if ($user->avatar)
-                    <img class="rounded-circle mr-4 float-left" width="100" src="/images/{{$user->photo->path}}">
-                @endif
-    
-                <div style="display: inline-block;">
-                    <strong>{{'@'.$user->name}}</strong><br/>
-                
-                    @if ($user->first_name && $user->last_name)
-                        <span>{{$user->first_name.' '.$user->last_name}}</span><br/>
-                    @endif
-                
-                    Created: {{$user->created_at}}<br/>
-                    <small>{{$user->role->name}}</small>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                <div class="card-title">
-                    <strong>Remove user</strong>
-                </div>
+@section('content-left')
+    @wrapper('admin.partials.widget', ['title' => 'User info'])            
+        @if ($user->avatar)
+            <img class="rounded-circle mr-4 float-left" width="100" src="/images/{{$user->photo->path}}">
+        @endif
 
-                <p class="alert alert-danger">Are you sure you want to permamently delete this account from system's database?</p>
-                
-                {!! Form::open(['method' => 'DELETE', 'action' => ['admin\UsersController@destroy', $user->id]]) !!}
-                
-                <div class="form-group">
-                    <a href="{{route('admin.users.index')}}" role="button" class="btn btn-success">Go back</a>
-                    {!! Form::submit('Delete permamently', ['class' => 'btn btn-danger']) !!}
-                </div>
-                {!! Form::close() !!}
-            </div>
+        <div style="display: inline-block;">
+            <strong>{{'@'.$user->name}}</strong><br/>
+        
+            @if ($user->first_name && $user->last_name)
+                <span>{{$user->first_name.' '.$user->last_name}}</span><br/>
+            @endif
+        
+            Created: {{$user->created_at}}<br/>
+            <small>{{$user->role->name}}</small>
         </div>
-    </div>
-    <div class="col-6">
-        <div class="card mb-4">
-            <div class="card-body">
-                <div class="card-title">
-                    <strong>Recent Actions:</strong>
-                </div>
+    @endwrapper
 
-                @include('admin.partials.logs')
-            </div>
+    @wrapper('admin.partials.widget', ['title' => 'Remove user'])
+        <p class="alert alert-danger">Are you sure you want to permamently delete this account from system's database?</p>
+        
+        {!! Form::open(['method' => 'DELETE', 'action' => ['admin\UsersController@destroy', $user->id]]) !!}
+        
+        <div class="form-group">
+            <a href="{{route('admin.users.index')}}" role="button" class="btn btn-success">Go back</a>
+            {!! Form::submit('Delete permamently', ['class' => 'btn btn-danger']) !!}
         </div>
-    </div>
+        {!! Form::close() !!}
+    @endwrapper
+@endsection
+
+@section('content-right')
+    @wrapper('admin.partials.widget', ['title' => 'Recent actions'])
+        @include('admin.partials.logs')
+    @endwrapper
 @endsection
