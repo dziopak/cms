@@ -137,4 +137,19 @@ class PageCategoriesController extends Controller
         $category->delete();
         return redirect(route('admin.pages.categories.index'));
     }
+
+    public function mass(Request $request) {
+        $data = $request->all();
+        if (empty($data['mass_edit'])) {
+            return Redirect::back()->with('error', 'No categories were selected.');
+        } else {
+            switch($data['mass_action']) {
+                case 'delete':
+                    Auth::user()->hasAccessOrRedirect('CATEGORY_DELETE');
+                    PageCategory::whereIn('id', $data['mass_edit'])->delete();
+                break;
+            }
+        }
+        return redirect(route('admin.pages.categories.index'));
+    }
 }

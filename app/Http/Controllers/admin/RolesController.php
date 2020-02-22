@@ -36,9 +36,12 @@ class RolesController extends Controller
         Auth::user()->hasAccessOrRedirect('ROLE_CREATE');
         $data = $request->all();
         $access = [];
-        foreach($data['access'] as $key => $row) {
-            if ($row === '1') {
-                array_push($access, $key);
+        
+        if (!empty($data['access'])) {
+            foreach($data['access'] as $key => $row) {
+                if ($row === '1') {
+                    array_push($access, $key);
+                }
             }
         }
         $data['access'] = serialize($access);

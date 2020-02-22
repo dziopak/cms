@@ -62,7 +62,7 @@
             </a>
 
             <ul class="sidebar-sub-list">
-                <li class="sidebar-list-item"><a href="">Browse modules</a></li>
+                <li class="sidebar-list-item"><a href="{{ route('admin.modules.index') }}">Browse modules</a></li>
                 <li class="sidebar-list-item"><a href="">Browse widgets</a></li>
             </ul>
         </li>

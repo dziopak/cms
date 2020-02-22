@@ -37055,6 +37055,19 @@ module.exports = function(module) {
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 $(document).ready(function () {
+  // MASS EDIT //
+  var selectAll = $('.select-all');
+  selectAll.change(function () {
+    selectAll.closest('table').find('input').prop('checked', selectAll.prop('checked'));
+  });
+  $("#mass_action").change(function (e) {
+    $(".mass_edit_sub").hide();
+
+    if ($("#" + e.target.value)) {
+      $("#" + e.target.value).show();
+    }
+  }); // LOGS //
+
   $('#filter-button').click(function () {
     var crud = document.getElementById('log-crud').value;
     var type = document.getElementById('log-type').value;
@@ -37067,7 +37080,7 @@ $(document).ready(function () {
         $(this).hide();
       }
     });
-  });
+  }); // TinyMCE //
 
   if ($('.tinymce').length > 0) {
     var editor_config = {

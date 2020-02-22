@@ -4,6 +4,7 @@
     Route::get('/{user_id}/disable', 'admin\UsersController@disable')->name('users.disable');
     Route::put('/{user_id}/block', 'admin\UsersController@block')->name('users.block');
     Route::put('/{user_id}/password', 'admin\UsersController@password')->name('users.password');
+    Route::post('/users/mass', 'admin\UsersController@mass')->name('users.mass');
         
     //Roles routes//
     Route::group(['prefix' => 'users', 'as' => 'users.'], function ()  {

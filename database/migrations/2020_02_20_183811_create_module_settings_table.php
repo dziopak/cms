@@ -15,6 +15,8 @@ class CreateModuleSettingsTable extends Migration
     {
         Schema::create('module_settings', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('description');
             $table->string('module_slug')->index();
             $table->mediumText('settings')->nullable();
         });

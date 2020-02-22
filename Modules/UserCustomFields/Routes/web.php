@@ -10,8 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::group(['prefix' => 'admin/modules', 'as' => 'admin.modules.usercustomfields.', 'middleware' => 'access:ADMIN_VIEW'], function () {
-    Route::prefix('usercustomfields')->group(function() {
-        Route::resource('/', 'UserCustomFieldsController');
-    });
+Route::group(['prefix' => 'admin/modules/usercustomfields', 'as' => 'admin.modules.usercustomfields.', 'middleware' => 'access:ADMIN_VIEW'], function () {
+    Route::get('/', 'UserCustomFieldsController@index')->name('index');
+    Route::get('/create', 'UserCustomFieldsController@create')->name('create');
+    Route::post('/', 'UserCustomFieldsController@store')->name('store');
+    Route::get('/{id}/edit', 'UserCustomFieldsController@edit')->name('edit');
+    Route::put('/{id}', 'UserCustomFieldsController@update')->name('update');
 });

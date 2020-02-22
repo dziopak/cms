@@ -27,7 +27,17 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::paginate(10);
-        return view('admin.users.index', compact('users'));
+        
+        // TO DO //
+        $user_roles = Role::all('id', 'name');
+        $roles = [];
+        foreach($user_roles as $role) {
+            $roles[$role->id] = $role->name;
+        }
+        // with Ajax //
+
+
+        return view('admin.users.index', compact('users', 'roles'));
     }
     
     
@@ -144,6 +154,38 @@ class UsersController extends Controller
         event(new UserDestroyEvent($user));
         Session::flash('crud', "Account of ".$user->name." was deleted successfully.");
         
+        return redirect(route('admin.users.index'));
+    }
+
+    public function mass(Request $request) {
+        $data = $request->all();
+        if (empty($data['mass_edit'])) {
+            return Redirect::back()->with('error', 'No users were selected.');
+        } else {
+            switch($data['mass_action']) {
+                case 'delete':
+                    Auth::user()->hasAccessOrRedirect('USER_DELETE');
+                    User::whereIn('id', $data['mass_edit'])->delete();
+                break;
+                
+                case 'hide':
+                    Auth::user()->hasAccessOrRedirect('USER_EDIT');
+                    User::whereIn('id', $data['mass_edit'])->update(['is_active' => 0]);
+                break;
+                
+                case 'show':
+                    Auth::user()->hasAccessOrRedirect('USER_EDIT');
+                    User::whereIn('id', $data['mass_edit'])->update(['is_active' => 1]);
+                break;
+                
+                case 'role':
+                    Auth::user()->hasAccessOrRedirect('USER_EDIT');
+                    // TO DO //
+                    // SET ROLE ACCESS //
+                    User::whereIn('id', $data['mass_edit'])->update(['role_id' => $data['role']]);
+                break;
+            }
+        }
         return redirect(route('admin.users.index'));
     }
 }

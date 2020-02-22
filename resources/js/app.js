@@ -1,6 +1,23 @@
 require('./bootstrap');
 
+
+
 $(document).ready(function() {
+  
+  // MASS EDIT //
+  var selectAll = $('.select-all');
+  selectAll.change(() => {
+    selectAll.closest('table').find('input').prop('checked', selectAll.prop('checked'))
+  });
+
+  $("#mass_action").change(function(e) {
+      $(".mass_edit_sub").hide();
+      if ($("#"+e.target.value)) {
+        $("#"+e.target.value).show();
+      }
+    });
+
+    // LOGS //
     $('#filter-button').click(() => {
         const crud = document.getElementById('log-crud').value;
         const type = document.getElementById('log-type').value;
@@ -15,6 +32,8 @@ $(document).ready(function() {
             }
         });
     });
+
+    // TinyMCE //
     if ($('.tinymce').length > 0) {
         var editor_config = {
             path_absolute : "/",

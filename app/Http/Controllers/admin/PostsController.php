@@ -14,6 +14,7 @@ use App\Events\Posts\PostDestroyEvent;
 use App\Post;
 use App\PostCategory;
 use Auth;
+use Redirect;
 
 class PostsController extends Controller
 {
@@ -99,6 +100,37 @@ class PostsController extends Controller
         event(new PostDestroyEvent($post));
         Session::flash('crud', 'Post "'.$post->name.'" has been deleted successfully.');
         
+        return redirect(route('admin.posts.index'));
+    }
+
+    public function mass(Request $request) {
+        $data = $request->all();
+        if (empty($data['mass_edit'])) {
+            return Redirect::back()->with('error', 'No posts were selected.');
+        } else {
+            switch($data['mass_action']) {
+                case 'delete':
+                    Auth::user()->hasAccessOrRedirect('POST_DELETE');
+                    Post::whereIn('id', $data['mass_edit'])->delete();
+                break;
+                
+                case 'hide':
+                    Auth::user()->hasAccessOrRedirect('POST_EDIT');
+                    Post::whereIn('id', $data['mass_edit'])->update(['is_active' => 0]);
+                break;
+                
+                case 'show':
+                    Auth::user()->hasAccessOrRedirect('POST_EDIT');
+                    Post::whereIn('id', $data['mass_edit'])->update(['is_active' => 1]);
+                break;
+                
+                case 'category':
+                    // TO DO //
+                    Auth::user()->hasAccessOrRedirect('POST_EDIT');
+                    return Redirect::back()->with('error', 'Functionality not ready yet.');
+                break;
+            }
+        }
         return redirect(route('admin.posts.index'));
     }
 }

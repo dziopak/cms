@@ -16,11 +16,6 @@
 @endsection
 
 
-@section('after')
-    {!! Form::close() !!}
-@endsection
-
-
 @section('module-content')
     @wrapper('admin.partials.widget', ['title' => 'Basic category data'])
         <div class="form-group row">
@@ -54,4 +49,9 @@
             {!! Form::submit('Create category', ['class' => 'btn btn-success']) !!}
         </div>
     @endwrapper
+@endsection
+
+
+@section('after')
+    {!! Form::close() !!}
 @endsection

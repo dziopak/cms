@@ -1,19 +1,24 @@
 @extends('layouts.admin.containers.full-width')
 
 <?php
-    $table_headers = [' ' => 'thumbnail', 'Title' => 'name', 'Author' => 'author', 'Created at' => 'created_at'];
-    $table_data_types = ['thumbnail' => 'image', 'author' => 'name'];
+    $table_headers = [' ' => 'thumbnail', 'Title' => 'name', 'Visible' => 'is_active', 'Author' => 'author', 'Created at' => 'created_at'];
+    $table_data_types = ['thumbnail' => 'image', 'author' => 'name', 'is_active' => 'boolean'];
     $table_actions = [
         'Edit' => [
             'url' => 'admin.posts.edit',
             'class' => 'success',
-            'access' => 'PAGE_EDIT'
+            'access' => 'POST_EDIT'
         ],
         'Delete' => [
             'url' => 'admin.posts.delete',
             'class' => 'danger',
-            'access' => 'PAGE_DELETE'
+            'access' => 'POST_DELETE'
         ]
+    ];
+    $mass_edit = [
+        "delete" => "Delete selected",
+        "hide" => "Disable / Hide",
+        "show" => "Enable / Show",
     ];
 ?>
 
@@ -28,8 +33,12 @@
 
 @section('module-content')
     @wrapper('admin.partials.widget', ['title' => 'Manage posts'])
-        @include('admin.partials.table', ['fields' => $posts])
-        
+
+        {{ Form::open(['method' => 'POST', 'route' => 'admin.posts.mass', 'class' => 'w-100']) }}
+            @include('admin.partials.table', ['fields' => $posts])
+            @include('admin.partials.massedit')
+        {{ Form::close() }}
+
         @if (Auth::user()->hasAccess('POST_CREATE'))
             <a href="{{ route('admin.posts.create') }}" class="btn btn-success">Create new</a>
         @endif

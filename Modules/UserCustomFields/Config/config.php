@@ -1,5 +1,7 @@
 <?php
 
 return [
-    'name' => 'UserCustomFields'
+    'name' => 'UserCustomFields',
+    'description' => 'Add custom fields to users profiles',
+    'slug' => 'usercustomfields'
 ];

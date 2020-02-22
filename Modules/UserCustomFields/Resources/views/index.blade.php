@@ -1,8 +1,15 @@
-@extends('admin.partials.container', ['layout' => 'full-width'])
+@extends('layouts.admin.containers.full-width')
 
 <?php
     $table_headers = ['Field name' => 'name', 'Field slug' => 'slug', 'Field type' => 'type', 'Required' => 'required'];
     $table_data_types = ['required' => 'boolean'];
+    $table_actions = [
+        'Edit' => [
+            'url' => 'admin.modules.usercustomfields.edit',
+            'class' => 'success',
+            'access' => 'MODULE_EDIT'    
+        ]
+    ];
 ?>
 
 @section('breadcrumbs')
@@ -15,12 +22,9 @@
 @endsection
 
 
-@section('title')
-    Manage user custom fields
-@endsection
-
 @section('module-content')
-    @include('admin.partials.table')
-    </div>
+    @wrapper('admin.partials.widget', ['title' => 'Manage custom fields'])
+        @include('admin.partials.table')
+    @endwrapper
     <a href="{{ route('admin.modules.usercustomfields.create') }}" class="btn btn-success">Create new</a>
 @endsection

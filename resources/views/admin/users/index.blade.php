@@ -20,6 +20,13 @@
             'access' => 'USER_DELETE'
         ]
     ];
+    $mass_edit = [
+        "delete" => "Delete selected",
+        "hide" => "Disable / Hide",
+        "show" => "Enable / Show",
+        "role" => "Set role",
+    ];
+    $mass_edit_extend = 'users';
     $table_headers = Hook::get('UsersIndexTableHeaders',[$table_headers],function($table_headers){
         return $table_headers;
     });
@@ -36,7 +43,11 @@
 
 @section('module-content')
     @wrapper('admin.partials.widget', ['title' => 'Manage users'])
-        @include('admin.partials.table', ['fields' => $users])
+        
+        {{ Form::open(['method' => 'POST', 'route' => 'admin.users.mass', 'class' => 'w-100']) }}
+            @include('admin.partials.table', ['fields' => $users])
+            @include('admin.partials.massedit')
+        {{ Form::close() }}
 
         @if (Auth::user()->hasAccess('USER_CREATE'))
             <a href="{{ route('admin.users.create') }}" class="btn btn-success">Create new</a>

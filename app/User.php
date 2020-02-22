@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -63,7 +64,7 @@ class User extends Authenticatable
                 return true;
             } else {
                 $access = unserialize($user->role->access);
-                if (in_array($permission, $access)) {
+                if (in_array($permission, $access) && $user->is_active == 1) {
                     return true;
                 } else {
                     return false;
@@ -76,7 +77,7 @@ class User extends Authenticatable
 
     public function hasAccessOrRedirect($permission) {
         if (!$this->hasAccess($permission)) {
-            return redirect(route('admin.dashboard.index'));
+            throw new \Illuminate\Http\Exceptions\HttpResponseException(redirect()->route( 'admin.dashboard.index' )->with("error", "You don't have access to perform this action."));
         }
     }
 

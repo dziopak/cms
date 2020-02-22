@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserCustomField extends Model
 {
-    protected $fillable = ['name', 'type', 'required'];
+    protected $fillable = ['name', 'slug', 'index_display', 'type', 'required'];
 }

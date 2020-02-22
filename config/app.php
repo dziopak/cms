@@ -227,7 +227,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        'Hook' => Esemve\Hook\Facades\Hook::class
+        'Hook' => Esemve\Hook\Facades\Hook::class,
+        'Modules' => Nwidart\Modules\Facades\Module::class
     ],
 
 ];
