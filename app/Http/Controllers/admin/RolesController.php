@@ -17,9 +17,13 @@ use Auth;
 class RolesController extends Controller
 {
     
-    public function index()
+    public function index(Request $request)
     {
-        $roles = Role::paginate(15);
+        if (!empty($request->get('search'))) {
+            $roles = Role::where('name', 'like', '%'.$request->get('search').'%')->paginate(15);
+        } else {
+            $roles = Role::paginate(15);
+        }
         return view('admin.roles.index', compact('roles'));
     }
 

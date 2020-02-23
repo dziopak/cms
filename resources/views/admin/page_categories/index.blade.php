@@ -30,6 +30,7 @@
 
 @section('module-content')
     @wrapper('admin.partials.widget', ['title' => 'Manage categories'])
+        @include('admin.partials.searchfilterbar')
         {{ Form::open(['method' => 'POST', 'route' => 'admin.pages.categories.mass', 'class' => 'w-100']) }}
             @include('admin.partials.table', ['fields' => $categories])
             @include('admin.partials.massedit')

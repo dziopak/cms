@@ -33,6 +33,8 @@
 
 @section('module-content')
     @wrapper('admin.partials.widget', ['title' => 'Manage pages'])    
+        @include('admin.partials.searchfilterbar')    
+
         {{ Form::open(['method' => 'POST', 'route' => 'admin.pages.mass', 'class' => 'w-100']) }}
             @include('admin.partials.table', ['fields' => $pages])
             @include('admin.partials.massedit')

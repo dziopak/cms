@@ -21,11 +21,16 @@ class PageCategoriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = PageCategory::paginate(15);
+        if (!empty($request->get('search'))) {
+            $categories = PageCategory::with('author', 'thumbnail')->where('name', 'like', '%'.$request->get('search').'%')->paginate(15);
+        } else {
+            $categories = PageCategory::paginate(15);
+        }
         return view('admin.page_categories.index', compact('categories'));
     }
+
 
     /**
      * Show the form for creating a new resource.

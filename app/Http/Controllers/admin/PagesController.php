@@ -14,13 +14,19 @@ use App\Events\Pages\PageDestroyEvent;
 use App\Page;
 use App\PageCategory;
 use Auth;
+use DB;
 
 class PagesController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $pages = Page::with('author', 'thumbnail')->paginate(15);
+        if (!empty($request->get('search'))) {
+            $pages = Page::with('author', 'thumbnail')->where('name', 'like', '%'.$request->get('search').'%')->paginate(15);
+        } else {
+            $pages = Page::with('author', 'thumbnail')->paginate(15);
+        }
+
         return view('admin.pages.index', compact('pages'));
     }
 

@@ -23,10 +23,13 @@ use Auth;
 
 class UsersController extends Controller
 {
-    
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::paginate(10);
+        if (!empty($request->get('search'))) {
+            $users = User::with('role', 'photo')->where('name', 'like', '%'.$request->get('search').'%')->orWhere('email', 'like', '%'.$request->get('search').'%')->paginate(15);
+        } else {
+            $users = User::with('role', 'photo')->paginate(15);
+        }
         
         // TO DO //
         $user_roles = Role::all('id', 'name');

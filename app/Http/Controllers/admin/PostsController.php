@@ -19,9 +19,13 @@ use Redirect;
 class PostsController extends Controller
 {
     
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::with('author', 'thumbnail')->paginate(15);
+        if (!empty($request->get('search'))) {
+            $posts = Post::with('author', 'thumbnail')->where('name', 'like', '%'.$request->get('search').'%')->paginate(15);
+        } else {
+            $posts = Post::with('author', 'thumbnail')->paginate(15);
+        }
         return view('admin.posts.index', compact('posts'));
     }
 

@@ -43,7 +43,8 @@
 
 @section('module-content')
     @wrapper('admin.partials.widget', ['title' => 'Manage users'])
-        
+
+        @include('admin.partials.searchfilterbar')
         {{ Form::open(['method' => 'POST', 'route' => 'admin.users.mass', 'class' => 'w-100']) }}
             @include('admin.partials.table', ['fields' => $users])
             @include('admin.partials.massedit')

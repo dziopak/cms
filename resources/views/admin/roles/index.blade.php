@@ -33,6 +33,8 @@
 
 @section('module-content')
     @wrapper('admin.partials.widget', ['title' => 'Manage user roles'])
+        
+        @include('admin.partials.searchfilterbar')
         @include('admin.partials.table', ['fields' => $roles])
 
         @if (Auth::user()->hasAccess('ROLE_CREATE'))

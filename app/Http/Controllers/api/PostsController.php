@@ -79,6 +79,7 @@ class PostsController extends Controller
             return response()->json(["status" => "400", "message" => "There were errors during the validation", "errors" => $validator->errors()], 400);
         } else {
             $user = User::findOrFail(User::jwtUser()->id);
+            return(User::jwtUser());
             if ($user->hasAccess('POST_UPDATE') === true) {
                 $post = Post::find($id);
                 if ($post) {

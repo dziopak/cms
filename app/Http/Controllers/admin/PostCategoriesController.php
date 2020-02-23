@@ -21,10 +21,14 @@ class PostCategoriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = PostCategory::paginate(15);
-        return view('admin.post_categories.index', compact('categories'));
+        if (!empty($request->get('search'))) {
+            $categories = PostCategory::with('author', 'thumbnail')->where('name', 'like', '%'.$request->get('search').'%')->paginate(15);
+        } else {
+            $categories = PostCategory::paginate(15);
+        }
+        return view('admin.page_categories.index', compact('categories'));
     }
 
     /**
