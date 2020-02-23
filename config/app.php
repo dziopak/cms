@@ -176,6 +176,7 @@ return [
         Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
     ],
 
     /*
@@ -228,7 +229,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Hook' => Esemve\Hook\Facades\Hook::class,
-        'Modules' => Nwidart\Modules\Facades\Module::class
+        'Modules' => Nwidart\Modules\Facades\Module::class,
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class, 
+        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
     ],
 
 ];

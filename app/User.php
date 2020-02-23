@@ -7,9 +7,10 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
+use Tymon\JWTAuth\Contracts\JWTSubject;
+use JWTAuth;
 
-
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
@@ -28,7 +29,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'first_name', 'last_name',
     ];
 
     /**
@@ -91,5 +92,32 @@ class User extends Authenticatable
                 $user->photo()->delete();
             }
         });
+    }
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
+    static function jwtUser() {
+        try {
+            if (! $user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['user_not_found'], 404);
+            }
+        } catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+            return response()->json(['token_expired'], $e->getStatusCode());
+        } catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+            return response()->json(['token_invalid'], $e->getStatusCode());
+        } catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
+            return response()->json(['token_absent'], $e->getStatusCode());
+        }
+
+        return $user;
     }
 }
