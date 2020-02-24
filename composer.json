@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "arrilot/laravel-widgets": "^3.13",
         "esemve/hook": "^0.0.6",
         "fideloper/proxy": "^4.0",
         "harimayco/laravel-menu": "^1.4",

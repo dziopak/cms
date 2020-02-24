@@ -138,3 +138,18 @@ label {
     font-size: 12px;
     color: #888888;
 }
+
+.grid-item {
+    width: 33.3%;
+    padding: 0px 10px 20px;
+    box-sizing: border-box;
+    float: left;
+}
+
+.grid-item .card {
+    width: 100%;
+}
+
+.grid-item.grid-item-large {
+    width: 66.6%;
+}

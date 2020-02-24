@@ -24,6 +24,7 @@
         {{$log->target && $log->target_id !== 0 ? '@'.$log->target->name : '"'.$log->target_name.'"' }}
     
         @endforeach
+    </p>
 @else
     <p class="alert alert-secondary">No actions yet.</p>
 @endif
