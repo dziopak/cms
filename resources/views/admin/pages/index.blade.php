@@ -1,6 +1,6 @@
 @extends('layouts.admin.containers.full-width')
 
-<?php
+@php
     $table_headers = [' ' => 'thumbnail', 'Title' => 'name', 'Author' => 'author', 'Created at' => 'created_at'];
     $table_data_types = ['thumbnail' => 'image', 'author' => 'name'];
     $table_actions = [
@@ -20,7 +20,12 @@
         "hide" => "Disable / Hide",
         "show" => "Enable / Show",
     ];
-?>
+    $sort_by = [
+        'name' => 'Title',
+        'user_id' => 'Author',
+        'created_at' => 'Creation date'
+    ];
+@endphp
 
 @section('breadcrumbs')
     <ul>

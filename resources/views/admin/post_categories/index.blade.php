@@ -1,6 +1,6 @@
 @extends('layouts.admin.containers.full-width')
 
-<?php
+@php
     $table_headers = ['Category name' => 'name'];
     $table_actions = [
         'Edit' => [
@@ -17,7 +17,10 @@
     $mass_edit = [
         'delete' => 'Delete selected'
     ];
-?>
+    $sort_by = [
+        'name' => 'Name'
+    ];
+@endphp
 
 @section('breadcrumbs')
     <ul>

@@ -120,4 +120,23 @@ class User extends Authenticatable implements JWTSubject
 
         return $user;
     }
+
+    public function scopeFilter($query, $request) {
+        if (!empty($request->get('search'))) {
+
+            // Search in name, first name, last name or email //
+            $query->where('name', 'like', '%'.$request->get('search').'%')
+            ->orWhere('first_name', 'like', '%'.$request->get('search').'%')
+            ->orWhere('last_name', 'like', '%'.$request->get('search').'%')
+            ->orWhere('email', 'like', '%'.$request->get('search').'%');
+        
+        }
+        if (!empty($request->get('sort_by'))) {
+
+            // Sort by selected field //
+            !empty($request->get('sort_order')) && $request->get('sort_order') === 'desc' ?
+            $query->orderByDesc($request->get('sort_by')) : $query->orderBy($request->get('sort_by'));
+        
+        }
+    }
 }

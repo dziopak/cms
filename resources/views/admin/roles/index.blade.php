@@ -1,6 +1,6 @@
 @extends('layouts.admin.containers.full-width')
 
-<?php
+@php
     $table_headers = ['Role name' => 'name'];
     $table_actions = [
         'Edit' => [
@@ -20,7 +20,10 @@
             'access' => 'ROLE_DELETE'
         ],
     ];
-?>
+    $sort_by = [
+        'name' => 'Name'
+    ];
+@endphp
 
 @section('breadcrumbs')
     <ul>

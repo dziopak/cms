@@ -21,12 +21,7 @@ class PagesController extends Controller
 
     public function index(Request $request)
     {
-        if (!empty($request->get('search'))) {
-            $pages = Page::with('author', 'thumbnail')->where('name', 'like', '%'.$request->get('search').'%')->paginate(15);
-        } else {
-            $pages = Page::with('author', 'thumbnail')->paginate(15);
-        }
-
+        $pages = Page::with('author', 'thumbnail')->filter($request)->paginate(15);
         return view('admin.pages.index', compact('pages'));
     }
 

@@ -1,6 +1,6 @@
 @extends('layouts.admin.containers.full-width')
 
-<?php
+@php
     $table_headers = [' ' => 'photo', 'Email' => 'email', 'Active' => 'is_active', 'Role' => 'role', 'Created' => 'created_at'];
     $table_data_types = ['photo' => 'image', 'is_active' => 'boolean', 'created_at' => 'date', 'role' => 'name'];
     $table_actions = [
@@ -30,7 +30,13 @@
     $table_headers = Hook::get('UsersIndexTableHeaders',[$table_headers],function($table_headers){
         return $table_headers;
     });
-?>
+    $sort_by = [
+        'name' => 'Username',
+        'email' => 'Email',
+        'first_name' => 'First name',
+        'last_name' => 'Last name',
+    ];
+@endphp
 
 @section('breadcrumbs')
     <ul>

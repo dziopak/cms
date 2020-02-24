@@ -23,11 +23,7 @@ class PageCategoriesController extends Controller
      */
     public function index(Request $request)
     {
-        if (!empty($request->get('search'))) {
-            $categories = PageCategory::with('author', 'thumbnail')->where('name', 'like', '%'.$request->get('search').'%')->paginate(15);
-        } else {
-            $categories = PageCategory::paginate(15);
-        }
+        $categories = PageCategory::filter($request)->paginate(15);
         return view('admin.page_categories.index', compact('categories'));
     }
 
