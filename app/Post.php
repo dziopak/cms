@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    protected $guarded = ['id'];
+    protected $guarded = ['id', 'post_id', 'thumbnail'];
 
     public function author() {
         return $this->belongsTo('App\User', 'user_id');

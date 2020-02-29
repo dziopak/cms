@@ -14,14 +14,14 @@
             // 'access' => 'CATEGORY_DELETE'
         ]
     ];
-    $mass_edit = [
-        'delete' => 'Delete selected'
-    ];
-    $sort_by = [
-        'name' => 'Name',
-        'origin_name' => 'Original name',
-        'lang_tag' => 'Language tag',
-    ];
+    // $mass_edit = [
+    //     'delete' => 'Delete selected'
+    // ];
+    // $sort_by = [
+    //     'name' => 'Name',
+    //     'origin_name' => 'Original name',
+    //     'lang_tag' => 'Language tag',
+    // ];
 @endphp
 
 @section('breadcrumbs')
@@ -35,9 +35,7 @@
 
 @section('module-content')
     @wrapper('admin.partials.widget', ['title' => 'Manage custom languages'])
-        @include('admin.partials.searchfilterbar')
         @include('admin.partials.table', ['fields' => $langs])
-        @include('admin.partials.massedit')
 
 
         <!-- // TO DO // 
