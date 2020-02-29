@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class PostCategory extends Model
 {
-    protected $fillable = ['name', 'slug', 'description', 'parent_id'];
+    protected $fillable = ['name', 'slug', 'description', 'parent_id', 'name_pl', 'slug_pl', 'description_pl'];
 
     public function posts() {
         return $this->hasMany('App\Post', 'category_id');
@@ -32,6 +32,7 @@ class PostCategory extends Model
             $query->where('name', 'like', '%'.$request->get('search').'%');
         
         }
+
         if (!empty($request->get('sort_by'))) {
 
             // Sort by selected field //

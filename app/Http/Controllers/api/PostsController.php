@@ -19,7 +19,7 @@ class PostsController extends Controller
     
     public function index(Request $request)
     {
-        return Post::with('author')->paginate(15);
+        return Post::with('author', 'thumbnail', 'category')->orderByDesc('created_at')->paginate(15);
     }
 
 
@@ -57,6 +57,19 @@ class PostsController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
+
+        if ($post) {
+            return $post;
+        } else {
+            return response()->json(["status" => "404", "message" => "Post doesn't exist."], 404);
+        }
+    }
+
+    public function find(Request $request)
+    {
+        // TO DO //
+        $post = Post::with('author', 'category', 'thumbnail')->where(['slug' => $request->get('slug')])->orWhere(['slug_pl' => $request->get('slug')])->first();
+        // FINDING BY SLUG HOOK //
 
         if ($post) {
             return $post;

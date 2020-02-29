@@ -149,3 +149,11 @@ label {
   width: 66.6%;
 }
 
+.hide {
+  display: none;
+}
+
+.mce-tinymce iframe {
+  min-height: 600px;
+}
+

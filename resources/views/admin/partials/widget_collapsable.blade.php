@@ -1,5 +1,5 @@
-<div class="grid-item @classes">
-    <div id="@id" class="card">
+<div class="@classes">
+    <div id="@id" class="card mb-4">
         <div class="card-body">
             <div class="card-title">    
                 <strong>

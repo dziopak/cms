@@ -6,7 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    protected $fillable = ['name', 'excerpt', 'slug', 'content', 'file_id', 'user_id', 'category_id', 'meta_title', 'meta_description'];
+    // TO DO //
+    protected $fillable = ['name', 'excerpt', 'slug', 'content', 'file_id', 'user_id', 'category_id', 'meta_title', 'meta_description', 'name_pl', 'slug_pl', 'excerpt_pl', 'content_pl', 'meta_title_pl', 'meta_description_pl', 'index', 'follow' ];
+    // Fillable hook for langs //
+
 
     public function author() {
         return $this->belongsTo('App\User', 'user_id');

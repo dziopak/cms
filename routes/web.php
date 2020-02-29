@@ -10,9 +10,9 @@ Route::group(['prefix' => '/'], function () {
 //Backoffice routes
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'access:ADMIN_VIEW'], function () {
     
-    Route::get('/', function() {
-        return view('admin.dashboard.index');
-    })->name('dashboard.index');
+    Route::get('/', 'admin\DashboardController@index')->name('dashboard.index');
+    Route::get('/dashboard', 'admin\DashboardController@edit')->name('dashboard.edit');
+    Route::patch('/dashboard', 'admin\DashboardController@update')->name('dashboard.update');
     
     Route::get('/clear-cache', function() {
         Artisan::call('cache:clear');

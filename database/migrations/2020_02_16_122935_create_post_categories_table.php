@@ -17,7 +17,7 @@ class CreatePostCategoriesTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
             $table->string('name');
-            $table->string('slug');
+            $table->string('slug')->index();
             $table->string('description');
             $table->bigInteger('parent_id')->index()->nullable();
         });

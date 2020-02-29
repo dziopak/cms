@@ -1,5 +1,6 @@
 {
     "Logs": true,
     "Posts": true,
-    "UserCustomFields": true
+    "UserCustomFields": true,
+    "Lang": true
 }

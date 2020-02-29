@@ -12,6 +12,8 @@
 @section('before')
     {!! Form::open(['method' => 'POST', 'action' => 'admin\PostsController@store', 'class' => 'w-100', 'files' => 'true']) !!}
     @include('admin.partials.validation')
+    @hook('post_edit_before')
+    @hook('post_before')
 @endsection
 
 
@@ -42,6 +44,9 @@
                 {!! Form::textarea('excerpt', null, ['class' => 'form-control']) !!}
             </div>
         </div>
+
+        @hook('post_create_left_content')
+        @hook('post_left_content')
     @endwrapper
 @endsection
 
@@ -67,6 +72,9 @@
                 {!! Form::textarea('meta_description', null, ['class' => 'form-control']) !!}
             </div>
         </div>
+
+        @hook('post_create_right_content')
+        @hook('post_right_content')
     @endwrapper
 @endsection
         
@@ -80,6 +88,9 @@
             <div class="form-group">
                 {!! Form::submit('Create post', ['class' => 'btn btn-success']) !!}
             </div>
+
+            @hook('post_edit_bottom_content')
+            @hook('post_bottom_content')
         @endwrapper
     </div>
 @endsection
@@ -87,4 +98,6 @@
 @section('after')
     {!! Form::close() !!}
     @include('admin.partials.tinymce')
+    @hook('post_edit_after')
+    @hook('post_after')
 @endsection

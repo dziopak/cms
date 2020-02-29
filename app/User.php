@@ -20,7 +20,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'avatar', 'role_id', 'first_name', 'last_name',
+        'name', 'email', 'password', 'avatar', 'role_id', 'first_name', 'last_name', 'last_login'
     ];
 
     /**
@@ -47,6 +47,10 @@ class User extends Authenticatable implements JWTSubject
 
     public function photo() {
         return $this->belongsTo('App\File', 'avatar');
+    }
+
+    public function dashboard() {
+        return $this->hasOne('App\Dashboard','user_id', 'id');
     }
 
     public function logs() {

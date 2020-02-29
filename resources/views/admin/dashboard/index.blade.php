@@ -9,7 +9,15 @@
 
 @section('module-content')
     <div id="dashboard">
-        @widget('admin.RecentPosts')
-        @asyncWidget('admin.RecentLogs')
+        @if (!empty($widgets))
+            @foreach($widgets as $key => $row)
+                <strong>{{ $row['name'] }}</strong>
+                <div class="row mt-2">
+                    @foreach($row['widgets'] as $widget => $size)
+                        @widget('admin.'.$widget, ['size' => '2', 'count' => 5])
+                    @endforeach
+                </div>
+            @endforeach
+        @endif
     </div>
 @endsection

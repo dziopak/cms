@@ -24,7 +24,7 @@ class PostCategoriesController extends Controller
     public function index(Request $request)
     {
         $categories = PostCategory::filter($request)->paginate(15);
-        return view('admin.page_categories.index', compact('categories'));
+        return view('admin.post_categories.index', compact('categories'));
     }
 
     /**
@@ -54,7 +54,7 @@ class PostCategoriesController extends Controller
         Auth::user()->hasAccessOrRedirect('CATEGORY_CREATE');
 
         $data = $request->all();
-        $id = PostCategory::create($data)->id;
+        $category = PostCategory::create($data);
 
         event(new CategoryCreateEvent($category, 'POST'));
         Session::flash('crud', 'Post category "'.$data['name'].'" has been created successfully.');

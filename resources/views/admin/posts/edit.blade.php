@@ -12,6 +12,8 @@
 @section('before')
     {!! Form::model($post, ['method' => 'PATCH', 'action' => ['admin\PostsController@update', $post->id], 'class' => 'w-100', 'files' => 'true']) !!}
     @include('admin.partials.validation')
+    @hook('post_edit_before')
+    @hook('post_before')
 @endsection
 
 
@@ -42,6 +44,9 @@
                 {!! Form::textarea('excerpt', null, ['class' => 'form-control']) !!}
             </div>
         </div>
+
+        @hook('post_edit_left_content')
+        @hook('post_left_content')
     @endwrapper
 @endsection
 
@@ -78,6 +83,8 @@
                 {!! Form::label('follow', 'Follow page', ['class' => 'form-check-label']) !!}
             </div>
         </div>
+        @hook('post_edit_right_content')
+        @hook('post_right_content')
     @endwrapper
 @endsection
         
@@ -87,6 +94,9 @@
             <div class="form-group">
                 {!! Form::textarea('content', null, ['class' => 'form-control tinymce']) !!}
             </div>
+
+            @hook('post_edit_bottom_content')
+            @hook('post_bottom_content')
 
             <div class="form-group">
                 {!! Form::hidden('post_id', $post->id) !!}
@@ -99,4 +109,6 @@
 @section('after')
     {!! Form::close() !!}
     @include('admin.partials.tinymce')
+    @hook('post_edit_after')
+    @hook('post_after')
 @endsection
