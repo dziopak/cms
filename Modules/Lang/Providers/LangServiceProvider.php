@@ -16,6 +16,7 @@ class LangServiceProvider extends ServiceProvider
         
         require('Hooks/posts.hooks.php');
         require('Hooks/pages.hooks.php');
+        require('Hooks/categories.hooks.php');
         
         Hook::listen('template.top-nav-user-bar', function ($callback, $output, $variables) use ($langs) {
             !empty(session('lang')) ? $current_lang = session('lang') : $current_lang = 'en';

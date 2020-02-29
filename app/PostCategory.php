@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class PostCategory extends Model
 {
-    protected $guarded = ['id', 'category_id'];
+    protected $guarded = ['id', 'category_id', 'type'];
 
     public function posts() {
         return $this->hasMany('App\Post', 'category_id');

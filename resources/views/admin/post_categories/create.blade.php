@@ -47,6 +47,12 @@
             </div>
         </div>
 
+        <!-- Custom field hooks -->
+        @hook('post_category_create_left_content')
+        @hook('post_category_left_content')
+        @hook('category_left_content')
+        <!-- End of field hooks -->
+
         <div class="form-group">
             {!! Form::hidden('type', 'post') !!}
             {!! Form::submit('Create category', ['class' => 'btn btn-success']) !!}

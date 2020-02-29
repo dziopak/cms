@@ -4,7 +4,7 @@
     <ul>
         <li><a href="{{route('admin.dashboard.index')}}">Admin</a></li>
         <li><a href="{{route('admin.pages.index')}}">Pages</a></li>
-        <li><a href="{{route('admin.pages.categories.index')}}">Pages</a></li>
+        <li><a href="{{route('admin.pages.categories.index')}}">Categories</a></li>
         <li>Edit</li>
     </ul>
 @endsection
@@ -43,6 +43,12 @@
                 {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
             </div>
         </div>
+
+        <!-- Custom field hooks -->
+        @hook('page_category_edit_left_content')
+        @hook('page_category_left_content')
+        @hook('category_left_content')
+        <!-- End of field hooks -->
 
         <div class="form-group">
             {!! Form::hidden('type', 'page') !!}

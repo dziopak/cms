@@ -97,13 +97,17 @@
                 {!! Form::textarea('content', null, ['class' => 'form-control tinymce']) !!}
             </div>
 
+            <!-- Custom field hooks -->
+            @hook('page_edit_bottom_content')
+            @hook('page_bottom_content')
+            <!-- End of field hooks -->
+            
+
             <div class="form-group">
                 {!! Form::hidden('page_id', $page->id) !!}
                 {!! Form::submit('Update', ['class' => 'btn btn-success']) !!}
             </div>
 
-            @hook('page_edit_bottom_content')
-            @hook('page_bottom_content')
         @endwrapper
     </div>
 @endsection

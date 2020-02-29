@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class PageCategory extends Model
 {
-    protected $guarded = ['id', 'category_id'];
+    protected $guarded = ['id', 'category_id', 'type'];
 
     public function pages() {
         return $this->hasMany('App\Page', 'category_id');

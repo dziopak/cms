@@ -22,7 +22,6 @@
             <div class="col">
                 {!! Form::label('name', 'Category name: ', ['class' => 'required']) !!}
                 {!! Form::text('name', null, ['class' => 'form-control']) !!}
-                {!! Form::text('name_pl', null, ['class' => 'form-control']) !!}
             </div>
         </div>
         
@@ -30,7 +29,6 @@
             <div class="col">
                 {!! Form::label('slug', 'Slug: ', ['class' => 'required']) !!}
                 {!! Form::text('slug', null, ['class' => 'form-control']) !!}
-                {!! Form::text('slug_pl', null, ['class' => 'form-control']) !!}
             </div>
         </div>
 
@@ -43,16 +41,22 @@
             <div class="col">
                 {!! Form::label('description', 'Description: ') !!}
                 {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
-                {!! Form::textarea('description_pl', null, ['class' => 'form-control']) !!}
             </div>
         </div>
 
+        <!-- Custom field hooks -->
+        @hook('post_category_edit_left_content')
+        @hook('post_category_left_content')
+        @hook('category_left_content')
+        <!-- End of field hooks -->
+        
         <div class="form-group">
             {!! Form::hidden('type', 'post') !!}
             {!! Form::hidden('category_id', $category->id) !!}
             {!! Form::submit('Update', ['class' => 'btn btn-success']) !!}
         </div>
-    @endwrapper
+
+        @endwrapper
 @endsection
 
 @section('after')
