@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Page extends Model
 {
-    protected $fillable = ['name', 'excerpt', 'slug', 'content', 'file_id', 'user_id', 'category_id', 'meta_title', 'meta_description', 'index', 'follow'];
+    protected $guarded = ['id', 'page_id'];
 
     public function author() {
         return $this->belongsTo('App\User', 'user_id');

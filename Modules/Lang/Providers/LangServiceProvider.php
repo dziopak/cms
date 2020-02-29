@@ -13,17 +13,9 @@ class LangServiceProvider extends ServiceProvider
     
     public function registerHooks() {
         $langs = Lang::all();
-        Hook::listen('template.post_left_content', function ($callback, $output, $variables) use ($langs) {
-            return view('lang::partials.posts.left', compact('langs'));
-        });
-
-        Hook::listen('template.post_right_content', function ($callback, $output, $variables) use ($langs) {
-            return view('lang::partials.posts.right', compact('langs'));
-        });
-
-        Hook::listen('template.post_bottom_content', function ($callback, $output, $variables) use ($langs) {
-            return view('lang::partials.posts.bottom', compact('langs'));
-        });
+        
+        require('Hooks/posts.hooks.php');
+        require('Hooks/pages.hooks.php');
         
         Hook::listen('template.top-nav-user-bar', function ($callback, $output, $variables) use ($langs) {
             !empty(session('lang')) ? $current_lang = session('lang') : $current_lang = 'en';

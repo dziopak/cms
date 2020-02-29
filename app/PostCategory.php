@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class PostCategory extends Model
 {
-    protected $fillable = ['name', 'slug', 'description', 'parent_id', 'name_pl', 'slug_pl', 'description_pl'];
+    protected $guarded = ['id', 'category_id'];
 
     public function posts() {
         return $this->hasMany('App\Post', 'category_id');
