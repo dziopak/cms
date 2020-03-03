@@ -35,7 +35,7 @@
                                         @break
 
                                         @case('image')
-                                            <img src="/images/{{ $field[$row]->path}}" alt={{ $field->name }} width="60">
+                                            <img src="{{ getPublicPath() }}/images/{{ $field[$row]->path}}" alt="{{ $field->name }}" width="60">
                                         @break
                                         
                                     @endswitch

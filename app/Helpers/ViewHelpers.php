@@ -4,4 +4,15 @@
         $string = view($template);
         return str_replace("\n", '\n', str_replace('"', '\"', addcslashes(str_replace("\r", '', (string)$string), "\0..\37'\\")));
     }
+
+    function getPublicPath() {
+        $production = ['dziopak-cms.hol.es'];
+        $hostname = $_SERVER['SERVER_NAME'];
+        
+        if (in_array($hostname, $production)) {
+            return $path = url('/public/');
+        } else {
+            return $path = url('/');
+        }
+    }
 ?>

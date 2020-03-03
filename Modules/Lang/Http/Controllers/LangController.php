@@ -63,6 +63,18 @@ class LangController extends Controller
             $table->mediumText('description_'.$tag);
         });
 
+        // Testimonials module table
+        Schema::table('testimonials', function (Blueprint $table) use ($tag) {
+            $table->string('author_title_'.$tag);
+            $table->mediumText('content_'.$tag);
+        });
+
+        // Portfolio module table
+        Schema::table('portfolio_items', function (Blueprint $table) use ($tag) {
+            $table->mediumText('intro_'.$tag);
+            $table->mediumText('desc_'.$tag);
+        });
+
         Lang::create($data);
         return redirect(route('admin.modules.lang.index'));
     }
@@ -133,6 +145,12 @@ class LangController extends Controller
             $table->dropColumn('name_'.$tag);
             $table->dropColumn('slug_'.$tag)->index();
             $table->dropColumn('description_'.$tag);
+        });
+
+        // Testimonials module table
+        Schema::table('testimonials', function (Blueprint $table) use ($tag) {
+            $table->dropColumn('author_title_'.$tag);
+            $table->dropColumn('content_'.$tag);
         });
 
         return redirect(route('admin.modules.lang.index'));

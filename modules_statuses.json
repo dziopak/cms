@@ -2,5 +2,7 @@
     "Logs": true,
     "Posts": true,
     "UserCustomFields": true,
-    "Lang": true
+    "Lang": true,
+    "Testimonials": true,
+    "Portfolio": true
 }

@@ -1,7 +1,7 @@
 <?php
 Route::group(['prefix' => '/'], function () {
     Route::get('/', function () {
-        return view('welcome');
+        Artisan::call('storage:link');
     });
 });
 
