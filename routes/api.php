@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 
-
 //POSTS ROUTES
 require base_path('routes/api/posts.php');
 

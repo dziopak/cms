@@ -22,6 +22,7 @@ use JWTAuth;
 class PostCategoriesController extends Controller
 {
     
+    
     public function index(Request $request)
     {
         return CategoryCollection::collection(PostCategory::orderByDesc('created_at')->paginate(15));

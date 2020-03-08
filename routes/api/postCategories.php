@@ -1,5 +1,7 @@
 <?php
+
     // OPEN ROUTES
+    
     Route::get('/posts/categories/', 'api\PostCategoriesController@index');
     Route::get('/posts/category/{id}/', 'api\PostCategoriesController@show');
     Route::get('/posts/category/', 'api\PostCategoriesController@find');
