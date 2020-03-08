@@ -10,6 +10,10 @@ use App\Events\Posts\PostCategoryCreateEvent;
 use App\Events\Posts\PostCategoryUpdateEvent;
 use App\Events\Posts\PostCategoryDestroyEvent;
 
+use App\Http\Resources\CategoryResource;
+use App\Http\Resources\CategoryCollection;
+use App\Http\Resources\PostResource;
+
 use App\Post;
 use App\User;
 use App\PostCategory;
@@ -20,9 +24,13 @@ class PostCategoriesController extends Controller
     
     public function index(Request $request)
     {
-        return PostCategory::orderByDesc('created_at')->paginate(15);
+        return CategoryCollection::collection(PostCategory::orderByDesc('created_at')->paginate(15));
     }
 
+    public function posts($id) {
+        $category = CategoryCollection::collection(PostCategory::findOrFail($id));
+        return ['data' => $category, 'status' => '200'];
+    }
 
     // public function store(Request $request)
     // {
@@ -57,7 +65,7 @@ class PostCategoriesController extends Controller
 
     public function show($id)
     {
-        $category = PostCategory::find($id);
+        $category = new CategoryResource(PostCategory::find($id));
 
         if ($category) {
             return $category;
@@ -72,10 +80,10 @@ class PostCategoriesController extends Controller
         $category = PostCategory::where(['slug' => $request->get('slug')])->orWhere(['slug_pl' => $request->get('slug')])->first();
         // FINDING BY SLUG HOOK //
 
-        if ($post) {
-            return $post;
+        if ($category) {
+            return $category;
         } else {
-            return response()->json(["status" => "404", "message" => "Post doesn't exist."], 404);
+            return response()->json(["status" => "404", "message" => "Category doesn't exist."], 404);
         }
     }
 

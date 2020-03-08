@@ -10,34 +10,46 @@ use App\Events\Posts\PostCreateEvent;
 use App\Events\Posts\PostUpdateEvent;
 use App\Events\Posts\PostDestroyEvent;
 
+use App\Http\Resources\PostResource;
+
 use App\Post;
 use App\User;
 use JWTAuth;
+use Hook;
+
+use App\Http\Utilities\AuthResponse;
 
 class PostsController extends Controller
 {
     
     public function index(Request $request)
     {
-        return Post::with('author', 'thumbnail', 'category')->orderByDesc('created_at')->paginate(15);
+        return PostResource::collection(Post::with('author', 'thumbnail', 'category')->orderBy('id')->paginate(15));
     }
 
 
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $validationFields = [
             'name' => 'required|string|max:255',
             'excerpt' => 'required|string|max:255',
             'slug' => 'required|string|max:255|unique:posts',
             'content' => 'required|string'
-        ]);
+        ];
+
+        $validationFields = Hook::get('apiPostsStoreValidation',[$validationFields],function($validationFields){
+            return $validationFields;
+        });
+        $validator = Validator::make($request->all(), $validationFields);
 
         if($validator->fails()){
             return response()->json(["status" => "400", "message" => "There were errors during the validation.", "errors" => $validator->errors()], 400);
         } else {
-            $user = User::jwtUser();
-            $user = User::findOrFail($user->id);
-            if ($user->hasAccess('POST_CREATE') === true) {
+            $access = AuthResponse::hasAccess();
+            if ($access === true) {
+                $user = User::jwtUser();
+                $user = User::findOrFail($user->id);
+
                 $data = $request->all();
                 $data['user_id'] = $user->id;
                 $thumbnail = $request->file('thumbnail');
@@ -47,32 +59,22 @@ class PostsController extends Controller
 
                 return response()->json(["status" => "201", "message" => "Successfully created new post.", "data" => compact('post')], 201);
             } else {
-                return response()->json(["status" => "403", "message" => "You don't have permission to access this route."], 403);
+                return $access;
             }
-            
         }
     }
 
 
     public function show($id)
     {
-        $post = Post::find($id);
-
-        if ($post) {
-            return $post;
+        if (is_numeric($id)) {
+            $post = new PostResource(Post::with('author', 'category', 'thumbnail')->find($id));
         } else {
-            return response()->json(["status" => "404", "message" => "Post doesn't exist."], 404);
+            $post = Post::with('author', 'category', 'thumbnail')->where(['slug' => $id])->orWhere(['slug_pl' => $id])->first();
         }
-    }
-
-    public function find(Request $request)
-    {
-        // TO DO //
-        $post = Post::with('author', 'category', 'thumbnail')->where(['slug' => $request->get('slug')])->orWhere(['slug_pl' => $request->get('slug')])->first();
-        // FINDING BY SLUG HOOK //
 
         if ($post) {
-            return $post;
+            return new PostResource($post);
         } else {
             return response()->json(["status" => "404", "message" => "Post doesn't exist."], 404);
         }

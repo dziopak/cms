@@ -11,6 +11,6 @@ use Harimayco\Menu\Models\MenuItems;
 class MenusController extends Controller
 {
     public function index() {
-        return Menu::with('items')->paginate(15);
+        return Menu::with('items')->get();
     }
 }
