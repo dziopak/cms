@@ -13,11 +13,13 @@ use App\Events\Posts\PostCategoryDestroyEvent;
 use App\Http\Resources\CategoryResource;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\PostResource;
+use App\Http\Utilities\AuthResponse;
 
 use App\Post;
 use App\User;
 use App\PostCategory;
 use JWTAuth;
+use Hook;
 
 class PostCategoriesController extends Controller
 {
@@ -33,35 +35,33 @@ class PostCategoriesController extends Controller
         return ['data' => $category, 'status' => '200'];
     }
 
-    // public function store(Request $request)
-    // {
-    //     $validator = Validator::make($request->all(), [
-    //         'name' => 'required|string|max:255',
-    //         'excerpt' => 'required|string|max:255',
-    //         'slug' => 'required|string|max:255|unique:posts',
-    //         'content' => 'required|string'
-    //     ]);
+    public function store(Request $request)
+    {
+        $validationFields = [
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'slug' => 'required|string|max:255|unique:posts'
+        ];
 
-    //     if($validator->fails()){
-    //         return response()->json(["status" => "400", "message" => "There were errors during the validation.", "errors" => $validator->errors()], 400);
-    //     } else {
-    //         $user = User::jwtUser();
-    //         $user = User::findOrFail($user->id);
-    //         if ($user->hasAccess('POST_CREATE') === true) {
-    //             $data = $request->all();
-    //             $data['user_id'] = $user->id;
-    //             $thumbnail = $request->file('thumbnail');
+        $validationFields = Hook::get('apiPostCategoriesStoreValidation',[$validationFields],function($validationFields){
+            return $validationFields;
+        });
 
-    //             $post = Post::create($data);
-    //             event(new PostCreateEvent($post, $thumbnail));
+        $validator = Validator::make($request->all(), $validationFields);
 
-    //             return response()->json(["status" => "201", "message" => "Successfully created new post.", "data" => compact('post')], 201);
-    //         } else {
-    //             return response()->json(["status" => "403", "message" => "You don't have permission to access this route."], 403);
-    //         }
+        if($validator->fails()){
+            return response()->json(["status" => "400", "message" => "There were errors during the validation.", "errors" => $validator->errors()], 400);
+        } else {
+            if ($access = AuthResponse::hasAccess('CATEGORY_CREATE') !== true) return $access;
+
+            $category = PostCategory::create($request->all());
             
-    //     }
-    // }
+            // TO DO //
+            // event(new PostCreateEvent($post, $thumbnail));
+
+            return response()->json(["status" => "201", "message" => "Successfully created new category.", "data" => $category], 201);
+        }
+    }
 
 
     public function show($id)
@@ -89,54 +89,38 @@ class PostCategoriesController extends Controller
     }
 
 
-    // public function update(Request $request, $id)
-    // {
-    //     $validator = Validator::make($request->all(), [
-    //         'name' => 'string|max:255',
-    //         'excerpt' => 'string|max:255',
-    //         'slug' => 'string|max:255|unique:posts',
-    //         'content' => 'string'
-    //     ]);
+    public function update($id, Request $request) {
+        $category = PostCategory::find($id);
+        if (!$category) return response()->json(['message' => 'Resource not found.', 'status' => 404], 404);
 
-    //     if($validator->fails()){
-    //         return response()->json(["status" => "400", "message" => "There were errors during the validation", "errors" => $validator->errors()], 400);
-    //     } else {
-    //         $user = User::findOrFail(User::jwtUser()->id);
-    //         return(User::jwtUser());
-    //         if ($user->hasAccess('POST_UPDATE') === true) {
-    //             $post = Post::find($id);
-    //             if ($post) {
-    //                 $data = $request->all();
-    //                 $thumbnail = $request->file('thumbnail');
-    //                 $post->update($data);
-    //                 // TO DO //
-    //                 // event(new PostUpdateEvent($post, $thumbnail));
-    //                 return response()->json(["status" => "201", "message" => "Successfully updated new post.", "data" => compact('post')], 201);
-    //             } else {
-    //                 return response()->json(["status" => "404", "message" => "Post doesn't exist."], 404);    
-    //             }
-    //         } else {
-    //             return response()->json(["status" => "403", "message" => "You don't have permission to access this route."], 403);
-    //         }
-            
-    //     }
-    // }
+        $validationFields = [
+            'name' => 'string|max:255',
+            'slug' => 'string|max:255',
+            'description' => 'string|max:255',
+        ];
 
+        // TO DO //
+        // VALIDATION HOOK //
 
-    // public function destroy($id)
-    // {
-    //     $user = User::find(User::jwtUser()->id);
-    //     if ($user && $user->hasAccess('POST_DELETE') === true) {
-    //         $post = Post::find($id);
-    //         if ($post) {
-    //             $post->delete();
-    //             event(new PostDestroyEvent($post));
-    //             return response()->json(["status" => "200", "message" => "Post has been successfully deleted.", "data" => compact('post')], 200);
-    //         } else {
-    //             return response()->json(["status" => "404", "message" => "Post doesn't exist."], 404);
-    //         }
-    //     } else {
-    //         return response()->json(["status" => "403", "message" => "You don't have permission to access this route."], 403);
-    //     }
-    // }
+        $validator = Validator::make($request->all(), $validationFields);
+        
+        if($validator->fails()) return ["status" => "400", "message" => "There were errors during the validation.", "errors" => $validator->errors()];
+        
+        $category->update($request->all());
+        return response()->json(['message' => 'Successfully updated resource', 'status' => '200', 'data' => $category], 200);
+    }
+
+    public function destroy($id) {
+        $access = AuthResponse::hasAccess('CATEGORY_DELETE');
+        if (!$access === true) return $access;
+
+        $category = PostCategory::find($id);
+        if ($category) {
+            $category->delete();
+            Post::where(['category_id' => $id])->update(['category_id' => 0]);
+            return response()->json(['message' => 'Successfully deleted resource', 'status' => '200', 'data' => $category], 200);
+        } else {
+            return response()->json(['message' => 'Resource not found', 'status' => '404'], 404);
+        }
+    }
 }

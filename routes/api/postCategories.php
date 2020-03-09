@@ -8,4 +8,10 @@
     
     Route::get('/category/{category}/posts/', 'api\PostCategoriesController@posts');
     Route::get('/posts/category/{category}/entries/', 'api\PostCategoriesController@posts');
+
+    Route::group(['middleware' => ['jwt.verify']], function() {
+        Route::post('/posts/categories/', 'api\PostCategoriesController@store');
+        Route::delete('/posts/category/{id}/', 'api\PostCategoriesController@destroy');
+        Route::patch('/posts/category/{id}/', 'api\PostCategoriesController@update');
+    });
 ?>
