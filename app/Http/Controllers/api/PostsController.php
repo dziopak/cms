@@ -11,13 +11,12 @@ use App\Events\Posts\PostUpdateEvent;
 use App\Events\Posts\PostDestroyEvent;
 
 use App\Http\Resources\PostResource;
+use App\Http\Utilities\AuthResponse;
 
 use App\Post;
 use App\User;
 use JWTAuth;
 use Hook;
-
-use App\Http\Utilities\AuthResponse;
 
 class PostsController extends Controller
 {
@@ -45,7 +44,7 @@ class PostsController extends Controller
         if($validator->fails()){
             return response()->json(["status" => "400", "message" => "There were errors during the validation.", "errors" => $validator->errors()], 400);
         } else {
-            $access = AuthResponse::hasAccess();
+            $access = AuthResponse::hasAccess('POST_CREATE');
             if ($access === true) {
                 $user = User::jwtUser();
                 $user = User::findOrFail($user->id);

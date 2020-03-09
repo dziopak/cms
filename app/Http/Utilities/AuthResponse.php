@@ -1,26 +1,26 @@
 <?php
-
     namespace App\Http\Utilities;
 
     use App\User;
-    use Tymon\JWTAuth\Exceptions\JWTException;
     use JWTAuth;
+    use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+    use Tymon\JWTAuth\Exceptions\TokenInvalidException;
+    use Tymon\JWTAuth\Exceptions\JWTException;
 
     class AuthResponse {
 
         static function hasAccess($access = null) {
-
             $user = User::jwtUser();
             if ( !empty($user) && !empty($user = User::find($user->id)) ) {
                 try {
                     if (! $user = JWTAuth::parseToken()->authenticate()) {
                         return response()->json(['message' => 'User not found.', 'status' => '404'], 404);
                     }
-                } catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+                } catch (TokenExpiredException $e) {
                     return response()->json(['message' => 'Token expired.', 'status' => $e->getStatusCode()], $e->getStatusCode());
-                } catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+                } catch (TokenInvalidException $e) {
                     return response()->json(['message' => 'Invalid token.', 'status' => $e->getStatusCode()], $e->getStatusCode());
-                } catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
+                } catch (JWTException $e) {
                     return response()->json(['message' => 'Authorization token is absent.', 'status' => $e->getStatusCode()], $e->getStatusCode());
                 }
                 
@@ -32,7 +32,6 @@
             } else {
                 return response()->json(['message' => 'User not logged in.', 'status' => '403'], 403);
             }
-            
         }
 
         static function authAndRespond($data) {

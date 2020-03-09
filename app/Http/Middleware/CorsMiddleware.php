@@ -7,8 +7,7 @@ use Closure;
 class CorsMiddleware
 {
     private static $allowedOriginsWhitelist = [
-      'http://localhost:3000',
-      'http://dziopak-cms.hol.es',
+      'http://localhost:3000'
     ];
 
     // All the headers must be a string
