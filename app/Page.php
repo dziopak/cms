@@ -1,12 +1,18 @@
 <?php
 
 namespace App;
-
 use Illuminate\Database\Eloquent\Model;
+
+use App\Events\Pages\PageCreateEvent;
+use App\Events\Pages\PageUpdateEvent;
+use App\Events\Pages\PageDestroyEvent;
+
 
 class Page extends Model
 {
     protected $guarded = ['id', 'page_id'];
+    public $fire_events = true;
+
 
     public function author() {
         return $this->belongsTo('App\User', 'user_id');
@@ -31,5 +37,23 @@ class Page extends Model
             $query->orderByDesc($request->get('sort_by')) : $query->orderBy($request->get('sort_by'));
         
         }
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+        $request = request();
+
+        self::created(function($page) use ($request) {
+            if ($page->fire_events) event(new PageCreateEvent($page, $request->file('thumbnail')));
+        });
+
+        self::updated(function($page) use ($request) {
+            if ($page->fire_events) event(new PageUpdateEvent($page, $request->file('thumbnail')));
+        });
+
+        self::deleted(function($page) {
+            if ($page->fire_events) event(new PageDestroyEvent($page));
+        });
     }
 }

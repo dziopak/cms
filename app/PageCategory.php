@@ -5,9 +5,14 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
+use App\Events\Categories\CategoryCreateEvent;
+use App\Events\Categories\CategoryUpdateEvent;
+use App\Events\Categories\CategoryDestroyEvent;
+
 class PageCategory extends Model
 {
     protected $guarded = ['id', 'category_id', 'type'];
+    public $fire_events = true;
 
     public function pages() {
         return $this->hasMany('App\Page', 'category_id');
@@ -15,14 +20,6 @@ class PageCategory extends Model
 
     public function list_all() {
         return $categories = DB::table('page_categories')->pluck('name', 'id')->all();
-    }
-
-    public static function boot() {
-        parent::boot();
-
-        static::deleting(function($category) {
-            $category->pages()->update(['category_id' => 0]);
-        });
     }
 
     public function scopeFilter($query, $request) {
@@ -39,5 +36,27 @@ class PageCategory extends Model
             $query->orderByDesc($request->get('sort_by')) : $query->orderBy($request->get('sort_by'));
         
         }
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+        $request = request();
+
+        self::created(function($category) use ($request) {
+            if ($category->fire_events) event(new CategoryCreateEvent($category, 'PAGE'));
+        });
+
+        self::updated(function($category) use ($request) {
+            if ($category->fire_events) event(new CategoryUpdateEvent($category, 'PAGE'));
+        });
+
+        self::deleted(function($category) {
+            if ($category->fire_events) event(new CategoryDestroyEvent($category, 'PAGE'));
+        });
+
+        static::deleting(function($category) {
+            $category->pages()->update(['category_id' => 0]);
+        });
     }
 }

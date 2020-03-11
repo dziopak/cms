@@ -178,6 +178,10 @@
                 {!! Form::checkbox('access[MENU_EDIT]', '1', null, ['class' => 'form-check-input']) !!}
                 {!! Form::label('access[MENU_EDIT]', 'Manage menus', ['class' => 'form-check-label']) !!}
             </div>
+            <div class="form-check">
+                {!! Form::checkbox('access[MODULE_USE]', '1', null, ['class' => 'form-check-input']) !!}
+                {!! Form::label('access[MODULE_USE]', 'Use modules', ['class' => 'form-check-label']) !!}
+            </div>
         </div>
     @endwrapper
 @endsection

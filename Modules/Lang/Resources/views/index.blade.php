@@ -37,12 +37,8 @@
     @wrapper('admin.partials.widget', ['title' => 'Manage custom languages'])
         @include('admin.partials.table', ['fields' => $langs])
 
-
-        <!-- // TO DO // 
-        // MODULE ACCESs // -->
-
-        {{-- @if (Auth::user()->hasAccess('CATEGORY_CREATE')) --}}
+        @if (Auth::user()->hasAccess('MODULE_USE'))
             <a href="{{ route('admin.modules.lang.create') }}" class="btn btn-success">Create new</a>
-        {{-- @endif --}}
+        @endif
     @endwrapper
 @endsection

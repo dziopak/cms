@@ -39,11 +39,8 @@
         @include('admin.partials.table', ['fields' => $testimonials])
         @include('admin.partials.massedit')
 
-        <!-- // TO DO // 
-        // MODULE ACCESs // -->
-
-        {{-- @if (Auth::user()->hasAccess('CATEGORY_CREATE')) --}}
+        @if (Auth::user()->hasAccess('MODULE_USE'))
             <a href="{{ route('admin.modules.testimonials.create') }}" class="btn btn-success">Create new</a>
-        {{-- @endif --}}
+        @endif
     @endwrapper
 @endsection

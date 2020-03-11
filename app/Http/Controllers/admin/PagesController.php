@@ -7,10 +7,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PagesRequest;
 use Illuminate\Support\Facades\Session;
 
-use App\Events\Pages\PageCreateEvent;
-use App\Events\Pages\PageUpdateEvent;
-use App\Events\Pages\PageDestroyEvent;
-
 use App\Page;
 use App\PageCategory;
 use Auth;
@@ -43,10 +39,7 @@ class PagesController extends Controller
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
         
-        $thumbnail = $request->file('thumbnail');
         $page = Page::create($data);
-
-        event(new PageCreateEvent($page, $thumbnail));
         Session::flash('crud', 'Page "'.$data['name'].'" has been created successfully.');
 
         return redirect(route('admin.pages.index'));
@@ -69,10 +62,8 @@ class PagesController extends Controller
         Auth::user()->hasAccessOrRedirect('PAGE_EDIT');
         
         $page = Page::findOrFail($id);
-        $thumbnail = $request->file('thumbnail');
         
         $page->update($request->all());
-        event(new PageUpdateEvent($page, $thumbnail));
         Session::flash('crud', 'Page "'.$page->name.'" has been updated successfully.');
         
         return redirect(route('admin.pages.index'));
@@ -91,8 +82,6 @@ class PagesController extends Controller
         $page = Page::findOrFail($id);
     
         Session::flash('crud', 'Page "'.$page->name.'" has been deleted successfully.');
-        event(new PageDestroyEvent($page));
-
         $page->delete();
         
         return redirect(route('admin.pages.index'));

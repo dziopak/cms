@@ -8,59 +8,54 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+
+use App\Events\Users\UserCreateEvent;
+use App\Events\Users\UserUpdateEvent;
+use App\Events\Users\UserDestroyEvent;
+
 use JWTAuth;
 
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    public $fire_events;
+    
     protected $fillable = [
         'name', 'email', 'password', 'avatar', 'role_id', 'first_name', 'last_name', 'last_login'
     ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token', 'first_name', 'last_name',
     ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
 
     public function role() {
         return $this->belongsTo('App\Role');
     }
 
+
     public function photo() {
         return $this->belongsTo('App\File', 'avatar');
     }
 
+
     public function dashboard() {
         return $this->hasOne('App\Dashboard','user_id', 'id');
     }
+
 
     public function logs() {
         $logs = Log::where('user_id', $this->id)->orWhere('target_id',$this->id)->where('type','USER');
         return $logs;
     }
 
+
     public function account_logs() {
         return $this->hasMany('App\Log', 'user_id');
     }
+
 
     public function hasAccess($permission) {
         if (Auth::check()) {
@@ -80,23 +75,13 @@ class User extends Authenticatable implements JWTSubject
         }
     }
 
+
     public function hasAccessOrRedirect($permission) {
         if (!$this->hasAccess($permission)) {
             throw new \Illuminate\Http\Exceptions\HttpResponseException(redirect()->route( 'admin.dashboard.index' )->with("error", "You don't have access to perform this action."));
         }
     }
 
-    public static function boot() {
-        parent::boot();
-
-        static::deleting(function($user) {
-            $user->account_logs()->delete();
-            if ($user->avatar != "1") {
-                unlink(public_path() . '/images/'.$user->photo->path);
-                $user->photo()->delete();
-            }
-        });
-    }
 
     public function getJWTIdentifier()
     {
@@ -108,6 +93,7 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
 
     static function jwtUser() {
         try {
@@ -124,6 +110,7 @@ class User extends Authenticatable implements JWTSubject
 
         return $user;
     }
+
 
     public function scopeFilter($query, $request) {
         if (!empty($request->get('search'))) {
@@ -142,5 +129,31 @@ class User extends Authenticatable implements JWTSubject
             $query->orderByDesc($request->get('sort_by')) : $query->orderBy($request->get('sort_by'));
         
         }
+    }
+
+
+    public static function boot() {
+        parent::boot();
+        $request = request();
+
+        static::deleting(function($user) {
+            $user->account_logs()->delete();
+            if ($user->avatar != "1") {
+                unlink(public_path() . '/images/'.$user->photo->path);
+                $user->photo()->delete();
+            }
+        });
+
+        self::created(function($user) use ($request) {
+            if ($user->fire_events) event(new UserCreateEvent($user, $request->file('avatar')));
+        });
+
+        self::updated(function($user) use ($request) {
+            if ($user->fire_events) event(new UserUpdateEvent($user, $request->file('avatar')));
+        });
+
+        self::deleted(function($user) {
+            if ($user->fire_events) event(new UserDestroyEvent($user));
+        });
     }
 }

@@ -5,9 +5,14 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
+use App\Events\Categories\CategoryCreateEvent;
+use App\Events\Categories\CategoryUpdateEvent;
+use App\Events\Categories\CategoryDestroyEvent;
+
 class PostCategory extends Model
 {
     protected $guarded = ['id', 'category_id', 'type'];
+    public $fire_events;
 
     public function posts() {
         return $this->hasMany('App\Post', 'category_id');
@@ -17,8 +22,21 @@ class PostCategory extends Model
         return $categories = DB::table('post_categories')->pluck('name', 'id')->all();
     }
 
-    public static function boot() {
+    public static function boot()
+    {
         parent::boot();
+
+        self::created(function($category) {
+            if ($category->fire_events) event(new CategoryCreateEvent($category, 'POST'));
+        });
+
+        self::updated(function($category) {
+            if ($category->fire_events) event(new CategoryUpdateEvent($category, 'POST'));
+        });
+
+        self::deleted(function($category) {
+            if ($category->fire_events) event(new CategoryDestroyEvent($category, 'POST'));
+        });
 
         static::deleting(function($category) {
             $category->posts()->update(['category_id' => 0]);

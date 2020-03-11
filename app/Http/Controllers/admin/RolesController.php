@@ -6,10 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-use App\Events\Roles\RoleCreateEvent;
-use App\Events\Roles\RoleUpdateEvent;
-use App\Events\Roles\RoleDestroyEvent;
-
 use App\Role;
 use App\Log;
 use Auth;
@@ -48,7 +44,6 @@ class RolesController extends Controller
         $data['access'] = serialize($access);
         
         $role = Role::create($data);
-        event(new RoleCreateEvent($role));
         $request->session()->flash('crud', 'Created '.$data['name'].' role successfully.');
         
         return redirect(route('admin.users.roles.index'));
@@ -84,7 +79,6 @@ class RolesController extends Controller
         $data['access'] = serialize($access);
         
         $role->update($data);
-        event(new RoleUpdateEvent($role));
         $request->session()->flash('crud', 'Updated '.$data['name'].' role successfully.');
         
         return redirect(route('admin.users.roles.index'));
@@ -116,7 +110,6 @@ class RolesController extends Controller
         $role = Role::findOrFail($id);
         
         $role->delete();
-        event(new RoleDestroyEvent($role));
         Session::flash('crud', 'Role '.$role->name.' has been deleted successfully.');
 
         return redirect(route('admin.users.roles.index'));

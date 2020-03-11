@@ -6,10 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-use App\Events\Posts\PostCategoryCreateEvent;
-use App\Events\Posts\PostCategoryUpdateEvent;
-use App\Events\Posts\PostCategoryDestroyEvent;
-
 use App\Http\Resources\CategoryResource;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\PostResource;
@@ -52,13 +48,10 @@ class PostCategoriesController extends Controller
         if($validator->fails()){
             return response()->json(["status" => "400", "message" => "There were errors during the validation.", "errors" => $validator->errors()], 400);
         } else {
-            if ($access = AuthResponse::hasAccess('CATEGORY_CREATE') !== true) return $access;
+            $access = AuthResponse::hasAccess();
+            if ($access !== true) return $access;
 
             $category = PostCategory::create($request->all());
-            
-            // TO DO //
-            // event(new PostCreateEvent($post, $thumbnail));
-
             return response()->json(["status" => "201", "message" => "Successfully created new category.", "data" => $category], 201);
         }
     }
@@ -66,23 +59,18 @@ class PostCategoriesController extends Controller
 
     public function show($id)
     {
-        $category = new CategoryResource(PostCategory::find($id));
-
-        if ($category) {
-            return $category;
-        } else {
-            return response()->json(["status" => "404", "message" => "Category doesn't exist."], 404);
+        if (is_numeric($id)) {
+            $category = PostCategory::find($id);
+        }   else {
+            $category = PostCategory::where(['slug' => $id]);
+            $category = Hook::get('apiPostCategoriesFindSelector',[$category, $id],function($category, $id){
+                return $category;
+            });
+            $category = $category->first();
         }
-    }
-
-    public function find(Request $request)
-    {
-        // TO DO //
-        $category = PostCategory::where(['slug' => $request->get('slug')])->orWhere(['slug_pl' => $request->get('slug')])->first();
-        // FINDING BY SLUG HOOK //
 
         if ($category) {
-            return $category;
+            return new CategoryResource($category);
         } else {
             return response()->json(["status" => "404", "message" => "Category doesn't exist."], 404);
         }
@@ -95,18 +83,18 @@ class PostCategoriesController extends Controller
 
         $validationFields = [
             'name' => 'string|max:255',
-            'slug' => 'string|max:255',
+            'slug' => 'string|max:255|unique:posts',
             'description' => 'string|max:255',
         ];
-
-        // TO DO //
-        // VALIDATION HOOK //
+        $validationFields = Hook::get('apiPostCategoriesUpdateValidation',[$validationFields],function($validationFields){
+            return $validationFields;
+        });
 
         $validator = Validator::make($request->all(), $validationFields);
-        
         if($validator->fails()) return ["status" => "400", "message" => "There were errors during the validation.", "errors" => $validator->errors()];
         
         $category->update($request->all());
+
         return response()->json(['message' => 'Successfully updated resource', 'status' => '200', 'data' => $category], 200);
     }
 
@@ -118,6 +106,7 @@ class PostCategoriesController extends Controller
         if ($category) {
             $category->delete();
             Post::where(['category_id' => $id])->update(['category_id' => 0]);
+
             return response()->json(['message' => 'Successfully deleted resource', 'status' => '200', 'data' => $category], 200);
         } else {
             return response()->json(['message' => 'Resource not found', 'status' => '404'], 404);

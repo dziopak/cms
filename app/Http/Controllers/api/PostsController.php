@@ -6,10 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-use App\Events\Posts\PostCreateEvent;
-use App\Events\Posts\PostUpdateEvent;
-use App\Events\Posts\PostDestroyEvent;
-
 use App\Http\Resources\PostResource;
 use App\Http\Utilities\AuthResponse;
 
@@ -45,21 +41,17 @@ class PostsController extends Controller
             return response()->json(["status" => "400", "message" => "There were errors during the validation.", "errors" => $validator->errors()], 400);
         } else {
             $access = AuthResponse::hasAccess('POST_CREATE');
-            if ($access === true) {
-                $user = User::jwtUser();
-                $user = User::findOrFail($user->id);
+            if ($access !== true) return $access;
 
-                $data = $request->all();
-                $data['user_id'] = $user->id;
-                $thumbnail = $request->file('thumbnail');
+            $user = User::jwtUser();
+            $user = User::find($user->id);
 
-                $post = Post::create($data);
-                event(new PostCreateEvent($post, $thumbnail));
+            $data = $request->all();
+            $data['user_id'] = $user->id;
 
-                return response()->json(["status" => "201", "message" => "Successfully created new post.", "data" => compact('post')], 201);
-            } else {
-                return $access;
-            }
+            $post = Post::create($data);
+
+            return response()->json(["status" => "201", "message" => "Successfully created new post.", "data" => compact('post')], 201);
         }
     }
 
@@ -92,42 +84,33 @@ class PostsController extends Controller
         if($validator->fails()){
             return response()->json(["status" => "400", "message" => "There were errors during the validation", "errors" => $validator->errors()], 400);
         } else {
-            $user = User::findOrFail(User::jwtUser()->id);
-            return(User::jwtUser());
-            if ($user->hasAccess('POST_UPDATE') === true) {
-                $post = Post::find($id);
-                if ($post) {
-                    $data = $request->all();
-                    $thumbnail = $request->file('thumbnail');
-                    $post->update($data);
-                    // TO DO //
-                    // event(new PostUpdateEvent($post, $thumbnail));
-                    return response()->json(["status" => "201", "message" => "Successfully updated new post.", "data" => compact('post')], 201);
-                } else {
-                    return response()->json(["status" => "404", "message" => "Post doesn't exist."], 404);    
-                }
-            } else {
-                return response()->json(["status" => "403", "message" => "You don't have permission to access this route."], 403);
-            }
+            $access = AuthResponse::hasAccess('POST_UPDATE');
+            if (!$access === true) return $access;
             
+            $post = Post::find($id);
+            if ($post) {
+                $data = $request->all();
+                $post->update($data);
+    
+                return response()->json(["status" => "201", "message" => "Successfully updated new post.", "data" => compact('post')], 201);
+            } else {
+                return response()->json(["status" => "404", "message" => "Post doesn't exist."], 404);    
+            }
         }
     }
 
 
     public function destroy($id)
     {
-        $user = User::find(User::jwtUser()->id);
-        if ($user && $user->hasAccess('POST_DELETE') === true) {
-            $post = Post::find($id);
-            if ($post) {
-                $post->delete();
-                event(new PostDestroyEvent($post));
-                return response()->json(["status" => "200", "message" => "Post has been successfully deleted.", "data" => compact('post')], 200);
-            } else {
-                return response()->json(["status" => "404", "message" => "Post doesn't exist."], 404);
-            }
+        $access = AuthResponse::hasAccess('POST_UPDATE');
+        if (!$access === true) return $access;
+
+        $post = Post::find($id);
+        if ($post) {
+            $post->delete();
+            return response()->json(["status" => "200", "message" => "Post has been successfully deleted.", "data" => compact('post')], 200);
         } else {
-            return response()->json(["status" => "403", "message" => "You don't have permission to access this route."], 403);
+            return response()->json(["status" => "404", "message" => "Post doesn't exist."], 404);
         }
     }
 }

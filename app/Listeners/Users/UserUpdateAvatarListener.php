@@ -26,6 +26,8 @@ class UserUpdateAvatarListener
             $photo->save(public_path('images/avatars/'.$name));
                         
             $photo = File::create(['path' => 'avatars/'.$name, 'type' => '1']);
+            
+            $event->post->fire_events = false;
             $event->user->update(['avatar' => $photo->id]);
         }
     }

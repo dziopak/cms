@@ -7,10 +7,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PostsRequest;
 use Illuminate\Support\Facades\Session;
 
-use App\Events\Posts\PostCreateEvent;
-use App\Events\Posts\PostUpdateEvent;
-use App\Events\Posts\PostDestroyEvent;
-
 use App\Post;
 use App\PostCategory;
 use Auth;
@@ -44,10 +40,8 @@ class PostsController extends Controller
         
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
-        $thumbnail = $request->file('thumbnail');
 
         $post = Post::create($data);
-        event(new PostCreateEvent($post, $thumbnail));
         Session::flash('crud', 'Post "'.$data['name'].'" has been created successfully.');
 
         return redirect(route('admin.posts.index'));
@@ -73,10 +67,8 @@ class PostsController extends Controller
         
         $post = Post::findOrFail($id);
         $data = $request->all();
-        $thumbnail = $request->file('thumbnail');        
 
         $post->update($data);
-        event(new PostUpdateEvent($post, $thumbnail));
         Session::flash('crud', 'Post "'.$data['name'].'" has been updated successfully.');
 
         return redirect(route('admin.posts.index'));
@@ -97,7 +89,6 @@ class PostsController extends Controller
         $post = Post::findOrFail($id);
 
         $post->delete();
-        event(new PostDestroyEvent($post));
         Session::flash('crud', 'Post "'.$post->name.'" has been deleted successfully.');
         
         return redirect(route('admin.posts.index'));

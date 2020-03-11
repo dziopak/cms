@@ -7,20 +7,12 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CategoriesRequest;
 use Illuminate\Support\Facades\Session;
 
-use App\Events\Categories\CategoryCreateEvent;
-use App\Events\Categories\CategoryUpdateEvent;
-use App\Events\Categories\CategoryDestroyEvent;
-
 use App\PageCategory;
 use Auth;
 
 class PageCategoriesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index(Request $request)
     {
         $categories = PageCategory::filter($request)->paginate(15);
@@ -28,11 +20,6 @@ class PageCategoriesController extends Controller
     }
 
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_CREATE');
@@ -44,12 +31,7 @@ class PageCategoriesController extends Controller
         return view('admin.page_categories.create', compact('categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(CategoriesRequest $request)
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_CREATE');
@@ -57,29 +39,11 @@ class PageCategoriesController extends Controller
         $data = $request->all();
         $category = PageCategory::create($data);
 
-        event(new CategoryCreateEvent($category, 'PAGE'));
         Session::flash('crud', 'Page category "'.$data['name'].'" has been created successfully.');
-
         return redirect(route('admin.pages.categories.index'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_EDIT');
@@ -92,13 +56,7 @@ class PageCategoriesController extends Controller
         return view('admin.page_categories.edit', compact('category', 'categories'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(CategoriesRequest $request, $id)
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_EDIT');
@@ -108,8 +66,6 @@ class PageCategoriesController extends Controller
 
         $category->update($data);
         Session::flash('crud', 'Page category "'.$category->name.'" has been updated successfully.');
-        
-        event(new CategoryUpdateEvent($category, 'PAGE'));
         
         return redirect(route('admin.pages.categories.index'));
     }
@@ -121,21 +77,15 @@ class PageCategoriesController extends Controller
         return view('admin.page_categories.delete', compact('category'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_DELETE');
         $category = PageCategory::findOrFail($id);
 
-        event(new CategoryDestroyEvent($category, 'PAGE'));
         Session::flash('crud', 'Page category "'.$category->name.'" has been deleted successfully.');
-
         $category->delete();
+        
         return redirect(route('admin.pages.categories.index'));
     }
 

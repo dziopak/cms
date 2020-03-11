@@ -11,9 +11,6 @@ use App\Http\Requests\UsersCreateRequest;
 use App\Http\Requests\UsersEditRequest;
 use App\Http\Requests\NewPasswordRequest;
 
-use App\Events\Users\UserCreateEvent;
-use App\Events\Users\UserUpdateEvent;
-use App\Events\Users\UserDestroyEvent;
 use App\Events\Users\UserNewPasswordEvent;
 use App\Events\Users\UserBlockEvent;
 
@@ -59,10 +56,8 @@ class UsersController extends Controller
         
         $data = $request->except('avatar');
         $data['password'] = Hash::make($request->password);
-        $avatar = $request->file('avatar');
 
         $user = User::create($data);
-        event(new UserCreateEvent($user, $avatar));
         $request->session()->flash('crud', 'User '.$user->name.' has been created successfully.');
 
         return redirect(route('admin.users.index'));
@@ -90,10 +85,8 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
         $roles = $role->get_all_roles();
         $data = $request->except('avatar');
-        $avatar = $request->file('avatar');
         
         $user->update($data);
-        event(new UserUpdateEvent($user, $avatar));
         $request->session()->flash('crud', 'Account data of '.$user->name.' has been updated successfully.');
         
         return redirect(route('admin.users.index'));
@@ -152,7 +145,7 @@ class UsersController extends Controller
         
         $user = User::findOrFail($id);
         $user->delete();
-        event(new UserDestroyEvent($user));
+        
         Session::flash('crud', "Account of ".$user->name." was deleted successfully.");
         
         return redirect(route('admin.users.index'));

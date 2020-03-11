@@ -167,6 +167,18 @@
                 {!! Form::checkbox('access[NEWSLETTER_DELETE_LAYOUT]', '1', null, ['class' => 'form-check-input']) !!}
                 {!! Form::label('access[NEWSLETTER_DELETE_LAYOUT]', 'Delete message layouts', ['class' => 'form-check-label']) !!}
             </div>
+
+            <div class="form-group">
+                <span class="text-primary">Other rules:</span>
+                <div class="form-check">
+                    {!! Form::checkbox('access[MENU_EDIT]', '1', null, ['class' => 'form-check-input']) !!}
+                    {!! Form::label('access[MENU_EDIT]', 'Manage menus', ['class' => 'form-check-label']) !!}
+                </div>
+                <div class="form-check">
+                    {!! Form::checkbox('access[MODULE_USE]', '1', null, ['class' => 'form-check-input']) !!}
+                    {!! Form::label('access[MODULE_USE]', 'Use modules', ['class' => 'form-check-label']) !!}
+                </div>
+            </div>
         </div>
     @endwrapper
 @endsection
