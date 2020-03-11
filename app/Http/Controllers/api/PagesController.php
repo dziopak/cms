@@ -6,20 +6,20 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-use App\Http\Resources\PostResource;
+use App\Http\Resources\PageResource;
 use App\Http\Utilities\AuthResponse;
 
-use App\Post;
+use App\Page;
 use App\User;
 use JWTAuth;
 use Hook;
 
-class PostsController extends Controller
+class PagesController extends Controller
 {
     
     public function index(Request $request)
     {
-        return PostResource::collection(Post::with('author', 'thumbnail', 'category')->orderBy('id')->paginate(15));
+        return PageResource::collection(Page::with('author', 'thumbnail', 'category')->orderBy('id')->paginate(15));
     }
 
 
@@ -28,18 +28,19 @@ class PostsController extends Controller
         $validationFields = [
             'name' => 'required|string|max:255',
             'excerpt' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:posts',
+            'slug' => 'required|string|max:255|unique:pages',
             'content' => 'required|string'
         ];
-        $validationFields = Hook::get('apiPostsStoreValidation',[$validationFields],function($validationFields){
+
+        $validationFields = Hook::get('apiPagesStoreValidation',[$validationFields],function($validationFields){
             return $validationFields;
         });
-
         $validator = Validator::make($request->all(), $validationFields);
+
         if($validator->fails()){
             return response()->json(["status" => "400", "message" => "There were errors during the validation.", "errors" => $validator->errors()], 400);
         } else {
-            $access = AuthResponse::hasAccess('POST_CREATE');
+            $access = AuthResponse::hasAccess('PAGE_CREATE');
             if ($access !== true) return $access;
 
             $user = User::jwtUser();
@@ -48,9 +49,9 @@ class PostsController extends Controller
             $data = $request->all();
             $data['user_id'] = $user->id;
 
-            $post = Post::create($data);
+            $page = Page::create($data);
 
-            return response()->json(["status" => "201", "message" => "Successfully created new post.", "data" => compact('post')], 201);
+            return response()->json(["status" => "201", "message" => "Successfully created new page.", "data" => compact('page')], 201);
         }
     }
 
@@ -58,15 +59,15 @@ class PostsController extends Controller
     public function show($id)
     {
         if (is_numeric($id)) {
-            $post = Post::with('author', 'category', 'thumbnail')->find($id);
+            $page = Page::with('author', 'category', 'thumbnail')->find($id);
         } else {
-            $post = Post::with('author', 'category', 'thumbnail')->where(['slug' => $id])->orWhere(['slug_pl' => $id])->first();
+            $page = Page::with('author', 'category', 'thumbnail')->where(['slug' => $id])->orWhere(['slug_pl' => $id])->first();
         }
 
-        if ($post) {
-            return new PostResource($post);
+        if ($page) {
+            return new PageResource($page);
         } else {
-            return response()->json(["status" => "404", "message" => "Post doesn't exist."], 404);
+            return response()->json(["status" => "404", "message" => "Page doesn't exist."], 404);
         }
     }
 
@@ -76,7 +77,7 @@ class PostsController extends Controller
         $validationFields = [
             'name' => 'string|max:255',
             'excerpt' => 'string|max:255',
-            'slug' => 'string|max:255|unique:posts',
+            'slug' => 'string|max:255|unique:pages',
             'content' => 'string'
         ];
         $validationFields = Hook::get('apiPostsUpdateValidation',[$validationFields],function($validationFields){
@@ -84,20 +85,21 @@ class PostsController extends Controller
         });
 
         $validator = Validator::make($request->all(), $validationFields);
+
         if($validator->fails()){
             return response()->json(["status" => "400", "message" => "There were errors during the validation", "errors" => $validator->errors()], 400);
         } else {
-            $access = AuthResponse::hasAccess('POST_UPDATE');
+            $access = AuthResponse::hasAccess('PAGE_UPDATE');
             if (!$access === true) return $access;
             
-            $post = Post::find($id);
-            if ($post) {
+            $page = Page::find($id);
+            if ($page) {
                 $data = $request->all();
-                $post->update($data);
+                $page->update($data);
     
-                return response()->json(["status" => "201", "message" => "Successfully updated new post.", "data" => compact('post')], 201);
+                return response()->json(["status" => "201", "message" => "Successfully updated new page.", "data" => compact('page')], 201);
             } else {
-                return response()->json(["status" => "404", "message" => "Post doesn't exist."], 404);    
+                return response()->json(["status" => "404", "message" => "Page doesn't exist."], 404);    
             }
         }
     }
@@ -105,15 +107,15 @@ class PostsController extends Controller
 
     public function destroy($id)
     {
-        $access = AuthResponse::hasAccess('POST_UPDATE');
+        $access = AuthResponse::hasAccess('PAGE_UPDATE');
         if (!$access === true) return $access;
 
-        $post = Post::find($id);
-        if ($post) {
-            $post->delete();
-            return response()->json(["status" => "200", "message" => "Post has been successfully deleted.", "data" => compact('post')], 200);
+        $page = Page::find($id);
+        if ($page) {
+            $page->delete();
+            return response()->json(["status" => "200", "message" => "Page has been successfully deleted.", "data" => compact('page')], 200);
         } else {
-            return response()->json(["status" => "404", "message" => "Post doesn't exist."], 404);
+            return response()->json(["status" => "404", "message" => "Page doesn't exist."], 404);
         }
     }
 }

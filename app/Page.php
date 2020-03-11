@@ -22,6 +22,10 @@ class Page extends Model
         return $this->belongsTo('App\File', 'file_id');
     }
 
+    public function category() {
+        return $this->belongsTo('App\PageCategory', 'category_id');
+    }
+
     public function scopeFilter($query, $request) {
         if (!empty($request->get('search'))) {
 

@@ -5,7 +5,7 @@
 
     // AUTH ROUTES
     Route::group(['middleware' => ['jwt.verify']], function() {
-        Route::post('/posts', 'api\PostsController@store');
+        Route::post('/post', 'api\PostsController@store');
         Route::delete('/post/{id}', 'api\PostsController@destroy');
         Route::patch('/post/{id}', 'api\PostsController@update');
     });
