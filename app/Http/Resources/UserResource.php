@@ -20,7 +20,7 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'created_at' => $this->created_at->diffForHumans(),
             'role' => $this->role->name,
-            'avatar' => $this->photo->path
+            'avatar' => $this->avatar ? env('APP_URL').'images/'.$this->photo->path : null
         ];
     }
 }

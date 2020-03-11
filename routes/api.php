@@ -15,3 +15,4 @@ require base_path('routes/api/menus.php');
 //USERS RESOURCE
 require base_path('routes/api/auth.php');
 require base_path('routes/api/roles.php');
+require base_path('routes/api/users.php');
