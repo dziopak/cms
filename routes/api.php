@@ -12,5 +12,6 @@ require base_path('routes/api/pages.php');
 //MENUS ROUTES
 require base_path('routes/api/menus.php');
 
-//AUTHORIZATION ROUTES
+//USERS RESOURCE
 require base_path('routes/api/auth.php');
+require base_path('routes/api/roles.php');

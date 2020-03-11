@@ -66,7 +66,7 @@ class PostsController extends Controller
         if ($post) {
             return new PostResource($post);
         } else {
-            return response()->json(["status" => "404", "message" => "Post doesn't exist."], 404);
+            return response()->json(["status" => "404", "message" => "Resource doesn't exist."], 404);
         }
     }
 

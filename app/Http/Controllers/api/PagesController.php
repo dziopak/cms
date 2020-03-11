@@ -99,7 +99,7 @@ class PagesController extends Controller
     
                 return response()->json(["status" => "201", "message" => "Successfully updated new page.", "data" => compact('page')], 201);
             } else {
-                return response()->json(["status" => "404", "message" => "Page doesn't exist."], 404);    
+                return response()->json(["status" => "404", "message" => "Resource doesn't exist."], 404);    
             }
         }
     }
@@ -115,7 +115,7 @@ class PagesController extends Controller
             $page->delete();
             return response()->json(["status" => "200", "message" => "Page has been successfully deleted.", "data" => compact('page')], 200);
         } else {
-            return response()->json(["status" => "404", "message" => "Page doesn't exist."], 404);
+            return response()->json(["status" => "404", "message" => "Resource doesn't exist."], 404);
         }
     }
 }
