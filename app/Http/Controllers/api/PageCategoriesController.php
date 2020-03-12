@@ -11,34 +11,33 @@ use App\Http\Resources\CategoryCollection;
 use App\Http\Utilities\CategoryUtilities;
 use App\Http\Utilities\AuthResponse;
 
-use App\Post;
+use App\Page;
 use App\User;
-use App\PostCategory;
+use App\PageCategory;
 use JWTAuth;
 use Hook;
 
-class PostCategoriesController extends Controller
+class PageCategoriesController extends Controller
 {
-    
     
     public function index(Request $request)
     {
-        return CategoryCollection::collection(PostCategory::orderByDesc('created_at')->paginate(15));
+        return CategoryCollection::collection(PageCategory::orderByDesc('created_at')->paginate(15));
     }
 
 
-    public function posts($id) {
-        $category = CategoryCollection::collection(PostCategory::findOrFail($id));
+    public function pages($id) {
+        $category = CategoryCollection::collection(PageCategory::findOrFail($id));
         return ['data' => $category, 'status' => '200'];
     }
 
 
     public function store(Request $request)
     {
-        $validation = CategoryUtilities::storeValidation($request, 'post');
+        $validation = CategoryUtilities::storeValidation($request, 'page');
         if ($validation !== true) return $validation;
 
-        $category = PostCategory::create($request->all());
+        $category = PageCategory::create($request->all());
         return response()->json(["status" => "201", "message" => "Successfully created new category.", "data" => $category], 201);
     }
 
@@ -46,10 +45,10 @@ class PostCategoriesController extends Controller
     public function show($id)
     {
         if (is_numeric($id)) {
-            $category = PostCategory::find($id);
+            $category = PageCategory::find($id);
         }   else {
-            $category = PostCategory::where(['slug' => $id]);
-            $category = Hook::get('apiPostCategoriesFindSelector',[$category, $id],function($category, $id){
+            $category = PageCategory::where(['slug' => $id]);
+            $category = Hook::get('apiPageCategoriesFindSelector',[$category, $id],function($category, $id){
                 return $category;
             });
 
@@ -62,10 +61,10 @@ class PostCategoriesController extends Controller
 
 
     public function update($id, Request $request) {
-        $validation = CategoryUtilities::updateValidation($request, 'post');
+        $validation = CategoryUtilities::updateValidation($request, 'page');
         if ($validation !== true) return $validation; 
 
-        $category = PostCategory::find($id);
+        $category = PageCategory::find($id);
         if (!$category) return response()->json(['message' => 'Resource not found.', 'status' => 404], 404);
         
         $category->update($request->all());
@@ -77,7 +76,7 @@ class PostCategoriesController extends Controller
         $access = AuthResponse::hasAccess('CATEGORY_DELETE');
         if (!$access === true) return $access;
 
-        $category = PostCategory::find($id);
+        $category = PageCategory::find($id);
         if (!$category) return response()->json(['message' => 'Resource not found', 'status' => '404'], 404);
         
         $category->delete();

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
 use App\Http\Utilities\AuthResponse;
+use App\Http\Utilities\UserUtilities;
 use App\Http\Resources\UserResource;
 use App\User;
 use JWTAuth;
@@ -16,42 +17,27 @@ use Hook;
 
 class UsersController extends Controller
 {
+
     public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
-
-        try {
-            if (! $token = JWTAuth::attempt($credentials)) {
-                return response()->json(['message' => 'Invalid login credentials.', 'status' => '400'], 400);
-            }
-        } catch (JWTException $e) {
-            return response()->json(['Message' => 'Error while creating the token', 'status' => '500'], 500);
-        }
-
-        return response()->json(['token' => $token, 'status' => 200]);
+        return UserUtilities::authenticateCredentials($credentials);
     }
 
 
     public function register(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
-
-        if($validator->fails()){
-            return response()->json(['message' => 'Validation error.', 'errors' => $validator->errors()->toJson(), 'status' => '400'], 400);
-        }
+        $validation = UserUtilities::registerValidation($request);
+        if ($validation !== true) return $validation;
 
         $user = User::create([
             'name' => $request->get('name'),
             'email' => $request->get('email'),
             'password' => Hash::make($request->get('password')),
         ]);
-        $user['token'] = $token = JWTAuth::fromUser($user);
-         
-        return response()->json($user, 201);
+
+        $user['token'] = $token = JWTAuth::fromUser($user); 
+        return response()->json(["message" => "Successfully registered new user account.", "user" => $user, "status" => 201], 201);
     }
 
 
@@ -73,31 +59,11 @@ class UsersController extends Controller
         return $user ? new UserResource($user) : response()->json(["status" => "404", "message" => "User doesn't exist."], 404);
     }
 
+
     public function store(Request $request)
-
     {
-        $validationFields = [
-            'name' => 'required|unique:users',
-            'email' => 'email|required|unique:users',
-            'role_id' => 'required|numeric',
-            'password' => 'required|min:8',
-            'repeat_password' => 'required'
-        ];
-        $validationFields = Hook::get('apiUserStoreValidation',[$validationFields],function($validationFields){
-            return $validationFields;
-        });
-
-        $validator = Validator::make($request->all(), $validationFields);
-        $validator->after(function ($validator) use ($request) {
-            if ($request->get('password') !== $request->get('repeat_password')) {
-                $validator->errors()->add('repeat_password', 'Passwords do not match.');
-            }
-        });
-
-        if($validator->fails()) return response()->json(["status" => "400", "message" => "There were errors during the validation.", "errors" => $validator->errors()], 400);
-        
-        $access = AuthResponse::hasAccess();
-        if ($access !== true) return $access;
+        $validation = UserUtilities::storeValidation($request);
+        if ($validation !== true) return $validation;
 
         $data = $request->except(['avatar', 'password', 'password_repeat']);
         $data['password'] = Hash::make($request->get('password'));
@@ -110,40 +76,16 @@ class UsersController extends Controller
 
     public function update(Request $request, $id)
     {
-        $validationFields = [
-            'name' => 'unique:users',
-            'email' => 'email|unique:users',
-            'role_id' => 'numeric',
-            'password' => 'string|min:8'
-        ];
-        $validationFields = Hook::get('apiUserUpdateValidation',[$validationFields],function($validationFields){
-            return $validationFields;
-        });
-
-        $validator = Validator::make($request->all(), $validationFields);
-        $validator->after(function ($validator) use ($request) {
-            if ($request->get('password') !== $request->get('repeat_password')) {
-                $validator->errors()->add('repeat_password', 'Passwords do not match.');
-            }
-        });
-
-        if($validator->fails()){
-            return response()->json(["status" => "400", "message" => "There were errors during the validation", "errors" => $validator->errors()], 400);
-        }
-
-        $access = AuthResponse::hasAccess('USER_UPDATE');
-        if ($access !== true) return $access;
+        $validation = UserUtilities::updateValidation($request);
+        if ($validation !== true) return $validation;
         
         $user = User::find($id);
+        if (!$user) return response()->json(["status" => "404", "message" => "Resource doesn't exist."], 404);    
         
-        if ($user) {
-            $data = $request->except('avatar', 'password', 'repeat_password');
-            $user->update($data);
+        $data = $request->except('avatar', 'password', 'repeat_password');
+        $user->update($data);
 
-            return response()->json(["status" => "201", "message" => "Successfully updated user account.", "data" => new UserResource($user)], 201);
-        } else {
-            return response()->json(["status" => "404", "message" => "Resource doesn't exist."], 404);    
-        }
+        return response()->json(["status" => "201", "message" => "Successfully updated user account.", "data" => new UserResource($user)], 201);
     }
 
 
@@ -153,11 +95,9 @@ class UsersController extends Controller
         if (!$access === true) return $access;
 
         $user = User::find($id);
-        if ($user) {
-            $user->delete();
-            return response()->json(["status" => "200", "message" => "User has been successfully deleted.", "data" => new UserResource($user)], 200);
-        } else {
-            return response()->json(["status" => "404", "message" => "Resource doesn't exist."], 404);
-        }
+        if (!$user) return response()->json(["status" => "404", "message" => "Resource doesn't exist."], 404);
+        
+        $user->delete();
+        return response()->json(["status" => "200", "message" => "User has been successfully deleted.", "data" => new UserResource($user)], 200);
     }
 }

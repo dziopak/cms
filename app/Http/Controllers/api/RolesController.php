@@ -5,11 +5,12 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+
 use App\Http\Utilities\AuthResponse;
 use App\Http\Utilities\RoleUtilities;
+use App\Http\Resources\RoleResource;
 
 use App\Role;
-use App\Http\Resources\RoleResource;
 use Hook;
 
 class RolesController extends Controller
@@ -28,10 +29,7 @@ class RolesController extends Controller
 
     public function store(Request $request)
     {
-        $access = AuthResponse::hasAccess('ROLE_CREATE');
         $validation = RoleUtilities::storeValidation($request);
-        
-        if ($access !== true) return $access;
         if ($validation !== true) return $validation;
 
         $data = $request->except('access');
@@ -44,10 +42,7 @@ class RolesController extends Controller
 
     public function update(Request $request, $id)
     {
-        $access = AuthResponse::hasAccess('ROLE_EDIT');
         $validation = RoleUtilities::updateValidation($request);
-        
-        if ($access !== true) return $access;
         if ($validation !== true) return $validation;
 
         $role = Role::find($id);

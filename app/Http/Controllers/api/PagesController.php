@@ -27,11 +27,8 @@ class PagesController extends Controller
     public function store(Request $request)
     {
         
-        $access = AuthResponse::hasAccess('PAGE_CREATE');
         $validation = PageUtilities::storeValidation($request);
-        
-        if ($access !== true) return $access;
-        if ($validation !== true) return $validation;
+        if ($validation !== true) return $validation;        
 
         $user = User::jwtUser();
         $user = User::find($user->id);
@@ -59,10 +56,7 @@ class PagesController extends Controller
 
     public function update(Request $request, $id)
     {
-        $access = AuthResponse::hasAccess('PAGE_UPDATE');
         $validation = PageUtilities::updateValidation($request);
-
-        if ($access !== true) return $access;
         if ($validation !== true) return $validation;
             
         $page = Page::find($id);
@@ -77,7 +71,7 @@ class PagesController extends Controller
 
     public function destroy($id)
     {
-        $access = AuthResponse::hasAccess('PAGE_UPDATE');
+        $access = AuthResponse::hasAccess('PAGE_EDIT');
         if ($access !== true) return $access;
 
         $page = Page::find($id);

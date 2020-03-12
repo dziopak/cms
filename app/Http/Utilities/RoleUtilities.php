@@ -3,11 +3,15 @@
     namespace App\Http\Utilities;
 
     use Illuminate\Support\Facades\Validator;
-    
+    use App\Http\Utilities\AuthResponse;
+
     use Hook;
 
     class RoleUtilities {
         static function storeValidation($request) {
+            $access = AuthResponse::hasAccess('ROLE_CREATE');
+            if ($access !== true) return $access;
+
             $validationFields = [
                 'name' => 'required|string|max:255',
                 'description' => 'required|string|max:255',
@@ -25,6 +29,9 @@
         }
 
         static function updateValidation($request) {
+            $access = AuthResponse::hasAccess('ROLE_EDIT');
+            if ($access !== true) return $access;
+
             $validationFields = [
                 'name' => 'string|max:255',
                 'description' => 'string|max:255',

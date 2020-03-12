@@ -3,24 +3,15 @@
     namespace App\Http\Utilities;
 
     use Illuminate\Support\Facades\Validator;
+    use App\Http\Utilities\AuthResponse;
 
     class MenuUtilities {
-        static function updateValidation($data) {
-            $validationFields = [
-                'name' => 'required|string|max:255',
-                'items' => 'array',
-            ];
-            $validator = Validator::make($data, $validationFields);
+        static function storeValidation($request) {
+            $access = AuthResponse::hasAccess('MENU_CREATE');
+            if ($access !== true) return $access;
             
-            if($validator->fails()){
-                $errors = $validator->errors();
-                return ["status" => "400", "message" => "There were errors during the validation.", "errors" => $errors];
-            }
+            $data = $request->all();
 
-            return true;
-        }
-
-        static function createValidation($data) {
             $validationFields = [
                 'name' => 'required|string|max:255',
                 'items' => 'array',
@@ -56,10 +47,27 @@
     
                 }
             }
-            if (!empty($errors)) {
-                return response()->json(['message' => 'There were errors during the validation.', 'errors' => $errors, 'status' => '400'], 400);
+
+            if (!empty($errors)) return response()->json(['message' => 'There were errors during the validation.', 'errors' => $errors, 'status' => '400'], 400);
+            return true;
+        }
+        
+        static function updateValidation($request) {
+            $access = AuthResponse::hasAccess('MENU_EDIT');
+            if ($access !== true) return $access;
+            
+            $validationFields = [
+                'name' => 'required|string|max:255',
+                'items' => 'array',
+            ];
+            $validator = Validator::make($request->all(), $validationFields);
+            
+            if($validator->fails()){
+                $errors = $validator->errors();
+                return ["status" => "400", "message" => "There were errors during the validation.", "errors" => $errors];
             }
 
             return true;
         }
+
     }

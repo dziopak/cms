@@ -19,61 +19,56 @@ class MenusController extends Controller
         return Menu::with('items')->get();
     }
 
+
     public function show($id) {
         is_numeric($id) ? $menu = Menu::with('items')->find($id) : $menu = Menu::with('items')->where(['name' => $id])->first();
         
-        if (!empty($menu)) {
-            return $menu;
-        } else {
-            return response()->json(['message' => 'Resource not found', 'status' => '404'], 404);
-        }
+        if (!$menu) return response()->json(['message' => 'Resource not found', 'status' => '404'], 404);
+        return $menu;
     }
 
-    public function create(Request $request) {
-        $access = AuthResponse::hasAccess('MENU_CREATE');
-        if (!$access === true) {
-            return $access;
-        }
 
-        $response = MenuUtilities::createValidation($data = $request->all());
-        if ($response === true) {
-            $menu = new Menu;
-            $menu->name = $data['name'];
-            $menu->save();
-            
-            foreach($data['items'] as $key => $item) {
-                $data['items'][$key]['menu'] = $menu->id;
-            }            
-            $items = MenuItems::insert($data['items']);
+    public function store(Request $request) {
+        $validation = MenuUtilities::storeValidation($request);
+        if ($validation !== true) return $validation;
 
-            $menu = Menu::with('items')->find($menu->id);
-            return response()->json(['message' => 'Successfully created menu', 'data' => $menu, 'status' => '201'], 201);
-        } else {
-            return $response;
-        }
+        $data = $request->all();
+
+        $menu = new Menu;
+        $menu->name = $data['name'];
+        $menu->save();
+        
+        foreach($data['items'] as $key => $item) {
+            $data['items'][$key]['menu'] = $menu->id;
+        }            
+        $items = MenuItems::insert($data['items']);
+
+        $menu = Menu::with('items')->find($menu->id);
+        return response()->json(['message' => 'Successfully created menu', 'data' => $menu, 'status' => '201'], 201);
     }
+
 
     public function update($id, Request $request) {
+        $validation = MenuUtilities::updateValidation($request);
+        if ($validation !== true) return $validation;
+
         $menu = Menu::find($id);
         if (!$menu) return response()->json(['message' => 'Resource not found.', 'status' => 404], 404);
 
-        if ($response = MenuUtilities::updateValidation($request->all()) !== true) return $response;
-        
         $menu->update($request->all());
-
         return response()->json(['message' => 'Successfully updated resource', 'status' => '200', 'data' => $menu], 200);
     }
+
 
     public function destroy($id) {
         $access = AuthResponse::hasAccess('MENU_DELETE');
         if (!$access === true) return $access;
 
         $menu = Menu::with('items')->find($id);
-        if ($menu) {
-            $menu->delete();
-            return response()->json(['message' => 'Successfully deleted resource', 'status' => '200', 'data' => $menu], 200);
-        } else {
-            return response()->json(['message' => 'Resource not found', 'status' => '404'], 404);
-        }
+        if (!$menu) return response()->json(['message' => 'Resource not found', 'status' => '404'], 404);
+        
+        $menu->delete();
+        return response()->json(['message' => 'Successfully deleted resource', 'status' => '200', 'data' => $menu], 200);
+        
     }
 }

@@ -29,9 +29,6 @@ class PostsController extends Controller
         $validation = PostUtilities::storeValidation($request);
         if ($validation !== true) return $validation;
 
-        $access = AuthResponse::hasAccess('POST_CREATE');
-        if ($access !== true) return $access;
-
         $user = User::jwtUser();
         $user = User::find($user->id);
 
@@ -39,7 +36,6 @@ class PostsController extends Controller
         $data['user_id'] = $user->id;
 
         $post = Post::create($data);
-
         return response()->json(["status" => "201", "message" => "Successfully created new post.", "data" => compact('post')], 201);
         
     }
@@ -53,20 +49,14 @@ class PostsController extends Controller
             $post = Post::with('author', 'category', 'thumbnail')->where(['slug' => $id])->orWhere(['slug_pl' => $id])->first();
         }
 
-        if ($post) {
-            return new PostResource($post);
-        } else {
-            return response()->json(["status" => "404", "message" => "Resource doesn't exist."], 404);
-        }
+        if (!$post) return response()->json(["status" => "404", "message" => "Resource doesn't exist."], 404);
+        return new PostResource($post);
     }
 
 
     public function update(Request $request, $id)
     {
         $validation = PostUtilities::updateValidation($request);
-        $access = AuthResponse::hasAccess('POST_UPDATE');
-        
-        if ($access !== true) return $access;
         if ($validation !== true) return $validation;
         
         $post = Post::find($id);
@@ -79,15 +69,13 @@ class PostsController extends Controller
 
     public function destroy($id)
     {
-        $access = AuthResponse::hasAccess('POST_UPDATE');
+        $access = AuthResponse::hasAccess('POST_EDIT');
         if (!$access === true) return $access;
 
         $post = Post::find($id);
-        if ($post) {
-            $post->delete();
-            return response()->json(["status" => "200", "message" => "Post has been successfully deleted.", "data" => compact('post')], 200);
-        } else {
-            return response()->json(["status" => "404", "message" => "Post doesn't exist."], 404);
-        }
+        if (!$post) response()->json(["status" => "404", "message" => "Post doesn't exist."], 404); 
+        
+        $post->delete();
+        return response()->json(["status" => "200", "message" => "Post has been successfully deleted.", "data" => compact('post')], 200);
     }
 }

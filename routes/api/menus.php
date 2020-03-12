@@ -4,7 +4,7 @@
     Route::get('/menu/{id}/', 'api\MenusController@show');
     
     Route::group(['middleware' => ['jwt.verify']], function() {
-        Route::post('/menus', 'api\MenusController@create');
+        Route::post('/menus', 'api\MenusController@store');
         Route::delete('/menu/{id}/', 'api\MenusController@destroy');
         Route::patch('/menu/{id}/', 'api\MenusController@update');
     });
