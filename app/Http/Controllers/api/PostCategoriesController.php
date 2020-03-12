@@ -6,20 +6,19 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+use App\Http\Utilities\AuthResponse;
 use App\Http\Resources\CategoryResource;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Utilities\CategoryUtilities;
-use App\Http\Utilities\AuthResponse;
 
-use App\Post;
-use App\User;
 use App\PostCategory;
+use App\Post;
+
 use JWTAuth;
 use Hook;
 
 class PostCategoriesController extends Controller
 {
-    
     
     public function index(Request $request)
     {

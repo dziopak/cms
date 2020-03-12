@@ -6,14 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+use App\Http\Utilities\AuthResponse;
 use App\Http\Resources\CategoryResource;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Utilities\CategoryUtilities;
-use App\Http\Utilities\AuthResponse;
 
 use App\Page;
-use App\User;
 use App\PageCategory;
+
 use JWTAuth;
 use Hook;
 
