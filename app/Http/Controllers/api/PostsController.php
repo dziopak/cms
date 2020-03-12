@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 
 use App\Http\Resources\PostResource;
 use App\Http\Utilities\AuthResponse;
+use App\Http\Utilities\PostUtilities;
 
 use App\Post;
 use App\User;
@@ -25,33 +26,22 @@ class PostsController extends Controller
 
     public function store(Request $request)
     {
-        $validationFields = [
-            'name' => 'required|string|max:255',
-            'excerpt' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:posts',
-            'content' => 'required|string'
-        ];
-        $validationFields = Hook::get('apiPostsStoreValidation',[$validationFields],function($validationFields){
-            return $validationFields;
-        });
+        $validation = PostUtilities::storeValidation($request);
+        if ($validation !== true) return $validation;
 
-        $validator = Validator::make($request->all(), $validationFields);
-        if($validator->fails()){
-            return response()->json(["status" => "400", "message" => "There were errors during the validation.", "errors" => $validator->errors()], 400);
-        } else {
-            $access = AuthResponse::hasAccess('POST_CREATE');
-            if ($access !== true) return $access;
+        $access = AuthResponse::hasAccess('POST_CREATE');
+        if ($access !== true) return $access;
 
-            $user = User::jwtUser();
-            $user = User::find($user->id);
+        $user = User::jwtUser();
+        $user = User::find($user->id);
 
-            $data = $request->all();
-            $data['user_id'] = $user->id;
+        $data = $request->all();
+        $data['user_id'] = $user->id;
 
-            $post = Post::create($data);
+        $post = Post::create($data);
 
-            return response()->json(["status" => "201", "message" => "Successfully created new post.", "data" => compact('post')], 201);
-        }
+        return response()->json(["status" => "201", "message" => "Successfully created new post.", "data" => compact('post')], 201);
+        
     }
 
 
@@ -73,33 +63,17 @@ class PostsController extends Controller
 
     public function update(Request $request, $id)
     {
-        $validationFields = [
-            'name' => 'string|max:255',
-            'excerpt' => 'string|max:255',
-            'slug' => 'string|max:255|unique:posts',
-            'content' => 'string'
-        ];
-        $validationFields = Hook::get('apiPostsUpdateValidation',[$validationFields],function($validationFields){
-            return $validationFields;
-        });
+        $validation = PostUtilities::updateValidation($request);
+        $access = AuthResponse::hasAccess('POST_UPDATE');
+        
+        if ($access !== true) return $access;
+        if ($validation !== true) return $validation;
+        
+        $post = Post::find($id);
+        if (!$post) return response()->json(["status" => "404", "message" => "Post doesn't exist."], 404);    
 
-        $validator = Validator::make($request->all(), $validationFields);
-        if($validator->fails()){
-            return response()->json(["status" => "400", "message" => "There were errors during the validation", "errors" => $validator->errors()], 400);
-        } else {
-            $access = AuthResponse::hasAccess('POST_UPDATE');
-            if (!$access === true) return $access;
-            
-            $post = Post::find($id);
-            if ($post) {
-                $data = $request->all();
-                $post->update($data);
-    
-                return response()->json(["status" => "201", "message" => "Successfully updated new post.", "data" => compact('post')], 201);
-            } else {
-                return response()->json(["status" => "404", "message" => "Post doesn't exist."], 404);    
-            }
-        }
+        $post->update($request->all());
+        return response()->json(["status" => "201", "message" => "Successfully updated post.", "data" => compact('post')], 201);
     }
 
 

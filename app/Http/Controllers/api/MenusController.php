@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Harimayco\Menu\Models\MenuItems;
 use Illuminate\Support\Facades\Validator;
 
-use App\Http\Utilities\Validation;
+use App\Http\Utilities\MenuUtilities;
 use App\Http\Utilities\AuthResponse;
 use App\Menu;
 use JWTAuth;
@@ -35,7 +35,7 @@ class MenusController extends Controller
             return $access;
         }
 
-        $response = Validation::createMenu($data = $request->all());
+        $response = MenuUtilities::createValidation($data = $request->all());
         if ($response === true) {
             $menu = new Menu;
             $menu->name = $data['name'];
@@ -57,7 +57,7 @@ class MenusController extends Controller
         $menu = Menu::find($id);
         if (!$menu) return response()->json(['message' => 'Resource not found.', 'status' => 404], 404);
 
-        if ($response = Validation::updateMenu($request->all()) !== true) return $response;
+        if ($response = MenuUtilities::updateValidation($request->all()) !== true) return $response;
         
         $menu->update($request->all());
 
