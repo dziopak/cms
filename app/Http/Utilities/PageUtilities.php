@@ -5,9 +5,20 @@
     use Illuminate\Support\Facades\Validator;
     use App\Http\Utilities\AuthResponse;
 
+    use App\User;
     use Hook;
 
     class PageUtilities {
+        static function create($request) {
+            $user = User::jwtUser();
+            $user = User::find($user->id);
+
+            $data = $request->all();
+            $data['user_id'] = $user->id;
+
+            return $page = Page::create($data);
+        }
+
         static function storeValidation($request) {
             $access = AuthResponse::hasAccess('PAGE_CREATE');
             if ($access !== true) return $access;

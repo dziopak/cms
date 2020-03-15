@@ -16,7 +16,7 @@ use JWTAuth;
 class MenusController extends Controller
 {
     public function index() {
-        return Menu::with('items')->get();
+        return Menu::with('items')->paginate(15);
     }
 
 
@@ -32,18 +32,7 @@ class MenusController extends Controller
         $validation = MenuUtilities::storeValidation($request);
         if ($validation !== true) return $validation;
 
-        $data = $request->all();
-
-        $menu = new Menu;
-        $menu->name = $data['name'];
-        $menu->save();
-        
-        foreach($data['items'] as $key => $item) {
-            $data['items'][$key]['menu'] = $menu->id;
-        }            
-        $items = MenuItems::insert($data['items']);
-
-        $menu = Menu::with('items')->find($menu->id);
+        $menu = MenuUtilities::create($request);
         return response()->json(['message' => 'Successfully created menu', 'data' => $menu, 'status' => '201'], 201);
     }
 

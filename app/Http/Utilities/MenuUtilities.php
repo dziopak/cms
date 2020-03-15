@@ -4,8 +4,25 @@
 
     use Illuminate\Support\Facades\Validator;
     use App\Http\Utilities\AuthResponse;
+    use App\Menu;
+    use App\MenuItem;
 
     class MenuUtilities {
+        static function create($request) {
+            $data = $request->all();
+
+            $menu = new Menu;
+            $menu->name = $data['name'];
+            $menu->save();
+            
+            foreach($data['items'] as $key => $item) {
+                $data['items'][$key]['menu'] = $menu->id;
+            }            
+            $items = MenuItem::insert($data['items']);
+
+            return $menu = Menu::with('items')->find($menu->id);
+        }
+
         static function storeValidation($request) {
             $access = AuthResponse::hasAccess('MENU_CREATE');
             if ($access !== true) return $access;

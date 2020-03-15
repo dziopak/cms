@@ -15,7 +15,7 @@ use App\Page;
 use App\PageCategory;
 
 use JWTAuth;
-use Hook;
+
 
 class PageCategoriesController extends Controller
 {
@@ -44,18 +44,9 @@ class PageCategoriesController extends Controller
 
     public function show($id)
     {
-        if (is_numeric($id)) {
-            $category = PageCategory::find($id);
-        }   else {
-            $category = PageCategory::where(['slug' => $id]);
-            $category = Hook::get('apiPageCategoriesFindSelector',[$category, $id],function($category, $id){
-                return $category;
-            });
-
-            $category = $category->first();
-        }
-
+        $category = CategoryUtilities::find($id, 'page');
         if (!$category) return response()->json(["status" => "404", "message" => "Category doesn't exist."], 404);
+
         return new CategoryResource($category);
     }
 
@@ -64,7 +55,7 @@ class PageCategoriesController extends Controller
         $validation = CategoryUtilities::updateValidation($request, 'page');
         if ($validation !== true) return $validation; 
 
-        $category = PageCategory::find($id);
+        $category = CategoryUtilities::find($id, 'page');
         if (!$category) return response()->json(['message' => 'Resource not found.', 'status' => 404], 404);
         
         $category->update($request->all());
@@ -76,7 +67,7 @@ class PageCategoriesController extends Controller
         $access = AuthResponse::hasAccess('CATEGORY_DELETE');
         if (!$access === true) return $access;
 
-        $category = PageCategory::find($id);
+        $category = CategoryUtilities::find($id, 'page');
         if (!$category) return response()->json(['message' => 'Resource not found', 'status' => '404'], 404);
         
         $category->delete();

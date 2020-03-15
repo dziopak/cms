@@ -26,17 +26,10 @@ class PagesController extends Controller
 
     public function store(Request $request)
     {
-        
         $validation = PageUtilities::storeValidation($request);
         if ($validation !== true) return $validation;        
 
-        $user = User::jwtUser();
-        $user = User::find($user->id);
-
-        $data = $request->all();
-        $data['user_id'] = $user->id;
-
-        $page = Page::create($data);
+        $page = PageUtilities::create($request);
         return response()->json(["status" => "201", "message" => "Successfully created new page.", "data" => compact('page')], 201);
     }
 

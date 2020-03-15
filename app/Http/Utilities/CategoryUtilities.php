@@ -4,10 +4,39 @@
 
     use Illuminate\Support\Facades\Validator;
     use App\Http\Utilities\AuthResponse;
+    use App\PostCategory;
+    use App\PageCategory;
 
     use Hook;
 
     class CategoryUtilities {
+        static function find($id, $type) {
+            switch($type) {
+                case 'post':
+                    if (is_numeric($id)) {
+                        $category = PostCategory::find($id);
+                    } else {
+                        $category = PostCategory::where(['slug' => $id]);
+                        $category = Hook::get('apiPostCategoriesFindSelector',[$category, $id],function($category, $id) {
+                            return $category;
+                        });
+                    }
+                break;
+
+                case 'page':
+                    if (is_numeric($id)) {
+                        $category = PageCategory::find($id);
+                    } else {
+                        $category = PageCategory::where(['slug' => $id]);
+                        $category = Hook::get('apiPageCategoriesFindSelector',[$category, $id],function($category, $id){
+                            return $category;
+                        });
+                    }
+                break;
+            }
+            
+            return $category->first();
+        }
 
         static function storeValidation($request, $type) {
             $access = AuthResponse::hasAccess('CATEGORY_CREATE');

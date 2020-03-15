@@ -27,7 +27,7 @@ class PostCategoriesController extends Controller
 
 
     public function posts($id) {
-        $category = CategoryCollection::collection(PostCategory::findOrFail($id));
+        $category = CategoryCollection::collection(PostCategory::find($id));
         return ['data' => $category, 'status' => '200'];
     }
 
@@ -44,16 +44,7 @@ class PostCategoriesController extends Controller
 
     public function show($id)
     {
-        if (is_numeric($id)) {
-            $category = PostCategory::find($id);
-        }   else {
-            $category = PostCategory::where(['slug' => $id]);
-            $category = Hook::get('apiPostCategoriesFindSelector',[$category, $id],function($category, $id){
-                return $category;
-            });
-
-            $category = $category->first();
-        }
+        $category = CategoryUtilities::find($id, 'post');
 
         if (!$category) return response()->json(["status" => "404", "message" => "Category doesn't exist."], 404);
         return new CategoryResource($category);
@@ -64,7 +55,7 @@ class PostCategoriesController extends Controller
         $validation = CategoryUtilities::updateValidation($request, 'post');
         if ($validation !== true) return $validation; 
 
-        $category = PostCategory::find($id);
+        $category = CategoryUtilities::find($id, 'post');
         if (!$category) return response()->json(['message' => 'Resource not found.', 'status' => 404], 404);
         
         $category->update($request->all());
@@ -76,7 +67,7 @@ class PostCategoriesController extends Controller
         $access = AuthResponse::hasAccess('CATEGORY_DELETE');
         if (!$access === true) return $access;
 
-        $category = PostCategory::find($id);
+        $category = CategoryUtilities::find($id, 'post');
         if (!$category) return response()->json(['message' => 'Resource not found', 'status' => '404'], 404);
         
         $category->delete();

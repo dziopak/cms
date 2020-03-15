@@ -29,13 +29,7 @@ class PostsController extends Controller
         $validation = PostUtilities::storeValidation($request);
         if ($validation !== true) return $validation;
 
-        $user = User::jwtUser();
-        $user = User::find($user->id);
-
-        $data = $request->all();
-        $data['user_id'] = $user->id;
-
-        $post = Post::create($data);
+        $post = PostUtilities::create($request);
         return response()->json(["status" => "201", "message" => "Successfully created new post.", "data" => compact('post')], 201);
         
     }
@@ -43,12 +37,7 @@ class PostsController extends Controller
 
     public function show($id)
     {
-        if (is_numeric($id)) {
-            $post = Post::with('author', 'category', 'thumbnail')->find($id);
-        } else {
-            $post = Post::with('author', 'category', 'thumbnail')->where(['slug' => $id])->orWhere(['slug_pl' => $id])->first();
-        }
-
+        $post = PostUtilities::prepareAndFind($id);
         if (!$post) return response()->json(["status" => "404", "message" => "Resource doesn't exist."], 404);
         return new PostResource($post);
     }
@@ -59,7 +48,7 @@ class PostsController extends Controller
         $validation = PostUtilities::updateValidation($request);
         if ($validation !== true) return $validation;
         
-        $post = Post::find($id);
+        $post = PostUtilities::find($id);
         if (!$post) return response()->json(["status" => "404", "message" => "Post doesn't exist."], 404);    
 
         $post->update($request->all());
@@ -72,7 +61,7 @@ class PostsController extends Controller
         $access = AuthResponse::hasAccess('POST_EDIT');
         if (!$access === true) return $access;
 
-        $post = Post::find($id);
+        $post = PostUtilities::find($id);
         if (!$post) response()->json(["status" => "404", "message" => "Post doesn't exist."], 404); 
         
         $post->delete();
