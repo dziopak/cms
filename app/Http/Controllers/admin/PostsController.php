@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostsRequest;
 use Illuminate\Support\Facades\Session;
+use App\Http\Utilities\TableData;
 
 use App\Post;
 use App\PostCategory;
@@ -18,7 +19,8 @@ class PostsController extends Controller
     public function index(Request $request)
     {
         $posts = Post::with('author', 'thumbnail')->filter($request)->paginate(15);
-        return view('admin.posts.index', compact('posts'));
+        $table = TableData::postsIndex();
+        return view('admin.posts.index', compact('posts', 'table'));
     }
 
     

@@ -1,32 +1,5 @@
 @extends('layouts.admin.containers.full-width')
 
-@php
-    $table_headers = [' ' => 'thumbnail', 'Title' => 'name', 'Author' => 'author', 'Created at' => 'created_at'];
-    $table_data_types = ['thumbnail' => 'image', 'author' => 'name'];
-    $table_actions = [
-        'Edit' => [
-            'url' => 'admin.pages.edit',
-            'class' => 'success',
-            'access' => 'PAGE_EDIT'
-        ],
-        'Delete' => [
-            'url' => 'admin.pages.delete',
-            'class' => 'danger',
-            'access' => 'PAGE_DELETE'
-        ]
-    ];
-    $mass_edit = [
-        "delete" => "Delete selected",
-        "hide" => "Disable / Hide",
-        "show" => "Enable / Show",
-    ];
-    $sort_by = [
-        'name' => 'Title',
-        'user_id' => 'Author',
-        'created_at' => 'Creation date'
-    ];
-@endphp
-
 @section('breadcrumbs')
     <ul>
         <li><a href="{{route('admin.dashboard.index')}}">Admin</a></li>

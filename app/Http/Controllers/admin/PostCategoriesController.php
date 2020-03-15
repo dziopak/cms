@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoriesRequest;
 use Illuminate\Support\Facades\Session;
+use App\Http\Utilities\TableData;
 
 use App\Events\Categories\CategoryCreateEvent;
 use App\Events\Categories\CategoryUpdateEvent;
@@ -24,7 +25,8 @@ class PostCategoriesController extends Controller
     public function index(Request $request)
     {
         $categories = PostCategory::filter($request)->paginate(15);
-        return view('admin.post_categories.index', compact('categories'));
+        $table = TableData::postCategoriesIndex();
+        return view('admin.post_categories.index', compact('categories', 'table'));
     }
 
     /**

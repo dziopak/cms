@@ -13,7 +13,7 @@
             if ($access !== true) return $access;
 
             $validationFields = [
-                'name' => 'required|string|max:255',
+                'name' => 'required|string|max:255|unique:roles',
                 'description' => 'required|string|max:255',
                 'access' => 'array'
             ];

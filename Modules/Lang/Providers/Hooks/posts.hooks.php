@@ -75,3 +75,15 @@
 
         return $output;
     }, 10);
+    
+
+    // Other hooks
+    Hook::listen('apiPostFindSelector', function ($callback, $output, $post, $slug) use ($langs) {
+        empty($output) ? $output = $post : null;
+
+        foreach($langs as $lang) {
+            $output = $output->orWhere(['slug_'.$lang->lang_tag => $slug]);
+        }
+
+        return $output;
+    }, 10);

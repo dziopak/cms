@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Requests\UsersCreateRequest;
 use App\Http\Requests\UsersEditRequest;
 use App\Http\Requests\NewPasswordRequest;
+use App\Http\Utilities\TableData;
 
 use App\Events\Users\UserNewPasswordEvent;
 use App\Events\Users\UserBlockEvent;
@@ -22,10 +23,8 @@ class UsersController extends Controller
 {
     public function index(Request $request)
     {
-        
         $users = User::with('role', 'photo')->filter($request)->paginate(15);
-        
-        
+                
         // TO DO //
         $user_roles = Role::all('id', 'name');
         $roles = [];
@@ -33,9 +32,9 @@ class UsersController extends Controller
             $roles[$role->id] = $role->name;
         }
         // with Ajax //
+        $table = TableData::usersIndex();
 
-
-        return view('admin.users.index', compact('users', 'roles'));
+        return view('admin.users.index', compact('users', 'roles', 'table'));
     }
     
     

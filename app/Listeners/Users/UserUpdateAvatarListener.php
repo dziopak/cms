@@ -27,7 +27,7 @@ class UserUpdateAvatarListener
                         
             $photo = File::create(['path' => 'avatars/'.$name, 'type' => '1']);
             
-            $event->post->fire_events = false;
+            $event->user->fire_events = false;
             $event->user->update(['avatar' => $photo->id]);
         }
     }

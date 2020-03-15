@@ -6,11 +6,33 @@
     use Tymon\JWTAuth\Exceptions\JWTException;
     use App\Http\Utilities\AuthResponse;
 
+    use App\User;
     use JWTAuth;
     use Hook;
 
     class UserUtilities {
+        static function register($request) {
+            $user = User::create([
+                'name' => $request->get('name'),
+                'email' => $request->get('email'),
+                'password' => Hash::make($request->get('password')),
+            ]);
+    
+            $user['token'] = JWTAuth::fromUser($user);
+            return $user; 
+        }
 
+        static function create($request) {
+            $data = $request->except(['avatar', 'password', 'password_repeat']);
+            $data['password'] = Hash::make($request->get('password'));
+
+            $user = new UserResource(User::create($data));
+        }
+
+        static function find($id) {
+            is_numeric($id) ? $user = User::find($id) : $user = User::where(['email' => $id])->first();
+            return $user;
+        }
 
         static function authenticateCredentials($credentials) {
             try {

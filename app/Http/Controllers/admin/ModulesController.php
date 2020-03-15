@@ -5,6 +5,8 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Nwidart\Modules\Facades\Module;
+use App\Http\Utilities\TableData;
+
 use Hook;
 
 class ModulesController extends Controller
@@ -23,6 +25,7 @@ class ModulesController extends Controller
         $modules['active'] = \App\Module::getModulesData($this->ModulesToArray(Module::allEnabled()));
         $modules['inactive'] = \App\Module::getModulesData($this->ModulesToArray(Module::allDisabled()));
 
-        return view('admin.modules.index', compact('modules'));
+        $table = TableData::modulesIndex();
+        return view('admin.modules.index', compact('modules', 'table'));
     }
 }

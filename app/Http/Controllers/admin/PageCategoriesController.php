@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoriesRequest;
 use Illuminate\Support\Facades\Session;
+use App\Http\Utilities\TableData;
 
 use App\PageCategory;
 use Auth;
@@ -16,7 +17,8 @@ class PageCategoriesController extends Controller
     public function index(Request $request)
     {
         $categories = PageCategory::filter($request)->paginate(15);
-        return view('admin.page_categories.index', compact('categories'));
+        $table = TableData::pageCategoriesIndex();
+        return view('admin.page_categories.index', compact('categories', 'table'));
     }
 
 

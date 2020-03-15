@@ -18,7 +18,7 @@ use JWTAuth;
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
-    public $fire_events;
+    public $fire_events = true;
     
     protected $fillable = [
         'name', 'email', 'password', 'avatar', 'role_id', 'first_name', 'last_name', 'last_login'

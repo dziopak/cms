@@ -1,30 +1,5 @@
 @extends('layouts.admin.containers.full-width')
 
-@php
-    $table_headers = ['Role name' => 'name'];
-    $table_actions = [
-        'Edit' => [
-            'url' => 'admin.users.roles.edit',
-            'class' => 'success',
-            'access' => 'ROLE_EDIT'
-        ],
-        'Duplicate' => [
-            'url' => 'admin.users.roles.duplicate',
-            'class' => 'primary',
-            'access' => 'ROLE_CREATE'
-        ],
-        'Delete' => [
-            'url' => 'admin.users.roles.delete',
-            'class' => 'danger',
-            'disabled' => ['0', '1'],
-            'access' => 'ROLE_DELETE'
-        ],
-    ];
-    $sort_by = [
-        'name' => 'Name'
-    ];
-@endphp
-
 @section('breadcrumbs')
     <ul>
         <li><a href="{{route('admin.dashboard.index')}}">Admin</a></li>

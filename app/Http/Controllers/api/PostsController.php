@@ -31,7 +31,6 @@ class PostsController extends Controller
 
         $post = PostUtilities::create($request);
         return response()->json(["status" => "201", "message" => "Successfully created new post.", "data" => compact('post')], 201);
-        
     }
 
 

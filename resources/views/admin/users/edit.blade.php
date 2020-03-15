@@ -59,7 +59,7 @@
 
 @section('content-right')    
     @wrapper('admin.partials.widget', ['title' => 'User info'])
-        @if ($user->avatar)
+        @if ($user->photo)
             <img class="rounded-circle mr-4 float-left" width="100" src="{{ getPublicPath() }}/images/{{$user->photo->path}}">
         @endif
 

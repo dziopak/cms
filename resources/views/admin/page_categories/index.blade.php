@@ -1,27 +1,5 @@
 @extends('layouts.admin.containers.full-width')
 
-@php
-    $table_headers = ['Category name' => 'name'];
-    $table_actions = [
-        'Edit' => [
-            'url' => 'admin.pages.categories.edit',
-            'class' => 'success',
-            'access' => 'CATEGORY_EDIT'
-        ],
-        'Delete' => [
-            'url' => 'admin.pages.categories.delete',
-            'class' => 'danger',
-            'access' => 'CATEGORY_DELETE'
-        ]
-    ];
-    $mass_edit = [
-        'delete' => 'Delete selected'
-    ];
-    $sort_by = [
-        'name' => 'Name'
-    ];
-@endphp
-
 @section('breadcrumbs')
     <ul>
         <li><a href="{{route('admin.dashboard.index')}}">Admin</a></li>

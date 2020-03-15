@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use App\Http\Utilities\TableData;
 
 use App\Role;
 use App\Log;
@@ -14,10 +15,10 @@ class RolesController extends Controller
 {
     
     public function index(Request $request)
-    {
-        
+    {     
         $roles = Role::filter($request)->paginate(15);
-        return view('admin.roles.index', compact('roles'));
+        $table = TableData::rolesIndex();
+        return view('admin.roles.index', compact('roles', 'table'));
     }
 
 

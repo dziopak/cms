@@ -30,13 +30,7 @@ class UsersController extends Controller
         $validation = UserUtilities::registerValidation($request);
         if ($validation !== true) return $validation;
 
-        $user = User::create([
-            'name' => $request->get('name'),
-            'email' => $request->get('email'),
-            'password' => Hash::make($request->get('password')),
-        ]);
-
-        $user['token'] = $token = JWTAuth::fromUser($user); 
+        $user = UserUtilities::register($request);
         return response()->json(["message" => "Successfully registered new user account.", "user" => $user, "status" => 201], 201);
     }
 
@@ -65,12 +59,8 @@ class UsersController extends Controller
         $validation = UserUtilities::storeValidation($request);
         if ($validation !== true) return $validation;
 
-        $data = $request->except(['avatar', 'password', 'password_repeat']);
-        $data['password'] = Hash::make($request->get('password'));
-
-        $user = new UserResource(User::create($data));
+        UserUtilities::create($request);
         return response()->json(["status" => "201", "message" => "Successfully created new user account.", "data" => compact('user')], 201);
-        
     }
 
 
@@ -79,7 +69,7 @@ class UsersController extends Controller
         $validation = UserUtilities::updateValidation($request);
         if ($validation !== true) return $validation;
         
-        $user = User::find($id);
+        $user = UserUtilities::find($id);
         if (!$user) return response()->json(["status" => "404", "message" => "Resource doesn't exist."], 404);    
         
         $data = $request->except('avatar', 'password', 'repeat_password');
@@ -94,7 +84,7 @@ class UsersController extends Controller
         $access = AuthResponse::hasAccess('USER_DELETE');
         if (!$access === true) return $access;
 
-        $user = User::find($id);
+        $user = UserUtilities::find($id);
         if (!$user) return response()->json(["status" => "404", "message" => "Resource doesn't exist."], 404);
         
         $user->delete();
