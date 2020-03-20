@@ -18,25 +18,9 @@
 
 @section('content-left')
     @wrapper('admin.partials.widget', ['title' => 'Basic category data'])
-        <div class="form-group row">
-            <div class="col">
-                {!! Form::label('name', 'Category name: ', ['class' => 'required']) !!}
-                {!! Form::text('name', null, ['class' => 'form-control']) !!}
-            </div>
-        </div>
         
-        <div class="form-group row">
-            <div class="col">
-                {!! Form::label('slug', 'Slug: ', ['class' => 'required']) !!}
-                {!! Form::text('slug', null, ['class' => 'form-control']) !!}
-            </div>
-        </div>
-
-        <div class="form-group">
-            {!! Form::label('parent_id', 'Parent: ') !!}
-            {!! Form::select('parent_id', $categories, null, ['class' => 'form-control']) !!}
-        </div>
-
+        @include('partials.form-fields', ['fields' => $form['left']])
+        
         <div class="form-group row">
             <div class="col">
                 {!! Form::label('description', 'Description: ') !!}
@@ -54,6 +38,7 @@
             {!! Form::hidden('type', 'post') !!}
             {!! Form::submit('Create category', ['class' => 'btn btn-success']) !!}
         </div>
+        
     @endwrapper
 @endsection
 

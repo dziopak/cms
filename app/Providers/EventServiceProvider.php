@@ -7,6 +7,12 @@ use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
 
+use Modules\Portfolio\Events\PortfolioItemCreateEvent;
+use Modules\Portfolio\Events\PortfolioItemUpdateEvent;
+use Modules\Portfolio\Events\PortfolioItemDestroyEvent;
+
+use Modules\Portfolio\Listeners\PortfolioItemUpdateThumbnailListener;
+
 class EventServiceProvider extends ServiceProvider
 {
     /**
@@ -17,6 +23,9 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        PortfolioItemUpdateEvent::class => [
+            PortfolioItemUpdateThumbnailListener::class,
         ]
     ];
 

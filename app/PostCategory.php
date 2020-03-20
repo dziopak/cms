@@ -18,7 +18,7 @@ class PostCategory extends Model
         return $this->hasMany('App\Post', 'category_id');
     }
 
-    public function list_all() {
+    public static function list_all() {
         return $categories = DB::table('post_categories')->pluck('name', 'id')->all();
     }
 

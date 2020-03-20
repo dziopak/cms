@@ -38,11 +38,11 @@ class PostCategoriesController extends Controller
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_CREATE');
 
-        $post_cat = new PostCategory;
         $categories[0] = 'No category';
-        $categories = array_merge($categories, $post_cat->list_all());
-        
-        return view('admin.post_categories.create', compact('categories'));
+        $categories = array_merge($categories, PostCategory::list_all());
+
+        $form = getData('admin/categories/post_categories_form', ['categories' => $categories]);    
+        return view('admin.post_categories.create', compact('categories', 'form'));
     }
 
     /**
@@ -84,13 +84,13 @@ class PostCategoriesController extends Controller
     public function edit($id)
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_EDIT');
-        $category = new PostCategory;
         
         $categories[0] = 'No category';
-        $categories = array_merge($categories, $category->list_all());
+        $categories = array_merge($categories, PostCategory::list_all());
+        $category = PostCategory::findOrFail($id);
 
-        $category = $category::findOrFail($id);
-        return view('admin.post_categories.edit', compact('category', 'categories'));
+        $form = getData('admin/categories/post_categories_form', ['categories' => $categories]);    
+        return view('admin.post_categories.edit', compact('category', 'categories', 'form'));
     }
 
     /**

@@ -1,0 +1,12 @@
+https://github.com/ycs77/laravel-wizard - CMS installation wizard
+https://github.com/spatie/laravel-medialibrary - media library
+https://github.com/spatie/laravel-analytics - GA
+
+
+- image optimization on the go
+- langs
+- move TableData to view composers
+
+
+
+- lang switcher https://www.google.com/search?q=laravel+lang+tutorial&oq=laravel+lang&aqs=chrome.1.69i57j35i39j0l5j69i60.3663j0j7&sourceid=chrome&ie=UTF-8#kpvalbx=_cHxyXpuWO9GJrwTq0LdQ27

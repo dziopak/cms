@@ -11,48 +11,16 @@
 @section('content-left')
     @wrapper('admin.partials.widget', ['title' => 'Basic user data'])
         {!! Form::model($user, ['method' => 'PATCH', 'action' => ['admin\UsersController@update', $user->id], 'files' => 'true']) !!}
-        @include('admin.partials.validation')
         
-        <div class="form-group row">
-            <div class="col">
-                {!! Form::label('first_name', 'First name: ') !!}
-                {!! Form::text('first_name', null, ['class' => 'form-control']) !!}
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col">
-                {!! Form::label('last_name', 'Last name: ') !!}
-                {!! Form::text('last_name', null, ['class' => 'form-control']) !!}
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col">
-                {!! Form::label('role_id', 'User\'s role*: ', ['class' => 'required']) !!}
-                {!! Form::select('role_id', $roles, null, ['class' => 'form-control']) !!}
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col">
-                {!! Form::label('email', 'Email address*: ', ['class' => 'required']) !!}
-                {!! Form::text('email', null, ['class' => 'form-control']) !!}
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col">
-                {!! Form::label('avatar', 'Avatar: ') !!}
-                {!! Form::file('avatar', ['class' => 'form-control']) !!}
-            </div>
-        </div>
-
+        @include('admin.partials.validation')
+        @include('partials.form-fields', ['fields' => $form['left']])
+        
+        
         <div class="form-group">
+            <input type="hidden" value="{{$user->id}}" name="user_id" />
             {!! Form::submit('Update', ['class' => 'btn btn-success']) !!}
         </div>
-
-        <input type="hidden" value="{{$user->id}}" name="user_id" />
+        
         {!! Form::close() !!}
     @endwrapper
 @endsection
@@ -81,17 +49,9 @@
 
     @wrapper('admin.partials.widget', ['title' => 'Change password'])
         {!! Form::open(['method' => 'PUT', 'action' => ['admin\UsersController@password', $user->id]]) !!}
-        <div class="form-group row">
-            <div class="col-sm-6">
-                {!! Form::label('password', 'Password: ', ['class' => 'required']) !!}
-                {!! Form::password('password', ['class' => 'form-control']) !!}
-            </div>
+        
+        @include('partials.form-fields', ['fields' => $form['right']])
 
-            <div class="col-sm-6">
-                {!! Form::label('repeat_password', 'Repeat password: ', ['class' => 'required']) !!}
-                {!! Form::password('repeat_password', ['class' => 'form-control']) !!}
-            </div>
-        </div>
         {!! Form::submit('Set password', ['class' => 'btn btn-primary']) !!}
         {!! Form::close() !!}
     @endwrapper

@@ -23,6 +23,7 @@
         "unisharp/laravel-filemanager": "^2.0"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.6",
         "facade/ignition": "^1.4",
         "fzaninotto/faker": "^1.4",
         "mockery/mockery": "^1.0",
@@ -45,7 +46,8 @@
             "Modules\\": "Modules/"
         },
         "files": [
-            "app/Helpers/ViewHelpers.php"
+            "app/Helpers/ViewHelpers.php",
+            "app/Helpers/DataArrays.php"
         ],
         "classmap": [
             "database/seeds",

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Testimonials\Entities\Testimonial;
+use Modules\Testimonials\Http\Utilities\TableData;
 use App\File;
 
 class TestimonialsController extends Controller
@@ -14,7 +15,8 @@ class TestimonialsController extends Controller
     public function index(Request $request)
     {
         $testimonials = Testimonial::filter($request)->paginate(15);
-        return view('testimonials::index', compact('testimonials'));
+        $table = TableData::testimonialsIndex();
+        return view('testimonials::index', compact('testimonials', 'table'));
     }
 
     

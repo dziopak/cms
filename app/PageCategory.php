@@ -18,7 +18,7 @@ class PageCategory extends Model
         return $this->hasMany('App\Page', 'category_id');
     }
 
-    public function list_all() {
+    public static function list_all() {
         return $categories = DB::table('page_categories')->pluck('name', 'id')->all();
     }
 

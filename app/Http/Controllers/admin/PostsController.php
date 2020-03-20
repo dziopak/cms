@@ -28,11 +28,11 @@ class PostsController extends Controller
     {
         Auth::user()->hasAccessOrRedirect('POST_CREATE');
 
-        $post_cat = new PostCategory;
         $categories[0] = 'No category';
-        $categories = array_merge($categories, $post_cat->list_all());
+        $categories = array_merge($categories, PostCategory::list_all());
         
-        return view('admin.posts.create', compact('categories'));
+        $form = getData('admin/posts_form', ['categories' => $categories]);
+        return view('admin.posts.create', compact('categories', 'form'));
     }
 
     
@@ -55,11 +55,12 @@ class PostsController extends Controller
         Auth::user()->hasAccessOrRedirect('POST_EDIT');
         
         $post = Post::findOrFail($id);
-        $post_cat = new PostCategory;
+
         $categories[0] = 'No category';
-        $categories = array_merge($categories, $post_cat->list_all());
+        $categories = array_merge($categories, PostCategory::list_all());
         
-        return view('admin.posts.edit', compact('post', 'categories'));
+        $form = getData('admin/posts_form', ['categories' => $categories]);
+        return view('admin.posts.edit', compact('post', 'form'));
     }
 
     

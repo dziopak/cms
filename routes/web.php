@@ -37,8 +37,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'access:ADM
     //SETTINGS ROUTES
     require base_path('routes/web/admin/settings.php');    
     
-    //FILE MANAGER ROUTES
-    require base_path('routes/web/admin/filemanager.php');    
+    //VENDOR ROUTES
+    require base_path('routes/web/admin/vendor/filemanager.php');    
 });
 
 Auth::routes();

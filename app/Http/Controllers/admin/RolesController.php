@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Utilities\RoleUtilities;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Http\Utilities\TableData;
@@ -13,9 +14,9 @@ use Auth;
 
 class RolesController extends Controller
 {
-    
+
     public function index(Request $request)
-    {     
+    {
         $roles = Role::filter($request)->paginate(15);
         $table = TableData::rolesIndex();
         return view('admin.roles.index', compact('roles', 'table'));
@@ -25,28 +26,21 @@ class RolesController extends Controller
     public function create()
     {
         Auth::user()->hasAccessOrRedirect('ROLE_CREATE');
-        return view('admin.roles.create');
+        $form = getData('admin/roles_form');
+        return view('admin.roles.create', compact('form'));
     }
 
-    
+
     public function store(Request $request)
     {
         Auth::user()->hasAccessOrRedirect('ROLE_CREATE');
+
         $data = $request->all();
-        $access = [];
-        
-        if (!empty($data['access'])) {
-            foreach($data['access'] as $key => $row) {
-                if ($row === '1') {
-                    array_push($access, $key);
-                }
-            }
-        }
-        $data['access'] = serialize($access);
-        
-        $role = Role::create($data);
-        $request->session()->flash('crud', 'Created '.$data['name'].' role successfully.');
-        
+        if (!empty($data['access'])) $data['access'] = RoleUtilities::serializeAccess($data['access']);
+
+        Role::create($data);
+        $request->session()->flash('crud', 'Created ' . $data['name'] . ' role successfully.');
+
         return redirect(route('admin.users.roles.index'));
     }
 
@@ -54,54 +48,45 @@ class RolesController extends Controller
     public function edit($id)
     {
         Auth::user()->hasAccessOrRedirect('ROLE_EDIT');
+
         $role = Role::findOrFail($id);
-        $access = [];
-        foreach(unserialize($role->access) as $role_access) {
-            $access[$role_access] = 1;
-        }
-        $role->access = $access;
-        return view('admin.roles.edit', compact('role'));
+        $role->access = RoleUtilities::unserializeAccess($role->access);
+
+        $form = getData('admin/roles_form');
+        return view('admin.roles.edit', compact('role', 'form'));
     }
 
-    
+
     public function update(Request $request, $id)
     {
         Auth::user()->hasAccessOrRedirect('ROLE_EDIT');
-        
+
         $role = Role::findOrFail($id);
         $data = $request->all();
 
-        $access = [];
-        foreach($data['access'] as $key => $row) {
-            if ($row === '1') {
-                array_push($access, $key);
-            }
-        }
-        $data['access'] = serialize($access);
-        
+        $data['access'] = RoleUtilities::serializeAccess($data['access']);
+
         $role->update($data);
-        $request->session()->flash('crud', 'Updated '.$data['name'].' role successfully.');
-        
+        $request->session()->flash('crud', 'Updated ' . $data['name'] . ' role successfully.');
+
         return redirect(route('admin.users.roles.index'));
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         Auth::user()->hasAccessOrRedirect('ROLE_DELETE');
         $role = Role::findOrFail($id);
 
         return view('admin.roles.delete', compact('role'));
     }
 
-    public function duplicate($id) {
+    public function duplicate($id)
+    {
         Auth::user()->hasAccessOrRedirect('ROLE_CREATE');
+
         $role = Role::findOrFail($id);
-        
-        $access = [];
-        foreach(unserialize($role->access) as $role_access) {
-            $access[$role_access] = 1;
-        }
-        $role->access = $access;
-        
+        $role->access = RoleUtilities::unserializeAccess($role->access);
+
         return view('admin.roles.create', compact('role'));
     }
 
@@ -109,9 +94,9 @@ class RolesController extends Controller
     public function destroy($id)
     {
         $role = Role::findOrFail($id);
-        
+
         $role->delete();
-        Session::flash('crud', 'Role '.$role->name.' has been deleted successfully.');
+        Session::flash('crud', 'Role ' . $role->name . ' has been deleted successfully.');
 
         return redirect(route('admin.users.roles.index'));
     }

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Lang\Entities\Lang;
+use Modules\Lang\Http\Utilities\TableData;
 
 
 class LangController extends Controller
@@ -16,7 +17,8 @@ class LangController extends Controller
     public function index()
     {
         $langs = Lang::all();
-        return view('lang::index', compact('langs'));
+        $table = TableData::langsIndex();
+        return view('lang::index', compact('langs', 'table'));
     }
 
     public function create()

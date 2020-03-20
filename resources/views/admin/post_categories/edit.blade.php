@@ -18,31 +18,8 @@
 
 @section('content-left')
     @wrapper('admin.partials.widget', ['title' => 'Basic category data'])
-        <div class="form-group row">
-            <div class="col">
-                {!! Form::label('name', 'Category name: ', ['class' => 'required']) !!}
-                {!! Form::text('name', null, ['class' => 'form-control']) !!}
-            </div>
-        </div>
         
-        <div class="form-group row">
-            <div class="col">
-                {!! Form::label('slug', 'Slug: ', ['class' => 'required']) !!}
-                {!! Form::text('slug', null, ['class' => 'form-control']) !!}
-            </div>
-        </div>
-
-        <div class="form-group">
-            {!! Form::label('parent_id', 'Post\'s category: ') !!}
-            {!! Form::select('parent_id', $categories, null, ['class' => 'form-control']) !!}
-        </div>
-
-        <div class="form-group row">
-            <div class="col">
-                {!! Form::label('description', 'Description: ') !!}
-                {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
-            </div>
-        </div>
+        @include('partials.form-fields', ['fields' => $form['left']])
 
         <!-- Custom field hooks -->
         @hook('post_category_edit_left_content')

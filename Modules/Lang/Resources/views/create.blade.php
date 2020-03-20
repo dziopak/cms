@@ -9,31 +9,53 @@
     </ul>
 @endsection
 
+@php
+    $form = [
+        [
+            'class' => 'form-group row',
+            'items' => [
+                'name' => [
+                    'type' => 'text',
+                    'label' => 'Language name',
+                    'required' => true,
+                    'value' => null,
+                    'class' => ''
+                ],
+            ],
+        ],
+        [
+            'class' => 'form-group row',
+            'items' => [
+                'origin_name' => [
+                    'type' => 'text',
+                    'label' => 'Origin name',
+                    'required' => true,
+                    'value' => null,
+                    'class' => ''
+                ],
+            ],
+        ],    
+        [
+            'class' => 'form-group row',
+            'items' => [
+                'lang_tag' => [
+                    'type' => 'text',
+                    'label' => 'Language tag',
+                    'required' => true,
+                    'value' => null,
+                    'class' => ''
+                ],
+            ],
+        ],    
+    ];
+@endphp
+
 @section('module-content')
     @wrapper('admin.partials.widget', ['title' => 'Fill lang data'])
         {!! Form::open(['method' => 'POST', 'route' => 'admin.modules.lang.store', 'class' => 'w-100', 'files' => 'true']) !!}
+            
             @include('admin.partials.validation')
-            
-            <div class="form-group row">
-                <div class="col">
-                    {!! Form::label('name', 'Language name: ', ['class' => 'required']) !!}
-                    {!! Form::text('name', null, ['class' => 'form-control']) !!}
-                </div>
-            </div>
-            
-            <div class="form-group row">
-                <div class="col">
-                    {!! Form::label('origin_name', 'Original name: ', ['class' => 'required']) !!}
-                    {!! Form::text('origin_name', null, ['class' => 'form-control']) !!}
-                </div>
-            </div>
-            
-            <div class="form-group row">
-                <div class="col">
-                    {!! Form::label('lang_tag', 'Lang tag: ', ['class' => 'required']) !!}
-                    {!! Form::text('lang_tag', null, ['class' => 'form-control']) !!}
-                </div>
-            </div>
+            @include('partials.form-fields', ['fields' => $form])
 
             <div class="form-group">
                 {!! Form::submit('Update', ['class' => 'btn btn-success']) !!}

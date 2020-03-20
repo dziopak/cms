@@ -15,7 +15,7 @@ class CreatePortfolioPictures extends Migration
     {
         Schema::create('portfolio_item_pictures', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('portfolio_item_id');
+            $table->bigInteger('portfolio_item_id')->nullable();
             $table->string('path');
         });
     }

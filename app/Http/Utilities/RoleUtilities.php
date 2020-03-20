@@ -8,6 +8,24 @@
     use Hook;
 
     class RoleUtilities {
+        static function serializeAccess ($access) {
+            foreach($access as $key => $row) {
+                if ($row === '1') {
+                    array_push($res, $key);
+                }
+            }
+
+            return $res;
+        }
+
+        static function unserializeAccess($access) {
+            foreach(unserialize($access) as $role_access) {
+                $res[$role_access] = 1;
+            }
+
+            return $res;
+        }
+
         static function storeValidation($request) {
             $access = AuthResponse::hasAccess('ROLE_CREATE');
             if ($access !== true) return $access;
