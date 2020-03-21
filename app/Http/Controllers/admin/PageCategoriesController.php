@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoriesRequest;
 use Illuminate\Support\Facades\Session;
-use App\Http\Utilities\TableData;
 
 use App\PageCategory;
 use Auth;
@@ -17,7 +16,8 @@ class PageCategoriesController extends Controller
     public function index(Request $request)
     {
         $categories = PageCategory::filter($request)->paginate(15);
-        $table = TableData::pageCategoriesIndex();
+        $table = getData('admin/categories/page_categories_index_table');
+
         return view('admin.page_categories.index', compact('categories', 'table'));
     }
 
@@ -26,9 +26,8 @@ class PageCategoriesController extends Controller
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_CREATE');
 
-        $page_cat = new PageCategory;
         $categories[0] = 'No category';
-        $categories = array_merge($categories, $page_cat->list_all());
+        $categories = array_merge($categories, PageCategory::list_all());
 
         $form = getData('admin/categories/page_categories_form', ['categories' => $categories]);    
         return view('admin.page_categories.create', compact('form'));
@@ -39,10 +38,9 @@ class PageCategoriesController extends Controller
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_CREATE');
 
-        $data = $request->all();
-        $category = PageCategory::create($data);
-
+        PageCategory::create($data = $request->all());
         Session::flash('crud', 'Page category "'.$data['name'].'" has been created successfully.');
+
         return redirect(route('admin.pages.categories.index'));
     }
 

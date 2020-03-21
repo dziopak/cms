@@ -6,12 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\PagesRequest;
 use Illuminate\Support\Facades\Session;
-use App\Http\Utilities\TableData;
 
 use App\Page;
 use App\PageCategory;
 use Auth;
-use DB;
 
 class PagesController extends Controller
 {
@@ -19,7 +17,8 @@ class PagesController extends Controller
     public function index(Request $request)
     {
         $pages = Page::with('author', 'thumbnail')->filter($request)->paginate(15);
-        $table = TableData::pagesIndex();
+        $table = getData('admin/pages/pages_index_table');
+
         return view('admin.pages.index', compact('pages', 'table'));
     }
 
@@ -57,7 +56,7 @@ class PagesController extends Controller
         $categories[0] = 'No category';
         $categories = array_merge($categories, PageCategory::list_all());
         
-        $form = getData('admin/pages_form', ['categories' => $categories]);
+        $form = getData('admin/pages/pages_form', ['categories' => $categories]);
         return view('admin.pages.edit', compact('page', 'form'));
     }
 

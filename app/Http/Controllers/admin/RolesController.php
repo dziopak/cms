@@ -6,10 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Utilities\RoleUtilities;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use App\Http\Utilities\TableData;
 
 use App\Role;
-use App\Log;
 use Auth;
 
 class RolesController extends Controller
@@ -18,7 +16,7 @@ class RolesController extends Controller
     public function index(Request $request)
     {
         $roles = Role::filter($request)->paginate(15);
-        $table = TableData::rolesIndex();
+        $table = getData('admin/roles/roles_index_table');
         return view('admin.roles.index', compact('roles', 'table'));
     }
 
@@ -26,7 +24,7 @@ class RolesController extends Controller
     public function create()
     {
         Auth::user()->hasAccessOrRedirect('ROLE_CREATE');
-        $form = getData('admin/roles_form');
+        $form = getData('admin/roles/roles_form');
         return view('admin.roles.create', compact('form'));
     }
 
@@ -52,7 +50,7 @@ class RolesController extends Controller
         $role = Role::findOrFail($id);
         $role->access = RoleUtilities::unserializeAccess($role->access);
 
-        $form = getData('admin/roles_form');
+        $form = getData('admin/roles/roles_form');
         return view('admin.roles.edit', compact('role', 'form'));
     }
 

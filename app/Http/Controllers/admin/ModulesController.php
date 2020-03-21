@@ -3,11 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Nwidart\Modules\Facades\Module;
-use App\Http\Utilities\TableData;
-
-use Hook;
 
 class ModulesController extends Controller
 {
@@ -25,7 +21,7 @@ class ModulesController extends Controller
         $modules['active'] = \App\Module::getModulesData($this->ModulesToArray(Module::allEnabled()));
         $modules['inactive'] = \App\Module::getModulesData($this->ModulesToArray(Module::allDisabled()));
 
-        $table = TableData::modulesIndex();
+        $table = getData('admin/modules/modules_index_table');
         return view('admin.modules.index', compact('modules', 'table'));
     }
 }

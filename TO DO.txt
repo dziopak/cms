@@ -1,11 +1,11 @@
 https://github.com/ycs77/laravel-wizard - CMS installation wizard
 https://github.com/spatie/laravel-medialibrary - media library
 https://github.com/spatie/laravel-analytics - GA
+https://gist.github.com/tillsanders/39a9fa50d4c0ec36d167 - drag & drop tables
 
 
 - image optimization on the go
 - langs
-- move TableData to view composers
 
 
 

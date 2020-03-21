@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Requests\UsersCreateRequest;
 use App\Http\Requests\UsersEditRequest;
 use App\Http\Requests\NewPasswordRequest;
-use App\Http\Utilities\TableData;
 
 use App\Events\Users\UserNewPasswordEvent;
 use App\Events\Users\UserBlockEvent;
@@ -32,8 +31,8 @@ class UsersController extends Controller
             $roles[$role->id] = $role->name;
         }
         // with Ajax //
-        $table = TableData::usersIndex();
 
+        $table = getData('admin/users/users_index_table');
         return view('admin.users.index', compact('users', 'roles', 'table'));
     }
     
