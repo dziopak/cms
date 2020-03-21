@@ -10,27 +10,28 @@
 @endsection
 
 @section('content-left')
-    @wrapper('admin.partials.widget', ['title' => 'Basic role data'])
+    @wrapper('admin.partials.widget', ['title' => 'admin/roles.delete_top_title'])
         <div style="display: inline-block;">
-            <strong>{{$role->name}} role</strong><br/>
-            Created: {{$role->created_at}}<br/>
+            <strong>{{$role->name}}</strong><br/>
+            {{ __('admin/general.created_at') }}: {{$role->created_at}}<br/>
         </div>
     @endwrapper
 
-    @wrapper('admin.partials.widget', ['title' => 'Remove role'])
-        <p class="alert alert-danger">Are you sure you want to permamently delete this role from system's database? This action is irreversible, and will change all {{$role->name}} accounts to regular user role.</p>
+    @wrapper('admin.partials.widget', ['title' => 'admin/roles.delete_bottom_title'])
+        <p class="alert alert-danger">{{ __('admin/roles.delete_information') }}</p>
         
         {!! Form::open(['method' => 'DELETE', 'action' => ['admin\RolesController@destroy', $role->id]]) !!}
         
         <div class="form-group">
-            <a href="{{route('admin.users.roles.index')}}" role="button" class="btn btn-success">Go back</a>
-            {!! Form::submit('Delete permamently', ['class' => 'btn btn-danger']) !!}
+            <a href="{{route('admin.users.roles.index')}}" role="button" class="btn btn-success">{{ __('admin/general.back_button') }}</a>
+            {!! Form::submit(__('admin/general.delete_permamently'), ['class' => 'btn btn-danger']) !!}
         </div>
         {!! Form::close() !!}
     @endwrapper
 @endsection
 
 @section('content-right')
-    @wrapper('admin.partials.widget', ['title' => 'Accounts with this role'])
+    @wrapper('admin.partials.widget', ['title' => 'admin/roles.delete_right_title'])
+        {{-- // TO DO // --}}
     @endwrapper
 @endsection

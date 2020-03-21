@@ -9,5 +9,9 @@
         'delete_top_title' => 'Informacje o kategorii',
         'delete_bottom_title' => 'Usuń kategorię',
 
-        'delete_information' => 'Czy napewno chcesz permamentnie usunąć tę kategorię z bazy danych? Ta operacja jest nieodwracalna.'
+        'delete_information' => 'Czy napewno chcesz permamentnie usunąć tę kategorię z bazy danych? Ta operacja jest nieodwracalna.',
+
+        'mass_delete' => 'Usuń zaznaczone',
+        
+        'name' => 'Nazwa'
     ];

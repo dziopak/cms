@@ -9,7 +9,7 @@
 @endsection
 
 @section('content-left')
-    @wrapper('admin.partials.widget', ['title' => 'User info'])            
+    @wrapper('admin.partials.widget', ['title' => 'admin/users.delete_top_title'])            
         @if ($user->avatar)
             <img class="rounded-circle mr-4 float-left" width="100" src="{{ getPublicPath() }}/images/{{$user->photo->path}}">
         @endif
@@ -21,26 +21,26 @@
                 <span>{{$user->first_name.' '.$user->last_name}}</span><br/>
             @endif
         
-            Created: {{$user->created_at}}<br/>
+            {{ __('admin/general.created_at') }} {{$user->created_at}}<br/>
             <small>{{$user->role->name}}</small>
         </div>
     @endwrapper
 
-    @wrapper('admin.partials.widget', ['title' => 'Remove user'])
-        <p class="alert alert-danger">Are you sure you want to permamently delete this account from system's database?</p>
+    @wrapper('admin.partials.widget', ['title' => 'admin/users.delete_bottom_title'])
+        <p class="alert alert-danger">{{ __('admin/users.delete_information') }}</p>
         
         {!! Form::open(['method' => 'DELETE', 'action' => ['admin\UsersController@destroy', $user->id]]) !!}
         
         <div class="form-group">
-            <a href="{{route('admin.users.index')}}" role="button" class="btn btn-success">Go back</a>
-            {!! Form::submit('Delete permamently', ['class' => 'btn btn-danger']) !!}
+            <a href="{{route('admin.users.index')}}" role="button" class="btn btn-success">{{ __('admin/general.back_button') }}</a>
+            {!! Form::submit(__('admin/general.delete_permamently'), ['class' => 'btn btn-danger']) !!}
         </div>
         {!! Form::close() !!}
     @endwrapper
 @endsection
 
 @section('content-right')
-    @wrapper('admin.partials.widget', ['title' => 'Recent actions'])
+    @wrapper('admin.partials.widget', ['title' => 'admin/users.recent_actions'])
         @include('admin.partials.logs')
     @endwrapper
 @endsection

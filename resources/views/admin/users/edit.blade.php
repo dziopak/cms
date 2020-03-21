@@ -9,7 +9,7 @@
 @endsection
 
 @section('content-left')
-    @wrapper('admin.partials.widget', ['title' => 'Basic user data'])
+    @wrapper('admin.partials.widget', ['title' => 'admin/users.edit_left_title'])
         {!! Form::model($user, ['method' => 'PATCH', 'action' => ['admin\UsersController@update', $user->id], 'files' => 'true']) !!}
         
         @include('admin.partials.validation')
@@ -26,7 +26,7 @@
 @endsection
 
 @section('content-right')    
-    @wrapper('admin.partials.widget', ['title' => 'User info'])
+    @wrapper('admin.partials.widget', ['title' => 'admin/users.edit_right_title'])
         @if ($user->photo)
             <img class="rounded-circle mr-4 float-left" width="100" src="{{ getPublicPath() }}/images/{{$user->photo->path}}">
         @endif
@@ -38,16 +38,16 @@
                 <span>{{$user->first_name.' '.$user->last_name}}</span><br/>
             @endif
             
-            Created: {{$user->created_at}}<br/>
+            {{ __('admin/general.created_at') }} {{$user->created_at}}<br/>
             <small>{{$user->role->name}}</small>
         </div>
     @endwrapper
 
-    @wrapper('admin.partials.widget', ['title' => 'Recent actions'])
+    @wrapper('admin.partials.widget', ['title' => 'admin/users.recent_actions'])
         @include('admin.partials.logs')
     @endwrapper
 
-    @wrapper('admin.partials.widget', ['title' => 'Change password'])
+    @wrapper('admin.partials.widget', ['title' => 'admin/users.change_password'])
         {!! Form::open(['method' => 'PUT', 'action' => ['admin\UsersController@password', $user->id]]) !!}
         
         @include('partials.form-fields', ['fields' => $form['right']])

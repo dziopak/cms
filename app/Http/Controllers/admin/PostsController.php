@@ -27,10 +27,9 @@ class PostsController extends Controller
     {
         Auth::user()->hasAccessOrRedirect('POST_CREATE');
 
-        $categories[0] = 'No category';
-        $categories = array_merge($categories, PostCategory::list_all());
-        
+        $categories = array_merge(['No category'], PostCategory::list_all());        
         $form = getData('admin/posts/posts_form', ['categories' => $categories]);
+        
         return view('admin.posts.create', compact('categories', 'form'));
     }
 
@@ -42,7 +41,7 @@ class PostsController extends Controller
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
 
-        $post = Post::create($data);
+        Post::create($data);
         Session::flash('crud', 'Post "'.$data['name'].'" has been created successfully.');
 
         return redirect(route('admin.posts.index'));
@@ -54,9 +53,7 @@ class PostsController extends Controller
         Auth::user()->hasAccessOrRedirect('POST_EDIT');
         
         $post = Post::findOrFail($id);
-
-        $categories[0] = 'No category';
-        $categories = array_merge($categories, PostCategory::list_all());
+        $categories = array_merge(['No category'], PostCategory::list_all());
         
         $form = getData('admin/posts/posts_form', ['categories' => $categories]);
         return view('admin.posts.edit', compact('post', 'form'));

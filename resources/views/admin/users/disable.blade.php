@@ -9,7 +9,7 @@
 @endsection
 
 @section('content-left')
-    @wrapper('admin.partials.widget', ['title' => 'User info'])
+    @wrapper('admin.partials.widget', ['title' => 'admin/users.disable_top_title'])
         @if ($user->avatar)
             <img class="rounded-circle mr-4 float-left" width="100" src="{{ getPublicPath() }}/images/{{$user->photo->path}}">
         @endif
@@ -21,24 +21,28 @@
                 <span>{{$user->first_name.' '.$user->last_name}}</span><br/>
             @endif
         
-            Created: {{$user->created_at}}<br/>
+            {{ __('admin/general.created_at') }} {{$user->created_at}}<br/>
             <small>{{$user->role->name}}</small>
         </div>
     @endwrapper
     
-    @wrapper('admin.partials.widget', ['title' => 'Change user status'])
-        <p class="alert alert-warning">Are you sure you want to {{$user->is_active == 1 ? "block" : "unblock"}} user's account?</p>
+    @wrapper('admin.partials.widget', ['title' => 'admin/users.disable_bottom_title'])
+        
+    
+        <p class="alert alert-warning">
+        {{$user->is_active == 1 ? __('admin/users.disable_information') : __('admin/users.enable_information') }}
+        </p>
         
         {!! Form::open(['method' => 'PUT', 'action' => ['admin\UsersController@block', $user->id]]) !!}
         
         <div class="form-group">
-            <a href="{{route('admin.users.index')}}" role="button" class="btn btn-primary">Go back</a>
+            <a href="{{route('admin.users.index')}}" role="button" class="btn btn-success">{{ __('admin/general.back_button') }}</a>
             @if ($user->is_active == 1)
                 {!! Form::hidden('is_active', 0) !!}   
-                {!! Form::submit("Block user", ['class' => 'btn btn-danger']) !!}
+                {!! Form::submit(__('admin/users.disable_button'), ['class' => 'btn btn-danger']) !!}
                 @else
                 {!! Form::hidden('is_active', 1) !!}   
-                {!! Form::submit("Unblock user", ['class' => 'btn btn-success']) !!}
+                {!! Form::submit(__('admin/users.enable_button'), ['class' => 'btn btn-success']) !!}
             @endif
         </div>
         {!! Form::close() !!}
@@ -46,7 +50,7 @@
 @endsection
 
 @section('content-right')
-    @wrapper('admin.partials.widget', ['title' => 'Recent actions'])
+    @wrapper('admin.partials.widget', ['title' => 'admin/users.recent_actions'])
         @include('admin.partials.logs')
     @endwrapper
 @endsection

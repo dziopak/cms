@@ -13,7 +13,7 @@
 @endsection
 
 @section('content-left')
-    @wrapper('admin.partials.widget', ['title' => 'Account data'])
+    @wrapper('admin.partials.widget', ['title' => 'admin/users.create_left_title'])
 
             @include('admin.partials.validation')
             @include('partials.form-fields', ['fields' => $form['left']])
@@ -27,7 +27,7 @@
 
 
 @section('content-right')
-    @wrapper('admin.partials.widget', ['title' => 'Profile'])
+    @wrapper('admin.partials.widget', ['title' => 'admin/users.create_right_title'])
 
         @include('admin.partials.validation')
         @include('partials.form-fields', ['fields' => $form['right']])

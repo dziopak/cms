@@ -6,5 +6,9 @@
         'delete_permamently' => 'Usuń permamentnie',
 
         'created_at' => 'Dodano',
-        'category' => 'Kategoria'
+        'category' => 'Kategoria',
+
+        'actions' => 'Operacje',
+        'yes' => 'Tak',
+        'no' => 'Nie'
     ];

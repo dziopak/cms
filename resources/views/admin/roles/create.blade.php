@@ -18,7 +18,7 @@
 @endsection
 
 @section('content-left')
-    @wrapper('admin.partials.widget', ['title' => 'Basic role data'])
+    @wrapper('admin.partials.widget', ['title' => 'admin/roles.create_left_title'])
         
         @include('admin.partials.validation')
         @include('partials.form-fields', ['fields' => $form['left']])
@@ -31,7 +31,7 @@
 @endsection
 
 @section('content-right')
-    @wrapper('admin.partials.widget', ['title' => 'User access'])
+    @wrapper('admin.partials.widget', ['title' => 'admin/roles.create_right_title'])
 
         @include('partials.form-fields', ['fields' => $form['right']])
     

@@ -9,5 +9,9 @@
         'delete_top_title' => 'Category info',
         'delete_bottom_title' => 'Remove category',
 
-        'delete_information' => 'Are you sure you want to permamently delete this category from system\'s database? This action is irreversible.'
+        'delete_information' => 'Are you sure you want to permamently delete this category from system\'s database? This action is irreversible.',
+    
+        'mass_delete' => 'Delete selected',
+
+        'name' => 'Name'
     ];

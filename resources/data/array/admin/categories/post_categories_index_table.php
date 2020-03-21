@@ -1,6 +1,6 @@
 <?php
 
-    $table['headers'] = ['Category name' => 'name'];
+    $table['headers'] = [__('admin/post_categories.name') => 'name'];
     $table['actions'] = [
         'Edit' => [
             'url' => 'admin.posts.categories.edit',
@@ -14,10 +14,10 @@
         ]
     ];
     $table['mass_edit'] = [
-        'delete' => 'Delete selected'
+        'delete' => __('admin/post_categories.mass_delete')
     ];
     $table['sort_by'] = [
-        'name' => 'Name'
+        'name' => __('admin/post_categories.name')
     ];
 
     return $table;

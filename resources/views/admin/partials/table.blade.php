@@ -4,10 +4,10 @@
             <tr>
                 <th style="width: 30px;"><input type="checkbox" class="select-all"></th>
                 @foreach($table['headers'] as $header => $row)
-                    <th>{{ $header }}</th>
+                    <th>{{ __($header) }}</th>
                 @endforeach
                 @if (!empty($table['actions'])) 
-                    <th class="text-right">Actions</th>
+                    <th class="text-right">{{ __('admin/general.actions') }}</th>
                 @endif
             </tr>
         </thead>
@@ -23,7 +23,7 @@
                                     @switch($table['data_types'][$row])
                                         
                                         @case('boolean')
-                                            {{ $field[$row] == 1 || $field[$row] == true ? "Yes" : "No" }}
+                                            {{ $field[$row] == 1 || $field[$row] == true ? __('admin/general.yes') : __('admin/general.no') }}
                                         @break
 
                                         @case('name')

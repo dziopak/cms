@@ -1,5 +1,5 @@
 <?php
-    $table['headers'] = [' ' => 'thumbnail', 'Title' => 'name', 'Author' => 'author', 'Created at' => 'created_at'];
+    $table['headers'] = [' ' => 'thumbnail', __('admin/pages.name') => 'name', __('admin/pages.author') => 'author', __('admin/pages.created_at') => 'created_at'];
     $table['data_types'] = ['thumbnail' => 'image', 'author' => 'name'];
     $table['actions'] = [
         'Edit' => [
@@ -14,14 +14,14 @@
         ]
     ];
     $table['mass_edit'] = [
-        "delete" => "Delete selected",
-        "hide" => "Disable / Hide",
-        "show" => "Enable / Show",
+        "delete" => __('admin/pages.mass_delete'),
+        "hide" => __('admin/pages.mass_hide'),
+        "show" => __('admin/pages.mass_show'),
     ];
     $table['sort_by'] = [
-        'name' => 'Title',
-        'user_id' => 'Author',
-        'created_at' => 'Creation date'
+        'name' => __('admin/pages.name'),
+        'user_id' => __('admin/pages.author'),
+        'created_at' => __('admin/pages.creation_date'),
     ];
 
     return $table;

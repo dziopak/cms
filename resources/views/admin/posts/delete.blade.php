@@ -9,22 +9,22 @@
 @endsection
 
 @section('content-left')
-    @wrapper('admin.partials.widget', ['title' => 'Post info'])                
+    @wrapper('admin.partials.widget', ['title' => 'admin/posts.delete_top_title'])                
         <div style="display: inline-block;">
             <strong>{{$post->name}}</strong>
-            <p>{{ $post->excerpt }}</p>
-            Created: {{$post->created_at}}
+            <p class="mt-2">{{ $post->excerpt }}</p>
+            {{ __('admin/general.created_at') }} {{$post->created_at}}
         </div>
     @endwrapper
             
-    @wrapper('admin.partials.widget', ['title' => 'Remove post'])
-        <p class="alert alert-danger">Are you sure you want to permamently delete this post from system's database? This action is irreversible.</p>
+    @wrapper('admin.partials.widget', ['title' => 'admin/posts.delete_top_title'])
+        <p class="alert alert-danger">{{ __('admin/posts.delete_information') }}</p>
         
         {!! Form::open(['method' => 'DELETE', 'action' => ['admin\PostsController@destroy', $post->id]]) !!}
         
         <div class="form-group">
-            <a href="{{route('admin.posts.index')}}" role="button" class="btn btn-success">Go back</a>
-            {!! Form::submit('Delete permamently', ['class' => 'btn btn-danger']) !!}
+            <a href="{{route('admin.posts.index')}}" role="button" class="btn btn-success">{{ __('admin/general.back_button') }}</a>
+            {!! Form::submit(__('admin/general.delete_permamently'), ['class' => 'btn btn-danger']) !!}
         </div>
         {!! Form::close() !!}
     @endwrapper

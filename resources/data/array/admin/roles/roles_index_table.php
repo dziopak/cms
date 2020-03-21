@@ -1,6 +1,6 @@
 <?php
 
-    $table['headers'] = ['Role name' => 'name'];
+    $table['headers'] = [__('admin/roles.name') => 'name'];
     $table['actions'] = [
         'Edit' => [
             'url' => 'admin.users.roles.edit',
@@ -20,7 +20,7 @@
         ],
     ];
     $table['sort_by'] = [
-        'name' => 'Name'
+        'name' => __('admin/roles.name')
     ];
 
     return $table;

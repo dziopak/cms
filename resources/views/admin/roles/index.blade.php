@@ -10,7 +10,7 @@
 @endsection
 
 @section('module-content')
-    @wrapper('admin.partials.widget', ['title' => 'Manage user roles'])
+    @wrapper('admin.partials.widget', ['title' => 'admin/roles.index_title'])
         
         @include('admin.partials.searchfilterbar')
         @include('admin.partials.table', ['fields' => $roles])

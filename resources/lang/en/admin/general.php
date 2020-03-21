@@ -6,6 +6,10 @@
         'delete_permamently' => 'Delete permamently',
 
         'created_at' => 'Created at',
-        'category' => 'Kategoria'
+        'category' => 'Category',
 
+        'actions' => 'Actions',
+
+        'yes' => 'Yest',
+        'no' => 'No',
     ];

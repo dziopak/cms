@@ -10,7 +10,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.widget', ['title' => 'Manage posts'])
+    @wrapper('admin.partials.widget', ['title' => 'admin/posts.index_title'])
         @include('admin.partials.searchfilterbar')
         {{ Form::open(['method' => 'POST', 'route' => 'admin.posts.mass', 'class' => 'w-100']) }}
             @include('admin.partials.table', ['fields' => $posts])
