@@ -2,10 +2,10 @@
 
 @section('breadcrumbs')
     <ul>
-        <li><a href="{{route('admin.dashboard.index')}}">Admin</a></li>
-        <li><a href="{{route('admin.users.index')}}">Users</a></li>
-        <li><a href="{{route('admin.users.roles.index')}}">Roles</a></li>
-        <li>List all</li>
+        <li><a href="{{route('admin.dashboard.index')}}">{{ __('admin/routes.admin') }}</a></li>
+        <li><a href="{{route('admin.users.index')}}">{{ __('admin/routes.users') }}</a></li>
+        <li><a href="{{route('admin.users.roles.index')}}">{{ __('admin/routes.roles') }}</a></li>
+        <li>{{ __('admin/routes.list') }}</li>
     </ul>
 @endsection
 

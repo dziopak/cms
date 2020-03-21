@@ -8,5 +8,4 @@ https://gist.github.com/tillsanders/39a9fa50d4c0ec36d167 - drag & drop tables
 - langs
 
 
-
 - lang switcher https://www.google.com/search?q=laravel+lang+tutorial&oq=laravel+lang&aqs=chrome.1.69i57j35i39j0l5j69i60.3663j0j7&sourceid=chrome&ie=UTF-8#kpvalbx=_cHxyXpuWO9GJrwTq0LdQ27

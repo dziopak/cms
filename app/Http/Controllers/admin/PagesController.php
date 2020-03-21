@@ -30,7 +30,7 @@ class PagesController extends Controller
         $categories[0] = 'No category';
         $categories = array_merge($categories, $page_cat->list_all());
         
-        $form = getData('admin/pages_form', ['categories' => $categories]);
+        $form = getData('admin/pages/pages_form', ['categories' => $categories]);
         return view('admin.pages.create', compact('form'));
     }
 
@@ -41,7 +41,7 @@ class PagesController extends Controller
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
         
-        $page = Page::create($data);
+        Page::create($data);
         Session::flash('crud', 'Page "'.$data['name'].'" has been created successfully.');
 
         return redirect(route('admin.pages.index'));

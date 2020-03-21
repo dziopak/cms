@@ -2,8 +2,8 @@
 
 @section('breadcrumbs')
     <ul>
-        <li><a href="{{ route('admin.dashboard.index') }}">Admin</a></li>
-        <li>Dashboard</li>
+        <li><a href="{{ route('admin.dashboard.index') }}">{{ __('admin/routes.admin') }}</a></li>
+        <li>{{ __('admin/routes.dashboard') }}</li>
     </ul>
 @endsection
 

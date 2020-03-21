@@ -2,9 +2,9 @@
 
 @section('breadcrumbs')
     <ul>
-        <li>Admin</li>
-        <li>Appearance</li>
-        <li>Menus</li>
+        <li>{{ __('admin/routes.admin') }}</li>
+        <li>{{ __('admin/routes.appearance') }}</li>
+        <li>{{ __('admin/routes.menus') }}</li>
     </ul>
 @endsection
 

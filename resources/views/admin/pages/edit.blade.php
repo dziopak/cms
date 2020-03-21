@@ -3,9 +3,9 @@
 
 @section('breadcrumbs')
     <ul>
-        <li><a href="{{route('admin.dashboard.index')}}">Admin</a></li>
-        <li><a href="{{route('admin.pages.index')}}">Pages</a></li>
-        <li>Edit</li>
+        <li><a href="{{route('admin.dashboard.index')}}">{{ __('admin/routes.admin') }}</a></li>
+        <li><a href="{{route('admin.pages.index')}}">{{ __('admin/routes.pages') }}</a></li>
+        <li>{{ __('admin/routes.edit') }}</li>
     </ul>
 @endsection
 
