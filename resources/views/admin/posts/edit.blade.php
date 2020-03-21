@@ -47,7 +47,7 @@
 
             <div class="form-group">
                 {!! Form::hidden('post_id', $post->id) !!}
-                {!! Form::submit('Update', ['class' => 'btn btn-success']) !!}
+                {!! Form::button('<i class="fa fa-home"></i>'.' '.__('admin/general.update_button'), ['class' => 'btn btn-success', 'type' => 'submit']) !!}
             </div>
         @endwrapper                
     </div>

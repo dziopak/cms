@@ -21,7 +21,7 @@
 
 
 @section('content-left')
-    @wrapper('admin.partials.widget', ['title' => 'Basic page data'])
+    @wrapper('admin.partials.widget', ['title' => 'admin/pages.edit_left_title'])
         
         @include('partials.form-fields', ['fields' => $form['left']])
 
@@ -33,7 +33,7 @@
 
 
 @section('content-right')
-    @wrapper('admin.partials.widget', ['title' => 'Page settings'])
+    @wrapper('admin.partials.widget', ['title' => 'admin/pages.edit_right_title'])
         
         @include('partials.form-fields', ['fields' => $form['right']])
     
@@ -46,7 +46,7 @@
 
 @section('content-bottom')
     <div class="col">
-        @wrapper('admin.partials.widget', ['title' => 'Page content'])
+        @wrapper('admin.partials.widget', ['title' => 'admin/pages.edit_bottom_title'])
 
             @include('partials.form-fields', ['fields' => $form['bottom']])
 
@@ -58,7 +58,8 @@
 
             <div class="form-group">
                 {!! Form::hidden('page_id', $page->id) !!}
-                {!! Form::submit('Update', ['class' => 'btn btn-success']) !!}
+                {!! Form::button('<i class="fa fa-home"></i>'.' '.__('admin/general.update_button'), ['class' => 'btn btn-success', 'type' => 'submit']) !!}
+                {{-- <button type="submit" class="" --}}
             </div>
 
         @endwrapper

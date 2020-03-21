@@ -25,7 +25,10 @@
 
         {{-- Create user button  --}}
         @if (Auth::user()->hasAccess('USER_CREATE'))
-            <a href="{{ route('admin.users.create') }}" class="btn btn-success">+ {{ __('admin/general.create_button') }}</a>
+            <a href="{{ route('admin.users.create') }}" class="btn btn-success">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                {{ __('admin/general.create_button') }}
+            </a>
         @endif
         {{-- End --}}
 

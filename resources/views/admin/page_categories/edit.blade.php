@@ -17,7 +17,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.widget', ['title' => 'Basic category data'])
+    @wrapper('admin.partials.widget', ['title' => 'admin/page_categories.edit_left_title'])
         
         @include('partials.form-fields', ['fields' => $form['left']])
 
@@ -30,7 +30,7 @@
         <div class="form-group">
             {!! Form::hidden('type', 'page') !!}
             {!! Form::hidden('category_id', $category->id) !!}
-            {!! Form::submit('Update', ['class' => 'btn btn-success']) !!}
+            {!! Form::button('<i class="fa fa-home"></i>'.' '.__('admin/general.update_button'), ['class' => 'btn btn-success', 'type' => 'submit']) !!}
         </div>
     @endwrapper
 @endsection

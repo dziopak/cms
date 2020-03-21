@@ -18,7 +18,10 @@
         {{ Form::close() }}
 
         @if (Auth::user()->hasAccess('POST_CREATE'))
-            <a href="{{ route('admin.posts.create') }}" class="btn btn-success">Create new</a>
+            <a href="{{ route('admin.posts.create') }}" class="btn btn-success">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                {{ __('admin/general.create_button') }}
+            </a>
         @endif
 
         <div class="float-right">{{ $posts->render() }}</div>

@@ -10,21 +10,21 @@
 @endsection
 
 @section('content-left')
-    @wrapper('admin.partials.widget', ['title' => 'Category info'])
+    @wrapper('admin.partials.widget', ['title' => 'admin/page_categories.delete_top_title'])
         <div style="display: inline-block;">
-            <strong>{{$category->name}} category</strong><br/>
-            Created: {{$category->created_at}}<br/>
+            {{ __('admin/general.category') }} <strong>{{$category->name}}</strong><br/>
+            {{ __('admin/general.created_at') }}: {{$category->created_at}}<br/>
         </div>
     @endwrapper
 
-    @wrapper('admin.partials.widget', ['title' => 'Remove category'])
-        <p class="alert alert-danger">Are you sure you want to permamently delete this category from system's database? This action is irreversible.</p>
+    @wrapper('admin.partials.widget', ['title' => 'admin/page_categories.delete_bottom_title'])
+        <p class="alert alert-danger">{{ __('admin/page_categories.delete_information') }}</p>
         
         {!! Form::open(['method' => 'DELETE', 'action' => ['admin\PageCategoriesController@destroy', $category->id]]) !!}
         
         <div class="form-group">
-            <a href="{{route('admin.pages.categories.index')}}" role="button" class="btn btn-success">Go back</a>
-            {!! Form::submit('Delete permamently', ['class' => 'btn btn-danger']) !!}
+            <a href="{{route('admin.pages.categories.index')}}" role="button" class="btn btn-success">{{ __('admin/general.back_button') }}</a>
+            {!! Form::submit(__('admin/general.delete_permamently'), ['class' => 'btn btn-danger']) !!}
         </div>
         {!! Form::close() !!}
     @endwrapper

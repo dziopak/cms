@@ -16,7 +16,10 @@
         @include('admin.partials.table', ['fields' => $roles])
 
         @if (Auth::user()->hasAccess('ROLE_CREATE'))
-            <a href="{{ route('admin.users.roles.create') }}" class="btn btn-success">Create new</a>
+            <a href="{{ route('admin.users.roles.create') }}" class="btn btn-success">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                {{ __('admin/general.create_button') }}
+            </a>
         @endif
 
         <div class="float-right">{{ $roles->render() }}</div>

@@ -10,7 +10,7 @@
 @endsection
 
 @section('module-content')
-    @wrapper('admin.partials.widget', ['title' => 'Manage categories'])
+    @wrapper('admin.partials.widget', ['title' => 'admin/page_categories.index_title'])
         @include('admin.partials.searchfilterbar')
         {{ Form::open(['method' => 'POST', 'route' => 'admin.pages.categories.mass', 'class' => 'w-100']) }}
             @include('admin.partials.table', ['fields' => $categories])
@@ -18,7 +18,10 @@
         {{ Form::close() }}
 
         @if (Auth::user()->hasAccess('CATEGORY_CREATE'))
-            <a href="{{ route('admin.pages.categories.create') }}" class="btn btn-success">Create new</a>
+            <a href="{{ route('admin.pages.categories.create') }}" class="btn btn-success">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                {{ __('admin/general.create_button') }}
+            </a>
         @endif
         <div class="float-right">{{ $categories->render() }}</div>
     @endwrapper    

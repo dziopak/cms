@@ -20,7 +20,10 @@
         {{ Form::close() }}
 
         @if (Auth::user()->hasAccess('CATEGORY_CREATE'))
-            <a href="{{ route('admin.posts.categories.create') }}" class="btn btn-success">Create new</a>
+            <a href="{{ route('admin.posts.categories.create') }}" class="btn btn-success">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                {{ __('admin/general.create_button') }}
+            </a>
         @endif
 
         <div class="float-right">{{ $categories->render() }}</div>

@@ -9,22 +9,22 @@
 @endsection
 
 @section('content-left')
-    @wrapper('admin.partials.widget', ['title' => 'Page info'])
+    @wrapper('admin.partials.widget', ['title' => 'admin/pages.delete_top_title'])
         <div style="display: inline-block;">
             <strong>{{$page->name}}</strong>
             <p>{{ $page->excerpt }}</p>
-            Created: {{$page->created_at}}
+            {{ __('admin/general.created_at') }} {{$page->created_at}}
         </div>
     @endwrapper
 
-    @wrapper('admin.partials.widget', ['title' => 'Remove page'])
-        <p class="alert alert-danger">Are you sure you want to permamently delete this page from system's database? This action is irreversible.</p>
+    @wrapper('admin.partials.widget', ['title' => 'admin/pages.delete_bottom_title'])
+        <p class="alert alert-danger">{{ __('admin/pages.delete_information') }}</p>
         
         {!! Form::open(['method' => 'DELETE', 'action' => ['admin\PagesController@destroy', $page->id]]) !!}
         
         <div class="form-group">
-            <a href="{{route('admin.pages.index')}}" role="button" class="btn btn-success">Go back</a>
-            {!! Form::submit('Delete permamently', ['class' => 'btn btn-danger']) !!}
+            <a href="{{route('admin.pages.index')}}" role="button" class="btn btn-success">{{ __('admin/general.back_button') }}</a>
+            {!! Form::submit(__('admin/general.delete_permamently'), ['class' => 'btn btn-danger']) !!}
         </div>
         {!! Form::close() !!}
     @endwrapper

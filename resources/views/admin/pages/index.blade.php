@@ -10,7 +10,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.widget', ['title' => 'Manage pages'])    
+    @wrapper('admin.partials.widget', ['title' => 'admin/pages.index_title'])    
         @include('admin.partials.searchfilterbar')    
 
         {{ Form::open(['method' => 'POST', 'route' => 'admin.pages.mass', 'class' => 'w-100']) }}
@@ -19,7 +19,10 @@
         {{ Form::close() }}
         
         @if (Auth::user()->hasAccess('PAGE_CREATE'))
-            <a href="{{ route('admin.pages.create') }}" class="btn btn-success">Create new</a>
+            <a href="{{ route('admin.pages.create') }}" class="btn btn-success">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                {{ __('admin/general.create_button') }}
+            </a>
         @endif
 
         <div class="float-right">{{ $pages->render() }}</div>

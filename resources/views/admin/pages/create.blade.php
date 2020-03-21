@@ -18,7 +18,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.widget', ['title' => 'Basic page data'])
+    @wrapper('admin.partials.widget', ['title' => 'admin/pages.create_left_title'])
         
         @include('partials.form-fields', ['fields' => $form['left']])
         @hook('page_create_left_content')
@@ -29,7 +29,7 @@
 
 
 @section('content-right')
-    @wrapper('admin.partials.widget', ['title' => 'Page settings'])
+    @wrapper('admin.partials.widget', ['title' => 'admin/pages.create_right_title'])
     
         @include('partials.form-fields', ['fields' => $form['right']])
         @hook('page_create_right_content')
@@ -40,12 +40,12 @@
 
 @section('content-bottom')
     <div class="col">
-        @wrapper('admin.partials.widget', ['title' => 'Page content'])
+        @wrapper('admin.partials.widget', ['title' => 'admin/pages.create_bottom_title'])
             
             @include('partials.form-fields', ['fields' => $form['bottom']])
 
             <div class="form-group">
-                {!! Form::submit('Create page', ['class' => 'btn btn-success']) !!}
+                {!! Form::submit(__('admin/general.create_button'), ['class' => 'btn btn-success']) !!}
             </div>
 
             @hook('page_create_bottom_content')

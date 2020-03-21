@@ -17,17 +17,10 @@
 
 
 @section('content-left')
-    @wrapper('admin.partials.widget', ['title' => 'Basic category data'])
+    @wrapper('admin.partials.widget', ['title' => 'admin/post_categories.create_left_title'])
         
         @include('partials.form-fields', ['fields' => $form['left']])
         
-        <div class="form-group row">
-            <div class="col">
-                {!! Form::label('description', 'Description: ') !!}
-                {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
-            </div>
-        </div>
-
         <!-- Custom field hooks -->
         @hook('post_category_create_left_content')
         @hook('post_category_left_content')

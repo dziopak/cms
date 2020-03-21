@@ -17,7 +17,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.widget', ['title' => 'Basic category data'])
+    @wrapper('admin.partials.widget', ['title' => 'admin/page_categories.create_left_title'])
         
         @include('partials.form-fields', ['fields' => $form['left']])
     

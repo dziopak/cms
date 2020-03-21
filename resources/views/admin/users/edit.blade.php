@@ -18,7 +18,7 @@
         
         <div class="form-group">
             <input type="hidden" value="{{$user->id}}" name="user_id" />
-            {!! Form::submit('Update', ['class' => 'btn btn-success']) !!}
+            {!! Form::button('<i class="fa fa-home"></i>'.' '.__('admin/general.update_button'), ['class' => 'btn btn-success', 'type' => 'submit']) !!}
         </div>
         
         {!! Form::close() !!}
@@ -52,7 +52,7 @@
         
         @include('partials.form-fields', ['fields' => $form['right']])
 
-        {!! Form::submit('Set password', ['class' => 'btn btn-primary']) !!}
+        {!! Form::button('<i class="fa fa-home"></i>'.' '.__('admin/general.update_button'), ['class' => 'btn btn-primary', 'type' => 'submit']) !!}
         {!! Form::close() !!}
     @endwrapper
 @endsection
