@@ -30,7 +30,7 @@ class PostsController extends Controller
         $categories[0] = 'No category';
         $categories = array_merge($categories, PostCategory::list_all());
         
-        $form = getData('admin/posts_form', ['categories' => $categories]);
+        $form = getData('admin/posts/posts_form', ['categories' => $categories]);
         return view('admin.posts.create', compact('categories', 'form'));
     }
 
@@ -58,7 +58,7 @@ class PostsController extends Controller
         $categories[0] = 'No category';
         $categories = array_merge($categories, PostCategory::list_all());
         
-        $form = getData('admin/posts_form', ['categories' => $categories]);
+        $form = getData('admin/posts/posts_form', ['categories' => $categories]);
         return view('admin.posts.edit', compact('post', 'form'));
     }
 

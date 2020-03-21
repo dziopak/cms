@@ -3,7 +3,10 @@
     <div class="card-body">
         <div class="card-title">    
             <strong>
-                @title
+
+                {{-- Display translated or static title --}}
+                {{ __($params['title']) }}
+
             </strong>
         </div>
         @child

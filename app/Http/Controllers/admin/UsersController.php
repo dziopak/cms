@@ -44,7 +44,7 @@ class UsersController extends Controller
         $role = new Role;
         $roles = $role->get_all_roles();
         
-        $form = getData('admin/users/user_create_form', ['roles' => $roles]);
+        $form = getData('admin/users/users_create_form', ['roles' => $roles]);
         return view('admin.users.create', compact('roles', 'form'));
     }
     
@@ -72,7 +72,7 @@ class UsersController extends Controller
         $role = new Role;
         $roles = $role->get_all_roles();
 
-        $form = getData('admin/users/user_update_form', ['roles' => $roles]);
+        $form = getData('admin/users/users_update_form', ['roles' => $roles]);
         return view('admin.users.edit', compact('user', 'roles', 'logs', 'form'));
     }
 

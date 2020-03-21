@@ -10,7 +10,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.widget', ['title' => 'Manage menus'])
+    @wrapper('admin.partials.widget', ['title' => 'admin/menus.index_title'])
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
         {!! Menu::render() !!}
         {!! Menu::scripts() !!}

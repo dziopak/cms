@@ -5,7 +5,7 @@
         "pages" => "Podstrony",
         "posts" => "Posty",
         "categories" => "Kategorie",
-        "users" => "Użytkownicy",
+        "users" => "Konta użytkowników",
         "appearance" => "Wygląd",
         "addons" => "Dodatki",
         "settings" => "Ustawienia",
@@ -14,9 +14,12 @@
         "menus" => "Menu",
         "modules" => "Moduły",
         "roles" => "Rangi",
+        "files" => "Menadżer plików",
 
         "list" => "Wszystkie",
         "edit" => "Edytuj",
         "delete" => "Usuń",
         "create" => "Dodaj",
+        "disable" => "Zablokuj",
+        "enable" => "Odblokuj",
     ];

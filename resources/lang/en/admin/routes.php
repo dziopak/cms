@@ -14,9 +14,12 @@
         "menus" => "Menus",
         "modules" => "Modules",
         "roles" => "Roles",
+        "files" => "File manager",
 
         "list" => "List all",
         "edit" => "Edit",
         "delete" => "Delete",
         "create" => "Create new",
+        "disable" => "Disable",
+        "enable" => "Enable",
     ];
