@@ -13,5 +13,9 @@
 
         'mass_delete' => 'Delete selected',
 
-        'name' => 'Name'
+        'name' => 'Name',
+        'slug' => 'Slug',
+        'parent' => 'Parent category',
+        'description' => 'Description',
+        'no_category' => 'No category',
     ];

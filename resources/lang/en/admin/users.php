@@ -25,9 +25,15 @@
         'enable_button' => 'Unblock user',
 
         'email' => 'Email',
+        'username' => 'Username',
         'is_active' => 'Active',
         'created_at' => 'Created',
         'role' => 'Role',
+        'password' => 'Password',
+        'repeat_password' => 'Repeat password',
+        'first_name' => 'First name',
+        'last_name' => 'Last name',
+        'avatar' => 'Picture',
 
         'mass_delete' => 'Delete selected',
         'mass_hide' => 'Disable / Hide',

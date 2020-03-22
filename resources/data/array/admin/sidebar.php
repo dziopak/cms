@@ -99,5 +99,10 @@
         ]
     ];
 
+
+    $items = Hook::get('adminSidebarItems',[$items],function($items){
+        return $items;
+    });
+
     return $items;
 ?>

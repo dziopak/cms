@@ -6,7 +6,7 @@
                 'items' => [
                     'name' => [
                         'type' => 'text',
-                        'label' => 'Title',
+                        'label' => __('admin/pages.name'),
                         'required' => true,
                         'value' => null,
                         'class' => ''
@@ -18,7 +18,7 @@
                 'items' => [
                     'slug' => [
                         'type' => 'text',
-                        'label' => 'Slug',
+                        'label' => __('admin/pages.slug'),
                         'required' => true,
                         'value' => null,
                         'class' => ''
@@ -26,7 +26,7 @@
                     'category_id' => [
                         'type' => 'select',
                         'options' => $args['categories'],
-                        'label' => 'Category',
+                        'label' => __('admin/pages.category'),
                         'required' => true,
                         'value' => null,
                         'class' => ''
@@ -38,7 +38,7 @@
                 'items' => [
                     'excerpt' => [
                         'type' => 'textarea',
-                        'label' => 'Excerpt:',
+                        'label' => __('admin/pages.excerpt'),
                         'required' => true,
                         'value' => null,
                         'class' => ''
@@ -52,7 +52,7 @@
                 'items' => [
                     'thumbnail' => [
                         'type' => 'file',
-                        'label' => 'Thumbnail',
+                        'label' => __('admin/pages.thumbnail'),
                         'class' => ''
                     ],
                 ],
@@ -62,7 +62,7 @@
                 'items' => [
                     'meta_title' => [
                         'type' => 'text',
-                        'label' => 'Meta title',
+                        'label' => __('admin/pages.meta_title'),
                         'required' => false,
                         'value' => null,
                         'class' => ''
@@ -74,7 +74,7 @@
                 'items' => [
                     'meta_description' => [
                         'type' => 'textarea',
-                        'label' => 'Meta description',
+                        'label' => __('admin/pages.meta_description'),
                         'required' => false,
                         'value' => null,
                         'class' => ''
@@ -86,14 +86,14 @@
                 'items' => [
                     'index' => [
                         'type' => 'checkbox',
-                        'label' => 'Index page',
+                        'label' => __('admin/pages.index'),
                         'value' => null,
                         'checked_value' => 1,
                         'class' => ''
                     ],
                     'follow' => [
                         'type' => 'checkbox',
-                        'label' => 'Index page',
+                        'label' => __('admin/pages.follow'),
                         'value' => null,
                         'checked_value' => 1,
                         'class' => ''
@@ -108,7 +108,7 @@
                     'content' => [
                         'type' => 'textarea',
                         'class' => 'tinymce',
-                        'label' => 'Content',
+                        'label' => __('admin/pages.content'),
                         'value' => null,
                         'required' => true
                     ]

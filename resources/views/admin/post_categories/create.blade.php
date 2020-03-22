@@ -29,7 +29,10 @@
 
         <div class="form-group">
             {!! Form::hidden('type', 'post') !!}
-            {!! Form::submit('Create category', ['class' => 'btn btn-success']) !!}
+            <button type="submit" class="btn btn-success">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                {{ __('admin/general.create_button') }}
+            </button>
         </div>
 
     @endwrapper

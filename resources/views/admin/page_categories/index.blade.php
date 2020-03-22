@@ -11,18 +11,29 @@
 
 @section('module-content')
     @wrapper('admin.partials.widget', ['title' => 'admin/page_categories.index_title'])
-        @include('admin.partials.searchfilterbar')
+        
+        
+        {{-- Table --}}
         {{ Form::open(['method' => 'POST', 'route' => 'admin.pages.categories.mass', 'class' => 'w-100']) }}
             @include('admin.partials.table', ['fields' => $categories])
-            @include('admin.partials.massedit')
         {{ Form::close() }}
+        {{-- End --}}
 
+
+        {{-- Create button --}}
         @if (Auth::user()->hasAccess('CATEGORY_CREATE'))
             <a href="{{ route('admin.pages.categories.create') }}" class="btn btn-success">
                 <i class="fa fa-plus" aria-hidden="true"></i>
                 {{ __('admin/general.create_button') }}
             </a>
         @endif
+        {{-- End --}}
+
+
+        {{-- Pagination --}}
         <div class="float-right">{{ $categories->render() }}</div>
+        {{-- End --}}
+
+
     @endwrapper    
 @endsection

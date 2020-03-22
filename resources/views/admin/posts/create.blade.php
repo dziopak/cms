@@ -44,7 +44,10 @@
             @include('partials.form-fields', ['fields' => $form['bottom']])
 
             <div class="form-group">
-                {!! Form::submit('Create post', ['class' => 'btn btn-success']) !!}
+                <button type="submit" class="btn btn-success">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    {{ __('admin/general.create_button') }}
+                </button>
             </div>
 
             @hook('post_edit_bottom_content')

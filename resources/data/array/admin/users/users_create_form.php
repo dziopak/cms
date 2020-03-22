@@ -6,7 +6,7 @@
                 'items' => [
                     'name' => [
                         'type' => 'text',
-                        'label' => 'Username',
+                        'label' => __('admin/users.name'),
                         'required' => true,
                         'value' => null,
                         'class' => ''
@@ -14,7 +14,7 @@
                     'role_id' => [
                         'type' => 'select',
                         'options' => $args['roles'],
-                        'label' => 'User\'s role',
+                        'label' => __('admin/users.role'),
                         'required' => true,
                         'value' => null,
                         'class' => ''
@@ -26,14 +26,14 @@
                 'items' => [
                     'password' => [
                         'type' => 'password',
-                        'label' => 'Password',
+                        'label' => __('admin/users.password'),
                         'required' => true,
                         'value' => null,
                         'class' => ''
                     ],
                     'repeat_password' => [
                         'type' => 'password',
-                        'label' => 'Repeat password',
+                        'label' => __('admin/users.repeat_password'),
                         'required' => true,
                         'value' => null,
                         'class' => ''
@@ -45,7 +45,7 @@
                 'items' => [
                     'email' => [
                         'type' => 'email',
-                        'label' => 'Email',
+                        'label' => __('admin/users.email'),
                         'required' => true,
                         'value' => null,
                         'class' => ''
@@ -59,14 +59,14 @@
                 'items' => [
                     'first_name' => [
                         'type' => 'text',
-                        'label' => 'First name',
+                        'label' => __('admin/users.first_name'),
                         'required' => false,
                         'value' => null,
                         'class' => ''
                     ],
                     'last_name' => [
                         'type' => 'text',
-                        'label' => 'Last name',
+                        'label' => __('admin/users.last_name'),
                         'required' => false,
                         'value' => null,
                         'class' => ''
@@ -78,7 +78,7 @@
                 'items' => [
                     'avatar' => [
                         'type' => 'file',
-                        'label' => 'Avatar:',
+                        'label' => __('admin/users.avatar'),
                         'required' => false,
                         'value' => null,
                         'class' => ''

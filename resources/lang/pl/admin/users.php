@@ -25,9 +25,15 @@
         'enable_button' => 'Odblokuj użytkownika',
 
         'email' => 'Email',
+        'name' => 'Nazwa',
         'is_active' => 'Aktywny',
         'created_at' => 'Dodano',
         'role' => 'Ranga',
+        'password' => 'Hasło',
+        'repeat_password' => 'Powtórz hasło',
+        'first_name' => 'Imię',
+        'last_name' => 'Nazwisko',
+        'avatar' => 'Zdjęcie',
 
         'mass_delete' => 'Usuń zaznaczone',
         'mass_hide' => 'Zablokuj / Ukryj',

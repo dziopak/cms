@@ -7,9 +7,9 @@
             'class' => 'success',
             'access' => 'USER_EDIT'
         ],
-        'Status' => [
+        'Disable' => [
             'url' => 'admin.users.disable',
-            'class' => 'primary',
+            'class' => 'warning',
             'access' => 'USER_EDIT'
         ],
         'Delete' => [
@@ -26,10 +26,8 @@
     ];
     $table['mass_edit_extend'] = 'users';
     $table['sort_by'] = [
-        'email' => 'Email',
-        'name' => 'Username',
-        'first_name' => 'First name',
-        'last_name' => 'Last name',
+        'email' => __('admin/users.email'),
+        'name' => __('admin/users.name'),
     ];
 
     $table['headers'] = Hook::get('UsersIndexTableHeaders',[$table['headers']],function($table_headers){

@@ -165,6 +165,7 @@ return [
          * Package Service Providers...
          */
         Esemve\Hook\HookServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
         
         /*
          * Application Service Providers...
@@ -232,6 +233,7 @@ return [
         'Modules' => Nwidart\Modules\Facades\Module::class,
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class, 
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
     ],
 
 ];

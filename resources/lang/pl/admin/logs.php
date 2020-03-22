@@ -19,5 +19,6 @@
             'modify' => 'Modyfikacja',
             'delete' => 'Usuwanie',
         ],
-        'filter' => 'Filtruj'
+        'filter' => 'Filtruj',
+        'no_actions' => 'Brak akcji.'
     ];

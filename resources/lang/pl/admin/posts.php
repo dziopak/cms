@@ -19,6 +19,13 @@
         'author' => 'Autor',
         'created_at' => 'Dodano',
         'creation_date' => 'Data utworzenia',
+        'slug' => 'Slug',
+        'category' => 'Kategoria',
+        'excerpt' => 'Skrót',
+        'content' => 'Treść',
+        'thumbnail' => 'Miniaturka',
+        'meta_title' => 'Meta title',
+        'meta_description' => 'Meta description',
 
         'mass_delete' => 'Usuń zaznaczone',
         'mass_hide' => 'Zablokuj / Ukryj',

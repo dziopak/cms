@@ -6,7 +6,7 @@
                 'items' => [
                     'name' => [
                         'type' => 'text',
-                        'label' => 'Title',
+                        'label' => __('admin/posts.name'),
                         'required' => true,
                         'value' => null,
                         'class' => ''
@@ -18,7 +18,7 @@
                 'items' => [
                     'slug' => [
                         'type' => 'text',
-                        'label' => 'Slug',
+                        'label' => __('admin/posts.slug'),
                         'required' => true,
                         'value' => null,
                         'class' => ''
@@ -26,7 +26,7 @@
                     'category_id' => [
                         'type' => 'select',
                         'options' => $args['categories'],
-                        'label' => 'Category',
+                        'label' => __('admin/posts.category'),
                         'required' => true,
                         'value' => null,
                         'class' => ''
@@ -38,7 +38,7 @@
                 'items' => [
                     'excerpt' => [
                         'type' => 'textarea',
-                        'label' => 'Excerpt:',
+                        'label' => __('admin/posts.excerpt'),
                         'required' => true,
                         'value' => null,
                         'class' => ''
@@ -52,7 +52,7 @@
                 'items' => [
                     'thumbnail' => [
                         'type' => 'file',
-                        'label' => 'Thumbnail',
+                        'label' => __('admin/posts.thumbnail'),
                         'class' => ''
                     ],
                 ],
@@ -62,7 +62,7 @@
                 'items' => [
                     'meta_title' => [
                         'type' => 'text',
-                        'label' => 'Meta title',
+                        'label' => __('admin/posts.meta_title'),
                         'required' => false,
                         'value' => null,
                         'class' => ''
@@ -74,7 +74,7 @@
                 'items' => [
                     'meta_description' => [
                         'type' => 'textarea',
-                        'label' => 'Meta description',
+                        'label' => __('admin/posts.meta_description'),
                         'required' => false,
                         'value' => null,
                         'class' => ''
@@ -89,7 +89,7 @@
                     'content' => [
                         'type' => 'textarea',
                         'class' => 'tinymce',
-                        'label' => 'Content',
+                        'label' => __('admin/posts.content'),
                         'value' => null,
                         'required' => true
                     ]

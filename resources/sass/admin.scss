@@ -2,11 +2,12 @@
 
 a {
     color: #212529;
+
+    &:hover {
+        text-decoration: none;
+    }
 }
 
-a:hover {
-    text-decoration: none;
-}
 
 li a:hover {
     color: #ff9c00;
@@ -20,9 +21,30 @@ li a:hover {
     background-color: #eeeeee;
 }
 
-#admin-page table.table tr td {
-    vertical-align: middle;
+#admin-page {
+    .table { 
+        tr td {
+            vertical-align: middle;
+
+            &:first-child {
+                text-align: center;
+            }
+
+            &:last-child {
+                text-align: right;
+            }
+        }
+
+        .btn {
+            transition: all 0.1s linear;
+        
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+    }
 }
+
 
 #main-container.container-fluid {
     padding: 0px;
@@ -33,29 +55,31 @@ li a:hover {
     background-color: #354149;
     min-height: 100vh;
     padding-right: 0px;
-}
 
-.sidebar-sub-list {
-    display: none;
-    position: absolute;
-    left: 100%;
-    top: 0;
-    background-color: #2f383e;
-    width: 150px;
-    padding: 5px 0;
-    z-index: 1;
-
-    & .sidebar-list-item {
-        text-align: left;
-        padding: 0;
-        
-        a {
-            padding: 5px 15px;
-            display: inline-block;
-            width: 100%;
+    &-sub-list {
+        display: none;
+        position: absolute;
+        left: 100%;
+        top: 0;
+        background-color: #2f383e;
+        width: 150px;
+        padding: 5px 0;
+        z-index: 1;
+    
+        & .sidebar-list-item {
+            text-align: left;
+            padding: 0;
+            
+            a {
+                padding: 5px 15px;
+                display: inline-block;
+                width: 100%;
+            }
         }
     }
 }
+
+
 
 .sidebar-list {
     padding: 0;
@@ -81,8 +105,8 @@ li a:hover {
 
         .fa.icon {
             width: 100%;
-            font-size: 40px;
-            margin: 10px auto 5px;
+            font-size: 38px;
+            margin: 10px auto 8px;
             border-radius: 50%;
         }
 

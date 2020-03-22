@@ -11,8 +11,6 @@
 
 @section('module-content')
     @wrapper('admin.partials.widget', ['title' => 'admin/roles.index_title'])
-        
-        @include('admin.partials.searchfilterbar')
         @include('admin.partials.table', ['fields' => $roles])
 
         @if (Auth::user()->hasAccess('ROLE_CREATE'))

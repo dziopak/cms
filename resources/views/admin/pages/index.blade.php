@@ -11,20 +11,29 @@
 
 @section('module-content')
     @wrapper('admin.partials.widget', ['title' => 'admin/pages.index_title'])    
-        @include('admin.partials.searchfilterbar')    
 
+
+        {{-- Table --}}
         {{ Form::open(['method' => 'POST', 'route' => 'admin.pages.mass', 'class' => 'w-100']) }}
             @include('admin.partials.table', ['fields' => $pages])
-            @include('admin.partials.massedit')
         {{ Form::close() }}
-        
+        {{-- End --}}
+
+
+        {{-- Create button --}}
         @if (Auth::user()->hasAccess('PAGE_CREATE'))
             <a href="{{ route('admin.pages.create') }}" class="btn btn-success">
                 <i class="fa fa-plus" aria-hidden="true"></i>
                 {{ __('admin/general.create_button') }}
             </a>
         @endif
+        {{-- End --}}
 
+
+        {{-- Pagination --}}
         <div class="float-right">{{ $pages->render() }}</div>
+        {{-- End --}}
+
+        
     @endwrapper
 @endsection

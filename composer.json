@@ -20,9 +20,11 @@
         "laravelcollective/html": "^6.0",
         "nwidart/laravel-modules": "^6.2",
         "tymon/jwt-auth": "dev-develop",
-        "unisharp/laravel-filemanager": "^2.0"
+        "unisharp/laravel-filemanager": "^2.0",
+        "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.2",
         "barryvdh/laravel-ide-helper": "^2.6",
         "facade/ignition": "^1.4",
         "fzaninotto/faker": "^1.4",

@@ -6,7 +6,7 @@
                 'items' => [
                     'name' => [
                         'type' => 'text',
-                        'label' => 'Category name',
+                        'label' => __('admin/page_categories.name'),
                         'required' => true,
                         'value' => null,
                         'class' => ''
@@ -18,7 +18,7 @@
                 'items' => [
                     'slug' => [
                         'type' => 'text',
-                        'label' => 'Slug',
+                        'label' => __('admin/page_categories.slug'),
                         'required' => true,
                         'value' => null,
                         'class' => ''
@@ -26,7 +26,7 @@
                     'parent_id' => [
                         'type' => 'select',
                         'options' => $args['categories'],
-                        'label' => 'Parent category',
+                        'label' => __('admin/page_categories.parent'),
                         'required' => true,
                         'value' => null,
                         'class' => ''
@@ -38,7 +38,7 @@
                 'items' => [
                     'description' => [
                         'type' => 'textarea',
-                        'label' => 'Description',
+                        'label' => __('admin/page_categories.description'),
                         'required' => true,
                         'value' => null,
                         'class' => ''

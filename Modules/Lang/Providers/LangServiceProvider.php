@@ -19,6 +19,22 @@ class LangServiceProvider extends ServiceProvider
         require('Hooks/categories.hooks.php');
         require('Hooks/modules/testimonials.hooks.php');
         require('Hooks/modules/portfolio.hooks.php');
+
+        // <i class="fas fa-globe-europe"></i>
+
+        Hook::listen('adminSidebarItems', function ($callback, $output, $items) {
+            if (empty($output))
+            {
+              $output = $items;
+            }
+
+            $output['settings']['items']['lang'] = [
+                'route' => 'admin.modules.lang.index',
+                'custom_label' => __('lang::admin/langs.lang_settings')
+            ];
+
+            return $output;
+        }, 10);
         
         Hook::listen('template.top-nav-user-bar', function ($callback, $output, $variables) use ($langs) {
             !empty(session('lang')) ? $current_lang = session('lang') : $current_lang = 'en';

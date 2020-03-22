@@ -15,6 +15,13 @@
         'delete_information' => 'Are you sure you want to permamently delete this post from system\'s database? This action is irreversible.',
 
         'name' => 'Title',
+        'slug' => 'Slug',
+        'category' => 'Category',
+        'excerpt' => 'Excerpt',
+        'content' => 'Content',
+        'thumbnail' => 'Thumbnail',
+        'meta_title' => 'Meta title',
+        'meta_description' => 'Meta description',
         'is_active' => 'Visible',
         'author' => 'Author',
         'created_at' => 'Created',

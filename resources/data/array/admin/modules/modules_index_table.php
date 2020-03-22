@@ -1,15 +1,15 @@
 <?php
-    $table['headers'] = ['Module name' => 'name', 'Description' => 'description'];
+    $table['headers'] = [__('admin/modules.name') => 'name', __('admin/modules.description') => 'description'];
     $table['data_types'] = ['active' => 'boolean'];
     $table['actions'] = [
         'Control panel' => [
             'url' => 'admin.modules.{module_slug}.index',
-            'class' => 'success',
+            'class' => 'primary',
             'access' => 'MODULE_USE',
         ],
         'Settings' => [
             'url' => 'admin.modules.{module_slug}.index',
-            'class' => 'primary',
+            'class' => 'success',
             'access' => 'MODULE_EDIT'
         ],
         'Disable' => [

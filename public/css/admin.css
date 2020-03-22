@@ -18,8 +18,24 @@ li a:hover {
   background-color: #eeeeee;
 }
 
-#admin-page table.table tr td {
+#admin-page .table tr td {
   vertical-align: middle;
+}
+
+#admin-page .table tr td:first-child {
+  text-align: center;
+}
+
+#admin-page .table tr td:last-child {
+  text-align: right;
+}
+
+#admin-page .table .btn {
+  transition: all 0.1s linear;
+}
+
+#admin-page .table .btn:hover {
+  transform: scale(1.1);
 }
 
 #main-container.container-fluid {
@@ -82,8 +98,8 @@ li a:hover {
 
 .sidebar-list-item .fa.icon {
   width: 100%;
-  font-size: 40px;
-  margin: 10px auto 5px;
+  font-size: 38px;
+  margin: 10px auto 8px;
   border-radius: 50%;
 }
 

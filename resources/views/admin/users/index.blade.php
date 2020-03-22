@@ -8,17 +8,15 @@
         <li>{{ __('admin/routes.list') }}</li>
     </ul>
 @endsection
-
+    
 
 @section('module-content')
     @wrapper('admin.partials.widget', ['title' => 'admin/users.list_all'])
-
+    
 
         {{-- Displaying data table --}}    
-        @include('admin.partials.searchfilterbar') 
         {{ Form::open(['method' => 'POST', 'route' => 'admin.users.mass', 'class' => 'w-100']) }}
-            @include('admin.partials.table', ['fields' => $users])
-            @include('admin.partials.massedit')
+            @include('admin.partials.table', ['fields' => $users, 'id' => 'users_table'])        
         {{ Form::close() }}
         {{-- End of table --}}
 
@@ -36,7 +34,6 @@
         {{-- Pagination --}}
         <div class="float-right">{{ $users->render() }}</div>
         {{-- End --}}
-
 
     @endwrapper
 @endsection

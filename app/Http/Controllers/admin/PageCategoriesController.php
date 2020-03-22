@@ -26,10 +26,9 @@ class PageCategoriesController extends Controller
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_CREATE');
 
-        $categories[0] = 'No category';
-        $categories = array_merge($categories, PageCategory::list_all());
+        $categories = array_merge([__('admin/page_categories.no_category')], PageCategory::list_all());
+        $form = getData('admin/categories/page_categories_form', ['categories' => $categories]);
 
-        $form = getData('admin/categories/page_categories_form', ['categories' => $categories]);    
         return view('admin.page_categories.create', compact('form'));
     }
 
@@ -48,13 +47,11 @@ class PageCategoriesController extends Controller
     public function edit($id)
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_EDIT');
-        
-        $categories[0] = 'No category';
-        $categories = array_merge($categories, PageCategory::list_all());
 
+        $categories = array_merge([__('admin/page_categories.no_category')], PageCategory::list_all());
         $category = PageCategory::findOrFail($id);
+
         $form = getData('admin/categories/page_categories_form', ['categories' => $categories]);
-        
         return view('admin.page_categories.edit', compact('category', 'form'));
     }
 

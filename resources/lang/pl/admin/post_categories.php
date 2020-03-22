@@ -13,5 +13,9 @@
 
         'mass_delete' => 'Usuń zaznaczone',
 
-        'name' => 'Nazwa'
+        'name' => 'Nazwa',
+        'slug' => 'Slug',
+        'parent' => 'Kategoria nadrzędna',
+        'description' => 'Opis kategorii',
+        'no_category' => 'Brak kategorii',
     ];
