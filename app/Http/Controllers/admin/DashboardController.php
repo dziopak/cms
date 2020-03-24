@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Dashboard;
 use Auth;
+use Widget;
+use App\Widgets\admin\RecentPosts;
+use Exception;
 
 class DashboardController extends Controller
 {
@@ -18,22 +21,28 @@ class DashboardController extends Controller
         return view('admin.dashboard.index', compact('widgets'));
     }
 
-    public function edit() {
-        $dash = Auth::user()->dashboard;
-        if (!$dash) {
-            $dash = Dashboard::create(['user_id' => Auth::user()->id]);
+    public function getWidget(Request $request) {
+        $widget = $request->get('name');
+        if (empty($widget)) return response()->json('URL parameter "name" is missing.', 404);
+        
+        try {
+            $widget = Widget::run('admin.'.$widget);
+        } catch (Exception $e) {
+            return response()->json(['message' => $e->getMessage(), 'status' => '404'], 404);
         }
-        $widgets = unserialize($dash->widgets);
-        return view('admin.dashboard.edit', compact('widgets'));
+        
+        return response()->json((string) $widget, 200);
     }
 
     public function update(Request $request) {
-        $dash = Auth::user()->dashboard;
-        $widgets = json_decode($request->get('widgets'), true);
-        // dd($widgets);
-        $dash->update([
-            'widgets' => serialize($widgets)
-        ]);
-        return redirect(route('admin.dashboard.index'));
+        $items = $request->get('items');
+        $dashboard = Auth::user()->dashboard;
+
+        if (is_array($items)) {
+            $dashboard->update(['widgets' => serialize($items)]);
+            return response()->json(['success' => true], 200); 
+        }
+        
+        return response()->json(['success' => false], 400); 
     }
 }

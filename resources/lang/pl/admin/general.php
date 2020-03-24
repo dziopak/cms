@@ -9,6 +9,7 @@
         'category' => 'Kategoria',
 
         'actions' => 'Operacje',
+        
         'yes' => 'Tak',
-        'no' => 'Nie'
+        'no' => 'Nie',
     ];

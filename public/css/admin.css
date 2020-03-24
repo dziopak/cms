@@ -1,3 +1,7 @@
+body {
+  font-family: "Raleway", sans-serif;
+}
+
 a {
   color: #212529;
 }
@@ -171,5 +175,97 @@ label {
 
 .mce-tinymce iframe {
   min-height: 600px;
+}
+
+.widget {
+  height: 100%;
+  overflow: hidden;
+}
+
+.widget .card {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  padding-bottom: 80px;
+  position: relative;
+  border-radius: 15px;
+  border-color: #0000000f;
+}
+
+.widget .card-body {
+  padding: 1.4rem 1.8rem;
+}
+
+.widget .card .widget-controls {
+  position: absolute;
+  bottom: 20px;
+}
+
+button#toggle-components {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: #354149;
+  color: #fff;
+  z-index: 92;
+  transition: background-color 0.2s linear;
+}
+
+button#toggle-components.active,
+button#toggle-components:hover {
+  background: #ff9c00;
+  color: #fff;
+}
+
+div#dashboard-components {
+  width: 50%;
+  position: fixed;
+  right: -260px;
+  top: 0;
+  bottom: 0;
+  background: #354149;
+  z-index: 91;
+  max-width: 260px;
+  transition: right 0.3s linear;
+  padding: 10px 20px;
+}
+
+div#dashboard-components.active {
+  right: 0;
+}
+
+.add-widget {
+  width: 100%;
+  min-height: 120px;
+  margin: 10px 0px;
+  border-radius: 8px;
+  border: 0px;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  place-content: center;
+  padding: 20px;
+}
+
+.add-widget span {
+  display: inline;
+}
+
+.add-widget p {
+  display: none;
+  text-align: center;
+  margin: 0;
+}
+
+.add-widget:hover span {
+  display: none;
+}
+
+.add-widget:hover p {
+  display: inline;
 }
 
