@@ -1,4 +1,4 @@
-@wrapper('admin.partials.widget_collapsable', ['title' => 'Recently logged in users', 'id' => 'recently-logged-users', 'classes' => 'col-lg-8'])
+@wrapper('admin.partials.widget_collapsable', ['title' => 'Recently logged in users', 'id' => 'recently-logged-users', 'classes' => ''])
     <ul class="list-group list-group-flush">
         @foreach($users as $user)
             <li class="list-group-item px-0">
@@ -6,5 +6,7 @@
             </li>  
         @endforeach
     </ul>
-    <a class="btn btn-primary mt-4" href="{{ route('admin.users.index') }}">All users</a>
+    <div class="widget-controls">
+        <a class="btn btn-primary mt-4" href="{{ route('admin.users.index') }}">All users</a>
+    </div>
 @endwrapper

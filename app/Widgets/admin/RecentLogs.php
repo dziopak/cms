@@ -7,7 +7,15 @@ use Arrilot\Widgets\AbstractWidget;
 class RecentLogs extends AbstractWidget
 {
     protected $config = [
-        'count' => 5
+        'count' => 5,
+        'x' => '0',
+        'y' => '0',
+        'w' => 4,
+        'h' => 5,
+        'min-w' => '4',
+        'min-h' => '6',
+        'id' => 'recentLogs',
+        'auto' => true
     ];
 
     public function placeholder()
