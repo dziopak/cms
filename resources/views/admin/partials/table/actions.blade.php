@@ -20,7 +20,7 @@
                 @if (!empty($action['disabled']) && in_array($field->id, $action['disabled']))
                     <a href="#" class="btn btn-secondary btn-disabled" disabled><i class="fa fas fa-ban"></i></a>    
                 @else
-                    <a href="{{ route($action['url'], $field->id) }}" class="btn btn-{{ $action['class'] }}">
+                    <a href="{{ route($action['url'], $field->id) }}" class="btn btn-action btn-{{ $action['class'] }}">
                         @include('admin.partials.table.action_type')
                     </a>    
                 @endif

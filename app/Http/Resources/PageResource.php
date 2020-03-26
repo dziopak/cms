@@ -25,9 +25,9 @@ class PageResource extends JsonResource
             'excerpt' => $this->excerpt,
             'thumbnail' => $this->file_id ? env('APP_URL').'images/'.$this->thumbnail->path : "",
             'author' => $this->author->name,
-            'category' => $this->category_id ? $this->category->name : "",
+            'category' => $this->category_id && $this->category->name ? $this->category->name : "",
             'category_id' => $this->category_id ? $this->category_id : "",
-            'category_slug' => $this->category_id ? $this->category->slug : "",
+            'category_slug' => $this->category_id && $this->category->slug ? $this->category->slug : "",
             'meta_title' => $this->meta_title,
             'meta_description' => $this->meta_description,
         ];

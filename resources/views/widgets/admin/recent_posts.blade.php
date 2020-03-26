@@ -7,7 +7,7 @@
         @endforeach
     </ul>
     <div class="widget-controls w-100">
-        <a class="btn btn-success mr-2" href="{{ route('admin.posts.create') }}">Write new</a>
-        <a class="btn btn-primary" href="{{ route('admin.posts.index') }}">All posts</a>
+        <a class="btn btn-primary mr-2" href="{{ route('admin.posts.create') }}">{{ __('admin/widgets/recent_posts.write_new') }}</a>
+        <a class="btn btn-transparent px-3" href="{{ route('admin.posts.index') }}">{{ __('admin/widgets/recent_posts.all_posts') }}</a>
     </div>
 @endwrapper
