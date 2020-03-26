@@ -12,4 +12,8 @@
         
         'yes' => 'Tak',
         'no' => 'Nie',
+
+        'day' => 'dzień|dni',
+        'month' => 'miesiąc|miesięcy',
+        'year' => 'rok|lat',
     ];

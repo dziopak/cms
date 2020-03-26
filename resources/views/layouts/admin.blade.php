@@ -16,12 +16,12 @@
 
 
             {{-- Main area --}}
-            <div id="admin-main" class="col-9 col-sm-9 col-md-10 col-lg-11">
+            <div id="admin-main" class="col">
                 
                 <!-- Top navigation bar -->
                 @include('admin.partials.top-nav')
 
-                <div class="row py-3 pr-3">
+                <div id="module" class="row py-3 pr-3">
                     <!-- Action alert -->
                     @include('layouts.admin.partials.alert')
                     
@@ -36,6 +36,7 @@
     </div>
 
     @yield('footer')
+    @stack('scripts-bottom')
 </body>
 
 </html>

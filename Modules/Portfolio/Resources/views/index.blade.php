@@ -11,8 +11,6 @@
 
 @section('module-content')
     @wrapper('admin.partials.widget', ['title' => 'All items'])
-        @include('admin.partials.searchfilterbar')
         @include('admin.partials.table', ['fields' => $items])
-        @include('admin.partials.massedit')
     @endwrapper
 @endsection

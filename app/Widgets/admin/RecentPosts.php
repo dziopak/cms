@@ -16,7 +16,9 @@ class RecentPosts extends AbstractWidget
         'min-w' => '4',
         'min-h' => '5',
         'id' => 'recentPosts',
-        'auto' => true
+        'auto' => true,
+        'header' => 'admin/widgets/recent_posts.title',
+        'icon' => 'fa fas fa-book'
     ];
 
     public function run()

@@ -1,11 +1,14 @@
 <?php
+
+use App\Http\Controllers\Admin;
+
 Route::group(['prefix' => '/'], function () {
     Route::get('/', function () {
         Artisan::call('storage:link');
     });
 });
 
-
+Route::get('/locale', LocaleController::class)->name('locale');
 
 //Backoffice routes
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'access:ADMIN_VIEW'], function () {
@@ -22,6 +25,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'access:ADM
     Route::get('/menus', function() {
         return view('admin.menus.index');
     })->name('menus.index');
+
 
     Route::get('/modules', 'admin\ModulesController@index')->name('modules.index');
 

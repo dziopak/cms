@@ -13,9 +13,11 @@ class RecentlyLoggedIn extends AbstractWidget
         'w' => 4,
         'h' => 5,
         'min-w' => '4',
-        'min-h' => '5',
+        'min-h' => '1',
         'id' => 'recentlyLoggedIn',
-        'auto' => true
+        'auto' => true,
+        'header' => 'Recent logins',
+        'icon' => 'fa fas fa-user-circle'
     ];
     
     public function placeholder()
