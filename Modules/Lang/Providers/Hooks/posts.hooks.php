@@ -1,53 +1,46 @@
 <?php
-    // View hooks
-    Hook::listen('template.post_left_content', function ($callback, $output, $variables) use ($langs) {
-        return view('lang::partials.posts.left', compact('langs'));
-    });
+    // Form hooks
+    Hook::listen('postsFormFields', function ($callback, $output, $form) use ($langs) {
+        empty($output) ? $output = $form : null;
 
-    Hook::listen('template.post_right_content', function ($callback, $output, $variables) use ($langs) {
-        return view('lang::partials.posts.right', compact('langs'));
-    });
+        $output['left']['name_row']['items']['name']['container_class'] .= ' lang lang_origin';
+        $output['left']['slug_category_row']['items']['slug']['container_class'] .= ' lang lang_origin';
+        $output['left']['excerpt_row']['items']['excerpt']['container_class'] .= ' lang lang_origin';
+        $output['bottom']['content_row']['items']['content']['container_class'] .= ' lang lang_origin';
+        $output['right']['meta_title_row']['items']['meta_title']['container_class'] .= ' lang lang_origin';
+        $output['right']['meta_description_row']['items']['meta_description']['container_class'] .= ' lang lang_origin';
 
-    Hook::listen('template.post_bottom_content', function ($callback, $output, $variables) use ($langs) {
-        return view('lang::partials.posts.bottom', compact('langs'));
-    });
-
-    //Resource hooks
-    Hook::listen('apiPostResource', function ($callback, $output, $postResource, $post) use ($langs) {
-        if (empty($output))
-        {
-          $output = $postResource;
-        }
-        
         foreach($langs as $lang) {
-            $output['name_'.$lang->lang_tag] = $post['name_'.$lang->lang_tag];
-            $output['slug_'.$lang->lang_tag] = $post['slug_'.$lang->lang_tag];
-            $output['content_'.$lang->lang_tag] = $post['content_'.$lang->lang_tag];
-            $output['excerpt_'.$lang->lang_tag] = $post['excerpt_'.$lang->lang_tag];
-            $output['category_'.$lang->lang_tag] = $post->category['name_'.$lang->lang_tag];
-            $output['category_slug_'.$lang->lang_tag] = $post->category['slug_'.$lang->lang_tag];
-            $output['meta_title_'.$lang->lang_tag] = $post['meta_title_'.$lang->lang_tag];
-            $output['meta_description_'.$lang->lang_tag] = $post['meta_description_'.$lang->lang_tag];
-        }
+            $tag = $lang->lang_tag;
 
+            // Name fields
+            $name = addFormInput('name_'.$tag, 'text', 'admin/posts.name', true, null, '', 'hide lang', [], ['data-replace' => 'name']);
+            $output['left']['name_row']['items'] = array_push_after('name', $name, $output['left']['name_row']['items']);
+            
+            // Slug fields
+            $slug = addFormInput('slug_'.$tag, 'text', 'admin/posts.slug', true, null, '', 'hide lang', [], ['data-replace' => 'slug']);
+            $output['left']['slug_category_row']['items'] = array_push_after('slug', $slug, $output['left']['slug_category_row']['items']);
+
+            // Excerpt fields
+            $excerpt = addFormInput('excerpt_'.$tag, 'textarea', 'admin/posts.excerpt', true, null, '', 'hide lang', [], ['data-replace' => 'excerpt']);
+            $output['left']['excerpt_row']['items'] = array_push_after('excerpt', $excerpt, $output['left']['excerpt_row']['items']);
+            
+            // Content fields
+            $content = addFormInput('content_'.$tag, 'textarea', 'admin/posts.content', true, null, 'tinymce', 'hide lang', [], ['data-replace' => 'content']);
+            $output['bottom']['content_row']['items'] = array_push_after('content', $content, $output['bottom']['content_row']['items']);
+            
+            // Meta title fields
+            $meta_title = addFormInput('meta_title_'.$tag, 'text', 'admin/posts.meta_title', false, null, '', 'hide lang', [], ['data-replace' => 'meta_title']);
+            $output['right']['meta_title_row']['items'] = array_push_after('meta_title', $meta_title, $output['right']['meta_title_row']['items']);
+            
+            // Meta description fields
+            $meta_description = addFormInput('meta_description_'.$tag, 'textarea', 'admin/posts.meta_description', false, null, '', 'hide lang', [], ['data-replace' => 'meta_description']);
+            $output['right']['meta_description_row']['items'] = array_push_after('meta_description', $meta_description, $output['right']['meta_description_row']['items']);
+
+        }
         return $output;
     }, 10);
-    
-    Hook::listen('apiCategoryResource', function ($callback, $output, $categoryResource, $category) use ($langs) {
-        if (empty($output))
-        {
-          $output = $categoryResource;
-        }
-        
-        foreach($langs as $lang) {
-            $output['name_'.$lang->lang_tag] = $category['name_'.$lang->lang_tag];
-            $output['slug_'.$lang->lang_tag] = $category['slug_'.$lang->lang_tag];
-            $output['description_'.$lang->lang_tag] = $category['description_'.$lang->lang_tag];
-        }
 
-        return $output;
-    }, 10);
-    
 
     //Validation hooks
     Hook::listen('apiPostsStoreValidation', function ($callback, $output, $validationFields) use ($langs) {
@@ -62,7 +55,7 @@
 
         return $output;
     }, 10);
-
+    
     Hook::listen('apiPostsUpdateValidation', function ($callback, $output, $validationFields) use ($langs) {
         empty($output) ? $output = $validationFields : null;
 
@@ -75,9 +68,9 @@
 
         return $output;
     }, 10);
-    
 
-    // Other hooks
+
+    //Other hooks
     Hook::listen('apiPostFindSelector', function ($callback, $output, $post, $slug) use ($langs) {
         empty($output) ? $output = $post : null;
 
@@ -87,3 +80,6 @@
 
         return $output;
     }, 10);
+
+
+    

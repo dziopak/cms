@@ -1,7 +1,7 @@
 <?php
     $form = [
         'left' => [
-            [
+            'name_row' => [
                 'class' => 'form-group row',
                 'items' => [
                     'name' => [
@@ -9,11 +9,12 @@
                         'label' => __('admin/pages.name'),
                         'required' => true,
                         'value' => null,
-                        'class' => ''
+                        'class' => '',
+                        'container_class' => ''
                     ],
                 ],
             ],
-            [
+            'slug_category_row' => [
                 'class' => 'form-group row',
                 'items' => [
                     'slug' => [
@@ -21,7 +22,8 @@
                         'label' => __('admin/pages.slug'),
                         'required' => true,
                         'value' => null,
-                        'class' => ''
+                        'class' => '',
+                        'container_class' => ''
                     ],
                     'category_id' => [
                         'type' => 'select',
@@ -29,11 +31,12 @@
                         'label' => __('admin/pages.category'),
                         'required' => true,
                         'value' => null,
-                        'class' => ''
+                        'class' => '',
+                        'container_class' => ''
                     ],
                 ],
             ],
-            [
+            'excerpt_row' => [
                 'class' => 'form-group row',
                 'items' => [
                     'excerpt' => [
@@ -41,23 +44,25 @@
                         'label' => __('admin/pages.excerpt'),
                         'required' => true,
                         'value' => null,
-                        'class' => ''
+                        'class' => '',
+                        'container_class' => ''
                     ],
                 ]
             ]    
         ],
         'right' => [
-            [
+            'thumbnail_row' => [
                 'class' => 'form-group row',
                 'items' => [
                     'thumbnail' => [
                         'type' => 'file',
                         'label' => __('admin/pages.thumbnail'),
-                        'class' => ''
+                        'class' => '',
+                        'container_class' => ''
                     ],
                 ],
             ],
-            [
+            'meta_title_row' => [
                 'class' => 'form-group row',
                 'items' => [
                     'meta_title' => [
@@ -65,11 +70,12 @@
                         'label' => __('admin/pages.meta_title'),
                         'required' => false,
                         'value' => null,
-                        'class' => ''
+                        'class' => '',
+                        'container_class' => ''
                     ],
                 ]
             ],
-            [
+            'meta_description_row' => [
                 'class' => 'form-group row',
                 'items' => [
                     'meta_description' => [
@@ -77,11 +83,12 @@
                         'label' => __('admin/pages.meta_description'),
                         'required' => false,
                         'value' => null,
-                        'class' => ''
+                        'class' => '',
+                        'container_class' => ''
                     ],
                 ]
             ],
-            [
+            'index_follow_row' => [
                 'class' => 'form-group',
                 'items' => [
                     'index' => [
@@ -89,20 +96,22 @@
                         'label' => __('admin/pages.index'),
                         'value' => null,
                         'checked_value' => 1,
-                        'class' => ''
+                        'class' => '',
+                        'container_class' => ''
                     ],
                     'follow' => [
                         'type' => 'checkbox',
                         'label' => __('admin/pages.follow'),
                         'value' => null,
                         'checked_value' => 1,
-                        'class' => ''
+                        'class' => '',
+                        'container_class' => ''
                     ],
                 ]
             ]
         ],
         'bottom' => [
-            [
+            'content_row' => [
                 'class' => 'form-group row',
                 'items' => [
                     'content' => [
@@ -110,11 +119,16 @@
                         'class' => 'tinymce',
                         'label' => __('admin/pages.content'),
                         'value' => null,
-                        'required' => true
+                        'required' => true,
+                        'container_class' => ''
                     ]
                 ]
             ]
         ]
     ];
+
+    $form = Hook::get('pagesFormFields',[$form],function($form){
+        return $form;
+    });
 
     return $form;

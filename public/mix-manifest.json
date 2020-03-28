@@ -3,5 +3,10 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/css/admin.css": "/css/admin.css",
-    "/js/lang.js": "/js/lang.js"
+    "/js/lang.js": "/js/lang.js",
+    "/js/admin/defer.js": "/js/admin/defer.js",
+    "/js/manifest.js": "/js/manifest.js",
+    "/js/vendor.js": "/js/vendor.js",
+    "/js/langs.js": "/js/langs.js",
+    "/public/css/lang.css": "/public/css/lang.css"
 }

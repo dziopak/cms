@@ -81,42 +81,89 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./Resources/assets/js/app.js":
-/*!************************************!*\
-  !*** ./Resources/assets/js/app.js ***!
-  \************************************/
+/***/ "./resources/js/admin/defer.js":
+/*!*************************************!*\
+  !*** ./resources/js/admin/defer.js ***!
+  \*************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+$(document).ready(function () {
+  // TinyMCE //
+  if ($('.tinymce').length > 0) {
+    var editor_config = {
+      path_absolute: "/",
+      selector: "textarea.tinymce",
+      plugins: ["advlist autolink lists link image charmap print preview hr anchor pagebreak", "searchreplace wordcount visualblocks visualchars code fullscreen", "insertdatetime media nonbreaking save table contextmenu directionality", "emoticons template paste textcolor colorpicker textpattern"],
+      toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media",
+      relative_urls: false,
+      file_browser_callback: function file_browser_callback(field_name, url, type, win) {
+        var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+        var y = window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight;
+        var cmsURL = editor_config.path_absolute + 'admin/filemanager?field_name=' + field_name;
 
+        if (type == 'image') {
+          cmsURL = cmsURL + "&type=Images";
+        } else {
+          cmsURL = cmsURL + "&type=Files";
+        }
+
+        tinyMCE.activeEditor.windowManager.open({
+          file: cmsURL,
+          title: 'Filemanager',
+          width: x * 0.8,
+          height: y * 0.8,
+          resizable: "yes",
+          close_previous: "no"
+        });
+      }
+    };
+    tinymce.init(editor_config);
+  } // MASS EDIT //
+
+
+  var selectAll = $('.select-all');
+  selectAll.change(function () {
+    selectAll.closest('table').find('input').prop('checked', selectAll.prop('checked'));
+  });
+  $("#mass_action").change(function (e) {
+    $(".mass_edit_sub").hide();
+
+    if ($("#" + e.target.value)) {
+      $("#" + e.target.value).show();
+    }
+  }); // LOGS //
+
+  $('#filter-button').click(function () {
+    var crud = document.getElementById('log-crud').value;
+    var type = document.getElementById('log-type').value;
+    $("#logs-table .alert").each(function () {
+      if (($(this).attr('data-crud') == crud || crud === "0") && ($(this).attr('data-type') == type || type === "0")) {
+        $(this).show();
+      } else if (crud == 0 && type == 0) {
+        $(this).show();
+      } else {
+        $(this).hide();
+      }
+    });
+  });
+});
 
 /***/ }),
 
-/***/ "./Resources/assets/sass/lang.scss":
-/*!*****************************************!*\
-  !*** ./Resources/assets/sass/lang.scss ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\nModuleBuildError: Module build failed (from C:/laragon/www/cms/node_modules/sass-loader/dist/cjs.js):\nValidationError: Invalid options object. Sass Loader has been initialized using an options object that does not match the API schema.\n - options has an unknown property 'outputStyle'. These properties are valid:\n   object { implementation?, sassOptions?, prependData?, sourceMap?, webpackImporter? }\n    at validate (C:\\laragon\\www\\cms\\node_modules\\sass-loader\\node_modules\\schema-utils\\dist\\validate.js:85:11)\n    at Object.loader (C:\\laragon\\www\\cms\\node_modules\\sass-loader\\dist\\index.js:36:28)\n    at C:\\laragon\\www\\cms\\Modules\\Lang\\node_modules\\webpack\\lib\\NormalModule.js:316:20\n    at C:\\laragon\\www\\cms\\Modules\\Lang\\node_modules\\loader-runner\\lib\\LoaderRunner.js:367:11\n    at C:\\laragon\\www\\cms\\Modules\\Lang\\node_modules\\loader-runner\\lib\\LoaderRunner.js:233:18\n    at runSyncOrAsync (C:\\laragon\\www\\cms\\Modules\\Lang\\node_modules\\loader-runner\\lib\\LoaderRunner.js:143:3)\n    at iterateNormalLoaders (C:\\laragon\\www\\cms\\Modules\\Lang\\node_modules\\loader-runner\\lib\\LoaderRunner.js:232:2)\n    at C:\\laragon\\www\\cms\\Modules\\Lang\\node_modules\\loader-runner\\lib\\LoaderRunner.js:205:4\n    at C:\\laragon\\www\\cms\\Modules\\Lang\\node_modules\\enhanced-resolve\\lib\\CachedInputFileSystem.js:85:15\n    at processTicksAndRejections (internal/process/task_queues.js:79:11)");
-
-/***/ }),
-
-/***/ 0:
-/*!****************************************************************************!*\
-  !*** multi ./Resources/assets/js/app.js ./Resources/assets/sass/lang.scss ***!
-  \****************************************************************************/
+/***/ 2:
+/*!*******************************************!*\
+  !*** multi ./resources/js/admin/defer.js ***!
+  \*******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\laragon\www\cms\Modules\Lang\Resources\assets\js\app.js */"./Resources/assets/js/app.js");
-module.exports = __webpack_require__(/*! C:\laragon\www\cms\Modules\Lang\Resources\assets\sass\lang.scss */"./Resources/assets/sass/lang.scss");
+module.exports = __webpack_require__(/*! C:\laragon\www\cms\resources\js\admin\defer.js */"./resources/js/admin/defer.js");
 
 
 /***/ })

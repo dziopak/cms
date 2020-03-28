@@ -7,6 +7,8 @@ use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
 $factory->define(User::class, function (Faker $faker) {
+
+    User::unsetEventDispatcher();
     return [
         'name' => $faker->firstName,
         'email' => $faker->unique()->safeEmail,
@@ -17,6 +19,7 @@ $factory->define(User::class, function (Faker $faker) {
         'is_active' => $faker->numberBetween(0,1),
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
-        'avatar' => '1'
+        'avatar' => '1',
+        'locale' => 'en'
     ];
 });

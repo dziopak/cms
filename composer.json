@@ -24,7 +24,6 @@
         "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.2",
         "barryvdh/laravel-ide-helper": "^2.6",
         "facade/ignition": "^1.4",
         "fzaninotto/faker": "^1.4",
@@ -49,7 +48,8 @@
         },
         "files": [
             "app/Helpers/ViewHelpers.php",
-            "app/Helpers/DataArrays.php"
+            "app/Helpers/DataArrays.php",
+            "app/Helpers/ArrayHelpers.php"
         ],
         "classmap": [
             "database/seeds",
