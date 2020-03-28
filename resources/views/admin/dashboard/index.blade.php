@@ -5,6 +5,12 @@
     <meta name="_token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gridstack@1.1.1/dist/gridstack.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/gridstack@1.1.1/dist/gridstack.all.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+@endpush
+
+
+@push('scripts-bottom')
+    <script src="{{asset('js/admin/dashboard.js')}}" defer></script>
 @endpush
 
 

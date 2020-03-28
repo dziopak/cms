@@ -36,13 +36,38 @@ class LangServiceProvider extends ServiceProvider
             return $output;
         }, 10);
         
-        Hook::listen('template.top-nav-user-bar', function ($callback, $output, $variables) use ($langs) {
-            !empty(session('lang')) ? $current_lang = session('lang') : $current_lang = 'en';
-            foreach($langs as $key => $lang) {
-                $tmp_langs[$lang->lang_tag] = $lang->name;
+        Hook::listen('template.adminStylesheets', function ($callback, $output, $variables){
+            $html = '<link href="'.asset('public/css/lang.css').'" rel="stylesheet">';        
+            !empty($output) ? $output .= $html : $output = $html;
+            return $output;
+        });
+    
+        Hook::listen('template.adminScriptsDefer', function ($callback, $output, $variables){
+            $html = '<script src="'.asset('js/langs.js').'"></script>';        
+            !empty($output) ? $output .= $html : $output = $html;
+            return $output;
+        });
+
+        Hook::listen('template.adminInlineScripts', function ($callback, $output, $variables) use ($langs) {
+            $html = '<div class="input-lang-switcher">';
+            $html .= '<div class="input-lang active" style="background-image: url(\'/images/langs/flags/en.png\');" data-lang="default"></div>';
+            foreach($langs as $lang) {
+                $html .= '<div style="background-image: url(\'/images/langs/flags/'.$lang->lang_tag.'.png\');" class="input-lang" data-lang="'.$lang->lang_tag.'"></div>';
             }
-            $langs = array_merge(['en' => "English"], $tmp_langs);
-            return view('lang::partials.lang-switcher', compact('langs', 'current_lang'));
+            $html .= '</div>';
+            $script = '
+                $(document).ready(function() {
+                    var fields = $(".lang_origin");
+    
+                    if (fields.length > 0) {
+                        fields.each(function() {
+                            $(this).append(`'.$html.'`);
+                        });
+                    }
+                });
+            ';        
+            !empty($output) ? $output .= $script : $output = $script;
+            return $output;
         });
     }
 

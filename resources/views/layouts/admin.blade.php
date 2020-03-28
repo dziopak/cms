@@ -37,6 +37,12 @@
 
     @yield('footer')
     @stack('scripts-bottom')
+    
+    <script>
+        @hook('adminInlineScripts')
+        </script>
+    <script src="{{asset('js/admin/defer.js')}}" defer></script>
+    @hook('adminScriptsDefer')
 </body>
 
 </html>

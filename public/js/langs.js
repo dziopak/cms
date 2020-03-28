@@ -93,7 +93,26 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+$(document).ready(function () {
+  $('.input-lang').click(function () {
+    var langSwitcher = $(this).closest('.input-lang-switcher');
+    var lang = $(this).data('lang');
+    langSwitcher.find('.active').removeClass('active');
+    $(this).addClass('active');
+    var container = $(this).closest('.form-group');
+    var field = container.find('.lang_origin').data('container-for');
+    container.find('.lang').hide();
 
+    if (lang === "default") {
+      var target = container.find('.lang_origin');
+    } else {
+      var target = container.find('.lang[data-container-for="' + field + '_' + lang + '"]');
+    }
+
+    target.show();
+    langSwitcher.appendTo(target);
+  });
+});
 
 /***/ }),
 
@@ -104,7 +123,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\nModuleBuildError: Module build failed (from C:/laragon/www/cms/node_modules/sass-loader/dist/cjs.js):\nValidationError: Invalid options object. Sass Loader has been initialized using an options object that does not match the API schema.\n - options has an unknown property 'outputStyle'. These properties are valid:\n   object { implementation?, sassOptions?, prependData?, sourceMap?, webpackImporter? }\n    at validate (C:\\laragon\\www\\cms\\node_modules\\sass-loader\\node_modules\\schema-utils\\dist\\validate.js:85:11)\n    at Object.loader (C:\\laragon\\www\\cms\\node_modules\\sass-loader\\dist\\index.js:36:28)\n    at C:\\laragon\\www\\cms\\Modules\\Lang\\node_modules\\webpack\\lib\\NormalModule.js:316:20\n    at C:\\laragon\\www\\cms\\Modules\\Lang\\node_modules\\loader-runner\\lib\\LoaderRunner.js:367:11\n    at C:\\laragon\\www\\cms\\Modules\\Lang\\node_modules\\loader-runner\\lib\\LoaderRunner.js:233:18\n    at runSyncOrAsync (C:\\laragon\\www\\cms\\Modules\\Lang\\node_modules\\loader-runner\\lib\\LoaderRunner.js:143:3)\n    at iterateNormalLoaders (C:\\laragon\\www\\cms\\Modules\\Lang\\node_modules\\loader-runner\\lib\\LoaderRunner.js:232:2)\n    at C:\\laragon\\www\\cms\\Modules\\Lang\\node_modules\\loader-runner\\lib\\LoaderRunner.js:205:4\n    at C:\\laragon\\www\\cms\\Modules\\Lang\\node_modules\\enhanced-resolve\\lib\\CachedInputFileSystem.js:85:15\n    at processTicksAndRejections (internal/process/task_queues.js:79:11)");
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 

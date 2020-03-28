@@ -15,7 +15,7 @@ class PostsStatistics extends AbstractWidget
      * @var array
      */
     protected $config = [
-        'days' => 7,
+        'days' => 14,
         'x' => '0',
         'y' => '0',
         'w' => 8,
