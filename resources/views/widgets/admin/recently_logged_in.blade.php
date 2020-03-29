@@ -1,4 +1,4 @@
-@wrapper('admin.partials.widget_collapsable', ['title' => 'Recently logged in users', 'id' => 'recently-logged-users', 'classes' => ''])
+@wrapper('admin.partials.widgets.widget_static', ['title' => 'Recently logged in users', 'id' => 'recently-logged-users', 'classes' => ''])
     <div class="hide-y-4">
         <ul class="list-group list-group-flush">
             @foreach($users as $user)

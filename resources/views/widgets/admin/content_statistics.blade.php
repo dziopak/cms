@@ -1,4 +1,4 @@
-@wrapper('admin.partials.widget_collapsable', ['id' => 'recent-logs', 'classes' => ''])
+@wrapper('admin.partials.widgets.widget_static', ['id' => 'recent-logs', 'classes' => ''])
     <div class="pt-5">
         <canvas id="content_stats_chart" height="200" class="chart"></canvas>
     </div>
@@ -14,7 +14,7 @@
                 data: {
                     datasets: [{
                         data: [<?php echo $data ?>],
-                        backgroundColor: ['#3490dc', '#38c172', '#ff3939'],
+                        backgroundColor: ['#706fd3', '#34ace0', '#227093'],
                     }],
 
                     labels: [<?php echo $labels ?>]

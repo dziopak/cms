@@ -1,4 +1,6 @@
 <script type="text/javascript">
+    var grid = GridStack.init();
+
     function saveDashboard() {
         var items = [];
 
@@ -25,99 +27,30 @@
             }
         });
     }
-
-    var grid = GridStack.init({
-        
-    });
-    // grid.on('resize', function(param) {
-    //     console.log(param);
-    // });
-    grid.on('change', function(grid, items) {
-        saveDashboard();
-
-        items.forEach(el => {
-            console.log(el);
-            var sizeY = el.height;
-            var sizeW = el.width;
-            
-            for(var i = 1; i < 10; i++) {
-                if (i < sizeY) {
-                    $(el.el).find('.hide-y-'+i).show();
-                    $(el.el).find('.show-y-'+i).hide();
-                } else {
-                    $(el.el).find('.hide-y-'+i).hide();
-                    $(el.el).find('.show-y-'+i).show();
-                }
-            }
-
-            // for(var i = 1; i < 12; i++) {
-            //     if (i < sizeX) {
-            //         $(el.el).find('.hide-x-'+i).show();
-            //         $(el.el).find('.show-x-'+i).hide();
-            //     } else {
-            //         $(el.el.find('.hide-x-'+i).hide();
-            //         $(el.el.find('.show-x-'+i).show();
-            //     }
-            // }
-        });
-
-        
-
-    });
-
+    
     $('.add-widget').click(function() {
         var name = $(this).attr('data-name');
         $.get( `{{ route('admin.dashboard.getwidget') }}?name=${name}`, function( html ) {
             if (typeof html === "string") {
+                
+                // Append new widget and auto position it
                 $('#dashboard').append(html);
                 grid.addWidget($('#'+name));
+                
+                // Scroll to new widget
+                document.getElementById(name).scrollIntoView();
                 $('#'+name).removeAttr('id');
+
+                // Save widgets positions
                 saveDashboard();
+
+                // Update onClick event for new item
+                $('.widget-remove').click(function() {
+                    $(this).closest('.grid-stack-item').remove();
+                    grid.init();
+                    saveDashboard();
+                });
             }
-        });
-    });
-
-    $('#toggle-components').click(function() {
-        var components = $('#dashboard-components');
-        if (!components.hasClass('active')) {
-            components.addClass('active');
-            $(this).addClass('active');
-        } else {
-            components.removeClass('active');
-            $(this).removeClass('active');
-        }
-    });
-
-    $(document).ready(function() {
-        $('.grid-stack-item').each(function() {
-            var sizeY = $(this).data('gs-height');
-            var sizeX = $(this).data('gs-width');
-
-            
-            for(var i = 1; i < 10; i++) {
-                if (i < sizeY) {
-                    $(this).find('.hide-y-'+i).show();
-                    $(this).find('.show-y-'+i).hide();
-                } else {
-                    $(this).find('.hide-y-'+i).hide();
-                    $(this).find('.show-y-'+i).show();
-                }
-            }
-
-            for(var i = 1; i < 12; i++) {
-                if (i < sizeX) {
-                    $(this).find('.hide-x-'+i).show();
-                    $(this).find('.show-x-'+i).hide();
-                } else {
-                    $(this).find('.hide-x-'+i).hide();
-                    $(this).find('.show-x-'+i).show();
-                }
-            }
-        });
-
-        $('.widget-remove').click(function() {
-            $(this).closest('.grid-stack-item').remove();
-            saveDashboard();
         });
     });
 </script>

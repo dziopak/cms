@@ -16,7 +16,7 @@
 
 
             {{-- Main area --}}
-            <div id="admin-main" class="col">
+            <div id="admin-main" class="col w-100 overflow-hidden">
                 
                 <!-- Top navigation bar -->
                 @include('admin.partials.top-nav')

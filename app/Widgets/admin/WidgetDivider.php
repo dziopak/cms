@@ -22,7 +22,8 @@ class WidgetDivider extends AbstractWidget
         'id' => 'widgetDivider',
         'auto' => true,
         'non-resizeable' => true,
-        'header' => 'Testowy divider'
+        'header' => 'Testowy divider',
+        'editable' => 'header'
     ];
 
     /**
