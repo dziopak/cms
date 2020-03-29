@@ -1,4 +1,4 @@
-@wrapper('admin.partials.widget_collapsable', ['title' => 'Recent posts', 'id' => 'recent-news', 'classes' => ''])
+@wrapper('admin.partials.widgets.widget_static', ['title' => 'Recent posts', 'id' => 'recent-news', 'classes' => ''])
     <ul class="list-group list-group-flush w-100">
         @foreach($posts as $post)
             <li class="list-group-item px-0">

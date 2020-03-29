@@ -10882,6 +10882,10 @@ a.text-dark:focus {
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   padding: 0;
   margin: 0;

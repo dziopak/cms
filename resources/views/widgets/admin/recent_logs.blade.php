@@ -1,4 +1,4 @@
-@wrapper('admin.partials.widget_collapsable', ['id' => 'recent-logs', 'classes' => ''])
+@wrapper('admin.partials.widgets.widget_static', ['id' => 'recent-logs', 'classes' => ''])
     
     @include('admin.partials.logs')
 

@@ -8,5 +8,14 @@
     "/js/manifest.js": "/js/manifest.js",
     "/js/vendor.js": "/js/vendor.js",
     "/js/langs.js": "/js/langs.js",
-    "/public/css/lang.css": "/public/css/lang.css"
+    "/public/css/lang.css": "/public/css/lang.css",
+    "/assets/js/slick.min.js": "/assets/js/slick.min.js",
+    "/assets/css/slick.css": "/assets/css/slick.css",
+    "/assets/css/slick-theme.css": "/assets/css/slick-theme.css",
+    "/assets/js/Chart.bundle.min.js": "/assets/js/Chart.bundle.min.js",
+    "/assets/css/Chart.min.css": "/assets/css/Chart.min.css",
+    "/assets/js/Chart.js": "/assets/js/Chart.js",
+    "/assets/js/gridstack.min.js": "/assets/js/gridstack.min.js",
+    "/assets/css/gridstack.min.css": "/assets/css/gridstack.min.css",
+    "/assets/js/gridstack.all.js": "/assets/js/gridstack.all.js"
 }

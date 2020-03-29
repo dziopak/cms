@@ -3,14 +3,18 @@
 
 @push('head')
     <meta name="_token" content="{{ csrf_token() }}" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gridstack@1.1.1/dist/gridstack.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/gridstack@1.1.1/dist/gridstack.all.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-@endpush
-
-
-@push('scripts-bottom')
+    <script src="{{asset('assets/js/gridstack.all.js')}}"></script>
+    <script src="{{asset('assets/js/Chart.js')}}"></script>
+    
+    <link rel="stylesheet" href="{{asset('assets/css/gridstack.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/slick.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/slick-theme.css')}}">
+    @endpush
+    
+    
+    @push('scripts-bottom')
     <script src="{{asset('js/admin/dashboard.js')}}" defer></script>
+    <script src="{{asset('assets/js/slick.min.js')}}" defer></script>
 @endpush
 
 
@@ -25,7 +29,9 @@
 @section('module-content')
 
     {{-- Adding components to dashboard --}}
+    <div class="row">
     @include('admin.partials.dashboard.controls')
+    </div>
     {{-- End --}}
 
 

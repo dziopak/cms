@@ -217,9 +217,16 @@ label {
   box-shadow: 0 0.1rem 0.25rem rgba(0, 0, 0, 0.075);
 }
 
-.card .card-title {
+.card-title {
+  color: #3490dc;
   margin-bottom: 0.75rem;
-  color: #555555;
+}
+
+.card-title .fa {
+  font-size: 22px;
+  margin-right: 16px;
+  display: block;
+  float: left;
 }
 
 .card .btn {
@@ -277,17 +284,6 @@ label {
   max-height: 100%;
 }
 
-.widget .card-title {
-  color: #3490dc;
-}
-
-.widget .card-title .fa {
-  font-size: 22px;
-  margin-right: 16px;
-  display: block;
-  float: left;
-}
-
 .widget .card .widget-controls {
   position: absolute;
   bottom: 20px;
@@ -323,52 +319,52 @@ button#toggle-components:hover {
   box-shadow: 0 0.1rem 0.25rem rgba(0, 0, 0, 0.075);
 }
 
-div#dashboard-components {
-  width: 50%;
-  position: fixed;
-  right: -260px;
-  top: 0;
-  bottom: 0;
-  background: #354149;
-  z-index: 91;
-  max-width: 260px;
-  transition: right 0.3s linear;
+#dashboard-components {
+  width: 100%;
+  transition: all 0.3s linear;
   padding: 10px 20px;
+  overflow: hidden;
+  margin-top: -30px;
+  display: none;
 }
 
-div#dashboard-components.active {
-  right: 0;
+#dashboard-components.active {
+  display: block;
+}
+
+#dashboard-components .slick-list,
+#dashboard-components .slick-track,
+#dashboard-components .slick-slide {
+  height: 100%;
 }
 
 .add-widget {
   width: 100%;
-  min-height: 120px;
-  margin: 10px 0px;
   border-radius: 8px;
   border: 0px;
   display: flex;
   cursor: pointer;
-  align-items: center;
-  place-content: center;
   padding: 20px;
+  height: 100%;
 }
 
-.add-widget span {
-  display: inline;
+.add-widget .card {
+  height: 100%;
+}
+
+.add-widget .widget-title {
+  color: #3490dc;
 }
 
 .add-widget p {
-  display: none;
-  text-align: center;
-  margin: 0;
+  margin-bottom: 0px;
 }
 
-.add-widget:hover span {
-  display: none;
-}
-
-.add-widget:hover p {
-  display: inline;
+.add-widget img {
+  margin: 40px auto;
+  max-width: 100%;
+  width: 60px;
+  height: 60px;
 }
 
 .ui-resizable-handle.ui-resizable-se.ui-icon.ui-icon-gripsmall-diagonal-se {
