@@ -93,36 +93,38 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+function resizeElementContent(sizeX, sizeY, el) {
+  for (var i = 1; i < 10; i++) {
+    if (i < sizeY) {
+      $(el).find('.hide-y-' + i).show();
+      $(el).find('.show-y-' + i).hide();
+    } else {
+      $(el).find('.hide-y-' + i).hide();
+      $(el).find('.show-y-' + i).show();
+    }
+  }
+
+  for (var i = 1; i < 10; i++) {
+    if (i < sizeX) {
+      $(el.el).find('.hide-x-' + i).show();
+      $(el.el).find('.show-x-' + i).hide();
+    } else {
+      $(el.el).find('.hide-x-' + i).hide();
+      $(el.el).find('.show-x-' + i).show();
+    }
+  }
+}
+
 $(document).ready(function () {
   $('.grid-stack-item').each(function () {
     var sizeY = $(this).data('gs-height');
     var sizeX = $(this).data('gs-width');
-
-    for (var i = 1; i < 10; i++) {
-      if (i < sizeY) {
-        $(this).find('.hide-y-' + i).show();
-        $(this).find('.show-y-' + i).hide();
-      } else {
-        $(this).find('.hide-y-' + i).hide();
-        $(this).find('.show-y-' + i).show();
-      }
-    }
-
-    for (var i = 1; i < 12; i++) {
-      if (i < sizeX) {
-        $(this).find('.hide-x-' + i).show();
-        $(this).find('.show-x-' + i).hide();
-      } else {
-        $(this).find('.hide-x-' + i).hide();
-        $(this).find('.show-x-' + i).show();
-      }
-    }
+    resizeElementContent(sizeX, sizeY, this);
   });
 });
 $(document).ready(function () {
   $('.widget-remove').click(function () {
     $(this).closest('.grid-stack-item').remove();
-    grid.init();
     saveDashboard();
   });
   var grid = GridStack.init();
@@ -130,51 +132,9 @@ $(document).ready(function () {
     saveDashboard();
     items.forEach(function (el) {
       var sizeY = el.height;
-      var sizeW = el.width;
-
-      for (var i = 1; i < 10; i++) {
-        if (i < sizeY) {
-          $(el.el).find('.hide-y-' + i).show();
-          $(el.el).find('.show-y-' + i).hide();
-        } else {
-          $(el.el).find('.hide-y-' + i).hide();
-          $(el.el).find('.show-y-' + i).show();
-        }
-      } // for(var i = 1; i < 12; i++) {
-      //     if (i < sizeX) {
-      //         $(el.el).find('.hide-x-'+i).show();
-      //         $(el.el).find('.show-x-'+i).hide();
-      //     } else {
-      //         $(el.el.find('.hide-x-'+i).hide();
-      //         $(el.el.find('.show-x-'+i).show();
-      //     }
-      // }
-
+      var sizeX = el.width;
+      resizeElementContent(sizeX, sizeY, el.el);
     });
-  });
-  $('.grid-stack-item').each(function () {
-    var sizeY = $(this).data('gs-height');
-    var sizeX = $(this).data('gs-width');
-
-    for (var i = 1; i < 10; i++) {
-      if (i < sizeY) {
-        $(this).find('.hide-y-' + i).show();
-        $(this).find('.show-y-' + i).hide();
-      } else {
-        $(this).find('.hide-y-' + i).hide();
-        $(this).find('.show-y-' + i).show();
-      }
-    }
-
-    for (var i = 1; i < 12; i++) {
-      if (i < sizeX) {
-        $(this).find('.hide-x-' + i).show();
-        $(this).find('.show-x-' + i).hide();
-      } else {
-        $(this).find('.hide-x-' + i).hide();
-        $(this).find('.show-x-' + i).show();
-      }
-    }
   });
   $('#dashboard-components').slick({
     infinite: true,
@@ -187,8 +147,11 @@ $(document).ready(function () {
     components.toggle();
     setTimeout(function () {
       if (components.is(':visible')) {
+        $('#toggle-components').addClass('active');
         $('#dashboard-components').slick('setPosition');
         document.getElementById('dashboard-components').scrollIntoView();
+      } else {
+        $('#toggle-components').removeClass('active');
       }
     }, 100);
   });

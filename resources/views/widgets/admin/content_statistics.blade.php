@@ -1,6 +1,6 @@
 @wrapper('admin.partials.widgets.widget_static', ['id' => 'recent-logs', 'classes' => ''])
     <div class="pt-5">
-        <canvas id="content_stats_chart" height="200" class="chart"></canvas>
+        <canvas id="content_stats_chart" width="200" class="chart"></canvas>
     </div>
 @endwrapper
 
@@ -22,8 +22,6 @@
                 options: {
                     legend: {
                         display: false,
-                    },
-                    layout: {
                     }
                 }
             });

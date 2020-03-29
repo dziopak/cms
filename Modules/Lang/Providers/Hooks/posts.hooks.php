@@ -41,8 +41,21 @@
         return $output;
     }, 10);
 
-
     //Validation hooks
+    Hook::listen('adminPostsValidation', function ($callback, $output, $validationFields) use ($langs) {
+        empty($output) ? $output = $validationFields : null;
+
+        foreach($langs as $lang) {
+            $output['name_'.$lang->lang_tag] = 'required|string|max:255';
+            $output['excerpt_'.$lang->lang_tag] = 'required|string|max:255';
+            $output['slug_'.$lang->lang_tag] = 'required|string|max:255|unique:posts';
+            $output['content_'.$lang->lang_tag] = 'required|string';
+        }
+
+        return $output;
+    }, 10);
+
+    
     Hook::listen('apiPostsStoreValidation', function ($callback, $output, $validationFields) use ($langs) {
         empty($output) ? $output = $validationFields : null;
 
@@ -55,6 +68,7 @@
 
         return $output;
     }, 10);
+    
     
     Hook::listen('apiPostsUpdateValidation', function ($callback, $output, $validationFields) use ($langs) {
         empty($output) ? $output = $validationFields : null;
