@@ -47,7 +47,6 @@
                 // Update onClick event for new item
                 $('.widget-remove').click(function() {
                     $(this).closest('.grid-stack-item').remove();
-                    grid.init();
                     saveDashboard();
                 });
             }

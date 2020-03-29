@@ -80,6 +80,32 @@
 
         return $output;
     }, 10);
+    
+    Hook::listen('adminPostCategoriesValidation', function ($callback, $output, $validationFields) use ($langs) {
+        empty($output) ? $output = $validationFields : null;
+
+        foreach($langs as $lang) {
+            $output['name_'.$lang->lang_tag] = 'string|max:255';
+            $output['description_'.$lang->lang_tag] = 'string|max:255';
+            $output['slug_'.$lang->lang_tag] = 'string|max:255|unique:posts';
+        }
+
+        return $output;
+    }, 10);
+    
+    Hook::listen('adminPageCategoriesValidation', function ($callback, $output, $validationFields) use ($langs) {
+        empty($output) ? $output = $validationFields : null;
+
+        foreach($langs as $lang) {
+            $output['name_'.$lang->lang_tag] = 'string|max:255';
+            $output['description_'.$lang->lang_tag] = 'string|max:255';
+            $output['slug_'.$lang->lang_tag] = 'string|max:255|unique:pages';
+        }
+
+        return $output;
+    }, 10);
+
+
 
 
     Hook::listen('apiPageCategoriesFindSelector', function ($callback, $output, $category, $slug) use ($langs) {

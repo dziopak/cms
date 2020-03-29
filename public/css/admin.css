@@ -308,6 +308,7 @@ button#toggle-components:hover {
   background: #3490dc;
   border: 1px solid #2871ad;
   color: #fff;
+  transform: scale(1.2);
 }
 
 #dashboard {

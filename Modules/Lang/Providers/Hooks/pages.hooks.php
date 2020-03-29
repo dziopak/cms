@@ -68,6 +68,19 @@
 
         return $output;
     }, 10);
+    
+    Hook::listen('adminPagesValidation', function ($callback, $output, $validationFields) use ($langs) {
+        empty($output) ? $output = $validationFields : null;
+
+        foreach($langs as $lang) {
+            $output['name_'.$lang->lang_tag] = 'string|max:255';
+            $output['excerpt_'.$lang->lang_tag] = 'string|max:255';
+            $output['slug_'.$lang->lang_tag] = 'string|max:255|unique:pages';
+            $output['content_'.$lang->lang_tag] = 'string';
+        }
+
+        return $output;
+    }, 10);
 
 
     //Other hooks

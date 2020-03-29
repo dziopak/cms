@@ -9,3 +9,4 @@ https://github.com/voerro/laravel-visitor-tracker - visitor tracking
 - image optimization on the go
 - new content lang switcher
 - data tables
+- translation of alerts, logs and validation

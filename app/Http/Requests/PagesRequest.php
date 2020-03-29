@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Hook;
 
 class PagesRequest extends FormRequest
 {
@@ -23,7 +24,7 @@ class PagesRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $validation_fields = [
             'name' => 'string|required',
             'content' => 'string|required',
             'excerpt' => 'string|required',
@@ -31,5 +32,11 @@ class PagesRequest extends FormRequest
             'content' => 'string|required',
             'category_id' => 'numeric|required',
         ];
+
+        $validation_fields = Hook::get('adminPagesValidation',[$validation_fields],function($validation_fields){
+            return $validation_fields;
+        });
+
+        return $validation_fields;
     }
 }

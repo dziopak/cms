@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Session;
+use Hook;
+
 
 class CategoriesRequest extends FormRequest
 {
@@ -24,22 +26,18 @@ class CategoriesRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [
+        $validation_fields = [
             'name' => 'string|required',
             'category_id' => 'numeric',
             'description' => 'string'
         ];
 
-        switch($this->request->get('category_type')) {
-            case 'post':
-                $rules['slug'] = 'string|required|unique:post_categories,slug,'.$this->request->get('category_id');
-            break;
+        $validation_fields['slug'] = 'string|required|unique:'.$this->request->get('type').'_categories,slug,'.$this->request->get('category_id');
+        $validation_fields = Hook::get('admin'.ucfirst($this->request->get('type')).'CategoriesValidation',[$validation_fields],function($validation_fields){
+            return $validation_fields;
+        });
 
-            case 'page':
-                $rules['slug'] = 'string|required|unique:page_categories,slug,'.$this->request->get('category_id');
-            break;
-        }
-        return $rules;
+        return $validation_fields;
     }
 
     public function withValidator($validator)

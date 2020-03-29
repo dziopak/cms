@@ -26,7 +26,7 @@
         <p>Shows amount of users, posts, pages and other content entries</p>
         @endwrapper
     </div>
-    <div class="add-widget" data-name="Widget Divider">
+    <div class="add-widget" data-name="widgetDivider">
         @wrapper('admin.partials.widgets.new_widget', ['title' => 'Widget divider'])
         <p>Separate widgets from each other to keep dashboard clean and readable</p>
         @endwrapper
