@@ -15,7 +15,7 @@ class RolesController extends Controller
 
     public function index(Request $request)
     {
-        $roles = Role::filter($request)->paginate(15);
+        $roles = Role::orderByDesc('id')->filter($request)->paginate(15);
         $table = getData('admin/roles/roles_index_table');
         return view('admin.roles.index', compact('roles', 'table'));
     }

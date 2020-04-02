@@ -1,4 +1,4 @@
-@wrapper('admin.partials.widgets.widget_static', ['id' => 'posts_statistics', 'classes' => ''])
+@wrapper('admin.partials.widgets.widget_static', ['id' => 'recent-logs', 'classes' => ''])
     <p>{{ __('admin/widgets/posts_statistics.created_within') }} {{ $config['days'] }} {{ trans_choice('admin/general.day', '2') }}</p>
 
     <canvas id="post_stats_chart" class="chart" style="height: 100%; width: 100%;"></canvas>    

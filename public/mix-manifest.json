@@ -17,5 +17,7 @@
     "/assets/js/Chart.js": "/assets/js/Chart.js",
     "/assets/js/gridstack.min.js": "/assets/js/gridstack.min.js",
     "/assets/css/gridstack.min.css": "/assets/css/gridstack.min.css",
-    "/assets/js/gridstack.all.js": "/assets/js/gridstack.all.js"
+    "/assets/js/gridstack.all.js": "/assets/js/gridstack.all.js",
+    "/css/dashboard.css": "/css/dashboard.css",
+    "/assets/js/editor.js": "/assets/js/editor.js"
 }

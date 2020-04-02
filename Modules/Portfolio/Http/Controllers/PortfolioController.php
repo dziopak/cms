@@ -7,22 +7,23 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Portfolio\Entities\PortfolioItem;
 use Modules\Portfolio\Entities\PortfolioItemPicture;
-use Modules\Portfolio\Http\Utilities\TableData;
 use Illuminate\Support\Facades\Session;
 
 class PortfolioController extends Controller
 {
     public function index(Request $request)
     {
-        $items = PortfolioItem::with('thumbnail', 'photos')->filter($request)->get();
-        $table = TableData::portfolioIndex();
+        $items = PortfolioItem::with('thumbnail', 'photos')->filter($request)->paginate(15);
+        $table = getModuleData('portfolio_index_table', 'Portfolio');
+        
         return view('portfolio::index', compact('items', 'table'));
     }
 
  
     public function create()
     {
-        return view('portfolio::create');
+        $form = getModuleData('portfolio_form', 'Portfolio');
+        return view('portfolio::create', compact('form'));
     }
 
 
@@ -49,7 +50,8 @@ class PortfolioController extends Controller
     public function edit($id)
     {
         $item = PortfolioItem::with('thumbnail', 'photos')->find($id);
-        return view('portfolio::edit', compact('item', 'pictures'));
+        $form = getModuleData('portfolio_form', 'Portfolio');
+        return view('portfolio::edit', compact('item', 'form'));
     }
 
  

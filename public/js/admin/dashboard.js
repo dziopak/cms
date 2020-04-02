@@ -121,8 +121,6 @@ $(document).ready(function () {
     var sizeX = $(this).data('gs-width');
     resizeElementContent(sizeX, sizeY, this);
   });
-});
-$(document).ready(function () {
   $('.widget-remove').click(function () {
     $(this).closest('.grid-stack-item').remove();
     saveDashboard();
@@ -140,18 +138,24 @@ $(document).ready(function () {
     infinite: true,
     slidesToShow: 4,
     slidesToScroll: 2,
-    arrows: false
+    arrows: true
   });
+  $('#dashboard-components .slick-arrow').hide();
   $('#toggle-components').click(function () {
     var components = $('#dashboard-components');
-    components.toggle();
     setTimeout(function () {
-      if (components.is(':visible')) {
+      if (!components.hasClass('active')) {
         $('#toggle-components').addClass('active');
+        $('#dashboard-components').addClass('active');
         $('#dashboard-components').slick('setPosition');
         document.getElementById('dashboard-components').scrollIntoView();
+        setTimeout(function () {
+          $('#dashboard-components .slick-arrow').fadeIn(40);
+        }, 10);
       } else {
         $('#toggle-components').removeClass('active');
+        $('#dashboard-components').removeClass('active');
+        $('#dashboard-components .slick-arrow').fadeOut(40);
       }
     }, 100);
   });

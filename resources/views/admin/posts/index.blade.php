@@ -14,9 +14,7 @@
 
 
         {{-- Table --}}
-        {{ Form::open(['method' => 'POST', 'route' => 'admin.posts.mass', 'class' => 'w-100']) }}
-            @include('admin.partials.table', ['fields' => $posts])
-        {{ Form::close() }}
+        @include('admin.partials.table', ['fields' => $posts])
         {{-- End --}}
 
 

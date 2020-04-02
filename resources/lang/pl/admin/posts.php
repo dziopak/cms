@@ -4,11 +4,11 @@
 
         'create_left_title' => 'Dane podstawowe',
         'create_right_title' => 'Ustawienia',
-        'create_bottom_title' => 'Treść',
+        'create_bottom_title' => 'Zawartość postu',
         
         'edit_left_title' => 'Dane podstawowe',
         'edit_right_title' => 'Ustawienia',
-        'edit_bottom_title' => 'Treść',
+        'edit_bottom_title' => 'Zawartość postu',
 
         'delete_top_title' => 'Informacje',
         'delete_bottom_title' => 'Usuń post',

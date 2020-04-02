@@ -1,5 +1,5 @@
 <button id="toggle-components">+</button>
-<div id="dashboard-components">    
+<div id="dashboard-components">
     <div class="add-widget" data-name="recentPosts">
         @wrapper('admin.partials.widgets.new_widget', ['title' => 'Newest posts', 'thumbnail' => '/images/widgets/posts_statistics.png'])
             <p>Shows list of latest posts added to the database</p>

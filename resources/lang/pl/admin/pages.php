@@ -4,11 +4,11 @@
 
         'create_left_title' => 'Dane podstawowe',
         'create_right_title' => 'Ustawienia',
-        'create_bottom_title' => 'Treść strony',
+        'create_bottom_title' => 'Zawartość strony',
         
         'edit_left_title' => 'Dane podstawowe',
         'edit_right_title' => 'Ustawienia',
-        'edit_bottom_title' => 'Treść strony',
+        'edit_bottom_title' => 'Zawartość strony',
 
         'delete_top_title' => 'Informacje',
         'delete_bottom_title' => 'Usuń podstronę',

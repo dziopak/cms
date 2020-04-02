@@ -110,6 +110,7 @@ $(document).ready(function () {
     }
 
     target.show();
+    target.css('display', 'block');
     langSwitcher.appendTo(target);
   });
 });

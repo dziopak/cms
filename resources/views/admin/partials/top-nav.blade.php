@@ -1,7 +1,7 @@
 <div class="row">
     <div id="top-nav">
         <div class="flex-spread">
-            <div class="breadcrumbs text-left ml-3">
+            <div id="top-breadcrumbs" class="breadcrumbs text-left ml-3">
                 @yield('breadcrumbs')
             </div>
             @include('admin.partials.user-bar')

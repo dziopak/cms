@@ -15,7 +15,7 @@ class PageCategoriesController extends Controller
     
     public function index(Request $request)
     {
-        $categories = PageCategory::filter($request)->paginate(15);
+        $categories = PageCategory::orderByDesc('id')->filter($request)->paginate(15);
         $table = getData('admin/categories/page_categories_index_table');
 
         return view('admin.page_categories.index', compact('categories', 'table'));

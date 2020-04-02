@@ -42,13 +42,13 @@ class ContentStatistics extends AbstractWidget
         $data = [];
 
         if ($this->config['days'] === 0) {
-            $data[] = "'".DB::table('users')->select(DB::raw('count(*) as total'))->first()->total."'";
-            $data[] = "'".DB::table('pages')->select(DB::raw('count(*) as total'))->first()->total."'";
-            $data[] = "'".DB::table('posts')->select(DB::raw('count(*) as total'))->first()->total."'";
+            $data[] = "'".($raw['users'] = DB::table('users')->select(DB::raw('count(*) as total'))->first()->total)."'";
+            $data[] = "'".($raw['pages'] = DB::table('pages')->select(DB::raw('count(*) as total'))->first()->total)."'";
+            $data[] = "'".($raw['posts'] = DB::table('posts')->select(DB::raw('count(*) as total'))->first()->total)."'";
         } else {
-            $data[] = "'".DB::table('users')->select(DB::raw('count(*) as total'))->where('created_at', '>=',$start_date)->first()->total."'";
-            $data[] = "'".DB::table('pages')->select(DB::raw('count(*) as total'))->where('created_at', '>=',$start_date)->first()->total."'";
-            $data[] = "'".DB::table('posts')->select(DB::raw('count(*) as total'))->where('created_at', '>=',$start_date)->first()->total."'";
+            $data[] = "'".($raw['users'] = DB::table('users')->select(DB::raw('count(*) as total'))->where('created_at', '>=',$start_date)->first()->total)."'";
+            $data[] = "'".($raw['pages'] = DB::table('pages')->select(DB::raw('count(*) as total'))->where('created_at', '>=',$start_date)->first()->total)."'";
+            $data[] = "'".($raw['posts'] = DB::table('posts')->select(DB::raw('count(*) as total'))->where('created_at', '>=',$start_date)->first()->total)."'";
         }
 
         $labels = ['"Users"', '"Pages"', '"Posts"'];
@@ -56,6 +56,7 @@ class ContentStatistics extends AbstractWidget
         return view('widgets.admin.content_statistics', [
             'config' => $this->config,
             'data' => implode(', ', $data),
+            'raw' => $raw,
             'labels' => implode(', ', $labels)
         ]);
     }

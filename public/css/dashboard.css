@@ -1,0 +1,131 @@
+#dashboard {
+  margin: 0 -8px 0 -10px;
+}
+
+.grid-stack-item-content {
+  border-radius: 10px;
+  box-shadow: 0 0.1rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+#dashboard-components {
+  width: 100%;
+  transition: all 0.2s linear;
+  padding: 10px 50px;
+  margin-top: -30px;
+  height: 0;
+}
+
+#dashboard-components.active {
+  height: 350px;
+}
+
+#dashboard-components.active .slick-arrow {
+  display: block;
+}
+
+#dashboard-components .slick-list,
+#dashboard-components .slick-track,
+#dashboard-components .slick-slide {
+  height: 100%;
+}
+
+#dashboard-components .slick-arrow {
+  display: none;
+  background: #fff no-repeat center;
+  background-size: 12px;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  transition: all 0.2s linear;
+}
+
+#dashboard-components .slick-arrow.slick-prev {
+  left: 15px;
+  background-image: url(https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-left-01-512.png);
+}
+
+#dashboard-components .slick-arrow.slick-prev::before {
+  content: "";
+}
+
+#dashboard-components .slick-arrow.slick-next {
+  right: 15px;
+  background-image: url(https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-right-01-512.png);
+}
+
+#dashboard-components .slick-arrow.slick-next::before {
+  content: "";
+}
+
+#dashboard-components .slick-arrow:hover {
+  background-color: #3490dc;
+  transform: scale(1.2) translateY(-43%);
+}
+
+.add-widget {
+  width: 100%;
+  border-radius: 8px;
+  border: 0px;
+  display: flex;
+  cursor: pointer;
+  padding: 20px;
+  height: 100%;
+}
+
+.add-widget .card {
+  height: 100%;
+}
+
+.add-widget .widget-title {
+  color: #3490dc;
+}
+
+.add-widget p {
+  margin-bottom: 0px;
+}
+
+.add-widget img {
+  margin: 40px auto;
+  max-width: 100%;
+  width: 60px;
+  height: 60px;
+}
+
+.ui-resizable-handle.ui-resizable-se.ui-icon.ui-icon-gripsmall-diagonal-se {
+  right: 20px;
+  bottom: 12px;
+}
+
+/* --------------- CHARTS --------------- */
+
+canvas.chart {
+  max-height: 85%;
+}
+
+.legend {
+  list-style: none;
+  display: flex;
+  flex-wrap: nowrap;
+  margin-top: 60px;
+  padding: 0;
+}
+
+.legend li {
+  width: 100%;
+  flex-basis: 100%;
+  text-align: center;
+}
+
+.legend li:first-child,
+.legend li:last-child {
+  margin-top: -20px;
+}
+
+.legend-item {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
+
+/* ------------ END OF CHARTS ----------- */
+

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Setting;
 use Blade;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,13 +20,7 @@ class AppServiceProvider extends ServiceProvider
         }
     }
 
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
+    private function registerBladeDirectives() {
         Blade::directive('wrapper', function($pass_params) {
             $pass_params = explode(', ', $pass_params);
             foreach($pass_params as $key => $row) {
@@ -59,5 +54,36 @@ class AppServiceProvider extends ServiceProvider
         
             return $s;
         });
+    }
+
+    public function registerConfig() {
+        $settings = Setting::all([
+            'name','value', 'group'
+        ])->groupBy('group', true)->transform(function($setting) {
+            $settings = $setting->toArray();
+            $result = [];
+
+            foreach($settings as $setting) {
+                $result[$setting['name']] = $setting['value'];
+            }
+
+            return $result;
+        });
+        
+        config([
+            'global' => $settings
+        ]);
+
+    }
+
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $this->registerConfig();
+        $this->registerBladeDirectives();
     }
 }
