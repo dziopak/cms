@@ -9,6 +9,7 @@ mix.js('resources/js/app.js', 'public/js')
 
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/admin.scss', 'public/css')
+    .sass('resources/sass/admin/dashboard.scss', 'public/css')
     
     .copy('node_modules/slick-carousel/slick/slick.min.js', 'public/assets/js')
     .copy('node_modules/slick-carousel/slick/slick.css', 'public/assets/css')

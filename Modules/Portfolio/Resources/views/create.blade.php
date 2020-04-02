@@ -14,10 +14,10 @@
 
 @section('breadcrumbs')
     <ul>
-        <li><a href="{{route('admin.dashboard.index')}}">Admin</a></li>
-        <li><a href="{{route('admin.modules.index')}}">Modules</a></li>
-        <li><a href="{{route('admin.modules.portfolio.index')}}">Modules</a></li>
-        <li>Create</li>
+        <li><a href="{{route('admin.dashboard.index')}}">{{ __('admin/routes.admin') }}</a></li>
+        <li><a href="{{route('admin.modules.index')}}">{{ __('admin/routes.modules') }}</a></li>
+        <li><a href="{{route('admin.modules.portfolio.index')}}">{{ __('portfolio::langs.portfolio') }}</a></li>
+        <li>{{ __('admin/routes.create') }}</li>
     </ul>
 @endsection
 
@@ -28,36 +28,29 @@
 
 
 @section('content-left')
-    @wrapper('admin.partials.widget', ['title' => 'Basic project data'])
+    @wrapper('admin.partials.widget', ['title' => 'portfolio::langs.basic_data_title'])
         <div class="row">
+            
             <div class="col-lg-3" style="display: flex;">
                 <div style="display: block; width: 130px; margin: 0 auto; align-self: center;">
                     {{ Form::file('thumbnail', ['style' => 'width: 130px;']) }}
                 </div>
             </div>
 
-            <div class="col-lg-9">
-                <div class="form-group row">
-                    <div class="col">
-                        {!! Form::label('name', 'Name: ', ['class' => 'required']) !!}
-                        {!! Form::text('name', null, ['class' => 'form-control']) !!}
-                    </div>
-                </div>
-    
-                <div class="form-group row">
-                    <div class="col">
-                        {!! Form::label('slug', 'Slug: ', ['class' => 'required']) !!}
-                        {!! Form::text('slug', null, ['class' => 'form-control']) !!}
-                    </div>
-                </div>
+
+            {{-- Form fields --}}
+            <div class="col-lg-9">    
+                @include('partials.form-fields', ['fields' => $form['basic_data']])
             </div>
+            {{-- End --}}
+
         </div>
         
     @endwrapper
 @endsection
 
 @section('content-right')
-    @wrapper('admin.partials.widget', ['title' => 'Project settings'])
+    @wrapper('admin.partials.widget', ['title' => 'portfolio::langs.settings_title'])
         
         <div class="form-group row">
             <div class="col">
@@ -84,7 +77,7 @@
 
 @section('content-bottom')
     <div class="col">
-        @wrapper('admin.partials.widget', ['title' => 'Pictures'])
+        @wrapper('admin.partials.widget', ['title' => 'portfolio::langs.pictures_title'])
             <div id="pictures">
             </div>
 
@@ -92,19 +85,24 @@
             </div>
         @endwrapper
 
-        @wrapper('admin.partials.widget', ['title' => 'Project content'])
-        <div class="row">    
-            <div class="form-group col-md-6">
-                {!! Form::label('intro', 'Intro: ', ['class' => 'required']) !!}
-                {!! Form::textarea('intro', null, ['class' => 'form-control']) !!}
-            </div>
+        @wrapper('admin.partials.widget', ['title' => 'portfolio::langs.content_title'])
+        
+        
+            {{-- Form fields --}}
+                @include('partials.form-fields', ['fields' => $form['project_content']])
+            {{-- End --}}
 
-            <div class="form-group col-md-6">
-                {!! Form::label('description', 'Description: ', ['class' => 'required']) !!}
-                {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
+
+            {{-- Submit button --}}
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    {{ __('admin/general.create_button') }}
+                </button>
             </div>
-        </div>
-        {{ Form::submit('Update project', ['class' => 'btn btn-success']) }}
+            {{-- End --}}
+
+
         @endwrapper
     </div>
 @endsection

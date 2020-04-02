@@ -41,11 +41,7 @@ class PostsStatistics extends AbstractWidget
         foreach ($period as $key => $date) {
             $dates[$key] = '"'.$date->format('Y-m-d').'"';
             $fdate = \Carbon\Carbon::parse($date)->format('Y-m-d');
-            if (!empty($posts[$fdate])) {
-                $values[$key] = $posts[$fdate]->total;
-            } else{
-                $values[$key] = 0;
-            }
+            !empty($posts[$fdate]) ? $values[$key] = $posts[$fdate]->total : $values[$key] = 0;
         }
 
         $data['labels'] = implode(",", $dates);

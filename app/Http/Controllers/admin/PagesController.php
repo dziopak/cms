@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\PagesRequest;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
 
 use App\Page;
 use App\PageCategory;
@@ -16,7 +17,7 @@ class PagesController extends Controller
 
     public function index(Request $request)
     {
-        $pages = Page::with('author', 'thumbnail')->filter($request)->paginate(15);
+        $pages = Page::with('author', 'thumbnail')->orderByDesc('id')->filter($request)->paginate(15);
         $table = getData('admin/pages/pages_index_table');
 
         return view('admin.pages.index', compact('pages', 'table'));

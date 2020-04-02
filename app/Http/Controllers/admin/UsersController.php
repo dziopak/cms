@@ -22,7 +22,7 @@ class UsersController extends Controller
 {
     public function index(Request $request)
     {
-        $users = User::with('role', 'photo')->filter($request)->paginate(15);
+        $users = User::with('role', 'photo')->orderByDesc('id')->filter($request)->paginate(15);
                 
         // TO DO //
         $user_roles = Role::all('id', 'name');

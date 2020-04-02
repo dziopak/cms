@@ -1,5 +1,9 @@
 @import 'variables';
 
+* {
+    outline: none !important;
+}
+
 body {
     font-family: 'Raleway', sans-serif;
     line-height: 1.8;
@@ -321,70 +325,6 @@ button#toggle-components.active, button#toggle-components:hover {
     transform: scale(1.2);
 }
 
-#dashboard {
-    margin: 0 -8px 0 -10px;
-}
-
-.grid-stack {
-    &-item {
-        &-content {
-            border-radius: 10px;
-            box-shadow: 0 0.1rem 0.25rem rgba(0, 0, 0, 0.075);
-        }
-    }
-}
-
-#dashboard-components {
-    width: 100%;
-    transition: all 0.3s linear;
-    padding: 10px 20px;
-    overflow: hidden;
-    margin-top: -30px;
-    display: none;
- 
-    &.active {
-        display: block;
-    }
-
-    .slick-list, .slick-track, .slick-slide {
-        height: 100%;
-    }
-}
-
-.add-widget {
-    width: 100%;
-    border-radius: 8px;
-    border: 0px;
-    display: flex;
-    cursor: pointer;
-    padding: 20px;
-    height: 100%;
-
-    .card {
-        height: 100%;
-    }
-
-    .widget-title {
-        color: $blue;
-    }
-
-    p {
-        margin-bottom: 0px;
-    }
-
-    img {
-        margin: 40px auto;
-        max-width: 100%;
-        width: 60px;
-        height: 60px;
-    }
-}
-
-.ui-resizable-handle.ui-resizable-se.ui-icon.ui-icon-gripsmall-diagonal-se {
-    right: 20px;
-    bottom: 12px;
-}
-
 
 #admin-page {
     background-color: #fafafa !important;
@@ -400,7 +340,7 @@ button#toggle-components.active, button#toggle-components:hover {
     flex-basis: 100%;
 }
 
-div#user-bar {
+#user-bar {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -474,17 +414,6 @@ input.form-control-blended {
     box-shadow: none;
 }
 
-
-/* --------------- CHARTS --------------- */
-
-canvas.chart {
-    max-height: 85%;
-}
-
-/* ------------ END OF CHARTS ----------- */
-
-
-
 /* ------------ ICONS ------------ */
 
 i.fa.fas.fa-trash, .fa-minus-circle {
@@ -513,4 +442,85 @@ i.fa.fas.fa-trash, .fa-minus-circle {
 
 .page-item .page-link {
     padding: 0.75rem 1rem;
+}
+
+
+
+// TinyMCE
+#admin-main {
+    .mce-tinymce.mce-container.mce-panel {
+        padding: 5px 10px;
+        border: 1px solid #c5c5c5;
+        border-radius: 20px;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    .mce-top-part.mce-container.mce-stack-layout-item.mce-first {
+        margin: 0 -7px;
+        border-bottom: 1px solid #c5c5c5;
+    }
+
+    div.mce-edit-area {
+        border: 0;
+    }
+
+    .mce-top-part::before {
+        border: 0px;
+        box-shadow: none;
+    }
+}
+
+
+@media (max-width: 768px) {
+    // Responsive padding & margin classes
+
+    .mb-md-3 {
+        margin-bottom: 1rem;
+    }
+
+    .my-md-4 {
+        margin-bottom: 1.5rem;
+        margin-top: 1.5rem;
+    }
+
+    // End of margin & padding classes 
+    
+
+
+    // Other rules
+    #user-bar {
+        border: 0px;
+    }
+
+    #top-breadcrumbs, #global-search {
+        display: none;
+    }
+
+    #admin-main .btn-action {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .responsive-center {
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .pagination {
+        li.page-item {
+
+            display: none;
+        }
+    
+        .page-item:first-child,
+        .page-item:nth-child( 2 ),
+        .page-item:nth-last-child( 2 ),
+        .page-item:last-child,
+        .page-item.active,
+        .page-item.disabled {
+    
+            display: block;
+        }
+    }
 }

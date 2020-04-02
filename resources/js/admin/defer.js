@@ -2,16 +2,29 @@ $(document).ready(function() {
 
     // TinyMCE //
     if ($('.tinymce').length > 0) {
+        // tinymce.init({
+        //     selector: 'textarea',
+        //     height: 500,
+        //     theme: 'modern',
+        //     plugins: 'print preview fullpage powerpaste searchreplace autolink directionality advcode visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount tinymcespellchecker a11ychecker imagetools mediaembed  linkchecker contextmenu colorpicker textpattern help',
+        //     toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
+        //     image_advtab: true,
+        //     templates: [
+        //       { title: 'Test template 1', content: 'Test 1' },
+        //       { title: 'Test template 2', content: 'Test 2' }
+        //     ],
+        //     content_css: [
+        //       '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+        //       '//www.tinymce.com/css/codepen.min.css'
+        //     ]
+        //    });
+        
         var editor_config = {
             path_absolute : "/",
             selector: "textarea.tinymce",
-            plugins: [
-            "advlist autolink lists link image charmap print preview hr anchor pagebreak",
-            "searchreplace wordcount visualblocks visualchars code fullscreen",
-            "insertdatetime media nonbreaking save table contextmenu directionality",
-            "emoticons template paste textcolor colorpicker textpattern"
-            ],
-            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media",
+            plugins: 'print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help',
+            toolbar1: "undo redo | styleselect formatselect insertfile | bold italic strikethrough forecolor backcolor | alignleft aligncenter alignright alignjustify | outdent indent | removeformat",
+            toolbar2: 'bullist numlist | link image media numlist bullist',
             relative_urls: false,
             file_browser_callback : function(field_name, url, type, win) {
             var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;

@@ -11,6 +11,27 @@
 
 @section('module-content')
     @wrapper('admin.partials.widget', ['title' => 'All items'])
+    
+        
+        {{-- Table --}}
         @include('admin.partials.table', ['fields' => $items])
-    @endwrapper
-@endsection
+        {{-- End --}}
+        
+        
+        {{-- Create button --}}
+            @if (Auth::user()->hasAccess('MODULE_USE'))
+            <a href="{{ route('admin.modules.portfolio.create') }}" class="btn btn-success">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                {{ __('admin/general.create_button') }}
+            </a>
+            @endif
+        {{-- End --}}
+
+    
+        {{-- Pagination --}}
+        <div class="float-right">{{ $items->render() }}</div>
+        {{-- End --}}
+
+    
+        @endwrapper
+    @endsection

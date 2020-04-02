@@ -23,7 +23,7 @@ class PostCategoriesController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = PostCategory::filter($request)->paginate(15);
+        $categories = PostCategory::orderByDesc('id')->filter($request)->paginate(15);
         $table = getData('admin/categories/post_categories_index_table');
         return view('admin.post_categories.index', compact('categories', 'table'));
     }

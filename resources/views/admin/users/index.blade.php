@@ -15,9 +15,7 @@
     
 
         {{-- Displaying data table --}}    
-        {{ Form::open(['method' => 'POST', 'route' => 'admin.users.mass', 'class' => 'w-100']) }}
-            @include('admin.partials.table', ['fields' => $users, 'id' => 'users_table'])        
-        {{ Form::close() }}
+        @include('admin.partials.table', ['fields' => $users, 'id' => 'users_table'])
         {{-- End of table --}}
 
 

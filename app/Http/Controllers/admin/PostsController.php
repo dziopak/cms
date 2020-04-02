@@ -17,7 +17,7 @@ class PostsController extends Controller
 
     public function index(Request $request)
     {
-        $posts = Post::with('author', 'thumbnail')->filter($request)->paginate(15);
+        $posts = Post::with('author', 'thumbnail')->orderByDesc('id')->filter($request)->paginate(15);
         $table = getData('admin/posts/posts_index_table');
         return view('admin.posts.index', compact('posts', 'table'));
     }

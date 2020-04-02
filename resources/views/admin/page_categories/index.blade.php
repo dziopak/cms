@@ -14,9 +14,7 @@
         
         
         {{-- Table --}}
-        {{ Form::open(['method' => 'POST', 'route' => 'admin.pages.categories.mass', 'class' => 'w-100']) }}
-            @include('admin.partials.table', ['fields' => $categories])
-        {{ Form::close() }}
+        @include('admin.partials.table', ['fields' => $categories])
         {{-- End --}}
 
 
