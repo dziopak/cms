@@ -9,7 +9,8 @@ use App\Events\Roles\RoleDestroyEvent;
 
 class Role extends Model
 {
-    protected $fillable = ['name', 'access', 'description']; 
+    public $timestamps = false;
+    protected $fillable = ['name', 'access', 'description'];
     public $fire_events = true;
 
     public function get_all_roles() {

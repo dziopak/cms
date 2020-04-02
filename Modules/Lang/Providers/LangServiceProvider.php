@@ -73,11 +73,13 @@ class LangServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        $this->registerHooks();
-        $this->registerTranslations();
-        $this->registerConfig();
-        $this->registerViews();
-        $this->registerFactories();
+        if (table_exists('langs')) {
+            $this->registerHooks();
+            $this->registerTranslations();
+            $this->registerConfig();
+            $this->registerViews();
+            $this->registerFactories();
+        }
         $this->loadMigrationsFrom(module_path('Lang', 'Database/Migrations'));
     }
 

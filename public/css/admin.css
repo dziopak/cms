@@ -339,12 +339,24 @@ button#toggle-components:hover {
   align-self: center;
 }
 
+#user-bar .no-avatar {
+  width: 30px;
+  background: #555555;
+  display: block;
+  height: 30px;
+  flex-basis: 30px;
+}
+
 #user-bar i.fa {
   font-size: 11px;
   background: #c2c7d4;
   padding: 8px;
   color: #fff;
   border-radius: 50%;
+}
+
+#user-bar i.fa + #user-bar i.fa {
+  margin-left: 20px;
 }
 
 #user-bar i.fa:hover {

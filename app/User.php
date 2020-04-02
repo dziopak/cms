@@ -21,7 +21,7 @@ class User extends Authenticatable implements JWTSubject
     public $fire_events = true;
     
     protected $fillable = [
-        'name', 'email', 'password', 'avatar', 'role_id', 'first_name', 'last_name', 'last_login'
+        'name', 'email', 'password', 'avatar', 'role_id', 'first_name', 'last_name', 'last_login', 'updated_at'
     ];
     protected $hidden = [
         'password', 'remember_token', 'first_name', 'last_name',
@@ -146,14 +146,17 @@ class User extends Authenticatable implements JWTSubject
 
         self::created(function($user) use ($request) {
             if ($user->fire_events) event(new UserCreateEvent($user, $request->file('avatar')));
+            $request->session()->flash('crud', 'User '.$user->name.' has been created successfully.');
         });
 
-        self::updated(function($user) use ($request) {
+        self::updating(function($user) use ($request) {
             if ($user->fire_events) event(new UserUpdateEvent($user, $request->file('avatar')));
+            $request->session()->flash('crud', 'Account data of '.$user->name.' has been updated successfully.');
         });
-
+        
         self::deleted(function($user) {
             if ($user->fire_events) event(new UserDestroyEvent($user));
+            $request->session()->flash('crud', 'Account data of '.$user->name.' has been deleted successfully.');
         });
     }
 }

@@ -14,8 +14,8 @@ class AddFirstNameAndLastNameToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
         });
     }
 
@@ -27,8 +27,8 @@ class AddFirstNameAndLastNameToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('first_name')->nullable();
-            $table->dropColumn('last_name')->nullable();
+            $table->dropColumn('first_name');
+            $table->dropColumn('last_name');
         });
     }
 }

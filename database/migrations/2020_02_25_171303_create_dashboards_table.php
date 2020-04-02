@@ -15,7 +15,6 @@ class CreateDashboardsTable extends Migration
     {
         Schema::create('dashboards', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
             $table->bigInteger('user_id')->index();
             $table->mediumText('widgets')->nullable();
         });

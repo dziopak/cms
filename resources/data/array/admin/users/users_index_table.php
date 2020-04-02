@@ -30,8 +30,4 @@
         'name' => __('admin/users.name'),
     ];
 
-    $table['headers'] = Hook::get('UsersIndexTableHeaders',[$table['headers']],function($table_headers){
-        return $table['headers'];
-    });
-
     return $table;
