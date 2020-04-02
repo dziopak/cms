@@ -22,7 +22,7 @@ class AccessMiddleware
                 return $next($request);
             } else {
                 $access = unserialize($user->role->access);
-                if (in_array($permission, $access) && $user->is_active == 1) {
+                if (is_array($access) && in_array($permission, $access) && $user->is_active == 1) {
                     return $next($request);
                 } else {
                     return redirect("/");

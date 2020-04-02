@@ -1,11 +1,11 @@
-@import 'variables';
+@import "variables";
 
 * {
     outline: none !important;
 }
 
 body {
-    font-family: 'Raleway', sans-serif;
+    font-family: "Raleway", sans-serif;
     line-height: 1.8;
     font-size: 0.8rem;
 }
@@ -15,7 +15,7 @@ a {
 
     &:hover {
         text-decoration: none;
-        color: $blue
+        color: $blue;
     }
 }
 
@@ -31,9 +31,8 @@ div#module {
     margin: 0 -4px;
 }
 
-
 #admin-page {
-    .table { 
+    .table {
         tr td {
             vertical-align: middle;
 
@@ -48,14 +47,13 @@ div#module {
 
         .btn {
             transition: all 0.1s linear;
-        
+
             &:hover {
                 transform: scale(1.1);
             }
         }
     }
 }
-
 
 #main-container.container-fluid {
     padding: 0px;
@@ -76,18 +74,18 @@ div#module {
         width: 160px;
         overflow: hidden;
         top: -1px;
-        left: 100%;        
+        left: 100%;
         display: none;
         position: absolute;
         padding: 5px 0;
         z-index: 1;
-    
+
         & .sidebar-list-item {
             text-align: left;
             padding: 0;
             text-align: left;
             border-bottom: 0;
-            
+
             a {
                 padding: 5px 15px;
                 display: inline-block;
@@ -104,7 +102,7 @@ div#module {
 
 .sidebar-list {
     padding: 0;
-    
+
     &-item {
         cursor: pointer;
         list-style: none;
@@ -119,16 +117,17 @@ div#module {
 
         &:first-child {
             background: #fff;
-            
+
             a {
                 padding: 14px 0 11px;
             }
         }
-        
-        &:hover ul.sidebar-sub-list, ul.sidebar-sub-list:hover {
+
+        &:hover ul.sidebar-sub-list,
+        ul.sidebar-sub-list:hover {
             display: block;
         }
-        
+
         a {
             width: 100%;
             padding: 10px 0px 14px;
@@ -136,7 +135,7 @@ div#module {
             color: #c2c7d4;
             transition: color 0.1s linear;
 
-            &:hover{
+            &:hover {
                 color: $blue;
             }
         }
@@ -228,11 +227,11 @@ label {
     border-radius: 10px;
     border: 0;
     box-shadow: 0 0.1rem 0.25rem rgba(0, 0, 0, 0.075);
-    
+
     &-title {
         color: $blue;
         margin-bottom: 0.75rem;
-        
+
         .fa {
             font-size: 22px;
             margin-right: 16px;
@@ -262,7 +261,6 @@ label {
         overflow: hidden;
     }
 }
-
 
 .widget {
     height: 100%;
@@ -303,7 +301,6 @@ label {
     }
 }
 
-
 button#toggle-components {
     position: fixed;
     bottom: 40px;
@@ -318,13 +315,13 @@ button#toggle-components {
     transition: all 0.15s linear;
 }
 
-button#toggle-components.active, button#toggle-components:hover {
+button#toggle-components.active,
+button#toggle-components:hover {
     background: $blue;
     border: 1px solid #2871ad;
     color: #fff;
     transform: scale(1.2);
 }
-
 
 #admin-page {
     background-color: #fafafa !important;
@@ -349,12 +346,24 @@ button#toggle-components.active, button#toggle-components:hover {
     height: 35px;
     align-self: center;
 
+    .no-avatar {
+        width: 30px;
+        background: #555555;
+        display: block;
+        height: 30px;
+        flex-basis: 30px;
+    }
+
     i.fa {
         font-size: 11px;
         background: #c2c7d4;
         padding: 8px;
         color: #fff;
         border-radius: 50%;
+
+        & + & {
+            margin-left: 20px;
+        }
 
         &:hover {
             background: #2176bd;
@@ -416,15 +425,12 @@ input.form-control-blended {
 
 /* ------------ ICONS ------------ */
 
-i.fa.fas.fa-trash, .fa-minus-circle {
+i.fa.fas.fa-trash,
+.fa-minus-circle {
     margin-left: 2px;
 }
 
 /* ---------- END ICONS ---------- */
-
-
-
-
 
 .divider .card-body {
     padding: 1.25rem 1.8rem;
@@ -443,8 +449,6 @@ i.fa.fas.fa-trash, .fa-minus-circle {
 .page-item .page-link {
     padding: 0.75rem 1rem;
 }
-
-
 
 // TinyMCE
 #admin-main {
@@ -471,7 +475,6 @@ i.fa.fas.fa-trash, .fa-minus-circle {
     }
 }
 
-
 @media (max-width: 768px) {
     // Responsive padding & margin classes
 
@@ -484,16 +487,15 @@ i.fa.fas.fa-trash, .fa-minus-circle {
         margin-top: 1.5rem;
     }
 
-    // End of margin & padding classes 
-    
-
+    // End of margin & padding classes
 
     // Other rules
     #user-bar {
         border: 0px;
     }
 
-    #top-breadcrumbs, #global-search {
+    #top-breadcrumbs,
+    #global-search {
         display: none;
     }
 
@@ -509,17 +511,15 @@ i.fa.fas.fa-trash, .fa-minus-circle {
 
     .pagination {
         li.page-item {
-
             display: none;
         }
-    
+
         .page-item:first-child,
-        .page-item:nth-child( 2 ),
-        .page-item:nth-last-child( 2 ),
+        .page-item:nth-child(2),
+        .page-item:nth-last-child(2),
         .page-item:last-child,
         .page-item.active,
         .page-item.disabled {
-    
             display: block;
         }
     }

@@ -10,3 +10,18 @@ https://github.com/voerro/laravel-visitor-tracker - visitor tracking
 - new content lang switcher
 - data tables
 - translation of alerts, logs and validation
+
+
+Installation:
+- composer install
+- npm install
+- generate app key
+- remove modules
+- migrate
+
+- auto creation of images folders:
+    -images
+    --avatars
+    --thumbnails
+
+- auto include flag icons

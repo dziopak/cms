@@ -13,6 +13,7 @@ use App\Http\Requests\NewPasswordRequest;
 
 use App\Events\Users\UserNewPasswordEvent;
 use App\Events\Users\UserBlockEvent;
+use App\Http\Utilities\ModelUtilities;
 
 use App\User;
 use App\Role;
@@ -57,8 +58,6 @@ class UsersController extends Controller
         $data['password'] = Hash::make($request->password);
 
         $user = User::create($data);
-        $request->session()->flash('crud', 'User '.$user->name.' has been created successfully.');
-
         return redirect(route('admin.users.index'));
     }
     
@@ -80,16 +79,12 @@ class UsersController extends Controller
     public function update(UsersEditRequest $request, $id)
     {
         Auth::user()->hasAccessOrRedirect('USER_EDIT');
-        
         $role = new Role;
-
+        
         $user = User::findOrFail($id);
-        $roles = $role->get_all_roles();
-        $data = $request->except('avatar');
+        $data = ModelUtilities::makeDirtyRequest($request->file('avatar'), $request->except('avatar'));
         
         $user->update($data);
-        $request->session()->flash('crud', 'Account data of '.$user->name.' has been updated successfully.');
-        
         return redirect(route('admin.users.index'));
     }
 
@@ -146,8 +141,6 @@ class UsersController extends Controller
         
         $user = User::findOrFail($id);
         $user->delete();
-        
-        Session::flash('crud', "Account of ".$user->name." was deleted successfully.");
         
         return redirect(route('admin.users.index'));
     }

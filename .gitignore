@@ -10,4 +10,8 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-/public/images
+/public/images/avatars/*
+/public/images/thumbnails/*
+/public/images/modules/*
+/Modules-backup
+/TO DO.txt
