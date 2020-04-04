@@ -1,4 +1,5 @@
 <?php
+
     $form = [
         'left' => [
             'name_row' => [
@@ -55,7 +56,8 @@
                 'class' => 'form-group row',
                 'items' => [
                     'thumbnail' => [
-                        'type' => 'file',
+                        'type' => 'image',
+                        'value' => $args['thumbnail'],
                         'label' => __('admin/pages.thumbnail'),
                         'class' => '',
                         'container_class' => ''

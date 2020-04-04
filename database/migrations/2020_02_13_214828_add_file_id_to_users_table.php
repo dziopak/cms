@@ -15,7 +15,7 @@ class AddFileIdToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->bigInteger('avatar')->default('1')->nullable();
+            $table->bigInteger('avatar')->default('0')->nullable();
         });
     }
 

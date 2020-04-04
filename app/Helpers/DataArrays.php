@@ -33,3 +33,19 @@
             }
         }
     }
+
+    function getThumbnail($thumb, $type = 0) {
+        if (!$thumb) {
+            switch($type) {
+                case 1:
+                    return 'images/assets/no-avatar.png';
+                break;
+                
+                default:
+                    return 'images/assets/no-thumbnail.png';
+                break;
+            }
+        } else {
+            return 'images/'.$thumb->path;
+        }
+    }

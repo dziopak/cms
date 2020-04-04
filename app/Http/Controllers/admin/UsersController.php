@@ -45,7 +45,7 @@ class UsersController extends Controller
         $role = new Role;
         $roles = $role->get_all_roles();
         
-        $form = getData('admin/users/users_create_form', ['roles' => $roles]);
+        $form = getData('admin/users/users_create_form', ['roles' => $roles, 'thumbnail' => getThumbnail(null, 1)]);
         return view('admin.users.create', compact('roles', 'form'));
     }
     
@@ -65,13 +65,13 @@ class UsersController extends Controller
     public function edit($id)
     {
         Auth::user()->hasAccessOrRedirect('USER_EDIT');
-        $user = User::findOrFail($id);
+        $user = User::with('photo')->findOrFail($id);
         $logs = $user->logs()->take(5)->orderBy('created_at', 'desc')->get();
 
         $role = new Role;
         $roles = $role->get_all_roles();
 
-        $form = getData('admin/users/users_update_form', ['roles' => $roles]);
+        $form = getData('admin/users/users_update_form', ['roles' => $roles, 'thumbnail' => getThumbnail($user->photo, 1)]);
         return view('admin.users.edit', compact('user', 'roles', 'logs', 'form'));
     }
 

@@ -393,6 +393,17 @@ input.form-control-blended {
     width: 100%;
 }
 
+input[type="file"].image-upload {
+    display: none;
+}
+
+.image-preview {
+    height: auto;
+    cursor: pointer;
+    max-height: 350px;
+    width: 100%;
+}
+
 .scroll-overflow {
     overflow-y: auto;
     height: 100%;

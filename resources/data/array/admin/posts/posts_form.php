@@ -55,7 +55,8 @@
                 'class' => 'form-group row',
                 'items' => [
                     'thumbnail' => [
-                        'type' => 'file',
+                        'type' => 'image',
+                        'value' => $args['thumbnail'],
                         'label' => __('admin/posts.thumbnail'),
                         'class' => '',
                         'container_class' => 'tinymce',

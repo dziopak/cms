@@ -1,0 +1,2 @@
+{!! Form::file($name, ['class' => 'form-control image-upload', 'id' => $name, parseAttributes($item, 'attributes')]) !!}
+<img src="/{{ $item['value'] }}" id="{{ $name }}-image-preview" onclick="$('#{{ $name }}').trigger('click')" class="image-preview {{ $item['class'] }}">

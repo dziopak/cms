@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\PagesRequest;
+use App\Http\Utilities\ModelUtilities;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 
@@ -31,7 +32,7 @@ class PagesController extends Controller
         $categories[0] = 'No category';
         $categories = array_merge($categories, $page_cat->list_all());
         
-        $form = getData('admin/pages/pages_form', ['categories' => $categories]);
+        $form = getData('admin/pages/pages_form', ['categories' => $categories, 'thumbnail' => getThumbnail(null)]);
         return view('admin.pages.create', compact('form'));
     }
 
@@ -52,12 +53,12 @@ class PagesController extends Controller
     {
         Auth::user()->hasAccessOrRedirect('PAGE_EDIT');
         
-        $page = Page::findOrFail($id);
+        $page = Page::with('thumbnail')->findOrFail($id);
     
         $categories[0] = 'No category';
         $categories = array_merge($categories, PageCategory::list_all());
-        
-        $form = getData('admin/pages/pages_form', ['categories' => $categories]);
+    
+        $form = getData('admin/pages/pages_form', ['categories' => $categories, 'thumbnail' => getThumbnail($page->thumbnail)]);
         return view('admin.pages.edit', compact('page', 'form'));
     }
 
@@ -66,8 +67,8 @@ class PagesController extends Controller
         Auth::user()->hasAccessOrRedirect('PAGE_EDIT');
         
         $page = Page::findOrFail($id);
-        
-        $page->update($request->all());
+        $data = ModelUtilities::makeDirtyRequest($request->file('thumbnail'), $request->except('thumbnail'));
+        $page->update($data);
         Session::flash('crud', 'Page "'.$page->name.'" has been updated successfully.');
         
         return redirect(route('admin.pages.index'));

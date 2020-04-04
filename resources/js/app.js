@@ -4,6 +4,3 @@ import Embed from '@editorjs/embed';
 import CodeTool from '@editorjs/code';
 
 require('./bootstrap');
-
-$(document).ready(function() {
-});

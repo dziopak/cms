@@ -9,11 +9,29 @@
 @endsection
 
 @section('content-left')
+    @wrapper('admin.partials.widget', ['title' => 'admin/users.edit_right_title'])
+        <div class="row">
+            <div class="col" style="max-width: 140px;">
+                @include('partials.form-fields', ['fields' => $form['profile']['avatar']])
+            </div>
+            <div class="col" style="display: inline-block;">
+                <strong>{{'@'.$user->name}}</strong><br/>
+                
+                @if ($user->first_name && $user->last_name)
+                    <span>{{$user->first_name.' '.$user->last_name}}</span><br/>
+                @endif
+                
+                {{ __('admin/general.created_at') }} {{$user->created_at}}<br/>
+                <small>{{$user->role->name}}</small>
+            </div>
+        </div>
+    @endwrapper
+
     @wrapper('admin.partials.widget', ['title' => 'admin/users.edit_left_title'])
         {!! Form::model($user, ['method' => 'PATCH', 'action' => ['admin\UsersController@update', $user->id], 'files' => 'true']) !!}
         
         @include('admin.partials.validation')
-        @include('partials.form-fields', ['fields' => $form['left']])
+        @include('partials.form-fields', ['fields' => $form['basic_data']])
         
         
         <div class="form-group">
@@ -25,24 +43,7 @@
     @endwrapper
 @endsection
 
-@section('content-right')    
-    @wrapper('admin.partials.widget', ['title' => 'admin/users.edit_right_title'])
-        @if ($user->photo)
-            <img class="rounded-circle mr-4 float-left" width="100" src="{{ getPublicPath() }}/images/{{$user->photo->path}}">
-        @endif
-
-        <div style="display: inline-block;">
-            <strong>{{'@'.$user->name}}</strong><br/>
-            
-            @if ($user->first_name && $user->last_name)
-                <span>{{$user->first_name.' '.$user->last_name}}</span><br/>
-            @endif
-            
-            {{ __('admin/general.created_at') }} {{$user->created_at}}<br/>
-            <small>{{$user->role->name}}</small>
-        </div>
-    @endwrapper
-
+@section('content-right')
     @wrapper('admin.partials.widget', ['title' => 'admin/users.recent_actions'])
         @include('admin.partials.logs')
     @endwrapper
@@ -50,7 +51,7 @@
     @wrapper('admin.partials.widget', ['title' => 'admin/users.change_password'])
         {!! Form::open(['method' => 'PUT', 'action' => ['admin\UsersController@password', $user->id]]) !!}
         
-        @include('partials.form-fields', ['fields' => $form['right']])
+        @include('partials.form-fields', ['fields' => $form['password_change']])
 
         {!! Form::button('<i class="fa fa-home"></i>'.' '.__('admin/general.update_button'), ['class' => 'btn btn-primary', 'type' => 'submit']) !!}
         {!! Form::close() !!}

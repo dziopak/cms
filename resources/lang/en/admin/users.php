@@ -25,7 +25,7 @@
         'enable_button' => 'Unblock user',
 
         'email' => 'Email',
-        'username' => 'Username',
+        'name' => 'Username',
         'is_active' => 'Active',
         'created_at' => 'Created',
         'role' => 'Role',

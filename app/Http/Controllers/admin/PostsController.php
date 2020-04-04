@@ -28,7 +28,7 @@ class PostsController extends Controller
         Auth::user()->hasAccessOrRedirect('POST_CREATE');
 
         $categories = array_merge(['No category'], PostCategory::list_all());        
-        $form = getData('admin/posts/posts_form', ['categories' => $categories]);
+        $form = getData('admin/posts/posts_form', ['categories' => $categories, 'thumbnail' => getThumbnail(null)]);
         
         return view('admin.posts.create', compact('categories', 'form'));
     }
@@ -52,10 +52,10 @@ class PostsController extends Controller
     {
         Auth::user()->hasAccessOrRedirect('POST_EDIT');
         
-        $post = Post::findOrFail($id);
+        $post = Post::with('thumbnail')->findOrFail($id);
         $categories = array_merge(['No category'], PostCategory::list_all());
-        
-        $form = getData('admin/posts/posts_form', ['categories' => $categories]);
+
+        $form = getData('admin/posts/posts_form', ['categories' => $categories, 'thumbnail' => getThumbnail($post->thumbnail)]);
         return view('admin.posts.edit', compact('post', 'form'));
     }
 
