@@ -1,0 +1,1 @@
+@extends($theme['url'].'.index')
