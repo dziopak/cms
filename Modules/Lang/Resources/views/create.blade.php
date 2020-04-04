@@ -1,4 +1,4 @@
-@extends('layouts.admin.containers.full-width')
+@extends('admin.layouts.full-width')
 
 @section('breadcrumbs')
     <ul>
@@ -34,7 +34,7 @@
                     'class' => ''
                 ],
             ],
-        ],    
+        ],
         [
             'class' => 'form-group row',
             'items' => [
@@ -46,14 +46,14 @@
                     'class' => ''
                 ],
             ],
-        ],    
+        ],
     ];
 @endphp
 
 @section('module-content')
     @wrapper('admin.partials.widget', ['title' => 'Fill lang data'])
         {!! Form::open(['method' => 'POST', 'route' => 'admin.modules.lang.store', 'class' => 'w-100', 'files' => 'true']) !!}
-            
+
             @include('admin.partials.validation')
             @include('partials.form-fields', ['fields' => $form])
 

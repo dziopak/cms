@@ -1,8 +1,10 @@
 <?php
-    Route::group(['prefix' => 'settings', 'as' => 'settings.'], function ()  {
+Route::group(['prefix' => 'settings', 'as' => 'settings.'], function () {
 
-            //LOGS ROUTES
-            Route::get('/logs', 'admin\LogsController@index')->name('logs.index');
+    //LOGS ROUTE
+    Route::get('/logs', 'admin\LogsController@index')->name('logs.index');
 
-    });
-?>
+    //GENERAL SEETINGS ROUTE
+    Route::get('/general', 'admin\GeneralSettingsController@index')->name('general.index');
+    Route::post('/general', 'admin\GeneralSettingsController@store')->name('general.store');
+});

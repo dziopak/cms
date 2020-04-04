@@ -1,4 +1,5 @@
-@extends('layouts.admin.containers.full-width')
+@extends('admin.layouts.full-width')
+
 
 @section('breadcrumbs')
     <ul>
@@ -11,7 +12,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.widget', ['title' => 'admin/logs.index_title'])    
+    @wrapper('admin.partials.widget', ['title' => 'admin/logs.index_title'])
         <p>{{ __('admin/logs.index_intro') }}</p>
         <div id="logs-table">
             <div class="form-group row">
@@ -31,7 +32,7 @@
                         <option value="MAIL">{{ __('admin/logs.action_types.mails') }}</option>
                     </select>
                 </div>
-                
+
                 <div class="col-3 pr-0">
                     <select id="log-crud" class="form-control">
                         <option value="0">{{ __('admin/logs.actions.all') }}</option>

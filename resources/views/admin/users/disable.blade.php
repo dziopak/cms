@@ -1,4 +1,5 @@
-@extends('layouts.admin.containers.columns-6-6')
+@extends('admin.layouts.columns-6-6')
+
 
 @section('breadcrumbs')
     <ul>
@@ -8,6 +9,7 @@
     </ul>
 @endsection
 
+
 @section('content-left')
     @wrapper('admin.partials.widget', ['title' => 'admin/users.disable_top_title'])
         @if ($user->avatar)
@@ -16,38 +18,37 @@
 
         <div style="display: inline-block;">
             <strong>{{'@'.$user->name}}</strong><br/>
-        
+
             @if ($user->first_name && $user->last_name)
                 <span>{{$user->first_name.' '.$user->last_name}}</span><br/>
             @endif
-        
+
             {{ __('admin/general.created_at') }} {{$user->created_at}}<br/>
             <small>{{$user->role->name}}</small>
         </div>
     @endwrapper
-    
+
     @wrapper('admin.partials.widget', ['title' => 'admin/users.disable_bottom_title'])
-        
-    
         <p class="alert alert-warning">
         {{$user->is_active == 1 ? __('admin/users.disable_information') : __('admin/users.enable_information') }}
         </p>
-        
+
         {!! Form::open(['method' => 'PUT', 'action' => ['admin\UsersController@block', $user->id]]) !!}
-        
+
         <div class="form-group">
             <a href="{{route('admin.users.index')}}" role="button" class="btn btn-success">{{ __('admin/general.back_button') }}</a>
             @if ($user->is_active == 1)
-                {!! Form::hidden('is_active', 0) !!}   
+                {!! Form::hidden('is_active', 0) !!}
                 {!! Form::submit(__('admin/users.disable_button'), ['class' => 'btn btn-danger']) !!}
                 @else
-                {!! Form::hidden('is_active', 1) !!}   
+                {!! Form::hidden('is_active', 1) !!}
                 {!! Form::submit(__('admin/users.enable_button'), ['class' => 'btn btn-success']) !!}
             @endif
         </div>
         {!! Form::close() !!}
     @endwrapper
 @endsection
+
 
 @section('content-right')
     @wrapper('admin.partials.widget', ['title' => 'admin/users.recent_actions'])

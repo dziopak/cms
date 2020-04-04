@@ -1,4 +1,5 @@
-@extends('layouts.admin.containers.columns-6-6')
+@extends('admin.layouts.columns-6-6')
+
 
 @section('breadcrumbs')
     <ul>
@@ -27,6 +28,7 @@
 
     @endwrapper
 @endsection
+
 
 @section('content-right')
     @wrapper('admin.partials.widget', ['title' => 'admin/roles.edit_right_title'])

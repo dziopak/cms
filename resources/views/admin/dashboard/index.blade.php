@@ -1,18 +1,18 @@
-@extends('layouts.admin.containers.full-width')
+@extends('admin.layouts.full-width')
 
 
 @push('head')
     <meta name="_token" content="{{ csrf_token() }}" />
     <script src="{{asset('assets/js/gridstack.all.js')}}"></script>
     <script src="{{asset('assets/js/Chart.js')}}"></script>
-    
+
     <link rel="stylesheet" href="{{asset('css/dashboard.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/gridstack.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/slick.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/slick-theme.css')}}">
 @endpush
-    
-    
+
+
 @push('scripts-bottom')
     <script src="{{asset('js/admin/dashboard.js')}}" defer></script>
     <script src="{{asset('assets/js/slick.min.js')}}" defer></script>
@@ -47,7 +47,7 @@
                     'w' => $widget['w'],
                     'h' => $widget['h'],
                     'auto' => false
-                ])  
+                ])
 
             @endforeach
         @endif

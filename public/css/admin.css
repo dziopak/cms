@@ -516,3 +516,7 @@ i.fa.fas.fa-trash,
   }
 }
 
+textarea.small {
+  height: 100px;
+}
+

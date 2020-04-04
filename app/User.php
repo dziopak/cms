@@ -139,7 +139,7 @@ class User extends Authenticatable implements JWTSubject
 
         static::deleting(function($user) {
             $user->account_logs()->delete();
-            if ($user->avatar != "1") {
+            if ($user->avatar != "0") {
                 unlink(public_path() . '/images/'.$user->photo->path);
                 $user->photo()->delete();
             }

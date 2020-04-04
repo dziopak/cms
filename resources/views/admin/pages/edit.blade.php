@@ -1,4 +1,4 @@
-@extends('layouts.admin.containers.columns-8-4')
+@extends('admin.layouts.columns-8-4')
 
 
 @section('breadcrumbs')
@@ -11,7 +11,7 @@
 
 
 @section('before')
-    
+
     {!! Form::model($page, ['method' => 'PATCH', 'action' => ['admin\PagesController@update', $page->id], 'class' => 'w-100', 'files' => 'true']) !!}
     @include('admin.partials.validation')
     @hook('page_edit_before')
@@ -22,7 +22,7 @@
 
 @section('content-left')
     @wrapper('admin.partials.widget', ['title' => 'admin/pages.edit_left_title'])
-        
+
         @include('partials.form-fields', ['fields' => $form['left']])
 
         @hook('page_edit_left_content')
@@ -34,9 +34,9 @@
 
 @section('content-right')
     @wrapper('admin.partials.widget', ['title' => 'admin/pages.edit_right_title'])
-        
+
         @include('partials.form-fields', ['fields' => $form['right']])
-    
+
         @hook('page_edit_right_content')
         @hook('page_right_content')
 
@@ -54,7 +54,7 @@
             @hook('page_edit_bottom_content')
             @hook('page_bottom_content')
             <!-- End of field hooks -->
-            
+
 
             <div class="form-group">
                 {!! Form::hidden('page_id', $page->id) !!}

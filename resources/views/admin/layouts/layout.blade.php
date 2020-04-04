@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    @include('layouts.admin.partials.head')
+    @include('admin.layouts.partials.head')
 </head>
 
 <body id="admin-page">
@@ -17,14 +17,14 @@
 
             {{-- Main area --}}
             <div id="admin-main" class="col w-100 overflow-hidden">
-                
+
                 <!-- Top navigation bar -->
                 @include('admin.partials.top-nav')
 
                 <div id="module" class="row py-3 pr-3">
                     <!-- Action alert -->
-                    @include('layouts.admin.partials.alert')
-                    
+                    @include('admin.layouts.partials.alert')
+
                     <!-- Module -->
                     @yield('content')
                 </div>
@@ -37,7 +37,7 @@
 
     @yield('footer')
     @stack('scripts-bottom')
-    
+
     <script>
         @hook('adminInlineScripts')
         </script>

@@ -1,4 +1,5 @@
-@extends('layouts.admin.containers.full-width')
+@extends('admin.layouts.full-width')
+
 
 @section('breadcrumbs')
     <ul>
@@ -10,7 +11,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.widget', ['title' => 'admin/pages.index_title'])    
+    @wrapper('admin.partials.widget', ['title' => 'admin/pages.index_title'])
 
 
         {{-- Table --}}
@@ -32,6 +33,6 @@
         <div class="float-right">{{ $pages->render() }}</div>
         {{-- End --}}
 
-        
+
     @endwrapper
 @endsection

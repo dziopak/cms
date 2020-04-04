@@ -1,4 +1,5 @@
-@extends('layouts.admin.containers.columns-8-4')
+@extends('admin.layouts.columns-8-4')
+
 
 @section('breadcrumbs')
     <ul>
@@ -18,7 +19,7 @@
 
 @section('module-content')
     @wrapper('admin.partials.widget', ['title' => 'admin/page_categories.edit_left_title'])
-        
+
         @include('partials.form-fields', ['fields' => $form['left']])
 
         <!-- Custom field hooks -->

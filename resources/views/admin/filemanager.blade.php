@@ -1,4 +1,5 @@
-@extends('layouts.admin.containers.full-width')
+@extends('admin.layouts.full-width')
+
 
 @section('breadcrumbs')
     <ul>
@@ -6,6 +7,7 @@
         <li>{{ __('admin/routes.files') }}</li>
     </ul>
 @endsection
+
 
 @section('module-content')
     @wrapper('admin.partials.widget', ['title' => 'File manager'])

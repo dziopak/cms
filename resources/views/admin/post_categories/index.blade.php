@@ -1,4 +1,5 @@
-@extends('layouts.admin.containers.full-width')
+@extends('admin.layouts.full-width')
+
 
 @section('breadcrumbs')
     <ul>
@@ -11,9 +12,9 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.widget', ['title' => 'admin/post_categories.index_title'])  
+    @wrapper('admin.partials.widget', ['title' => 'admin/post_categories.index_title'])
 
-        
+
         {{-- Table --}}
         @include('admin.partials.table', ['fields' => $categories])
         {{-- End --}}
@@ -28,7 +29,7 @@
         @endif
         {{-- End --}}
 
-        
+
         {{-- Pagination --}}
         <div class="float-right">{{ $categories->render() }}</div>
         {{-- End --}}
