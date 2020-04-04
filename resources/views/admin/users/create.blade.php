@@ -1,4 +1,4 @@
-@extends('layouts.admin.containers.columns-6-6')
+@extends('layouts.admin.containers.columns-8-4')
 
 @section('breadcrumbs')
     <ul>

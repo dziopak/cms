@@ -14,11 +14,18 @@ class CreateFilesTable extends Migration
     public function up()
     {
         Schema::create('files', function (Blueprint $table) {
+            DB::statement('SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";');
             $table->bigIncrements('id');
             $table->string('path');
             $table->tinyInteger('type');
             $table->timestamps();
         });
+
+        DB::table('files')->insert([
+            'id' => 0,
+            'path' => 'assets/no-avatar.png',
+            'type' => 1
+        ]);
     }
 
     /**

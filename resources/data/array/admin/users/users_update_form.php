@@ -1,6 +1,6 @@
 <?php
     $form = [
-        'left' => [
+        'basic_data' => [
             [
                 'class' => 'form-group row',
                 'items' => [
@@ -44,21 +44,26 @@
                         'class' => ''
                     ],
                 ]
-            ],    
-            [
-                'class' => 'form-group row',
-                'items' => [
-                    'avatar' => [
-                        'type' => 'file',
-                        'label' => __('admin/users.avatar'),
-                        'required' => false,
-                        'value' => null,
-                        'class' => ''
-                    ],
-                ]
-            ],    
+            ],        
         ],
-        'right' => [
+        'profile' => [
+            'avatar' => [
+                'avatar_row' => [
+                    'class' => 'form-group row',
+                    'items' => [
+                        'avatar' => [
+                            'type' => 'image',
+                            'value' => $args['thumbnail'],
+                            'label' => __('admin/users.avatar'),
+                            'required' => false,
+                            'class' => 'rounded-circle',
+                            'container_class' => 'ml-2'
+                        ],
+                    ]
+                ]
+            ]
+        ],
+        'password_change' => [
             [
                 'class' => 'form-group row',
                 'items' => [

@@ -57,6 +57,19 @@
             [
                 'class' => 'form-group row',
                 'items' => [
+                    'avatar' => [
+                        'type' => 'image',
+                        'value' => $args['thumbnail'],
+                        'label' => __('admin/users.avatar'),
+                        'required' => false,
+                        'class' => '',
+                        'container_class' => ''
+                    ],
+                ]
+            ],
+            [
+                'class' => 'form-group row',
+                'items' => [
                     'first_name' => [
                         'type' => 'text',
                         'label' => __('admin/users.first_name'),
@@ -72,18 +85,6 @@
                         'class' => ''
                     ],
                 ],
-            ],
-            [
-                'class' => 'form-group row',
-                'items' => [
-                    'avatar' => [
-                        'type' => 'file',
-                        'label' => __('admin/users.avatar'),
-                        'required' => false,
-                        'value' => null,
-                        'class' => ''
-                    ],
-                ]
             ],
         ]
     ];

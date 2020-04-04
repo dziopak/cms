@@ -18,8 +18,8 @@
                 @endif
             >
         
-                {{-- Display label if not a checkbox --}}
-                @if($item['type'] !== 'checkbox')
+                {{-- Display label if not a checkbox or image --}}
+                @if($item['type'] !== 'checkbox' && $item['type'] !== 'image')
                 {!! Form::label($name, $item['label'].': ', ['class' => !empty($item['required']) && $item['required'] === true ? 'required' : '']) !!}
                 @endif
 
@@ -48,6 +48,10 @@
                     
                     @case('file')
                         {!! Form::file($name, ['class' => 'form-control '.$item['class'], parseAttributes($item, 'attributes')]) !!}
+                    @break
+
+                    @case('image')
+                        @include('admin.partials.image-input')
                     @break
 
                     @case('checkbox')

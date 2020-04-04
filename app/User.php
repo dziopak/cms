@@ -3,10 +3,8 @@
 namespace App;
 
 use Auth;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\DB;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 use App\Events\Users\UserCreateEvent;
@@ -14,6 +12,9 @@ use App\Events\Users\UserUpdateEvent;
 use App\Events\Users\UserDestroyEvent;
 
 use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -100,11 +101,11 @@ class User extends Authenticatable implements JWTSubject
             if (! $user = JWTAuth::parseToken()->authenticate()) {
                 return response()->json(['user_not_found'], 404);
             }
-        } catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+        } catch (TokenExpiredException $e) {
             return response()->json(['token_expired'], $e->getStatusCode());
-        } catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+        } catch (TokenInvalidException $e) {
             return response()->json(['token_invalid'], $e->getStatusCode());
-        } catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
+        } catch (JWTException $e) {
             return response()->json(['token_absent'], $e->getStatusCode());
         }
 
@@ -145,18 +146,24 @@ class User extends Authenticatable implements JWTSubject
         });
 
         self::created(function($user) use ($request) {
-            if ($user->fire_events) event(new UserCreateEvent($user, $request->file('avatar')));
-            $request->session()->flash('crud', 'User '.$user->name.' has been created successfully.');
+            if ($user->fire_events) {
+                event(new UserCreateEvent($user, $request->file('avatar')));
+                $request->session()->flash('crud', 'User '.$user->name.' has been created successfully.');
+            }
         });
 
         self::updating(function($user) use ($request) {
-            if ($user->fire_events) event(new UserUpdateEvent($user, $request->file('avatar')));
-            $request->session()->flash('crud', 'Account data of '.$user->name.' has been updated successfully.');
+            if ($user->fire_events) {
+                event(new UserUpdateEvent($user, $request->file('avatar')));
+                $request->session()->flash('crud', 'Account data of '.$user->name.' has been updated successfully.');
+            }
         });
         
         self::deleted(function($user) {
-            if ($user->fire_events) event(new UserDestroyEvent($user));
-            $request->session()->flash('crud', 'Account data of '.$user->name.' has been deleted successfully.');
+            if ($user->fire_events) {
+                event(new UserDestroyEvent($user));
+                $request->session()->flash('crud', 'Account data of '.$user->name.' has been deleted successfully.');
+            }
         });
     }
 }

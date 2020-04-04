@@ -37131,8 +37131,6 @@ __webpack_require__.r(__webpack_exports__);
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-$(document).ready(function () {});
-
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
