@@ -1,4 +1,5 @@
-@extends('layouts.admin.containers.columns-8-4')
+@extends('admin.layouts.columns-8-4')
+
 
 @section('breadcrumbs')
     <ul>
@@ -31,14 +32,14 @@
                 {!! Form::text('slug', null, ['class' => 'form-control']) !!}
             </div>
         </div>
-        
+
         <div class="form-group row">
             <div class="col">
                 {!! Form::label('required', 'Required: ', ['class' => 'required']) !!}
                 {!! Form::select('required', [0 => "No", 1 => "Yes"], null, ['class' => 'form-control']) !!}
             </div>
         </div>
-        
+
         <div class="form-group row">
             <div class="col">
                 {!! Form::label('type', 'Type: ', ['class' => 'required']) !!}

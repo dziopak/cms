@@ -1,16 +1,20 @@
-@extends('layouts.admin.containers.columns-8-4')
+@extends('admin.layouts.columns-8-4')
+
 
 @push('scripts')
     <script src="{{asset('vendor/dropzone/dist/min/dropzone.min.js')}}" type="text/javascript"></script>
 @endpush
 
+
 @push('styles')
     <link rel="stylesheet" type="text/css" href="{{asset('vendor/dropzone/dist/min/dropzone.min.css')}}">
 @endpush
 
+
 @section('head')
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
+
 
 @section('breadcrumbs')
     <ul>
@@ -20,6 +24,7 @@
         <li>{{ __('admin/routes.edit') }}</li>
     </ul>
 @endsection
+
 
 @section('before')
     {!! Form::model($item, ['method' => 'PATCH', 'route' => ['admin.modules.portfolio.update', $item->id], 'id' => 'portfolio-item-form', 'class' => 'w-100', 'files' => 'true']) !!}
@@ -40,7 +45,7 @@
             </div>
 
             {{-- Form fields --}}
-            <div class="col-lg-9">    
+            <div class="col-lg-9">
                 @include('partials.form-fields', ['fields' => $form['basic_data']])
             </div>
             {{-- End --}}
@@ -48,9 +53,10 @@
     @endwrapper
 @endsection
 
+
 @section('content-right')
     @wrapper('admin.partials.widget', ['title' => 'portfolio::langs.settings_title'])
-        
+
         <div class="form-group row">
             <div class="col">
                 {!! Form::label('thumb_color', 'Thumbnail color: ', ['class' => 'required']) !!}
@@ -86,9 +92,9 @@
             <div id="pictures">
             </div>
 
-            <div class="dropzone" action="{{route('admin.modules.portfolio.fileupload')}}">    
+            <div class="dropzone" action="{{route('admin.modules.portfolio.fileupload')}}">
             </div>
-            
+
             <div class="py-4">
                 @if (count($item->photos) > 0)
                     @foreach($item->photos as $photo)
@@ -129,15 +135,15 @@
     {!! Form::close() !!}
     <script>
         var CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
-    
+
         Dropzone.autoDiscover = false;
-        var myDropzone = new Dropzone(".dropzone",{ 
+        var myDropzone = new Dropzone(".dropzone",{
             maxFilesize: 3,  // 3 mb
             acceptedFiles: ".jpeg,.jpg,.png,.pdf",
         });
         myDropzone.on("sending", function(file, xhr, formData) {
            formData.append("_token", CSRF_TOKEN);
-        }); 
+        });
         myDropzone.on("success", function($response) {
            console.log($response.xhr.response);
            if (!isNaN($response.xhr.response)) {

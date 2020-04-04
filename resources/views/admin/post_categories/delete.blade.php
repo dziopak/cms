@@ -1,4 +1,5 @@
-@extends('layouts.admin.containers.columns-6-6')
+@extends('admin.layouts.columns-6-6')
+
 
 @section('breadcrumbs')
     <ul>
@@ -8,6 +9,7 @@
         <li>{{ __('admin/routes.delete') }}</li>
     </ul>
 @endsection
+
 
 @section('content-left')
     @wrapper('admin.partials.widget', ['title' => 'admin/post_categories.delete_top_title'])
@@ -26,6 +28,6 @@
             {!! Form::submit(__('admin/general.delete_permamently'), ['class' => 'btn btn-danger']) !!}
         </div>
         {!! Form::close() !!}
-    
+
     @endwrapper
 @endsection

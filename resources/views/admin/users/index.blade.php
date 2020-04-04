@@ -1,4 +1,4 @@
-@extends('layouts.admin.containers.full-width')
+@extends('admin.layouts.full-width')
 
 
 @section('breadcrumbs')
@@ -8,13 +8,12 @@
         <li>{{ __('admin/routes.list') }}</li>
     </ul>
 @endsection
-    
+
 
 @section('module-content')
     @wrapper('admin.partials.widget', ['title' => 'admin/users.list_all'])
-    
 
-        {{-- Displaying data table --}}    
+        {{-- Displaying data table --}}
         @include('admin.partials.table', ['fields' => $users, 'id' => 'users_table'])
         {{-- End of table --}}
 

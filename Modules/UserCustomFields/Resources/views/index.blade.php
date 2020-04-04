@@ -1,16 +1,18 @@
-@extends('layouts.admin.containers.full-width')
+@extends('admin.layouts.full-width')
 
-<?php
+
+@php
     $table_headers = ['Field name' => 'name', 'Field slug' => 'slug', 'Field type' => 'type', 'Required' => 'required'];
     $table_data_types = ['required' => 'boolean'];
     $table_actions = [
         'Edit' => [
             'url' => 'admin.modules.usercustomfields.edit',
             'class' => 'success',
-            'access' => 'MODULE_EDIT'    
+            'access' => 'MODULE_EDIT'
         ]
     ];
-?>
+@endphp
+
 
 @section('breadcrumbs')
     <ul>

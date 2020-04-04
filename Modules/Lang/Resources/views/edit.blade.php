@@ -1,4 +1,5 @@
-@extends('layouts.admin.containers.full-width')
+@extends('admin.layouts.full-width')
+
 
 @section('breadcrumbs')
     <ul>
@@ -8,6 +9,7 @@
         <li>Edit</li>
     </ul>
 @endsection
+
 
 @php
     $form = [
@@ -34,7 +36,7 @@
                     'class' => ''
                 ],
             ],
-        ],    
+        ],
         [
             'class' => 'form-group row',
             'items' => [
@@ -46,9 +48,10 @@
                     'class' => ''
                 ],
             ],
-        ],    
+        ],
     ];
 @endphp
+
 
 @section('module-content')
     @wrapper('admin.partials.widget', ['title' => 'Edit lang data'])

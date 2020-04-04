@@ -1,4 +1,5 @@
-@extends('layouts.admin.containers.full-width')
+@extends('admin.layouts.full-width')
+
 
 @section('breadcrumbs')
     <ul>
@@ -8,6 +9,7 @@
         <li>List all</li>
     </ul>
 @endsection
+
 
 @section('module-content')
     @wrapper('admin.partials.widget', ['title' => 'Manage testimonials'])

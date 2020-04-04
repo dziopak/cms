@@ -1,4 +1,5 @@
-@extends('layouts.admin.containers.full-width')
+@extends('admin.layouts.full-width')
+
 
 @section('breadcrumbs')
     <ul>
@@ -32,6 +33,6 @@
         <div class="float-right">{{ $posts->render() }}</div>
         {{-- End --}}
 
-        
+
     @endwrapper
 @endsection

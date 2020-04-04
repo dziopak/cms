@@ -1,4 +1,5 @@
-@extends('layouts.admin.containers.full-width')
+@extends('admin.layouts.full-width')
+
 
 @section('breadcrumbs')
     <ul>
@@ -13,7 +14,7 @@
     @wrapper('admin.partials.widget', ['title' => 'admin/modules.active'])
         @include('admin.partials.table', ['fields' => $modules['active'], 'mass_edit_by' => 'name'])
     @endwrapper
-    
+
     @wrapper('admin.partials.widget', ['title' => 'admin/modules.inactive'])
         @include('admin.partials.table', ['fields' => $modules['inactive'], 'mass_edit_by' => 'name'])
     @endwrapper

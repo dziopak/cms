@@ -1,4 +1,5 @@
-@extends('layouts.admin.containers.columns-8-4')
+@extends('admin.layouts.columns-8-4')
+
 
 @section('breadcrumbs')
     <ul>
@@ -8,9 +9,11 @@
     </ul>
 @endsection
 
+
 @section('before')
     {!! Form::open(['method' => 'POST', 'action' => 'admin\UsersController@store', 'files' => 'true']) !!}
 @endsection
+
 
 @section('content-left')
     @wrapper('admin.partials.widget', ['title' => 'admin/users.create_left_title'])

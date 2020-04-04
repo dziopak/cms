@@ -1,4 +1,5 @@
-@extends('layouts.admin.containers.columns-8-4')
+@extends('admin.layouts.columns-8-4')
+
 
 @section('breadcrumbs')
     <ul>
@@ -18,9 +19,9 @@
 
 @section('content-left')
     @wrapper('admin.partials.widget', ['title' => 'admin/post_categories.create_left_title'])
-        
+
         @include('partials.form-fields', ['fields' => $form['left']])
-        
+
         <!-- Custom field hooks -->
         @hook('post_category_create_left_content')
         @hook('post_category_left_content')
@@ -37,6 +38,7 @@
 
     @endwrapper
 @endsection
+
 
 @section('after')
     {!! Form::close() !!}

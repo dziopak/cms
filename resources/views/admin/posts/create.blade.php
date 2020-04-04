@@ -1,4 +1,5 @@
-@extends('layouts.admin.containers.columns-8-4')
+@extends('admin.layouts.columns-8-4')
+
 
 @section('breadcrumbs')
     <ul>
@@ -19,7 +20,7 @@
 
 @section('content-left')
     @wrapper('admin.partials.widget', ['title' => 'admin/posts.create_left_title'])
-    
+
         @include('partials.form-fields', ['fields' => $form['left']])
         @hook('post_create_left_content')
         @hook('post_left_content')
@@ -29,18 +30,18 @@
 
 @section('content-right')
     @wrapper('admin.partials.widget', ['title' => 'admin/posts.create_right_title'])
-        
+
         @include('partials.form-fields', ['fields' => $form['right']])
         @hook('post_create_right_content')
         @hook('post_right_content')
 
     @endwrapper
 @endsection
-        
+
 @section('content-bottom')
     <div class="col">
-        @wrapper('admin.partials.widget', ['title' => 'admin/posts.create_bottom_title'])    
-            
+        @wrapper('admin.partials.widget', ['title' => 'admin/posts.create_bottom_title'])
+
             @include('partials.form-fields', ['fields' => $form['bottom']])
 
             <div class="form-group">
@@ -52,7 +53,7 @@
 
             @hook('post_edit_bottom_content')
             @hook('post_bottom_content')
-            
+
         @endwrapper
     </div>
 @endsection

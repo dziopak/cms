@@ -1,4 +1,5 @@
-@extends('layouts.admin.containers.full-width')
+@extends('admin.layouts.full-width')
+
 
 @section('breadcrumbs')
     <ul>
@@ -9,15 +10,16 @@
     </ul>
 @endsection
 
+
 @section('module-content')
     @wrapper('admin.partials.widget', ['title' => 'All items'])
-    
-        
+
+
         {{-- Table --}}
         @include('admin.partials.table', ['fields' => $items])
         {{-- End --}}
-        
-        
+
+
         {{-- Create button --}}
             @if (Auth::user()->hasAccess('MODULE_USE'))
             <a href="{{ route('admin.modules.portfolio.create') }}" class="btn btn-success">
@@ -27,11 +29,11 @@
             @endif
         {{-- End --}}
 
-    
+
         {{-- Pagination --}}
         <div class="float-right">{{ $items->render() }}</div>
         {{-- End --}}
 
-    
-        @endwrapper
-    @endsection
+
+    @endwrapper
+@endsection

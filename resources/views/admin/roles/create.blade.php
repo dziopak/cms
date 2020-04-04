@@ -1,4 +1,5 @@
-@extends('layouts.admin.containers.columns-6-6')
+@extends('admin.layouts.columns-6-6')
+
 
 @section('breadcrumbs')
     <ul>
@@ -9,6 +10,7 @@
     </ul>
 @endsection
 
+
 @section('before')
     @if (isset($role))
         {!! Form::model($role, ['method' => 'POST', 'action' => 'admin\RolesController@store', 'class' => 'w-100']) !!}
@@ -17,12 +19,13 @@
     @endif
 @endsection
 
+
 @section('content-left')
     @wrapper('admin.partials.widget', ['title' => 'admin/roles.create_left_title'])
-        
+
         @include('admin.partials.validation')
         @include('partials.form-fields', ['fields' => $form['left']])
-        
+
         <div class="form-group">
             <button type="submit" class="btn btn-success">
                 <i class="fa fa-plus" aria-hidden="true"></i>
@@ -33,13 +36,15 @@
     @endwrapper
 @endsection
 
+
 @section('content-right')
     @wrapper('admin.partials.widget', ['title' => 'admin/roles.create_right_title'])
 
         @include('partials.form-fields', ['fields' => $form['right']])
-    
+
     @endwrapper
 @endsection
+
 
 @section('after')
     {!! Form::close() !!}

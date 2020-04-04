@@ -1,4 +1,5 @@
-@extends('layouts.admin.containers.columns-6-6')
+@extends('admin.layouts.columns-6-6')
+
 
 @section('breadcrumbs')
     <ul>
@@ -27,6 +28,6 @@
             {!! Form::submit('Delete permamently', ['class' => 'btn btn-danger']) !!}
         </div>
         {!! Form::close() !!}
-    
+
     @endwrapper
 @endsection

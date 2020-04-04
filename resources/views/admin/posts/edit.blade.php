@@ -1,4 +1,5 @@
-@extends('layouts.admin.containers.columns-8-4')
+@extends('admin.layouts.columns-8-4')
+
 
 @section('breadcrumbs')
     <ul>
@@ -19,13 +20,14 @@
 
 @section('content-left')
     @wrapper('admin.partials.widget', ['title' => 'admin/posts.edit_left_title'])
-        
+
         @include('partials.form-fields', ['fields' => $form['left']])
         @hook('post_edit_left_content')
         @hook('post_left_content')
 
     @endwrapper
 @endsection
+
 
 @section('content-right')
     @wrapper('admin.partials.widget', ['title' => 'admin/posts.edit_right_title'])
@@ -36,11 +38,12 @@
 
     @endwrapper
 @endsection
-        
+
+
 @section('content-bottom')
     <div class="col">
         @wrapper('admin.partials.widget', ['title' => 'admin/posts.edit_bottom_title'])
-            
+
             @include('partials.form-fields', ['fields' => $form['bottom']])
             @hook('post_edit_bottom_content')
             @hook('post_bottom_content')
@@ -49,9 +52,10 @@
                 {!! Form::hidden('post_id', $post->id) !!}
                 {!! Form::button('<i class="fa fa-home"></i>'.' '.__('admin/general.update_button'), ['class' => 'btn btn-success', 'type' => 'submit']) !!}
             </div>
-        @endwrapper                
+        @endwrapper
     </div>
 @endsection
+
 
 @section('after')
     {!! Form::close() !!}

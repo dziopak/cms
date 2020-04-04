@@ -1,4 +1,5 @@
-@extends('layouts.admin.containers.full-width')
+@extends('admin.layouts.full-width')
+
 
 @section('breadcrumbs')
     <ul>
@@ -9,25 +10,26 @@
     </ul>
 @endsection
 
+
 @section('module-content')
     @wrapper('admin.partials.widget', ['title' => 'Update testimonial data'])
         {!! Form::model($testimonial, ['method' => 'PATCH', 'route' => ['admin.modules.testimonials.update', $testimonial->id], 'class' => 'w-100', 'files' => 'true']) !!}
             @include('admin.partials.validation')
-            
+
             <div class="form-group row">
                 <div class="col">
                     {!! Form::label('thumbnail', 'Thumbnail: ') !!}
                     {!! Form::file('thumbnail', ['class' => 'form-control']) !!}
                 </div>
             </div>
-            
+
             <div class="form-group row">
                 <div class="col">
                     {!! Form::label('author', 'Author: ', ['class' => 'required']) !!}
                     {!! Form::text('author', null, ['class' => 'form-control']) !!}
                 </div>
             </div>
-            
+
             <div class="form-group row">
                 <div class="col">
                     {!! Form::label('author_title', 'Author\'s title: ', ['class' => 'required']) !!}
@@ -35,7 +37,7 @@
                 </div>
             </div>
 
-            
+
             <div class="form-group row">
                 <div class="col">
                     {!! Form::label('content', 'Content: ', ['class' => 'required']) !!}
