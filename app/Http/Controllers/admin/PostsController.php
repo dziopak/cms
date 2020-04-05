@@ -17,20 +17,14 @@ class PostsController extends Controller
 
     public function index(Request $request)
     {
-        $posts = Post::with('author', 'thumbnail')->orderByDesc('id')->filter($request)->paginate(15);
-        $table = getData('admin/posts/posts_index_table');
-        return view('admin.posts.index', compact('posts', 'table'));
+        return view('admin.posts.index');
     }
 
     
     public function create()
     {
         Auth::user()->hasAccessOrRedirect('POST_CREATE');
-
-        $categories = array_merge(['No category'], PostCategory::list_all());        
-        $form = getData('admin/posts/posts_form', ['categories' => $categories, 'thumbnail' => getThumbnail(null)]);
-        
-        return view('admin.posts.create', compact('categories', 'form'));
+        return view('admin.posts.create');
     }
 
     
@@ -51,12 +45,7 @@ class PostsController extends Controller
     public function edit($id)
     {
         Auth::user()->hasAccessOrRedirect('POST_EDIT');
-        
-        $post = Post::with('thumbnail')->findOrFail($id);
-        $categories = array_merge(['No category'], PostCategory::list_all());
-
-        $form = getData('admin/posts/posts_form', ['categories' => $categories, 'thumbnail' => getThumbnail($post->thumbnail)]);
-        return view('admin.posts.edit', compact('post', 'form'));
+        return view('admin.posts.edit', ['post_id' => $id]);
     }
 
     

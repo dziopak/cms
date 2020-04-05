@@ -17,6 +17,7 @@ class PostsController extends Controller
 
     public function index()
     {
-        return view($this->theme['url'] . '.posts.index', ['theme' => $this->theme]);
+        // return view($thisX->theme['url'] . '.posts.index', ['theme' => $this->theme]);
+        return view($this->theme['url'] . '.posts.index');
     }
 }

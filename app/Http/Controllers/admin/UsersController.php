@@ -5,7 +5,6 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
 
 use App\Http\Requests\UsersCreateRequest;
 use App\Http\Requests\UsersEditRequest;
@@ -23,29 +22,13 @@ class UsersController extends Controller
 {
     public function index(Request $request)
     {
-        $users = User::with('role', 'photo')->orderByDesc('id')->filter($request)->paginate(15);
-                
-        // TO DO //
-        $user_roles = Role::all('id', 'name');
-        $roles = [];
-        foreach($user_roles as $role) {
-            $roles[$role->id] = $role->name;
-        }
-        // with Ajax //
-
-        $table = getData('admin/users/users_index_table');
-        return view('admin.users.index', compact('users', 'roles', 'table'));
+        return view('admin.users.index');
     }
     
     
     public function create()
     {
         Auth::user()->hasAccessOrRedirect('USER_CREATE');
-        
-        $role = new Role;
-        $roles = $role->get_all_roles();
-        
-        $form = getData('admin/users/users_create_form', ['roles' => $roles, 'thumbnail' => getThumbnail(null, 1)]);
         return view('admin.users.create', compact('roles', 'form'));
     }
     
@@ -65,21 +48,13 @@ class UsersController extends Controller
     public function edit($id)
     {
         Auth::user()->hasAccessOrRedirect('USER_EDIT');
-        $user = User::with('photo')->findOrFail($id);
-        $logs = $user->logs()->take(5)->orderBy('created_at', 'desc')->get();
-
-        $role = new Role;
-        $roles = $role->get_all_roles();
-
-        $form = getData('admin/users/users_update_form', ['roles' => $roles, 'thumbnail' => getThumbnail($user->photo, 1)]);
-        return view('admin.users.edit', compact('user', 'roles', 'logs', 'form'));
+        return view('admin.users.edit', ['user_id' => $id]);
     }
 
 
     public function update(UsersEditRequest $request, $id)
     {
         Auth::user()->hasAccessOrRedirect('USER_EDIT');
-        $role = new Role;
         
         $user = User::findOrFail($id);
         $data = ModelUtilities::makeDirtyRequest($request->file('avatar'), $request->except('avatar'));
@@ -102,11 +77,7 @@ class UsersController extends Controller
 
     public function disable($id) {
         Auth::user()->hasAccessOrRedirect('USER_EDIT');
-        
-        $user = User::findOrFail($id);
-        $logs = $user->account_logs()->take(5)->orderBy('created_at', 'desc')->get();
-
-        return view('admin.users.disable', compact('user', 'logs'));
+        return view('admin.users.disable', ['user_id' => $id]);
     }
 
     public function block(Request $request, $id) {
@@ -127,11 +98,7 @@ class UsersController extends Controller
     
     public function delete($id) {
         Auth::user()->hasAccessOrRedirect('USER_DELETE');
-        
-        $user = User::findOrFail($id);
-        $logs = $user->account_logs()->take(5)->orderBy('created_at', 'desc')->get();
-
-        return view('admin.users.delete', compact('user', 'logs'));
+        return view('admin.users.delete', ['user_id' => $id]);
     }
 
 

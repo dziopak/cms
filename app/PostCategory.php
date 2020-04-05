@@ -9,6 +9,7 @@ use App\Events\Categories\CategoryCreateEvent;
 use App\Events\Categories\CategoryUpdateEvent;
 use App\Events\Categories\CategoryDestroyEvent;
 
+
 class PostCategory extends Model
 {
     protected $guarded = ['id', 'category_id', 'type'];
@@ -36,9 +37,6 @@ class PostCategory extends Model
 
         self::deleted(function($category) {
             if ($category->fire_events) event(new CategoryDestroyEvent($category, 'POST'));
-        });
-
-        static::deleting(function($category) {
             $category->posts()->update(['category_id' => 0]);
         });
     }
