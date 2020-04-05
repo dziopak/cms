@@ -9,18 +9,21 @@
 
     class RoleUtilities {
         static function serializeAccess ($access) {
+            $res = [];
             foreach($access as $key => $row) {
                 if ($row === '1') {
                     array_push($res, $key);
                 }
             }
-
-            return $res;
+            return serialize($res);
         }
 
         static function unserializeAccess($access) {
-            foreach(unserialize($access) as $role_access) {
-                $res[$role_access] = 1;
+            $res = [];
+            if (!empty($access)) {
+                foreach(unserialize($access) as $role_access) {
+                    $res[$role_access] = 1;
+                }
             }
 
             return $res;
@@ -35,14 +38,14 @@
                 'description' => 'required|string|max:255',
                 'access' => 'array'
             ];
-    
+
             $validationFields = Hook::get('apiRolesStoreValidation',[$validationFields],function($validationFields){
                 return $validationFields;
             });
-            
+
             $validator = Validator::make($request->all(), $validationFields);
-            if($validator->fails()) return response()->json(["status" => "400", "message" => "There were errors during the validation.", "errors" => $validator->errors()], 400);         
-            
+            if($validator->fails()) return response()->json(["status" => "400", "message" => "There were errors during the validation.", "errors" => $validator->errors()], 400);
+
             return true;
         }
 
@@ -58,10 +61,10 @@
             $validationFields = Hook::get('apiRoleUpdateValidation',[$validationFields],function($validationFields){
                 return $validationFields;
             });
-    
+
             $validator = Validator::make($request->all(), $validationFields);
             if($validator->fails()) return response()->json(["status" => "400", "message" => "There were errors during the validation", "errors" => $validator->errors()], 400);
-            
+
             return true;
         }
     }

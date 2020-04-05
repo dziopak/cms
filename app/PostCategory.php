@@ -28,15 +28,25 @@ class PostCategory extends Model
         parent::boot();
 
         self::created(function($category) {
-            if ($category->fire_events) event(new CategoryCreateEvent($category, 'POST'));
+            if ($category->fire_events) {
+                event(new CategoryCreateEvent($category, 'POST'));
+                $request->session()->flash('crud', 'Category '.$category->name.' has been created successfully.');
+            }
         });
 
         self::updated(function($category) {
-            if ($category->fire_events) event(new CategoryUpdateEvent($category, 'POST'));
+            if ($category->fire_events) {
+                event(new CategoryUpdateEvent($category, 'POST'));
+                $request->session()->flash('crud', 'Category '.$category->name.' has been updated successfully.');
+            }
         });
 
         self::deleted(function($category) {
-            if ($category->fire_events) event(new CategoryDestroyEvent($category, 'POST'));
+            if ($category->fire_events) {
+                event(new CategoryDestroyEvent($category, 'POST'));
+                $request->session()->flash('crud', 'Category '.$category->name.' has been deleted successfully.');
+            }
+
             $category->posts()->update(['category_id' => 0]);
         });
     }
@@ -46,7 +56,7 @@ class PostCategory extends Model
 
             // Search in name //
             $query->where('name', 'like', '%'.$request->get('search').'%');
-        
+
         }
 
         if (!empty($request->get('sort_by'))) {
@@ -54,7 +64,7 @@ class PostCategory extends Model
             // Sort by selected field //
             !empty($request->get('sort_order')) && $request->get('sort_order') === 'desc' ?
             $query->orderByDesc($request->get('sort_by')) : $query->orderBy($request->get('sort_by'));
-        
+
         }
     }
 }

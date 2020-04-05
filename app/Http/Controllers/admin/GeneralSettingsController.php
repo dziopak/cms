@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Setting;
+use App\Http\Utilities\Admin\SettingsUtilities;
 use Illuminate\Http\Request;
 
 class GeneralSettingsController extends Controller
@@ -26,19 +26,6 @@ class GeneralSettingsController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->except('_token');
-        \DB::transaction(function () use ($data) {
-            foreach ($data as $setting => $value) {
-                \DB::table('settings')->updateOrInsert([
-                    'name' => $setting
-                ], [
-                    'name' => $setting,
-                    'value' => $value,
-                    'group' => 'general',
-                ]);
-            }
-        });
-
-        return redirect()->back();
+        return SettingsUtilities::GeneralSettingsStore($request);
     }
 }
