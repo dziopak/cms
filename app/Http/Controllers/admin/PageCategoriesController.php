@@ -15,21 +15,14 @@ class PageCategoriesController extends Controller
     
     public function index(Request $request)
     {
-        $categories = PageCategory::orderByDesc('id')->filter($request)->paginate(15);
-        $table = getData('admin/categories/page_categories_index_table');
-
-        return view('admin.page_categories.index', compact('categories', 'table'));
+        return view('admin.page_categories.index');
     }
 
 
     public function create()
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_CREATE');
-
-        $categories = array_merge([__('admin/page_categories.no_category')], PageCategory::list_all());
-        $form = getData('admin/categories/page_categories_form', ['categories' => $categories]);
-
-        return view('admin.page_categories.create', compact('form'));
+        return view('admin.page_categories.create');
     }
 
 
@@ -47,12 +40,7 @@ class PageCategoriesController extends Controller
     public function edit($id)
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_EDIT');
-
-        $categories = array_merge([__('admin/page_categories.no_category')], PageCategory::list_all());
-        $category = PageCategory::findOrFail($id);
-
-        $form = getData('admin/categories/page_categories_form', ['categories' => $categories]);
-        return view('admin.page_categories.edit', compact('category', 'form'));
+        return view('admin.page_categories.edit', ['category_id' => $id]);
     }
 
 

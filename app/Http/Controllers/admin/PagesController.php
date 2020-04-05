@@ -18,22 +18,13 @@ class PagesController extends Controller
 
     public function index(Request $request)
     {
-        $pages = Page::with('author', 'thumbnail')->orderByDesc('id')->filter($request)->paginate(15);
-        $table = getData('admin/pages/pages_index_table');
-
-        return view('admin.pages.index', compact('pages', 'table'));
+        return view('admin.pages.index');
     }
 
     public function create()
     {
         Auth::user()->hasAccessOrRedirect('PAGE_CREATE');
-
-        $page_cat = new PageCategory;
-        $categories[0] = 'No category';
-        $categories = array_merge($categories, $page_cat->list_all());
-        
-        $form = getData('admin/pages/pages_form', ['categories' => $categories, 'thumbnail' => getThumbnail(null)]);
-        return view('admin.pages.create', compact('form'));
+        return view('admin.pages.create');
     }
 
     public function store(PagesRequest $request)
@@ -52,14 +43,7 @@ class PagesController extends Controller
     public function edit($id)
     {
         Auth::user()->hasAccessOrRedirect('PAGE_EDIT');
-        
-        $page = Page::with('thumbnail')->findOrFail($id);
-    
-        $categories[0] = 'No category';
-        $categories = array_merge($categories, PageCategory::list_all());
-    
-        $form = getData('admin/pages/pages_form', ['categories' => $categories, 'thumbnail' => getThumbnail($page->thumbnail)]);
-        return view('admin.pages.edit', compact('page', 'form'));
+        return view('admin.pages.edit', ['page_id' => $id]);
     }
 
     public function update(Request $request, $id)

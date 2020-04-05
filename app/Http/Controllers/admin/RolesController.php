@@ -15,17 +15,14 @@ class RolesController extends Controller
 
     public function index(Request $request)
     {
-        $roles = Role::orderByDesc('id')->filter($request)->paginate(15);
-        $table = getData('admin/roles/roles_index_table');
-        return view('admin.roles.index', compact('roles', 'table'));
+        return view('admin.roles.index');
     }
 
 
     public function create()
     {
         Auth::user()->hasAccessOrRedirect('ROLE_CREATE');
-        $form = getData('admin/roles/roles_form');
-        return view('admin.roles.create', compact('form'));
+        return view('admin.roles.create');
     }
 
 
@@ -46,12 +43,7 @@ class RolesController extends Controller
     public function edit($id)
     {
         Auth::user()->hasAccessOrRedirect('ROLE_EDIT');
-
-        $role = Role::findOrFail($id);
-        $role->access = RoleUtilities::unserializeAccess($role->access);
-
-        $form = getData('admin/roles/roles_form');
-        return view('admin.roles.edit', compact('role', 'form'));
+        return view('admin.roles.edit', ['role_id' => $id]);
     }
 
 
@@ -73,9 +65,7 @@ class RolesController extends Controller
     public function delete($id)
     {
         Auth::user()->hasAccessOrRedirect('ROLE_DELETE');
-        $role = Role::findOrFail($id);
-
-        return view('admin.roles.delete', compact('role'));
+        return view('admin.roles.delete', ['role' => Role::findOrFail($id)]);
     }
 
     public function duplicate($id)

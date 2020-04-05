@@ -9,10 +9,12 @@ class Log extends Model
     protected $fillable = ['user_id', 'target_id', 'type', 'crud_action', 'message', 'target_name'];
     protected $table = 'logs';
 
+
     public function author() {
         return $this->belongsTo('App\User', 'user_id', 'id');
     }
 
+    
     public function target() {
         switch($this->type) {
             case 'USER':

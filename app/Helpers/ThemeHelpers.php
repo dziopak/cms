@@ -18,3 +18,17 @@ function getThemeList()
 
     return $themes;
 }
+
+
+function getThemeData($slug = null) {
+    if ($slug === null) $slug = config('global.general.theme');
+    $manifest = base_path() . '/resources/views/themes/'.$slug.'/theme.json';
+
+    if (is_file($manifest)) {
+        $theme = jsonToArray($manifest);
+        $theme['url'] = 'themes.'.$theme['slug'];
+        return $theme;
+    }
+
+    return false;
+}

@@ -7,10 +7,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CategoriesRequest;
 use Illuminate\Support\Facades\Session;
 
-use App\Events\Categories\CategoryCreateEvent;
-use App\Events\Categories\CategoryUpdateEvent;
-use App\Events\Categories\CategoryDestroyEvent;
-
 use App\PostCategory;
 use Auth;
 
@@ -23,9 +19,7 @@ class PostCategoriesController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = PostCategory::orderByDesc('id')->filter($request)->paginate(15);
-        $table = getData('admin/categories/post_categories_index_table');
-        return view('admin.post_categories.index', compact('categories', 'table'));
+        return view('admin.post_categories.index');
     }
 
     /**
@@ -36,11 +30,7 @@ class PostCategoriesController extends Controller
     public function create()
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_CREATE');
-
-        $categories = array_merge([__('admin/post_categories.no_category')], PostCategory::list_all());
-        $form = getData('admin/categories/post_categories_form', ['categories' => $categories]);    
-
-        return view('admin.post_categories.create', compact('categories', 'form'));
+        return view('admin.post_categories.create');
     }
 
     /**
@@ -56,7 +46,6 @@ class PostCategoriesController extends Controller
         $data = $request->all();
         $category = PostCategory::create($data);
 
-        event(new CategoryCreateEvent($category, 'POST'));
         Session::flash('crud', 'Post category "'.$data['name'].'" has been created successfully.');
 
         return redirect(route('admin.posts.categories.index'));
@@ -82,12 +71,7 @@ class PostCategoriesController extends Controller
     public function edit($id)
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_EDIT');
-        
-        $categories = array_merge([__('admin/post_categories.no_category')], PostCategory::list_all());
-        $category = PostCategory::findOrFail($id);
-
-        $form = getData('admin/categories/post_categories_form', ['categories' => $categories]);    
-        return view('admin.post_categories.edit', compact('category', 'categories', 'form'));
+        return view('admin.post_categories.edit', ['category_id' => $id]);
     }
 
     /**
@@ -104,7 +88,6 @@ class PostCategoriesController extends Controller
         $category = PostCategory::findOrFail($id);
         $data = $request->all();
 
-        event(new CategoryUpdateEvent($category, 'POST'));
         Session::flash('crud', 'Post category "'.$category->name.'" has been updated successfully.');
 
         $category->update($data);
@@ -114,7 +97,6 @@ class PostCategoriesController extends Controller
     public function delete($id) {
         Auth::user()->hasAccessOrRedirect('CATEGORY_DELETE');
         $category = PostCategory::findOrFail($id);
-        
         return view('admin.post_categories.delete', compact('category'));
     }
 
@@ -129,9 +111,8 @@ class PostCategoriesController extends Controller
         Auth::user()->hasAccessOrRedirect('CATEGORY_DELETE');
         $category = PostCategory::findOrFail($id);
 
-        event(new CategoryDestroyEvent($category, 'POST'));
         Session::flash('crud', 'Post category "'.$category->name.'" has been deleted successfully.');
-
+        
         $category->delete();
         return redirect(route('admin.posts.categories.index'));
     }

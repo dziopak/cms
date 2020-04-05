@@ -15,11 +15,7 @@ class GeneralSettingsController extends Controller
      */
     public function index()
     {
-        $themes = getThemeList();
-        $settings = Setting::where(['group' => 'general'])->pluck('value', 'name')->toArray();
-        $form = getData('admin/settings/general', array_merge($settings, ['themes' => $themes]));
-
-        return view('admin.settings.general', compact('settings', 'form'));
+        return view('admin.settings.general');
     }
 
     /**
