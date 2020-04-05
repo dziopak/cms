@@ -46,15 +46,24 @@ class Page extends Model
         $request = request();
 
         self::created(function($page) use ($request) {
-            if ($page->fire_events) event(new PageCreateEvent($page, $request->file('thumbnail')));
+            if ($page->fire_events) {
+                event(new PageCreateEvent($page, $request->file('thumbnail')));
+                $request->session()->flash('crud', 'Page '.$page->name.' has been created successfully.');
+            }
         });
 
         self::updated(function($page) use ($request) {
-            if ($page->fire_events) event(new PageUpdateEvent($page, $request->file('thumbnail')));
+            if ($page->fire_events) {
+                event(new PageUpdateEvent($page, $request->file('thumbnail')));
+                $request->session()->flash('crud', 'Page '.$page->name.' has been updated successfully.');
+            }
         });
 
-        self::deleted(function($page) {
-            if ($page->fire_events) event(new PageDestroyEvent($page));
+        self::deleted(function($page) use ($request) {
+            if ($page->fire_events) {
+                event(new PageDestroyEvent($page));
+                $request->session()->flash('crud', 'Page '.$page->name.' has been deleted successfully.');
+            }
         });
     }
 }

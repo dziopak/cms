@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Utilities\RoleUtilities;
+use App\Http\Utilities\Admin\RoleUtilities;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -29,14 +29,7 @@ class RolesController extends Controller
     public function store(Request $request)
     {
         Auth::user()->hasAccessOrRedirect('ROLE_CREATE');
-
-        $data = $request->all();
-        if (!empty($data['access'])) $data['access'] = RoleUtilities::serializeAccess($data['access']);
-
-        Role::create($data);
-        $request->session()->flash('crud', 'Created ' . $data['name'] . ' role successfully.');
-
-        return redirect(route('admin.users.roles.index'));
+        return RoleUtilities::store($request);
     }
 
 
@@ -50,17 +43,9 @@ class RolesController extends Controller
     public function update(Request $request, $id)
     {
         Auth::user()->hasAccessOrRedirect('ROLE_EDIT');
-
-        $role = Role::findOrFail($id);
-        $data = $request->all();
-
-        $data['access'] = RoleUtilities::serializeAccess($data['access']);
-
-        $role->update($data);
-        $request->session()->flash('crud', 'Updated ' . $data['name'] . ' role successfully.');
-
-        return redirect(route('admin.users.roles.index'));
+        return RoleUtilities::update($id, $request);
     }
+
 
     public function delete($id)
     {
@@ -68,24 +53,17 @@ class RolesController extends Controller
         return view('admin.roles.delete', ['role' => Role::findOrFail($id)]);
     }
 
+
     public function duplicate($id)
     {
         Auth::user()->hasAccessOrRedirect('ROLE_CREATE');
-
-        $role = Role::findOrFail($id);
-        $role->access = RoleUtilities::unserializeAccess($role->access);
-
-        return view('admin.roles.create', compact('role'));
+        return view('admin.roles.create', ['role_id' => $id]);
     }
 
 
     public function destroy($id)
     {
-        $role = Role::findOrFail($id);
-
-        $role->delete();
-        Session::flash('crud', 'Role ' . $role->name . ' has been deleted successfully.');
-
-        return redirect(route('admin.users.roles.index'));
+        Auth::user()->hasAccessOrRedirect('ROLE_DELETE');
+        return RoleUtilities::destroy($id);
     }
 }

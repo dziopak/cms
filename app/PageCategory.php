@@ -19,7 +19,7 @@ class PageCategory extends Model
     }
 
     public static function list_all() {
-        return $categories = DB::table('page_categories')->pluck('name', 'id')->all();
+        return DB::table('page_categories')->pluck('name', 'id')->all();
     }
 
     public function scopeFilter($query, $request) {
@@ -45,14 +45,21 @@ class PageCategory extends Model
 
         self::created(function($category) use ($request) {
             if ($category->fire_events) event(new CategoryCreateEvent($category, 'PAGE'));
+            $request->session()->flash('crud', 'Page category '.$category->name.' has been created successfully.');
         });
 
         self::updated(function($category) use ($request) {
-            if ($category->fire_events) event(new CategoryUpdateEvent($category, 'PAGE'));
+            if ($category->fire_events) {
+                event(new CategoryUpdateEvent($category, 'PAGE'));
+                $request->session()->flash('crud', 'Page category '.$category->name.' has been updated successfully.');
+            }
         });
 
-        self::deleted(function($category) {
-            if ($category->fire_events) event(new CategoryDestroyEvent($category, 'PAGE'));
+        self::deleted(function($category) use ($request) {
+            if ($category->fire_events) {
+                event(new CategoryDestroyEvent($category, 'PAGE'));
+                
+            }
         });
 
         static::deleting(function($category) {

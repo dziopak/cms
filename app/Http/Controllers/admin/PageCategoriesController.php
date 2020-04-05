@@ -5,7 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoriesRequest;
-use Illuminate\Support\Facades\Session;
+use App\Http\Utilities\Admin\PageCategoryUtilities;
 
 use App\PageCategory;
 use Auth;
@@ -30,9 +30,7 @@ class PageCategoriesController extends Controller
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_CREATE');
 
-        PageCategory::create($data = $request->all());
-        Session::flash('crud', 'Page category "'.$data['name'].'" has been created successfully.');
-
+        PageCategory::create($request->all());
         return redirect(route('admin.pages.categories.index'));
     }
 
@@ -47,20 +45,13 @@ class PageCategoriesController extends Controller
     public function update(CategoriesRequest $request, $id)
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_EDIT');
-    
-        $category = PageCategory::findOrFail($id);    
-        $data = $request->all();
-
-        $category->update($data);
-        Session::flash('crud', 'Page category "'.$category->name.'" has been updated successfully.');
-        
-        return redirect(route('admin.pages.categories.index'));
+        return PageCategoryUtilities::update($id, $request);
     }
 
     public function delete($id) {
         Auth::user()->hasAccessOrRedirect('CATEGORY_DELETE');
-        $category = PageCategory::findOrFail($id);
         
+        $category = PageCategory::findOrFail($id);
         return view('admin.page_categories.delete', compact('category'));
     }
 
@@ -68,26 +59,10 @@ class PageCategoriesController extends Controller
     public function destroy($id)
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_DELETE');
-        $category = PageCategory::findOrFail($id);
-
-        Session::flash('crud', 'Page category "'.$category->name.'" has been deleted successfully.');
-        $category->delete();
-        
-        return redirect(route('admin.pages.categories.index'));
+        return PageCategoryUtilities::destroy($id);
     }
 
     public function mass(Request $request) {
-        $data = $request->all();
-        if (empty($data['mass_edit'])) {
-            return Redirect::back()->with('error', 'No categories were selected.');
-        } else {
-            switch($data['mass_action']) {
-                case 'delete':
-                    Auth::user()->hasAccessOrRedirect('CATEGORY_DELETE');
-                    PageCategory::whereIn('id', $data['mass_edit'])->delete();
-                break;
-            }
-        }
-        return redirect(route('admin.pages.categories.index'));
+        return PageCategoryUtilities::massAction($request);
     }
 }

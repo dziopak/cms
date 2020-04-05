@@ -6,9 +6,13 @@
     use App\Http\Utilities\AuthResponse;
 
     use App\User;
+    use App\Page;
+    use Auth;
     use Hook;
 
     class PageUtilities {
+
+
         static function create($request) {
             $user = User::jwtUser();
             $user = User::find($user->id);
@@ -18,6 +22,16 @@
 
             return $page = Page::create($data);
         }
+
+
+        public function store($request) {
+            $data = $request->all();
+            $data['user_id'] = Auth::user()->id;
+            
+            Page::create($data);
+            return redirect(route('admin.pages.index'));
+        }
+
 
         static function storeValidation($request) {
             $access = AuthResponse::hasAccess('PAGE_CREATE');
@@ -41,6 +55,7 @@
             return true;
         }
 
+
         static function updateValidation($request) {
             $access = AuthResponse::hasAccess('PAGE_EDIT');
             if ($access !== true) return $access;
@@ -62,4 +77,6 @@
 
             return true;
         }
+
+        
     }

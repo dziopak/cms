@@ -173,12 +173,21 @@ return [
         
         /*
          * Application Service Providers...
-         */
+        */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+        Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+        App\Providers\RouteServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+
+        /*
+         * View composers 
+        */
         App\Providers\FrontViewServiceProvider::class,
         App\Providers\AdminViewServiceProvider::class,
+        App\Providers\ViewComposersProviders\DashboardComposers::class,
         App\Providers\ViewComposersProviders\UsersComposers::class,
         App\Providers\ViewComposersProviders\RolesComposers::class,
         App\Providers\ViewComposersProviders\PostsComposers::class,
@@ -186,10 +195,6 @@ return [
         App\Providers\ViewComposersProviders\SettingsComposers::class,
         App\Providers\ViewComposersProviders\ModulesComposers::class,
         App\Providers\ViewComposersProviders\CategoriesComposers::class,
-        Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
-        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
     ],
 
     /*
