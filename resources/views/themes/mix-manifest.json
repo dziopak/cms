@@ -1,0 +1,16 @@
+{
+    "/resources/views/themes/public/js/admin/dashboard.js": "/resources/views/themes/public/js/admin/dashboard.js",
+    "/resources/views/themes/public/js/admin/defer.js": "/resources/views/themes/public/js/admin/defer.js",
+    "/resources/views/themes/public/js/app.js": "/resources/views/themes/public/js/app.js",
+    "/public/css/app.css": "/public/css/app.css",
+    "/public/css/admin.css": "/public/css/admin.css",
+    "/public/css/dashboard.css": "/public/css/dashboard.css",
+    "/default/assets/css/theme.css": "/default/assets/css/theme.css",
+    "/public/assets/js/slick.min.js": "/public/assets/js/slick.min.js",
+    "/public/assets/css/slick.css": "/public/assets/css/slick.css",
+    "/public/assets/css/slick-theme.css": "/public/assets/css/slick-theme.css",
+    "/public/assets/js/Chart.js": "/public/assets/js/Chart.js",
+    "/public/assets/css/Chart.min.css": "/public/assets/css/Chart.min.css",
+    "/public/assets/js/gridstack.all.js": "/public/assets/js/gridstack.all.js",
+    "/public/assets/css/gridstack.min.css": "/public/assets/css/gridstack.min.css"
+}

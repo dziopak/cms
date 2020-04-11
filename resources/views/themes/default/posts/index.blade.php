@@ -1,1 +1,1 @@
-@extends($theme['url'].'.index')
+@extends($theme->data->url.'.layouts.full-width')

@@ -51,7 +51,7 @@
 @endphp
 
 @section('module-content')
-    @wrapper('admin.partials.widget', ['title' => 'Fill lang data'])
+    @wrapper('admin.partials.wrapper', ['title' => 'Fill lang data'])
         {!! Form::open(['method' => 'POST', 'route' => 'admin.modules.lang.store', 'class' => 'w-100', 'files' => 'true']) !!}
 
             @include('admin.partials.validation')

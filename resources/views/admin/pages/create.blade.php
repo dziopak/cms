@@ -19,7 +19,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.widget', ['title' => 'admin/pages.create_left_title'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/pages.create_left_title'])
 
         @include('partials.form-fields', ['fields' => $form['left']])
         @hook('page_create_left_content')
@@ -30,7 +30,7 @@
 
 
 @section('content-right')
-    @wrapper('admin.partials.widget', ['title' => 'admin/pages.create_right_title'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/pages.create_right_title'])
 
         @include('partials.form-fields', ['fields' => $form['right']])
         @hook('page_create_right_content')
@@ -42,7 +42,7 @@
 
 @section('content-bottom')
     <div class="col">
-        @wrapper('admin.partials.widget', ['title' => 'admin/pages.create_bottom_title'])
+        @wrapper('admin.partials.wrapper', ['title' => 'admin/pages.create_bottom_title'])
 
             @include('partials.form-fields', ['fields' => $form['bottom']])
 

@@ -33,7 +33,7 @@
 
 
 @section('content-left')
-    @wrapper('admin.partials.widget', ['title' => 'portfolio::langs.basic_data_title'])
+    @wrapper('admin.partials.wrapper', ['title' => 'portfolio::langs.basic_data_title'])
         <div class="row">
 
             <div class="col-lg-3" style="display: flex;">
@@ -56,7 +56,7 @@
 
 
 @section('content-right')
-    @wrapper('admin.partials.widget', ['title' => 'portfolio::langs.settings_title'])
+    @wrapper('admin.partials.wrapper', ['title' => 'portfolio::langs.settings_title'])
 
         <div class="form-group row">
             <div class="col">
@@ -83,7 +83,7 @@
 
 @section('content-bottom')
     <div class="col">
-        @wrapper('admin.partials.widget', ['title' => 'portfolio::langs.pictures_title'])
+        @wrapper('admin.partials.wrapper', ['title' => 'portfolio::langs.pictures_title'])
             <div id="pictures">
             </div>
 
@@ -91,7 +91,7 @@
             </div>
         @endwrapper
 
-        @wrapper('admin.partials.widget', ['title' => 'portfolio::langs.content_title'])
+        @wrapper('admin.partials.wrapper', ['title' => 'portfolio::langs.content_title'])
 
 
             {{-- Form fields --}}

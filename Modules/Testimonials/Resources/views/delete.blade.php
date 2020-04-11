@@ -12,14 +12,14 @@
 
 
 @section('content-left')
-    @wrapper('admin.partials.widget', ['title' => 'Testimonial info'])
+    @wrapper('admin.partials.wrapper', ['title' => 'Testimonial info'])
         <div style="display: inline-block;">
             Author: {{$testimonial->author}} [<strong>{{$lang->lang_tag}}</strong>]<br/>
             Created: {{$testimonial->created_at}}<br/>
         </div>
     @endwrapper
 
-    @wrapper('admin.partials.widget', ['title' => 'Remove testimonial'])
+    @wrapper('admin.partials.wrapper', ['title' => 'Remove testimonial'])
 
         <p class="alert alert-danger">Are you sure you want to permamently delete this testimonial from system's database? This action is irreversible.</p>
         {!! Form::open(['method' => 'DELETE', 'route' => ['admin.modules.testimonials.destroy', $testimonial->id]]) !!}

@@ -19,7 +19,7 @@
 
 
 @section('content-left')
-    @wrapper('admin.partials.widget', ['title' => 'admin/posts.edit_left_title'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/posts.edit_left_title'])
 
         @include('partials.form-fields', ['fields' => $form['left']])
         @hook('post_edit_left_content')
@@ -30,7 +30,7 @@
 
 
 @section('content-right')
-    @wrapper('admin.partials.widget', ['title' => 'admin/posts.edit_right_title'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/posts.edit_right_title'])
 
         @include('partials.form-fields', ['fields' => $form['right']])
         @hook('post_edit_right_content')
@@ -42,7 +42,7 @@
 
 @section('content-bottom')
     <div class="col">
-        @wrapper('admin.partials.widget', ['title' => 'admin/posts.edit_bottom_title'])
+        @wrapper('admin.partials.wrapper', ['title' => 'admin/posts.edit_bottom_title'])
 
             @include('partials.form-fields', ['fields' => $form['bottom']])
             @hook('post_edit_bottom_content')

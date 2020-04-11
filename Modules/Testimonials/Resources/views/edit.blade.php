@@ -12,7 +12,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.widget', ['title' => 'Update testimonial data'])
+    @wrapper('admin.partials.wrapper', ['title' => 'Update testimonial data'])
         {!! Form::model($testimonial, ['method' => 'PATCH', 'route' => ['admin.modules.testimonials.update', $testimonial->id], 'class' => 'w-100', 'files' => 'true']) !!}
             @include('admin.partials.validation')
 

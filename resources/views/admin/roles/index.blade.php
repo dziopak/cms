@@ -12,7 +12,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.widget', ['title' => 'admin/roles.index_title'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/roles.index_title'])
         @include('admin.partials.table', ['fields' => $roles])
 
         @if (Auth::user()->hasAccess('ROLE_CREATE'))

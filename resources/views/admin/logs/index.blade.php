@@ -12,7 +12,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.widget', ['title' => 'admin/logs.index_title'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/logs.index_title'])
         <p>{{ __('admin/logs.index_intro') }}</p>
         <div id="logs-table">
             <div class="form-group row">

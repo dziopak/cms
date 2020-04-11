@@ -11,7 +11,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.widget', ['title' => 'admin/pages.index_title'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/pages.index_title'])
 
 
         {{-- Table --}}

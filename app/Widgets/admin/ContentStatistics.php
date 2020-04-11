@@ -42,18 +42,18 @@ class ContentStatistics extends AbstractWidget
         $data = [];
 
         if ($this->config['days'] === 0) {
-            $data[] = "'".($raw['users'] = DB::table('users')->select(DB::raw('count(*) as total'))->first()->total)."'";
-            $data[] = "'".($raw['pages'] = DB::table('pages')->select(DB::raw('count(*) as total'))->first()->total)."'";
-            $data[] = "'".($raw['posts'] = DB::table('posts')->select(DB::raw('count(*) as total'))->first()->total)."'";
+            $data[] = "'" . ($raw['users'] = DB::table('users')->select(DB::raw('count(*) as total'))->first()->total) . "'";
+            $data[] = "'" . ($raw['pages'] = DB::table('pages')->select(DB::raw('count(*) as total'))->first()->total) . "'";
+            $data[] = "'" . ($raw['posts'] = DB::table('posts')->select(DB::raw('count(*) as total'))->first()->total) . "'";
         } else {
-            $data[] = "'".($raw['users'] = DB::table('users')->select(DB::raw('count(*) as total'))->where('created_at', '>=',$start_date)->first()->total)."'";
-            $data[] = "'".($raw['pages'] = DB::table('pages')->select(DB::raw('count(*) as total'))->where('created_at', '>=',$start_date)->first()->total)."'";
-            $data[] = "'".($raw['posts'] = DB::table('posts')->select(DB::raw('count(*) as total'))->where('created_at', '>=',$start_date)->first()->total)."'";
+            $data[] = "'" . ($raw['users'] = DB::table('users')->select(DB::raw('count(*) as total'))->where('created_at', '>=', $start_date)->first()->total) . "'";
+            $data[] = "'" . ($raw['pages'] = DB::table('pages')->select(DB::raw('count(*) as total'))->where('created_at', '>=', $start_date)->first()->total) . "'";
+            $data[] = "'" . ($raw['posts'] = DB::table('posts')->select(DB::raw('count(*) as total'))->where('created_at', '>=', $start_date)->first()->total) . "'";
         }
 
         $labels = ['"Users"', '"Pages"', '"Posts"'];
 
-        return view('widgets.admin.content_statistics', [
+        return view('admin.widgets.content_statistics', [
             'config' => $this->config,
             'data' => implode(', ', $data),
             'raw' => $raw,

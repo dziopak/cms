@@ -24,7 +24,7 @@ class RecentPosts extends AbstractWidget
     public function run()
     {
         $posts = Post::orderByDesc('created_at')->take($this->config['count'])->get();
-        return view('widgets.admin.recent_posts', [
+        return view('admin.widgets.recent_posts', [
             'config' => $this->config,
             'posts' => $posts
         ]);

@@ -11,7 +11,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.widget', ['title' => 'admin/users.list_all'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/users.list_all'])
 
         {{-- Displaying data table --}}
         @include('admin.partials.table', ['fields' => $users, 'id' => 'users_table'])

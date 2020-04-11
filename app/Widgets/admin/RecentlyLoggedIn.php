@@ -19,7 +19,7 @@ class RecentlyLoggedIn extends AbstractWidget
         'header' => 'Recent logins',
         'icon' => 'fa fas fa-user-circle'
     ];
-    
+
     public function placeholder()
     {
         return 'Loading recently logged in users...';
@@ -29,7 +29,7 @@ class RecentlyLoggedIn extends AbstractWidget
     {
         $users = \App\User::with('role')->orderByDesc('last_login')->take($this->config['count'])->get();
 
-        return view('widgets.admin.recently_logged_in', [
+        return view('admin.widgets.recently_logged_in', [
             'config' => $this->config,
             'users' => $users
         ]);

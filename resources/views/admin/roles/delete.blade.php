@@ -12,14 +12,14 @@
 
 
 @section('content-left')
-    @wrapper('admin.partials.widget', ['title' => 'admin/roles.delete_top_title'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/roles.delete_top_title'])
         <div style="display: inline-block;">
             <strong>{{$role->name}}</strong><br/>
             {{ __('admin/general.created_at') }}: {{$role->created_at}}<br/>
         </div>
     @endwrapper
 
-    @wrapper('admin.partials.widget', ['title' => 'admin/roles.delete_bottom_title'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/roles.delete_bottom_title'])
         <p class="alert alert-danger">{{ __('admin/roles.delete_information') }}</p>
 
         {!! Form::open(['method' => 'DELETE', 'action' => ['admin\RolesController@destroy', $role->id]]) !!}
@@ -34,7 +34,7 @@
 
 
 @section('content-right')
-    @wrapper('admin.partials.widget', ['title' => 'admin/roles.delete_right_title'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/roles.delete_right_title'])
         {{-- // TO DO // --}}
     @endwrapper
 @endsection

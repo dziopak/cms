@@ -18,7 +18,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.widget', ['title' => 'Field data'])
+    @wrapper('admin.partials.wrapper', ['title' => 'Field data'])
         <div class="form-group row">
             <div class="col">
                 {!! Form::label('name', 'Field name: ', ['class' => 'required']) !!}
@@ -55,7 +55,7 @@
 
 
 @section('content-right')
-    @wrapper('admin.partials.widget', ['title' => 'Manual'])
+    @wrapper('admin.partials.wrapper', ['title' => 'Manual'])
         <p>Fill all required field information.</p>
     @endwrapper
 @endsection

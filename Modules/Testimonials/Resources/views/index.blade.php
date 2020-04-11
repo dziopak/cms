@@ -12,7 +12,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.widget', ['title' => 'Manage testimonials'])
+    @wrapper('admin.partials.wrapper', ['title' => 'Manage testimonials'])
         @include('admin.partials.searchfilterbar')
         @include('admin.partials.table', ['fields' => $testimonials])
         @include('admin.partials.massedit')

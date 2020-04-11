@@ -19,7 +19,7 @@
 
 
 @section('content-left')
-    @wrapper('admin.partials.widget', ['title' => 'admin/posts.create_left_title'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/posts.create_left_title'])
 
         @include('partials.form-fields', ['fields' => $form['left']])
         @hook('post_create_left_content')
@@ -29,7 +29,7 @@
 @endsection
 
 @section('content-right')
-    @wrapper('admin.partials.widget', ['title' => 'admin/posts.create_right_title'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/posts.create_right_title'])
 
         @include('partials.form-fields', ['fields' => $form['right']])
         @hook('post_create_right_content')
@@ -40,7 +40,7 @@
 
 @section('content-bottom')
     <div class="col">
-        @wrapper('admin.partials.widget', ['title' => 'admin/posts.create_bottom_title'])
+        @wrapper('admin.partials.wrapper', ['title' => 'admin/posts.create_bottom_title'])
 
             @include('partials.form-fields', ['fields' => $form['bottom']])
 
