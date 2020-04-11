@@ -18,7 +18,7 @@
 
 
 @section('content-left')
-    @wrapper('admin.partials.widget', ['title' => 'admin/post_categories.create_left_title'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/post_categories.create_left_title'])
 
         @include('partials.form-fields', ['fields' => $form['left']])
 

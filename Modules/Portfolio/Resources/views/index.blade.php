@@ -12,7 +12,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.widget', ['title' => 'All items'])
+    @wrapper('admin.partials.wrapper', ['title' => 'All items'])
 
 
         {{-- Table --}}

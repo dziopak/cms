@@ -29,17 +29,18 @@ class PostsStatistics extends AbstractWidget
         'icon' => 'fa fas fa-book'
     ];
 
-    private function getData() {
+    private function getData()
+    {
         $start_date = \Carbon\Carbon::now()->subDays($this->config['days'] +  1);
         $end_date = \Carbon\Carbon::now();
         $period = \Carbon\CarbonPeriod::create($start_date, $end_date);
 
-        $posts = DB::table('posts')->select(DB::raw('DATE(created_at) as date, count(*) as total'))->where('created_at', '>=',$start_date)->groupBy('date')->get()->keyBy('date');
+        $posts = DB::table('posts')->select(DB::raw('DATE(created_at) as date, count(*) as total'))->where('created_at', '>=', $start_date)->groupBy('date')->get()->keyBy('date');
 
         $dates = [];
         $values = [];
         foreach ($period as $key => $date) {
-            $dates[$key] = '"'.$date->format('Y-m-d').'"';
+            $dates[$key] = '"' . $date->format('Y-m-d') . '"';
             $fdate = \Carbon\Carbon::parse($date)->format('Y-m-d');
             !empty($posts[$fdate]) ? $values[$key] = $posts[$fdate]->total : $values[$key] = 0;
         }
@@ -58,7 +59,7 @@ class PostsStatistics extends AbstractWidget
     {
         //
         $data = $this->getData();
-        return view('widgets.admin.posts_statistics', [
+        return view('admin.widgets.posts_statistics', [
             'config' => $this->config,
             'data' => $data
         ]);

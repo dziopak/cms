@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -176,14 +176,14 @@ $(document).ready(function () {
 
 /***/ }),
 
-/***/ 2:
+/***/ 3:
 /*!*******************************************!*\
   !*** multi ./resources/js/admin/defer.js ***!
   \*******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\laragon\www\cms\resources\js\admin\defer.js */"./resources/js/admin/defer.js");
+module.exports = __webpack_require__(/*! E:\laragon\www\cms\resources\js\admin\defer.js */"./resources/js/admin/defer.js");
 
 
 /***/ })

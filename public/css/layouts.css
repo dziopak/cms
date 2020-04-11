@@ -1,0 +1,128 @@
+#layout {
+  min-height: 800px;
+  overflow: hidden;
+  width: calc(100% + 20px);
+  margin-left: -10px;
+}
+
+.grid-stack-item-content {
+  border-radius: 10px;
+  box-shadow: 0 0.1rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+#layout-components {
+  width: 100%;
+  transition: all 0.2s linear;
+  padding: 10px 50px;
+  margin-top: -30px;
+  height: 0;
+}
+
+#layout-components.active {
+  height: 350px;
+}
+
+#layout-components.active .slick-arrow {
+  display: block;
+}
+
+#layout-components .slick-list,
+#layout-components .slick-track,
+#layout-components .slick-slide {
+  height: 100%;
+}
+
+#layout-components .slick-arrow {
+  display: none;
+  background: #fff no-repeat center;
+  background-size: 12px;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  transition: all 0.2s linear;
+}
+
+#layout-components .slick-arrow.slick-prev {
+  left: 15px;
+  background-image: url(https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-left-01-512.png);
+}
+
+#layout-components .slick-arrow.slick-prev::before {
+  content: "";
+}
+
+#layout-components .slick-arrow.slick-next {
+  right: 15px;
+  background-image: url(https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-right-01-512.png);
+}
+
+#layout-components .slick-arrow.slick-next::before {
+  content: "";
+}
+
+#layout-components .slick-arrow:hover {
+  background-color: #3490dc;
+  transform: scale(1.2) translateY(-43%);
+}
+
+.add-widget {
+  width: 100%;
+  border-radius: 8px;
+  border: 0px;
+  display: flex;
+  cursor: pointer;
+  padding: 20px;
+  height: 100%;
+}
+
+.add-widget .card {
+  height: 100%;
+}
+
+.add-widget .widget-title {
+  color: #3490dc;
+}
+
+.add-widget p {
+  margin-bottom: 0px;
+}
+
+.add-widget img {
+  margin: 40px auto;
+  max-width: 100%;
+  width: 60px;
+  height: 60px;
+}
+
+.ui-resizable-handle.ui-resizable-se.ui-icon.ui-icon-gripsmall-diagonal-se {
+  right: 20px;
+  bottom: 12px;
+}
+
+#fade {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 1;
+  display: none;
+}
+
+.block-settings {
+  width: 40%;
+  max-width: 600px;
+  min-width: 280px;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #ced4da;
+  box-shadow: 0 0.1rem 0.25rem rgba(0, 0, 0, 0.075);
+  overflow: hidden;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+

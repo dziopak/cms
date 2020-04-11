@@ -11,7 +11,7 @@
 
 
 @section('content-left')
-    @wrapper('admin.partials.widget', ['title' => 'admin/users.delete_top_title'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/users.delete_top_title'])
         @if ($user->avatar)
             <img class="rounded-circle mr-4 float-left" width="100" src="{{ getPublicPath() }}/images/{{$user->photo->path}}">
         @endif
@@ -28,7 +28,7 @@
         </div>
     @endwrapper
 
-    @wrapper('admin.partials.widget', ['title' => 'admin/users.delete_bottom_title'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/users.delete_bottom_title'])
         <p class="alert alert-danger">{{ __('admin/users.delete_information') }}</p>
 
         {!! Form::open(['method' => 'DELETE', 'action' => ['admin\UsersController@destroy', $user->id]]) !!}
@@ -43,7 +43,7 @@
 
 
 @section('content-right')
-    @wrapper('admin.partials.widget', ['title' => 'admin/users.recent_actions'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/users.recent_actions'])
         @include('admin.partials.logs')
     @endwrapper
 @endsection

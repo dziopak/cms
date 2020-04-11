@@ -1,9 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin;
-use App\Http\Controllers\Front;
-
-
 //Front-office routes
 Route::group(['as' => 'front.'], function () {
     Route::get('/', 'front\PostsController@index')->name('posts.index');
@@ -16,11 +12,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'access:ADM
     Route::get('/', 'admin\DashboardController@index')->name('dashboard.index');
     Route::post('/dashboard', 'admin\DashboardController@update')->name('dashboard.update');
     Route::get('/dashboard/widget', 'admin\DashboardController@getWidget')->name('dashboard.getwidget');
-
-    Route::get('/clear-cache', function () {
-        Artisan::call('cache:clear');
-        return redirect(route('admin.dashboard.index'));
-    });
+    Route::get('/layouts/widget', 'admin\LayoutsController@getBlock')->name('layouts.getwidget');
 
     Route::get('/menus', function () {
         return view('admin.menus.index');
@@ -45,5 +37,5 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'access:ADM
     require base_path('routes/web/admin/vendor/filemanager.php');
 });
 
-Auth::routes();
-Route::get('/locale', LocaleController::class)->name('locale');
+//HELPERS ROUTES
+require base_path('routes/web/admin/helpers.php');

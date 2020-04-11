@@ -12,14 +12,14 @@
 
 
 @section('content-left')
-    @wrapper('admin.partials.widget', ['title' => 'admin/page_categories.delete_top_title'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/page_categories.delete_top_title'])
         <div style="display: inline-block;">
             {{ __('admin/general.category') }} <strong>{{$category->name}}</strong><br/>
             {{ __('admin/general.created_at') }}: {{$category->created_at}}<br/>
         </div>
     @endwrapper
 
-    @wrapper('admin.partials.widget', ['title' => 'admin/page_categories.delete_bottom_title'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/page_categories.delete_bottom_title'])
         <p class="alert alert-danger">{{ __('admin/page_categories.delete_information') }}</p>
 
         {!! Form::open(['method' => 'DELETE', 'action' => ['admin\PageCategoriesController@destroy', $category->id]]) !!}

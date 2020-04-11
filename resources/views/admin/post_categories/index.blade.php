@@ -12,7 +12,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.widget', ['title' => 'admin/post_categories.index_title'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/post_categories.index_title'])
 
 
         {{-- Table --}}

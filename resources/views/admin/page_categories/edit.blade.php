@@ -18,7 +18,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.widget', ['title' => 'admin/page_categories.edit_left_title'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/page_categories.edit_left_title'])
 
         @include('partials.form-fields', ['fields' => $form['left']])
 

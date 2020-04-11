@@ -28,8 +28,8 @@ class RecentLogs extends AbstractWidget
     public function run()
     {
         $logs = \App\Log::orderByDesc('created_at')->take($this->config['count'])->get();
-        
-        return view('widgets.admin.recent_logs', [
+
+        return view('admin.widgets.recent_logs', [
             'config' => $this->config,
             'logs' => $logs
         ]);

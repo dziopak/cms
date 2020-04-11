@@ -17,6 +17,9 @@ $items = [
             'categories' => [
                 'route' => 'admin.pages.categories.index',
             ],
+            'layouts' => [
+                'route' => 'admin.pages.layouts.index',
+            ],
         ],
     ],
     'posts' => [

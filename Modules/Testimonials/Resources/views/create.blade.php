@@ -12,7 +12,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.widget', ['title' => 'Fill testimonial data'])
+    @wrapper('admin.partials.wrapper', ['title' => 'Fill testimonial data'])
         {!! Form::open(['method' => 'POST', 'route' => 'admin.modules.testimonials.store', 'class' => 'w-100', 'files' => 'true']) !!}
             @include('admin.partials.validation')
 

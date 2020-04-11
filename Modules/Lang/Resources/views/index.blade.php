@@ -10,7 +10,7 @@
 @endsection
 
 @section('module-content')
-    @wrapper('admin.partials.widget', ['title' => 'Manage custom languages'])
+    @wrapper('admin.partials.wrapper', ['title' => 'Manage custom languages'])
         @include('admin.partials.table', ['fields' => $langs])
 
         @if (Auth::user()->hasAccess('MODULE_USE'))

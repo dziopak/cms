@@ -25,7 +25,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.widget', ['title' => 'Manage custom fields'])
+    @wrapper('admin.partials.wrapper', ['title' => 'Manage custom fields'])
         @include('admin.partials.table')
     @endwrapper
     <a href="{{ route('admin.modules.usercustomfields.create') }}" class="btn btn-success">Create new</a>

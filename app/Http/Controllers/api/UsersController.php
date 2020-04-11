@@ -4,16 +4,12 @@ namespace App\Http\Controllers\api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Tymon\JWTAuth\Exceptions\JWTException;
 
 use App\Http\Utilities\AuthResponse;
 use App\Http\Utilities\UserUtilities;
 use App\Http\Resources\UserResource;
 use App\User;
 use JWTAuth;
-use Hook;
 
 class UsersController extends Controller
 {
@@ -42,7 +38,8 @@ class UsersController extends Controller
     }
 
 
-    public function index() {
+    public function index()
+    {
         return UserResource::collection(User::orderBy('id')->paginate(15));
     }
 
@@ -68,10 +65,10 @@ class UsersController extends Controller
     {
         $validation = UserUtilities::updateValidation($request);
         if ($validation !== true) return $validation;
-        
+
         $user = UserUtilities::find($id);
-        if (!$user) return response()->json(["status" => "404", "message" => "Resource doesn't exist."], 404);    
-        
+        if (!$user) return response()->json(["status" => "404", "message" => "Resource doesn't exist."], 404);
+
         $data = $request->except('avatar', 'password', 'repeat_password');
         $user->update($data);
 
@@ -86,7 +83,7 @@ class UsersController extends Controller
 
         $user = UserUtilities::find($id);
         if (!$user) return response()->json(["status" => "404", "message" => "Resource doesn't exist."], 404);
-        
+
         $user->delete();
         return response()->json(["status" => "200", "message" => "User has been successfully deleted.", "data" => new UserResource($user)], 200);
     }

@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use App\Helpers\ThemeHelpers;
+use stdClass;
 
 class FrontViewServiceProvider extends ServiceProvider
 {
@@ -26,12 +28,20 @@ class FrontViewServiceProvider extends ServiceProvider
     {
 
         // Theme data
-        $theme = getThemeData();
-        view()->composer($theme['url'].'/*', function ($view) use ($theme) {
+        $theme = (new ThemeHelpers);
+        $theme->data = $theme->getThemeData();
+
+        $site = new stdClass();
+        $site->full_title = config('global.general.title') . ' - ' . config('global.general.description');
+        $site->title = config('global.general.title');
+        $site->description = config('global.general.description');
+
+        view()->composer($theme->data->url . '/*', function ($view) use ($theme, $site) {
             $view->with('theme', $theme);
+            $view->with('site', $site);
         });
 
-        // 
-        
+        //
+
     }
 }

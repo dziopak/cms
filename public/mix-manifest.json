@@ -19,5 +19,12 @@
     "/assets/css/gridstack.min.css": "/assets/css/gridstack.min.css",
     "/assets/js/gridstack.all.js": "/assets/js/gridstack.all.js",
     "/css/dashboard.css": "/css/dashboard.css",
-    "/assets/js/editor.js": "/assets/js/editor.js"
+    "/assets/js/editor.js": "/assets/js/editor.js",
+    "/resources/views/themes/default/assets/css/theme.css": "/resources/views/themes/default/assets/css/theme.css",
+    "/resources/views/themes/default/assets/css/custom.css": "/resources/views/themes/default/assets/css/custom.css",
+    "/../resources/views/themes/default/assets/css/theme.css": "/../resources/views/themes/default/assets/css/theme.css",
+    "/../resources/views/themes/default/assets/css/custom.css": "/../resources/views/themes/default/assets/css/custom.css",
+    "/js/admin/layouts.js": "/js/admin/layouts.js",
+    "/css/layouts.css": "/css/layouts.css",
+    "/assets/js/micromodal.min.js": "/assets/js/micromodal.min.js"
 }

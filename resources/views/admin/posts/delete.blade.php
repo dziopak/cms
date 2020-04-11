@@ -11,7 +11,7 @@
 
 
 @section('content-left')
-    @wrapper('admin.partials.widget', ['title' => 'admin/posts.delete_top_title'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/posts.delete_top_title'])
         <div style="display: inline-block;">
             <strong>{{$post->name}}</strong>
             <p class="mt-2">{{ $post->excerpt }}</p>
@@ -19,7 +19,7 @@
         </div>
     @endwrapper
 
-    @wrapper('admin.partials.widget', ['title' => 'admin/posts.delete_top_title'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/posts.delete_top_title'])
         <p class="alert alert-danger">{{ __('admin/posts.delete_information') }}</p>
 
         {!! Form::open(['method' => 'DELETE', 'action' => ['admin\PostsController@destroy', $post->id]]) !!}

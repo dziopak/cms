@@ -31,7 +31,7 @@
 
     {{-- Adding components to dashboard --}}
     <div class="row">
-    @include('admin.partials.dashboard.controls')
+    @include('admin.dashboard.partials.controls')
     </div>
     {{-- End --}}
 
@@ -56,5 +56,5 @@
 @endsection
 
 @section('footer')
-    @include('admin.partials.dashboard.scripts')
+    @include('admin.dashboard.partials.scripts')
 @endsection

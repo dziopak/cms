@@ -12,7 +12,7 @@
 
 @section('content-left')
     {!! Form::open(['method' => 'POST', 'action' => 'admin\GeneralSettingsController@store']) !!}
-    @wrapper('admin.partials.widget', ['title' => 'admin/settings.general_title'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/settings.general_title'])
 
 
         <p>{{ __('admin/settings.general_description') }}</p>

@@ -34,7 +34,7 @@ class WidgetDivider extends AbstractWidget
     {
         //
 
-        return view('widgets.admin.widget_divider', [
+        return view('admin.widgets.widget_divider', [
             'config' => $this->config,
         ]);
     }

@@ -48,6 +48,7 @@
         },
         "files": [
             "app/Helpers/ViewHelpers.php",
+            "app/Helpers/StringHelpers.php",
             "app/Helpers/DataArrays.php",
             "app/Helpers/ArrayHelpers.php",
             "app/Helpers/DBHelpers.php",

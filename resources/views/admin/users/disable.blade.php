@@ -11,7 +11,7 @@
 
 
 @section('content-left')
-    @wrapper('admin.partials.widget', ['title' => 'admin/users.disable_top_title'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/users.disable_top_title'])
         @if ($user->avatar)
             <img class="rounded-circle mr-4 float-left" width="100" src="{{ getPublicPath() }}/images/{{$user->photo->path}}">
         @endif
@@ -28,7 +28,7 @@
         </div>
     @endwrapper
 
-    @wrapper('admin.partials.widget', ['title' => 'admin/users.disable_bottom_title'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/users.disable_bottom_title'])
         <p class="alert alert-warning">
         {{$user->is_active == 1 ? __('admin/users.disable_information') : __('admin/users.enable_information') }}
         </p>
@@ -51,7 +51,7 @@
 
 
 @section('content-right')
-    @wrapper('admin.partials.widget', ['title' => 'admin/users.recent_actions'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/users.recent_actions'])
         @include('admin.partials.logs')
     @endwrapper
 @endsection

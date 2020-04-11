@@ -12,7 +12,7 @@
 
 @section('content-left')
     {!! Form::model($user, ['method' => 'PATCH', 'action' => ['admin\UsersController@update', $user->id], 'files' => 'true']) !!}
-        @wrapper('admin.partials.widget', ['title' => 'admin/users.edit_right_title'])
+        @wrapper('admin.partials.wrapper', ['title' => 'admin/users.edit_right_title'])
             <div class="row">
                 <div class="col" style="max-width: 140px;">
                     @include('partials.form-fields', ['fields' => $form['profile']['avatar']])
@@ -30,7 +30,7 @@
             </div>
         @endwrapper
 
-        @wrapper('admin.partials.widget', ['title' => 'admin/users.edit_left_title'])
+        @wrapper('admin.partials.wrapper', ['title' => 'admin/users.edit_left_title'])
             @include('admin.partials.validation')
             @include('partials.form-fields', ['fields' => $form['basic_data']])
 
@@ -45,11 +45,11 @@
 
 
 @section('content-right')
-    @wrapper('admin.partials.widget', ['title' => 'admin/users.recent_actions'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/users.recent_actions'])
         @include('admin.partials.logs')
     @endwrapper
 
-    @wrapper('admin.partials.widget', ['title' => 'admin/users.change_password'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/users.change_password'])
         {!! Form::open(['method' => 'PUT', 'action' => ['admin\UsersController@password', $user->id]]) !!}
 
         @include('partials.form-fields', ['fields' => $form['password_change']])

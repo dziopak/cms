@@ -11,7 +11,7 @@
 
 
 @section('content-left')
-    @wrapper('admin.partials.widget', ['title' => 'admin/pages.delete_top_title'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/pages.delete_top_title'])
         <div style="display: inline-block;">
             <strong>{{$page->name}}</strong>
             <p>{{ $page->excerpt }}</p>
@@ -19,7 +19,7 @@
         </div>
     @endwrapper
 
-    @wrapper('admin.partials.widget', ['title' => 'admin/pages.delete_bottom_title'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/pages.delete_bottom_title'])
         <p class="alert alert-danger">{{ __('admin/pages.delete_information') }}</p>
 
         {!! Form::open(['method' => 'DELETE', 'action' => ['admin\PagesController@destroy', $page->id]]) !!}
