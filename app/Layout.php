@@ -11,6 +11,6 @@ class Layout extends Model
 
     public function blocks()
     {
-        return $this->belongsToMany(\App\Block::class)->withPivot('x', 'y', 'width', 'height');
+        return $this->hasMany(\App\Block::class);
     }
 }

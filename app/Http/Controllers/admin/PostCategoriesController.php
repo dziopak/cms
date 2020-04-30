@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -77,7 +77,8 @@ class PostCategoriesController extends Controller
     }
 
 
-    public function delete($id) {
+    public function delete($id)
+    {
         Auth::user()->hasAccessOrRedirect('CATEGORY_DELETE');
         $category = PostCategory::findOrFail($id);
         return view('admin.post_categories.delete', compact('category'));
@@ -97,7 +98,8 @@ class PostCategoriesController extends Controller
     }
 
 
-    public function mass(Request $request) {
+    public function mass(Request $request)
+    {
         return PostCategoryUtilities::massAction($request);
     }
 }

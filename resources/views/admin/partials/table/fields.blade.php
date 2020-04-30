@@ -24,6 +24,11 @@
                         <img src="{{ getPublicPath() }}/images/{{ $field[$row]->path}}" alt="{{ $field->name }}" width="60">
                     @break
 
+                    {{-- Image from path --}}
+                    @case('image_local')
+                        <img src="{{ getPublicPath() }}/images/{{ $field[$row]}}" alt="{{ $field->name }}" width="60">
+                    @break
+
                     {{-- Switch: custom text depending from value --}}
                     @case('switch')
                         @if (!empty($table['options'][$row][$field[$row]]))

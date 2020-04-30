@@ -8,6 +8,7 @@ return [
     "users" => "Konta użytkowników",
     "appearance" => "Wygląd",
     "addons" => "Dodatki",
+    "media" => "Media",
     "settings" => "Ustawienia",
 
     "logs" => "Logi systemowe",

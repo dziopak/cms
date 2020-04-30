@@ -22,6 +22,26 @@
                 $('.widget-remove').click(function() {
                     $(this).closest('.grid-stack-item').remove();
                 });
+
+                $(".grid-stack-item .card-title").click(function() {
+                    var key = $(this)
+                        .closest(".grid-stack-item")
+                        .attr("data-gs-key");
+
+                    $(".block-settings").fadeOut("50");
+                    if (key) {
+                        setTimeout(function() {
+                            $("#fade").fadeIn("100");
+                            $('.block-settings[key="' + key + '"]').fadeIn("100");
+                        }, 300);
+                    }
+                });
+                $("#fade, .block-settings button").click(function(e) {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    $("#fade").fadeOut("100");
+                    $(".block-settings").fadeOut("100");
+                });
             }
         });
     });

@@ -3,8 +3,8 @@
 namespace App\Widgets\front;
 
 use Arrilot\Widgets\AbstractWidget;
-use App\Helpers\ThemeHelpers;
 use App\Menu;
+use stdClass;
 
 class VerticalMenu extends AbstractWidget
 {
@@ -26,7 +26,7 @@ class VerticalMenu extends AbstractWidget
         'x' => 0,
         'y' => 0,
         'non-resizeable' => false,
-        'id' => 'vertical-menu-block',
+        'id' => 'vertical-menu-block'
     ];
 
 
@@ -45,18 +45,8 @@ class VerticalMenu extends AbstractWidget
 
     public function run()
     {
-        $menus = $this->convertMenuList();
-        if ($this->config['is_admin']) {
-            return view('admin.blocks.vertical_menu', [
-                'config' => $this->config,
-                'key' => randomString(15),
-                'menus' => $menus
-            ]);
-        } else {
-            return view(ThemeHelpers::getBlockPath('vertical_menu'), [
-                'config' => $this->config,
-                'key' => randomString(15)
-            ]);
-        }
+        $this->config = decodeBlockConfig($this->config);
+        $menu = \App\Menu::find($this->config['block']->config['menu_id'] ?? 1);
+        return block('vertical_menu', $this->config, ['menus' => $this->convertMenuList()], ['menu' => $menu->items]);
     }
 }

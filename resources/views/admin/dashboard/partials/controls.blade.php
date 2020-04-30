@@ -7,12 +7,12 @@
     </div>
 
     <div class="add-widget" data-name="postsStatistics">
-        @wrapper('admin.partials.widgets.new_widget', ['title' => 'Posts statistics'])
+        @wrapper('admin.partials.widgets.new_widget', ['title' => 'Posts statistics', 'thumbnail' => '/images/widgets/posts_statistics.png'])
         <p>Shows all statistics related to posts.</p>
         @endwrapper
     </div>
     <div class="add-widget" data-name="recentLogs">
-        @wrapper('admin.partials.widgets.new_widget', ['title' => 'Recent Logs'])
+        @wrapper('admin.partials.widgets.new_widget', ['title' => 'Recent Logs', 'thumbnail' => '/images/widgets/posts_statistics.png'])
         <p>Shows recent actions done by admin panel users</p>
         @endwrapper
     </div>
@@ -22,12 +22,12 @@
         @endwrapper
     </div>
     <div class="add-widget" data-name="contentStatistics">
-        @wrapper('admin.partials.widgets.new_widget', ['title' => 'Content Statistics'])
+        @wrapper('admin.partials.widgets.new_widget', ['title' => 'Content Statistics', 'thumbnail' => '/images/widgets/posts_statistics.png'])
         <p>Shows amount of users, posts, pages and other content entries</p>
         @endwrapper
     </div>
     <div class="add-widget" data-name="widgetDivider">
-        @wrapper('admin.partials.widgets.new_widget', ['title' => 'Widget divider'])
+        @wrapper('admin.partials.widgets.new_widget', ['title' => 'Widget divider', 'thumbnail' => '/images/widgets/posts_statistics.png'])
         <p>Separate widgets from each other to keep dashboard clean and readable</p>
         @endwrapper
     </div>

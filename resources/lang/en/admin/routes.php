@@ -8,6 +8,7 @@ return [
     "users" => "Users",
     "appearance" => "Appearance",
     "addons" => "Addons",
+    "media" => "Media",
     "settings" => "Settings",
 
     "logs" => "System logs",

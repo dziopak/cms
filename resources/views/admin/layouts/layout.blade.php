@@ -11,7 +11,7 @@
 
 
             {{-- Sidebar --}}
-            @include('admin.partials.sidebar')
+            @include('admin.partials.sidebar.sidebar')
             {{-- End of Sidebar --}}
 
 

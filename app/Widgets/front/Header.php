@@ -25,20 +25,9 @@ class Header extends AbstractWidget
         'id' => 'header-block'
     ];
 
-    /**
-     * Treat this method as a controller action.
-     * Return view() or other content to display.
-     */
+
     public function run()
     {
-        if ($this->config['is_admin']) {
-            return view('admin.blocks.header', [
-                'config' => $this->config,
-            ]);
-        } else {
-            return view(ThemeHelpers::getBlockPath('header'), [
-                'config' => $this->config,
-            ]);
-        }
+        return block('header', decodeBlockConfig($this->config));
     }
 }

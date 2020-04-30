@@ -1,15 +1,10 @@
 <button id="toggle-components">+</button>
-<div id="layout-components">
+<button id="toggle-new-components" class="toggle-components">C</button>
+<button id="toggle-existing-components" class="toggle-components">E</button>
+<div id="layout-components" class="components-bar">
     <div class="add-widget" data-name="header">
         @wrapper('admin.partials.widgets.new_widget', ['title' => 'Header'])
             <p>Static hero image</p>
-        @endwrapper
-    </div>
-
-
-    <div class="add-widget" data-name="hero-slideshow">
-        @wrapper('admin.partials.widgets.new_widget', ['title' => 'Hero slideshow'])
-            <p>Carousell of header banners</p>
         @endwrapper
     </div>
 
@@ -42,5 +37,9 @@
     </div>
 
 
-
+    <div class="add-widget" data-name="login">
+        @wrapper('admin.partials.widgets.new_widget', ['title' => 'Login form'])
+            <p>Displays login form for guest users</p>
+        @endwrapper
+    </div>
 </div>

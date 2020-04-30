@@ -1,15 +1,13 @@
 @foreach($layout->blocks as $block)
     {{-- @dump($block) --}}
-<div style="
-        grid-column-start: {{ $block->pivot->x + 1 }};
-        grid-column-end: {{ $block->pivot->x + $block->pivot->width + 1 }};
-        grid-row-start: {{ $block->pivot->y + 1 }};
-        grid-row-end: {{ $block->pivot->y + $block->pivot->height + 1 }};"
-    class="grid-item">
+
+    @wrapper('themes.default.blocks.wrapper')
         @if ($block->type === 'module')
+        <div class="module">
             @yield('content')
+        </div>
         @else
-            @widget('front.'.$block['type'])
+            @widget('front.'.$block['type'], ['block' => $block, 'position' => $block->pivot, 'key' => randomString() ])
         @endif
-    </div>
+    @endwrapper
 @endforeach

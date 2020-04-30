@@ -1,23 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-
 use App\Http\Resources\PostResource;
 use App\Http\Utilities\AuthResponse;
 use App\Http\Utilities\PostUtilities;
-
 use App\Post;
-use App\User;
-use JWTAuth;
-use Hook;
 
 class PostsController extends Controller
 {
-    
+
     public function index(Request $request)
     {
         return PostResource::collection(Post::with('author', 'thumbnail', 'category')->orderBy('id')->paginate(15));
@@ -46,9 +40,9 @@ class PostsController extends Controller
     {
         $validation = PostUtilities::updateValidation($request);
         if ($validation !== true) return $validation;
-        
+
         $post = PostUtilities::find($id);
-        if (!$post) return response()->json(["status" => "404", "message" => "Post doesn't exist."], 404);    
+        if (!$post) return response()->json(["status" => "404", "message" => "Post doesn't exist."], 404);
 
         $post->update($request->all());
         return response()->json(["status" => "201", "message" => "Successfully updated post.", "data" => compact('post')], 201);
@@ -61,8 +55,8 @@ class PostsController extends Controller
         if (!$access === true) return $access;
 
         $post = PostUtilities::find($id);
-        if (!$post) response()->json(["status" => "404", "message" => "Post doesn't exist."], 404); 
-        
+        if (!$post) response()->json(["status" => "404", "message" => "Post doesn't exist."], 404);
+
         $post->delete();
         return response()->json(["status" => "200", "message" => "Post has been successfully deleted.", "data" => compact('post')], 200);
     }

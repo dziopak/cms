@@ -38,37 +38,43 @@
 
 
 @section('content-left')
-@include('admin.partials.validation')
+    @include('admin.partials.validation')
 
+    <div id="layout" class="grid-stack">
+        @if (!empty($layout->blocks) && count($layout->blocks) > 0)
+            @foreach($layout->blocks as $block)
 
-<div id="layout" class="grid-stack">
-    @foreach($layout->blocks as $block)
+                @if ($block->type === 'module')
+                @include('admin.blocks.module', ['config' => [
+                        'x' => $block->x,
+                        'y' => $block->y,
+                        'w' => $block->width,
+                        'h' => $block->height,
+                        'block_id' => $block->id
+                    ]])
+                @else
+                    @widget('front.'.$block['type'], [
+                        'x' => $block->x,
+                        'y' => $block->y,
+                        'w' => $block->width,
+                        'h' => $block->height,
+                        'block_id' => $block->id,
+                        'is_admin' => true,
+                        'exists' => true,
+                        'block' => $block,
+                    ])
 
-        @if ($block->type === 'module')
-
-           @include('admin.blocks.module', ['config' => [
-                'x' => $block->pivot->x,
-                'y' => $block->pivot->y,
-                'w' => $block->pivot->width,
-                'h' => $block->pivot->height,
-                'block_id' => 1
-            ]])
-
+                @endif
+            @endforeach
         @else
-
-            @widget('front.'.$block['type'], [
-                'x' => $block->pivot->x,
-                'y' => $block->pivot->y,
-                'w' => $block->pivot->width,
-                'h' => $block->pivot->height,
-                'block_id' => $block->id,
-                'is_admin' => true,
-                'exists' => true,
-                'block' => $block
-            ])
-
+        @include('admin.blocks.module', ['config' => [
+            'x' => 0,
+            'y' => 0,
+            'w' => 6,
+            'h' => 1,
+            'block_id' => 0
+        ]])
         @endif
-    @endforeach
     </div>
 @endsection
 
@@ -79,8 +85,4 @@
         {!! Form::button('<i class="fa fa-home"></i>'.' '.__('admin/general.update_button'), ['class' => 'btn btn-success mt-4', 'type' => 'submit']) !!}
         {!! Form::close() !!}
     @endwrapper
-@endsection
-
-
-@section('after')
 @endsection

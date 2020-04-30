@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -8,17 +8,13 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UsersCreateRequest;
 use App\Http\Requests\UsersEditRequest;
 use App\Http\Requests\NewPasswordRequest;
-
 use App\Http\Utilities\Admin\UserUtilities;
-use App\Http\Utilities\ModelUtilities;
 
-use App\User;
-use App\Role;
 use Auth;
 
 class UsersController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         return view('admin.users.index');
     }
@@ -51,24 +47,28 @@ class UsersController extends Controller
         return UserUtilities::update($id, $request);
     }
 
-    public function password(NewPasswordRequest $request, $id) {
+    public function password(NewPasswordRequest $request, $id)
+    {
         Auth::user()->hasAccessOrRedirect('USER_EDIT');
         return UserUtilities::setPassword($id, $request);
     }
 
-    public function disable($id) {
+    public function disable($id)
+    {
         Auth::user()->hasAccessOrRedirect('USER_EDIT');
         return view('admin.users.disable', ['user_id' => $id]);
     }
 
 
-    public function block(Request $request, $id) {
+    public function block(Request $request, $id)
+    {
         Auth::user()->hasAccessOrRedirect('USER_EDIT');
         return UserUtilities::blockUser($id, $request);
     }
 
 
-    public function delete($id) {
+    public function delete($id)
+    {
         Auth::user()->hasAccessOrRedirect('USER_DELETE');
         return view('admin.users.delete', ['user_id' => $id]);
     }
@@ -80,7 +80,8 @@ class UsersController extends Controller
         return UserUtilities::destroy($id);
     }
 
-    public function mass(Request $request) {
+    public function mass(Request $request)
+    {
         return UserUtilities::massAction($request);
     }
 }

@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\PagesRequest;
-use App\Http\Utilities\ModelUtilities;
 use App\Http\Utilities\Admin\PageUtilities;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Redirect;
 
 use App\Page;
 use Auth;
@@ -51,7 +48,8 @@ class PagesController extends Controller
     }
 
 
-    public function delete($id) {
+    public function delete($id)
+    {
         Auth::user()->hasAccessOrRedirect('PAGE_DELETE');
         return view('admin.pages.delete', ['page' => Page::findOrFail($id)]);
     }
@@ -64,9 +62,8 @@ class PagesController extends Controller
     }
 
 
-    public function mass(Request $request) {
+    public function mass(Request $request)
+    {
         return PageUtilities::massAction($request);
     }
-
-
 }

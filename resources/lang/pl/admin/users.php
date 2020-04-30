@@ -1,42 +1,43 @@
 <?php
-    return [
-        'list_all' => 'Konta użytkowników',
+return [
+    'list_all' => 'Konta użytkowników',
 
-        'create_left_title' => 'Dane konta',
-        'create_right_title' => 'Profil użytkownika',
-        
-        'edit_left_title' => 'Dane konta',
-        'edit_right_title' => 'Profil użytkownika',
+    'create_left_title' => 'Dane konta',
+    'create_right_title' => 'Profil użytkownika',
 
-        'recent_actions' => 'Ostatnie akcje',
-        'change_password' => 'Zmień hasło',
+    'edit_left_title' => 'Dane konta',
+    'edit_right_title' => 'Profil użytkownika',
 
-        'delete_top_title' => 'Informacje o koncie',
-        'delete_bottom_title' => 'Usuń konto użytkownika',
-        'delete_information' => 'Czy napewno chcesz permamentnie usunąć to konto z bazy danych? Ta operacja jest nie odwracalna.',
-    
-        'disable_top_title' => 'Informacje o koncie',
-        'disable_bottom_title' => 'Zablokuj / odblokuj użytkownika',
+    'recent_actions' => 'Ostatnie akcje',
+    'change_password' => 'Zmień hasło',
 
-        'disable_information' => 'Czy napewno chcesz zablokować konto użytkownika?',
-        'enable_information' => 'Czy napewno chcesz odblokować konto użytkownika?',
+    'delete_top_title' => 'Informacje o koncie',
+    'delete_bottom_title' => 'Usuń konto użytkownika',
+    'delete_information' => 'Czy napewno chcesz permamentnie usunąć to konto z bazy danych? Ta operacja jest nie odwracalna.',
 
-        'disable_button' => 'Zablokuj użytkownika',
-        'enable_button' => 'Odblokuj użytkownika',
+    'disable_top_title' => 'Informacje o koncie',
+    'disable_bottom_title' => 'Zablokuj / odblokuj użytkownika',
 
-        'email' => 'Email',
-        'name' => 'Nazwa',
-        'is_active' => 'Aktywny',
-        'created_at' => 'Dodano',
-        'role' => 'Ranga',
-        'password' => 'Hasło',
-        'repeat_password' => 'Powtórz hasło',
-        'first_name' => 'Imię',
-        'last_name' => 'Nazwisko',
-        'avatar' => 'Zdjęcie',
+    'disable_information' => 'Czy napewno chcesz zablokować konto użytkownika?',
+    'enable_information' => 'Czy napewno chcesz odblokować konto użytkownika?',
 
-        'mass_delete' => 'Usuń zaznaczone',
-        'mass_hide' => 'Zablokuj / Ukryj',
-        'mass_show' => 'Odblokuj / Wyświetlaj',
-        'mass_role' => 'Przypisz rangę',
-    ];
+    'disable_button' => 'Zablokuj użytkownika',
+    'enable_button' => 'Odblokuj użytkownika',
+
+    'email' => 'Email',
+    'name' => 'Nazwa',
+    'is_active' => 'Aktywny',
+    'created_at' => 'Dodano',
+    'role' => 'Ranga',
+    'password' => 'Hasło',
+    'repeat_password' => 'Powtórz hasło',
+    'first_name' => 'Imię',
+    'last_name' => 'Nazwisko',
+    'avatar' => 'Zdjęcie',
+    'creation_date' => "Data utworzenia",
+
+    'mass_delete' => 'Usuń zaznaczone',
+    'mass_hide' => 'Zablokuj / Ukryj',
+    'mass_show' => 'Odblokuj / Wyświetlaj',
+    'mass_role' => 'Przypisz rangę',
+];

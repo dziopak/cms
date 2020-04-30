@@ -4,7 +4,7 @@ namespace App\Helpers;
 
 class ThemeHelpers
 {
-    public function getThemeList()
+    public static function getThemeList()
     {
         $path = base_path() . '/resources/views/themes/';
         $dir = scandir(base_path() . '/resources/views/themes');
@@ -49,9 +49,13 @@ class ThemeHelpers
         return false;
     }
 
-    public function getThemeView($view, $params = null)
+    public function getThemeView($view, $params = null, $path = false)
     {
-        return view('themes.' . $this->activeTheme() . '.' . $view, $params);
+        if ($path !== true) {
+            return view('themes.' . $this->activeTheme() . '.' . $view, $params);
+        } else {
+            return 'themes.' . $this->activeTheme() . '.' . $view;
+        }
     }
 
     public function getThemePath()
@@ -64,7 +68,8 @@ class ThemeHelpers
         return config('global.general.theme');
     }
 
-    public static function getBlockPath($name)
+
+    public static function getBlockPath($name, $is_admin = false)
     {
         return 'themes.' . ThemeHelpers::activeTheme() . '.blocks.' . $name . '.index';
     }

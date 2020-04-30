@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Layout;
-use App\Block;
+use App\Http\Utilities\Admin\LayoutUtilities;
 use Widget;
 use Exception;
 
@@ -30,6 +30,8 @@ class LayoutsController extends Controller
      */
     public function create()
     {
+        $form = getData('admin/layouts/layouts_form');
+        return view('admin.page_layouts.create', compact('form'));
     }
 
     /**
@@ -40,7 +42,7 @@ class LayoutsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return LayoutUtilities::store($request);
     }
 
 
@@ -65,7 +67,7 @@ class LayoutsController extends Controller
     public function edit($id)
     {
         $layout = Layout::with('blocks')->findOrFail($id);
-        $layout->widgets = unserialize($layout->widgets);
+
         $form = getData('admin/layouts/layouts_form');
         return view('admin.page_layouts.edit', compact('layout', 'form'));
     }
@@ -79,63 +81,14 @@ class LayoutsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->except(['_token', 'result']);
-        $json = json_decode($request->get('result'), true);
-
-        $layout = Layout::findOrFail($id);
-        $sync = [];
-
-        foreach ($json as $block) {
-            $block_data = [];
-
-            if (!empty($block['config']['title'])) {
-                $block_data['title'] = $block['config']['title'];
-                unset($block['config']['title']);
-                $block_data['type'] = explode('-block', $block['type'])[0];
-                $block_data['config'] = $block['config'];
-            }
-
-            $insert = Block::updateOrCreate(['id' => $block['id']], $block_data);
-            $sync[$insert->id] = [
-                'x' => $block['x'],
-                'y' => $block['y'],
-                'width' => $block['w'],
-                'height' => $block['h']
-            ];
-        }
-
-
-        $layout->blocks()->sync($sync);
-
-        // usort($json, function ($string1, $string2) {
-        //     return strcmp($string1['y'], $string2['y']);
-        // });
-
-
-        // foreach ($json as $block) {
-        //     $block['id'] = explode('-block', $block['id'])[0];
-        //     $blocks[$block['y']][] = $block;
-        // }
-
-        // foreach ($blocks as $key => $row) {
-        //     usort($blocks[$key], function ($string1, $string2) {
-        //         return strcmp($string1['x'], $string2['x']);
-        //     });
-        // }
-        // $data['widgets'] = serialize($blocks);
-
-
-
-        Layout::findOrFail($id)->update([
-            "name" => $data['name'],
-        ]);
-
-        return redirect(route('admin.pages.layouts.index'))->with('crud', 'Layout created successfully.');
+        return LayoutUtilities::update($id, $request);
     }
 
 
     public function delete($id)
     {
+        $layout = Layout::findOrFail($id);
+        return view('admin.page_layouts.delete', compact('layout'));
     }
 
     /**
@@ -146,7 +99,11 @@ class LayoutsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $layout = Layout::findOrFail($id);
+        $layout->blocks()->delete();
+        $layout->delete();
+
+        return redirect(route('admin.pages.layouts.index'))->with('crud', 'Layout deleted successfully.');
     }
 
 

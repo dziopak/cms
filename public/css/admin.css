@@ -29,15 +29,18 @@ div#module {
   margin: 0 -4px;
 }
 
-#admin-page .table tr td {
+#admin-page .table tr td,
+#admin-page .table tr th {
   vertical-align: middle;
 }
 
-#admin-page .table tr td:first-child {
+#admin-page .table tr td:first-child,
+#admin-page .table tr th:first-child {
   text-align: center;
 }
 
-#admin-page .table tr td:last-child {
+#admin-page .table tr td:last-child,
+#admin-page .table tr th:last-child {
   text-align: right;
 }
 
@@ -518,5 +521,86 @@ i.fa.fas.fa-trash,
 
 textarea.small {
   height: 100px;
+}
+
+#fade {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 1;
+  display: none;
+}
+
+.module-modal {
+  width: 80%;
+  max-width: 1200px;
+  position: fixed;
+  top: 10%;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+  overflow-x: hidden;
+  background: #eee;
+  border-radius: 15px;
+}
+
+.module-modal .modal-content {
+  padding: 20px 0px;
+  overflow: hidden;
+  height: calc(100% - 52px);
+}
+
+.module-modal .modal-overflow {
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 100%;
+}
+
+.module-modal .modal-tab .card:last-child {
+  margin-bottom: 0px !important;
+}
+
+.module-modal .modal-tab .card:last-child .card-body {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.modal-nav {
+  width: 100%;
+  height: 50px;
+  background: #fff;
+}
+
+.modal-nav ul {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  padding: 0;
+}
+
+.modal-nav ul li {
+  height: 50px;
+  display: inline-block;
+  padding: 14px 20px;
+  cursor: pointer;
+}
+
+.modal-nav ul li + li {
+  border-left: 1px solid #eee;
+}
+
+.modal-nav ul li.active {
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
+  background: #fafafa;
+}
+
+.modal-nav ul li.active + li {
+  border-left: unset;
 }
 
