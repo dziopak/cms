@@ -19,10 +19,7 @@ mix.js("resources/js/app.js", "public/js")
 
     .copy("node_modules/slick-carousel/slick/slick.min.js", "public/assets/js")
     .copy("node_modules/slick-carousel/slick/slick.css", "public/assets/css")
-    .copy(
-        "node_modules/slick-carousel/slick/slick-theme.css",
-        "public/assets/css"
-    )
+    .copy("resources/assets/slick/slick-theme.css", "public/assets/css")
 
     .copy("node_modules/chart.js/dist/Chart.js", "public/assets/js")
     .copy("node_modules/chart.js/dist/Chart.min.css", "public/assets/css")

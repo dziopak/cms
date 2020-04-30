@@ -13,9 +13,7 @@
 
 @section('module-content')
     @wrapper('admin.partials.wrapper', ['title' => 'Manage testimonials'])
-        @include('admin.partials.searchfilterbar')
         @include('admin.partials.table', ['fields' => $testimonials])
-        @include('admin.partials.massedit')
 
         @if (Auth::user()->hasAccess('MODULE_USE'))
             <a href="{{ route('admin.modules.testimonials.create') }}" class="btn btn-success">Create new</a>

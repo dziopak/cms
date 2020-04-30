@@ -48,12 +48,14 @@
         },
         "files": [
             "app/Helpers/ViewHelpers.php",
+            "app/Helpers/BlockHelpers.php",
             "app/Helpers/StringHelpers.php",
             "app/Helpers/DataArrays.php",
             "app/Helpers/ArrayHelpers.php",
             "app/Helpers/DBHelpers.php",
             "app/Helpers/ThemeHelpers.php",
-            "app/Helpers/JSONHelpers.php"
+            "app/Helpers/JSONHelpers.php",
+            "app/Helpers/DataHelpers.php"
         ],
         "classmap": [
             "database/seeds",

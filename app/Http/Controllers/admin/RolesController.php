@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Utilities\Admin\RoleUtilities;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
 use App\Role;
 use Auth;

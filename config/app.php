@@ -170,7 +170,7 @@ return [
          */
         Esemve\Hook\HookServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
-        
+
         /*
          * Application Service Providers...
         */
@@ -183,7 +183,7 @@ return [
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
         /*
-         * View composers 
+         * View composers
         */
         App\Providers\FrontViewServiceProvider::class,
         App\Providers\AdminViewServiceProvider::class,
@@ -192,6 +192,7 @@ return [
         App\Providers\ViewComposersProviders\RolesComposers::class,
         App\Providers\ViewComposersProviders\PostsComposers::class,
         App\Providers\ViewComposersProviders\PagesComposers::class,
+        App\Providers\ViewComposersProviders\MediaComposers::class,
         App\Providers\ViewComposersProviders\SettingsComposers::class,
         App\Providers\ViewComposersProviders\ModulesComposers::class,
         App\Providers\ViewComposersProviders\CategoriesComposers::class,
@@ -248,7 +249,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Hook' => Esemve\Hook\Facades\Hook::class,
         'Modules' => Nwidart\Modules\Facades\Module::class,
-        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class, 
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
     ],

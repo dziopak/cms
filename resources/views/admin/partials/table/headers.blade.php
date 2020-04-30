@@ -4,8 +4,10 @@
         @foreach($table['headers'] as $header => $row)
             <th>{{ __($header) }}</th>
         @endforeach
-        @if (!empty($table['actions'])) 
-            <th class="text-right">{{ __('admin/general.actions') }}</th>
+        @if (!empty($table['actions']))
+            @if ((!isset($actions) || $actions === true) && (!isset($controls) || $controls === true))
+                <th class="text-right">{{ __('admin/general.actions') }}</th>
+            @endif
         @endif
     </tr>
 </thead>

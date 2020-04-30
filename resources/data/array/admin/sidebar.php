@@ -57,15 +57,25 @@ $items = [
         'route' => 'admin.dashboard.index',
         'items' => [
             'menus' => [
-                'route' => 'admin.menus.index'
+                'route' => 'admin.widgets.menus.index'
             ],
-            'widgets' => [
+            'headers' => [
                 'route' => 'admin.dashboard.index'
             ],
-            'theme' => [
+            'carousells' => [
+                'route' => 'admin.dashboard.index'
+            ],
+            'sliders' => [
+                'route' => 'admin.blocks.sliders.index'
+            ],
+            'forms' => [
                 'route' => 'admin.dashboard.index'
             ],
         ]
+    ],
+    'media' => [
+        'class' => 'icon fa fas fa-image',
+        'route' => 'admin.media.index'
     ],
     'addons' => [
         'class' => 'icon fa fas fa-plug',

@@ -10,7 +10,7 @@
   box-shadow: 0 0.1rem 0.25rem rgba(0, 0, 0, 0.075);
 }
 
-#layout-components {
+.components-bar {
   width: 100%;
   transition: all 0.2s linear;
   padding: 10px 50px;
@@ -18,21 +18,21 @@
   height: 0;
 }
 
-#layout-components.active {
-  height: 350px;
+.components-bar.active {
+  height: 200px;
 }
 
-#layout-components.active .slick-arrow {
+.components-bar.active .slick-arrow {
   display: block;
 }
 
-#layout-components .slick-list,
-#layout-components .slick-track,
-#layout-components .slick-slide {
+.components-bar .slick-list,
+.components-bar .slick-track,
+.components-bar .slick-slide {
   height: 100%;
 }
 
-#layout-components .slick-arrow {
+.components-bar .slick-arrow {
   display: none;
   background: #fff no-repeat center;
   background-size: 12px;
@@ -42,30 +42,30 @@
   transition: all 0.2s linear;
 }
 
-#layout-components .slick-arrow.slick-prev {
+.components-bar .slick-arrow.slick-prev {
   left: 15px;
   background-image: url(https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-left-01-512.png);
 }
 
-#layout-components .slick-arrow.slick-prev::before {
+.components-bar .slick-arrow.slick-prev::before {
   content: "";
 }
 
-#layout-components .slick-arrow.slick-next {
+.components-bar .slick-arrow.slick-next {
   right: 15px;
   background-image: url(https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-right-01-512.png);
 }
 
-#layout-components .slick-arrow.slick-next::before {
+.components-bar .slick-arrow.slick-next::before {
   content: "";
 }
 
-#layout-components .slick-arrow:hover {
-  background-color: #3490dc;
+.components-bar .slick-arrow:hover {
   transform: scale(1.2) translateY(-43%);
 }
 
-.add-widget {
+.add-widget,
+.existing-widget {
   width: 100%;
   border-radius: 8px;
   border: 0px;
@@ -75,39 +75,67 @@
   height: 100%;
 }
 
-.add-widget .card {
+.add-widget .card,
+.existing-widget .card {
   height: 100%;
 }
 
-.add-widget .widget-title {
+.add-widget .widget-title,
+.existing-widget .widget-title {
   color: #3490dc;
 }
 
-.add-widget p {
+.add-widget p,
+.existing-widget p {
   margin-bottom: 0px;
 }
 
-.add-widget img {
+.add-widget img,
+.existing-widget img {
   margin: 40px auto;
   max-width: 100%;
   width: 60px;
   height: 60px;
 }
 
+button.toggle-components {
+  position: fixed;
+  bottom: 45px;
+  right: 45px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #c2c7d4;
+  border: 1px solid #9397a0;
+  color: #fff;
+  z-index: 90;
+  transition: all 0.15s linear;
+  transition-delay: 2s;
+}
+
+button#toggle-components:hover ~ #toggle-new-components,
+.toggle-components:hover ~ #toggle-new-components {
+  bottom: 100px;
+  transition-delay: 0s;
+}
+
+button#toggle-components:hover ~ #toggle-existing-components,
+.toggle-components:hover ~ #toggle-existing-components {
+  right: 100px;
+  transition-delay: 0s;
+}
+
+button.toggle-components.active,
+button.toggle-components:hover {
+  background: #3490dc;
+  border: 1px solid #2871ad;
+  color: #fff;
+  transform: scale(1.2);
+}
+
 .ui-resizable-handle.ui-resizable-se.ui-icon.ui-icon-gripsmall-diagonal-se {
   right: 20px;
   bottom: 12px;
-}
-
-#fade {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.75);
-  z-index: 1;
-  display: none;
 }
 
 .block-settings {

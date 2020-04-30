@@ -95,20 +95,20 @@
 
 $(document).ready(function () {
   // TinyMCE //
-  if ($('.tinymce').length > 0) {
+  if ($(".tinymce").length > 0) {
     var editor_config = {
       path_absolute: "/",
       selector: "textarea.tinymce",
-      plugins: 'print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help',
+      plugins: "print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help",
       toolbar1: "undo redo | styleselect formatselect insertfile | bold italic strikethrough forecolor backcolor | alignleft aligncenter alignright alignjustify | outdent indent | removeformat",
-      toolbar2: 'bullist numlist | link image media numlist bullist',
+      toolbar2: "bullist numlist | link image media numlist bullist",
       relative_urls: false,
       file_browser_callback: function file_browser_callback(field_name, url, type, win) {
-        var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
-        var y = window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight;
-        var cmsURL = editor_config.path_absolute + 'admin/filemanager?field_name=' + field_name;
+        var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName("body")[0].clientWidth;
+        var y = window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName("body")[0].clientHeight;
+        var cmsURL = editor_config.path_absolute + "admin/filemanager?field_name=" + field_name;
 
-        if (type == 'image') {
+        if (type == "image") {
           cmsURL = cmsURL + "&type=Images";
         } else {
           cmsURL = cmsURL + "&type=Files";
@@ -116,7 +116,7 @@ $(document).ready(function () {
 
         tinyMCE.activeEditor.windowManager.open({
           file: cmsURL,
-          title: 'Filemanager',
+          title: "Filemanager",
           width: x * 0.8,
           height: y * 0.8,
           resizable: "yes",
@@ -128,9 +128,9 @@ $(document).ready(function () {
   } // MASS EDIT //
 
 
-  var selectAll = $('.select-all');
+  var selectAll = $(".select-all");
   selectAll.change(function () {
-    selectAll.closest('table').find('input').prop('checked', selectAll.prop('checked'));
+    selectAll.closest("table").find("input").prop("checked", selectAll.prop("checked"));
   });
   $("#mass_action").change(function (e) {
     $(".mass_edit_sub").hide();
@@ -140,11 +140,11 @@ $(document).ready(function () {
     }
   }); // LOGS //
 
-  $('#filter-button').click(function () {
-    var crud = document.getElementById('log-crud').value;
-    var type = document.getElementById('log-type').value;
+  $("#filter-button").click(function () {
+    var crud = document.getElementById("log-crud").value;
+    var type = document.getElementById("log-type").value;
     $("#logs-table .alert").each(function () {
-      if (($(this).attr('data-crud') == crud || crud === "0") && ($(this).attr('data-type') == type || type === "0")) {
+      if (($(this).attr("data-crud") == crud || crud === "0") && ($(this).attr("data-type") == type || type === "0")) {
         $(this).show();
       } else if (crud == 0 && type == 0) {
         $(this).show();
@@ -158,10 +158,10 @@ $(document).ready(function () {
 function readURL(input) {
   if (input.files && input.files[0]) {
     var reader = new FileReader();
-    var target = '#' + $(input).attr('id') + '-image-preview';
+    var target = "#" + $(input).attr("id") + "-image-preview";
 
     reader.onload = function (e) {
-      $(target).attr('src', e.target.result);
+      $(target).attr("src", e.target.result);
     };
 
     reader.readAsDataURL(input.files[0]); // convert to base64 string
@@ -171,6 +171,16 @@ function readURL(input) {
 $(document).ready(function () {
   $("input[type='file']").change(function () {
     readURL(this);
+  });
+  $("#fade *").click(function (event) {
+    event.stopPropagation();
+  });
+  $(".modal-nav li").click(function () {
+    var tab = $(this).attr("data-tab") || 1;
+    $(".modal-nav li.active").removeClass("active");
+    $(this).addClass("active");
+    $(".modal-tab").hide();
+    $('.modal-tab[data-tab="' + tab + '"]').show();
   });
 });
 

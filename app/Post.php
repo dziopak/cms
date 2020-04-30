@@ -13,32 +13,34 @@ class Post extends Model
     protected $guarded = ['id', 'post_id', 'thumbnail'];
     public $fire_events = true;
 
-    public function author() {
+    public function author()
+    {
         return $this->belongsTo('App\User', 'user_id');
     }
 
-    public function thumbnail() {
+    public function thumbnail()
+    {
         return $this->belongsTo('App\File', 'file_id');
     }
 
-    public function category() {
+    public function category()
+    {
         return $this->belongsTo('App\PostCategory', 'category_id');
     }
 
-    public function scopeFilter($query, $request) {
+    public function scopeFilter($query, $request)
+    {
         if (!empty($request->get('search'))) {
 
             // Search in name or slug //
-            $query->where('name', 'like', '%'.$request->get('search').'%')
-            ->orWhere('slug', 'like', '%'.$request->get('search').'%');
-        
+            $query->where('name', 'like', '%' . $request->get('search') . '%')
+                ->orWhere('slug', 'like', '%' . $request->get('search') . '%');
         }
         if (!empty($request->get('sort_by'))) {
 
             // Sort by selected field //
             !empty($request->get('sort_order')) && $request->get('sort_order') === 'desc' ?
-            $query->orderByDesc($request->get('sort_by')) : $query->orderBy($request->get('sort_by'));
-        
+                $query->orderByDesc($request->get('sort_by')) : $query->orderBy($request->get('sort_by'));
         }
     }
 
@@ -48,15 +50,15 @@ class Post extends Model
         parent::boot();
         $request = request();
 
-        self::created(function($post) use ($request) {
+        self::created(function ($post) use ($request) {
             if ($post->fire_events) event(new PostCreateEvent($post, $request->file('thumbnail')));
         });
 
-        self::updated(function($post) use ($request) {
+        self::updated(function ($post) use ($request) {
             if ($post->fire_events) event(new PostUpdateEvent($post, $request->file('thumbnail')));
         });
 
-        self::deleted(function($post) use ($request) {
+        self::deleted(function ($post) use ($request) {
             if ($post->fire_events) event(new PostDestroyEvent($post));
         });
     }

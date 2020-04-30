@@ -1,6 +1,6 @@
 <?php
 
-$table['headers'] = [__('admin/layouts.name') => 'name', __('admin/layouts.type') => 'type'];
+$table['headers'] = [__('admin/layouts.name') => 'name'];
 $table['data_types'] = [
     'type' => 'switch'
 ];

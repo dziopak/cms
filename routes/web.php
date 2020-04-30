@@ -1,11 +1,5 @@
 <?php
 
-//Front-office routes
-Route::group(['as' => 'front.'], function () {
-    Route::get('/', 'front\PostsController@index')->name('posts.index');
-});
-
-
 //Back-office routes
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'access:ADMIN_VIEW'], function () {
 
@@ -16,12 +10,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'access:ADM
 
     Route::get('/menus', function () {
         return view('admin.menus.index');
-    })->name('menus.index');
+    })->name('widgets.menus.index');
 
 
     Route::get('/modules', 'admin\ModulesController@index')->name('modules.index');
 
-    //POSTS ROUTES
+    //USERS ROUTES
     require base_path('routes/web/admin/users.php');
 
     //POSTS ROUTES
@@ -30,8 +24,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'access:ADM
     //PAGES ROUTES
     require base_path('routes/web/admin/pages.php');
 
+    //MEDIA ROUTES
+    require base_path('routes/web/admin/media.php');
+
     //SETTINGS ROUTES
     require base_path('routes/web/admin/settings.php');
+
+    //BLOCKS ROUTES
+    require base_path('routes/web/admin/blocks.php');
 
     //VENDOR ROUTES
     require base_path('routes/web/admin/vendor/filemanager.php');
@@ -39,3 +39,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'access:ADM
 
 //HELPERS ROUTES
 require base_path('routes/web/admin/helpers.php');
+
+
+//Front-office routes
+Route::group(['as' => 'front.'], function () {
+    //POSTS ROUTES
+    require base_path('routes/web/front/posts.php');
+
+    //PAGES ROUTES
+    require base_path('routes/web/front/pages.php');
+});

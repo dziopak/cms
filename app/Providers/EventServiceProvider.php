@@ -29,6 +29,15 @@ class EventServiceProvider extends ServiceProvider
         ]
     ];
 
+    protected $listenFiles = [
+        'CategoriesEvents',
+        'PagesEvents',
+        'PostsEvents',
+        'RolesEvents',
+        'UsersEvents',
+        'FilesEvents',
+    ];
+
     /**
      * Register any events for your application.
      *
@@ -36,12 +45,10 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->listen = array_merge(include('EventServiceProvider/CategoriesEventServiceProvider.php'), $this->listen);
-        $this->listen = array_merge(include('EventServiceProvider/PagesEventServiceProvider.php'), $this->listen);
-        $this->listen = array_merge(include('EventServiceProvider/PostsEventServiceProvider.php'), $this->listen);
-        $this->listen = array_merge(include('EventServiceProvider/RolesEventServiceProvider.php'), $this->listen);
-        $this->listen = array_merge(include('EventServiceProvider/UsersEventServiceProvider.php'), $this->listen);
-        
+        foreach ($this->listenFiles as $file) {
+            $this->listen = array_merge(include('EventServiceProvider/' . $file . '.php'), $this->listen);
+        }
+
         parent::boot();
     }
 }

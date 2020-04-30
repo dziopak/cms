@@ -11,9 +11,10 @@
  *
  * @return integer position of key in array
  *
-**/
+ **/
 if (!function_exists('array_key_position')) {
-    function array_key_position($key, $array) {
+    function array_key_position($key, $array)
+    {
         return $i = array_search($key, array_keys($array));
     }
 }
@@ -33,9 +34,10 @@ if (!function_exists('array_key_position')) {
  *
  * @return array complete array
  *
-**/
+ **/
 if (!function_exists('array_push_after')) {
-    function array_push_after($key, $data, $array) {
+    function array_push_after($key, $data, $array)
+    {
         $position = array_key_position($key, $array) + 1;
         $res = array_slice($array, 0, $position, true) + $data + array_slice($array, $position, count($array), true);
 

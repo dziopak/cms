@@ -31,14 +31,6 @@ class Footer extends AbstractWidget
      */
     public function run()
     {
-        if ($this->config['is_admin']) {
-            return view('admin.blocks.footer', [
-                'config' => $this->config,
-            ]);
-        } else {
-            return view(ThemeHelpers::getBlockPath('footer'), [
-                'config' => $this->config,
-            ]);
-        }
+        return block('footer', decodeBlockConfig($this->config));
     }
 }

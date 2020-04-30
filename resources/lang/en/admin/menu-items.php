@@ -23,8 +23,10 @@ return [
     'appearance' => 'Appearance',
     'appearance_items' => [
         'menus' => 'Menus',
-        'widgets' => 'Widgets',
-        'theme' => 'Themes'
+        'headers' => 'Headers',
+        'sliders' => 'Sliders',
+        'carousells' => 'Carousells',
+        'forms' => 'Forms',
     ],
     'addons' => 'Addons',
     'addons_items' => [

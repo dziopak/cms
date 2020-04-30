@@ -25,20 +25,26 @@ class Slider extends AbstractWidget
         'id' => 'slider-block'
     ];
 
+    public function convertSlidersList()
+    {
+        $all = \App\Slider::all();
+        $sliders = [];
+
+        foreach ($all as $slider) {
+            $sliders[$slider->id] = $slider->name;
+        }
+
+        return $sliders;
+    }
+
     /**
      * Treat this method as a controller action.
      * Return view() or other content to display.
      */
     public function run()
     {
-        if ($this->config['is_admin']) {
-            return view('admin.blocks.slider', [
-                'config' => $this->config,
-            ]);
-        } else {
-            return view(ThemeHelpers::getBlockPath('slider'), [
-                'config' => $this->config,
-            ]);
-        }
+        $this->config = decodeBlockConfig($this->config);
+        $slider = \App\Slider::find($this->config['block']->config['slider_id'] ?? 1);
+        return block('slider', $this->config, ['sliders' => $this->convertSlidersList()], ['slider' => $slider]);
     }
 }

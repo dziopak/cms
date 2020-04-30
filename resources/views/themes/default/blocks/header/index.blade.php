@@ -1,9 +1,8 @@
 <div class="header grid-item">
     <div class="hero">
-        <img src="{{ $theme->getAsset('img/hero.jpg') }}">
-        <div class="hero__container">
-            <h1>Simple & Flexible</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+        <div class="hero-container">
+            <h1>{{ $block['title'] ?? config('global.general.title') }}</h1>
+            <p>{{ $block['slogan'] ?? config('global.general.description') }}</p>
             <a class="btn cta" href="#">Read more</a>
         </div>
     </div>

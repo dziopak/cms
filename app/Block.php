@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Block extends Model
 {
-    protected $fillable = ['title', 'config', 'type'];
+    protected $fillable = ['title', 'config', 'type', 'x', 'y', 'layout_id', 'width', 'height'];
     public $timestamps = false;
 
     public function layouts()
     {
-        return $this->belongsToMany(\App\Layout::class)->withPivot('x', 'y', 'width', 'height');
+        return $this->belongsTo(\App\Layout::class);
     }
 }

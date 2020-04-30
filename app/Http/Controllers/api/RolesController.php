@@ -1,21 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-
 use App\Http\Utilities\AuthResponse;
 use App\Http\Utilities\RoleUtilities;
 use App\Http\Resources\RoleResource;
-
 use App\Role;
-use Hook;
 
 class RolesController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         return RoleResource::collection(Role::orderBy('id')->paginate(15));
     }
 
@@ -46,12 +43,12 @@ class RolesController extends Controller
         if ($validation !== true) return $validation;
 
         $role = Role::find($id);
-        if (!$role) return response()->json(["status" => "404", "message" => "Resource doesn't exist."], 404);     
-                
+        if (!$role) return response()->json(["status" => "404", "message" => "Resource doesn't exist."], 404);
+
         $data = $request->except('access');
         $data['access'] = serialize($request->get('access'));
         $role->update($data);
-    
+
         return response()->json(["status" => "201", "message" => "Successfully updated the role.", "data" => new RoleResource($role)], 201);
     }
 
@@ -63,7 +60,7 @@ class RolesController extends Controller
 
         $role = Role::find($id);
         if (!$role) return response()->json(["status" => "404", "message" => "Resource doesn't exist."], 404);
-        
+
         $role->delete();
         return response()->json(["status" => "200", "message" => "User role has been successfully deleted.", "data" => new RoleResource($role)], 200);
     }

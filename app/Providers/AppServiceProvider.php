@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Helpers\ThemeHelpers;
 use Illuminate\Support\ServiceProvider;
 use App\Setting;
 use Blade;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -53,6 +55,11 @@ class AppServiceProvider extends ServiceProvider
             $s .= "<?php echo preg_replace('/@child/', \$child, \$contents); ?>";
 
             return $s;
+        });
+
+        \Blade::directive('view', function ($view) {
+            $theme = new ThemeHelpers;
+            return View::make($theme->getThemeView($view, [], true))->render();
         });
     }
 

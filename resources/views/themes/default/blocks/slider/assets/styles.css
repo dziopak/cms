@@ -1,0 +1,22 @@
+.slider img {
+    min-width: 100%;
+}
+
+.hero-slider .slide-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    text-align: center;
+    display: none;
+}
+
+.hero-slider .slick-current .slide-content {
+    display: block;
+}
+
+.hero-slider .slick-slide {
+    height: 100vh;
+    position: relative;
+}

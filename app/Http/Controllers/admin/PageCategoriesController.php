@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -12,7 +12,7 @@ use Auth;
 
 class PageCategoriesController extends Controller
 {
-    
+
     public function index(Request $request)
     {
         return view('admin.page_categories.index');
@@ -48,9 +48,10 @@ class PageCategoriesController extends Controller
         return PageCategoryUtilities::update($id, $request);
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         Auth::user()->hasAccessOrRedirect('CATEGORY_DELETE');
-        
+
         $category = PageCategory::findOrFail($id);
         return view('admin.page_categories.delete', compact('category'));
     }
@@ -62,7 +63,8 @@ class PageCategoriesController extends Controller
         return PageCategoryUtilities::destroy($id);
     }
 
-    public function mass(Request $request) {
+    public function mass(Request $request)
+    {
         return PageCategoryUtilities::massAction($request);
     }
 }

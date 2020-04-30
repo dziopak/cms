@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use App\Helpers\ThemeHelpers;
 use stdClass;
+use Illuminate\Support\Facades\Blade;
 
 class FrontViewServiceProvider extends ServiceProvider
 {
@@ -41,7 +42,7 @@ class FrontViewServiceProvider extends ServiceProvider
             $view->with('site', $site);
         });
 
-        //
-
+        Blade::include('themes.' . $theme->data->slug . '.blocks.header.index', 'header');
+        Blade::include('themes.' . $theme->data->slug . '.blocks.footer.index', 'footer');
     }
 }
