@@ -58,7 +58,6 @@
 }
 
 #dashboard-components .slick-arrow:hover {
-  background-color: #3490dc;
   transform: scale(1.2) translateY(-43%);
 }
 

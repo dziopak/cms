@@ -23,7 +23,7 @@
     @wrapper('admin.partials.wrapper', ['title' => 'admin/media.edit_title'])
 
         {{-- Slider's images  --}}
-        @include('admin.blocks.sliders.partials.image_data')
+        @each('admin.blocks.sliders.partials.image_data', $slider->files, 'image')
 
     @endwrapper
 @endsection
@@ -100,12 +100,17 @@
 
 
                 {{-- Add media to slider --}}
-                <button onclick="$('form').submit()" style="width: 100px; margin: 0 auto;" class="btn btn-success">
+                <div id="slider-add-existing" style="width: 100px;" class="btn btn-success mx-auto mt-4">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                     {{ __('admin/general.create_button') }}
-                </button>
+                </div>
             </div>
 
         </div>
     </div>
 @endsection
+
+
+@push('scripts-bottom')
+    @include('admin.blocks.sliders.partials.scripts')
+@endpush
