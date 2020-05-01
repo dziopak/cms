@@ -25,9 +25,6 @@
         myDropzone.on("sending", function(file, xhr, formData) {
            formData.append("_token", CSRF_TOKEN);
         });
-        myDropzone.on("success", function($response) {
-           console.log($response.xhr.response);
-        });
     </script>
 
     <style>

@@ -29,6 +29,9 @@
                     $(html).insertAfter($('.slider-row:last-child'));
                 });
                 $('#fade').fadeOut();
+                $('.slider-remove').click(function() {
+                removeSlides($(this).attr('data-id'));
+            });
             }
         } catch (error) {
             console.error(error);
@@ -40,14 +43,14 @@
         $("#media-list-form input[name^='mass_edit']:checked").each(function() {
             slides.push($(this).val());
         });
-        addSlides(slides).then(() => {
-            $('.slider-remove').click(function() {
-                removeSlides($(this).attr('data-id'));
-            });
-        });
+        addSlides(slides);
     });
 
     $('.slider-remove').click(function() {
         removeSlides($(this).attr('data-id'));
+    });
+
+    myDropzone.on("success", function($response) {
+        addSlides([$response.xhr.response]);
     });
 </script>
