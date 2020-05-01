@@ -1,32 +1,58 @@
 {{-- Loop through images and display pivot fields --}}
-@foreach($slider->files as $image)
-    <div class="row px-2 py-4" style="border-bottom: 1px solid #eee;">
+
+    <div data-id="{{ $image->id ?? "@@ID@@" }}" class="slider-row row px-2 py-4" style="border-bottom: 1px solid #eee;">
 
 
-        {{-- Thumbnail --}}
         <div class="col" style="max-width: 180px;">
-            <img class="float-left" src="/images/{{ $image->path }}" width="160" alt="{{ $image->name ?? 'Image' }}">
+
+            {{-- Thumbnail --}}
+            <img class="float-left" src="/images/{{ $image->path ?? "@@PATH@@" }}" width="160" alt="{{ $image->name ?? 'Image' }}">
+
+            {{-- Remove image from slider --}}
+            <div class="slider-remove btn btn-danger w-100 my-4" data-id="{{ $image->id ?? "@@ID@@" }}">Remove</div>
+
         </div>
 
         <div class="col">
 
-            {{-- Title --}}
-            <div class="form-group">
-                {!! Form::text('image['.$image->id.'][title]', $image->pivot->title, ['class' => 'form-control', 'placeholder' => 'Title...']) !!}
-            </div>
+            @if (!empty($image->id))
 
-            {{-- Button url --}}
-            <div class="form-group">
-                {!! Form::text('image['.$image->id.'][url]', $image->pivot->url, ['class' => 'form-control', 'placeholder' => 'Redirect url...']) !!}
-            </div>
+                {{-- Title --}}
+                <div class="form-group">
+                    {!! Form::text('image['.$image->id.'][title]', $image->pivot->title, ['class' => 'form-control', 'placeholder' => 'Title...']) !!}
+                </div>
 
-            {{-- Description  --}}
-            <div class="form-group">
-                {!! Form::textarea('image['.$image->id.'][description]', $image->pivot->description, ['class' => 'form-control', 'placeholder' => 'Description or content here...']) !!}
-            </div>
+                {{-- Button url --}}
+                <div class="form-group">
+                    {!! Form::text('image['.$image->id.'][url]', $image->pivot->url, ['class' => 'form-control', 'placeholder' => 'Redirect url...']) !!}
+                </div>
+
+                {{-- Description  --}}
+                <div class="form-group">
+                    {!! Form::textarea('image['.$image->id.'][description]', $image->pivot->description, ['class' => 'form-control', 'placeholder' => 'Description or content here...']) !!}
+                </div>
+
+            @else
+
+                {{-- Title --}}
+                <div class="form-group">
+                    {!! Form::text('image[@@ID@@][title]', null, ['class' => 'form-control', 'placeholder' => 'Title...']) !!}
+                </div>
+
+                {{-- Button url --}}
+                <div class="form-group">
+                    {!! Form::text('image[@@ID@@][url]', null, ['class' => 'form-control', 'placeholder' => 'Redirect url...']) !!}
+                </div>
+
+                {{-- Description  --}}
+                <div class="form-group">
+                    {!! Form::textarea('image[@@ID@@][description]', null, ['class' => 'form-control', 'placeholder' => 'Description or content here...']) !!}
+                </div>
+
+            @endif
 
         </div>
 
 
     </div>
-@endforeach
+

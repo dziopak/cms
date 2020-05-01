@@ -1,4 +1,4 @@
-@import '../variables';
+@import "../variables";
 
 #dashboard {
     margin: 0 -8px 0 -10px;
@@ -19,16 +19,18 @@
     padding: 10px 50px;
     margin-top: -30px;
     height: 0;
- 
+
     &.active {
         height: 350px;
-        
+
         .slick-arrow {
             display: block;
         }
     }
 
-    .slick-list, .slick-track, .slick-slide {
+    .slick-list,
+    .slick-track,
+    .slick-slide {
         height: 100%;
     }
 
@@ -48,18 +50,17 @@
                 content: "";
             }
         }
-        
+
         &.slick-next {
             right: 15px;
             background-image: url(https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-right-01-512.png);
-            
+
             &::before {
                 content: "";
             }
         }
 
         &:hover {
-            background-color: #3490dc;
             transform: scale(1.2) translateY(-43%);
         }
     }
@@ -99,7 +100,6 @@
     bottom: 12px;
 }
 
-
 /* --------------- CHARTS --------------- */
 
 canvas.chart {
@@ -118,7 +118,8 @@ canvas.chart {
         flex-basis: 100%;
         text-align: center;
 
-        &:first-child, &:last-child {
+        &:first-child,
+        &:last-child {
             margin-top: -20px;
         }
     }

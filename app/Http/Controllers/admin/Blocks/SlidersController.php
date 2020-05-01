@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Blocks;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Slider;
+use Auth;
 
 class SlidersController extends Controller
 {
@@ -103,10 +104,27 @@ class SlidersController extends Controller
     public function attach(Request $request, $id)
     {
         $slider = Slider::findOrFail($id);
-        $data = $request->get('mass_edit');
+        $slider->files()->sync($data = $request->get('files'), false);
 
-        $slider->files()->sync($data, false);
+        $slider = Slider::with('files')->findOrFail($id);
 
-        return redirect()->back();
+        $files = [];
+        foreach ($slider->files as $image) {
+            if (in_array($image->id, $data)) {
+                $files[] = $image;
+            }
+        }
+
+        return response()->json(['message' => 'Slides attached successfully', 'slides' => $data, 'files' => $files], 200);
+    }
+
+
+    public function detach(Request $request, $id)
+    {
+        $slider = Slider::findOrFail($id);
+        $files = $request->get('files');
+
+        $slider->files()->detach($files);
+        return response()->json(['status' => 200, 'message' => 'Slides detached successfully.', 'slides' => $files], 200);
     }
 }
