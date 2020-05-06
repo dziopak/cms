@@ -11,15 +11,18 @@ mix.js("resources/js/app.js", "public/js")
     .js("resources/js/admin/dashboard.js", "public/js/admin")
     .js("resources/js/admin/layouts.js", "public/js/admin")
     .js("resources/js/admin/defer.js", "public/js/admin")
+    .js("resources/js/admin/menus.js", "public/js/admin")
 
     .sass("resources/sass/app.scss", "public/css")
     .sass("resources/sass/admin.scss", "public/css")
     .sass("resources/sass/admin/dashboard.scss", "public/css")
     .sass("resources/sass/admin/layouts.scss", "public/css")
+    .sass("resources/sass/admin/menus.scss", "public/css")
 
     .copy("node_modules/slick-carousel/slick/slick.min.js", "public/assets/js")
     .copy("node_modules/slick-carousel/slick/slick.css", "public/assets/css")
     .copy("resources/assets/slick/slick-theme.css", "public/assets/css")
+    .copy("resources/assets/nestable/nestable.js", "public/assets/js")
 
     .copy("node_modules/chart.js/dist/Chart.js", "public/assets/js")
     .copy("node_modules/chart.js/dist/Chart.min.css", "public/assets/css")

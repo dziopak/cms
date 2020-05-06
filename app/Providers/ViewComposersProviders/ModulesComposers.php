@@ -18,10 +18,11 @@ class ModulesComposers extends ServiceProvider
         //
     }
 
-    
-    private function ModulesToArray($modules) {
+
+    private function ModulesToArray($modules)
+    {
         $res = [];
-        foreach($modules as $module) {
+        foreach ($modules as $module) {
             $res[] = $module->getName();
         }
         return $res;
@@ -35,13 +36,13 @@ class ModulesComposers extends ServiceProvider
      */
     public function boot(Request $request)
     {
-        view()->composer('admin.modules.index', function ($view) {
+        view()->composer('admin.plugins.index', function ($view) {
             Module::boot();
             $modules['active'] = \App\Module::getModulesData($this->ModulesToArray(Module::allEnabled()));
             $modules['inactive'] = \App\Module::getModulesData($this->ModulesToArray(Module::allDisabled()));
-            
+
             $view->modules = $modules;
-            $view->table = getData('admin/modules/modules_index_table');
+            $view->table = getData('Admin/modules/modules_index_table');
         });
     }
 }

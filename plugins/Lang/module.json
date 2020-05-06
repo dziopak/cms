@@ -1,0 +1,11 @@
+{
+    "name": "Lang",
+    "alias": "lang",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": ["plugins\\Lang\\Providers\\LangServiceProvider"],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

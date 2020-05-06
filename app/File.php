@@ -36,7 +36,7 @@ class File extends Model
         $relatedModels = [
             $this->posts,
             $this->pages,
-            $this->users
+            $this->users,
         ];
 
         $related = collect();
@@ -49,7 +49,6 @@ class File extends Model
     public function scopeFilter($query, $request)
     {
         if (!empty($request->get('search'))) {
-
             // Search in name or slug //
             $query->where('name', 'like', '%' . $request->get('search') . '%');
         }
@@ -59,6 +58,7 @@ class File extends Model
             !empty($request->get('sort_order')) && $request->get('sort_order') === 'asc' ?
                 $query->orderBy($request->get('sort_by')) : $query->orderByDesc($request->get('sort_by'));
         } else {
+
             $query->orderByDesc('id');
         }
     }
@@ -75,6 +75,7 @@ class File extends Model
         $request = request();
 
         self::deleted(function ($file) use ($request) {
+            unlink(public_path() . '/images/' . $file->path);
             event(new FileDestroyEvent($file));
         });
     }

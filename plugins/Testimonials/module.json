@@ -1,0 +1,13 @@
+{
+    "name": "Testimonials",
+    "alias": "testimonials",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "plugins\\Testimonials\\Providers\\TestimonialsServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

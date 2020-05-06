@@ -22,7 +22,12 @@ class PagesController extends Controller
         } else {
             $page = Page::with('author', 'category', 'thumbnail')->where(['slug' => $id])->orWhere(['slug_pl' => $id])->first();
         }
-        $blocks = getLayout(\App\Layout::findOrFail(1));
-        return view($this->theme['url'] . '.modules.pages.show', compact('page', 'blocks'));
+
+        if ($page) {
+            $blocks = getLayout(\App\Layout::findOrFail($page->layout));
+            return view($this->theme['url'] . '.modules.pages.show', compact('page', 'blocks'));
+        } else {
+            return redirect(route('front.posts.index'));
+        }
     }
 }

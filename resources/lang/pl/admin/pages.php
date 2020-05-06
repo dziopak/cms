@@ -10,8 +10,7 @@ return [
     'edit_right_title' => 'Ustawienia',
     'edit_bottom_title' => 'Zawartość strony',
 
-    'delete_top_title' => 'Informacje',
-    'delete_bottom_title' => 'Usuń podstronę',
+    'delete_title' => 'Usuń podstronę',
     'delete_information' => 'Czy napewno chcesz permamentnie usunąć tą podstronę z bazy danych? Ta operacja jest nieodwracalna.',
 
     'name' => 'Tytuł',

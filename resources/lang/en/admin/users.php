@@ -11,8 +11,7 @@ return [
     'recent_actions' => 'Recent actions',
     'change_password' => 'Change password',
 
-    'delete_top_title' => 'Account data',
-    'delete_bottom_title' => 'Remove user account',
+    'delete_title' => 'Remove user account',
     'delete_information' => 'Are you sure you want to permamently delete this account from system\'s database?',
 
     'disable_top_title' => 'Account data',

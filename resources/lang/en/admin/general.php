@@ -1,19 +1,21 @@
 <?php
-    return [
-        'create_button' => 'Create',
-        'update_button' => 'Save',
-        'back_button' => 'Go back',
-        'delete_permamently' => 'Delete permamently',
+return [
+    'create_button' => 'Create',
+    'update_button' => 'Save',
+    'back_button' => 'Go back',
+    'delete_button' => 'Delete',
+    'delete_permamently' => 'Delete permamently',
 
-        'created_at' => 'Created at',
-        'category' => 'Category',
 
-        'actions' => 'Actions',
+    'created_at' => 'Created at',
+    'category' => 'Category',
 
-        'yes' => 'Yest',
-        'no' => 'No',
+    'actions' => 'Actions',
 
-        'day' => 'day|days',
-        'month' => 'month|months',
-        'year' => 'year|years',
-    ];
+    'yes' => 'Yest',
+    'no' => 'No',
+
+    'day' => 'day|days',
+    'month' => 'month|months',
+    'year' => 'year|years',
+];

@@ -26,7 +26,7 @@
                     var html = `{!! view('admin.blocks.sliders.partials.image_data')->render() !!}`;
                     html = html.replace(/@@ID@@/g, el.id);
                     html = html.replace(/@@PATH@@/g, el.path);
-                    $(html).insertAfter($('.slider-row:last-child'));
+                    $('#slider-image-data').append(html);
                 });
                 $('#fade').fadeOut();
                 $('.slider-remove').click(function() {

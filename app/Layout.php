@@ -13,4 +13,9 @@ class Layout extends Model
     {
         return $this->hasMany(\App\Block::class);
     }
+
+    public function scopelist()
+    {
+        return Layout::select('id', 'name')->pluck('name', 'id');
+    }
 }

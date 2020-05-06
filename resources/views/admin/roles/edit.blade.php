@@ -1,6 +1,7 @@
-@extends('admin.layouts.columns-6-6')
+@extends('admin.layouts.columns-4-8')
 
 
+{{-- Breadcrumbs --}}
 @section('breadcrumbs')
     <ul>
         <li><a href="{{route('admin.dashboard.index')}}">{{ __('admin/routes.admin') }}</a></li>
@@ -11,11 +12,13 @@
 @endsection
 
 
+{{-- Open form --}}
 @section('before')
     {!! Form::model($role, ['method' => 'PATCH', 'action' => ['admin\RolesController@update', $role->id]]) !!}
 @endsection
 
 
+{{-- Basic data --}}
 @section('content-left')
     @wrapper('admin.partials.wrapper', ['title' => 'admin/roles.edit_left_title'])
 
@@ -30,6 +33,7 @@
 @endsection
 
 
+{{-- Role's access --}}
 @section('content-right')
     @wrapper('admin.partials.wrapper', ['title' => 'admin/roles.edit_right_title'])
 
@@ -39,6 +43,7 @@
 @endsection
 
 
+{{-- Close form --}}
 @section('after')
     {!! Form::close() !!}
 @endsection

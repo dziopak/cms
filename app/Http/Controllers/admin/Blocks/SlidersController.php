@@ -3,128 +3,70 @@
 namespace App\Http\Controllers\Admin\Blocks;
 
 use App\Http\Controllers\Controller;
+use App\Http\Utilities\Admin\Blocks\SliderUtilities;
 use Illuminate\Http\Request;
-use App\Slider;
 use Auth;
 
 class SlidersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        $sliders = Slider::paginate(15);
-        $table = getData('admin/blocks/sliders/sliders_index_table');
         return view('admin.blocks.sliders.index', compact('sliders', 'table'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        //
+        Auth::user()->hasAccessOrRedirect('BLOCK_CREATE');
+        return view('admin.blocks.sliders.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        //
+        Auth::user()->hasAccessOrRedirect('BLOCK_CREATE');
+
+        $slider = \App\Slider::create(['name' => $request->get('name')]);
+        return redirect(route('admin.blocks.sliders.edit', $slider->id));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        $slider = Slider::findOrFail($id);
-        return view('admin.blocks.sliders.edit', compact('slider'));
+        Auth::user()->hasAccessOrRedirect('BLOCK_EDIT');
+        return view('admin.blocks.sliders.edit', ['slider' => \App\Slider::findOrFail($id)]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
-        $slider = Slider::findOrFail($id);
+        Auth::user()->hasAccessOrRedirect('BLOCK_EDIT');
 
-        $data = $request->get('image');
-        $slider->files()->sync($data);
-
-        return redirect()->back();
+        \App\Slider::findOrFail($id)->files()->sync($request->get('image'));
+        return redirect(route('admin.blocks.sliders.index'))->with('crud', 'Slider successfully updated');
     }
 
 
-    public function delete()
-    {
-        return redirect()->back();
-    }
-
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        Auth::user()->hasAccessOrRedirect('BLOCK_DELETE');
+
+        $slider = \App\Slider::findOrFail($id)->delete();
+        return response()->json(['message' => 'Slider successfuly deleted.', 'id' => $slider->id], 200);
     }
 
 
     public function attach(Request $request, $id)
     {
-        $slider = Slider::findOrFail($id);
-        $slider->files()->sync($data = $request->get('files'), false);
-
-        $slider = Slider::with('files')->findOrFail($id);
-
-        $files = [];
-        foreach ($slider->files as $image) {
-            if (in_array($image->id, $data)) {
-                $files[] = $image;
-            }
-        }
-
-        return response()->json(['message' => 'Slides attached successfully', 'slides' => $data, 'files' => $files], 200);
+        Auth::user()->hasAccessOrRedirect('BLOCK_EDIT');
+        return SliderUtilities::attach($id, $request->get('files'));
     }
 
 
     public function detach(Request $request, $id)
     {
-        $slider = Slider::findOrFail($id);
-        $files = $request->get('files');
-
-        $slider->files()->detach($files);
-        return response()->json(['status' => 200, 'message' => 'Slides detached successfully.', 'slides' => $files], 200);
+        Auth::user()->hasAccessOrRedirect('BLOCK_EDIT');
+        return SliderUtilities::detach($id, $request->get('files'));
     }
 }

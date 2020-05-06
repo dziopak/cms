@@ -26,21 +26,24 @@ class PagesComposers extends ServiceProvider
     {
         view()->composer('admin.pages.index', function ($view) use ($request) {
             $view->pages = \App\Page::with('author', 'thumbnail')->orderByDesc('id')->filter($request)->paginate(15);
-            $view->table = getData('admin/pages/pages_index_table');
+            $view->table = getData('Admin/pages/pages_index_table');
         });
 
 
         view()->composer('admin.pages.create', function ($view) {
             $categories = array_merge(['No category'], \App\PageCategory::list_all());
-            $view->form = getData('admin/pages/pages_form', ['categories' => $categories, 'thumbnail' => getThumbnail(null)]);
+            $layouts = \App\Layout::list();
+
+            $view->form = getData('Admin/pages/pages_form', ['categories' => $categories, 'thumbnail' => getThumbnail(null), 'layouts' => $layouts ?? [0 => 'none']]);
         });
 
 
         view()->composer('admin.pages.edit', function ($view) {
             $page = \App\Page::with('thumbnail')->findOrFail($view->page_id);
             $categories = array_merge(['No category'], \App\PageCategory::list_all());
-    
-            $view->form = getData('admin/pages/pages_form', ['categories' => $categories, 'thumbnail' => getThumbnail($page->thumbnail)]);
+            $layouts = \App\Layout::list();
+
+            $view->form = getData('Admin/pages/pages_form', ['categories' => $categories, 'thumbnail' => getThumbnail($page->thumbnail), 'layouts' => $layouts ?? [0 => 'none']]);
             $view->page = $page;
         });
     }

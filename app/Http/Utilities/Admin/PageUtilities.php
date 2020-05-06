@@ -32,7 +32,7 @@ class PageUtilities
     public static function destroy($id)
     {
         Page::findOrFail($id)->delete();
-        return redirect(route('admin.pages.index'));
+        return response()->json(['message' => 'Page deleted successfully', 'id' => $id], 200);
     }
 
 

@@ -1,33 +1,32 @@
 <?php
-    return [
-        'index_title' => 'Zarządzanie postami',
+return [
+    'index_title' => 'Zarządzanie postami',
 
-        'create_left_title' => 'Dane podstawowe',
-        'create_right_title' => 'Ustawienia',
-        'create_bottom_title' => 'Zawartość postu',
-        
-        'edit_left_title' => 'Dane podstawowe',
-        'edit_right_title' => 'Ustawienia',
-        'edit_bottom_title' => 'Zawartość postu',
+    'create_left_title' => 'Dane podstawowe',
+    'create_right_title' => 'Ustawienia',
+    'create_bottom_title' => 'Zawartość postu',
 
-        'delete_top_title' => 'Informacje',
-        'delete_bottom_title' => 'Usuń post',
-        'delete_information' => 'Czy napewno chcesz permamentnie usunąć ten post z bazy danych? Ta operacja jest nieodwracalna.',
+    'edit_left_title' => 'Dane podstawowe',
+    'edit_right_title' => 'Ustawienia',
+    'edit_bottom_title' => 'Zawartość postu',
 
-        'name' => 'Tytuł',
-        'is_active' => 'Widoczny',
-        'author' => 'Autor',
-        'created_at' => 'Dodano',
-        'creation_date' => 'Data utworzenia',
-        'slug' => 'Slug',
-        'category' => 'Kategoria',
-        'excerpt' => 'Skrót',
-        'content' => 'Treść',
-        'thumbnail' => 'Miniaturka',
-        'meta_title' => 'Meta title',
-        'meta_description' => 'Meta description',
+    'delete_title' => 'Usuń post',
+    'delete_information' => 'Czy napewno chcesz permamentnie usunąć ten post z bazy danych? Ta operacja jest nieodwracalna.',
 
-        'mass_delete' => 'Usuń zaznaczone',
-        'mass_hide' => 'Zablokuj / Ukryj',
-        'mass_show' => 'Odblokuj / Wyświetlaj',
-    ];
+    'name' => 'Tytuł',
+    'is_active' => 'Widoczny',
+    'author' => 'Autor',
+    'created_at' => 'Dodano',
+    'creation_date' => 'Data utworzenia',
+    'slug' => 'Slug',
+    'category' => 'Kategoria',
+    'excerpt' => 'Skrót',
+    'content' => 'Treść',
+    'thumbnail' => 'Miniaturka',
+    'meta_title' => 'Meta title',
+    'meta_description' => 'Meta description',
+
+    'mass_delete' => 'Usuń zaznaczone',
+    'mass_hide' => 'Zablokuj / Ukryj',
+    'mass_show' => 'Odblokuj / Wyświetlaj',
+];

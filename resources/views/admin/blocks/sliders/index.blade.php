@@ -33,5 +33,27 @@
         {{-- End --}}
 
 
+        {{-- Delete modal --}}
+        <div id="fade">
+            <div class="choice-modal" id="delete-slider-modal">
+                <div class="modal-content">
+
+                    <div class="text-center">
+                    {{-- Modal content --}}
+
+                        <h3 class="modal-title mb-3">Delete selected slider</h3>
+                        <p class="mb-4">Are you sure you want to permamently remove this slider from the database? This action is irreversible!</p>
+
+                        <div class="modal-nav">
+                            <div class="btn btn-danger" data-type="delete" id="modal-confirm">Delete</div>
+                            <div class="btn btn-primary" id="modal-cancel">Cancel</div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
     @endwrapper
 @endsection

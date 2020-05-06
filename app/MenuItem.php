@@ -3,12 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Harimayco\Menu\Models\MenuItems;
 
-class MenuItem extends MenuItems
+class MenuItem extends Model
 {
     protected $fillable = ['label', 'link', 'parent', 'sort', 'class', 'menu', 'depth'];
-    public function menu() {
+    public $timestamps = false;
+
+    public function menu()
+    {
         return $this->belongsTo('App\Menu');
     }
 }

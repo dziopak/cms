@@ -1,5 +1,7 @@
 <?php
 
+Route::get('/module', 'Admin\ModuleDownloadController@download');
+
 //Back-office routes
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'access:ADMIN_VIEW'], function () {
 
@@ -13,7 +15,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'access:ADM
     })->name('widgets.menus.index');
 
 
-    Route::get('/modules', 'admin\ModulesController@index')->name('modules.index');
+    Route::get('/plugins', 'admin\PluginsController@index')->name('plugins.index');
 
     //USERS ROUTES
     require base_path('routes/web/admin/users.php');

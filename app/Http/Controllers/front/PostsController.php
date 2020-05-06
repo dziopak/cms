@@ -25,7 +25,14 @@ class PostsController extends Controller
 
     public function show($id)
     {
-        $post = Post::findOrFail($id);
+        if (is_numeric($id)) {
+            $post = Post::with('author', 'category', 'thumbnail')->findOrFail($id);
+        } else {
+            $post = Post::with('author', 'category', 'thumbnail')->where(['slug' => $id])->orWhere(['slug_pl' => $id])->first();
+        }
+
+        // TO DO //
+        // LAYOUT ID FROM GENERAL SETTINGS //
         $blocks = getLayout(\App\Layout::findOrFail(1));
 
         return view($this->theme['url'] . '.modules.posts.show', compact('post', 'blocks'));
