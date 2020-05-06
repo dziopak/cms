@@ -1,4 +1,4 @@
-@extends('admin.layouts.columns-6-6')
+@extends('admin.layouts.columns-4-8')
 
 
 @section('breadcrumbs')

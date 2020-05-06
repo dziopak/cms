@@ -20,28 +20,24 @@
 @section('content-left')
     {!! Form::model($slider, ['method' => 'PATCH', 'action' => ['Admin\Blocks\SlidersController@update', $slider->id], 'class' => 'w-100']) !!}
 
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/media.edit_title'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/blocks/sliders.manage_pictures_title'])
 
         {{-- Slider's images  --}}
-        @each('admin.blocks.sliders.partials.image_data', $slider->files, 'image')
+        <div id="slider-image-data">
+            @each('admin.blocks.sliders.partials.image_data', $slider->files, 'image')
+        </div>
 
     @endwrapper
 @endsection
 
 
 @section('content-right')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/media.edit_title'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/blocks/sliders.edit_title'])
 
-        {{-- Name --}}
+        {{-- Name input --}}
         <div class="form-group">
-            {!! Form::label('name', 'Slider\'s name:') !!}
+            {!! Form::label('name', __('admin/blocks/sliders.name')) !!}
             {!! Form::text('name', $slider->name, ['class' => 'form-control']) !!}
-        </div>
-
-        {{-- Layout --}}
-        <div class="form-group">
-            {!! Form::label('layout', 'Layout:') !!}
-            {!! Form::select('layout', ['0' => 'Hero', '1' => 'Image slider with description'], null, ['class' => 'form-control']) !!}
         </div>
 
         {{-- Add media button --}}
@@ -50,11 +46,11 @@
             {{ __('admin/general.create_button') }}
         </div>
 
-        {{-- Add media button --}}
+        {{-- Save button --}}
         <button type="submit" class="btn btn-primary">
             <i class="fa fa-home" aria-hidden="true"></i>
             {{ __('admin/general.update_button') }}
-
+        </button>
     @endwrapper
 
 
@@ -64,50 +60,7 @@
 
 {{-- Add media modal --}}
 @section('content-bottom')
-    <div id="fade" onclick="$('#fade').fadeOut()" class="row">
-        <div class="module-modal">
-
-            {{-- Modal navigation --}}
-            <div class="modal-nav">
-                <ul>
-                    <li data-tab="1" class="active">Select media</li>
-                    <li data-tab="2">Upload new</li>
-                </ul>
-            </div>
-
-            <div class="modal-content">
-                <div class="modal-overflow">
-
-                    {{-- Media library --}}
-                    <div class="modal-tab" data-tab="1">
-                        @wrapper('admin.partials.wrapper', ['title' => 'admin/media.edit_title'])
-                            @include('admin.media.partials.list', ['endpoint' => route('admin.blocks.sliders.attach', $slider->id), 'controls' => false])
-                        @endwrapper
-                    </div>
-
-
-                    {{-- Upload media --}}
-                    <div class="modal-tab" data-tab="2" style="display: none;">
-                        @wrapper('admin.partials.wrapper', ['title' => 'admin/media.edit_title'])
-                            <div style="height: 100%;">
-                                @include('admin.media.partials.upload', ['endpoint' => 'test'])
-                            </div>
-                        @endwrapper
-                    </div>
-
-
-                </div>
-
-
-                {{-- Add media to slider --}}
-                <div id="slider-add-existing" style="width: 100px;" class="btn btn-success mx-auto mt-4">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                    {{ __('admin/general.create_button') }}
-                </div>
-            </div>
-
-        </div>
-    </div>
+    @include('admin.media.modals.add_media')
 @endsection
 
 

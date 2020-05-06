@@ -149,8 +149,10 @@ class User extends Authenticatable implements JWTSubject
         static::deleting(function ($user) {
             $user->account_logs()->delete();
             if ($user->avatar != "0") {
-                unlink(public_path() . '/images/' . $user->photo->path);
-                $user->photo()->delete();
+                if (!empty($user->avatar->path)) {
+                    unlink(public_path() . '/images/' . $user->photo->path);
+                    $user->photo()->delete();
+                }
             }
         });
 
@@ -168,7 +170,7 @@ class User extends Authenticatable implements JWTSubject
             }
         });
 
-        self::deleted(function ($user) {
+        self::deleted(function ($user) use ($request) {
             if ($user->fire_events) {
                 event(new UserDestroyEvent($user));
                 $request->session()->flash('crud', 'Account data of ' . $user->name . ' has been deleted successfully.');

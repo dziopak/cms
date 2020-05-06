@@ -1,5 +1,5 @@
 @php
-    $items = getData('admin/sidebar');
+    $items = getData('Admin/sidebar');
 @endphp
 
 <div class="col sidebar">

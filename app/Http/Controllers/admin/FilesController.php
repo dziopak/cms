@@ -102,7 +102,8 @@ class FilesController extends Controller
     public function destroy($id)
     {
         \App\File::findOrFail($id)->delete();
-        return redirect(route('admin.media.index'));
+        return response()->json(['message' => 'Successfully deleted the file', 'id' => $id], 200);
+        // return redirect(route('admin.media.index'));
     }
 
     public function upload(Request $request)

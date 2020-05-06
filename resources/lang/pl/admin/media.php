@@ -15,6 +15,9 @@ return [
     'upload_files' => 'Wgraj pliki',
     'index_title' => 'Zarządzanie plikami',
 
+    'select_media' => 'Wybierz zdjęcia',
+    'upload_new' => 'Wgraj nowe',
+
     'delete_title' => 'Usuń załącznik',
     'attached_to_title' => 'Powiązania',
     'delete_information' => 'Czy napewno chcesz permamentnie usunąć ten plik z bazy danych? Ta operacja jest nieodwracalna.',
@@ -23,5 +26,4 @@ return [
 
     'untitled' => 'Bez tytułu',
     'no_description' => 'Brak opisu',
-
 ];

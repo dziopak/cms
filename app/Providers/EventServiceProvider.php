@@ -7,11 +7,11 @@ use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
 
-use Modules\Portfolio\Events\PortfolioItemCreateEvent;
-use Modules\Portfolio\Events\PortfolioItemUpdateEvent;
-use Modules\Portfolio\Events\PortfolioItemDestroyEvent;
+use plugins\Portfolio\Events\PortfolioItemCreateEvent;
+use plugins\Portfolio\Events\PortfolioItemUpdateEvent;
+use plugins\Portfolio\Events\PortfolioItemDestroyEvent;
 
-use Modules\Portfolio\Listeners\PortfolioItemUpdateThumbnailListener;
+use plugins\Portfolio\Listeners\PortfolioItemUpdateThumbnailListener;
 
 class EventServiceProvider extends ServiceProvider
 {

@@ -8,8 +8,8 @@ https://sortablejs.github.io/Sortable/ - sortable elements
 
 - image optimization on the go
 - new content lang switcher
-- data tables
 - translation of alerts, logs and validation
+- translations and logs of new modules
 
 
 Installation:

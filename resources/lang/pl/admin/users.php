@@ -11,8 +11,7 @@ return [
     'recent_actions' => 'Ostatnie akcje',
     'change_password' => 'Zmień hasło',
 
-    'delete_top_title' => 'Informacje o koncie',
-    'delete_bottom_title' => 'Usuń konto użytkownika',
+    'delete_title' => 'Usuń konto użytkownika',
     'delete_information' => 'Czy napewno chcesz permamentnie usunąć to konto z bazy danych? Ta operacja jest nie odwracalna.',
 
     'disable_top_title' => 'Informacje o koncie',

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'namespace' => 'Modules',
+    'namespace' => 'Plugins',
 
     /*
     |--------------------------------------------------------------------------
@@ -70,7 +70,7 @@ return [
         |
         */
 
-        'modules' => base_path('Modules'),
+        'modules' => base_path('plugins'),
         /*
         |--------------------------------------------------------------------------
         | Modules assets path
@@ -80,7 +80,7 @@ return [
         |
         */
 
-        'assets' => public_path('modules'),
+        'assets' => public_path('plugins'),
         /*
         |--------------------------------------------------------------------------
         | The migrations path
@@ -181,13 +181,6 @@ return [
     */
     'register' => [
         'translations' => true,
-        /**
-         * load files on boot or register method
-         *
-         * Note: boot not compatible with asgardcms
-         *
-         * @example boot|register
-         */
         'files' => 'register',
     ],
 

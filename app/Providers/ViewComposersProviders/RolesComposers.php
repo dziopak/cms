@@ -28,7 +28,7 @@ class RolesComposers extends ServiceProvider
     {
         view()->composer('admin.roles.index', function ($view) use ($request) {
             $view->roles = \App\Role::orderBy('id')->filter($request)->paginate(15);
-            $view->table = getData('admin/roles/roles_index_table');
+            $view->table = getData('Admin/roles/roles_index_table');
         });
 
 
@@ -39,7 +39,7 @@ class RolesComposers extends ServiceProvider
 
                 $view->role = $role;
             }
-            $view->form = getData('admin/roles/roles_form');
+            $view->form = getData('Admin/roles/roles_form');
         });
 
 
@@ -48,7 +48,7 @@ class RolesComposers extends ServiceProvider
             $role->access = \App\Http\Utilities\RoleUtilities::unserializeAccess($role->access);
 
             $view->role = $role;
-            $view->form = getData('admin/roles/roles_form');
+            $view->form = getData('Admin/roles/roles_form');
         });
     }
 }

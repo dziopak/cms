@@ -44,7 +44,7 @@ class Slider extends AbstractWidget
     public function run()
     {
         $this->config = decodeBlockConfig($this->config);
-        $slider = \App\Slider::find($this->config['block']->config['slider_id'] ?? 1);
+        $slider = \App\Slider::find($this->config['block']->config['slider_id'] ?? 0);
         return block('slider', $this->config, ['sliders' => $this->convertSlidersList()], ['slider' => $slider]);
     }
 }

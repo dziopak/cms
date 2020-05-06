@@ -98,6 +98,10 @@ $(document).ready(function() {
         readURL(this);
     });
 
+    $("#fade, #modal-cancel").click(function(event) {
+        $("#fade").fadeOut();
+    });
+
     $("#fade *").click(function(event) {
         event.stopPropagation();
     });
@@ -110,5 +114,43 @@ $(document).ready(function() {
 
         $(".modal-tab").hide();
         $('.modal-tab[data-tab="' + tab + '"]').show();
+    });
+
+    $(".modal-action").click(function() {
+        $("#fade").fadeIn();
+
+        var url = $(this).attr("data-route");
+        if (url) {
+            $("#modal-confirm").attr("data-route", url);
+        }
+    });
+
+    function tableRowDelete(res) {
+        $('.data-list-table tr[data-row="' + res.data.id + '"]').remove();
+        $("#fade").hide();
+    }
+
+    async function axiosDelete(route, callback = null) {
+        axios
+            .delete(route)
+            .then(function(response) {
+                callback(response);
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    }
+
+    $("#modal-confirm").click(function() {
+        var url = $(this).attr("data-route");
+        if (url) {
+            var action = $(this).attr("data-type");
+
+            switch (action) {
+                case "delete":
+                    axiosDelete(url, tableRowDelete);
+                    break;
+            }
+        }
     });
 });

@@ -19,7 +19,7 @@ class LayoutsController extends Controller
     public function index()
     {
         $layouts = Layout::orderByDesc('id')->paginate(15);
-        $table = getData('admin/layouts/layouts_index_table');
+        $table = getData('Admin/layouts/layouts_index_table');
         return view('admin.page_layouts.index', compact('layouts', 'table'));
     }
 
@@ -30,7 +30,7 @@ class LayoutsController extends Controller
      */
     public function create()
     {
-        $form = getData('admin/layouts/layouts_form');
+        $form = getData('Admin/layouts/layouts_form');
         return view('admin.page_layouts.create', compact('form'));
     }
 
@@ -68,7 +68,7 @@ class LayoutsController extends Controller
     {
         $layout = Layout::with('blocks')->findOrFail($id);
 
-        $form = getData('admin/layouts/layouts_form');
+        $form = getData('Admin/layouts/layouts_form');
         return view('admin.page_layouts.edit', compact('layout', 'form'));
     }
 

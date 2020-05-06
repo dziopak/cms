@@ -1,3 +1,8 @@
+@section('head')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
+
+
 {{-- Search / Filters bar --}}
 @if ((!isset($filters) || $filters === true) && (!isset($controls) || $controls === true))
     @include('admin.partials.searchfilterbar')
@@ -9,12 +14,12 @@
 
     {{-- Table --}}
     <div class="table-responsive">
-        <table {{ !empty($id) ? 'id='.$id.'' : '' }} class="table table-striped table-hover">
+        <table {{ !empty($id) ? 'id='.$id.'' : '' }} class="data-list-table table table-striped table-hover">
             @include('admin.partials.table.headers')
 
             <tbody>
                 @foreach($fields as $key => $field)
-                    <tr>
+                    <tr data-row="{{ $field->id }}">
                         <td><input type="checkbox" name="mass_edit[{{ $key }}]" value="{{ $field->id }}"></td>
                         @include('admin.partials.table.fields')
 

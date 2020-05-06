@@ -67,13 +67,6 @@ class UsersController extends Controller
     }
 
 
-    public function delete($id)
-    {
-        Auth::user()->hasAccessOrRedirect('USER_DELETE');
-        return view('admin.users.delete', ['user_id' => $id]);
-    }
-
-
     public function destroy($id)
     {
         Auth::user()->hasAccessOrRedirect('USER_DELETE');
