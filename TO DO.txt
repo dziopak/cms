@@ -1,9 +1,7 @@
 https://github.com/ycs77/laravel-wizard - CMS installation wizard
-https://gist.github.com/tillsanders/39a9fa50d4c0ec36d167 - drag & drop tables
 
 https://github.com/spatie/laravel-analytics - GA
 https://github.com/voerro/laravel-visitor-tracker - visitor tracking
-https://sortablejs.github.io/Sortable/ - sortable elements
 
 
 - image optimization on the go
