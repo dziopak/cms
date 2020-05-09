@@ -11,9 +11,18 @@
 
 @section('container')
 
-    <p class="text-center">
+    <p class="header__intro">
+        <strong class="header__intro-title">{{__('installer_messages.environment.menu.title') }}</strong><br />
         {!! trans('installer_messages.environment.menu.desc') !!}
     </p>
+
+    <p class="text-center">
+    </p>
+
+@endsection
+
+
+@section('continue')
     <div class="buttons">
         <a href="{{ route('LaravelInstaller::environmentWizard') }}" class="button button-wizard">
             <i class="fa fa-sliders fa-fw" aria-hidden="true"></i> {{ trans('installer_messages.environment.menu.wizard-button') }}
@@ -22,5 +31,4 @@
             <i class="fa fa-code fa-fw" aria-hidden="true"></i> {{ trans('installer_messages.environment.menu.classic-button') }}
         </a>
     </div>
-
 @endsection

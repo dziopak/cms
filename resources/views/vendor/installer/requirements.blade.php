@@ -10,6 +10,10 @@
 @endsection
 
 @section('container')
+    <p class="header__intro">
+        <strong class="header__intro-title">{{__('installer_messages.requirements.title') }}</strong><br />
+        {{ trans('installer_messages.requirements.message') }}
+    </p>
 
     @foreach($requirements['requirements'] as $type => $requirement)
         <ul class="list">
@@ -18,7 +22,7 @@
                 @if($type == 'php')
                     <strong>
                         <small>
-                            (version {{ $phpSupportInfo['minimum'] }} required)
+                            ({{ trans('installer_messages.requirements.version') }} {{ $phpSupportInfo['minimum'] }}+)
                         </small>
                     </strong>
                     <span class="float-right">
@@ -37,7 +41,9 @@
             @endforeach
         </ul>
     @endforeach
+@endsection
 
+@section('continue')
     @if ( ! isset($requirements['errors']) && $phpSupportInfo['supported'] )
         <div class="buttons">
             <a class="button" href="{{ route('LaravelInstaller::permissions') }}">
@@ -46,5 +52,4 @@
             </a>
         </div>
     @endif
-
 @endsection

@@ -7,13 +7,14 @@ return [
      * Shared translations.
      *
      */
-    'title' => 'Laravel Installer',
+    'title' => 'D-CMS Install',
     'next' => 'Next Step',
     'back' => 'Previous',
     'finish' => 'Install',
     'forms' => [
         'errorTitle' => 'The Following errors occurred:',
     ],
+    'close' => 'Close',
 
     /*
      *
@@ -22,9 +23,9 @@ return [
      */
     'welcome' => [
         'templateTitle' => 'Welcome',
-        'title'   => 'Laravel Installer',
-        'message' => 'Easy Installation and Setup Wizard.',
-        'next'    => 'Check Requirements',
+        'title'   => 'Welcome to the D-CMS installation wizard.',
+        'message' => 'Please, follow to the instructions contained in each step to succesfully finish the installation process.',
+        'next'    => 'Continue',
     ],
 
     /*
@@ -35,7 +36,9 @@ return [
     'requirements' => [
         'templateTitle' => 'Step 1 | Server Requirements',
         'title' => 'Server Requirements',
-        'next'    => 'Check Permissions',
+        'message' => 'This wizard will check if your environment meets the CMS requirements.',
+        'next'    => 'Continue',
+        'version' => 'version'
     ],
 
     /*
@@ -46,7 +49,8 @@ return [
     'permissions' => [
         'templateTitle' => 'Step 2 | Permissions',
         'title' => 'Permissions',
-        'next' => 'Configure Environment',
+        'message' => 'In this step we will check if your file system has required permissions.',
+        'next' => 'Continue',
     ],
 
     /*
@@ -68,6 +72,7 @@ return [
             'tabs' => [
                 'environment' => 'Environment',
                 'database' => 'Database',
+                'mailing' => 'Mailing',
                 'application' => 'Application',
             ],
             'form' => [

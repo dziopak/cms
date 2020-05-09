@@ -29,5 +29,6 @@
     "/assets/js/micromodal.min.js": "/assets/js/micromodal.min.js",
     "/js/admin/menus.js": "/js/admin/menus.js",
     "/css/menus.css": "/css/menus.css",
-    "/assets/js/nestable.js": "/assets/js/nestable.js"
+    "/assets/js/nestable.js": "/assets/js/nestable.js",
+    "/css/installer.css": "/css/installer.css"
 }

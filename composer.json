@@ -47,6 +47,7 @@
             "plugins\\": "plugins/"
         },
         "files": [
+            "app/Helpers/AppHelpers.php",
             "app/Helpers/ViewHelpers.php",
             "app/Helpers/BlockHelpers.php",
             "app/Helpers/StringHelpers.php",

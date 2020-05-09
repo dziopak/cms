@@ -1,5 +1,3 @@
-https://github.com/ycs77/laravel-wizard - CMS installation wizard
-
 https://github.com/spatie/laravel-analytics - GA
 https://github.com/voerro/laravel-visitor-tracker - visitor tracking
 
@@ -11,15 +9,5 @@ https://github.com/voerro/laravel-visitor-tracker - visitor tracking
 
 
 Installation:
-- composer install
-- npm install
-- generate app key
-- remove modules
-- migrate
-
-- auto creation of images folders:
-    -images
-    --avatars
-    --thumbnails
-
-- auto include flag icons
+-Default .env
+-AppServiceProvider, FrontViewServiceProvider
