@@ -9,13 +9,25 @@
 @endsection
 
 @section('container')
-    <p class="text-center">
-      {{ trans('installer_messages.welcome.message') }}
+    <p class="header__intro">
+        <strong class="header__intro-title">{{__('installer_messages.welcome.title') }}</strong><br />
+        {{ trans('installer_messages.welcome.message') }}
     </p>
-    <p class="text-center">
-      <a href="{{ route('LaravelInstaller::requirements') }}" class="button">
-        {{ trans('installer_messages.welcome.next') }}
-        <i class="fa fa-angle-right fa-fw" aria-hidden="true"></i>
-      </a>
-    </p>
+@endsection
+
+
+@section('continue')
+    <form action="{{ route('LaravelInstaller::setup') }}" method="GET">
+        <div id="lang-selector">
+            <select name="language">
+                <option value="en">English</option>
+                <option value="pl">Polski</option>
+            </select>
+
+            <button type="submit" class="button">
+                {{ __('installer_messages.welcome.next') }}
+                <i class="fa fa-angle-right fa-fw" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
 @endsection

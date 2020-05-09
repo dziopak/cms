@@ -21,6 +21,9 @@
         </div>
     </form>
 
+@endsection
+
+@section('continue')
     @if( ! isset($environment['errors']))
         <div class="buttons-container">
             <a class="button float-left" href="{{ route('LaravelInstaller::environmentWizard') }}">
@@ -34,5 +37,4 @@
             </a>
         </div>
     @endif
-
 @endsection

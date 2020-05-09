@@ -10,6 +10,11 @@
 @endsection
 
 @section('container')
+    <p class="header__intro">
+        <strong class="header__intro-title">{{__('installer_messages.permissions.title') }}</strong><br />
+        {{ trans('installer_messages.permissions.message') }}
+    </p>
+
 
     <ul class="list">
         @foreach($permissions['permissions'] as $permission)
@@ -23,6 +28,10 @@
         @endforeach
     </ul>
 
+@endsection
+
+
+@section('continue')
     @if ( ! isset($permissions['errors']))
         <div class="buttons">
             <a href="{{ route('LaravelInstaller::environment') }}" class="button">
@@ -31,5 +40,4 @@
             </a>
         </div>
     @endif
-
 @endsection

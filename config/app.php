@@ -174,6 +174,7 @@ return [
         /*
          * Application Service Providers...
         */
+        App\Providers\BladeDirectivesProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
@@ -185,6 +186,7 @@ return [
         /*
          * View composers
         */
+        App\Providers\SettingsProvider::class,
         App\Providers\FrontViewServiceProvider::class,
         App\Providers\AdminViewServiceProvider::class,
         App\Providers\ViewComposersProviders\DashboardComposers::class,

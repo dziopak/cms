@@ -51,3 +51,14 @@ Route::group(['as' => 'front.'], function () {
     //PAGES ROUTES
     require base_path('routes/web/front/pages.php');
 });
+
+Route::group(['prefix' => 'install', 'as' => 'LaravelInstaller::', 'middleware' => ['web', 'install']], function () {
+    Route::get('setup', [
+        'as' => 'setup',
+        'uses' => 'InstallerRequirementsController@setup',
+    ]);
+    Route::get('requirements', [
+        'as' => 'requirements',
+        'uses' => 'InstallerRequirementsController@requirements',
+    ]);
+});

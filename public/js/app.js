@@ -37319,6 +37319,17 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./public/installer/css/scss/installer.scss":
+/*!**************************************************!*\
+  !*** ./public/installer/css/scss/installer.scss ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -37459,9 +37470,9 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /***/ }),
 
 /***/ 0:
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/admin.scss ./resources/sass/admin/dashboard.scss ./resources/sass/admin/layouts.scss ./resources/sass/admin/menus.scss ./resources/views/themes/default/assets/sass/theme.scss ./resources/views/themes/default/assets/sass/custom.scss ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/admin.scss ./resources/sass/admin/dashboard.scss ./resources/sass/admin/layouts.scss ./resources/sass/admin/menus.scss ./public/installer/css/scss/installer.scss ./resources/views/themes/default/assets/sass/theme.scss ./resources/views/themes/default/assets/sass/custom.scss ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -37471,6 +37482,7 @@ __webpack_require__(/*! E:\laragon\www\cms\resources\sass\admin.scss */"./resour
 __webpack_require__(/*! E:\laragon\www\cms\resources\sass\admin\dashboard.scss */"./resources/sass/admin/dashboard.scss");
 __webpack_require__(/*! E:\laragon\www\cms\resources\sass\admin\layouts.scss */"./resources/sass/admin/layouts.scss");
 __webpack_require__(/*! E:\laragon\www\cms\resources\sass\admin\menus.scss */"./resources/sass/admin/menus.scss");
+__webpack_require__(/*! E:\laragon\www\cms\public\installer\css\scss\installer.scss */"./public/installer/css/scss/installer.scss");
 __webpack_require__(/*! E:\laragon\www\cms\resources\views\themes\default\assets\sass\theme.scss */"./resources/views/themes/default/assets/sass/theme.scss");
 module.exports = __webpack_require__(/*! E:\laragon\www\cms\resources\views\themes\default\assets\sass\custom.scss */"./resources/views/themes/default/assets/sass/custom.scss");
 

@@ -18,6 +18,7 @@ mix.js("resources/js/app.js", "public/js")
     .sass("resources/sass/admin/dashboard.scss", "public/css")
     .sass("resources/sass/admin/layouts.scss", "public/css")
     .sass("resources/sass/admin/menus.scss", "public/css")
+    .sass("public/installer/css/scss/installer.scss", "public/css")
 
     .copy("node_modules/slick-carousel/slick/slick.min.js", "public/assets/js")
     .copy("node_modules/slick-carousel/slick/slick.css", "public/assets/css")
