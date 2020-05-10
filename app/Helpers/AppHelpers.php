@@ -2,7 +2,7 @@
 
 function is_installed()
 {
-    if (file_exists(base_path("/storage/installed"))) {
+    if (file_exists(base_path("/storage/installed")) && table_exists('settings')) {
         return true;
     } else {
         return false;

@@ -19,7 +19,7 @@ class SettingsProvider extends ServiceProvider
 
     public function registerConfig()
     {
-        if (is_installed()) {
+        if (is_installed() && table_exists('settings')) {
             $settings = \App\Setting::all([
                 'name', 'value', 'group'
             ])->groupBy('group', true)->transform(function ($setting) {

@@ -73,7 +73,7 @@ class LangServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        if (table_exists('langs')) {
+        if (is_installed() && table_exists('langs')) {
             $this->registerHooks();
             $this->registerTranslations();
             $this->registerConfig();
