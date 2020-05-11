@@ -4,18 +4,8 @@ Route::get('/module', 'Admin\ModuleDownloadController@download');
 
 //Back-office routes
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'access:ADMIN_VIEW'], function () {
-
-    Route::get('/', 'admin\DashboardController@index')->name('dashboard.index');
-    Route::post('/dashboard', 'admin\DashboardController@update')->name('dashboard.update');
-    Route::get('/dashboard/widget', 'admin\DashboardController@getWidget')->name('dashboard.getwidget');
-    Route::get('/layouts/widget', 'admin\LayoutsController@getBlock')->name('layouts.getwidget');
-
-    Route::get('/menus', function () {
-        return view('admin.menus.index');
-    })->name('widgets.menus.index');
-
-
-    Route::get('/plugins', 'admin\PluginsController@index')->name('plugins.index');
+    //DASHBOARD ROUTES
+    require base_path('routes/web/admin/dashboard.php');
 
     //USERS ROUTES
     require base_path('routes/web/admin/users.php');
@@ -37,6 +27,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'access:ADM
 
     //VENDOR ROUTES
     require base_path('routes/web/admin/vendor/filemanager.php');
+
+    Route::get('/menus', function () {
+        return view('admin.menus.index');
+    })->name('widgets.menus.index');
+
+
+    Route::get('/plugins', 'Admin\Modules\PluginsController@index')->name('plugins.index');
 });
 
 //HELPERS ROUTES
@@ -60,5 +57,9 @@ Route::group(['prefix' => 'install', 'as' => 'LaravelInstaller::', 'middleware' 
     Route::get('requirements', [
         'as' => 'requirements',
         'uses' => 'InstallerRequirementsController@requirements',
+    ]);
+    Route::get('database/{locale}/', [
+        'as' => 'database',
+        'uses' => 'InstallerDatabaseController@db',
     ]);
 });

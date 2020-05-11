@@ -2,6 +2,8 @@
 
 namespace App\Http\Utilities\Admin\Blocks;
 
+use Auth;
+
 class MenuUtilities
 {
     public static function order($id, $data)
@@ -17,6 +19,7 @@ class MenuUtilities
         return response()->json(['message' => 'Successfuly ordered menu items', 'data' => $data], 200);
     }
 
+
     public static function attach($id, $data)
     {
         $menu = \App\Menu::findOrFail($id);
@@ -24,7 +27,8 @@ class MenuUtilities
         $item = $menu->items()->create([
             'label' => $data['label'],
             'link' => $data['link'],
-            'parent' => $data['parent']
+            'parent' => $data['parent'],
+            'class' => $data['class']
         ]);
 
         return response()->json(['message' => 'Successfuly attached menu item', 'data' => $data, 'id' => $item->id], 200);
@@ -76,5 +80,27 @@ class MenuUtilities
         }
 
         return response()->json(['message' => 'Search performed successfully.', 'items' => $res], 200);
+    }
+
+
+    public static function mass($data)
+    {
+        if (empty($data['mass_edit'])) {
+            return redirect()->back();
+        } else {
+            switch ($data['mass_action']) {
+                case 'delete':
+                    return MenuUtilities::mass_delete($data['mass_edit']);
+                    break;
+            }
+        }
+    }
+
+    public static function mass_delete($ids)
+    {
+        Auth::user()->hasAccessOrRedirect('BLOCK_DELETE');
+
+        \App\Menu::with('items')->whereIn('id', $ids)->delete();
+        return redirect(route('admin.blocks.menus.index'))->with(['crud' => 'Successfully deleted selected menus.']);
     }
 }

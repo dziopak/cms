@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ModuleDownloadController extends Controller
+class PluginDownloadController extends Controller
 {
     public function download(Request $request)
     {

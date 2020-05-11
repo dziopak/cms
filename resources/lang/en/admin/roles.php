@@ -23,7 +23,7 @@ return [
     'blocks_rules' => 'Blocks management',
 
     'admin_view' => 'Browse admin panel',
-    'module_use' => 'Manage modules',
+    'module_use' => 'Manage plugins',
     'menu_edit' => 'Manage menus',
 
     'user_create' => 'Create user accounts',

@@ -2,9 +2,11 @@
 
 return [
 
+    'menu_index_title' => 'Zarządzaj blokami menu',
     'menu_add_field_title' => 'Dodaje nowe pole',
     'menu_fields_title' => 'Pola menu',
     'menu_data_title' => 'Ustawienia menu',
+    'menu_create_title' => 'Stwórz nowe menu',
 
     'name' => 'Nazwa',
 

@@ -6,8 +6,3 @@ https://github.com/voerro/laravel-visitor-tracker - visitor tracking
 - new content lang switcher
 - translation of alerts, logs and validation
 - translations and logs of new modules
-
-
-Installation:
--Default .env
--AppServiceProvider, FrontViewServiceProvider

@@ -15,7 +15,7 @@
     @wrapper('admin.partials.wrapper', ['title' => 'admin/posts.delete_top_title'])
         <p class="alert alert-danger">{{ __('admin/posts.delete_information') }}</p>
 
-        {!! Form::open(['method' => 'DELETE', 'action' => ['admin\LayoutsController@destroy', $layout->id]]) !!}
+        {!! Form::open(['method' => 'DELETE', 'action' => ['Admin\Modules\LayoutsController@destroy', $layout->id]]) !!}
 
         <div class="form-group">
             <a href="{{route('admin.posts.index')}}" role="button" class="btn btn-success">{{ __('admin/general.back_button') }}</a>

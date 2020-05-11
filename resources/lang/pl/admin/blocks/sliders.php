@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'index_title' => 'Zarządzaj sliderami',
-    'create_title' => 'Stwórz nowy slider',
-    'edit_title' => 'Edytuj slider',
+    'index_title' => 'Zarządzaj slajderami',
+    'create_title' => 'Stwórz nowy slajder',
+    'edit_title' => 'Edytuj slajder',
     'manage_pictures_title' => 'Zarządzaj zdjęciami',
 
     'name' => 'Tytuł',

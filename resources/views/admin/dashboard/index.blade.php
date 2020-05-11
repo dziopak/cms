@@ -41,7 +41,7 @@
         @if ($widgets)
             @foreach($widgets as $widget)
 
-                @widget('admin.'.$widget['id'], [
+                @widget('Dashboard.'.$widget['id'], [
                     'x' => $widget['x'],
                     'y' => $widget['y'],
                     'w' => $widget['w'],

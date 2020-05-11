@@ -14,7 +14,7 @@
 
 {{-- Open form --}}
 @section('before')
-    {!! Form::model($role, ['method' => 'PATCH', 'action' => ['admin\RolesController@update', $role->id]]) !!}
+    {!! Form::model($role, ['method' => 'PATCH', 'action' => ['Admin\Modules\RolesController@update', $role->id]]) !!}
 @endsection
 
 

@@ -11,7 +11,7 @@
 
 
 @section('before')
-    {!! Form::open(['method' => 'POST', 'action' => 'admin\PostsController@store', 'class' => 'w-100', 'files' => 'true']) !!}
+    {!! Form::open(['method' => 'POST', 'action' => 'Admin\Modules\PostsController@store', 'class' => 'w-100', 'files' => 'true']) !!}
     @include('admin.partials.validation')
     @hook('post_edit_before')
     @hook('post_before')

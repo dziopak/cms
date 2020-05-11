@@ -182,13 +182,12 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
-        App\Providers\SettingsProvider::class,
+        App\Providers\SettingsServiceProvider::class,
 
         /*
          * View composers
         */
-        App\Providers\FrontViewServiceProvider::class,
-        App\Providers\AdminViewServiceProvider::class,
+        App\Providers\ThemeServiceProvider::class,
         App\Providers\ViewComposersProviders\DashboardComposers::class,
         App\Providers\ViewComposersProviders\UsersComposers::class,
         App\Providers\ViewComposersProviders\RolesComposers::class,

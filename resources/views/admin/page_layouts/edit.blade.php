@@ -33,7 +33,7 @@
 @section('before')
     <div id="fade"></div>
     @include('admin.page_layouts.partials.controls')
-    {!! Form::model($layout, ['method' => 'PATCH', 'action' => ['admin\LayoutsController@update', $layout->id], 'class' => 'w-100', 'id' => 'LayoutUpdateForm']) !!}
+    {!! Form::model($layout, ['method' => 'PATCH', 'action' => ['Admin\Modules\LayoutsController@update', $layout->id], 'class' => 'w-100', 'id' => 'LayoutUpdateForm']) !!}
 @endsection
 
 
@@ -53,7 +53,7 @@
                         'block_id' => $block->id
                     ]])
                 @else
-                    @widget('front.'.$block['type'], [
+                    @widget('Blocks.'.$block['type'], [
                         'x' => $block->x,
                         'y' => $block->y,
                         'w' => $block->width,

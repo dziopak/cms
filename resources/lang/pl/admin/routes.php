@@ -13,10 +13,12 @@ return [
 
     "logs" => "Logi systemowe",
     "menus" => "Menu",
-    "modules" => "Moduły",
+    "sliders" => "Slajdery",
+    "modules" => "Wtyczki",
     "roles" => "Rangi",
     "files" => "Menadżer plików",
     "layouts" => "Szablony",
+    "blocks" => "Bloki",
 
     "list" => "Wszystkie",
     "edit" => "Edytuj",

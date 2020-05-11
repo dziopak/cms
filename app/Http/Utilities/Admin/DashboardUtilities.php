@@ -14,7 +14,7 @@ class DashboardUtilities
         if (empty($widget)) return response()->json('URL parameter "name" is missing.', 404);
 
         try {
-            $widget = Widget::run('admin.' . $widget);
+            $widget = Widget::run('dashboard.' . $widget);
         } catch (Exception $e) {
             return response()->json(['message' => $e->getMessage(), 'status' => '404'], 404);
         }

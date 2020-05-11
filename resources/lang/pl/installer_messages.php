@@ -176,6 +176,14 @@ return [
     'final' => [
         'title' => 'Instalacja zakończona',
         'finished' => 'Aplikacja została poprawnie zainstalowana.',
+        'message' => 'Możesz już zalogować się do panelu administracyjnego i zacząć tworzyć swój projekt! Wykorzystaj do tego poniższe dane logowania:',
+        'credentials' => [
+            'email' => 'Email: admin@admin.pl',
+            'password' => 'Hasło: admin',
+        ],
+        'credentials_message' => 'Pamiętaj, by jak najszybciej spersonalizować te dane.',
         'exit' => 'Kliknij aby zakończyć',
     ],
+
+
 ];

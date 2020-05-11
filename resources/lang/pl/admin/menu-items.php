@@ -30,8 +30,8 @@ return [
     ],
     'addons' => 'Dodatki',
     'addons_items' => [
-        'modules' => 'Przeglądaj moduły',
-        'widgets' => 'Przeglądaj widgety',
+        'modules' => 'Przeglądaj wtyczki',
+        'bridges' => 'Przeglądaj mosty',
         'store' => 'D-Store'
     ],
     'settings' => 'Ustawienia',

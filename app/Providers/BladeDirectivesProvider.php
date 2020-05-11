@@ -21,6 +21,10 @@ class BladeDirectivesProvider extends ServiceProvider
 
     private function registerBladeDirectives()
     {
+        // Theme data
+        $theme = (new ThemeHelpers);
+        $theme->data = $theme->getThemeData();
+
         Blade::directive('wrapper', function ($pass_params) {
             $pass_params = explode(', ', $pass_params);
             foreach ($pass_params as $key => $row) {
@@ -57,6 +61,18 @@ class BladeDirectivesProvider extends ServiceProvider
         \Blade::directive('view', function ($view) {
             $theme = new ThemeHelpers;
             return View::make($theme->getThemeView($view, [], true))->render();
+        });
+
+        Blade::include('themes.' . $theme->data->slug . '.partials.head', 'head');
+        Blade::include('themes.' . $theme->data->slug . '.partials.grid', 'boot');
+        Blade::directive('block', function ($expression) {
+            $name = explode(',', $expression)[0];
+            $block = str_replace($name . ', ', "", $expression);
+
+            return "<?php
+                    \$block = unserialize($block);
+                    echo Widget::run('Blocks.' . $name, ['block' => \$block, 'position' => ['x' => \$block->x, 'y' => \$block->y, 'w' => \$block->width, 'h' => \$block->height]]);
+                ?>";
         });
     }
 

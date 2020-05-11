@@ -39,7 +39,7 @@ const addItemCallback = response => {
     const { id } = response.data;
     const { data } = response.data;
     $("#menu-items ol:first-child").append(`
-        <li class="list-group-item dd-item" data-id="${id}" data-label="${data.label}" data-url="${data.link}">
+        <li class="list-group-item dd-item" data-id="${id}" data-label="${data.label}" data-url="${data.link}" data-class="${data.class}">
             <button class="remove">x</button>
             <div class="dd-handle">${data.label}</div>
         </li>
@@ -53,6 +53,7 @@ $("#menu-add-item").click(function() {
         {
             label: $("#item_label").val(),
             link: $("#item_url").val(),
+            class: $("#item_class").val(),
             parent: 0
         },
         addItemCallback
