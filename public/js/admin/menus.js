@@ -955,7 +955,7 @@ $(".search-entries").click(function () {
 var addItemCallback = function addItemCallback(response) {
   var id = response.data.id;
   var data = response.data.data;
-  $("#menu-items ol:first-child").append("\n        <li class=\"list-group-item dd-item\" data-id=\"".concat(id, "\" data-label=\"").concat(data.label, "\" data-url=\"").concat(data.link, "\">\n            <button class=\"remove\">x</button>\n            <div class=\"dd-handle\">").concat(data.label, "</div>\n        </li>\n    "));
+  $("#menu-items ol:first-child").append("\n        <li class=\"list-group-item dd-item\" data-id=\"".concat(id, "\" data-label=\"").concat(data.label, "\" data-url=\"").concat(data.link, "\" data-class=\"").concat(data["class"], "\">\n            <button class=\"remove\">x</button>\n            <div class=\"dd-handle\">").concat(data.label, "</div>\n        </li>\n    "));
   updateOutput();
 };
 
@@ -963,6 +963,7 @@ $("#menu-add-item").click(function () {
   Object(_imports_ajax__WEBPACK_IMPORTED_MODULE_0__["postCall"])(endpoints.addItem, {
     label: $("#item_label").val(),
     link: $("#item_url").val(),
+    "class": $("#item_class").val(),
     parent: 0
   }, addItemCallback);
 }); // REMOVE ITEM FUNCTIONS

@@ -36,14 +36,14 @@ class UsersComposers extends ServiceProvider
             // with Ajax //
 
             $view->roles = $roles;
-            $view->table = getData('Admin/users/users_index_table');
+            $view->table = getData('Admin/Modules/users/users_index_table');
         });
 
 
         view()->composer('admin.users.create', function ($view) {
             $role = new \App\Role;
             $roles = $role->get_all_roles();
-            $view->form = getData('Admin/users/users_create_form', ['roles' => $roles, 'thumbnail' => getThumbnail(null, 1)]);
+            $view->form = getData('Admin/Modules/users/users_create_form', ['roles' => $roles, 'thumbnail' => getThumbnail(null, 1)]);
         });
 
 
@@ -52,7 +52,7 @@ class UsersComposers extends ServiceProvider
             $view->logs = $view->user->logs()->take(5)->orderBy('created_at', 'desc')->get();
 
             $roles = (new \App\Role)->get_all_roles();
-            $view->form = getData('Admin/users/users_update_form', ['roles' => $roles, 'thumbnail' => getThumbnail($view->user->photo, 1)]);
+            $view->form = getData('Admin/Modules/users/users_update_form', ['roles' => $roles, 'thumbnail' => getThumbnail($view->user->photo, 1)]);
         });
 
 

@@ -30,8 +30,8 @@ return [
     ],
     'addons' => 'Addons',
     'addons_items' => [
-        'modules' => 'Browse modules',
-        'widgets' => 'Browse widgets',
+        'modules' => 'Browse plugins',
+        'bridges' => 'Browse bridges',
         'store' => 'D-Store'
     ],
     'settings' => 'Settings',

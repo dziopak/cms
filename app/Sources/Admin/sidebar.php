@@ -81,7 +81,7 @@ $items = [
             'modules' => [
                 'route' => 'admin.plugins.index',
             ],
-            'widgets' => [
+            'bridges' => [
                 'route' => 'admin.dashboard.index',
             ],
             'store' => [

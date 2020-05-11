@@ -11,7 +11,7 @@
 
 
 @section('before')
-    {!! Form::model($post, ['method' => 'PATCH', 'action' => ['admin\PostsController@update', $post->id], 'class' => 'w-100', 'files' => 'true']) !!}
+    {!! Form::model($post, ['method' => 'PATCH', 'action' => ['Admin\Modules\PostsController@update', $post->id], 'class' => 'w-100', 'files' => 'true']) !!}
     @include('admin.partials.validation')
     @hook('post_edit_before')
     @hook('post_before')

@@ -25,4 +25,25 @@ class SliderUtilities
         \App\Slider::findOrFail($id)->files()->detach($data);
         return response()->json(['status' => 200, 'message' => 'Slides detached successfully.', 'slides' => $data], 200);
     }
+
+    public static function mass($data)
+    {
+        if (empty($data['mass_edit'])) {
+            return redirect()->back();
+        } else {
+            switch ($data['mass_action']) {
+                case 'delete':
+                    return SliderUtilities::mass_delete($data['mass_edit']);
+                    break;
+            }
+        }
+    }
+
+    public static function mass_delete($ids)
+    {
+        \Auth::user()->hasAccessOrRedirect('BLOCK_DELETE');
+
+        \App\Slider::whereIn('id', $ids)->delete();
+        return redirect(route('admin.blocks.sliders.index'))->with(['crud' => 'Successfully deleted selected sliders.']);
+    }
 }

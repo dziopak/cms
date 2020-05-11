@@ -33,7 +33,7 @@
         {{$user->is_active == 1 ? __('admin/users.disable_information') : __('admin/users.enable_information') }}
         </p>
 
-        {!! Form::open(['method' => 'PUT', 'action' => ['admin\UsersController@block', $user->id]]) !!}
+        {!! Form::open(['method' => 'PUT', 'action' => ['Admin\Modules\UsersController@block', $user->id]]) !!}
 
         <div class="form-group">
             <a href="{{route('admin.users.index')}}" role="button" class="btn btn-success">{{ __('admin/general.back_button') }}</a>

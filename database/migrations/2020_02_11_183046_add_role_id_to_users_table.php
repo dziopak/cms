@@ -16,6 +16,14 @@ class AddRoleIdToUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->integer('role_id')->default('1')->index();
         });
+        DB::table('users')->insert(
+            array(
+                'name' => 'Admin',
+                'password' => Hash::make('admin'),
+                'email' => 'admin@admin.pl',
+                'role_id' => 0,
+            )
+        );
     }
 
     /**

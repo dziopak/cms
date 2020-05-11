@@ -11,7 +11,7 @@
 
 
 @section('before')
-    {!! Form::open(['method' => 'POST', 'action' => 'admin\PagesController@store', 'class' => 'w-100', 'files' => 'true']) !!}
+    {!! Form::open(['method' => 'POST', 'action' => 'Admin\Modules\PagesController@store', 'class' => 'w-100', 'files' => 'true']) !!}
     @include('admin.partials.validation')
     @hook('page_create_before')
     @hook('page_before')

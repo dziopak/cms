@@ -11,7 +11,7 @@
 
 
 @section('content-left')
-    {!! Form::open(['method' => 'POST', 'action' => 'admin\GeneralSettingsController@store']) !!}
+    {!! Form::open(['method' => 'POST', 'action' => 'Admin\Modules\SettingsController@store']) !!}
     @wrapper('admin.partials.wrapper', ['title' => 'admin/settings.general_title'])
 
 

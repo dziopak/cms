@@ -13,9 +13,9 @@
 
 @section('before')
     @if (isset($role))
-        {!! Form::model($role, ['method' => 'POST', 'action' => 'admin\RolesController@store', 'class' => 'w-100']) !!}
+        {!! Form::model($role, ['method' => 'POST', 'action' => 'Admin\Modules\RolesController@store', 'class' => 'w-100']) !!}
     @else
-        {!! Form::open(['method' => 'POST', 'action' => 'admin\RolesController@store', 'class' => 'w-100']) !!}
+        {!! Form::open(['method' => 'POST', 'action' => 'Admin\Modules\RolesController@store', 'class' => 'w-100']) !!}
     @endif
 @endsection
 

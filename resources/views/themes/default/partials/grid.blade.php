@@ -1,13 +1,17 @@
-@foreach($layout->blocks as $block)
-    {{-- @dump($block) --}}
-
-    @wrapper('themes.default.blocks.wrapper')
-        @if ($block->type === 'module')
-        <div class="module">
-            @yield('content')
-        </div>
-        @else
-            @widget('front.'.$block['type'], ['block' => $block, 'position' => $block->pivot, 'key' => randomString() ])
-        @endif
-    @endwrapper
+@foreach($blocks as $row)
+    <div class="block-row row">
+        @foreach($row as $column)
+            <div style="border: 1px solid #000; overflow: hidden;" class="block-col col-md-{{ $column['COLUMN_WIDTH'] }}">
+                @foreach($column['BLOCKS'] as $block)
+                    @if ($block->type === 'module')
+                        <div class="module">
+                            @yield('module')
+                        </div>
+                    @else
+                        @block($block['type'], serialize($block))
+                    @endif
+                @endforeach
+            </div>
+        @endforeach
+    </div>
 @endforeach

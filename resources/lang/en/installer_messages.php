@@ -193,6 +193,12 @@ return [
         'title' => 'Installation Finished',
         'templateTitle' => 'Installation Finished',
         'finished' => 'Application has been successfully installed.',
+        'message' => 'You can already log in to your admin panel! Use credentials below:',
+        'credentials' => [
+            'email' => 'Email: admin@admin.pl',
+            'password' => 'Password: admin',
+        ],
+        'credentials_message' => 'Remeber to personalise this credentials as quick as possible.',
         'migration' => 'Migration &amp; Seed Console Output:',
         'console' => 'Application Console Output:',
         'log' => 'Installation Log Entry:',

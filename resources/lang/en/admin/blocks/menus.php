@@ -2,9 +2,11 @@
 
 return [
 
+    'menu_index_title' => 'Manage menus',
     'menu_add_field_title' => 'Add a new field',
     'menu_fields_title' => 'Menu fields',
     'menu_data_title' => 'Menu settings',
+    'menu_create_title' => 'Create new menu',
 
     'name' => 'Name',
 

@@ -30,7 +30,7 @@ class ThemeHelpers
 
     public function getThemeData($slug = null)
     {
-        if ($slug === null) $slug = config('global.general.theme');
+        $slug = ThemeHelpers::activeTheme();
         $manifest = base_path() . '/resources/views/themes/' . $slug . '/theme.json';
 
         if (is_file($manifest)) {
@@ -65,7 +65,7 @@ class ThemeHelpers
 
     public static function activeTheme()
     {
-        return config('global.general.theme');
+        return config('global.general.theme') ?? 'default';
     }
 
 

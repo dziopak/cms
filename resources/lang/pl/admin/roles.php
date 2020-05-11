@@ -23,7 +23,7 @@ return [
     'blocks_rules' => 'Uprawnienia do zarządzania blokami',
 
     'admin_view' => 'Przeglądanie panelu administracyjnego',
-    'module_use' => 'Zarządzanie modułami',
+    'module_use' => 'Zarządzanie wtyczkami',
     'menu_edit' => 'Zarządzanie menu',
 
     'user_create' => 'Tworzenie kont użytkowników',

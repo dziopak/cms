@@ -13,10 +13,12 @@ return [
 
     "logs" => "System logs",
     "menus" => "Menus",
-    "modules" => "Modules",
+    "sliders" => "Sliders",
+    "modules" => "Plugins",
     "roles" => "Roles",
     "files" => "File manager",
     "layouts" => "Layouts",
+    "blocks" => "Blocks",
 
     "list" => "List all",
     "edit" => "Edit",

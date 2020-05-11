@@ -33,7 +33,7 @@
 @section('before')
     <div id="fade"></div>
     @include('admin.page_layouts.partials.controls')
-    {!! Form::open(['method' => 'POST', 'action' => ['admin\LayoutsController@store'], 'class' => 'w-100', 'id' => 'LayoutCreateForm']) !!}
+    {!! Form::open(['method' => 'POST', 'action' => ['Admin\Modules\LayoutsController@store'], 'class' => 'w-100', 'id' => 'LayoutCreateForm']) !!}
 @endsection
 
 

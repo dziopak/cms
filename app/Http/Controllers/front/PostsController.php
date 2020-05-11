@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Helpers\ThemeHelpers;
 use App\Http\Controllers\Controller;
 use App\Post;
 
@@ -11,7 +12,7 @@ class PostsController extends Controller
 
     public function __construct()
     {
-        $this->theme['slug'] = config('global.general.theme');
+        $this->theme['slug'] = ThemeHelpers::activeTheme();
         $this->theme['url'] = 'themes.' . $this->theme['slug'];
     }
 

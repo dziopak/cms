@@ -11,7 +11,7 @@
 
 
 @section('before')
-    {!! Form::open(['method' => 'POST', 'action' => 'admin\UsersController@store', 'files' => 'true']) !!}
+    {!! Form::open(['method' => 'POST', 'action' => 'Admin\Modules\UsersController@store', 'files' => 'true']) !!}
 @endsection
 
 

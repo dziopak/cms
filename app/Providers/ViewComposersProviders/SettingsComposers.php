@@ -28,7 +28,7 @@ class SettingsComposers extends ServiceProvider
         view()->composer('admin.settings.general', function ($view) {
             $themes = ThemeHelpers::getThemeList();
             $view->settings = \App\Setting::where(['group' => 'general'])->pluck('value', 'name')->toArray();
-            $view->form = getData('Admin/settings/general', array_merge($view->settings, ['themes' => $themes]));
+            $view->form = getData('Admin/Modules/settings/general', array_merge($view->settings, ['themes' => $themes]));
         });
 
 

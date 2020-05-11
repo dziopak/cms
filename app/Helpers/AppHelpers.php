@@ -8,9 +8,19 @@ function is_installed()
         return false;
     }
 }
+
+function db_set()
+{
+    if (!empty(getenv('DB_DATABASE')) && !empty(getenv('DB_USERNAME')) && !empty(getenv('DB_HOST'))) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function setLang($lang)
 {
-    if (Auth::user()) {
+    if (db_set() && Auth::user()) {
         Auth::user()->fire_events = false;
         Auth::user()->locale = $lang;
         Auth::user()->save();

@@ -12,7 +12,7 @@
 
 @section('before')
 
-    {!! Form::model($page, ['method' => 'PATCH', 'action' => ['admin\PagesController@update', $page->id], 'class' => 'w-100', 'files' => 'true']) !!}
+    {!! Form::model($page, ['method' => 'PATCH', 'action' => ['Admin\Modules\PagesController@update', $page->id], 'class' => 'w-100', 'files' => 'true']) !!}
     @include('admin.partials.validation')
     @hook('page_edit_before')
     @hook('page_before')

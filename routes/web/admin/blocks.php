@@ -3,6 +3,8 @@
 
 Route::group(['prefix' => 'blocks', 'as' => 'blocks.'], function () {
 
+    Route::get('/', 'Admin\Modules\BlocksController@index')->name('index');
+
     //SLIDERS ROUTES
     require base_path('routes/web/admin/blocks/sliders.php');
 

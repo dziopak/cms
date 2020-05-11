@@ -4,6 +4,7 @@
 @section('breadcrumbs')
     <ul>
         <li><a href="{{route('admin.dashboard.index')}}">{{ __('admin/routes.admin') }}</a></li>
+        <li><a href="{{route('admin.blocks.index')}}">{{ __('admin/routes.blocks') }}</a></li>
         <li><a href="{{route('admin.blocks.menus.index')}}">{{ __('admin/routes.menus') }}</a></li>
         <li>{{ __('admin/routes.list') }}</li>
     </ul>
@@ -11,7 +12,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/blocks/menus.index_title'])
+    @wrapper('admin.partials.wrapper', ['title' => 'admin/blocks/menus.menu_index_title'])
 
         {{-- Table --}}
             @include('admin.partials.table', ['fields' => $menus])
@@ -20,7 +21,7 @@
 
         {{-- Create button --}}
         @if (Auth::user()->hasAccess('BLOCK_CREATE'))
-            <a href="{{ route('admin.blocks.sliders.create') }}" class="btn btn-success">
+            <a href="{{ route('admin.blocks.menus.create') }}" class="btn btn-success">
                 <i class="fa fa-plus" aria-hidden="true"></i>
                 {{ __('admin/general.create_button') }}
             </a>

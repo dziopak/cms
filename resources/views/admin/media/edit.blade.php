@@ -12,7 +12,7 @@
 
 @section('before')
 
-    {!! Form::model($file, ['method' => 'PATCH', 'action' => ['Admin\FilesController@update', $file->id], 'class' => 'w-100']) !!}
+    {!! Form::model($file, ['method' => 'PATCH', 'action' => ['Admin\Modules\FilesController@update', $file->id], 'class' => 'w-100']) !!}
     @include('admin.partials.validation')
 
 @endsection

@@ -1,6 +1,16 @@
 @extends('admin.layouts.columns-4-8')
 
 
+@section('breadcrumbs')
+    <ul>
+        <li><a href="{{route('admin.dashboard.index')}}">{{ __('admin/routes.admin') }}</a></li>
+        <li><a href="{{route('admin.blocks.index')}}">{{ __('admin/routes.blocks') }}</a></li>
+        <li><a href="{{route('admin.blocks.menus.index')}}">{{ __('admin/routes.menus') }}</a></li>
+        <li>{{ __('admin/routes.edit') }}</li>
+    </ul>
+@endsection
+
+
 @push('head')
     <link href="{{asset('/css/menus.css')}}" rel="stylesheet">
     <script src="{{asset('/assets/js/nestable.js')}}"></script>
@@ -12,21 +22,12 @@
 @endpush
 
 
-@section('breadcrumbs')
-    <ul>
-        <li><a href="{{route('admin.dashboard.index')}}">{{ __('admin/routes.admin') }}</a></li>
-        <li><a href="{{route('admin.blocks.menus.index')}}">{{ __('admin/routes.menus') }}</a></li>
-        <li>{{ __('admin/routes.list') }}</li>
-    </ul>
-@endsection
-
-
 @section('content-left')
     @wrapper('admin.partials.wrapper', ['title' => 'admin/blocks/menus.menu_data_title'])
 
         {{-- Name input --}}
         <div class="form-group">
-            {!! Form::label('name', __('admin/blocks/menus.name'.':')) !!}
+            {!! Form::label('name', __('admin/blocks/menus.name').':') !!}
             {!! Form::text('name', $menu->name, ['class' => 'form-control']) !!}
         </div>
 

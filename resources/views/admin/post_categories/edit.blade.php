@@ -12,7 +12,7 @@
 
 
 @section('before')
-    {!! Form::model($category, ['method' => 'PATCH', 'action' => ['admin\PostCategoriesController@update', $category->id], 'class' => 'w-100', 'files' => 'true']) !!}
+    {!! Form::model($category, ['method' => 'PATCH', 'action' => ['Admin\Modules\PostCategoriesController@update', $category->id], 'class' => 'w-100', 'files' => 'true']) !!}
     @include('admin.partials.validation')
 @endsection
 

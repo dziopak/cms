@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin\Blocks;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Blocks\Sliders\CreateSliderRequest;
+use App\Http\Requests\Admin\Blocks\Sliders\UpdateSliderRequest;
 use App\Http\Utilities\Admin\Blocks\SliderUtilities;
 use Illuminate\Http\Request;
+
 use Auth;
 
 class SlidersController extends Controller
@@ -23,7 +26,7 @@ class SlidersController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(CreateSliderRequest $request)
     {
         Auth::user()->hasAccessOrRedirect('BLOCK_CREATE');
 
@@ -39,7 +42,7 @@ class SlidersController extends Controller
     }
 
 
-    public function update(Request $request, $id)
+    public function update(UpdateSliderRequest $request, $id)
     {
         Auth::user()->hasAccessOrRedirect('BLOCK_EDIT');
 
@@ -68,5 +71,11 @@ class SlidersController extends Controller
     {
         Auth::user()->hasAccessOrRedirect('BLOCK_EDIT');
         return SliderUtilities::detach($id, $request->get('files'));
+    }
+
+    public function mass(Request $request)
+    {
+        $data = $request->all();
+        return SliderUtilities::mass($data);
     }
 }

@@ -4,7 +4,8 @@
 @section('breadcrumbs')
     <ul>
         <li><a href="{{route('admin.dashboard.index')}}">{{ __('admin/routes.admin') }}</a></li>
-        <li><a href="{{route('admin.media.index')}}">{{ __('admin/routes.media') }}</a></li>
+        <li><a href="{{route('admin.blocks.index')}}">{{ __('admin/routes.blocks') }}</a></li>
+        <li><a href="{{route('admin.blocks.sliders.index')}}">{{ __('admin/routes.sliders') }}</a></li>
         <li>{{ __('admin/routes.list') }}</li>
     </ul>
 @endsection

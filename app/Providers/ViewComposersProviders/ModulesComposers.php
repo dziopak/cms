@@ -42,7 +42,7 @@ class ModulesComposers extends ServiceProvider
             $modules['inactive'] = \App\Module::getModulesData($this->ModulesToArray(Module::allDisabled()));
 
             $view->modules = $modules;
-            $view->table = getData('Admin/modules/modules_index_table');
+            $view->table = getData('Admin/Modules/plugins/plugins_index_table');
         });
     }
 }

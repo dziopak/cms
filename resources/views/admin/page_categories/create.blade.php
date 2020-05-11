@@ -12,7 +12,7 @@
 
 
 @section('before')
-    {!! Form::open(['method' => 'POST', 'action' => 'admin\PageCategoriesController@store', 'class' => 'w-100', 'files' => 'true']) !!}
+    {!! Form::open(['method' => 'POST', 'action' => 'Admin\Modules\PageCategoriesController@store', 'class' => 'w-100', 'files' => 'true']) !!}
     @include('admin.partials.validation')
 @endsection
 
