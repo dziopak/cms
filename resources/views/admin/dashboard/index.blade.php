@@ -2,7 +2,6 @@
 
 
 @push('head')
-    <meta name="_token" content="{{ csrf_token() }}" />
     <script src="{{asset('assets/js/gridstack.all.js')}}"></script>
     <script src="{{asset('assets/js/Chart.js')}}"></script>
 

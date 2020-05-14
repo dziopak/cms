@@ -2,6 +2,7 @@
 Route::resource('/pages', 'Admin\Modules\PagesController')->except('show');
 Route::get('/pages/{page_id}/delete', 'Admin\Modules\PagesController@delete')->name('pages.delete');
 Route::post('/pages/mass', 'Admin\Modules\PagesController@mass')->name('pages.mass');
+Route::post('/pages/{id}/thumbnail', 'Admin\Modules\PagesController@thumbnail')->name('pages.thumbnail');
 
 // Categories routes//
 Route::group(['prefix' => 'pages', 'as' => 'pages.'], function () {

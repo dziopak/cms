@@ -1,8 +1,0 @@
-https://github.com/spatie/laravel-analytics - GA
-https://github.com/voerro/laravel-visitor-tracker - visitor tracking
-
-
-- image optimization on the go
-- new content lang switcher
-- translation of alerts, logs and validation
-- translations and logs of new modules

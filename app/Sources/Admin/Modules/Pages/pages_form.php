@@ -73,6 +73,7 @@ $form = [
                     'type' => 'image',
                     'value' => $args['thumbnail'],
                     'label' => __('admin/pages.thumbnail'),
+                    'endpoint' => $args['thumbnail_endpoint'] ?? null,
                     'class' => '',
                     'container_class' => ''
                 ],

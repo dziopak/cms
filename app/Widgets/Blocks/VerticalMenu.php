@@ -42,10 +42,16 @@ class VerticalMenu extends AbstractWidget
     }
 
 
+
     public function run()
     {
         $this->config = decodeBlockConfig($this->config);
+
         $menu = \App\Menu::find($this->config['block']->config['menu_id'] ?? 1);
-        return block('vertical_menu', $this->config, ['menus' => $this->convertMenuList()], ['menu' => $menu->items]);
+
+        if ($this->config['is_admin'] === false)
+            $items = $menu->items()->where(['parent' => 0])->get();
+
+        return block('vertical_menu', $this->config, ['menus' => $this->convertMenuList()], ['menu' => $items ?? null]);
     }
 }

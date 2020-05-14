@@ -27,6 +27,7 @@
 
                     <!-- Module -->
                     @yield('content')
+                    @stack('content-bottom')
                 </div>
             </div>
             {{-- End of Main area --}}

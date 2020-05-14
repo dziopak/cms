@@ -59,7 +59,6 @@
             <div class="form-group">
                 {!! Form::hidden('page_id', $page->id) !!}
                 {!! Form::button('<i class="fa fa-home"></i>'.' '.__('admin/general.update_button'), ['class' => 'btn btn-success', 'type' => 'submit']) !!}
-                {{-- <button type="submit" class="" --}}
             </div>
 
         @endwrapper

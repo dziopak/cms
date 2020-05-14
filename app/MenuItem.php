@@ -13,4 +13,9 @@ class MenuItem extends Model
     {
         return $this->belongsTo('App\Menu');
     }
+
+    public function items()
+    {
+        return $this->hasMany('App\MenuItem', 'parent');
+    }
 }

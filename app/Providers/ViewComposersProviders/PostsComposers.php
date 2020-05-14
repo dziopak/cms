@@ -39,7 +39,7 @@ class PostsComposers extends ServiceProvider
         view()->composer('admin.posts.edit', function ($view) {
             $categories = array_merge(['No category'], \App\PostCategory::list_all());
             $view->post = \App\Post::with('thumbnail')->findOrFail($view->post_id);
-            $view->form = getData('Admin/Modules/posts/posts_form', ['categories' => $categories, 'thumbnail' => getThumbnail($view->post->thumbnail)]);
+            $view->form = getData('Admin/Modules/posts/posts_form', ['categories' => $categories, 'thumbnail' => getThumbnail($view->post->thumbnail), 'thumb_endpoint' => route('admin.posts.update', $view->post_id)]);
         });
     }
 }

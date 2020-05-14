@@ -48,7 +48,11 @@ class FilesController extends Controller
      */
     public function show($id)
     {
-        //
+        $id === "0" ?
+            $path = 'assets/no-thumbnail.png' :
+            $path = \App\File::findOrFail($id)->path;
+
+        return response()->json(['message' => 'Successfully fetched item', 'path' => $path]);
     }
 
     /**
@@ -109,5 +113,26 @@ class FilesController extends Controller
     public function upload(Request $request)
     {
         return FileUtilities::upload($request);
+    }
+
+    public function mass(Request $request)
+    {
+        $data = $request->all();
+
+        if (empty($data['mass_edit'])) {
+            return redirect()->back()->with('error', 'No posts were selected.');
+        } else {
+            switch ($data['mass_action']) {
+                case 'delete':
+                    \App\File::whereIn('id', $data['mass_edit'])->delete();
+                    break;
+
+                default:
+                    return redirect()->back();
+                    break;
+            }
+        }
+
+        return redirect()->back()->with('crud', 'Files has been successfully deleted.');
     }
 }

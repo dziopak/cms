@@ -16,7 +16,9 @@
 
         <div class="row">
             @yield('content-bottom')
+            @stack('content-bottom')
         </div>
         @yield('after')
+        @stack('after')
     </div>
 @endsection

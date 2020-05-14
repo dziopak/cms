@@ -2,7 +2,6 @@
 
 
 @push('head')
-    <meta name="_token" content="{{ csrf_token() }}" />
     <script src="{{asset('assets/js/gridstack.all.js')}}"></script>
     <script src="{{asset('assets/js/Chart.js')}}"></script>
 
@@ -43,28 +42,16 @@
     <div id="layout" class="grid-stack">
         @if (!empty($layout->blocks) && count($layout->blocks) > 0)
             @foreach($layout->blocks as $block)
-
-                @if ($block->type === 'module')
-                @include('admin.blocks.module', ['config' => [
-                        'x' => $block->x,
-                        'y' => $block->y,
-                        'w' => $block->width,
-                        'h' => $block->height,
-                        'block_id' => $block->id
-                    ]])
-                @else
-                    @widget('Blocks.'.$block['type'], [
-                        'x' => $block->x,
-                        'y' => $block->y,
-                        'w' => $block->width,
-                        'h' => $block->height,
-                        'block_id' => $block->id,
-                        'is_admin' => true,
-                        'exists' => true,
-                        'block' => $block,
-                    ])
-
-                @endif
+                @widget('Blocks.'.$block['type'], [
+                    'x' => $block->x,
+                    'y' => $block->y,
+                    'w' => $block->width,
+                    'h' => $block->height,
+                    'block_id' => $block->id,
+                    'is_admin' => true,
+                    'exists' => true,
+                    'block' => $block,
+                ])
             @endforeach
         @else
         @include('admin.blocks.module', ['config' => [

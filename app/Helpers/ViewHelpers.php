@@ -24,3 +24,13 @@ function getView($path, $params = [])
 {
     return view('themes.' . config('global.general.theme') . '.' . $path, $params);
 }
+
+function isActivePage($path)
+{
+    $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    if (str_replace('/', '', $path) == str_replace('/', '', $url)) {
+        return true;
+    }
+
+    return false;
+}

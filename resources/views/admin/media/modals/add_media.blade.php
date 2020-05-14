@@ -1,5 +1,5 @@
 <div id="fade" onclick="$('#fade').fadeOut()" class="row">
-    <div class="module-modal">
+    <div id="select-media-modal" class="module-modal">
 
         {{-- Modal navigation --}}
         <div class="modal-nav">
@@ -15,7 +15,7 @@
                 {{-- Media library --}}
                 <div class="modal-tab" data-tab="1">
                     @wrapper('admin.partials.wrapper', ['title' => 'admin/media.edit_title'])
-                        @include('admin.media.partials.list', ['endpoint' => route('admin.blocks.sliders.attach', $slider->id), 'controls' => false])
+                        @include('admin.media.partials.list', ['endpoint' => $endpoint, 'controls' => false])
                     @endwrapper
                 </div>
 
@@ -24,12 +24,10 @@
                 <div class="modal-tab" data-tab="2" style="display: none;">
                     @wrapper('admin.partials.wrapper', ['title' => 'admin/media.edit_title'])
                         <div style="height: 100%;">
-                            @include('admin.media.partials.upload', ['endpoint' => 'test'])
+                            @include('admin.media.partials.upload')
                         </div>
                     @endwrapper
                 </div>
-
-
             </div>
 
 
@@ -42,3 +40,17 @@
 
     </div>
 </div>
+
+@push('scripts-bottom')
+    @if (!empty($single) && $single === true)
+        <script>
+            $(document).ready(function() {
+                $(".data-list-table input[name^='mass_edit']").each(function() {
+                    $(this).attr('type', 'radio');
+                    $(this).attr('name', 'thumbnail');
+                });
+                $('.select-all').hide();
+            });
+        </script>
+    @endif
+@endpush

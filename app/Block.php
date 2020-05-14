@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Block extends Model
 {
-    protected $fillable = ['title', 'config', 'type', 'x', 'y', 'layout_id', 'width', 'height'];
+    protected $fillable = ['title', 'config', 'type', 'x', 'y', 'layout_id', 'width', 'height', 'container'];
     public $timestamps = false;
 
     public function layouts()

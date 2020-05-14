@@ -46,6 +46,26 @@ $(document).ready(function() {
         event.stopPropagation();
     });
 
+    $(".grid-stack-item .widget-container").click(function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        $(this).toggleClass("active");
+        var key = $(this).attr("data-key");
+
+        if ($(this).hasClass("active")) {
+            $('input[name="config[' + key + '][container]"]').attr(
+                "value",
+                "true"
+            );
+        } else {
+            $('input[name="config[' + key + '][container]"]').attr(
+                "value",
+                "false"
+            );
+        }
+    });
+
     $("#fade, .block-settings button").click(function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
@@ -148,4 +168,17 @@ $(document).ready(function() {
         arrows: true
     });
     $(".components-bar .slick-arrow").hide();
+});
+
+$(document).ready(function() {
+    $(".widget-container").each(function() {
+        var container = $(this)
+            .closest(".card")
+            .find(".with-container")
+            .val();
+
+        if (container == true) {
+            $(this).addClass("active");
+        }
+    });
 });

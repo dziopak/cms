@@ -1,4 +1,4 @@
-@wrapper('admin.partials.widgets.widget_static', ['id' => 'login-block', 'classes' => ''])
+@wrapper('admin.partials.widgets.block', ['id' => 'login-block', 'classes' => ''])
     <div class="block-settings" style="display: none;" key="{{ $key ?? 0 }}">
         <div class="card-body">
             <div class="card-title">

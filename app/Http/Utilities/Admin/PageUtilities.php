@@ -12,7 +12,7 @@ class PageUtilities
 
     public static function store($request)
     {
-        $data = $request->except('thumbnail');
+        $data = $request->all();
         $data['user_id'] = Auth::user()->id;
 
         Page::create($data);
@@ -20,12 +20,40 @@ class PageUtilities
     }
 
 
+    public static function update_thumbnail($id, $request)
+    {
+        $page = Page::findOrFail($id);
+        $page->fire_events = false;
+        $page->update(['file_id' => $request->get('file')]);
+
+        if ($request->get('file') === 0) {
+            $path = 'assets/no-thumbnail.png';
+        } else {
+            $path = \App\File::select('path')->findOrFail($request->get('file'))->path;
+        }
+
+        return $path;
+    }
+
+
     public static function update($id, $request)
     {
-        $data = ModelUtilities::makeDirtyRequest($request->file('thumbnail'), $request->except('thumbnail'));
-        $page = Page::findOrFail($id)->update($data);
 
-        return redirect(route('admin.pages.index'));
+
+        switch ($request->get('request')) {
+            case 'photo':
+                $path = PageUtilities::update_thumbnail($id, $request);
+                $res = response()->json(['message' => 'Successfully updated page thumbnail.', 'file' => $request->get('file'), 'path' => $path]);
+                break;
+
+            default:
+                $data = $request->except('thumbnail');
+                Page::findOrFail($id)->update($data);
+                $res = redirect(route('admin.pages.index'));
+                break;
+        }
+
+        return $res;
     }
 
 

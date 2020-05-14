@@ -60,7 +60,7 @@
 
 {{-- Add media modal --}}
 @section('content-bottom')
-    @include('admin.media.modals.add_media')
+    @include('admin.media.modals.add_media', ['endpoint' => route('admin.blocks.sliders.attach', $slider->id)])
 @endsection
 
 
