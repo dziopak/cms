@@ -48,6 +48,7 @@ function getLayout($layout)
         $blocks[$block->y][] = $block;
     }
 
+
     foreach ($merge as $start => $end) {
         for ($i = $start + 1; $i < $end; $i++) {
             if (!empty($blocks[$i])) {
@@ -62,13 +63,16 @@ function getLayout($layout)
 
     $res = [];
     foreach ($blocks as $key => $row) {
+        $res[$key]['container'] = 0;
         foreach ($row as $block) {
+            if ($block->container === 1) $res[$key]['container'] = $block->container;
             $res[$key][$block->x]['BLOCKS'][] = $block;
             if (empty($res[$key][$block->x]['COLUMN_WIDTH']) || $res[$key][$block->x]['COLUMN_WIDTH'] < $block->width) {
                 $res[$key][$block->x]['COLUMN_WIDTH'] = $block->width;
             }
         }
     }
+
 
     return $res;
 }

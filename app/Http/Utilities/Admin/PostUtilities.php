@@ -2,7 +2,7 @@
 
 namespace App\Http\Utilities\Admin;
 
-use App\Http\Utilities\ModelUtilities;
+use App\Http\Requests\PostsRequest;
 use App\Post;
 use Auth;
 
@@ -18,18 +18,50 @@ class PostUtilities
     }
 
 
+    public static function update_photo($id, $request)
+    {
+        $post = Post::findOrFail($id);
+        $post->fire_events = false;
+        $post->update(['file_id' => $request->get('file')]);
+
+        if ($request->get('file') === 0) {
+            $path = 'assets/no-thumbnail.png';
+        } else {
+            $path = \App\File::select('path')->findOrFail($request->get('file'))->path;
+        }
+
+        return $path;
+    }
+
+
     public static function update($id, $request)
     {
-        $data = ModelUtilities::makeDirtyRequest($request->file('thumbnail'), $request->except('thumbnail'));
-        Post::findOrFail($id)->update($data);
+        Auth::user()->hasAccessOrRedirect('PAGE_EDIT');
 
-        return redirect(route('admin.posts.index'));
+        $type = $request->get('request');
+        switch ($type) {
+
+            case 'photo':
+                // Thumbnail upload
+                $path = PostUtilities::update_photo($id, $request);
+                $res = response()->json(['message' => 'Successfully updated page thumbnail.', 'file' => $request->get('file'), 'path' => $path]);
+                break;
+
+
+            default:
+                // Regular update
+                Post::findOrFail($id)->update($request->except('thumbnail'));
+                $res = redirect(route('admin.posts.index'));
+                break;
+        }
+
+        return $res;
     }
 
 
     public static function destroy($id)
     {
-        $post = Post::findOrFail($id)->delete();
+        Post::findOrFail($id)->delete();
         return response()->json(['message' => 'Post deleted successfully', 'id' => $id], 200);
     }
 

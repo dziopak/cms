@@ -8,7 +8,7 @@
 
         {{-- Show form inputs --}}
         @foreach($row['items'] as $name => $item)
-        
+
             {{-- Input container --}}
             <div class="{{ $item['type'] === "checkbox" ? 'form-check' : 'col' }} {{ !empty($item['container_class']) ? $item['container_class'] : '' }}" data-container-for="{{ $name }}" {{ parseAttributes($item, 'container_attributes') }}
                 @if (!empty($item['container_attributes']))
@@ -17,7 +17,7 @@
                     @endforeach
                 @endif
             >
-        
+
                 {{-- Display label if not a checkbox or image --}}
                 @if($item['type'] !== 'checkbox' && $item['type'] !== 'image')
                 {!! Form::label($name, $item['label'].': ', ['class' => !empty($item['required']) && $item['required'] === true ? 'required' : '']) !!}
@@ -25,7 +25,7 @@
 
                 {{-- Display proper input type --}}
                 @switch($item['type'])
-                    
+
                     @case('text')
                         {!! Form::text($name, $item['value'], ['class' => 'form-control '.$item['class'], parseAttributes($item, 'attributes')]) !!}
                     @break
@@ -45,13 +45,13 @@
                     @case('textarea')
                         {!! Form::textarea($name, $item['value'], ['class' => 'form-control '.$item['class'], parseAttributes($item, 'attributes')]) !!}
                     @break
-                    
+
                     @case('file')
                         {!! Form::file($name, ['class' => 'form-control '.$item['class'], parseAttributes($item, 'attributes')]) !!}
                     @break
 
                     @case('image')
-                        @include('admin.partials.image-input')
+                        @include('admin.partials.image-input', ['endpoint' => $item['endpoint'] ?? ""])
                     @break
 
                     @case('checkbox')

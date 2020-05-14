@@ -1,3 +1,4 @@
+{{-- Load widget's config --}}
 <div
     {{ !empty($config['id']) && empty($config['exists']) ? "id=".$config['id'] : '' }}
     class="grid-stack-item"
@@ -15,6 +16,7 @@
     {{ !empty($key) ? "data-gs-key=".$key : "" }}
 >
 
+    {{-- Display widget --}}
     <div class="grid-stack-item-content">
         <div class="widget @classes">
             <div class="card mb-4 w-100 grid-stack-content">

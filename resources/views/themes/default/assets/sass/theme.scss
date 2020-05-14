@@ -111,6 +111,10 @@ h1 {
 
     ul {
         padding: 0;
+
+        .sub-menu {
+            padding-left: 10px;
+        }
     }
 
     &-title {
@@ -154,4 +158,8 @@ h1 {
             max-width: 240px;
         }
     }
+}
+
+.pagination {
+    margin: 10px 20px;
 }

@@ -14,7 +14,7 @@
     {!! Form::model($user, ['method' => 'PATCH', 'action' => ['Admin\Modules\UsersController@update', $user->id], 'files' => 'true']) !!}
         @wrapper('admin.partials.wrapper', ['title' => 'admin/users.edit_right_title'])
             <div class="row">
-                <div class="col" style="max-width: 140px;">
+                <div class="col" style="max-width: 200px;">
                     @include('partials.form-fields', ['fields' => $form['profile']['avatar']])
                 </div>
                 <div class="col" style="display: inline-block;">

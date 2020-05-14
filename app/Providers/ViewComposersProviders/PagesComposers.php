@@ -43,7 +43,16 @@ class PagesComposers extends ServiceProvider
             $categories = array_merge(['No category'], \App\PageCategory::list_all());
             $layouts = \App\Layout::list();
 
-            $view->form = getData('Admin/Modules/pages/pages_form', ['categories' => $categories, 'thumbnail' => getThumbnail($page->thumbnail), 'layouts' => $layouts ?? [0 => 'none']]);
+            $view->form = getData(
+                'Admin/Modules/pages/pages_form',
+                [
+                    'categories' => $categories,
+                    'thumbnail' => getThumbnail($page->thumbnail),
+                    'layouts' => $layouts ?? [0 => 'none'],
+                    'thumbnail_endpoint' => route('admin.pages.update', $view->page_id)
+                ]
+            );
+
             $view->page = $page;
         });
     }

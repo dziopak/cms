@@ -262,17 +262,29 @@ label {
   overflow: hidden;
 }
 
-.widget-remove {
+.widget-remove,
+.widget-container {
   position: absolute;
-  right: 19px;
-  top: 25px;
   color: #eee;
   transition: color 0.1s linear;
   cursor: pointer;
 }
 
-.widget-remove:hover {
+.widget-remove:hover,
+.widget-remove.active,
+.widget-container:hover,
+.widget-container.active {
   color: #3490dc;
+}
+
+.widget-remove {
+  right: 19px;
+  top: 25px;
+}
+
+.widget-container {
+  left: 20px;
+  top: 25px;
 }
 
 .widget .card {
@@ -628,5 +640,11 @@ textarea.small {
   color: #3490dc;
   font-size: 0.8rem;
   font-weight: bold;
+}
+
+#layout .card-title strong {
+  margin-top: -3px;
+  display: block;
+  text-align: center;
 }
 

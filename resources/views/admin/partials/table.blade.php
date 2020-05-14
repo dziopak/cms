@@ -1,8 +1,3 @@
-@section('head')
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-@endsection
-
-
 {{-- Search / Filters bar --}}
 @if ((!isset($filters) || $filters === true) && (!isset($controls) || $controls === true))
     @include('admin.partials.searchfilterbar')
@@ -10,7 +5,9 @@
 
 
 {{-- Form opening --}}
+@if (empty($no_form))
 {{ Form::open(['method' => 'POST', "url" => $endpoint ?? url()->current().'/mass', 'class' => 'w-100', 'id' => $form_id ?? '']) }}
+@endif
 
     {{-- Table --}}
     <div class="table-responsive">
@@ -39,4 +36,6 @@
     @endif
 
 
+@if (empty($no_form))
 {{ Form::close() }}
+@endif

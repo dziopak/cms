@@ -23,9 +23,21 @@ class UsersEditRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'email' => 'email|required|unique:users,email,'.$this->request->get('user_id'),
-            'role_id' => 'required|numeric',
-        ];
+        switch ($this->request->get('request')) {
+            case 'photo':
+                $validationFields = [
+                    'file' => 'required|numeric'
+                ];
+                break;
+
+            default:
+                $validationFields =  [
+                    'email' => 'email|required|unique:users,email,' . $this->request->get('user_id'),
+                    'role_id' => 'required|numeric',
+                ];
+                break;
+        }
+
+        return $validationFields;
     }
 }

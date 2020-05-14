@@ -1,4 +1,4 @@
-@wrapper('admin.partials.widgets.widget_static', ['id' => 'slider-block', 'classes' => ''])
+@wrapper('admin.partials.widgets.block', ['id' => 'slider-block', 'classes' => ''])
     <div class="block-settings" style="display: none;" key="{{ $key ?? 0 }}">
         <div class="card-body">
             <div class="card-title">

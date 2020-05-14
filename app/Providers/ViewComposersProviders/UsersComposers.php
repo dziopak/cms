@@ -52,7 +52,7 @@ class UsersComposers extends ServiceProvider
             $view->logs = $view->user->logs()->take(5)->orderBy('created_at', 'desc')->get();
 
             $roles = (new \App\Role)->get_all_roles();
-            $view->form = getData('Admin/Modules/users/users_update_form', ['roles' => $roles, 'thumbnail' => getThumbnail($view->user->photo, 1)]);
+            $view->form = getData('Admin/Modules/users/users_update_form', ['roles' => $roles, 'thumbnail' => getThumbnail($view->user->photo, 1), 'thumb_endpoint' => route('admin.users.update', $view->user_id)]);
         });
 
 

@@ -40,7 +40,7 @@ class PostsController extends Controller
     }
 
 
-    public function update(PostsRequest $request, $id)
+    public function update(Request $request, $id)
     {
         Auth::user()->hasAccessOrRedirect('POST_EDIT');
         return PostUtilities::update($id, $request);

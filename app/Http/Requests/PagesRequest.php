@@ -24,16 +24,27 @@ class PagesRequest extends FormRequest
      */
     public function rules()
     {
-        $validation_fields = [
-            'name' => 'string|required',
-            'content' => 'string|required',
-            'excerpt' => 'string|required',
-            'slug' => 'string|required|unique:pages,slug,'.$this->request->get('page_id'),
-            'content' => 'string|required',
-            'category_id' => 'numeric|required',
-        ];
+        switch ($this->request->get('request')) {
 
-        $validation_fields = Hook::get('adminPagesValidation',[$validation_fields],function($validation_fields){
+            case 'photo':
+                $validation_fields = [
+                    'file' => 'required|numeric'
+                ];
+                break;
+
+            default:
+                $validation_fields = [
+                    'name' => 'string|required',
+                    'content' => 'string|required',
+                    'excerpt' => 'string|required',
+                    'slug' => 'string|required|unique:pages,slug,' . $this->request->get('page_id'),
+                    'content' => 'string|required',
+                    'category_id' => 'numeric|required',
+                ];
+                break;
+        }
+
+        $validation_fields = Hook::get('adminPagesValidation', [$validation_fields], function ($validation_fields) {
             return $validation_fields;
         });
 

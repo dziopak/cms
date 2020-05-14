@@ -14,8 +14,15 @@ class LayoutUtilities extends \App\Http\Utilities\LayoutUtilities
         $json = json_decode($request->get('result'), true);
 
         foreach ($json as $block) {
+            $title = $block['config']['title'] ?? "Untitled";
+            $container = filter_var($block['config']['container'], FILTER_VALIDATE_BOOLEAN);
+
+            unset($block['config']['title']);
+            unset($block['config']['container']);
+
             Block::updateOrCreate(['id' => $block['id']], [
-                'title' => $block['config']['title'] ?? "Untitled",
+                'title' => $title,
+                'container' => $container,
                 'config' => serialize($block['config'] ?? []),
                 'type' => explode('-block', $block['type'])[0],
                 'x' => $block['x'],

@@ -11,11 +11,6 @@
 @endpush
 
 
-@section('head')
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-@endsection
-
-
 @section('breadcrumbs')
     <ul>
         <li><a href="{{route('admin.dashboard.index')}}">{{ __('admin/routes.admin') }}</a></li>

@@ -17,21 +17,44 @@ class UserUtilities extends \App\Http\Utilities\UserUtilities
 
     public static function store($request)
     {
-        $data = $request->except('avatar');
+        $data = $request->all();
         $data['password'] = Hash::make($request->password);
 
-        $user = User::create($data);
+        User::create($data);
         return redirect(route('admin.users.index'));
+    }
+
+
+    public static function update_thumbnail($id, $request)
+    {
+        $user = \App\User::findOrFail($id);
+        $user->fire_events = false;
+        $user->update(['avatar' => $request->get('file')]);
+
+        if ($request->get('file') === 0) {
+            $path = 'assets/no-avatar.png';
+        } else {
+            $path = \App\File::select('path')->findOrFail($request->get('file'))->path;
+        }
+
+        return $path;
     }
 
 
     public static function update($id, $request)
     {
-        $user = User::findOrFail($id);
-        $data = ModelUtilities::makeDirtyRequest($request->file('avatar'), $request->except('avatar'));
 
-        $user->update($data);
-        return redirect(route('admin.users.index'));
+        switch ($request->get('request')) {
+            case 'photo':
+                $path = UserUtilities::update_thumbnail($id, $request);
+                return response()->json(['message' => 'Successfully updated user\'s photo.', 'file' => $request->get('file'), 'path' => $path]);
+                break;
+
+            default:
+                User::findOrFail($id)->update($request->except('avatar'));
+                return redirect(route('admin.users.index'));
+                break;
+        }
     }
 
 
