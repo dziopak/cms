@@ -195,7 +195,7 @@ return [
         App\Providers\ViewComposersProviders\PagesComposers::class,
         App\Providers\ViewComposersProviders\MediaComposers::class,
         App\Providers\ViewComposersProviders\SettingsComposers::class,
-        App\Providers\ViewComposersProviders\ModulesComposers::class,
+        App\Providers\ViewComposersProviders\PluginsComposers::class,
         App\Providers\ViewComposersProviders\CategoriesComposers::class,
         App\Providers\ViewComposersProviders\Blocks\MenusComposers::class,
         App\Providers\ViewComposersProviders\Blocks\SlidersComposers::class,

@@ -37,6 +37,13 @@
     </div>
 
 
+    <div class="add-widget" data-name="horizontal-menu">
+        @wrapper('admin.partials.widgets.new_widget', ['title' => 'Horizontal menu'])
+            <p>Horizontal navigation menu</p>
+        @endwrapper
+    </div>
+
+
     <div class="add-widget" data-name="login">
         @wrapper('admin.partials.widgets.new_widget', ['title' => 'Login form'])
             <p>Displays login form for guest users</p>

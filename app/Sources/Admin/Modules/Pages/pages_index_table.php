@@ -20,6 +20,10 @@ $table['mass_edit'] = [
     "hide" => __('admin/pages.mass_hide'),
     "show" => __('admin/pages.mass_show'),
 ];
+$table['mass_edit_extend'] = [
+    "name_replace" => __("admin/general.mass_name_replace"),
+    "category" => __("admin/general.mass_set_category")
+];
 $table['sort_by'] = [
     'name' => __('admin/pages.name'),
     'user_id' => __('admin/pages.author'),

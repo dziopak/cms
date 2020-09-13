@@ -16,12 +16,12 @@
 
             <tbody>
                 @foreach($fields as $key => $field)
-                    <tr data-row="{{ $field->id }}">
-                        <td><input type="checkbox" name="mass_edit[{{ $key }}]" value="{{ $field->id }}"></td>
+                <tr data-row="{{ $field->id }}">
+                    <td><input type="checkbox" name="mass_edit[{{ $key }}]" value="{{ $field->id }}"></td>
                         @include('admin.partials.table.fields')
 
                         @if ((!isset($actions) || $actions === true) && (!isset($controls) || $controls === true))
-                            @include('admin.partials.table.actions')
+                        @include('admin.partials.table.actions')
                         @endif
                     </tr>
                 @endforeach

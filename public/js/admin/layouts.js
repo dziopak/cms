@@ -192,7 +192,7 @@ $(document).ready(function () {
         if (value) {
           var name = $(this).attr("name");
           name = name.split(/[[\]]{1,2}/);
-          config = _objectSpread({}, config, _defineProperty({}, name[2], $(this).val()));
+          config = _objectSpread(_objectSpread({}, config), {}, _defineProperty({}, name[2], $(this).val()));
         }
       });
       var data = {

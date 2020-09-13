@@ -6,17 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Testimonial extends Model
 {
-    protected $guarded = ['id', 'thumbnail'];
+    protected $guarded = ['id'];
 
     public function thumbnail()
     {
         return $this->belongsTo("App\File", 'file_id');
     }
 
+
     public function scopeFilter($query, $request)
     {
         if (!empty($request->get('search'))) {
-
             // Search in name or slug //
             $query->where('author', 'like', '%' . $request->get('search') . '%');
         }

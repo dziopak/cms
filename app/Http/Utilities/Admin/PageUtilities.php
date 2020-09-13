@@ -87,12 +87,32 @@ class PageUtilities
                     break;
 
                 case 'category':
-                    // TO DO //
                     Auth::user()->hasAccessOrRedirect('PAGE_EDIT');
-                    return redirect()->back()->with('error', 'Functionality not ready yet.');
+                    Page::whereIn('id', $data['mass_edit'])->update(['category_id' => $data['category_id']]);
+                    return redirect()->back()->with('crud', 'Successfully assigned category to selected pages.');
+                    break;
+
+                case 'name_replace':
+                    // --TO DO-- //
+                    //   LANGS   //
+                    //-----------//
+                    Auth::user()->hasAccessOrRedirect('PAGE_EDIT');
+                    $pages = Page::whereIn('id', $data['mass_edit'])->get(['id', 'name']);
+                    $res = [];
+                    foreach ($pages as $key => $page) {
+                        if (strpos($page->name, $data['name_search_string']) !== false) {
+                            $page->name = str_replace($data['name_search_string'], $data['name_replace_string'], $page->name);
+                            $page->save();
+                        }
+                    }
+                    return redirect()->back()->with('crud', 'Successfully replaced titles of multiple rows.');
                     break;
             }
         }
         return redirect(route('admin.pages.index'));
+    }
+
+    public function name_replace($request, $phrase, $replace)
+    {
     }
 }

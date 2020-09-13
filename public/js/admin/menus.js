@@ -123,6 +123,24 @@ var runtime = (function (exports) {
   var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
   var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
 
+  function define(obj, key, value) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+    return obj[key];
+  }
+  try {
+    // IE 8 has a broken Object.defineProperty that only works on DOM objects.
+    define({}, "");
+  } catch (err) {
+    define = function(obj, key, value) {
+      return obj[key] = value;
+    };
+  }
+
   function wrap(innerFn, outerFn, self, tryLocsList) {
     // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
     var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
@@ -193,16 +211,19 @@ var runtime = (function (exports) {
     Generator.prototype = Object.create(IteratorPrototype);
   GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;
   GeneratorFunctionPrototype.constructor = GeneratorFunction;
-  GeneratorFunctionPrototype[toStringTagSymbol] =
-    GeneratorFunction.displayName = "GeneratorFunction";
+  GeneratorFunction.displayName = define(
+    GeneratorFunctionPrototype,
+    toStringTagSymbol,
+    "GeneratorFunction"
+  );
 
   // Helper for defining the .next, .throw, and .return methods of the
   // Iterator interface in terms of a single ._invoke method.
   function defineIteratorMethods(prototype) {
     ["next", "throw", "return"].forEach(function(method) {
-      prototype[method] = function(arg) {
+      define(prototype, method, function(arg) {
         return this._invoke(method, arg);
-      };
+      });
     });
   }
 
@@ -221,9 +242,7 @@ var runtime = (function (exports) {
       Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
     } else {
       genFun.__proto__ = GeneratorFunctionPrototype;
-      if (!(toStringTagSymbol in genFun)) {
-        genFun[toStringTagSymbol] = "GeneratorFunction";
-      }
+      define(genFun, toStringTagSymbol, "GeneratorFunction");
     }
     genFun.prototype = Object.create(Gp);
     return genFun;
@@ -493,7 +512,7 @@ var runtime = (function (exports) {
   // unified ._invoke helper method.
   defineIteratorMethods(Gp);
 
-  Gp[toStringTagSymbol] = "Generator";
+  define(Gp, toStringTagSymbol, "Generator");
 
   // A Generator should always return itself as the iterator object when the
   // @@iterator function is called on it. Some browsers' implementations of the
@@ -950,7 +969,7 @@ $(".search-entries").click(function () {
   });
   var url = endpoints.search;
   Object(_imports_ajax__WEBPACK_IMPORTED_MODULE_0__["postCall"])(url, data, searchResponse);
-}); // ADD ITEM FUNCTIONS
+}); // ADD & UPDATE ITEM FUNCTIONS
 
 var addItemCallback = function addItemCallback(response) {
   var id = response.data.id;
@@ -959,13 +978,32 @@ var addItemCallback = function addItemCallback(response) {
   updateOutput();
 };
 
+var updateItemCallback = function updateItemCallback(response) {
+  var data = response.data.data;
+  $('#menu-items li[data-id="' + data.id + '"] .dd-handle').text(data.label);
+  $('#menu-items li[data-id="' + data.id + '"]').attr({
+    "data-label": data.label,
+    "data-link": data.url,
+    "data-class": data["class"]
+  });
+};
+
 $("#menu-add-item").click(function () {
-  Object(_imports_ajax__WEBPACK_IMPORTED_MODULE_0__["postCall"])(endpoints.addItem, {
-    label: $("#item_label").val(),
-    link: $("#item_url").val(),
-    "class": $("#item_class").val(),
-    parent: 0
-  }, addItemCallback);
+  if ($(this).data("action") === "update") {
+    Object(_imports_ajax__WEBPACK_IMPORTED_MODULE_0__["postCall"])(endpoints.updateItem, {
+      id: $("#menu-items button.edit.active").closest("li").data("id"),
+      label: $("#item_label").val(),
+      link: $("#item_url").val(),
+      "class": $("#item_class").val()
+    }, updateItemCallback);
+  } else {
+    Object(_imports_ajax__WEBPACK_IMPORTED_MODULE_0__["postCall"])(endpoints.addItem, {
+      label: $("#item_label").val(),
+      link: $("#item_url").val(),
+      "class": $("#item_class").val(),
+      parent: 0
+    }, addItemCallback);
+  }
 }); // REMOVE ITEM FUNCTIONS
 
 $("#menu-items").on("click", ".list-group-item .remove", function (e) {
@@ -975,6 +1013,27 @@ $("#menu-items").on("click", ".list-group-item .remove", function (e) {
   Object(_imports_ajax__WEBPACK_IMPORTED_MODULE_0__["postCall"])(url, {}, function (response) {
     Object(_imports_DOMHelpers__WEBPACK_IMPORTED_MODULE_1__["removeNode"])($('#menu-items li[data-id="' + response.data.id + '"]'));
   });
+}); // EDIT ITEM FUNCTIONS
+
+$("#menu-items").on("click", ".list-group-item .edit", function (e) {
+  var item = $(this).closest("li");
+  var data = item.data();
+  var button = $("#menu-add-item");
+  cleanFields();
+
+  if (!$(this).hasClass("active")) {
+    $("#menu-items li button.active").removeClass("active");
+    $(this).toggleClass("active");
+    $("#item_label").val(data.label);
+    $("#item_class").val(data["class"]);
+    $("#item_url").val(data.link);
+    button.attr("data-action", "update");
+    button.html(button.data("update-message"));
+  } else {
+    $(this).removeClass("active");
+    button.attr("data-action", "add");
+    button.html(button.data("add-message"));
+  }
 });
 /* JQUERY FUNCTIONS */
 // Set url and title of entry
@@ -1026,6 +1085,12 @@ var updateOutput = function updateOutput() {
     sort[parent] += 1;
   });
   Object(_imports_ajax__WEBPACK_IMPORTED_MODULE_0__["postCall"])(endpoints.order, data, function () {});
+};
+
+var cleanFields = function cleanFields() {
+  $("#item_label").val("");
+  $("#item_class").val("");
+  $("#item_url").val("");
 };
 
 /***/ }),

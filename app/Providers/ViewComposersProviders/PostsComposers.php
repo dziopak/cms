@@ -26,6 +26,7 @@ class PostsComposers extends ServiceProvider
     {
         view()->composer('admin.posts.index', function ($view) use ($request) {
             $view->posts = \App\Post::with('author', 'thumbnail')->orderByDesc('id')->filter($request)->paginate(15);
+            $view->categories = array_merge([0 => __('admin/general.no_category')], \App\PostCategory::all('id', 'name')->pluck('name', 'id')->toArray());
             $view->table = getData('Admin/Modules/posts/posts_index_table');
         });
 

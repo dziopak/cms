@@ -18,6 +18,6 @@ $factory->define(Post::class, function (Faker $faker) {
         'content_pl' => $faker->text(600),
         'user_id' => '1',
         'category_id' => $faker->numberBetween(0, 1),
-        // 'created_at' => $faker->dateTimeBetween($startDate = '-30 days', $endDate = 'now')
+        'created_at' => $faker->dateTimeBetween($startDate = '-30 days', $endDate = 'now')
     ];
 });

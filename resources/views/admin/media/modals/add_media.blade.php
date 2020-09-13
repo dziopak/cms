@@ -1,4 +1,4 @@
-<div id="fade" onclick="$('#fade').fadeOut()" class="row">
+<div id="{{ $modal_id ?? "fade" }}" onclick="$('#fade').fadeOut()" class="row {{ $classes ?? ""}} fade">
     <div id="select-media-modal" class="module-modal">
 
         {{-- Modal navigation --}}
@@ -24,7 +24,7 @@
                 <div class="modal-tab" data-tab="2" style="display: none;">
                     @wrapper('admin.partials.wrapper', ['title' => 'admin/media.edit_title'])
                         <div style="height: 100%;">
-                            @include('admin.media.partials.upload')
+                            @include('admin.media.partials.upload', ['modal_id' => $modal_id ?? ""])
                         </div>
                     @endwrapper
                 </div>
@@ -32,7 +32,7 @@
 
 
             {{-- Add media to slider --}}
-            <div id="slider-add-existing" style="width: 100px;" class="btn btn-success mx-auto mt-4">
+            <div id="{{ !empty($modal_id) ? $modal_id.'_' : '' }}slider-add-existing" style="width: 100px;" class="btn btn-success mx-auto mt-4">
                 <i class="fa fa-plus" aria-hidden="true"></i>
                 {{ __('admin/general.create_button') }}
             </div>
@@ -45,11 +45,19 @@
     @if (!empty($single) && $single === true)
         <script>
             $(document).ready(function() {
-                $(".data-list-table input[name^='mass_edit']").each(function() {
-                    $(this).attr('type', 'radio');
-                    $(this).attr('name', 'thumbnail');
-                });
-                $('.select-all').hide();
+                @if (!empty($modal_id))
+                    $("#{{ $modal_id }} .data-list-table input[name^='mass_edit']").each(function() {
+                        $(this).attr('type', 'radio');
+                        $(this).attr('name', 'thumbnail');
+                    });
+                    $('#{{ $modal_id }} .select-all').hide();
+                @else
+                    $("#fade .data-list-table input[name^='mass_edit']").each(function() {
+                        $(this).attr('type', 'radio');
+                        $(this).attr('name', 'thumbnail');
+                    });
+                    $('#select-media-modal .select-all').hide();
+                @endif
             });
         </script>
     @endif

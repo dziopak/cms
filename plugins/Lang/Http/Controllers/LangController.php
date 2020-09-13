@@ -33,48 +33,48 @@ class LangController extends Controller
 
         // Posts table
         Schema::table('posts', function (Blueprint $table) use ($tag) {
-            $table->string('name_' . $tag);
-            $table->string('slug_' . $tag)->index();
-            $table->mediumText('excerpt_' . $tag);
-            $table->mediumText('content_' . $tag);
+            $table->string('name_' . $tag)->nullable();
+            $table->string('slug_' . $tag)->index()->nullable();
+            $table->mediumText('excerpt_' . $tag)->nullable();
+            $table->mediumText('content_' . $tag)->nullable();
             $table->string('meta_title_' . $tag)->nullable();
             $table->mediumText('meta_description_' . $tag)->nullable();
         });
 
         // Pages table
         Schema::table('pages', function (Blueprint $table) use ($tag) {
-            $table->string('name_' . $tag);
-            $table->string('slug_' . $tag)->index();
-            $table->mediumText('excerpt_' . $tag);
-            $table->mediumText('content_' . $tag);
+            $table->string('name_' . $tag)->nullable();
+            $table->string('slug_' . $tag)->index()->nullable();
+            $table->mediumText('excerpt_' . $tag)->nullable();
+            $table->mediumText('content_' . $tag)->nullable();
             $table->string('meta_title_' . $tag)->nullable();
             $table->mediumText('meta_description_' . $tag)->nullable();
         });
 
         // Posts categories table
         Schema::table('post_categories', function (Blueprint $table) use ($tag) {
-            $table->string('name_' . $tag);
-            $table->string('slug_' . $tag)->index();
-            $table->mediumText('description_' . $tag);
+            $table->string('name_' . $tag)->nullable();
+            $table->string('slug_' . $tag)->index()->nullable();
+            $table->mediumText('description_' . $tag)->nullable();
         });
 
         // Page categories table
         Schema::table('page_categories', function (Blueprint $table) use ($tag) {
-            $table->string('name_' . $tag);
-            $table->string('slug_' . $tag)->index();
-            $table->mediumText('description_' . $tag);
+            $table->string('name_' . $tag)->nullable();
+            $table->string('slug_' . $tag)->index()->nullable();
+            $table->mediumText('description_' . $tag)->nullable();
         });
 
         // Testimonials module table
         Schema::table('testimonials', function (Blueprint $table) use ($tag) {
-            $table->string('author_title_' . $tag);
-            $table->mediumText('content_' . $tag);
+            $table->string('author_title_' . $tag)->nullable();
+            $table->mediumText('content_' . $tag)->nullable();
         });
 
         // Portfolio module table
         Schema::table('portfolio_items', function (Blueprint $table) use ($tag) {
-            $table->mediumText('intro_' . $tag);
-            $table->mediumText('desc_' . $tag);
+            $table->mediumText('intro_' . $tag)->nullable();
+            $table->mediumText('desc_' . $tag)->nullable();
         });
 
         Lang::create($data);

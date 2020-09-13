@@ -322,6 +322,33 @@ button#toggle-components {
   transition: all 0.15s linear;
 }
 
+button#toggle-components:hover ~ .toggle-components-up,
+.toggle-components-up {
+  bottom: 100px;
+  transition-delay: 0s;
+}
+
+button#toggle-components:hover ~ .toggle-components-left,
+.toggle-components-left {
+  right: 100px;
+  transition-delay: 0s;
+}
+
+button.toggle-components {
+  position: fixed;
+  bottom: 45px;
+  right: 45px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #c2c7d4;
+  border: 1px solid #9397a0;
+  color: #fff;
+  z-index: 90;
+  transition: all 0.15s linear;
+  transition-delay: 2s;
+}
+
 button#toggle-components.active,
 button#toggle-components:hover {
   background: #3490dc;
@@ -535,7 +562,8 @@ textarea.small {
   height: 100px;
 }
 
-#fade {
+#fade,
+.fade {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -544,6 +572,10 @@ textarea.small {
   background: rgba(0, 0, 0, 0.75);
   z-index: 1;
   display: none;
+}
+
+.fade {
+  opacity: 1 !important;
 }
 
 .module-modal {
@@ -646,5 +678,20 @@ textarea.small {
   margin-top: -3px;
   display: block;
   text-align: center;
+}
+
+small.close {
+  cursor: pointer;
+  font-size: 14px;
+}
+
+span.tag {
+  background: #eee;
+  padding: 10px 15px;
+}
+
+span.tag .close {
+  float: unset;
+  margin-left: 10px;
 }
 

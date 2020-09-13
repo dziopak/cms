@@ -30,6 +30,17 @@
             float: right;
             margin-right: 0px;
         }
+
+        &.edit {
+            &.active {
+                background-color: #38c172;
+                border-color: #38c172;
+                color: #fff;
+                border-color: inherit;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+            }
+        }
     }
 
     .dd-handle {

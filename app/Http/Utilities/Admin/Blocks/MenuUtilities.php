@@ -24,14 +24,22 @@ class MenuUtilities
     {
         $menu = \App\Menu::findOrFail($id);
 
-        $item = $menu->items()->create([
-            'label' => $data['label'],
-            'link' => $data['link'],
-            'parent' => $data['parent'],
-            'class' => $data['class']
-        ]);
-
-        return response()->json(['message' => 'Successfuly attached menu item', 'data' => $data, 'id' => $item->id], 200);
+        if (!empty($data['id'])) {
+            $item = $menu->items()->findOrFail($data['id'])->update([
+                'label' => $data['label'],
+                'link' => $data['link'],
+                'class' => $data['class']
+            ]);
+            return response()->json(['message' => 'Successfuly updated menu item', 'data' => $data], 200);
+        } else {
+            $item = $menu->items()->create([
+                'label' => $data['label'],
+                'link' => $data['link'],
+                'parent' => $data['parent'],
+                'class' => $data['class']
+            ]);
+            return response()->json(['message' => 'Successfuly attached menu item', 'data' => $data, 'id' => $item->id], 200);
+        }
     }
 
 

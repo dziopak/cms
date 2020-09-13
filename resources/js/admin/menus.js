@@ -34,7 +34,7 @@ $(".search-entries").click(function() {
     postCall(url, data, searchResponse);
 });
 
-// ADD ITEM FUNCTIONS
+// ADD & UPDATE ITEM FUNCTIONS
 const addItemCallback = response => {
     const { id } = response.data;
     const { data } = response.data;
@@ -47,17 +47,42 @@ const addItemCallback = response => {
     updateOutput();
 };
 
+const updateItemCallback = response => {
+    const { data } = response.data;
+    $('#menu-items li[data-id="' + data.id + '"] .dd-handle').text(data.label);
+    $('#menu-items li[data-id="' + data.id + '"]').attr({
+        "data-label": data.label,
+        "data-link": data.url,
+        "data-class": data.class
+    });
+};
+
 $("#menu-add-item").click(function() {
-    postCall(
-        endpoints.addItem,
-        {
-            label: $("#item_label").val(),
-            link: $("#item_url").val(),
-            class: $("#item_class").val(),
-            parent: 0
-        },
-        addItemCallback
-    );
+    if ($(this).data("action") === "update") {
+        postCall(
+            endpoints.updateItem,
+            {
+                id: $("#menu-items button.edit.active")
+                    .closest("li")
+                    .data("id"),
+                label: $("#item_label").val(),
+                link: $("#item_url").val(),
+                class: $("#item_class").val()
+            },
+            updateItemCallback
+        );
+    } else {
+        postCall(
+            endpoints.addItem,
+            {
+                label: $("#item_label").val(),
+                link: $("#item_url").val(),
+                class: $("#item_class").val(),
+                parent: 0
+            },
+            addItemCallback
+        );
+    }
 });
 
 // REMOVE ITEM FUNCTIONS
@@ -71,6 +96,31 @@ $("#menu-items").on("click", ".list-group-item .remove", function(e) {
     postCall(url, {}, response => {
         removeNode($('#menu-items li[data-id="' + response.data.id + '"]'));
     });
+});
+
+// EDIT ITEM FUNCTIONS
+$("#menu-items").on("click", ".list-group-item .edit", function(e) {
+    const item = $(this).closest("li");
+    const data = item.data();
+    const button = $("#menu-add-item");
+
+    cleanFields();
+
+    if (!$(this).hasClass("active")) {
+        $("#menu-items li button.active").removeClass("active");
+        $(this).toggleClass("active");
+
+        $("#item_label").val(data.label);
+        $("#item_class").val(data.class);
+        $("#item_url").val(data.link);
+
+        button.attr("data-action", "update");
+        button.html(button.data("update-message"));
+    } else {
+        $(this).removeClass("active");
+        button.attr("data-action", "add");
+        button.html(button.data("add-message"));
+    }
 });
 
 /* JQUERY FUNCTIONS */
@@ -136,4 +186,10 @@ const updateOutput = () => {
     });
 
     postCall(endpoints.order, data, () => {});
+};
+
+const cleanFields = () => {
+    $("#item_label").val("");
+    $("#item_class").val("");
+    $("#item_url").val("");
 };

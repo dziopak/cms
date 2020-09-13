@@ -21,3 +21,7 @@ input[type="radio"].dropzone-select {
     margin: 10px auto;
     display: block;
 }
+
+*:focus {
+    outline: none;
+}

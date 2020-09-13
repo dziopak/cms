@@ -111,7 +111,7 @@ class UserUtilities extends \App\Http\Utilities\UserUtilities
                     User::whereIn('id', $data['mass_edit'])->update(['is_active' => 1]);
                     break;
 
-                case 'role':
+                case 'user_role':
                     Auth::user()->hasAccessOrRedirect('USER_EDIT');
                     User::whereIn('id', $data['mass_edit'])->update(['role_id' => $data['role']]);
                     break;

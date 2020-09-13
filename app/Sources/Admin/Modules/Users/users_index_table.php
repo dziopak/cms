@@ -23,9 +23,10 @@ $table['mass_edit'] = [
     "delete" => __('admin/users.mass_delete'),
     "hide" => __('admin/users.mass_hide'),
     "show" => __('admin/users.mass_show'),
-    "role" => __('admin/users.mass_role'),
 ];
-$table['mass_edit_extend'] = 'users';
+$table['mass_edit_extend'] = [
+    'user_role' => __('admin/users.mass_role')
+];
 $table['sort_by'] = [
     'email' => __('admin/users.email'),
     'name' => __('admin/users.name'),

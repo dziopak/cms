@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Resources\PageResource;
 use App\Http\Utilities\AuthResponse;
 use App\Http\Utilities\PageUtilities;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
+use App\Http\Utilities\ModelUtilities;
 use App\Page;
 
 class PagesController extends Controller
@@ -14,7 +17,14 @@ class PagesController extends Controller
 
     public function index(Request $request)
     {
-        return PageResource::collection(Page::with('author', 'thumbnail', 'category')->orderBy('id')->paginate(15));
+        $pages = QueryBuilder::for(Page::with('author', 'thumbnail', 'category'))
+            ->allowedFilters(['created_at', 'updated_at', 'name', 'slug', AllowedFilter::exact('id')])
+            ->allowedSorts(['id', 'created_at', 'updated_at'])
+            ->defaultSort('-created_at');
+
+        return PageResource::collection(ModelUtilities::scope($pages, $request));
+
+        // return PageResource::collection(Page::with('author', 'thumbnail', 'category')->orderBy('id')->paginate(15));
     }
 
 

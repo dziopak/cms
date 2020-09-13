@@ -23,11 +23,11 @@ class PostResource extends JsonResource
             'slug' => $this->slug,
             'content' => $this->content,
             'excerpt' => $this->excerpt,
-            'thumbnail' => $this->file_id ? env('APP_URL').'images/'.$this->thumbnail->path : "",
-            'author' => $this->author->name,
-            'category' => $this->category_id ? $this->category->name : "",
-            'category_id' => $this->category_id ? $this->category_id : "",
-            'category_slug' => $this->category_id ? $this->category->slug : "",
+            'thumbnail' => $this->file_id ? env('APP_URL') . 'images/' . $this->thumbnail->path : "",
+            'author' => $this->author->name ?? null,
+            'category' => $this->category->name ?? null,
+            'category_id' => $this->category_id ?? null,
+            'category_slug' => $this->category->slug ?? null,
             'meta_title' => $this->meta_title,
             'meta_description' => $this->meta_description,
             'index' => $this->index,
@@ -35,7 +35,7 @@ class PostResource extends JsonResource
         ];
         $post = $this;
 
-        $postResource = Hook::get('apiPostResource',[$postResource, $post],function($postResource, $post) {
+        $postResource = Hook::get('apiPostResource', [$postResource, $post], function ($postResource, $post) {
             return $postResource;
         });
 

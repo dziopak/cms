@@ -1,6 +1,6 @@
 @foreach($blocks as $row)
 @if ($row['container'] === 1)
-    <div class="grid-container">
+    <div class="container">
 @endif
     <div class="block-row row">
 
