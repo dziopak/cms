@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Resources\PostResource;
 use App\Http\Utilities\AuthResponse;
 use App\Http\Utilities\PostUtilities;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
+use App\Http\Utilities\ModelUtilities;
 use App\Post;
 
 class PostsController extends Controller
@@ -14,7 +17,12 @@ class PostsController extends Controller
 
     public function index(Request $request)
     {
-        return PostResource::collection(Post::with('author', 'thumbnail', 'category')->orderBy('id')->paginate(15));
+        $posts = QueryBuilder::for(Post::with('author', 'thumbnail', 'category'))
+            ->allowedFilters(['created_at', 'updated_at', 'name', 'slug', AllowedFilter::exact('id')])
+            ->allowedSorts(['id', 'created_at', 'updated_at'])
+            ->defaultSort('-created_at');
+
+        return PostResource::collection(ModelUtilities::scope($posts, $request));
     }
 
 

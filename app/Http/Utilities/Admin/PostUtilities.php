@@ -87,10 +87,26 @@ class PostUtilities
                     Post::whereIn('id', $data['mass_edit'])->update(['is_active' => 1]);
                     break;
 
-                case 'category':
-                    // TO DO //
+                case 'name_replace':
+                    // --TO DO-- //
+                    //   LANGS   //
+                    //-----------//
                     Auth::user()->hasAccessOrRedirect('POST_EDIT');
-                    return redirect()->back()->with('error', 'Functionality not ready yet.');
+                    $posts = Post::whereIn('id', $data['mass_edit'])->get(['id', 'name']);
+                    $res = [];
+                    foreach ($posts as $key => $post) {
+                        if (strpos($post->name, $data['name_search_string']) !== false) {
+                            $post->name = str_replace($data['name_search_string'], $data['name_replace_string'], $post->name);
+                            $post->save();
+                        }
+                    }
+                    return redirect()->back()->with('crud', 'Successfully replaced titles of multiple rows.');
+                    break;
+
+                case 'category':
+                    Auth::user()->hasAccessOrRedirect('POST_EDIT');
+                    Post::whereIn('id', $data['mass_edit'])->update(['category_id' => $data['category_id']]);
+                    return redirect()->back()->with('crud', 'Successfully assigned category to selected posts.');
                     break;
             }
         }

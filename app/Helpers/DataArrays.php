@@ -9,7 +9,7 @@ function getData($file)
 function getModuleData($file, $module_name)
 {
     if (!empty(func_get_args()[2])) $args = func_get_args()[2];
-    return include(base_path('plugins/' . $module_name . '/resources/data/array/' . $file . '.php'));
+    return include(base_path('plugins/' . $module_name . '/Sources/' . $file . '.php'));
 };
 
 function addFormInput($name, $type, $label, $required = false, $value = null, $class = '', $container_class = '', $attributes = [], $container_attributes = [])

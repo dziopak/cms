@@ -10,7 +10,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "plugins\\Portfolio\\Providers\\PortfolioServiceProvider"
+                "plugins\\Portfolio\\Providers\\PortfolioServiceProvider",
+                "plugins\\Portfolio\\Providers\\HooksServiceProvider"
             ],
             "aliases": {}
         }

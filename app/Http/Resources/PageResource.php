@@ -23,17 +23,17 @@ class PageResource extends JsonResource
             'slug' => $this->slug,
             'content' => $this->content,
             'excerpt' => $this->excerpt,
-            'thumbnail' => $this->file_id ? env('APP_URL').'images/'.$this->thumbnail->path : "",
-            'author' => $this->author->name,
-            'category' => $this->category_id && $this->category->name ? $this->category->name : "",
-            'category_id' => $this->category_id ? $this->category_id : "",
-            'category_slug' => $this->category_id && $this->category->slug ? $this->category->slug : "",
+            'thumbnail' => $this->thumbnail ? env('APP_URL') . 'images/' . $this->thumbnail->path : "",
+            'author' => $this->author ? $this->author->name : '',
+            'category' => $this->category->name ?? null,
+            'category_id' => $this->category_id ?? null,
+            'category_slug' => $this->category->slug ?? null,
             'meta_title' => $this->meta_title,
             'meta_description' => $this->meta_description,
         ];
         $page = $this;
 
-        $pageResource = Hook::get('apiPageResource',[$pageResource, $page],function($pageResource, $page) {
+        $pageResource = Hook::get('apiPageResource', [$pageResource, $page], function ($pageResource, $page) {
             return $pageResource;
         });
 

@@ -19,6 +19,7 @@ class CreateTestimonialsTable extends Migration
             $table->string('author_title');
             $table->mediumText('content');
             $table->bigInteger('file_id')->nullable();
+            $table->string('background-color', 7)->nullable();
             $table->timestamps();
         });
     }

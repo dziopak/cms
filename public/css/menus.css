@@ -35,6 +35,14 @@
   margin-right: 0px;
 }
 
+#menu-items button.edit.active {
+  background-color: #38c172;
+  border-color: #38c172;
+  color: #fff;
+  border-color: inherit;
+  box-shadow: none;
+}
+
 #menu-items .dd-handle {
   padding: 10px 0;
 }

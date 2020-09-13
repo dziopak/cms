@@ -33,4 +33,5 @@ return [
     "mass_delete" => "Delete selected",
     "mass_hide" => "Disable / Hide",
     "mass_show" => "Enable / Show",
+    "mass_replace" => "Replace phrases in name",
 ];

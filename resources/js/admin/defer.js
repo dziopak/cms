@@ -55,8 +55,8 @@ $(document).ready(function() {
 
     $("#mass_action").change(function(e) {
         $(".mass_edit_sub").hide();
-        if ($("#" + e.target.value)) {
-            $("#" + e.target.value).show();
+        if ($("#mass_" + e.target.value)) {
+            $("#mass_" + e.target.value).show();
         }
     });
 
@@ -102,7 +102,11 @@ $(document).ready(function() {
         $("#fade").fadeOut();
     });
 
-    $("#fade *").click(function(event) {
+    $(".fade").click(function() {
+        $(this).fadeOut();
+    });
+
+    $("#fade *, .fade *").click(function(event) {
         event.stopPropagation();
     });
 

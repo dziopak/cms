@@ -25,15 +25,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'access:ADM
     //BLOCKS ROUTES
     require base_path('routes/web/admin/blocks.php');
 
+    //PLUGINS ROUTES
+    require base_path('routes/web/admin/plugins.php');
+
     //VENDOR ROUTES
     require base_path('routes/web/admin/vendor/filemanager.php');
 
     Route::get('/menus', function () {
         return view('admin.menus.index');
     })->name('widgets.menus.index');
-
-
-    Route::get('/plugins', 'Admin\Modules\PluginsController@index')->name('plugins.index');
 });
 
 //HELPERS ROUTES

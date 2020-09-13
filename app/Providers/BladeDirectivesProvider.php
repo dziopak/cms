@@ -91,6 +91,27 @@ class BladeDirectivesProvider extends ServiceProvider
         });
 
 
+        Blade::directive('pluginAsset', function ($expression) {
+            list($type, $name, $plugin) = explode(',', $expression, 3);
+
+            $type = trim(str_replace('\'', '', $type));
+            $name = trim(str_replace('\'', '', $name));
+            $plugin = trim(str_replace('\'', '', $plugin));
+
+            $path = $type . '/plugins/' . $plugin . '/' . $name . '.' . $type;
+
+            switch ($type) {
+                case 'css':
+                    return '<?php echo "<link rel="stylesheet" type="text/css" href=\'/' . $path . '\'>"; ?>';
+                    break;
+
+                case 'js':
+                    return '<?php echo "<script src=\'/' . $path . '\'></script>"; ?>';
+                    break;
+            }
+        });
+
+
         // Set variable directive
         Blade::directive('set', function ($expression) {
             list($variable, $value) = explode(',', $expression, 2);
@@ -107,6 +128,7 @@ class BladeDirectivesProvider extends ServiceProvider
         Blade::directive('includeJS', function ($js) {
             return "<script src='{{asset(\"js/$js\")}}'></script>";
         });
+
 
         // Include CSS directive
         Blade::directive('includeCSS', function ($css) {

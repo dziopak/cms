@@ -33,4 +33,5 @@ return [
     "mass_delete" => "Usuń zaznaczone",
     "mass_hide" => "Zablokuj / Schowaj",
     "mass_show" => "Odblokuj / Pokaż",
+    "mass_replace" => "Zmień frazy w nazwie"
 ];

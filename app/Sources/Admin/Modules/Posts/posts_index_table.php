@@ -19,6 +19,10 @@ $table['mass_edit'] = [
     "hide" => __("admin/posts.mass_hide"),
     "show" => __("admin/posts.mass_show"),
 ];
+$table['mass_edit_extend'] = [
+    "name_replace" => __("admin/general.mass_name_replace"),
+    "category" => __("admin/general.mass_set_category")
+];
 $table['sort_by'] = [
     'name' => 'Title',
     'user_id' => 'Author',

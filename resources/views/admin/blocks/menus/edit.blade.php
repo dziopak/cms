@@ -76,7 +76,7 @@
 
 
         {{-- Add button --}}
-        <div id="menu-add-item" class="btn btn-success mt-2">
+        <div id="menu-add-item" class="btn btn-success mt-2" data-action="add" data-add-message="<i class='fa fa-plus' aria-hidden='true'></i> {{ __('admin/general.create_button') }}" data-update-message="{{ __('admin/general.update_button') }}">
             <i class="fa fa-plus" aria-hidden="true"></i>
             {{ __('admin/general.create_button') }}
         </div>

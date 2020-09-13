@@ -45,31 +45,21 @@ class TestimonialsController extends Controller
         }
 
 
-        $testimonial = Testimonial::create($data);
+        Testimonial::create($data);
         return redirect(route('admin.plugins.testimonials.index'));
     }
 
     public function edit($id)
     {
         $testimonial = Testimonial::findOrFail($id);
-        return view('testimonials::edit', compact('testimonial'));
+        $form = getModuleData('testimonials_form', 'Testimonials', ['thumbnail' => getThumbnail($testimonial->thumbnail)]);
+        return view('testimonials::edit', compact('form', 'testimonial'));
     }
 
     public function update(Request $request, $id)
     {
         $testimonial = Testimonial::findOrFail($id);
         $data = $request->all();
-
-        if ($request->file('thumbnail')) {
-
-            $thumbnail = $request->file('thumbnail');
-            $name = time() . '_' . $thumbnail->getClientOriginalName();
-            $thumbnail->move('images/testimonials', $name);
-
-            $photo = File::create(['path' => 'testimonials/' . $name, 'type' => '1']);
-            $data['file_id'] = $photo->id;
-        }
-
 
         $testimonial->update($data);
         return redirect(route('admin.plugins.testimonials.index'));

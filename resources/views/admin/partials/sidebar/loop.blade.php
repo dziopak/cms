@@ -10,7 +10,7 @@
                     <li class="sidebar-list-item">
                         <a href="{{ route($item_data['route']) }}">
                             @if(!empty($item_data['custom_label']))
-                                {{ $item_data['custom_label'] }}
+                                {{ __($item_data['custom_label']) }}
                             @else
                                 {{ __('admin/menu-items.'.$name.'_items.'.$item_name) }}
                             @endif

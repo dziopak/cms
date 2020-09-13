@@ -4,9 +4,16 @@ namespace plugins\Testimonials\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use App\Http\Utilities\Admin\PluginUtilities;
 
 class TestimonialsServiceProvider extends ServiceProvider
 {
+
+    public function registerPlugin()
+    {
+        PluginUtilities::registerPlugin('testimonials');
+    }
+
     /**
      * Boot the application events.
      *
@@ -14,6 +21,7 @@ class TestimonialsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->registerPlugin();
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
@@ -29,6 +37,7 @@ class TestimonialsServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
+        $this->app->register(HooksServiceProvider::class);
     }
 
     /**

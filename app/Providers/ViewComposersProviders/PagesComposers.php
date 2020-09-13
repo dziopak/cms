@@ -26,6 +26,7 @@ class PagesComposers extends ServiceProvider
     {
         view()->composer('admin.pages.index', function ($view) use ($request) {
             $view->pages = \App\Page::with('author', 'thumbnail')->orderByDesc('id')->filter($request)->paginate(15);
+            $view->categories = array_merge([0 => __('admin/general.no_category')], \App\PageCategory::all('id', 'name')->pluck('name', 'id')->toArray());
             $view->table = getData('Admin/Modules/pages/pages_index_table');
         });
 

@@ -46,7 +46,7 @@ class PostCategoriesController extends Controller
     public function store(CategoriesRequest $request)
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_CREATE');
-        return PostCategoryUtilities::store();
+        return PostCategoryUtilities::store($request);
     }
 
 

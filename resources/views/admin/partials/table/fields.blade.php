@@ -37,6 +37,7 @@
                             {{ $field[$row] }}
                         @endif
                     @break
+
                 @endswitch
             @else
                 {{ $field[$row] }}

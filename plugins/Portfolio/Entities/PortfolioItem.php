@@ -6,20 +6,41 @@ use Illuminate\Database\Eloquent\Model;
 use plugins\Portfolio\Events\PortfolioItemCreateEvent;
 use plugins\Portfolio\Events\PortfolioItemUpdateEvent;
 use plugins\Portfolio\Events\PortfolioItemDestroyEvent;
+use plugins\Portfolio\Entities\PortfolioCategory;
+use App\File;
 
 class PortfolioItem extends Model
 {
     protected $guarded = [];
     public $fire_events = true;
+    public $timestamps = false;
 
     public function photos()
     {
-        return $this->hasMany('plugins\Portfolio\Entities\PortfolioItemPicture', 'portfolio_item_id');
+        return $this->belongsToMany(File::class);
     }
+
 
     public function thumbnail()
     {
         return $this->belongsTo('App\File', 'file_id');
+    }
+
+    // TO DO //
+    // ASSIGN FROM TESTIMONIAL PLUGIN //
+    public function testimonial()
+    {
+        return $this->belongsTo('plugins\Testimonials\Entities\Testimonial');
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(PortfolioCategory::class);
+    }
+
+    public function content_boxes()
+    {
+        return $this->hasMany('plugins\Portfolio\Entities\ContentBox');
     }
 
     public function scopeFilter($query, $request)

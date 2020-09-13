@@ -18,17 +18,18 @@ class CreatePortfolioItemsTable extends Migration
             $table->string('name');
             $table->string('slug')->index();
 
-            $table->tinyInteger('type')->default(0);
-            $table->mediumText('intro');
-            $table->mediumText('description');
-            
-            $table->bigInteger('testimonial_id')->nullable();
+            $table->tinyInteger('category')->default(0);
+            $table->mediumText('intro')->nullable();
+            $table->mediumText('description')->nullable();
+
             $table->bigInteger('file_id')->nullable();
-            
-            $table->string('thumb_background');
-            $table->string('thumb_color');
-            
-            $table->timestamps();
+
+            $table->string('thumb_background')->default('#ffffff');
+            $table->string('thumb_color')->default('#ffffff');
+
+            // TO DO //
+            // Testimonials plugin //
+            $table->bigInteger('testimonial_id')->nullable();
         });
     }
 
