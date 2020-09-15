@@ -28,6 +28,11 @@ return [
     "content" => "Treść",
     "no_category" => "Bez kategorii",
 
+    "align" => "Wyrównaj",
+    "to_left" => "Do lewej",
+    "to_right" => "Do prawej",
+    "to_middle" => "Do środka",
+
     "mass_delete" => "Usuń zaznaczone",
     "mass_hide" => "Zablokuj / Schowaj",
     "mass_show" => "Odblokuj / Pokaż",

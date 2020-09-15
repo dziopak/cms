@@ -28,6 +28,11 @@ return [
     "content" => "Content",
     "no_category" => "No category",
 
+    "align" => "Align",
+    "to_left" => "To left",
+    "to_right" => "To right",
+    "to_middle" => "Center",
+
     "mass_delete" => "Delete selected",
     "mass_hide" => "Disable / Hide",
     "mass_show" => "Enable / Show",

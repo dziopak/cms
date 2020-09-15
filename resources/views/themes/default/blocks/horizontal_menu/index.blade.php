@@ -1,8 +1,24 @@
+@php
+    switch($block['align']) {
+        case '0':
+        default:
+            $class = 'align-left';
+        break;
+
+        case '1':
+            $class = 'align-right';
+        break;
+
+        case '2':
+            $class = 'align-center';
+        break;
+    }
+@endphp
 
 <div class="horizontal-menu grid-item {{ $block['classes'] ?? "" }}">
 
     @if(!empty($block['menu']))
-        <ul class="align-center">
+        <ul class="{{ $class }}">
             {{-- Menu item's loop --}}
             @foreach($block['menu'] as $item)
                 <li class="{{ $item['class'] }}">

@@ -110,6 +110,18 @@ h1 {
   padding: 0;
 }
 
+.vertical-menu ul.align-left {
+  text-align: left;
+}
+
+.vertical-menu ul.align-right {
+  text-align: right;
+}
+
+.vertical-menu ul.align-center {
+  text-align: center;
+}
+
 .vertical-menu ul .sub-menu {
   padding-left: 10px;
 }
@@ -123,6 +135,14 @@ h1 {
 .horizontal-menu ul {
   display: block;
   margin: 0;
+}
+
+.horizontal-menu ul.align-left {
+  text-align: left;
+}
+
+.horizontal-menu ul.align-right {
+  text-align: right;
 }
 
 .horizontal-menu ul.align-center {

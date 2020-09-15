@@ -1,8 +1,23 @@
+@php
+    switch($block['align']) {
+        case '0':
+        default:
+            $class = 'align-left';
+        break;
+
+        case '1':
+            $class = 'align-right';
+        break;
+
+        case '2':
+            $class = 'align-center';
+        break;
+    }
+@endphp
 
 <div class="vertical-menu grid-item {{ $block['classes'] ?? "" }}">
-
     @if(!empty($block['menu']))
-        <ul>
+        <ul class="{{ $class }}">
 
             {{-- Nav title --}}
             <li class="vertical-menu-title">{{ $block['title'] }}</li>
