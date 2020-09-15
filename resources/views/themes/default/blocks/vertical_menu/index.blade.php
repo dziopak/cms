@@ -1,5 +1,5 @@
 @php
-    switch($block['align']) {
+    switch($block['align'] ?? 0) {
         case '0':
         default:
             $class = 'align-left';

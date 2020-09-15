@@ -1,3 +1,15 @@
+// Blocks
+@import "../../blocks/horizontal_menu/style.scss";
+@import "../../blocks/vertical_menu/style.scss";
+@import "../../blocks/footer/style.scss";
+@import "../../blocks/header/style.scss";
+@import "../../blocks/slider/style.scss";
+// End of blocks
+
+// Modules
+@import "../../modules/posts/style.scss";
+// End of modules
+
 body {
     font-family: "Nunito Sans", sans-serif;
     color: #333333;
@@ -62,109 +74,7 @@ h1 {
 .grid {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-
-    .grid-item {
-    }
 }
-
-// BLOCKS //
-.hero {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    color: #222;
-    height: 400px;
-    background: #eeeeee;
-
-    img {
-        width: 100%;
-    }
-
-    &-container {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        max-width: 50%;
-        text-align: center;
-    }
-
-    p {
-        max-width: 560px;
-        margin: 20px auto;
-    }
-}
-
-.footer {
-    width: 100%;
-    background-color: #eeeeee;
-    padding: 20px;
-
-    p {
-        margin-bottom: 0px;
-    }
-}
-
-.vertical-menu {
-    padding: 10px 20px;
-    background: #fafafa;
-
-    ul {
-        padding: 0;
-
-        &.align-left {
-            text-align: left;
-        }
-
-        &.align-right {
-            text-align: right;
-        }
-
-        &.align-center {
-            text-align: center;
-        }
-
-        .sub-menu {
-            padding-left: 10px;
-        }
-    }
-
-    &-title {
-        font-weight: 500;
-        text-transform: uppercase;
-        font-size: 12px;
-    }
-}
-
-.horizontal-menu {
-    ul {
-        display: block;
-        margin: 0;
-
-        &.align-left {
-            text-align: left;
-        }
-
-        &.align-right {
-            text-align: right;
-        }
-
-        &.align-center {
-            text-align: center;
-        }
-
-        li {
-            display: inline-block;
-            padding: 10px 20px;
-
-            ul {
-                display: none;
-            }
-        }
-    }
-}
-
-//Modules
 
 .module {
     h3 {
@@ -182,21 +92,6 @@ h1 {
 
     &-page {
         padding: 40px 10px;
-    }
-}
-
-.post {
-    padding: 40px 20px;
-    border-top: 1px solid #dee2e6;
-
-    &:first-child {
-        border-top: 0px;
-    }
-
-    &__thumbnail {
-        &-col {
-            max-width: 240px;
-        }
     }
 }
 
