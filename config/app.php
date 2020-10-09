@@ -187,18 +187,7 @@ return [
         /*
          * View composers
         */
-        App\Providers\ThemeServiceProvider::class,
-        App\Providers\ViewComposersProviders\DashboardComposers::class,
-        App\Providers\ViewComposersProviders\UsersComposers::class,
-        App\Providers\ViewComposersProviders\RolesComposers::class,
-        App\Providers\ViewComposersProviders\PostsComposers::class,
-        App\Providers\ViewComposersProviders\PagesComposers::class,
-        App\Providers\ViewComposersProviders\MediaComposers::class,
-        App\Providers\ViewComposersProviders\SettingsComposers::class,
-        App\Providers\ViewComposersProviders\PluginsComposers::class,
-        App\Providers\ViewComposersProviders\CategoriesComposers::class,
-        App\Providers\ViewComposersProviders\Blocks\MenusComposers::class,
-        App\Providers\ViewComposersProviders\Blocks\SlidersComposers::class,
+        App\Providers\ThemeServiceProvider::class
     ],
 
     /*

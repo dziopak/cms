@@ -2,13 +2,11 @@
 
 namespace App\Listeners\Posts;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use App\Log;
 
 class PostCreateLogListener
 {
-    
+
     public function handle($event)
     {
         $log_data = [
@@ -22,5 +20,4 @@ class PostCreateLogListener
 
         Log::create($log_data);
     }
-
 }

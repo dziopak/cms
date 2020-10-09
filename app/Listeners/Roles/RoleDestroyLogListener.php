@@ -2,15 +2,12 @@
 
 namespace App\Listeners\Roles;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-
 use App\Log;
 use Auth;
 
 class RoleDestroyLogListener
 {
-    
+
     public function handle($event)
     {
         $log_data = [
@@ -21,8 +18,7 @@ class RoleDestroyLogListener
             'crud_action' => '3',
             'message' => 'deleted access role'
         ];
-        
+
         Log::create($log_data);
     }
-
 }

@@ -2,15 +2,12 @@
 
 namespace App\Listeners\Roles;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-
 use App\Log;
 use Auth;
 
 class RoleCreateLogListener
 {
-    
+
     public function handle($event)
     {
         $log_data = [
@@ -23,5 +20,4 @@ class RoleCreateLogListener
         ];
         Log::create($log_data);
     }
-
 }

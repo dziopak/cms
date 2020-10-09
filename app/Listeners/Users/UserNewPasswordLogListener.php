@@ -2,15 +2,12 @@
 
 namespace App\Listeners\Users;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-
 use App\Log;
 use Auth;
 
 class UserNewPasswordLogListener
 {
- 
+
     public function handle($event)
     {
         $log_data = [
@@ -23,5 +20,4 @@ class UserNewPasswordLogListener
         ];
         Log::create($log_data);
     }
-
 }

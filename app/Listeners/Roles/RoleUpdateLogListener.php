@@ -2,15 +2,12 @@
 
 namespace App\Listeners\Roles;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-
 use App\Log;
 use Auth;
 
 class RoleUpdateLogListener
 {
-    
+
     public function handle($event)
     {
         $log_data = [
@@ -21,8 +18,7 @@ class RoleUpdateLogListener
             'crud_action' => '2',
             'message' => 'updated access role'
         ];
-        
+
         Log::create($log_data);
     }
-
 }

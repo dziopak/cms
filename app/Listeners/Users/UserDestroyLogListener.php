@@ -2,9 +2,6 @@
 
 namespace App\Listeners\Users;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-
 use App\Log;
 use Auth;
 

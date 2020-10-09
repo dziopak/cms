@@ -2,9 +2,6 @@
 
 namespace App\Listeners\Posts;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-
 use App\Log;
 use Auth;
 
@@ -23,5 +20,4 @@ class PostDestroyLogListener
         ];
         Log::create($log_data);
     }
-
 }
