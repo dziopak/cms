@@ -33,7 +33,7 @@ class PostCategoryUtilities
         $category = PostCategory::findOrFail($id);
         $category->delete();
 
-        return response()->json(['message' => 'Category deleted successfully', 'id' => $id], 200);
+        return response()->json(['message' => __('admin/messages.categories.delete.success'), 'id' => $id], 200);
     }
 
 
@@ -41,7 +41,7 @@ class PostCategoryUtilities
     {
         $data = $request->all();
         if (empty($data['mass_edit'])) {
-            return redirect()->back()->with('error', 'No categories were selected.');
+            return redirect()->back()->with('error', __('admin/messages.categories.mass.errors.no_categories'));
         } else {
             switch ($data['mass_action']) {
                 case 'delete':

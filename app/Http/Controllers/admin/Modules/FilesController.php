@@ -52,7 +52,7 @@ class FilesController extends Controller
             $path = 'assets/no-thumbnail.png' :
             $path = \App\File::findOrFail($id)->path;
 
-        return response()->json(['message' => 'Successfully fetched item', 'path' => $path]);
+        return response()->json(['path' => $path]);
     }
 
     /**
@@ -106,7 +106,7 @@ class FilesController extends Controller
     public function destroy($id)
     {
         \App\File::findOrFail($id)->delete();
-        return response()->json(['message' => 'Successfully deleted the file', 'id' => $id], 200);
+        return response()->json(['message' => __('admin/messages.files.delete.success'), 'id' => $id], 200);
         // return redirect(route('admin.media.index'));
     }
 
@@ -120,11 +120,12 @@ class FilesController extends Controller
         $data = $request->all();
 
         if (empty($data['mass_edit'])) {
-            return redirect()->back()->with('error', 'No posts were selected.');
+            return redirect()->back()->with('error', __('admin/messages.files.mass.errors.no_files'));
         } else {
             switch ($data['mass_action']) {
                 case 'delete':
                     \App\File::whereIn('id', $data['mass_edit'])->delete();
+                    return redirect()->back()->with('crud', __('admin/messages.files.mass.delete'));
                     break;
 
                 default:
@@ -132,7 +133,6 @@ class FilesController extends Controller
                     break;
             }
         }
-
-        return redirect()->back()->with('crud', 'Files has been successfully deleted.');
+        return redirect()->back();
     }
 }

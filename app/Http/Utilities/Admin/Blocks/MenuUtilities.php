@@ -16,7 +16,7 @@ class MenuUtilities
             }
         }
 
-        return response()->json(['message' => 'Successfuly ordered menu items', 'data' => $data], 200);
+        return response()->json(['message' => __('admin/messages.blocks.menus.items.order'), 'data' => $data], 200);
     }
 
 
@@ -30,7 +30,7 @@ class MenuUtilities
                 'link' => $data['link'],
                 'class' => $data['class']
             ]);
-            return response()->json(['message' => 'Successfuly updated menu item', 'data' => $data], 200);
+            return response()->json(['message' => __('admin/messages.blocks.menus.items.update'), 'data' => $data], 200);
         } else {
             $item = $menu->items()->create([
                 'label' => $data['label'],
@@ -38,7 +38,7 @@ class MenuUtilities
                 'parent' => $data['parent'],
                 'class' => $data['class']
             ]);
-            return response()->json(['message' => 'Successfuly attached menu item', 'data' => $data, 'id' => $item->id], 200);
+            return response()->json(['message' => __('admin/messages.blocks.menus.items.attach'), 'data' => $data, 'id' => $item->id], 200);
         }
     }
 
@@ -87,7 +87,7 @@ class MenuUtilities
             }
         }
 
-        return response()->json(['message' => 'Search performed successfully.', 'items' => $res], 200);
+        return response()->json(['message' => __('admin/messages.blocks.menus.items.search'), 'items' => $res], 200);
     }
 
 
@@ -109,6 +109,6 @@ class MenuUtilities
         Auth::user()->hasAccessOrRedirect('BLOCK_DELETE');
 
         \App\Menu::with('items')->whereIn('id', $ids)->delete();
-        return redirect(route('admin.blocks.menus.index'))->with(['crud' => 'Successfully deleted selected menus.']);
+        return redirect(route('admin.blocks.menus.index'))->with(['crud' => __('admin/messages.blocks.menus.mass.delete')]);
     }
 }

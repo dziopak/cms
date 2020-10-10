@@ -159,21 +159,20 @@ class User extends Authenticatable implements JWTSubject
         self::created(function ($user) use ($request) {
             if ($user->fire_events) {
                 event(new UserCreateEvent($user, $request->file('avatar')));
-                $request->session()->flash('crud', 'User ' . $user->name . ' has been created successfully.');
+                $request->session()->flash('crud', __('admin/messages.users.create.success'));
             }
         });
 
         self::updating(function ($user) use ($request) {
             if ($user->fire_events) {
                 event(new UserUpdateEvent($user, $request->file('avatar')));
-                $request->session()->flash('crud', 'Account data of ' . $user->name . ' has been updated successfully.');
+                $request->session()->flash('crud', __('admin/messages.users.update.success'));
             }
         });
 
         self::deleted(function ($user) use ($request) {
             if ($user->fire_events) {
                 event(new UserDestroyEvent($user));
-                $request->session()->flash('crud', 'Account data of ' . $user->name . ' has been deleted successfully.');
             }
         });
     }

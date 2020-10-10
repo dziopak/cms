@@ -29,19 +29,20 @@ class UsersComposer
     private function edit($request, $view)
     {
         $roles = (new \App\Role)->get_all_roles();
-
+        $user = \App\User::with('photo')->findOrFail($view->user_id);
         return [
-            'user' => \App\User::with('photo')->findOrFail($view->user_id),
-            'logs' => $view->user->logs()->take(5)->orderBy('created_at', 'desc')->get(),
-            'form' => getData('Admin/Modules/users/users_update_form', ['roles' => $roles, 'thumbnail' => getThumbnail($view->user->photo, 1), 'thumb_endpoint' => route('admin.users.update', $view->user_id)])
+            'user' => $user,
+            'logs' => $user->logs()->take(5)->orderBy('created_at', 'desc')->get(),
+            'form' => getData('Admin/Modules/users/users_update_form', ['roles' => $roles, 'thumbnail' => getThumbnail($user->photo, 1), 'thumb_endpoint' => route('admin.users.update', $view->user_id)])
         ];
     }
 
     private function disable($request, $view)
     {
+        $user = \App\User::findOrFail($view->user_id);
         return [
-            'user' => \App\User::findOrFail($view->user_id),
-            'logs' => $view->user->account_logs()->take(5)->orderBy('created_at', 'desc')->get()
+            'user' => $user,
+            'logs' => $user->account_logs()->take(5)->orderBy('created_at', 'desc')->get()
         ];
     }
 

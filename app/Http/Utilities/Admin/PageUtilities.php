@@ -43,7 +43,7 @@ class PageUtilities
         switch ($request->get('request')) {
             case 'photo':
                 $path = PageUtilities::update_thumbnail($id, $request);
-                $res = response()->json(['message' => 'Successfully updated page thumbnail.', 'file' => $request->get('file'), 'path' => $path]);
+                $res = response()->json(['message' => __('admin/messages.pages.update.thumbnail.success'), 'file' => $request->get('file'), 'path' => $path]);
                 break;
 
             default:
@@ -60,7 +60,7 @@ class PageUtilities
     public static function destroy($id)
     {
         Page::findOrFail($id)->delete();
-        return response()->json(['message' => 'Page deleted successfully', 'id' => $id], 200);
+        return response()->json(['message' => __('admin/messages.pages.delete.success'), 'id' => $id], 200);
     }
 
 
@@ -68,7 +68,7 @@ class PageUtilities
     {
         $data = $request->all();
         if (empty($data['mass_edit'])) {
-            return redirect()->back()->with('error', 'No pages were selected.');
+            return redirect()->back()->with('error', __('admin/messages.pages.mass.errors.no_pages'));
         } else {
             switch ($data['mass_action']) {
                 case 'delete':
@@ -89,7 +89,7 @@ class PageUtilities
                 case 'category':
                     Auth::user()->hasAccessOrRedirect('PAGE_EDIT');
                     Page::whereIn('id', $data['mass_edit'])->update(['category_id' => $data['category_id']]);
-                    return redirect()->back()->with('crud', 'Successfully assigned category to selected pages.');
+                    return redirect()->back()->with('crud', __('admin/messages.pages.mass.assign_category'));
                     break;
 
                 case 'name_replace':
@@ -105,7 +105,7 @@ class PageUtilities
                             $page->save();
                         }
                     }
-                    return redirect()->back()->with('crud', 'Successfully replaced titles of multiple rows.');
+                    return redirect()->back()->with('crud', __('admin/messages.pages.mass.title_replace_phrases'));
                     break;
             }
         }

@@ -15,56 +15,55 @@ class PostCategory extends Model
     protected $guarded = ['id', 'category_id', 'type'];
     public $fire_events;
 
-    public function posts() {
+    public function posts()
+    {
         return $this->hasMany('App\Post', 'category_id');
     }
 
-    public static function list_all() {
+    public static function list_all()
+    {
         return $categories = DB::table('post_categories')->pluck('name', 'id')->all();
     }
 
     public static function boot()
     {
         parent::boot();
+        $request = request();
 
-        self::created(function($category) {
+        self::created(function ($category) use ($request) {
             if ($category->fire_events) {
                 event(new CategoryCreateEvent($category, 'POST'));
-                $request->session()->flash('crud', 'Category '.$category->name.' has been created successfully.');
+                $request->session()->flash('crud', __('admin/messages.categories.create.success'));
             }
         });
 
-        self::updated(function($category) {
+        self::updated(function ($category) use ($request) {
             if ($category->fire_events) {
                 event(new CategoryUpdateEvent($category, 'POST'));
-                $request->session()->flash('crud', 'Category '.$category->name.' has been updated successfully.');
+                $request->session()->flash('crud', __('admin/messages.categories.update.success'));
             }
         });
 
-        self::deleted(function($category) {
+        self::deleted(function ($category) use ($request) {
             if ($category->fire_events) {
                 event(new CategoryDestroyEvent($category, 'POST'));
-                $request->session()->flash('crud', 'Category '.$category->name.' has been deleted successfully.');
             }
 
             $category->posts()->update(['category_id' => 0]);
         });
     }
 
-    public function scopeFilter($query, $request) {
+    public function scopeFilter($query, $request)
+    {
+        $request = request();
+
         if (!empty($request->get('search'))) {
-
-            // Search in name //
-            $query->where('name', 'like', '%'.$request->get('search').'%');
-
+            $query->where('name', 'like', '%' . $request->get('search') . '%');
         }
 
         if (!empty($request->get('sort_by'))) {
-
-            // Sort by selected field //
             !empty($request->get('sort_order')) && $request->get('sort_order') === 'desc' ?
-            $query->orderByDesc($request->get('sort_by')) : $query->orderBy($request->get('sort_by'));
-
+                $query->orderByDesc($request->get('sort_by')) : $query->orderBy($request->get('sort_by'));
         }
     }
 }

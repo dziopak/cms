@@ -13,7 +13,7 @@
 @section('content-left')
     @wrapper('admin.partials.wrapper', ['title' => 'admin/users.disable_top_title'])
         @if ($user->avatar)
-            <img class="rounded-circle mr-4 float-left" width="100" src="{{ getPublicPath() }}/images/{{$user->photo->path}}">
+            <img class="rounded-circle mr-4 float-left" width="100" src="{{ getPublicPath() }}/images/{{$user->photo->path ?? 'assets/no-avatar.png'}}">
         @endif
 
         <div style="display: inline-block;">

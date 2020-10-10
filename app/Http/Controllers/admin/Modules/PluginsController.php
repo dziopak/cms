@@ -15,12 +15,12 @@ class PluginsController extends Controller
     public function disable($slug)
     {
         Module::find($slug)->disable();
-        return redirect()->back()->with('crud', 'Plugin disabled successfully');
+        return redirect()->back()->with('crud', __('admin/messages.plugins.disable.success'));
     }
 
     public function enable($slug)
     {
         Module::find($slug)->enable();
-        return redirect()->back()->with('crud', 'Plugin enabled successfully');
+        return redirect()->back()->with('crud', __('admin/messages.plugins.enable.success'));
     }
 }

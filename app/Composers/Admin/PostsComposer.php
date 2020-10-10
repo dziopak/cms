@@ -26,9 +26,10 @@ class PostsComposer
     private function edit($request, $view)
     {
         $categories = array_merge(['No category'], \App\PostCategory::list_all());
+        $post = \App\Post::with('thumbnail')->findOrFail($view->post_id);
         return [
-            'post' => \App\Post::with('thumbnail')->findOrFail($view->post_id),
-            'form' => getData('Admin/Modules/posts/posts_form', ['categories' => $categories, 'thumbnail' => getThumbnail($view->post->thumbnail), 'thumb_endpoint' => route('admin.posts.update', $view->post_id)])
+            'post' => $post,
+            'form' => getData('Admin/Modules/posts/posts_form', ['categories' => $categories, 'thumbnail' => getThumbnail($post->thumbnail), 'thumb_endpoint' => route('admin.posts.update', $view->post_id)])
         ];
     }
 

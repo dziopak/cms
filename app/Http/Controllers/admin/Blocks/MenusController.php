@@ -63,7 +63,7 @@ class MenusController extends Controller
         }
 
         Menu::with('items')->findOrFail($id)->delete();
-        return response()->json(['message' => 'Successfuly deleted a menu', 'id' => $id], 200);
+        return response()->json(['message' => __('admin/messages.blocks.menus.delete.success'), 'id' => $id], 200);
     }
 
 
@@ -86,7 +86,7 @@ class MenusController extends Controller
         Auth::user()->hasAccessOrRedirect('BLOCK_EDIT');
 
         Menu::findOrFail($menu_id)->items()->findOrFail($item_id)->delete();
-        return response()->json(['message' => 'Successfuly detached menu item', 'id' => $item_id], 200);
+        return response()->json(['message' => __('admin/messages.blocks.menus.items.detach'), 'id' => $item_id], 200);
     }
 
 

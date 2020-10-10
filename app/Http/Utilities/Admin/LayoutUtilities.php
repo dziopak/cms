@@ -44,7 +44,7 @@ class LayoutUtilities extends \App\Http\Utilities\LayoutUtilities
 
         LayoutUtilities::updateBlocks($layout->id, $request);
 
-        return redirect(route('admin.pages.layouts.index'))->with('crud', 'Layout created successfully.');
+        return redirect(route('admin.pages.layouts.index'))->with('crud', __('admin/messages.layouts.create.success'));
     }
 
 
@@ -60,6 +60,6 @@ class LayoutUtilities extends \App\Http\Utilities\LayoutUtilities
             "name" => $data['name'],
         ]);
 
-        return redirect(route('admin.pages.layouts.index'))->with('crud', 'Layout updated successfully.');
+        return redirect(route('admin.pages.layouts.index'))->with('crud', __('admin/messages.layouts.update.success'));
     }
 }

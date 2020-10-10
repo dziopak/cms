@@ -108,7 +108,7 @@ class LayoutsController extends Controller
         $layout->blocks()->delete();
         $layout->delete();
 
-        return redirect(route('admin.pages.layouts.index'))->with('crud', 'Layout deleted successfully.');
+        return redirect(route('admin.pages.layouts.index'))->with('crud', __('admin/messages.layouts.delete.success'));
     }
 
 

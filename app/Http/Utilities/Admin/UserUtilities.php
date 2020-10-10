@@ -47,7 +47,7 @@ class UserUtilities extends \App\Http\Utilities\UserUtilities
         switch ($request->get('request')) {
             case 'photo':
                 $path = UserUtilities::update_thumbnail($id, $request);
-                return response()->json(['message' => 'Successfully updated user\'s photo.', 'file' => $request->get('file'), 'path' => $path]);
+                return response()->json(['message' => __('admin/messages.users.update.thumbnail.success'), 'file' => $request->get('file'), 'path' => $path]);
                 break;
 
             default:
@@ -85,7 +85,7 @@ class UserUtilities extends \App\Http\Utilities\UserUtilities
     public static function destroy($id)
     {
         User::findOrFail($id)->delete();
-        return response()->json(['message' => 'Successfully deleted user.', 'id' => $id], 200);
+        return response()->json(['message' => __('admin/messages.users.delete.success'), 'id' => $id], 200);
     }
 
 
@@ -93,7 +93,7 @@ class UserUtilities extends \App\Http\Utilities\UserUtilities
     {
         $data = $request->all();
         if (empty($data['mass_edit'])) {
-            return redirect()->back()->with('error', 'No users were selected.');
+            return redirect()->back()->with('error', __('admin/messages.users.mass.errors.no_users'));
         } else {
             switch ($data['mass_action']) {
                 case 'delete':

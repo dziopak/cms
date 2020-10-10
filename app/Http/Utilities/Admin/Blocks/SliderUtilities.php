@@ -17,13 +17,13 @@ class SliderUtilities
             }
         }
 
-        return response()->json(['message' => 'Slides attached successfully', 'slides' => $data, 'files' => $files], 200);
+        return response()->json(['message' => __('admin/messages.blocks.sliders.items.attach'), 'slides' => $data, 'files' => $files], 200);
     }
 
     public static function detach($id, $data)
     {
         \App\Slider::findOrFail($id)->files()->detach($data);
-        return response()->json(['status' => 200, 'message' => 'Slides detached successfully.', 'slides' => $data], 200);
+        return response()->json(['status' => 200, 'message' => __('admin/messages.blocks.sliders.items.detach'), 'slides' => $data], 200);
     }
 
     public static function mass($data)
@@ -44,6 +44,6 @@ class SliderUtilities
         \Auth::user()->hasAccessOrRedirect('BLOCK_DELETE');
 
         \App\Slider::whereIn('id', $ids)->delete();
-        return redirect(route('admin.blocks.sliders.index'))->with(['crud' => 'Successfully deleted selected sliders.']);
+        return redirect(route('admin.blocks.sliders.index'))->with(['crud' => __('admin/messages.blocks.sliders.mass.delete')]);
     }
 }

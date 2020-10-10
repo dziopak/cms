@@ -44,7 +44,7 @@ class PostUtilities
             case 'photo':
                 // Thumbnail upload
                 $path = PostUtilities::update_photo($id, $request);
-                $res = response()->json(['message' => 'Successfully updated page thumbnail.', 'file' => $request->get('file'), 'path' => $path]);
+                $res = response()->json(['message' => __('admin/messages.posts.update.thumbnail.success'), 'file' => $request->get('file'), 'path' => $path]);
                 break;
 
 
@@ -62,14 +62,14 @@ class PostUtilities
     public static function destroy($id)
     {
         Post::findOrFail($id)->delete();
-        return response()->json(['message' => 'Post deleted successfully', 'id' => $id], 200);
+        return response()->json(['message' => __('admin/messages.posts.delete.success'), 'id' => $id], 200);
     }
 
     public static function massAction($request)
     {
         $data = $request->all();
         if (empty($data['mass_edit'])) {
-            return redirect()->back()->with('error', 'No posts were selected.');
+            return redirect()->back()->with('error', __('admin/messages.posts.mass.errors.no_posts'));
         } else {
             switch ($data['mass_action']) {
                 case 'delete':
@@ -93,20 +93,19 @@ class PostUtilities
                     //-----------//
                     Auth::user()->hasAccessOrRedirect('POST_EDIT');
                     $posts = Post::whereIn('id', $data['mass_edit'])->get(['id', 'name']);
-                    $res = [];
                     foreach ($posts as $key => $post) {
                         if (strpos($post->name, $data['name_search_string']) !== false) {
                             $post->name = str_replace($data['name_search_string'], $data['name_replace_string'], $post->name);
                             $post->save();
                         }
                     }
-                    return redirect()->back()->with('crud', 'Successfully replaced titles of multiple rows.');
+                    return redirect()->back()->with('crud', __('admin/messages.posts.mass.title_replace_phrases'));
                     break;
 
                 case 'category':
                     Auth::user()->hasAccessOrRedirect('POST_EDIT');
                     Post::whereIn('id', $data['mass_edit'])->update(['category_id' => $data['category_id']]);
-                    return redirect()->back()->with('crud', 'Successfully assigned category to selected posts.');
+                    return redirect()->back()->with('crud', __('admin/messages.posts.mass.assign_category'));
                     break;
             }
         }

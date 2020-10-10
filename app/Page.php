@@ -53,21 +53,20 @@ class Page extends Model
         self::created(function ($page) use ($request) {
             if ($page->fire_events) {
                 event(new PageCreateEvent($page, $request->file('thumbnail')));
-                $request->session()->flash('crud', 'Page ' . $page->name . ' has been created successfully.');
+                $request->session()->flash('crud', __('admin/messages.pages.create.success'));
             }
         });
 
         self::updated(function ($page) use ($request) {
             if ($page->fire_events) {
                 event(new PageUpdateEvent($page, $request->file('thumbnail')));
-                $request->session()->flash('crud', 'Page ' . $page->name . ' has been updated successfully.');
+                $request->session()->flash('crud', __('admin/messages.pages.update.success'));
             }
         });
 
         self::deleted(function ($page) use ($request) {
             if ($page->fire_events) {
                 event(new PageDestroyEvent($page));
-                $request->session()->flash('crud', 'Page ' . $page->name . ' has been deleted successfully.');
             }
         });
     }
