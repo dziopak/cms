@@ -73,6 +73,7 @@ class BladeDirectivesProvider extends ServiceProvider
 
         // Head partial directive
         Blade::include('themes.' . $theme->data->slug . '.partials.head', 'head');
+        Blade::include('themes.' . $theme->data->slug . '.partials.meta', 'meta');
 
 
         // Grid partial directive

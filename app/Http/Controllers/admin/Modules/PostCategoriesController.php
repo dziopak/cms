@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Modules;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoriesRequest;
-use App\Http\Utilities\Admin\PostCategoryUtilities;
+use App\Http\Utilities\Admin\Modules\Categories\PostCategoryEntity;
 
 use App\PostCategory;
 use Auth;
@@ -46,7 +46,7 @@ class PostCategoriesController extends Controller
     public function store(CategoriesRequest $request)
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_CREATE');
-        return PostCategoryUtilities::store($request);
+        return PostCategoryEntity::store($request);
     }
 
 
@@ -73,7 +73,7 @@ class PostCategoriesController extends Controller
     public function update(CategoriesRequest $request, $id)
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_EDIT');
-        return PostCategoryUtilities::update($id, $request);
+        return PostCategoryEntity::update($id, $request);
     }
 
 
@@ -94,12 +94,12 @@ class PostCategoriesController extends Controller
     public function destroy($id)
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_DELETE');
-        return PostCategoryUtilities::destroy($id);
+        return PostCategoryEntity::destroy($id);
     }
 
 
     public function mass(Request $request)
     {
-        return PostCategoryUtilities::massAction($request);
+        return PostCategoryEntity::massAction($request);
     }
 }

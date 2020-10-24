@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Utilities\Admin;
+namespace App\Http\Utilities\Admin\Modules\Dashboards;
 
 use Exception;
 use Widget;
 use Auth;
 
-class DashboardUtilities
+class DashboardEntity
 {
     public static function getWidget($request)
     {

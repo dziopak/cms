@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Modules;
 
 use App\Http\Requests\Admin\Pages\Layouts\CreateLayoutRequest;
 use App\Http\Requests\Admin\Pages\Layouts\UpdateLayoutRequest;
-use App\Http\Utilities\Admin\LayoutUtilities;
+use App\Http\Utilities\Admin\Modules\Layouts\LayoutEntity;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Layout;
@@ -47,7 +47,7 @@ class LayoutsController extends Controller
      */
     public function store(CreateLayoutRequest $request)
     {
-        return LayoutUtilities::store($request);
+        return LayoutEntity::store($request);
     }
 
 
@@ -86,7 +86,7 @@ class LayoutsController extends Controller
      */
     public function update(UpdateLayoutRequest $request, $id)
     {
-        return LayoutUtilities::update($id, $request);
+        return LayoutEntity::update($id, $request);
     }
 
 

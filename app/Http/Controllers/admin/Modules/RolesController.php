@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Modules;
 
 use App\Http\Controllers\Controller;
-use App\Http\Utilities\Admin\RoleUtilities;
+use App\Http\Utilities\Admin\Modules\Roles\RoleEntity;
 use Illuminate\Http\Request;
 
 use App\Role;
@@ -28,7 +28,7 @@ class RolesController extends Controller
     public function store(Request $request)
     {
         Auth::user()->hasAccessOrRedirect('ROLE_CREATE');
-        return RoleUtilities::store($request);
+        return RoleEntity::store($request);
     }
 
 
@@ -42,7 +42,7 @@ class RolesController extends Controller
     public function update(Request $request, $id)
     {
         Auth::user()->hasAccessOrRedirect('ROLE_EDIT');
-        return RoleUtilities::update($id, $request);
+        return RoleEntity::update($id, $request);
     }
 
 
@@ -63,6 +63,6 @@ class RolesController extends Controller
     public function destroy($id)
     {
         Auth::user()->hasAccessOrRedirect('ROLE_DELETE');
-        return RoleUtilities::destroy($id);
+        return RoleEntity::destroy($id);
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Utilities\AuthResponse;
+use App\Http\Utilities\Api\AuthResponse;
 use App\Http\Utilities\RoleUtilities;
 use App\Http\Resources\RoleResource;
 use App\Role;

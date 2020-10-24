@@ -114,15 +114,7 @@ $form = [
                     'value' => null,
                     'checked_value' => 1,
                     'class' => '',
-                    'container_class' => ''
-                ],
-                'follow' => [
-                    'type' => 'checkbox',
-                    'label' => __('admin/pages.follow'),
-                    'value' => null,
-                    'checked_value' => 1,
-                    'class' => '',
-                    'container_class' => ''
+                    'container_class' => '',
                 ],
             ]
         ]

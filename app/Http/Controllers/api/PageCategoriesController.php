@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Http\Utilities\Api\AuthResponse;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Http\Utilities\AuthResponse;
 use App\Http\Resources\CategoryResource;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Utilities\CategoryUtilities;
+use Illuminate\Http\Request;
 use App\PageCategory;
 
 

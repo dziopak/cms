@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers\Admin\Modules;
 
+use App\Http\Utilities\Admin\Modules\Posts\PostEntity;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\PostsRequest;
-
-use App\Http\Utilities\Admin\PostUtilities;
+use Illuminate\Http\Request;
 use App\Post;
 use Auth;
 
 class PostsController extends Controller
 {
 
-    public function index(Request $request)
+    public function index()
     {
         return view('admin.posts.index');
     }
@@ -29,7 +28,7 @@ class PostsController extends Controller
     public function store(PostsRequest $request)
     {
         Auth::user()->hasAccessOrRedirect('POST_CREATE');
-        return PostUtilities::store($request);
+        return PostEntity::store($request->all());
     }
 
 
@@ -43,7 +42,7 @@ class PostsController extends Controller
     public function update(Request $request, $id)
     {
         Auth::user()->hasAccessOrRedirect('POST_EDIT');
-        return PostUtilities::update($id, $request);
+        return PostEntity::update($id, $request);
     }
 
 
@@ -59,11 +58,11 @@ class PostsController extends Controller
     public function destroy($id)
     {
         Auth::user()->hasAccessOrRedirect('POST_DELETE');
-        return PostUtilities::destroy($id);
+        return PostEntity::destroy($id);
     }
 
     public function mass(Request $request)
     {
-        return PostUtilities::massAction($request);
+        return PostEntity::massAction($request);
     }
 }

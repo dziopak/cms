@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Utilities\Api\AuthResponse;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Resources\PageResource;
-use App\Http\Utilities\AuthResponse;
 use App\Http\Utilities\PageUtilities;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 use App\Http\Utilities\ModelUtilities;
+use Illuminate\Http\Request;
 use App\Page;
 
 class PagesController extends Controller

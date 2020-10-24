@@ -17,7 +17,7 @@ class RolesComposer
     {
         if (!empty($view->role_id)) {
             $role = \App\Role::findOrFail($view->role_id);
-            $role->access = \App\Http\Utilities\Admin\RoleUtilities::unserializeAccess($role->access);
+            $role->access = \App\Http\Utilities\RoleUtilities::unserializeAccess($role->access);
             $data['role'] = $role;
         }
 

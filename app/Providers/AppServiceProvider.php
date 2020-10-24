@@ -27,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
             'App\Composers\Admin\DashboardComposer' => 'admin.dashboard.*',
             'App\Composers\Admin\MediaComposer' => 'admin.media.*',
             'App\Composers\Admin\Blocks\MenusComposer' => 'admin.blocks.menus.*',
+            'App\Composers\Admin\Blocks\SlidersComposer' => 'admin.blocks.sliders.*',
             'App\Composers\Admin\PluginsComposer' => 'admin.plugins.*',
         ]);
     }

@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Admin\Modules;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Http\Utilities\Admin\Modules\Users\UserEntity;
 use App\Http\Requests\UsersCreateRequest;
-use App\Http\Requests\UsersEditRequest;
 use App\Http\Requests\NewPasswordRequest;
-use App\Http\Utilities\Admin\UserUtilities;
+use App\Http\Requests\UsersEditRequest;
 
 use Auth;
 
@@ -30,7 +30,7 @@ class UsersController extends Controller
     public function store(UsersCreateRequest $request)
     {
         Auth::user()->hasAccessOrRedirect('USER_CREATE');
-        return UserUtilities::store($request);
+        return UserEntity::store($request->all());
     }
 
 
@@ -44,14 +44,16 @@ class UsersController extends Controller
     public function update(UsersEditRequest $request, $id)
     {
         Auth::user()->hasAccessOrRedirect('USER_EDIT');
-        return UserUtilities::update($id, $request);
+        return UserEntity::update($id, $request);
     }
+
 
     public function password(NewPasswordRequest $request, $id)
     {
         Auth::user()->hasAccessOrRedirect('USER_EDIT');
-        return UserUtilities::setPassword($id, $request);
+        return UserEntity::setUserPassword($id, $request);
     }
+
 
     public function disable($id)
     {
@@ -63,18 +65,19 @@ class UsersController extends Controller
     public function block(Request $request, $id)
     {
         Auth::user()->hasAccessOrRedirect('USER_EDIT');
-        return UserUtilities::blockUser($id, $request);
+        return UserEntity::blockUser($id, $request);
     }
 
 
     public function destroy($id)
     {
         Auth::user()->hasAccessOrRedirect('USER_DELETE');
-        return UserUtilities::destroy($id);
+        return UserEntity::destroy($id);
     }
+
 
     public function mass(Request $request)
     {
-        return UserUtilities::massAction($request);
+        return UserEntity::massAction($request->all());
     }
 }

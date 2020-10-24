@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Resources\PostResource;
-use App\Http\Utilities\AuthResponse;
+use App\Http\Utilities\Api\AuthResponse;
 use App\Http\Utilities\PostUtilities;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;

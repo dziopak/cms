@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Utilities\Admin;
+namespace App\Http\Utilities\Admin\Modules\Categories;
 
 use App\PageCategory;
 use Auth;
 
-class PageCategoryUtilities
+class PageCategoryEntity
 {
     public static function update($id, $request)
     {

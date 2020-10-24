@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Modules;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoriesRequest;
-use App\Http\Utilities\Admin\PageCategoryUtilities;
+use App\Http\Utilities\Admin\Modules\Categories\PageCategoryEntity;
 
 use App\PageCategory;
 use Auth;
@@ -45,7 +45,7 @@ class PageCategoriesController extends Controller
     public function update(CategoriesRequest $request, $id)
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_EDIT');
-        return PageCategoryUtilities::update($id, $request);
+        return PageCategoryEntity::update($id, $request);
     }
 
     public function delete($id)
@@ -60,11 +60,11 @@ class PageCategoriesController extends Controller
     public function destroy($id)
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_DELETE');
-        return PageCategoryUtilities::destroy($id);
+        return PageCategoryEntity::destroy($id);
     }
 
     public function mass(Request $request)
     {
-        return PageCategoryUtilities::massAction($request);
+        return PageCategoryEntity::massAction($request);
     }
 }

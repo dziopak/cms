@@ -22,7 +22,7 @@ return [
     'meta_title' => 'Meta title',
     'meta_description' => 'Meta description',
     'author' => 'Autor',
-    'index' => 'Indeksuj stronę',
+    'index' => 'Nie indeksuj tej strony',
     'follow' => 'Dopuszczaj crawlery',
     'is_active' => 'Widoczny',
     'layout' => 'Szablon',

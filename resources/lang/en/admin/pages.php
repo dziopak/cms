@@ -21,7 +21,7 @@ return [
     'thumbnail' => 'Thumbnail',
     'meta_title' => 'Meta title',
     'meta_description' => 'Meta description',
-    'index' => 'Index page',
+    'index' => 'Don\'t index this page',
     'follow' => 'Follow page',
     'is_active' => 'Visible',
     'layout' => 'Layout',

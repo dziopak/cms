@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Http\Utilities\MenuUtilities;
-use App\Http\Utilities\AuthResponse;
+use App\Http\Utilities\Api\AuthResponse;
 use App\Menu;
 
 class MenusController extends Controller

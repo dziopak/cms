@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Modules;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\PagesRequest;
-use App\Http\Utilities\Admin\PageUtilities;
+use App\Http\Utilities\Admin\Modules\Pages\PageEntity;
 
 use App\Page;
 use Auth;
@@ -30,7 +30,7 @@ class PagesController extends Controller
     public function store(PagesRequest $request)
     {
         Auth::user()->hasAccessOrRedirect('PAGE_CREATE');
-        return PageUtilities::store($request);
+        return PageEntity::store($request->all());
     }
 
 
@@ -44,7 +44,7 @@ class PagesController extends Controller
     public function update(Request $request, $id)
     {
         Auth::user()->hasAccessOrRedirect('PAGE_EDIT');
-        return PageUtilities::update($id, $request);
+        return PageEntity::update($id, $request);
     }
 
 
@@ -58,12 +58,12 @@ class PagesController extends Controller
     public function destroy($id)
     {
         Auth::user()->hasAccessOrRedirect('PAGE_DELETE');
-        return PageUtilities::destroy($id);
+        return PageEntity::destroy($id);
     }
 
 
     public function mass(Request $request)
     {
-        return PageUtilities::massAction($request);
+        return PageEntity::massAction($request);
     }
 }

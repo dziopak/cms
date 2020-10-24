@@ -30,6 +30,7 @@ return [
         'mass' => [
             'assign_category' => 'Pomyślnie przypisano kategorię do wybranych podstron.',
             'title_replace_phrases' => 'Pomyślnie zaaktualizowano frazy w tytułach wybranych podstron.',
+            'universal' => 'Pomyślnie wykonano wskazane operacje.',
             'errors' => [
                 'no_pages' => 'Nie wybrano żadnej podstrony.'
             ]

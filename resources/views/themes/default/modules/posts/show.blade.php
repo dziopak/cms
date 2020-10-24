@@ -1,5 +1,9 @@
 @extends($theme->data->url.'.index')
 
+@set($title, $post->name)
+@set($meta_title, $post->meta_title)
+@set($meta_description, $post->meta_description)
+
 @section('module')
         <div class="post row">
 

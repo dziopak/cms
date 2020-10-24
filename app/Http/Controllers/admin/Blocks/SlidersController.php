@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Admin\Blocks;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Blocks\Sliders\CreateSliderRequest;
 use App\Http\Requests\Admin\Blocks\Sliders\UpdateSliderRequest;
-use App\Http\Utilities\Admin\Blocks\SliderUtilities;
+use App\Http\Utilities\Admin\Blocks\Sliders\SliderEntity;
+use App\Http\Utilities\Admin\Blocks\Sliders\SliderItems;
 use Illuminate\Http\Request;
 
 use Auth;
@@ -62,20 +63,19 @@ class SlidersController extends Controller
 
     public function attach(Request $request, $id)
     {
-        Auth::user()->hasAccessOrRedirect('BLOCK_EDIT');
-        return SliderUtilities::attach($id, $request->get('files'));
+
+        return (new SliderItems($id))->attach($request->get('files'));
     }
 
 
     public function detach(Request $request, $id)
     {
-        Auth::user()->hasAccessOrRedirect('BLOCK_EDIT');
-        return SliderUtilities::detach($id, $request->get('files'));
+        return (new SliderItems($id))->detach($request->get('files'));
     }
+
 
     public function mass(Request $request)
     {
-        $data = $request->all();
-        return SliderUtilities::mass($data);
+        return SliderEntity::mass($request->all());
     }
 }

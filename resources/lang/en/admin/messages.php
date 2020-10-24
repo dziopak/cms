@@ -30,6 +30,7 @@ return [
         'mass' => [
             'assign_category' => 'Successfully assigned category to selected pages.',
             'title_replace_phrases' => 'Successfully replaced titles of selected pages.',
+            'universal' => 'Successfully completed selected operations.',
             'errors' => [
                 'no_pages' => 'No pages selected.'
             ]
