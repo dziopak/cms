@@ -8,7 +8,7 @@ class SlidersComposer
     private function index($request, $view)
     {
         return [
-            'sliders' => \App\Slider::paginate(15),
+            'sliders' => \App\Models\Slider::paginate(15),
             'table' => getData('Admin/blocks/sliders/sliders_index_table')
         ];
     }

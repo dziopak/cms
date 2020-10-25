@@ -2,7 +2,7 @@
 
 namespace App\Http\Utilities\Admin\Modules\Users;
 
-use App\User;
+use App\Models\User;
 use Auth;
 
 class UserActions

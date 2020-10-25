@@ -4,7 +4,7 @@ namespace App\Http\Utilities\Admin\Modules\Pages;
 
 use App\Http\Utilities\Admin\Pages\PageActions;
 use App\Http\Utilities\Admin\Pages\PageFiles;
-use App\Page;
+use App\Models\Page;
 use Auth;
 
 class PageEntity

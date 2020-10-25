@@ -7,10 +7,10 @@ class UsersComposer
 
     private function index($request, $view)
     {
-        $view->users = \App\User::with('role', 'photo')->filter($request)->paginate(15);
+        $view->users = \App\Models\User::with('role', 'photo')->filter($request)->paginate(15);
 
 
-        $roles = \App\Role::all('id', 'name')->pluck('name', 'id');
+        $roles = \App\Models\Role::all('id', 'name')->pluck('name', 'id');
 
         return [
             'roles' => $roles,
@@ -20,7 +20,7 @@ class UsersComposer
 
     private function create($request, $view)
     {
-        $roles = \App\Role::get_all_roles();
+        $roles = \App\Models\Role::get_all_roles();
         return [
             'form' => getData('Admin/Modules/users/users_create_form', ['roles' => $roles, 'thumbnail' => getThumbnail(null, 1)])
         ];
@@ -28,8 +28,8 @@ class UsersComposer
 
     private function edit($request, $view)
     {
-        $roles = (new \App\Role)->get_all_roles();
-        $user = \App\User::with('photo')->findOrFail($view->user_id);
+        $roles = (new \App\Models\Role)->get_all_roles();
+        $user = \App\Models\User::with('photo')->findOrFail($view->user_id);
         return [
             'user' => $user,
             'logs' => $user->logs()->take(5)->orderBy('created_at', 'desc')->get(),
@@ -39,7 +39,7 @@ class UsersComposer
 
     private function disable($request, $view)
     {
-        $user = \App\User::findOrFail($view->user_id);
+        $user = \App\Models\User::findOrFail($view->user_id);
         return [
             'user' => $user,
             'logs' => $user->account_logs()->take(5)->orderBy('created_at', 'desc')->get()

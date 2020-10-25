@@ -7,7 +7,7 @@ use App\Http\Requests\Admin\Pages\Layouts\UpdateLayoutRequest;
 use App\Http\Utilities\Admin\Modules\Layouts\LayoutEntity;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Layout;
+use App\Models\Layout;
 use Widget;
 use Exception;
 

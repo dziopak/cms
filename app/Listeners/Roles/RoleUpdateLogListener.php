@@ -2,7 +2,7 @@
 
 namespace App\Listeners\Roles;
 
-use App\Log;
+use App\Models\Log;
 use Auth;
 
 class RoleUpdateLogListener

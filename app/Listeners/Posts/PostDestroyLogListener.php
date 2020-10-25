@@ -2,7 +2,7 @@
 
 namespace App\Listeners\Posts;
 
-use App\Log;
+use App\Models\Log;
 use Auth;
 
 class PostDestroyLogListener

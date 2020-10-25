@@ -8,7 +8,7 @@ use App\Http\Utilities\Admin\Users\UserFiles;
 use App\Events\Users\UserNewPasswordEvent;
 use Illuminate\Support\Facades\Hash;
 use App\Events\Users\UserBlockEvent;
-use App\User;
+use App\Models\User;
 
 class UserEntity
 {

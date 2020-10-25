@@ -10,14 +10,14 @@ class CategoriesComposer
         switch ($type) {
             case 'post_categories':
                 $data = [
-                    'categories' => \App\PostCategory::orderByDesc('id')->filter($request)->paginate(15),
+                    'categories' => \App\Models\PostCategory::orderByDesc('id')->filter($request)->paginate(15),
                     'table' => getData('Admin/Modules/categories/post_categories_index_table')
                 ];
                 break;
 
             case 'page_categories':
                 $data = [
-                    'categories' => \App\PageCategory::orderByDesc('id')->filter($request)->paginate(15),
+                    'categories' => \App\Models\PageCategory::orderByDesc('id')->filter($request)->paginate(15),
                     'table' => getData('Admin/Modules/categories/page_categories_index_table')
                 ];
                 break;
@@ -29,7 +29,7 @@ class CategoriesComposer
     {
         switch ($type) {
             case 'post_categories':
-                $categories = array_merge([__('admin/post_categories.no_category')], \App\PostCategory::list_all());
+                $categories = array_merge([__('admin/post_categories.no_category')], \App\Models\PostCategory::list_all());
                 $data = [
                     'categories' => $categories,
                     'form' => getData('Admin/Modules/categories/post_categories_form', ['categories' => $categories])
@@ -37,7 +37,7 @@ class CategoriesComposer
                 break;
 
             case 'page_categories':
-                $categories = array_merge([__('admin/page_categories.no_category')], \App\PageCategory::list_all());
+                $categories = array_merge([__('admin/page_categories.no_category')], \App\Models\PageCategory::list_all());
                 $data = [
                     'categories' => $categories,
                     'form' => getData('Admin/Modules/categories/page_categories_form', ['categories' => $categories])
@@ -52,18 +52,18 @@ class CategoriesComposer
 
         switch ($type) {
             case 'post_categories':
-                $categories = array_merge([__('admin/post_categories.no_category')], \App\PostCategory::list_all());
+                $categories = array_merge([__('admin/post_categories.no_category')], \App\Models\PostCategory::list_all());
                 $data = [
-                    'category' => \App\PostCategory::findOrFail($view->category_id),
+                    'category' => \App\Models\PostCategory::findOrFail($view->category_id),
                     'categories' => $categories,
                     'form' => getData('Admin/Modules/categories/post_categories_form', ['categories' => $categories])
                 ];
                 break;
 
             case 'page_categories':
-                $categories = array_merge([__('admin/page_categories.no_category')], \App\PageCategory::list_all());
+                $categories = array_merge([__('admin/page_categories.no_category')], \App\Models\PageCategory::list_all());
                 $data = [
-                    'category' => \App\PageCategory::findOrFail($view->category_id),
+                    'category' => \App\Models\PageCategory::findOrFail($view->category_id),
                     'categories' => $categories,
                     'form' => getData('Admin/Modules/categories/page_categories_form', ['categories' => $categories])
                 ];

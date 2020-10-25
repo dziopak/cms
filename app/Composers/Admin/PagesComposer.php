@@ -8,16 +8,16 @@ class PagesComposer
     private function index($request, $view)
     {
         return [
-            'pages' => \App\Page::with('author', 'thumbnail')->orderByDesc('id')->filter($request)->paginate(15),
-            'categories' => array_merge([0 => __('admin/general.no_category')], \App\PageCategory::all('id', 'name')->pluck('name', 'id')->toArray()),
+            'pages' => \App\Models\Page::with('author', 'thumbnail')->orderByDesc('id')->filter($request)->paginate(15),
+            'categories' => array_merge([0 => __('admin/general.no_category')], \App\Models\PageCategory::all('id', 'name')->pluck('name', 'id')->toArray()),
             'table' => getData('Admin/Modules/pages/pages_index_table')
         ];
     }
 
     private function create($request, $view)
     {
-        $categories = array_merge(['No category'], \App\PageCategory::list_all());
-        $layouts = \App\Layout::list();
+        $categories = array_merge(['No category'], \App\Models\PageCategory::list_all());
+        $layouts = \App\Models\Layout::list();
 
         return [
             'categories' => $categories,
@@ -27,9 +27,9 @@ class PagesComposer
 
     private function edit($request, $view)
     {
-        $page = \App\Page::with('thumbnail')->findOrFail($view->page_id);
-        $categories = array_merge(['No category'], \App\PageCategory::list_all());
-        $layouts = \App\Layout::list();
+        $page = \App\Models\Page::with('thumbnail')->findOrFail($view->page_id);
+        $categories = array_merge(['No category'], \App\Models\PageCategory::list_all());
+        $layouts = \App\Models\Layout::list();
 
         return [
             'form' => getData(

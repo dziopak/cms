@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Utilities\Api\Menus\MenuEntity;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
-use App\Http\Utilities\MenuUtilities;
-use App\Http\Utilities\Api\AuthResponse;
-use App\Menu;
+use App\Models\Menu;
 
 class MenusController extends Controller
 {
@@ -19,45 +17,24 @@ class MenusController extends Controller
 
     public function show($id)
     {
-        is_numeric($id) ? $menu = Menu::with('items')->find($id) : $menu = Menu::with('items')->where(['name' => $id])->first();
-
-        if (!$menu) return response()->json(['message' => 'Resource not found', 'status' => '404'], 404);
-        return $menu;
+        return MenuEntity::show($id);
     }
 
 
     public function store(Request $request)
     {
-        $validation = MenuUtilities::storeValidation($request);
-        if ($validation !== true) return $validation;
-
-        $menu = MenuUtilities::create($request);
-        return response()->json(['message' => 'Successfully created menu', 'data' => $menu, 'status' => '201'], 201);
+        return MenuEntity::store($request);
     }
 
 
     public function update($id, Request $request)
     {
-        $validation = MenuUtilities::updateValidation($request);
-        if ($validation !== true) return $validation;
-
-        $menu = Menu::find($id);
-        if (!$menu) return response()->json(['message' => 'Resource not found.', 'status' => 404], 404);
-
-        $menu->update($request->all());
-        return response()->json(['message' => 'Successfully updated resource', 'status' => '200', 'data' => $menu], 200);
+        return MenuEntity::update($request, $id);
     }
 
 
     public function destroy($id)
     {
-        $access = AuthResponse::hasAccess('MENU_DELETE');
-        if (!$access === true) return $access;
-
-        $menu = Menu::with('items')->find($id);
-        if (!$menu) return response()->json(['message' => 'Resource not found', 'status' => '404'], 404);
-
-        $menu->delete();
-        return response()->json(['message' => 'Successfully deleted resource', 'status' => '200', 'data' => $menu], 200);
+        return MenuEntity::destroy($id);
     }
 }

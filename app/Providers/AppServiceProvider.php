@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Console\Commands\ModelMakeCommand;
 use Illuminate\Support\ServiceProvider;
 use App\Helpers\ThemeHelpers;
 
@@ -40,15 +41,19 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->app->extend('command.model.make', function ($command, $app) {
+            return new ModelMakeCommand($app['files']);
+        });
+
         view()->composer('admin.settings.general', function ($view) {
             $themes = ThemeHelpers::getThemeList();
-            $view->settings = \App\Setting::where(['group' => 'general'])->pluck('value', 'name')->toArray();
+            $view->settings = \App\Models\Setting::where(['group' => 'general'])->pluck('value', 'name')->toArray();
             $view->form = getData('Admin/Modules/settings/general', array_merge($view->settings, ['themes' => $themes]));
         });
 
 
         view()->composer('admin.logs.index', function ($view) {
-            $view->logs = \App\Log::with('author')->orderBy('logs.id', 'desc')->get();
+            $view->logs = \App\Models\Log::with('author')->orderBy('logs.id', 'desc')->get();
         });
     }
 }

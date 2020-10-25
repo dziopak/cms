@@ -7,7 +7,7 @@ use plugins\Portfolio\Events\PortfolioItemCreateEvent;
 use plugins\Portfolio\Events\PortfolioItemUpdateEvent;
 use plugins\Portfolio\Events\PortfolioItemDestroyEvent;
 use plugins\Portfolio\Entities\PortfolioCategory;
-use App\File;
+use App\Models\File;
 
 class PortfolioItem extends Model
 {
@@ -23,7 +23,7 @@ class PortfolioItem extends Model
 
     public function thumbnail()
     {
-        return $this->belongsTo('App\File', 'file_id');
+        return $this->belongsTo('App\Models\File', 'file_id');
     }
 
     // TO DO //

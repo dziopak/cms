@@ -2,8 +2,8 @@
 
 namespace App\Http\Utilities\Admin\Modules\Layouts;
 
-use App\Http\Utilities\Admin\Layouts\LayoutBlocks;
-use App\Layout;
+use App\Http\Utilities\Admin\Modules\Layouts\LayoutBlocks;
+use App\Models\Layout;
 
 class LayoutEntity
 {

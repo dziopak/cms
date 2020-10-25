@@ -2,7 +2,7 @@
 
 namespace App\Http\Utilities\Admin\Blocks\Sliders;
 
-use App\Slider;
+use App\Models\Slider;
 use Auth;
 
 class SliderActions

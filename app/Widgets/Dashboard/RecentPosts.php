@@ -3,7 +3,7 @@
 namespace App\Widgets\Dashboard;
 
 use Arrilot\Widgets\AbstractWidget;
-use App\Post;
+use App\Models\Post;
 
 class RecentPosts extends AbstractWidget
 {

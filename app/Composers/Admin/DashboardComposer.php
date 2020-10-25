@@ -8,7 +8,7 @@ class DashboardComposer
     {
 
         if (!$view->dashboard) {
-            $view->dashboard = \App\Dashboard::create(['user_id' => $view->user->id]);
+            $view->dashboard = \App\Models\Dashboard::create(['user_id' => $view->user->id]);
         }
         $view->with('widgets', unserialize($view->dashboard->widgets));
     }

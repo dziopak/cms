@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
-use App\Page;
+use App\Models\Page;
 
 class PagesController extends Controller
 {
@@ -24,7 +24,7 @@ class PagesController extends Controller
         }
 
         if ($page) {
-            $blocks = getLayout(\App\Layout::findOrFail($page->layout));
+            $blocks = getLayout(\App\Models\Layout::findOrFail($page->layout));
             return view($this->theme['url'] . '.modules.pages.show', compact('page', 'blocks'));
         } else {
             return redirect(route('front.posts.index'));

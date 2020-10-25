@@ -3,7 +3,7 @@
 namespace App\Http\Utilities\Admin\Blocks\Menus;
 
 use Auth;
-use App\Menu;
+use App\Models\Menu;
 
 class MenuItems
 {

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Helpers\ThemeHelpers;
 use App\Http\Controllers\Controller;
-use App\Post;
+use App\Models\Post;
 
 class PostsController extends Controller
 {
@@ -18,7 +18,7 @@ class PostsController extends Controller
 
     public function index()
     {
-        $blocks = getLayout(\App\Layout::findOrFail(1));
+        $blocks = getLayout(\App\Models\Layout::findOrFail(1));
         $posts = Post::orderByDesc('created_at')->orderByDesc('id')->paginate(5);
 
         return view($this->theme['url'] . '.modules.posts.index', compact('posts', 'blocks'));
@@ -34,7 +34,7 @@ class PostsController extends Controller
 
         // TO DO //
         // LAYOUT ID FROM GENERAL SETTINGS //
-        $blocks = getLayout(\App\Layout::findOrFail(1));
+        $blocks = getLayout(\App\Models\Layout::findOrFail(1));
 
         return view($this->theme['url'] . '.modules.posts.show', compact('post', 'blocks'));
     }

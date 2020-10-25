@@ -31,7 +31,7 @@ class SlidersController extends Controller
     {
         Auth::user()->hasAccessOrRedirect('BLOCK_CREATE');
 
-        $slider = \App\Slider::create(['name' => $request->get('name')]);
+        $slider = \App\Models\Slider::create(['name' => $request->get('name')]);
         return redirect(route('admin.blocks.sliders.edit', $slider->id));
     }
 
@@ -39,7 +39,7 @@ class SlidersController extends Controller
     public function edit($id)
     {
         Auth::user()->hasAccessOrRedirect('BLOCK_EDIT');
-        return view('admin.blocks.sliders.edit', ['slider' => \App\Slider::findOrFail($id)]);
+        return view('admin.blocks.sliders.edit', ['slider' => \App\Models\Slider::findOrFail($id)]);
     }
 
 
@@ -47,7 +47,7 @@ class SlidersController extends Controller
     {
         Auth::user()->hasAccessOrRedirect('BLOCK_EDIT');
 
-        \App\Slider::findOrFail($id)->files()->sync($request->get('image'));
+        \App\Models\Slider::findOrFail($id)->files()->sync($request->get('image'));
         return redirect(route('admin.blocks.sliders.index'))->with('crud', __('admin/messages.blocks.sliders.update.success'));
     }
 
@@ -56,7 +56,7 @@ class SlidersController extends Controller
     {
         Auth::user()->hasAccessOrRedirect('BLOCK_DELETE');
 
-        $slider = \App\Slider::findOrFail($id)->delete();
+        $slider = \App\Models\Slider::findOrFail($id)->delete();
         return response()->json(['message' => __('admin/messages.blocks.sliders.delete.success'), 'id' => $slider->id], 200);
     }
 

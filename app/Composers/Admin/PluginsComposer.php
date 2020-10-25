@@ -7,9 +7,9 @@ class PluginsComposer
 
     private function index($request, $view)
     {
-        \App\Module::boot();
-        $modules['active'] = \App\Module::active();
-        $modules['inactive'] = \App\Module::inactive();
+        \App\Models\Module::boot();
+        $modules['active'] = \App\Models\Module::active();
+        $modules['inactive'] = \App\Models\Module::inactive();
 
 
         return [

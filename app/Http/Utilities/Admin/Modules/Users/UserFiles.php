@@ -2,7 +2,7 @@
 
 namespace App\Http\Utilities\Admin\Modules\Users;
 
-use App\User;
+use App\Models\User;
 use Auth;
 
 class UserFiles
@@ -25,7 +25,7 @@ class UserFiles
             if ($file_id === 0) {
                 $path = 'assets/no-thumbnail.png';
             } else {
-                $path = \App\File::select('path')->findOrFail($file_id)->path;
+                $path = \App\Models\File::select('path')->findOrFail($file_id)->path;
             }
         }
 

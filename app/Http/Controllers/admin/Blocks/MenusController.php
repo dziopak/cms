@@ -10,7 +10,7 @@ use App\Http\Utilities\Admin\Blocks\Menus\MenuItems;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Menu;
+use App\Models\Menu;
 use Auth;
 
 class MenusController extends Controller

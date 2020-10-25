@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PagesRequest;
 use App\Http\Utilities\Admin\Modules\Pages\PageEntity;
 
-use App\Page;
+use App\Models\Page;
 use Auth;
 
 class PagesController extends Controller

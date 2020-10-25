@@ -2,7 +2,7 @@
 
 namespace App\Http\Utilities\Admin\Modules\Pages;
 
-use App\Page;
+use App\Models\Page;
 use Auth;
 
 class PageActions

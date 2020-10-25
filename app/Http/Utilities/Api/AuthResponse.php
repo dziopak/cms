@@ -2,7 +2,7 @@
 
 namespace App\Http\Utilities\Api;
 
-use App\User;
+use App\Models\User;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;

@@ -8,14 +8,14 @@ class MediaComposer
     private function index($request, $view)
     {
         return [
-            'files' => \App\File::filter($request)->paginate(15),
+            'files' => \App\Models\File::filter($request)->paginate(15),
             'table' => getData('Admin/Modules/media/media_index_table')
         ];
     }
 
     private function edit($request, $view)
     {
-        $file = \App\File::findOrFail($view->file->id);
+        $file = \App\Models\File::findOrFail($view->file->id);
         return [
             'form' => getData('Admin/Modules/media/media_edit_form'),
             'file' => $file
@@ -27,7 +27,7 @@ class MediaComposer
 
         if (empty($view->files)) {
             return [
-                'files' => \App\File::filter($request)->get(),
+                'files' => \App\Models\File::filter($request)->get(),
                 'table' => getData('Admin/Modules/media/media_index_table')
             ];
         }

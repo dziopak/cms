@@ -4,7 +4,7 @@ namespace App\Http\Utilities\Admin\Modules\Posts;
 
 use App\Http\Utilities\Admin\Posts\PostActions;
 use App\Http\Utilities\Admin\Posts\PostFiles;
-use App\Post;
+use App\Models\Post;
 use Auth;
 
 class PostEntity

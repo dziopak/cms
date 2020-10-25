@@ -27,7 +27,7 @@ class RecentlyLoggedIn extends AbstractWidget
 
     public function run()
     {
-        $users = \App\User::with('role')->orderByDesc('last_login')->take($this->config['count'])->get();
+        $users = \App\Models\User::with('role')->orderByDesc('last_login')->take($this->config['count'])->get();
 
         return view('admin.widgets.recently_logged_in', [
             'config' => $this->config,

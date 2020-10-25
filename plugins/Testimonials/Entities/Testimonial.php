@@ -10,7 +10,7 @@ class Testimonial extends Model
 
     public function thumbnail()
     {
-        return $this->belongsTo("App\File", 'file_id');
+        return $this->belongsTo("App\Models\File", 'file_id');
     }
 
 

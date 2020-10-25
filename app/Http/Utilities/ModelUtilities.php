@@ -12,6 +12,7 @@ class ModelUtilities
         return $data;
     }
 
+
     public static function scope($model, $request)
     {
         $perpage = $request->get('perpage') ?? 15;
@@ -27,12 +28,13 @@ class ModelUtilities
         return $model->paginate($perpage);
     }
 
+
     public static function bySlug($slug, $model)
     {
         if (is_numeric($slug)) {
-            return $item = $model->find($slug);
+            return $model->find($slug);
         }
 
-        return $item = $model->where(['slug' => $slug])->first();
+        return $model->where(['slug' => $slug])->first();
     }
 }

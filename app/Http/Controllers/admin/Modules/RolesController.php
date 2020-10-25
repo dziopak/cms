@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Utilities\Admin\Modules\Roles\RoleEntity;
 use Illuminate\Http\Request;
 
-use App\Role;
+use App\Models\Role;
 use Auth;
 
 class RolesController extends Controller

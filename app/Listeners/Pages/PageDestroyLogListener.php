@@ -2,7 +2,7 @@
 
 namespace App\Listeners\Pages;
 
-use App\Log;
+use App\Models\Log;
 use Auth;
 
 class PageDestroyLogListener

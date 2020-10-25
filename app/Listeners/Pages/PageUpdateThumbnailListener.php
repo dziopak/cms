@@ -2,7 +2,7 @@
 
 namespace App\Listeners\Pages;
 
-use App\File;
+use App\Models\File;
 
 class PageUpdateThumbnailListener
 {

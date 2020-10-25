@@ -2,7 +2,7 @@
 
 namespace App\Http\Utilities\Admin\Modules\Pages;
 
-use App\Page;
+use App\Models\Page;
 use Auth;
 
 class PageFiles
@@ -23,7 +23,7 @@ class PageFiles
             if ($file_id === 0) {
                 $path = 'assets/no-thumbnail.png';
             } else {
-                $path = \App\File::select('path')->findOrFail($file_id)->path;
+                $path = \App\Models\File::select('path')->findOrFail($file_id)->path;
             }
         }
 

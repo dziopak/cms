@@ -4,7 +4,7 @@ namespace App\Widgets\Dashboard;
 
 use Arrilot\Widgets\AbstractWidget;
 use Carbon;
-use App\Post;
+use App\Models\Post;
 use DB;
 
 class PostsStatistics extends AbstractWidget

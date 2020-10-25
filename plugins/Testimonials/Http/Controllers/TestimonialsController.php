@@ -7,7 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use plugins\Testimonials\Entities\Testimonial;
 use plugins\Testimonials\Http\Utilities\TableData;
-use App\File;
+use App\Models\File;
 
 class TestimonialsController extends Controller
 {

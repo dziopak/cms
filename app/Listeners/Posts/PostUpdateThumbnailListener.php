@@ -2,7 +2,7 @@
 
 namespace App\Listeners\Posts;
 
-use App\File;
+use App\Models\File;
 
 class PostUpdateThumbnailListener
 {

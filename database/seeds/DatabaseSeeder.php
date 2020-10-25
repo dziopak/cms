@@ -11,6 +11,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $pages = factory(App\Post::class, 100)->create();
+        $pages = factory(App\Models\Post::class, 100)->create();
     }
 }

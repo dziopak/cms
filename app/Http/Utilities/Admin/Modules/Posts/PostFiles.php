@@ -2,7 +2,7 @@
 
 namespace App\Http\Utilities\Admin\Modules\Posts;
 
-use App\Post;
+use App\Models\Post;
 use Auth;
 
 class PostFiles
@@ -25,7 +25,7 @@ class PostFiles
             if ($file_id === 0) {
                 $path = 'assets/no-thumbnail.png';
             } else {
-                $path = \App\File::select('path')->findOrFail($file_id)->path;
+                $path = \App\Models\File::select('path')->findOrFail($file_id)->path;
             }
         }
 

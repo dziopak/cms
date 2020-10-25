@@ -2,13 +2,16 @@
 
 namespace App\Composers\Admin;
 
+use App\Models\Role;
+use App\Http\Utilities\RoleAccess;
+
 class RolesComposer
 {
 
     private function index($request, $view)
     {
         return [
-            'roles' => \App\Role::orderBy('id')->filter($request)->paginate(15),
+            'roles' => Role::orderBy('id')->filter($request)->paginate(15),
             'table' => getData('Admin/Modules/roles/roles_index_table'),
         ];
     }
@@ -16,8 +19,8 @@ class RolesComposer
     private function create($request, $view)
     {
         if (!empty($view->role_id)) {
-            $role = \App\Role::findOrFail($view->role_id);
-            $role->access = \App\Http\Utilities\RoleUtilities::unserializeAccess($role->access);
+            $role = Role::findOrFail($view->role_id);
+            $role->access = RoleAccess::unserializeAccess($role->access);
             $data['role'] = $role;
         }
 
@@ -27,8 +30,8 @@ class RolesComposer
 
     private function edit($request, $view)
     {
-        $role = \App\Role::findOrFail($view->role_id);
-        $role->access = \App\Http\Utilities\RoleUtilities::unserializeAccess($role->access);
+        $role = Role::findOrFail($view->role_id);
+        $role->access = RoleAccess::unserializeAccess($role->access);
 
         return [
             'role' => $role,

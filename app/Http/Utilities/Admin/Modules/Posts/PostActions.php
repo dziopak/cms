@@ -2,7 +2,7 @@
 
 namespace App\Http\Utilities\Admin\Modules\Posts;
 
-use App\Post;
+use App\Models\Post;
 use Auth;
 
 class PostActions

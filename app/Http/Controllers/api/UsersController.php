@@ -2,39 +2,17 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
+use App\Http\Utilities\Api\Users\UserAuthentication;
+use App\Http\Utilities\Api\Users\UserEntity;
+use App\Http\Resources\UserResource;
 use App\Http\Controllers\Controller;
 use App\Http\Utilities\Api\AuthResponse;
-use App\Http\Utilities\UserUtilities;
-use App\Http\Resources\UserResource;
-use App\User;
+use Illuminate\Http\Request;
+use App\Models\User;
 use JWTAuth;
 
 class UsersController extends Controller
 {
-
-    public function authenticate(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
-        return UserUtilities::authenticateCredentials($credentials);
-    }
-
-
-    public function register(Request $request)
-    {
-        $validation = UserUtilities::registerValidation($request);
-        if ($validation !== true) return $validation;
-
-        $user = UserUtilities::register($request);
-        return response()->json(["message" => "Successfully registered new user account.", "user" => $user, "status" => 201], 201);
-    }
-
-
-    public function getAuthenticatedUser()
-    {
-        $response = AuthResponse::authAndRespond(JWTAuth::parseToken()->authenticate());
-        return $response;
-    }
 
 
     public function index()
@@ -45,45 +23,42 @@ class UsersController extends Controller
 
     public function show($id)
     {
-        $user = User::find($id);
-        return $user ? new UserResource($user) : response()->json(["status" => "404", "message" => "User doesn't exist."], 404);
+        return UserEntity::show($id);
     }
 
 
     public function store(Request $request)
     {
-        $validation = UserUtilities::storeValidation($request);
-        if ($validation !== true) return $validation;
-
-        UserUtilities::create($request);
-        return response()->json(["status" => "201", "message" => "Successfully created new user account.", "data" => compact('user')], 201);
+        return UserEntity::store($request);
     }
 
 
     public function update(Request $request, $id)
     {
-        $validation = UserUtilities::updateValidation($request);
-        if ($validation !== true) return $validation;
-
-        $user = UserUtilities::find($id);
-        if (!$user) return response()->json(["status" => "404", "message" => "Resource doesn't exist."], 404);
-
-        $data = $request->except('avatar', 'password', 'repeat_password');
-        $user->update($data);
-
-        return response()->json(["status" => "201", "message" => "Successfully updated user account.", "data" => new UserResource($user)], 201);
+        return UserEntity::update($request, $id);
     }
 
 
     public function destroy($id)
     {
-        $access = AuthResponse::hasAccess('USER_DELETE');
-        if (!$access === true) return $access;
+        return UserEntity::destroy($id);
+    }
 
-        $user = UserUtilities::find($id);
-        if (!$user) return response()->json(["status" => "404", "message" => "Resource doesn't exist."], 404);
 
-        $user->delete();
-        return response()->json(["status" => "200", "message" => "User has been successfully deleted.", "data" => new UserResource($user)], 200);
+    public function authenticate(Request $request)
+    {
+        return UserAuthentication::authenticateCredentials($request->only('email', 'password'));
+    }
+
+
+    public function register(Request $request)
+    {
+        return UserAuthentication::register($request);
+    }
+
+
+    public function getAuthenticatedUser()
+    {
+        return AuthResponse::authAndRespond(JWTAuth::parseToken()->authenticate());
     }
 }

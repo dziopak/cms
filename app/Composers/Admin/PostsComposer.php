@@ -8,15 +8,15 @@ class PostsComposer
     private function index($request, $view)
     {
         return [
-            'posts' => \App\Post::with('author', 'thumbnail')->orderByDesc('id')->filter($request)->paginate(15),
-            'categories' => array_merge([0 => __('admin/general.no_category')], \App\PostCategory::all('id', 'name')->pluck('name', 'id')->toArray()),
+            'posts' => \App\Models\Post::with('author', 'thumbnail')->orderByDesc('id')->filter($request)->paginate(15),
+            'categories' => array_merge([0 => __('admin/general.no_category')], \App\Models\PostCategory::all('id', 'name')->pluck('name', 'id')->toArray()),
             'table' => getData('Admin/Modules/posts/posts_index_table')
         ];
     }
 
     private function create($request, $view)
     {
-        $categories = array_merge(['No category'], \App\PostCategory::list_all());
+        $categories = array_merge(['No category'], \App\Models\PostCategory::list_all());
         return [
             'categories' => $categories,
             'form' => getData('Admin/Modules/posts/posts_form', ['categories' => $categories, 'thumbnail' => getThumbnail(null)])
@@ -25,8 +25,8 @@ class PostsComposer
 
     private function edit($request, $view)
     {
-        $categories = array_merge(['No category'], \App\PostCategory::list_all());
-        $post = \App\Post::with('thumbnail')->findOrFail($view->post_id);
+        $categories = array_merge(['No category'], \App\Models\PostCategory::list_all());
+        $post = \App\Models\Post::with('thumbnail')->findOrFail($view->post_id);
         return [
             'post' => $post,
             'form' => getData('Admin/Modules/posts/posts_form', ['categories' => $categories, 'thumbnail' => getThumbnail($post->thumbnail), 'thumb_endpoint' => route('admin.posts.update', $view->post_id)])

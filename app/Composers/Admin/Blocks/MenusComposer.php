@@ -8,7 +8,7 @@ class MenusComposer
     private function index($request, $view)
     {
         return [
-            'menus' => \App\Menu::paginate(15),
+            'menus' => \App\Models\Menu::paginate(15),
             'table' => getData('Admin/Blocks/menus/menus_index_table')
         ];
     }
@@ -16,7 +16,7 @@ class MenusComposer
     private function edit($request, $view)
     {
         return [
-            'menu' => \App\Menu::with('items')->findOrFail($request->route('menu')),
+            'menu' => \App\Models\Menu::with('items')->findOrFail($request->route('menu')),
             'item_types' => [
                 'url' => 'URL',
                 'entries' => 'Entries'
