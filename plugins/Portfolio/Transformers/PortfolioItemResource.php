@@ -2,11 +2,11 @@
 
 namespace Plugins\Portfolio\Transformers;
 
-use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\Media\ImageResource;
 use Hook;
 
-class PortfolioItemResource extends Resource
+class PortfolioItemResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

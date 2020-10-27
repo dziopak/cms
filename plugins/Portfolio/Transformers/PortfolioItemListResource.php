@@ -2,9 +2,9 @@
 
 namespace Plugins\Portfolio\Transformers;
 
-use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class PortfolioItemListResource extends Resource
+class PortfolioItemListResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

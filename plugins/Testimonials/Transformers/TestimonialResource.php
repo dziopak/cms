@@ -2,10 +2,10 @@
 
 namespace Plugins\Testimonials\Transformers;
 
-use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Hook;
 
-class TestimonialResource extends Resource
+class TestimonialResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
