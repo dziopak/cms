@@ -2,7 +2,7 @@
 
 namespace App\Http\Utilities\Admin\Modules\Posts;
 
-use App\Models\Post;
+use App\Entities\Post;
 use Auth;
 
 class PostFiles
@@ -21,11 +21,12 @@ class PostFiles
 
         foreach ($posts as $post) {
             $post->fire_events = false;
-            $post->update(['file_id' => $file_id]);
             if ($file_id === 0) {
+                $post->update(['file_id' => null]);
                 $path = 'assets/no-thumbnail.png';
             } else {
-                $path = \App\Models\File::select('path')->findOrFail($file_id)->path;
+                $post->update(['file_id' => $file_id]);
+                $path = \App\Entities\File::select('path')->findOrFail($file_id)->path;
             }
         }
 

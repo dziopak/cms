@@ -8,7 +8,7 @@
 
 @section('module')
     <div class="module-page">
-        <h3>{{ $page->name }}</h3>
+        <h2>{{ $page->name }}</h2>
         {!! $page->content !!}
     </div>
 @endsection

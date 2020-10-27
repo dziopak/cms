@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,6 +11,6 @@ class Block extends Model
 
     public function layouts()
     {
-        return $this->belongsTo(\App\Models\Layout::class);
+        return $this->belongsTo(\App\Entities\Layout::class);
     }
 }

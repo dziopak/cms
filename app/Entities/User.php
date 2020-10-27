@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Entities;
 
 use Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -34,19 +34,19 @@ class User extends Authenticatable implements JWTSubject
 
     public function role()
     {
-        return $this->belongsTo('App\Models\Role');
+        return $this->belongsTo('App\Entities\Role');
     }
 
 
     public function photo()
     {
-        return $this->belongsTo('App\Models\File', 'avatar');
+        return $this->belongsTo('App\Entities\File', 'avatar');
     }
 
 
     public function dashboard()
     {
-        return $this->hasOne('App\Models\Dashboard', 'user_id', 'id');
+        return $this->hasOne('App\Entities\Dashboard', 'user_id', 'id');
     }
 
 
@@ -59,7 +59,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function account_logs()
     {
-        return $this->hasMany('App\Models\Log', 'user_id');
+        return $this->hasMany('App\Entities\Log', 'user_id');
     }
 
 

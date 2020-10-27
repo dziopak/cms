@@ -13,7 +13,7 @@ return [
 
     "actions" => "Actions",
 
-    "yes" => "Yest",
+    "yes" => "Yes",
     "no" => "No",
 
     "day" => "day|days",

@@ -3,7 +3,7 @@
 namespace App\Http\Utilities\Admin\Modules\Layouts;
 
 use App\Http\Utilities\Admin\Modules\Layouts\LayoutBlocks;
-use App\Models\Layout;
+use App\Entities\Layout;
 
 class LayoutEntity
 {

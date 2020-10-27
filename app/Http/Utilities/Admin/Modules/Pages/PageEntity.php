@@ -2,9 +2,9 @@
 
 namespace App\Http\Utilities\Admin\Modules\Pages;
 
-use App\Http\Utilities\Admin\Pages\PageActions;
-use App\Http\Utilities\Admin\Pages\PageFiles;
-use App\Models\Page;
+use App\Http\Utilities\Admin\Modules\Pages\PageActions;
+use App\Http\Utilities\Admin\Modules\Pages\PageFiles;
+use App\Entities\Page;
 use Auth;
 
 class PageEntity

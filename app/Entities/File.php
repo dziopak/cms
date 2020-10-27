@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Entities;
 
 use App\Events\Files\FileDestroyEvent;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Slider;
+use App\Entities\Slider;
 
 class File extends Model
 {
@@ -13,17 +13,17 @@ class File extends Model
 
     public function posts()
     {
-        return $this->hasMany('\App\Models\Post', 'file_id');
+        return $this->hasMany('\App\Entities\Post', 'file_id');
     }
 
     public function pages()
     {
-        return $this->hasMany('\App\Models\Page', 'file_id');
+        return $this->hasMany('\App\Entities\Page', 'file_id');
     }
 
     public function users()
     {
-        return $this->hasMany('\App\Models\User', 'avatar');
+        return $this->hasMany('\App\Entities\User', 'avatar');
     }
 
     public function sliders()

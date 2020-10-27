@@ -2,14 +2,14 @@
 
 use App\Helpers\ThemeHelpers;
 
+Auth::routes();
+Route::get('/locale', LocaleController::class)->name('locale');
+Route::get('/module', 'Admin\PluginDownloadController@download');
+
 Route::get('/clear-cache', function () {
     Artisan::call('cache:clear');
     return redirect(route('admin.dashboard.index'));
 });
-
-Auth::routes();
-Route::get('/locale', LocaleController::class)->name('locale');
-
 
 Route::get('theme/assets/{type}/{filename}', function ($type, $filename) {
     $path = base_path() . '/resources/views/themes/' . ThemeHelpers::activeTheme() . '/assets/' . $type . "/" . $filename;

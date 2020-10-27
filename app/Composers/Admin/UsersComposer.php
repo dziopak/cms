@@ -7,39 +7,39 @@ class UsersComposer
 
     private function index($request, $view)
     {
-        $view->users = \App\Models\User::with('role', 'photo')->filter($request)->paginate(15);
+        $view->users = \App\Entities\User::with('role', 'photo')->filter($request)->paginate(15);
 
 
-        $roles = \App\Models\Role::all('id', 'name')->pluck('name', 'id');
+        $roles = \App\Entities\Role::all('id', 'name')->pluck('name', 'id');
 
         return [
             'roles' => $roles,
-            'table' => getData('Admin/Modules/users/users_index_table')
+            'table' => getData('Admin/Modules/Users/users_index_table')
         ];
     }
 
     private function create($request, $view)
     {
-        $roles = \App\Models\Role::get_all_roles();
+        $roles = \App\Entities\Role::get_all_roles();
         return [
-            'form' => getData('Admin/Modules/users/users_create_form', ['roles' => $roles, 'thumbnail' => getThumbnail(null, 1)])
+            'form' => getData('Admin/Modules/Users/users_create_form', ['roles' => $roles, 'thumbnail' => getThumbnail(null, 1)])
         ];
     }
 
     private function edit($request, $view)
     {
-        $roles = (new \App\Models\Role)->get_all_roles();
-        $user = \App\Models\User::with('photo')->findOrFail($view->user_id);
+        $roles = (new \App\Entities\Role)->get_all_roles();
+        $user = \App\Entities\User::with('photo')->findOrFail($view->user_id);
         return [
             'user' => $user,
             'logs' => $user->logs()->take(5)->orderBy('created_at', 'desc')->get(),
-            'form' => getData('Admin/Modules/users/users_update_form', ['roles' => $roles, 'thumbnail' => getThumbnail($user->photo, 1), 'thumb_endpoint' => route('admin.users.update', $view->user_id)])
+            'form' => getData('Admin/Modules/Users/users_update_form', ['roles' => $roles, 'thumbnail' => getThumbnail($user->photo, 1), 'thumb_endpoint' => route('admin.users.update', $view->user_id)])
         ];
     }
 
     private function disable($request, $view)
     {
-        $user = \App\Models\User::findOrFail($view->user_id);
+        $user = \App\Entities\User::findOrFail($view->user_id);
         return [
             'user' => $user,
             'logs' => $user->account_logs()->take(5)->orderBy('created_at', 'desc')->get()

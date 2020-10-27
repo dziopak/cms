@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CategoriesRequest;
 use App\Http\Utilities\Admin\Modules\Categories\PageCategoryEntity;
 
-use App\Models\PageCategory;
+use App\Entities\PageCategory;
 use Auth;
 
 class PageCategoriesController extends Controller

@@ -1,33 +1,34 @@
 <?php
 
-namespace App\Models;
+namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
 use App\Events\Pages\PageCreateEvent;
 use App\Events\Pages\PageUpdateEvent;
 use App\Events\Pages\PageDestroyEvent;
-
+use App\Traits\Sluggable;
 
 class Page extends Model
 {
     protected $guarded = ['id', 'page_id'];
     public $fire_events = true;
 
+    use Sluggable;
 
     public function author()
     {
-        return $this->belongsTo('App\Models\User', 'user_id');
+        return $this->belongsTo('App\Entities\User', 'user_id');
     }
 
     public function thumbnail()
     {
-        return $this->belongsTo('App\Models\File', 'file_id');
+        return $this->belongsTo('App\Entities\File', 'file_id');
     }
 
     public function category()
     {
-        return $this->belongsTo('App\Models\PageCategory', 'category_id');
+        return $this->belongsTo('App\Entities\PageCategory', 'category_id');
     }
 
     public function scopeFilter($query, $request)

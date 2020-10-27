@@ -1,4 +1,2 @@
 <?php
-
-Route::get('/{id}', 'front\PagesController@show')->name('pages.index');
-Route::get('/{id}', 'front\PagesController@show')->name('pages.show');
+Route::get('/{id}', 'Front\PagesController@show')->name('pages.show');

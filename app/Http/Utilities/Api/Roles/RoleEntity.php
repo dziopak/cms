@@ -2,7 +2,7 @@
 
 namespace App\Http\Utilities\Api\Roles;
 
-use App\Models\Role;
+use App\Entities\Role;
 use App\Http\Resources\RoleResource;
 use App\Http\Utilities\Api\AuthResponse;
 

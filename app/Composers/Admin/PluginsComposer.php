@@ -7,14 +7,14 @@ class PluginsComposer
 
     private function index($request, $view)
     {
-        \App\Models\Module::boot();
-        $modules['active'] = \App\Models\Module::active();
-        $modules['inactive'] = \App\Models\Module::inactive();
+        \App\Entities\Module::boot();
+        $modules['active'] = \App\Entities\Module::active();
+        $modules['inactive'] = \App\Entities\Module::inactive();
 
 
         return [
             'modules' => $modules,
-            'table' => getData('Admin/Modules/plugins/plugins_index_table')
+            'table' => getData('Admin/Modules/Plugins/plugins_index_table')
         ];
     }
 

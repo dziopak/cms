@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\File;
+use App\Entities\File;
 
 class Slider extends Model
 {

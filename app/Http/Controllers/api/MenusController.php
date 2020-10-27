@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Utilities\Api\Menus\MenuEntity;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Menu;
+use App\Entities\Menu;
 
 class MenusController extends Controller
 {

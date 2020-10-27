@@ -6,7 +6,7 @@ use App\Http\Utilities\Api\Roles\RoleEntity;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\RoleResource;
 use Illuminate\Http\Request;
-use App\Models\Role;
+use App\Entities\Role;
 
 
 class RolesController extends Controller

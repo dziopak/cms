@@ -15,7 +15,7 @@
     }
 @endphp
 
-<div class="vertical-menu grid-item {{ $block['classes'] ?? "" }}">
+<div class="vertical-menu grid-item {{ $block['classes'] ?? "" }}{{ !empty($block['style']) ? " vertical-menu--style-".$block['style'] : "" }}">
     @if(!empty($block['menu']))
         <ul class="{{ $class }}">
 

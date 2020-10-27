@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -43,7 +43,7 @@ class Role extends Model
 
     public function users()
     {
-        return $this->hasMany('App\Models\User', 'role_id');
+        return $this->hasMany('App\Entities\User', 'role_id');
     }
 
 

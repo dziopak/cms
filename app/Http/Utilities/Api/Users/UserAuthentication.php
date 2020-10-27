@@ -5,7 +5,7 @@ namespace App\Http\Utilities\Api\Users;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Support\Facades\Hash;
 
-use App\Models\User;
+use App\Entities\User;
 use JWTAuth;
 
 class UserAuthentication

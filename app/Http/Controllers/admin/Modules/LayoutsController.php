@@ -7,7 +7,7 @@ use App\Http\Requests\Admin\Pages\Layouts\UpdateLayoutRequest;
 use App\Http\Utilities\Admin\Modules\Layouts\LayoutEntity;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Layout;
+use App\Entities\Layout;
 use Widget;
 use Exception;
 
@@ -24,7 +24,7 @@ class LayoutsController extends Controller
     public function index()
     {
         $layouts = Layout::orderByDesc('id')->paginate(15);
-        $table = getData('Admin/Modules/layouts/layouts_index_table');
+        $table = getData('Admin/Modules/Layouts/layouts_index_table');
         return view('admin.page_layouts.index', compact('layouts', 'table'));
     }
 
@@ -35,7 +35,7 @@ class LayoutsController extends Controller
      */
     public function create()
     {
-        $form = getData('Admin/Modules/layouts/layouts_form');
+        $form = getData('Admin/Modules/Layouts/layouts_form');
         return view('admin.page_layouts.create', compact('form'));
     }
 
@@ -73,7 +73,7 @@ class LayoutsController extends Controller
     {
         $layout = Layout::with('blocks')->findOrFail($id);
 
-        $form = getData('Admin/Modules/layouts/layouts_form');
+        $form = getData('Admin/Modules/Layouts/layouts_form');
         return view('admin.page_layouts.edit', compact('layout', 'form'));
     }
 

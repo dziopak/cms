@@ -24,6 +24,7 @@ $form = [
                     'value' => null,
                     'class' => '',
                     'container_class' => 'tinymce',
+                    'disabled' => true
                 ],
                 'category_id' => [
                     'type' => 'select',

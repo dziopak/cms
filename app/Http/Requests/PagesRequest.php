@@ -34,10 +34,9 @@ class PagesRequest extends FormRequest
 
             default:
                 $validation_fields = [
-                    'name' => 'string|required',
+                    'name' => 'required|string|unique:pages,name,' . $this->request->get('page_id'),
                     'content' => 'string|required',
                     'excerpt' => 'string|required',
-                    'slug' => 'string|required|unique:pages,slug,' . $this->request->get('page_id'),
                     'content' => 'string|required',
                     'category_id' => 'numeric|required',
                 ];

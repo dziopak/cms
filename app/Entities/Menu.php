@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,6 +11,6 @@ class Menu extends Model
 
     public function items()
     {
-        return $this->hasMany('App\Models\MenuItem', 'menu')->orderBy('sort');
+        return $this->hasMany('App\Entities\MenuItem', 'menu')->orderBy('sort');
     }
 }

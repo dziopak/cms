@@ -7,8 +7,8 @@ use App\Http\Utilities\Api\AuthResponse;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 use App\Http\Utilities\ModelUtilities;
-use App\Models\User;
-use App\Models\Page;
+use App\Entities\User;
+use App\Entities\Page;
 
 class PageEntity
 {

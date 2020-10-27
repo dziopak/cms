@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -8,21 +8,22 @@ use Illuminate\Support\Facades\DB;
 use App\Events\Categories\CategoryCreateEvent;
 use App\Events\Categories\CategoryUpdateEvent;
 use App\Events\Categories\CategoryDestroyEvent;
-
+use App\Traits\Sluggable;
 
 class PostCategory extends Model
 {
+    use Sluggable;
     protected $guarded = ['id', 'category_id', 'type'];
     public $fire_events;
 
     public function posts()
     {
-        return $this->hasMany('App\Models\Post', 'category_id');
+        return $this->hasMany('App\Entities\Post', 'category_id');
     }
 
     public static function list_all()
     {
-        return $categories = DB::table('post_categories')->pluck('name', 'id')->all();
+        return DB::table('post_categories')->pluck('name', 'id')->all();
     }
 
     public static function boot()

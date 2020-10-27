@@ -2,7 +2,7 @@
 
 namespace App\Http\Utilities\Api\Files;
 
-use App\Models\File;
+use App\Entities\File;
 
 class FileHandling
 {

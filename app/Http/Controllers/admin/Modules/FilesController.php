@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Modules;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\File;
+use App\Entities\File;
 use App\Http\Utilities\Api\Files\FileHandling;
 
 class FilesController extends Controller
@@ -32,7 +32,7 @@ class FilesController extends Controller
     {
         $id === "0" ?
             $path = 'assets/no-thumbnail.png' :
-            $path = \App\Models\File::findOrFail($id)->path;
+            $path = \App\Entities\File::findOrFail($id)->path;
 
         return response()->json(['path' => $path]);
     }
@@ -59,14 +59,14 @@ class FilesController extends Controller
 
     public function delete($id)
     {
-        $file = \App\Models\File::findOrFail($id);
+        $file = \App\Entities\File::findOrFail($id);
         return view('admin.media.delete', compact('file'));
     }
 
 
     public function destroy($id)
     {
-        \App\Models\File::findOrFail($id)->delete();
+        \App\Entities\File::findOrFail($id)->delete();
         return response()->json(['message' => __('admin/messages.files.delete.success'), 'id' => $id], 200);
     }
 
@@ -86,7 +86,7 @@ class FilesController extends Controller
         } else {
             switch ($data['mass_action']) {
                 case 'delete':
-                    \App\Models\File::whereIn('id', $data['mass_edit'])->delete();
+                    \App\Entities\File::whereIn('id', $data['mass_edit'])->delete();
                     return redirect()->back()->with('crud', __('admin/messages.files.mass.delete'));
                     break;
 

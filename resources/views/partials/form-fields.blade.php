@@ -27,7 +27,7 @@
                 @switch($item['type'])
 
                     @case('text')
-                        {!! Form::text($name, $item['value'], ['class' => 'form-control '.$item['class'], parseAttributes($item, 'attributes')]) !!}
+                        {!! Form::text($name, $item['value'], ['class' => 'form-control '.$item['class'], parseAttributes($item, 'attributes'), !empty($item['disabled']) ? 'disabled' : '']) !!}
                     @break
 
                     @case('password')

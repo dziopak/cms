@@ -1,5 +1,3 @@
 <?php
 
-use Illuminate\Http\Request;
-
-Route::get('/testimonials', "TestimonialsApiController@index");
+Route::get('/v1/testimonials', "TestimonialsApiController@index");

@@ -47,13 +47,13 @@ class AppServiceProvider extends ServiceProvider
 
         view()->composer('admin.settings.general', function ($view) {
             $themes = ThemeHelpers::getThemeList();
-            $view->settings = \App\Models\Setting::where(['group' => 'general'])->pluck('value', 'name')->toArray();
+            $view->settings = \App\Entities\Setting::where(['group' => 'general'])->pluck('value', 'name')->toArray();
             $view->form = getData('Admin/Modules/settings/general', array_merge($view->settings, ['themes' => $themes]));
         });
 
 
         view()->composer('admin.logs.index', function ($view) {
-            $view->logs = \App\Models\Log::with('author')->orderBy('logs.id', 'desc')->get();
+            $view->logs = \App\Entities\Log::with('author')->orderBy('logs.id', 'desc')->get();
         });
     }
 }

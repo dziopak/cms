@@ -2,7 +2,7 @@
 
 namespace App\Http\Utilities\Admin\Modules\Pages;
 
-use App\Models\Page;
+use App\Entities\Page;
 use Auth;
 
 class PageFiles
@@ -19,11 +19,12 @@ class PageFiles
         $pages = Page::findOrFail($this->pages);
         foreach ($pages as $page) {
             $page->fire_events = false;
-            $page->update(['file_id' => $file_id]);
             if ($file_id === 0) {
+                $page->update(['file_id' => null]);
                 $path = 'assets/no-thumbnail.png';
             } else {
-                $path = \App\Models\File::select('path')->findOrFail($file_id)->path;
+                $page->update(['file_id' => $file_id]);
+                $path = \App\Entities\File::select('path')->findOrFail($file_id)->path;
             }
         }
 

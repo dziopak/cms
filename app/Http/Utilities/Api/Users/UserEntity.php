@@ -6,7 +6,7 @@ use App\Http\Resources\UserResource;
 use App\Http\Utilities\Api\AuthResponse;
 use Illuminate\Support\Facades\Hash;
 
-use App\Models\User;
+use App\Entities\User;
 
 
 class UserEntity

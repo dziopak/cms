@@ -2,13 +2,15 @@
 
 namespace App\Http\Utilities\Admin\Modules\Posts;
 
-use App\Http\Utilities\Admin\Posts\PostActions;
-use App\Http\Utilities\Admin\Posts\PostFiles;
-use App\Models\Post;
+use App\Http\Utilities\Admin\Modules\Posts\PostActions;
+use App\Http\Utilities\Admin\Modules\Posts\PostFiles;
+use App\Entities\Post;
 use Auth;
 
 class PostEntity
 {
+
+
     public static function store($data)
     {
         $data['user_id'] = Auth::user()->id;

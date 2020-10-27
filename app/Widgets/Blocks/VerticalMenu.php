@@ -3,7 +3,7 @@
 namespace App\Widgets\Blocks;
 
 use Arrilot\Widgets\AbstractWidget;
-use App\Models\Menu;
+use App\Entities\Menu;
 
 class VerticalMenu extends AbstractWidget
 {
@@ -28,6 +28,13 @@ class VerticalMenu extends AbstractWidget
         'id' => 'vertical-menu-block'
     ];
 
+    // TO DO //
+    // FROM THEME SETTINGS //
+    private $styles = [
+        0 => 'Default',
+        1 => 'Style #1'
+    ];
+
 
     public function convertMenuList()
     {
@@ -47,11 +54,11 @@ class VerticalMenu extends AbstractWidget
     {
         $this->config = decodeBlockConfig($this->config);
 
-        $menu = \App\Models\Menu::find($this->config['block']->config['menu_id'] ?? 1);
+        $menu = \App\Entities\Menu::find($this->config['block']->config['menu_id'] ?? 1);
 
         if ($this->config['is_admin'] === false)
             $items = $menu->items()->where(['parent' => 0])->get();
 
-        return block('vertical_menu', $this->config, ['menus' => $this->convertMenuList()], ['menu' => $items ?? null]);
+        return block('vertical_menu', $this->config, ['menus' => $this->convertMenuList(), 'styles' => $this->styles], ['menu' => $items ?? null]);
     }
 }

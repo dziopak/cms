@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -8,15 +8,17 @@ use Illuminate\Support\Facades\DB;
 use App\Events\Categories\CategoryCreateEvent;
 use App\Events\Categories\CategoryUpdateEvent;
 use App\Events\Categories\CategoryDestroyEvent;
+use App\Traits\Sluggable;
 
 class PageCategory extends Model
 {
+    use Sluggable;
     protected $guarded = ['id', 'category_id', 'type'];
     public $fire_events = true;
 
     public function pages()
     {
-        return $this->hasMany('App\Models\Page', 'category_id');
+        return $this->hasMany('App\Entities\Page', 'category_id');
     }
 
     public static function list_all()

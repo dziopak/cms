@@ -8,19 +8,19 @@ class MenuRelations
     {
         switch ($type) {
             case 'page':
-                return \App\Models\Page::class;
+                return \App\Entities\Page::class;
                 break;
 
             case 'post':
-                return \App\Models\Post::class;
+                return \App\Entities\Post::class;
                 break;
 
             case 'post_category':
-                return \App\Models\PostCategory::class;
+                return \App\Entities\PostCategory::class;
                 break;
 
             case 'page_category':
-                return \App\Models\PageCategory::class;
+                return \App\Entities\PageCategory::class;
                 break;
         }
     }

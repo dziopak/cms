@@ -27,7 +27,7 @@ class RecentLogs extends AbstractWidget
 
     public function run()
     {
-        $logs = \App\Models\Log::orderByDesc('created_at')->take($this->config['count'])->get();
+        $logs = \App\Entities\Log::orderByDesc('created_at')->take($this->config['count'])->get();
 
         return view('admin.widgets.recent_logs', [
             'config' => $this->config,

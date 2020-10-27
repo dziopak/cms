@@ -5,8 +5,8 @@ namespace App\Http\Utilities\Api\Categories;
 use App\Http\Utilities\Api\AuthResponse;
 use App\Http\Resources\CategoryResource;
 use App\Http\Resources\CategoryCollection;
-use App\Models\PostCategory;
-use App\Models\PageCategory;
+use App\Entities\PostCategory;
+use App\Entities\PageCategory;
 use Hook;
 
 class CategoryEntity

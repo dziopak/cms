@@ -24,7 +24,8 @@ $form = [
                     'required' => true,
                     'value' => null,
                     'class' => '',
-                    'container_class' => ''
+                    'container_class' => '',
+                    'disabled' => true
                 ],
                 'category_id' => [
                     'type' => 'select',

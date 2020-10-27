@@ -3,8 +3,8 @@
 namespace App\Http\Utilities\Api\Menus;
 
 use App\Http\Utilities\Api\AuthResponse;
-use App\Models\Menu;
-use App\Models\MenuItem;
+use App\Entities\Menu;
+use App\Entities\MenuItem;
 
 class MenuEntity
 {

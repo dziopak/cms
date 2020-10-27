@@ -7,8 +7,8 @@ use App\Http\Resources\PostResource;
 use App\Http\Utilities\ModelUtilities;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
-use App\Models\User;
-use App\Models\Post;
+use App\Entities\User;
+use App\Entities\Post;
 use Hook;
 
 class PostEntity

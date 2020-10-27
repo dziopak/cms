@@ -2,7 +2,7 @@
 
 namespace App\Listeners\Posts;
 
-use App\Models\Log;
+use App\Entities\Log;
 
 class PostCreateLogListener
 {

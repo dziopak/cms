@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,7 +12,7 @@ class Log extends Model
 
     public function author()
     {
-        return $this->belongsTo('App\Models\User', 'user_id', 'id');
+        return $this->belongsTo('App\Entities\User', 'user_id', 'id');
     }
 
 
@@ -20,27 +20,27 @@ class Log extends Model
     {
         switch ($this->type) {
             case 'USER':
-                return $this->belongsTo('App\Models\User', 'target_id', 'id');
+                return $this->belongsTo('App\Entities\User', 'target_id', 'id');
                 break;
 
             case 'ROLE':
-                return $this->belongsTo('App\Models\Role', 'target_id', 'id');
+                return $this->belongsTo('App\Entities\Role', 'target_id', 'id');
                 break;
 
             case 'POST':
-                return $this->belongsTo('App\Models\Post', 'target_id', 'id');
+                return $this->belongsTo('App\Entities\Post', 'target_id', 'id');
                 break;
 
             case 'POST_CATEGORY':
-                return $this->belongsTo('App\Models\PostCategory', 'target_id', 'id');
+                return $this->belongsTo('App\Entities\PostCategory', 'target_id', 'id');
                 break;
 
             case 'PAGE':
-                return $this->belongsTo('App\Models\Page', 'target_id', 'id');
+                return $this->belongsTo('App\Entities\Page', 'target_id', 'id');
                 break;
 
             case 'PAGE_CATEGORY':
-                return $this->belongsTo('App\Models\PageCategory', 'target_id', 'id');
+                return $this->belongsTo('App\Entities\PageCategory', 'target_id', 'id');
                 break;
         }
     }

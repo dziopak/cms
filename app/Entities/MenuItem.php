@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,11 +11,11 @@ class MenuItem extends Model
 
     public function menu()
     {
-        return $this->belongsTo('App\Models\Menu');
+        return $this->belongsTo('App\Entities\Menu');
     }
 
     public function items()
     {
-        return $this->hasMany('App\Models\MenuItem', 'parent');
+        return $this->hasMany('App\Entities\MenuItem', 'parent');
     }
 }

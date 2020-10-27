@@ -11,3 +11,8 @@ Route::group(['prefix' => 'blocks', 'as' => 'blocks.'], function () {
     //BLOCKS ROUTES
     require base_path('routes/web/admin/blocks/menus.php');
 });
+
+
+Route::get('/menus', function () {
+    return view('admin.menus.index');
+})->name('widgets.menus.index');

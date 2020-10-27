@@ -23,11 +23,11 @@ class CategoryCollection extends JsonResource
             'description' => $this->description,
             'parent_id' => $this->parent_id,
         ];
-        $this->posts ? $categoryResource['posts'] = PostResource::collection($this->posts) : null;
-        $this->pages ? $categoryResource['pages'] = PostResource::collection($this->pages) : null;
+        $this->posts ? $categoryResource['posts'] = PostResource::collection($this->posts)->sortByDesc('created_at') : null;
+        $this->pages ? $categoryResource['pages'] = PageResource::collection($this->pages) : null;
 
         $category = $this;
-        return $categoryResource = Hook::get('apiCategoryResource',[$categoryResource, $category],function($categoryResource, $category) {
+        return $categoryResource = Hook::get('apiCategoryResource', [$categoryResource, $category], function ($categoryResource, $category) {
             return $categoryResource;
         });
     }

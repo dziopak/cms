@@ -1,4 +1,4 @@
 <?php
 
-Route::get('/portfolio/items', "PortfolioApiController@index");
-Route::get('/portfolio/item/{id}', "PortfolioApiController@show");
+Route::get('/v1/portfolio/items', "PortfolioApiController@index");
+Route::get('/v1/portfolio/item/{id}', "PortfolioApiController@show");

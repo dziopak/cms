@@ -3,7 +3,7 @@
 namespace App\Http\Utilities\Admin\Modules\Roles;
 
 use App\Http\Utilities\RoleAccess;
-use App\Models\Role;
+use App\Entities\Role;
 
 class RoleEntity
 {

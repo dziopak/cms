@@ -3,7 +3,7 @@
 namespace App\Listeners\Users;
 
 use Intervention\Image\ImageManagerStatic as Image;
-use App\Models\File;
+use App\Entities\File;
 
 class UserUpdateAvatarListener
 {

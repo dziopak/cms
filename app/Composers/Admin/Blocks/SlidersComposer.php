@@ -2,14 +2,16 @@
 
 namespace App\Composers\Admin\Blocks;
 
+use App\Entities\Slider;
+
 class SlidersComposer
 {
 
     private function index($request, $view)
     {
         return [
-            'sliders' => \App\Models\Slider::paginate(15),
-            'table' => getData('Admin/blocks/sliders/sliders_index_table')
+            'sliders' => Slider::paginate(15),
+            'table' => getData('Admin/Blocks/sliders/sliders_index_table')
         ];
     }
 
@@ -21,6 +23,10 @@ class SlidersComposer
 
         switch ($vw) {
             case 'index':
+                $data = $this->index($request, $view);
+                break;
+
+            default:
                 $data = $this->index($request, $view);
                 break;
         }

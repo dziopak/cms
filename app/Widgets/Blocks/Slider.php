@@ -26,7 +26,7 @@ class Slider extends AbstractWidget
 
     public function convertSlidersList()
     {
-        $all = \App\Models\Slider::all();
+        $all = \App\Entities\Slider::all();
         $sliders = [];
 
         foreach ($all as $slider) {
@@ -43,7 +43,7 @@ class Slider extends AbstractWidget
     public function run()
     {
         $this->config = decodeBlockConfig($this->config);
-        $slider = \App\Models\Slider::find($this->config['block']->config['slider_id'] ?? 0);
+        $slider = \App\Entities\Slider::find($this->config['block']->config['slider_id'] ?? 0);
         return block('slider', $this->config, ['sliders' => $this->convertSlidersList()], ['slider' => $slider]);
     }
 }

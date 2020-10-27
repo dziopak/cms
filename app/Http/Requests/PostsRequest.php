@@ -7,49 +7,30 @@ use Hook;
 
 class PostsRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
+
+
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
+
     public function rules()
     {
 
+        if ($this->request->get('request') === 'photo') return ['file' => 'required|numeric'];
 
-        switch ($this->request->get('request')) {
+        $validation_fields = [
+            'name' => 'required|string|unique:posts,name,' . $this->request->get('post_id'),
+            'content' => 'string|required',
+            'excerpt' => 'string|required',
+            'content' => 'string|required',
+            'category_id' => 'numeric|required',
+        ];
 
-            case 'photo':
-                $validation_fields = [
-                    'file' => 'required|numeric'
-                ];
-                break;
 
-            default:
-                $validation_fields = [
-                    'name' => 'string|required',
-                    'content' => 'string|required',
-                    'excerpt' => 'string|required',
-                    'slug' => 'string|required|unique:posts,slug,' . $this->request->get('post_id'),
-                    'content' => 'string|required',
-                    'category_id' => 'numeric|required',
-                ];
-                break;
-        }
-
-        $validation_fields = Hook::get('adminPagesValidation', [$validation_fields], function ($validation_fields) {
+        return $validation_fields = Hook::get('adminPagesValidation', [$validation_fields], function ($validation_fields) {
             return $validation_fields;
         });
-
-        return $validation_fields;
     }
 }

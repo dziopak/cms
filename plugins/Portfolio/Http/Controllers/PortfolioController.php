@@ -57,7 +57,7 @@ class PortfolioController extends Controller
                 if ($file === 0) {
                     $path = 'assets/no-thumbnail.png';
                 } else {
-                    $path = \App\Models\File::select('path')->findOrFail($file)->path;
+                    $path = \App\Entities\File::select('path')->findOrFail($file)->path;
                 }
                 return response()->json(['message' => 'Successfully updated project\'s thumbnail', 'path' => $path], 200);
                 break;
@@ -97,7 +97,7 @@ class PortfolioController extends Controller
         }
 
         foreach ($data as $photo) {
-            $file = \App\Models\File::findOrFail($photo);
+            $file = \App\Entities\File::findOrFail($photo);
             if ($file) {
                 $res[] = $file;
             }

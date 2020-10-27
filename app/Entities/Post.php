@@ -1,31 +1,34 @@
 <?php
 
-namespace App\Models;
+namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
 use App\Events\Posts\PostCreateEvent;
 use App\Events\Posts\PostUpdateEvent;
 use App\Events\Posts\PostDestroyEvent;
+use App\Traits\Sluggable;
+
 
 class Post extends Model
 {
+    use Sluggable;
     protected $guarded = ['id', 'post_id', 'thumbnail'];
     public $fire_events = true;
 
     public function author()
     {
-        return $this->belongsTo('App\Models\User', 'user_id');
+        return $this->belongsTo('App\Entities\User', 'user_id');
     }
 
     public function thumbnail()
     {
-        return $this->belongsTo('App\Models\File', 'file_id');
+        return $this->belongsTo('App\Entities\File', 'file_id');
     }
 
     public function category()
     {
-        return $this->belongsTo('App\Models\PostCategory', 'category_id');
+        return $this->belongsTo('App\Entities\PostCategory', 'category_id');
     }
 
     public function scopeFilter($query, $request)

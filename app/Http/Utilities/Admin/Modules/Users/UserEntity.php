@@ -3,12 +3,12 @@
 namespace App\Http\Utilities\Admin\Modules\Users;
 
 
-use App\Http\Utilities\Admin\Users\UserActions;
-use App\Http\Utilities\Admin\Users\UserFiles;
+use App\Http\Utilities\Admin\Modules\Users\UserActions;
+use App\Http\Utilities\Admin\Modules\Users\UserFiles;
 use App\Events\Users\UserNewPasswordEvent;
 use Illuminate\Support\Facades\Hash;
 use App\Events\Users\UserBlockEvent;
-use App\Models\User;
+use App\Entities\User;
 
 class UserEntity
 {

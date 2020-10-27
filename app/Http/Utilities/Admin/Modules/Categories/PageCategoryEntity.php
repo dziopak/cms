@@ -2,7 +2,7 @@
 
 namespace App\Http\Utilities\Admin\Modules\Categories;
 
-use App\Models\PageCategory;
+use App\Entities\PageCategory;
 use Auth;
 
 class PageCategoryEntity

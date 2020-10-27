@@ -3,8 +3,8 @@
 namespace App\Http\Utilities\Api\Categories;
 
 use App\Http\Resources\CategoryCollection;
-use App\Models\Page;
-use App\Models\Post;
+use App\Entities\Page;
+use App\Entities\Post;
 
 class CategoryEntries
 {

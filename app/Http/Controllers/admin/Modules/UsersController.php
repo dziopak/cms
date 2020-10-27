@@ -23,7 +23,7 @@ class UsersController extends Controller
     public function create()
     {
         Auth::user()->hasAccessOrRedirect('USER_CREATE');
-        return view('admin.users.create', compact('roles', 'form'));
+        return view('admin.users.create');
     }
 
 

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PagesRequest;
 use App\Http\Utilities\Admin\Modules\Pages\PageEntity;
 
-use App\Models\Page;
+use App\Entities\Page;
 use Auth;
 
 class PagesController extends Controller
@@ -41,7 +41,7 @@ class PagesController extends Controller
     }
 
 
-    public function update(Request $request, $id)
+    public function update(PagesRequest $request, $id)
     {
         Auth::user()->hasAccessOrRedirect('PAGE_EDIT');
         return PageEntity::update($id, $request);

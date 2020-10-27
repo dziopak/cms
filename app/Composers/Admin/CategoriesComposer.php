@@ -10,15 +10,15 @@ class CategoriesComposer
         switch ($type) {
             case 'post_categories':
                 $data = [
-                    'categories' => \App\Models\PostCategory::orderByDesc('id')->filter($request)->paginate(15),
-                    'table' => getData('Admin/Modules/categories/post_categories_index_table')
+                    'categories' => \App\Entities\PostCategory::orderByDesc('id')->filter($request)->paginate(15),
+                    'table' => getData('Admin/Modules/Categories/post_categories_index_table')
                 ];
                 break;
 
             case 'page_categories':
                 $data = [
-                    'categories' => \App\Models\PageCategory::orderByDesc('id')->filter($request)->paginate(15),
-                    'table' => getData('Admin/Modules/categories/page_categories_index_table')
+                    'categories' => \App\Entities\PageCategory::orderByDesc('id')->filter($request)->paginate(15),
+                    'table' => getData('Admin/Modules/Categories/page_categories_index_table')
                 ];
                 break;
         }
@@ -29,18 +29,18 @@ class CategoriesComposer
     {
         switch ($type) {
             case 'post_categories':
-                $categories = array_merge([__('admin/post_categories.no_category')], \App\Models\PostCategory::list_all());
+                $categories = array_merge([__('admin/post_categories.no_category')], \App\Entities\PostCategory::list_all());
                 $data = [
                     'categories' => $categories,
-                    'form' => getData('Admin/Modules/categories/post_categories_form', ['categories' => $categories])
+                    'form' => getData('Admin/Modules/Categories/post_categories_form', ['categories' => $categories])
                 ];
                 break;
 
             case 'page_categories':
-                $categories = array_merge([__('admin/page_categories.no_category')], \App\Models\PageCategory::list_all());
+                $categories = array_merge([__('admin/page_categories.no_category')], \App\Entities\PageCategory::list_all());
                 $data = [
                     'categories' => $categories,
-                    'form' => getData('Admin/Modules/categories/page_categories_form', ['categories' => $categories])
+                    'form' => getData('Admin/Modules/Categories/page_categories_form', ['categories' => $categories])
                 ];
                 break;
         }
@@ -52,20 +52,20 @@ class CategoriesComposer
 
         switch ($type) {
             case 'post_categories':
-                $categories = array_merge([__('admin/post_categories.no_category')], \App\Models\PostCategory::list_all());
+                $categories = array_merge([__('admin/post_categories.no_category')], \App\Entities\PostCategory::list_all());
                 $data = [
-                    'category' => \App\Models\PostCategory::findOrFail($view->category_id),
+                    'category' => \App\Entities\PostCategory::findOrFail($view->category_id),
                     'categories' => $categories,
-                    'form' => getData('Admin/Modules/categories/post_categories_form', ['categories' => $categories])
+                    'form' => getData('Admin/Modules/Categories/post_categories_form', ['categories' => $categories])
                 ];
                 break;
 
             case 'page_categories':
-                $categories = array_merge([__('admin/page_categories.no_category')], \App\Models\PageCategory::list_all());
+                $categories = array_merge([__('admin/page_categories.no_category')], \App\Entities\PageCategory::list_all());
                 $data = [
-                    'category' => \App\Models\PageCategory::findOrFail($view->category_id),
+                    'category' => \App\Entities\PageCategory::findOrFail($view->category_id),
                     'categories' => $categories,
-                    'form' => getData('Admin/Modules/categories/page_categories_form', ['categories' => $categories])
+                    'form' => getData('Admin/Modules/Categories/page_categories_form', ['categories' => $categories])
                 ];
                 break;
         }

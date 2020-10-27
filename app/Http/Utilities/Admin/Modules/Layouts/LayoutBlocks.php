@@ -2,7 +2,7 @@
 
 namespace App\Http\Utilities\Admin\Modules\Layouts;
 
-use App\Models\Block;
+use App\Entities\Block;
 
 class LayoutBlocks
 {

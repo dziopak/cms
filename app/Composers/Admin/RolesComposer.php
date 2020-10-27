@@ -2,7 +2,7 @@
 
 namespace App\Composers\Admin;
 
-use App\Models\Role;
+use App\Entities\Role;
 use App\Http\Utilities\RoleAccess;
 
 class RolesComposer
@@ -12,7 +12,7 @@ class RolesComposer
     {
         return [
             'roles' => Role::orderBy('id')->filter($request)->paginate(15),
-            'table' => getData('Admin/Modules/roles/roles_index_table'),
+            'table' => getData('Admin/Modules/Roles/roles_index_table'),
         ];
     }
 
@@ -24,7 +24,7 @@ class RolesComposer
             $data['role'] = $role;
         }
 
-        $data['form'] = getData('Admin/Modules/roles/roles_form');
+        $data['form'] = getData('Admin/Modules/Roles/roles_form');
         return $data;
     }
 
@@ -35,7 +35,7 @@ class RolesComposer
 
         return [
             'role' => $role,
-            'form' => getData('Admin/Modules/roles/roles_form')
+            'form' => getData('Admin/Modules/Roles/roles_form')
         ];
     }
 

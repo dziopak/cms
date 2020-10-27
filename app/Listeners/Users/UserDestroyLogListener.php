@@ -2,7 +2,7 @@
 
 namespace App\Listeners\Users;
 
-use App\Models\Log;
+use App\Entities\Log;
 use Auth;
 
 class UserDestroyLogListener

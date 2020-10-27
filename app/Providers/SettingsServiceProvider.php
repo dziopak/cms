@@ -21,7 +21,7 @@ class SettingsServiceProvider extends ServiceProvider
     {
         if (is_installed() && db_set()) {
             if (table_exists('settings')) {
-                $settings = \App\Models\Setting::all([
+                $settings = \App\Entities\Setting::all([
                     'name', 'value', 'group'
                 ])->groupBy('group', true)->transform(function ($setting) {
                     $settings = $setting->toArray();

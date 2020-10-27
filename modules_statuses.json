@@ -1,7 +1,7 @@
 {
     "Logs": true,
     "Posts": true,
-    "Lang": true,
-    "Testimonials": true,
-    "Portfolio": true
+    "Lang": false,
+    "Testimonials": false,
+    "Portfolio": false
 }

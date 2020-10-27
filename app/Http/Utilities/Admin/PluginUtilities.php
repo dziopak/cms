@@ -43,7 +43,7 @@ class PluginUtilities
         Hook::listen('activePlugins', function ($callback, $output, $plugin) use ($manifest) {
             if (empty($output) || !is_array($output)) $output = [];
 
-            $plugin = new \App\Models\Module;
+            $plugin = new \App\Entities\Module;
             $plugin->slug = $manifest['slug'];
             $plugin->id = $manifest['id'];
             $plugin->name = $manifest['name'];

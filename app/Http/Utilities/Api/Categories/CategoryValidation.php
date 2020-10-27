@@ -4,8 +4,8 @@ namespace App\Http\Utilities\Api\Categories;
 
 use Illuminate\Support\Facades\Validator;
 use App\Http\Utilities\Api\AuthResponse;
-use App\Models\PostCategory;
-use App\Models\PageCategory;
+use App\Entities\PostCategory;
+use App\Entities\PageCategory;
 
 use Hook;
 

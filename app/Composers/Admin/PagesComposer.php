@@ -8,32 +8,32 @@ class PagesComposer
     private function index($request, $view)
     {
         return [
-            'pages' => \App\Models\Page::with('author', 'thumbnail')->orderByDesc('id')->filter($request)->paginate(15),
-            'categories' => array_merge([0 => __('admin/general.no_category')], \App\Models\PageCategory::all('id', 'name')->pluck('name', 'id')->toArray()),
-            'table' => getData('Admin/Modules/pages/pages_index_table')
+            'pages' => \App\Entities\Page::with('author', 'thumbnail')->orderByDesc('id')->filter($request)->paginate(15),
+            'categories' => array_merge([0 => __('admin/general.no_category')], \App\Entities\PageCategory::all('id', 'name')->pluck('name', 'id')->toArray()),
+            'table' => getData('Admin/Modules/Pages/pages_index_table')
         ];
     }
 
     private function create($request, $view)
     {
-        $categories = array_merge(['No category'], \App\Models\PageCategory::list_all());
-        $layouts = \App\Models\Layout::list();
+        $categories = array_merge(['No category'], \App\Entities\PageCategory::list_all());
+        $layouts = \App\Entities\Layout::list();
 
         return [
             'categories' => $categories,
-            'form' => getData('Admin/Modules/pages/pages_form', ['categories' => $categories, 'thumbnail' => getThumbnail(null), 'layouts' => $layouts ?? [0 => 'none']])
+            'form' => getData('Admin/Modules/Pages/pages_form', ['categories' => $categories, 'thumbnail' => getThumbnail(null), 'layouts' => $layouts ?? [0 => 'none']])
         ];
     }
 
     private function edit($request, $view)
     {
-        $page = \App\Models\Page::with('thumbnail')->findOrFail($view->page_id);
-        $categories = array_merge(['No category'], \App\Models\PageCategory::list_all());
-        $layouts = \App\Models\Layout::list();
+        $page = \App\Entities\Page::with('thumbnail')->findOrFail($view->page_id);
+        $categories = array_merge(['No category'], \App\Entities\PageCategory::list_all());
+        $layouts = \App\Entities\Layout::list();
 
         return [
             'form' => getData(
-                'Admin/Modules/pages/pages_form',
+                'Admin/Modules/Pages/pages_form',
                 [
                     'categories' => $categories,
                     'thumbnail' => getThumbnail($page->thumbnail),

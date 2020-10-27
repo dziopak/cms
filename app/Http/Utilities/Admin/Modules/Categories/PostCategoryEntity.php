@@ -2,7 +2,7 @@
 
 namespace App\Http\Utilities\Admin\Modules\Categories;
 
-use App\Models\PostCategory;
+use App\Entities\PostCategory;
 use Auth;
 
 class PostCategoryEntity

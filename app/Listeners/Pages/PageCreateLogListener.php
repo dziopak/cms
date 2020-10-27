@@ -2,7 +2,7 @@
 
 namespace App\Listeners\Pages;
 
-use App\Models\Log;
+use App\Entities\Log;
 
 class PageCreateLogListener
 {

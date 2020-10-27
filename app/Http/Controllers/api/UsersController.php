@@ -8,7 +8,7 @@ use App\Http\Resources\UserResource;
 use App\Http\Controllers\Controller;
 use App\Http\Utilities\Api\AuthResponse;
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Entities\User;
 use JWTAuth;
 
 class UsersController extends Controller

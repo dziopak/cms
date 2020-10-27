@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CategoriesRequest;
 use App\Http\Utilities\Admin\Modules\Categories\PostCategoryEntity;
 
-use App\Models\PostCategory;
+use App\Entities\PostCategory;
 use Auth;
 
 class PostCategoriesController extends Controller

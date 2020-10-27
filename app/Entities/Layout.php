@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Block;
+use App\Entities\Block;
 
 class Layout extends Model
 {

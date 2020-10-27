@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
-use App\Models\Page;
+use App\Entities\Page;
 
 class PagesController extends Controller
 {
@@ -17,17 +17,10 @@ class PagesController extends Controller
 
     public function show($id)
     {
-        if (is_numeric($id)) {
-            $page = Page::with('author', 'category', 'thumbnail')->findOrFail($id);
-        } else {
-            $page = Page::with('author', 'category', 'thumbnail')->where(['slug' => $id])->orWhere(['slug_pl' => $id])->first();
-        }
+        $page = Page::findBySlug('test-page');
+        if (empty($page)) redirect(route('front.posts.index'));
 
-        if ($page) {
-            $blocks = getLayout(\App\Models\Layout::findOrFail($page->layout));
-            return view($this->theme['url'] . '.modules.pages.show', compact('page', 'blocks'));
-        } else {
-            return redirect(route('front.posts.index'));
-        }
+        $blocks = getLayout(\App\Entities\Layout::findOrFail($page->layout));
+        return view($this->theme['url'] . '.modules.pages.show', compact('page', 'blocks'));
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Entities;
 
 use App\Http\Utilities\Admin\PluginUtilities;
 use Illuminate\Database\Eloquent\Model;
@@ -58,7 +58,7 @@ class Module extends Model
         $output = [];
 
         foreach ($plugins as $plugin) {
-            $obj = new \App\Models\Module;
+            $obj = new \App\Entities\Module;
             $obj->slug = $plugin['slug'];
 
             $obj->id = $plugin['id'];

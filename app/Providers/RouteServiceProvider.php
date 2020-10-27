@@ -21,7 +21,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+    public const HOME = '/login';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -35,46 +35,59 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
     }
 
-    /**
-     * Define the routes for the application.
-     *
-     * @return void
-     */
+
     public function map()
     {
+        $this->mapAdminRoutes();
         $this->mapApiRoutes();
-
         $this->mapWebRoutes();
-
-        //
+        $this->mapFrontRoutes();
     }
 
-    /**
-     * Define the "web" routes for the application.
-     *
-     * These routes all receive session state, CSRF protection, etc.
-     *
-     * @return void
-     */
+
+    protected function mapFrontRoutes()
+    {
+        foreach (glob(base_path('routes/web/front/*.php')) as $file) {
+            Route::middleware(['web', 'guest:api'])
+                ->as('front.')
+                ->namespace($this->namespace)
+                ->group($file);
+        }
+    }
+
+
+    protected function mapAdminRoutes()
+    {
+        $files = array_merge(
+            glob(base_path('routes/web/admin/modules/*.php')),
+            glob(base_path('routes/web/admin/blocks/*.php'))
+        );
+
+        foreach ($files as $file) {
+            Route::middleware(['web', 'access:ADMIN_VIEW'])
+                ->prefix('admin')
+                ->as('admin.')
+                ->namespace($this->namespace)
+                ->group($file);
+        }
+    }
+
+
     protected function mapWebRoutes()
     {
-        Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/web.php'));
+        foreach (glob(base_path('routes/web/*.php')) as $file) {
+            Route::middleware(['web'])
+                ->namespace($this->namespace)
+                ->group($file);
+        }
     }
 
-    /**
-     * Define the "api" routes for the application.
-     *
-     * These routes are typically stateless.
-     *
-     * @return void
-     */
+
     protected function mapApiRoutes()
     {
         Route::prefix('api')
-             ->middleware('api')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/api.php'));
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/api.php'));
     }
 }

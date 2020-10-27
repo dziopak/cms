@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin\Modules;
 
 use App\Http\Utilities\Admin\Modules\Posts\PostEntity;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PostsRequest;
 use Illuminate\Http\Request;
-use App\Models\Post;
+use App\Entities\Post;
+use App\Http\Requests\PostsRequest;
 use Auth;
 
 class PostsController extends Controller

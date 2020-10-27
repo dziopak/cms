@@ -21,7 +21,6 @@
         "rachidlaasri/laravel-installer": "^4.0",
         "spatie/laravel-query-builder": "^2.8",
         "tymon/jwt-auth": "dev-develop",
-        "unisharp/laravel-filemanager": "^2.0",
         "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {

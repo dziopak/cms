@@ -3,7 +3,7 @@
 namespace App\Widgets\Blocks;
 
 use Arrilot\Widgets\AbstractWidget;
-use App\Models\Menu;
+use App\Entities\Menu;
 
 class HorizontalMenu extends AbstractWidget
 {
@@ -46,7 +46,7 @@ class HorizontalMenu extends AbstractWidget
     {
         $this->config = decodeBlockConfig($this->config);
 
-        $menu = \App\Models\Menu::find($this->config['block']->config['menu_id'] ?? 1);
+        $menu = \App\Entities\Menu::find($this->config['block']->config['menu_id'] ?? 1);
 
         if ($this->config['is_admin'] === false)
             $items = $menu->items()->where(['parent' => 0])->get();
