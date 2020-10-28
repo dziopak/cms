@@ -28,7 +28,8 @@
 
 
 @section('content-left')
-    @wrapper('admin.partials.wrapper', ['title' => 'portfolio::langs.basic_data_title'])
+    <x-wrapper title="portfolio::langs.basic_data_title">
+
         <div class="row">
             <div class="col-lg-3" style="display: flex;">
                 @include('partials.form-fields', ['fields' => $form['thumbnail']])
@@ -45,7 +46,8 @@
             </div>
 
         </div>
-    @endwrapper
+
+    </x-wrapper>
 @endsection
 
 

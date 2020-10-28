@@ -18,7 +18,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/page_categories.edit_left_title'])
+    <x-wrapper title="admin/page_categories.edit_left_title">
 
         @include('partials.form-fields', ['fields' => $form['basic_data']])
 
@@ -26,7 +26,7 @@
             {!! Form::button('<i class="fa fa-home"></i>'.' '.__('admin/general.update_button'), ['class' => 'btn btn-success', 'type' => 'submit']) !!}
         </div>
 
-    @endwrapper
+    </x-wrapper>
 @endsection
 
 

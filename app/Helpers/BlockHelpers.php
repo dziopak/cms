@@ -6,11 +6,8 @@ use App\Helpers\ThemeHelpers;
 function decodeBlockConfig($config)
 {
     if (empty($config['block'])) $config['block'] = new stdClass;
-    if (!empty($config['block']->config)) {
-        if (is_string($config['block']->config)) $config['block']->config = unserialize($config['block']->config);
-    } else {
-        $config['block']->config = [];
-    }
+    if (empty($config['block']->config)) $config['block']->config = [];
+    if (is_string($config['block']->config)) $config['block']->config = unserialize($config['block']->config);
 
     return $config;
 }
@@ -18,19 +15,20 @@ function decodeBlockConfig($config)
 
 function block($block, $config, $admin_options = [], $front_options = [])
 {
+    if (empty($config['block']->config)) $config['block']->config = [];
+
     if ($config['is_admin']) {
         return view('admin.blocks.' . $block, array_merge([
             'config' => $config,
             'key' => randomString(15),
         ], $admin_options));
-    } else {
-        if (empty($config['block']->config)) $config['block']->config = [];
-        return view(ThemeHelpers::getBlockPath($block), [
-            'block' => array_merge($config['block']->config, array_merge([
-                'title' => $config['block']->title
-            ], $front_options))
-        ]);
     }
+
+    return view(ThemeHelpers::getBlockPath($block), [
+        'block' => array_merge($config['block']->config, array_merge([
+            'title' => $config['block']->title
+        ], $front_options))
+    ]);
 }
 
 

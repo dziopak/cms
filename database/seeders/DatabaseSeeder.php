@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,6 +13,5 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $pages = factory(App\Entities\Post::class, 100)->create();
     }
 }

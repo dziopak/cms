@@ -11,9 +11,9 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/menus.index_title'])
+    <x-wrapper title="admin/menus.index_title">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
         {!! Menu::render() !!}
         {!! Menu::scripts() !!}
-    @endwrapper
+    </x-wrapper>
 @endsection

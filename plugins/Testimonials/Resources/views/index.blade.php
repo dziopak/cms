@@ -12,11 +12,11 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.wrapper', ['title' => 'Manage testimonials'])
+    <x-wrapper title="Manage testimonials">
         @include('admin.partials.table', ['fields' => $testimonials])
 
         @if (Auth::user()->hasAccess('MODULE_USE'))
             <a href="{{ route('admin.plugins.testimonials.create') }}" class="btn btn-success">Create new</a>
         @endif
-    @endwrapper
+    </x-wrapper>
 @endsection

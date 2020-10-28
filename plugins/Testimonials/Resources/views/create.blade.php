@@ -12,7 +12,8 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.wrapper', ['title' => 'Fill testimonial data'])
+    <x-wrapper title="Fill testimonial data">
+
         {!! Form::open(['method' => 'POST', 'route' => 'admin.plugins.testimonials.store', 'class' => 'w-100', 'files' => 'true']) !!}
             @include('admin.partials.validation')
 
@@ -54,5 +55,6 @@
             </div>
 
         {!! Form::close() !!}
-    @endwrapper
+
+    </x-wrapper>
 @endsection

@@ -54,7 +54,8 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.wrapper', ['title' => 'Edit lang data'])
+    <x-wrapper title="Edit lang data">
+
         {!! Form::model($lang, ['method' => 'PATCH', 'route' => ['admin.plugins.lang.update', $lang->id], 'class' => 'w-100', 'files' => 'true']) !!}
             @include('admin.partials.validation')
             @include('partials.form-fields', ['fields' => $form])
@@ -65,5 +66,6 @@
             </div>
 
         {!! Form::close() !!}
-    @endwrapper
+
+    </x-wrapper>
 @endsection

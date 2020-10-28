@@ -12,7 +12,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.wrapper', ['title' => 'Update testimonial data'])
+    <x-wrapper title="Update testimonial data">
         {!! Form::model($testimonial, ['method' => 'PATCH', 'route' => ['admin.plugins.testimonials.update', $testimonial->id], 'class' => 'w-100', 'files' => 'true']) !!}
             @include('admin.partials.validation')
 
@@ -36,5 +36,5 @@
             </div>
 
         {!! Form::close() !!}
-    @endwrapper
+    </x-wrapper>
 @endsection

@@ -11,16 +11,14 @@
 
 
 @section('before')
-
     @include('admin.partials.validation')
-
 @endsection
 
 
 @section('content-left')
     {!! Form::open(['method' => 'POST', 'action' => 'Admin\Blocks\SlidersController@store', 'class' => 'w-100']) !!}
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/blocks/sliders.create_title'])
 
+    <x-wrapper title="admin/blocks/sliders.create_title">
 
         {{-- Name input --}}
         <div class="form-group">
@@ -34,7 +32,7 @@
             {{ __('admin/general.update_button') }}
         </button>
 
+    </x-wrapper>
 
-    @endwrapper
     {!! Form::close() !!}
 @endsection

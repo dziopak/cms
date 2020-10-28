@@ -21,7 +21,7 @@
 
 
 @section('content-left')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/roles.create_left_title'])
+    <x-wrapper title="admin/roles.create_left_title">
 
         @include('admin.partials.validation')
         @include('partials.form-fields', ['fields' => $form['left']])
@@ -33,16 +33,14 @@
             </button>
         </div>
 
-    @endwrapper
+    </x-wrapper>
 @endsection
 
 
 @section('content-right')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/roles.create_right_title'])
-
+    <x-wrapper title="admin/roles.create_right_title">
         @include('partials.form-fields', ['fields' => $form['right']])
-
-    @endwrapper
+    </x-wrapper>
 @endsection
 
 

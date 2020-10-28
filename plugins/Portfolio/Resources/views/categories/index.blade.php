@@ -12,7 +12,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.wrapper', ['title' => 'All items'])
+    <x-wrapper title="All items">
 
 
         {{-- Table --}}
@@ -35,5 +35,5 @@
         {{-- End --}}
 
 
-    @endwrapper
+    </x-wrapper>
 @endsection

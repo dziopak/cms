@@ -11,8 +11,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/pages.index_title'])
-
+    <x-wrapper title="admin/pages.index_title">
 
         {{-- Table --}}
             @include('admin.partials.table', ['fields' => $pages])
@@ -34,7 +33,7 @@
         {{-- End --}}
 
 
-    @endwrapper
+    </x-wrapper>
 
 
     {{-- Delete modal --}}

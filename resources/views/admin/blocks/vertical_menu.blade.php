@@ -6,7 +6,7 @@
     ];
 @endphp
 
-@wrapper('admin.partials.widgets.block', ['id' => 'vertical-menu-block', 'classes' => ''])
+<x-block :config="$config" :key="$key">
     {{ $config['block']->title ?? "Untitled" }}
     <div class="block-settings" style="display: none;" key="{{ $key ?? 0 }}">
         <div class="card-body">
@@ -37,7 +37,7 @@
             {!! Form::button('<i class="fa fa-home"></i>'.' '.__('admin/general.update_button'), ['class' => 'btn btn-success mt-4', 'type' => 'submit']) !!}
         </div>
     </div>
-@endwrapper
+</x-block>
 
 
 

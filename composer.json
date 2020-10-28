@@ -12,16 +12,17 @@
         "arrilot/laravel-widgets": "^3.13",
         "fideloper/proxy": "^4.0",
         "intervention/image": "^2.5",
-        "laravel/framework": "^7.0",
+        "laravel/framework": "^8.0",
         "laravel/tinker": "^2.4",
-        "laravel/ui": "^2.0",
+        "laravel/ui": "^3.0",
         "laravelcollective/html": "^6.0",
         "nwidart/laravel-modules": "^6.2",
         "rachidlaasri/laravel-installer": "^4.0",
         "spatie/laravel-query-builder": "^2.8",
         "tymon/jwt-auth": "dev-develop",
         "yajra/laravel-datatables-oracle": "~9.0",
-        "esemve/hook": "dev-master"
+        "esemve/hook": "dev-master",
+        "guzzlehttp/guzzle": "^7.0.1"
     },
     "repositories":[
         {
@@ -31,11 +32,11 @@
     ],
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.6",
-        "facade/ignition": "^2.0",
+        "facade/ignition": "^2.3.6",
         "fzaninotto/faker": "^1.4",
         "mockery/mockery": "^1.0",
-        "nunomaduro/collision": "^4.1",
-        "phpunit/phpunit": "^8.5"
+        "nunomaduro/collision": "^5.0",
+        "phpunit/phpunit": "^9.0"
     },
     "config": {
         "optimize-autoloader": true,
@@ -50,7 +51,9 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
-            "plugins\\": "plugins/"
+            "plugins\\": "plugins/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
             "app/Helpers/AppHelpers.php",
@@ -63,10 +66,6 @@
             "app/Helpers/ThemeHelpers.php",
             "app/Helpers/JSONHelpers.php",
             "app/Helpers/DataHelpers.php"
-        ],
-        "classmap": [
-            "database/seeds",
-            "database/factories"
         ]
     },
     "autoload-dev": {

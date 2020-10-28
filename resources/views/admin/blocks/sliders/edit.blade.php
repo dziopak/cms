@@ -18,21 +18,21 @@
 
 
 @section('content-left')
+
     {!! Form::model($slider, ['method' => 'PATCH', 'action' => ['Admin\Blocks\SlidersController@update', $slider->id], 'class' => 'w-100']) !!}
 
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/blocks/sliders.manage_pictures_title'])
-
+    <x-wrapper title="admin/blocks/sliders.manage_pictures_title">
         {{-- Slider's images  --}}
         <div id="slider-image-data">
             @each('admin.blocks.sliders.partials.image_data', $slider->files, 'image')
         </div>
+    </x-wrapper>
 
-    @endwrapper
 @endsection
 
 
 @section('content-right')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/blocks/sliders.edit_title'])
+    <x-wrapper title="admin/blocks/sliders.edit_title">
 
         {{-- Name input --}}
         <div class="form-group">
@@ -51,8 +51,7 @@
             <i class="fa fa-home" aria-hidden="true"></i>
             {{ __('admin/general.update_button') }}
         </button>
-    @endwrapper
-
+    </x-wrapper>
 
     {!! Form::close() !!}
 @endsection

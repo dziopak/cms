@@ -16,29 +16,29 @@
 
 
 @section('content-left')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/users.create_left_title'])
+    <x-wrapper title="admin/users.create_left_title">
 
-            @include('admin.partials.validation')
-            @include('partials.form-fields', ['fields' => $form['left']])
+        @include('admin.partials.validation')
+        @include('partials.form-fields', ['fields' => $form['left']])
 
-            <div class="form-group">
-                <button type="submit" class="btn btn-success">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                    {{ __('admin/general.create_button') }}
-                </button>
-            </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                {{ __('admin/general.create_button') }}
+            </button>
+        </div>
 
-    @endwrapper
+    </x-wrapper>
 @endsection
 
 
 @section('content-right')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/users.create_right_title'])
+    <x-wrapper title="admin/users.create_right_title">
 
         @include('admin.partials.validation')
         @include('partials.form-fields', ['fields' => $form['right']])
 
-    @endwrapper
+    </x-wrapper>
 @endsection
 
 

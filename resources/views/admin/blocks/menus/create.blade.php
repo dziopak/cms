@@ -18,9 +18,8 @@
 
 @section('content-left')
     {!! Form::open(['method' => 'POST', 'action' => 'Admin\Blocks\MenusController@store', 'class' => 'w-100']) !!}
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/blocks/menus.menu_create_title'])
 
-
+    <x-wrapper title="admin/blocks/menus.menu_create_title">
         {{-- Name input --}}
         <div class="form-group">
             {!! Form::label('name', __('admin/blocks/menus.name').':') !!}
@@ -32,8 +31,7 @@
             <i class="fa fa-home" aria-hidden="true"></i>
             {{ __('admin/general.update_button') }}
         </button>
+    </x-wrapper>
 
-
-    @endwrapper
     {!! Form::close() !!}
 @endsection

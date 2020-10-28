@@ -11,11 +11,11 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/plugins.active'])
+    <x-wrapper title="admin/plugins.active">
         @include('admin.partials.table', ['table' => $table['active'], 'fields' => $modules['active'], 'mass_edit_by' => 'name'])
-    @endwrapper
+    </x-wrapper>
 
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/plugins.inactive'])
+    <x-wrapper title="admin/plugins.inactive">
         @include('admin.partials.table', ['table' => $table['inactive'], 'fields' => $modules['inactive'], 'mass_edit_by' => 'name'])
-    @endwrapper
+    </x-wrapper>
 @endsection

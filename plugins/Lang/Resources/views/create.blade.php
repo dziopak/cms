@@ -51,7 +51,7 @@
 @endphp
 
 @section('module-content')
-    @wrapper('admin.partials.wrapper', ['title' => 'Fill lang data'])
+    <x-wrapper title="Fill lang data">
         {!! Form::open(['method' => 'POST', 'route' => 'admin.plugins.lang.store', 'class' => 'w-100', 'files' => 'true']) !!}
 
             @include('admin.partials.validation')
@@ -62,5 +62,5 @@
             </div>
 
         {!! Form::close() !!}
-    @endwrapper
+    </x-wrapper>
 @endsection

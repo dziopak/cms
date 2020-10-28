@@ -12,7 +12,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/logs.index_title'])
+    <x-wrapper title="admin/logs.index_title">
         <p>{{ __('admin/logs.index_intro') }}</p>
         <div id="logs-table">
             <div class="form-group row">
@@ -48,5 +48,5 @@
             </div>
             @include('admin.partials.logs')
         </div>
-    @endwrapper
+    </x-wrapper>
 @endsection

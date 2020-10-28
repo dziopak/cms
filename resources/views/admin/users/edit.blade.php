@@ -12,7 +12,8 @@
 
 @section('content-left')
     {!! Form::model($user, ['method' => 'PATCH', 'action' => ['Admin\Modules\UsersController@update', $user->id], 'files' => 'true']) !!}
-        @wrapper('admin.partials.wrapper', ['title' => 'admin/users.edit_right_title'])
+        <x-wrapper title="admin/users.edit_right_title">
+
             <div class="row">
                 <div class="col" style="max-width: 200px;">
                     @include('partials.form-fields', ['fields' => $form['profile']['avatar']])
@@ -28,9 +29,9 @@
                     <small>{{$user->role->name}}</small>
                 </div>
             </div>
-        @endwrapper
+        </x-wrapper>
 
-        @wrapper('admin.partials.wrapper', ['title' => 'admin/users.edit_left_title'])
+        <x-wrapper title="admin/users.edit_left_title">
             @include('admin.partials.validation')
             @include('partials.form-fields', ['fields' => $form['basic_data']])
 
@@ -39,22 +40,22 @@
                 <input type="hidden" value="{{$user->id}}" name="user_id" />
                 {!! Form::button('<i class="fa fa-home"></i>'.' '.__('admin/general.update_button'), ['class' => 'btn btn-success', 'type' => 'submit']) !!}
             </div>
-        @endwrapper
+        </x-wrapper>
     {!! Form::close() !!}
 @endsection
 
 
 @section('content-right')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/users.recent_actions'])
+    <x-wrapper title="admin/users.recent_actions">
         @include('admin.partials.logs')
-    @endwrapper
+    </x-wrapper>
 
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/users.change_password'])
+    <x-wrapper title="admin/users.change_password">
         {!! Form::open(['method' => 'PUT', 'action' => ['Admin\Modules\UsersController@password', $user->id]]) !!}
 
         @include('partials.form-fields', ['fields' => $form['password_change']])
 
         {!! Form::button('<i class="fa fa-home"></i>'.' '.__('admin/general.update_button'), ['class' => 'btn btn-primary', 'type' => 'submit']) !!}
         {!! Form::close() !!}
-    @endwrapper
+    </x-wrapper>
 @endsection

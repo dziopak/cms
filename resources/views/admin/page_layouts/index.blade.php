@@ -12,7 +12,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/layouts.index_title'])
+    <x-wrapper title="admin/layouts.index_title">
 
 
         {{-- Table --}}
@@ -35,5 +35,5 @@
         {{-- End --}}
 
 
-    @endwrapper
+    </x-wrapper>
 @endsection

@@ -1,4 +1,4 @@
-@wrapper('admin.partials.widgets.widget_static', ['title' => 'Recent posts', 'id' => 'recent-news', 'classes' => ''])
+<x-widgetStatic :config="$config">
     @if (!empty($posts) && count($posts) > 0)
         <ul class="list-group list-group-flush w-100">
             @foreach($posts as $post)
@@ -17,4 +17,4 @@
         <a class="btn btn-primary mr-2" href="{{ route('admin.posts.create') }}">{{ __('admin/widgets/recent_posts.write_new') }}</a>
         <a class="btn btn-transparent px-3" href="{{ route('admin.posts.index') }}">{{ __('admin/widgets/recent_posts.all_posts') }}</a>
     </div>
-@endwrapper
+</x-widgetStatic>

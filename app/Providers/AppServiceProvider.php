@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Console\Commands\ModelMakeCommand;
 use Illuminate\Support\ServiceProvider;
 use App\Helpers\ThemeHelpers;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -41,6 +42,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+        Paginator::useBootstrap();
         $this->app->extend('command.model.make', function ($command, $app) {
             return new ModelMakeCommand($app['files']);
         });

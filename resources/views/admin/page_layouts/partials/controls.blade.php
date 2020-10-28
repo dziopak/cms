@@ -2,51 +2,52 @@
 <button id="toggle-new-components" class="toggle-components">C</button>
 <button id="toggle-existing-components" class="toggle-components">E</button>
 <div id="layout-components" class="components-bar">
+
     <div class="add-widget" data-name="header">
-        @wrapper('admin.partials.widgets.new_widget', ['title' => 'Header'])
+        <x-newWidget thumbnail="" title="Header">
             <p>Static hero image</p>
-        @endwrapper
+        </x-newWidget>
     </div>
 
 
     <div class="add-widget" data-name="slider">
-        @wrapper('admin.partials.widgets.new_widget', ['title' => 'Slider'])
+        <x-newWidget thumbnail="" title="Slider">
             <p>Image slider</p>
-        @endwrapper
+        </x-newWidget>
     </div>
 
 
     <div class="add-widget" data-name="carousell">
-        @wrapper('admin.partials.widgets.new_widget', ['title' => 'Carousell'])
+        <x-newWidget thumbnail="" title="Carousell">
             <p>Customizable slick carousell</p>
-        @endwrapper
+        </x-newWidget>
     </div>
 
 
     <div class="add-widget" data-name="footer">
-        @wrapper('admin.partials.widgets.new_widget', ['title' => 'Footer'])
+        <x-newWidget thumbnail="" title="Footer">
             <p>Footer block</p>
-        @endwrapper
+        </x-newWidget>
     </div>
 
 
     <div class="add-widget" data-name="vertical-menu">
-        @wrapper('admin.partials.widgets.new_widget', ['title' => 'Vertical menu'])
+        <x-newWidget thumbnail="" title="Vertical menu">
             <p>Vertical navigation menu</p>
-        @endwrapper
+        </x-newWidget>
     </div>
 
 
     <div class="add-widget" data-name="horizontal-menu">
-        @wrapper('admin.partials.widgets.new_widget', ['title' => 'Horizontal menu'])
+        <x-newWidget thumbnail="" title="Horizontal menu">
             <p>Horizontal navigation menu</p>
-        @endwrapper
+        </x-newWidget>
     </div>
 
 
     <div class="add-widget" data-name="login">
-        @wrapper('admin.partials.widgets.new_widget', ['title' => 'Login form'])
+        <x-newWidget thumbnail="" title="Login box">
             <p>Displays login form for guest users</p>
-        @endwrapper
+        </x-newWidget>
     </div>
 </div>

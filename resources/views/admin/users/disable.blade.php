@@ -11,7 +11,7 @@
 
 
 @section('content-left')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/users.disable_top_title'])
+    <x-wrapper title="admin/users.disable_top_title">
         @if ($user->avatar)
             <img class="rounded-circle mr-4 float-left" width="100" src="{{ getPublicPath() }}/images/{{$user->photo->path ?? 'assets/no-avatar.png'}}">
         @endif
@@ -26,9 +26,9 @@
             {{ __('admin/general.created_at') }} {{$user->created_at}}<br/>
             <small>{{$user->role->name}}</small>
         </div>
-    @endwrapper
+    </x-wrapper>
 
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/users.disable_bottom_title'])
+    <x-wrapper title="admin/users.disable_bottom_title">
         <p class="alert alert-warning">
         {{$user->is_active == 1 ? __('admin/users.disable_information') : __('admin/users.enable_information') }}
         </p>
@@ -46,12 +46,12 @@
             @endif
         </div>
         {!! Form::close() !!}
-    @endwrapper
+    </x-wrapper>
 @endsection
 
 
 @section('content-right')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/users.recent_actions'])
+    <x-wrapper title="admin/users.recent_actions">
         @include('admin.partials.logs')
-    @endwrapper
+    </x-wrapper>
 @endsection

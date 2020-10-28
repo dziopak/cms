@@ -1,4 +1,4 @@
-@wrapper('admin.partials.wrapper', ['title' => 'admin/media.attached_to_title'])
+<x-wrapper title="admin/media.attached_to_title">
     <ul>
         @foreach($file->getRelated() as $related)
             <li>
@@ -9,4 +9,4 @@
             </li>
         @endforeach
     </ul>
-@endwrapper
+</x-wrapper>

@@ -12,7 +12,8 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/roles.index_title'])
+
+    <x-wrapper title="admin/roles.index_title">
         @include('admin.partials.table', ['fields' => $roles])
 
         @if (Auth::user()->hasAccess('ROLE_CREATE'))
@@ -23,7 +24,7 @@
         @endif
 
         <div class="float-right">{{ $roles->render() }}</div>
-    @endwrapper
+    </x-wrapper>
 
 
     {{-- Delete modal --}}

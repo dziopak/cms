@@ -10,11 +10,11 @@
 @endsection
 
 @section('module-content')
-    @wrapper('admin.partials.wrapper', ['title' => 'Manage custom languages'])
+    <x-wrapper title="Manage custom languages">
         @include('admin.partials.table', ['fields' => $langs])
 
         @if (Auth::user()->hasAccess('MODULE_USE'))
             <a href="{{ route('admin.plugins.lang.create') }}" class="btn btn-success">Create new</a>
         @endif
-    @endwrapper
+    </x-wrapper>
 @endsection

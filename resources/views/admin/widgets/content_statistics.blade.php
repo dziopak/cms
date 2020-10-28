@@ -1,4 +1,4 @@
-@wrapper('admin.partials.widgets.widget_static', ['id' => 'recent-logs', 'classes' => ''])
+<x-widgetStatic title="Content Stats" id="recent-logs" :config="$config">
     <div class="pt-5">
         <canvas id="content_stats_chart" width="200" style="margin: 0 auto; max-width: 320px; max-height: 80%;" class="chart"></canvas>
 
@@ -8,8 +8,7 @@
             <li><span class="legend-item" style="background-color: #706fd3"></span><br/><strong>{{ __('admin/widgets/content_statistics.users') }}</strong>: {{ $raw['users'] }}</li>
         </ul>
     </div>
-@endwrapper
-
+</x-widgetStatic>
 
 @push('scripts-bottom')
     <script>

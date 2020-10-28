@@ -12,8 +12,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/post_categories.index_title'])
-
+    <x-wrapper title="admin/post_categories.index_title">
 
         {{-- Table --}}
         @include('admin.partials.table', ['fields' => $categories])
@@ -34,8 +33,7 @@
         <div class="float-right">{{ $categories->render() }}</div>
         {{-- End --}}
 
-
-    @endwrapper
+    </x-wrapper>
 
 
     {{-- Delete modal --}}

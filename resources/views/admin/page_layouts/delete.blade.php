@@ -12,15 +12,18 @@
 
 
 @section('content-left')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/posts.delete_top_title'])
+    <x-wrapper title="admin/posts.delete_top_title">
+
+
         <p class="alert alert-danger">{{ __('admin/posts.delete_information') }}</p>
 
         {!! Form::open(['method' => 'DELETE', 'action' => ['Admin\Modules\LayoutsController@destroy', $layout->id]]) !!}
-
         <div class="form-group">
             <a href="{{route('admin.posts.index')}}" role="button" class="btn btn-success">{{ __('admin/general.back_button') }}</a>
             {!! Form::submit(__('admin/general.delete_permamently'), ['class' => 'btn btn-danger']) !!}
         </div>
         {!! Form::close() !!}
-    @endwrapper
+
+
+    </x-wrapper>
 @endsection

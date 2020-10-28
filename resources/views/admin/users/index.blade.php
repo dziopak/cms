@@ -11,7 +11,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/users.list_all'])
+    <x-wrapper title="{{ __('admin/users.list_all') }}">
 
         {{-- Displaying data table --}}
         @include('admin.partials.table', ['fields' => $users, 'id' => 'users_table'])
@@ -32,7 +32,7 @@
         <div class="float-right">{{ $users->render() }}</div>
         {{-- End --}}
 
-    @endwrapper
+    </x-wrapper>
 
 
     {{-- Delete modal --}}

@@ -19,30 +19,30 @@
 
 
 @section('content-left')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/posts.edit_left_title'])
+    <x-wrapper title="admin/posts.edit_left_title">
 
         @include('partials.form-fields', ['fields' => $form['left']])
         @hook('post_edit_left_content')
         @hook('post_left_content')
 
-    @endwrapper
+    </x-wrapper>
 @endsection
 
 
 @section('content-right')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/posts.edit_right_title'])
+    <x-wrapper title="admin/posts.edit_right_title">
 
         @include('partials.form-fields', ['fields' => $form['right']])
         @hook('post_edit_right_content')
         @hook('post_right_content')
 
-    @endwrapper
+    </x-wrapper>
 @endsection
 
 
 @section('content-bottom')
     <div class="col">
-        @wrapper('admin.partials.wrapper', ['title' => 'admin/posts.edit_bottom_title'])
+        <x-wrapper title="admin/posts.edit_bottom_title">
 
             @include('partials.form-fields', ['fields' => $form['bottom']])
             @hook('post_edit_bottom_content')
@@ -52,7 +52,8 @@
                 {!! Form::hidden('post_id', $post->id) !!}
                 {!! Form::button('<i class="fa fa-home"></i>'.' '.__('admin/general.update_button'), ['class' => 'btn btn-success', 'type' => 'submit']) !!}
             </div>
-        @endwrapper
+
+        </x-wrapper>
     </div>
 @endsection
 

@@ -20,7 +20,7 @@
 
 {{-- Basic data --}}
 @section('content-left')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/roles.edit_left_title'])
+    <x-wrapper title="admin/roles.edit_left_title">
 
         @include('admin.partials.validation')
         @include('partials.form-fields', ['fields' => $form['left']])
@@ -29,17 +29,15 @@
             {!! Form::button('<i class="fa fa-home"></i>'.' '.__('admin/general.update_button'), ['class' => 'btn btn-success', 'type' => 'submit']) !!}
         </div>
 
-    @endwrapper
+    </x-wrapper>
 @endsection
 
 
 {{-- Role's access --}}
 @section('content-right')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/roles.edit_right_title'])
-
+    <x-wrapper title="admin/roles.edit_right_title">
         @include('partials.form-fields', ['fields' => $form['right']])
-
-    @endwrapper
+    </x-wrapper>
 @endsection
 
 

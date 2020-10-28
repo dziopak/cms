@@ -10,7 +10,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.wrapper', ['title' => 'File manager'])
+    <x-wrapper title="File manager">
         <iframe src="{{ route('unisharp.lfm.show')}}?type=image" style="width: 100%; height: 500px; overflow: hidden; border: none;"></iframe>
-    @endwrapper
+    </x-wrapper>
 @endsection

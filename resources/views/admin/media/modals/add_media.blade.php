@@ -14,19 +14,19 @@
 
                 {{-- Media library --}}
                 <div class="modal-tab" data-tab="1">
-                    @wrapper('admin.partials.wrapper', ['title' => 'admin/media.edit_title'])
+                    <x-wrapper title="admin/media.edit_title">
                         @include('admin.media.partials.list', ['endpoint' => $endpoint, 'controls' => false])
-                    @endwrapper
+                    </x-wrapper>
                 </div>
 
 
                 {{-- Upload media --}}
                 <div class="modal-tab" data-tab="2" style="display: none;">
-                    @wrapper('admin.partials.wrapper', ['title' => 'admin/media.edit_title'])
+                    <x-wrapper title="admin/media.edit_title">
                         <div style="height: 100%;">
                             @include('admin.media.partials.upload', ['modal_id' => $modal_id ?? ""])
                         </div>
-                    @endwrapper
+                    </x-wrapper>
                 </div>
             </div>
 

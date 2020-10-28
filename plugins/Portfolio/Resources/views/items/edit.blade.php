@@ -38,7 +38,8 @@
 
 
 @section('content-left')
-    @wrapper('admin.partials.wrapper', ['title' => 'portfolio::langs.basic_data_title'])
+
+    <x-wrapper title="portfolio::langs.basic_data_title">
         <div class="row">
             <div class="col-lg-3" style="display: flex;">
                 @include('partials.form-fields', ['fields' => $form['thumbnail']])
@@ -50,37 +51,37 @@
             </div>
             {{-- End --}}
         </div>
-    @endwrapper
+    </x-wrapper>
 
-    @wrapper('admin.partials.wrapper', ['title' => 'portfolio::langs.pictures_title'])
 
-            <div id="pictures" class="py-4">
-                @if (count($item->photos) > 0)
-                    @foreach($item->photos as $photo)
-                        <div class="d-inline-block mr-2 position-relative picture" data-id="{{ $photo->id }}">
-                            <button type="button" class="close position-absolute mt-1" style="right: 5px;" aria-label="Close" data-id="{{ $photo->id }}">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            <img height="100" width="100" src="/images/{{ $photo->path }}" class="border border-dark" alt="photo">
-                        </div>
-                    @endforeach
-                @else
-                    <p class="alert alert-secondary">No photos uploaded</p>
-                @endif
-            </div>
+    <x-wrapper title="portfolio::langs.pictures_title">
+        <div id="pictures" class="py-4">
+            @if (count($item->photos) > 0)
+                @foreach($item->photos as $photo)
+                    <div class="d-inline-block mr-2 position-relative picture" data-id="{{ $photo->id }}">
+                        <button type="button" class="close position-absolute mt-1" style="right: 5px;" aria-label="Close" data-id="{{ $photo->id }}">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <img height="100" width="100" src="/images/{{ $photo->path }}" class="border border-dark" alt="photo">
+                    </div>
+                @endforeach
+            @else
+                <p class="alert alert-secondary">No photos uploaded</p>
+            @endif
+        </div>
 
-            {{-- Add media button --}}
-            <div id="add-pictures" class="btn btn-primary">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                {{ __('admin/general.create_button') }}
-            </div>
+        {{-- Add media button --}}
+        <div id="add-pictures" class="btn btn-primary">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            {{ __('admin/general.create_button') }}
+        </div>
 
-        @endwrapper
+    </x-wrapper>
 @endsection
 
 
 @section('content-right')
-    @wrapper('admin.partials.wrapper', ['title' => 'portfolio::langs.settings_title'])
+    <x-wrapper title="portfolio::langs.settings_title">
 
         <div class="form-group row">
             <div class="col">
@@ -120,7 +121,8 @@
                 @endforeach
             </div>
         </div>
-    @endwrapper
+
+    </x-wrapper>
 @endsection
 
 
@@ -128,8 +130,7 @@
     <div class="col">
 
 
-
-        @wrapper('admin.partials.wrapper', ['title' => 'portfolio::langs.content_title'])
+        <x-wrapper title="portfolio::langs.content_title">
 
             {{-- Form fields --}}
             <div class="row">
@@ -138,11 +139,12 @@
             {{-- End --}}
 
 
-        @endwrapper
+        </x-wrapper>
 
 
         @if (!empty($item->content_boxes))
-            @wrapper('admin.partials.wrapper', ['title' => 'Additional content'])
+            <x-wrapper title="Additional content">
+
                 <div id="content-boxes">
                     @foreach($item->content_boxes as $box)
                         <div class="portfolio_content_box" data-id="{{ $box->id }}">
@@ -161,12 +163,13 @@
                         </div>
                     @endforeach
                 </div>
-            @endwrapper
+
+            </x-wrapper>
         @endif
 
-        @wrapper('admin.partials.wrapper', ['title' => ''])
+        <x-wrapper title="">
             {!! Form::button('<i class="fa fa-home"></i>'.' '.__('admin/general.update_button'), ['class' => 'btn btn-success mb-1', 'type' => 'submit']) !!}
-        @endwrapper
+        </x-wrapper>
     </div>
 
     @include('admin.media.modals.add_media', ['modal_id' => 'portfolio_attach_modal', 'endpoint' => route('admin.plugins.portfolio.attach', $item->id), 'single' => false])

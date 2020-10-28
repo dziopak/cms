@@ -18,7 +18,7 @@
 
 
 @section('content-left')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/post_categories.edit_left_title'])
+    <x-wrapper title="admin/post_categories.edit_left_title">
 
         @include('partials.form-fields', ['fields' => $form['left']])
 
@@ -34,7 +34,7 @@
             {!! Form::button('<i class="fa fa-home"></i>'.' '.__('admin/general.update_button'), ['class' => 'btn btn-success', 'type' => 'submit']) !!}
         </div>
 
-        @endwrapper
+    </x-wrapper>
 @endsection
 
 

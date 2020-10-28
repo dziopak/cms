@@ -23,8 +23,8 @@
 
 
 @section('content-left')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/blocks/menus.menu_data_title'])
 
+    <x-wrapper title="admin/blocks/menus.menu_data_title">
         {{-- Name input --}}
         <div class="form-group">
             {!! Form::label('name', __('admin/blocks/menus.name').':') !!}
@@ -36,12 +36,10 @@
             <i class="fa fa-home" aria-hidden="true"></i>
             {{ __('admin/general.update_button') }}
         </button>
+    </x-wrapper>
 
-    @endwrapper
 
-
-    <div>
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/blocks/menus.menu_add_field_title'])
+    <x-wrapper title="admin/blocks/menus.menu_add_field_title">
 
         {{-- Label --}}
         <div class="form-group">
@@ -66,14 +64,11 @@
             {!! Form::label('item_url', __('admin/blocks/menus.item_url').':') !!}
             {!! Form::text('item_url', null, ['class' => 'form-control']) !!}
         </div>
-
-
         <hr/>
 
 
         {{-- Search & Results --}}
         @include('admin.blocks.menus.partials.item-type-model')
-
 
         {{-- Add button --}}
         <div id="menu-add-item" class="btn btn-success mt-2" data-action="add" data-add-message="<i class='fa fa-plus' aria-hidden='true'></i> {{ __('admin/general.create_button') }}" data-update-message="{{ __('admin/general.update_button') }}">
@@ -81,16 +76,14 @@
             {{ __('admin/general.create_button') }}
         </div>
 
-    @endwrapper
-    </div>
-
+    </x-wrapper>
 @endsection
 
 
 @section('content-right')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/blocks/menus.menu_fields_title'])
+    <x-wrapper title="admin/blocks/menus.menu_fields_title">
         @include('admin.blocks.menus.partials.render')
-    @endwrapper
+    </x-wrapper>
 @endsection
 
 

@@ -19,7 +19,7 @@
 
 
 @section('content-left')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/media.edit_title'])
+    <x-wrapper title="admin/media.edit_title">
 
         {{-- Display image --}}
         <img class="float-left mr-2" src="/images/{{ $file->path }}" width="160">
@@ -32,7 +32,7 @@
         {{-- Submit button --}}
         {!! Form::button('<i class="fa fa-home"></i>'.' '.__('admin/general.update_button'), ['class' => 'btn btn-success', 'type' => 'submit']) !!}
 
-    @endwrapper
+    </x-wrapper>
 @endsection
 
 

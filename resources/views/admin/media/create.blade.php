@@ -13,8 +13,8 @@
 @section('content-left')
 
     {{-- Files dropzone --}}
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/media.upload_files'])
+    <x-wrapper title="admin/media.upload_files">
         @include('admin.media.partials.upload')
-    @endwrapper
+    </x-wrapper>
 
 @endsection

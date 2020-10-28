@@ -12,7 +12,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/blocks/sliders.index_title'])
+    <x-wrapper title="admin/blocks/sliders.index_title">
 
         {{-- Table --}}
             @include('admin.partials.table', ['fields' => $sliders])
@@ -56,5 +56,5 @@
             </div>
         </div>
 
-    @endwrapper
+    </x-wrapper>
 @endsection

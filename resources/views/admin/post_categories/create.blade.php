@@ -18,7 +18,7 @@
 
 
 @section('content-left')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/post_categories.create_left_title'])
+    <x-wrapper title="admin/post_categories.create_left_title">
 
         @include('partials.form-fields', ['fields' => $form['left']])
 
@@ -36,7 +36,7 @@
             </button>
         </div>
 
-    @endwrapper
+    </x-wrapper>
 @endsection
 
 

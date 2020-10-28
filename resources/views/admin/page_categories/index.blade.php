@@ -12,7 +12,7 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/page_categories.index_title'])
+    <x-wrapper title="admin/page_categories.index_title">
 
 
         {{-- Table --}}
@@ -35,7 +35,7 @@
         {{-- End --}}
 
 
-    @endwrapper
+    </x-wrapper>
 
 
     {{-- Delete modal --}}

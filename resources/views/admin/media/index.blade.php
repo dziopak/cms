@@ -11,18 +11,17 @@
 
 
 @section('module-content')
-    @wrapper('admin.partials.wrapper', ['title' => 'admin/media.index_title'])
+    <x-wrapper title="admin/media.index_title">
         @include('admin.media.partials.list')
-    @endwrapper
+    </x-wrapper>
 
     {{-- Delete modal --}}
     <div id="fade">
         <div class="choice-modal" id="delete-media-modal">
             <div class="modal-content">
-
                 <div class="text-center">
-                {{-- Modal content --}}
 
+                {{-- Modal content --}}
                     <h3 class="modal-title mb-3">{{ __('admin/media.delete_title') }}</h3>
                     <p class="mb-4">{{ __('admin/media.delete_information') }}</p>
 
@@ -32,7 +31,6 @@
                     </div>
 
                 </div>
-
             </div>
         </div>
     </div>
