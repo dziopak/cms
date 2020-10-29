@@ -1,6 +1,19 @@
 <?php
 $form = [
-    'left' => [
+    'right' => [
+        'thumbnail_row' => [
+            'class' => 'form-group row',
+            'items' => [
+                'thumbnail' => [
+                    'type' => 'image',
+                    'value' => $args['thumbnail'],
+                    'label' => __('admin/posts.thumbnail'),
+                    'endpoint' => $args['thumb_endpoint'] ?? null,
+                    'class' => '',
+                    'container_class' => 'tinymce',
+                ],
+            ],
+        ],
         'name_row' => [
             'class' => 'form-group row',
             'items' => [
@@ -49,21 +62,6 @@ $form = [
                     'container_class' => 'tinymce',
                 ],
             ]
-        ]
-    ],
-    'right' => [
-        'thumbnail_row' => [
-            'class' => 'form-group row',
-            'items' => [
-                'thumbnail' => [
-                    'type' => 'image',
-                    'value' => $args['thumbnail'],
-                    'label' => __('admin/posts.thumbnail'),
-                    'endpoint' => $args['thumb_endpoint'] ?? null,
-                    'class' => '',
-                    'container_class' => 'tinymce',
-                ],
-            ],
         ],
         'meta_title_row' => [
             'class' => 'form-group row',
@@ -92,7 +90,7 @@ $form = [
             ]
         ],
     ],
-    'bottom' => [
+    'left' => [
         'content_row' => [
             'class' => 'form-group row',
             'items' => [

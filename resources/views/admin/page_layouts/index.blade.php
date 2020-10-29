@@ -16,24 +16,15 @@
 
 
         {{-- Table --}}
-        @include('admin.partials.table', ['fields' => $layouts])
-        {{-- End --}}
+        <x-table :table="$table" :fields="$layouts" />
 
-
-        {{-- Create button --}}
-        @if (Auth::user()->hasAccess('LAYOUT_CREATE'))
-            <a href="{{ route('admin.pages.layouts.create') }}" class="btn btn-success">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                {{ __('admin/general.create_button') }}
-            </a>
-        @endif
-        {{-- End --}}
-
+        {{-- Create button  --}}
+        <x-create-button access="LAYOUT_CREATE" route="admin.pages.layouts.create" />
 
         {{-- Pagination --}}
         <div class="float-right">{{ $layouts->render() }}</div>
-        {{-- End --}}
 
-
+        {{-- TO DO --}}
+        {{-- DELETE MODAL --}}
     </x-wrapper>
 @endsection

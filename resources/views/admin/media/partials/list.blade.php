@@ -1,20 +1,10 @@
 {{-- Table --}}
-@include('admin.partials.table', ['fields' => $files, 'form_id' => 'media-list-form'])
-{{-- End --}}
-
+<x-table :table="$table" :fields="$files" form_id="media-list-form" :controls="false" :filters="false" :form="false" />
 
 {{-- Create button --}}
-@if (Auth::user()->hasAccess('MEDIA_UPLOAD') && (!isset($controls) || $controls === true))
-    <a href="{{ route('admin.media.create') }}" class="btn btn-success">
-        <i class="fa fa-plus" aria-hidden="true"></i>
-        {{ __('admin/general.create_button') }}
-    </a>
-@endif
-{{-- End --}}
-
+<x-create-button access="MEDIA_UPLOAD" route="admin.media.create" />
 
 {{-- Pagination --}}
 @if (method_exists($files, 'render'))
     <div class="float-right">{{ $files->render() }}</div>
 @endif
-{{-- End --}}

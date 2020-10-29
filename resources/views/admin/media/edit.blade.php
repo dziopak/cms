@@ -26,11 +26,11 @@
 
         {{-- Display form --}}
         <div class="mb-4">
-            @include('partials.form-fields', ['fields' => $form['basic']])
+            <x-form-fields :fields="$form['basic']" />
         </div>
 
         {{-- Submit button --}}
-        {!! Form::button('<i class="fa fa-home"></i>'.' '.__('admin/general.update_button'), ['class' => 'btn btn-success', 'type' => 'submit']) !!}
+        <x-update-button />
 
     </x-wrapper>
 @endsection

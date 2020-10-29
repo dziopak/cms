@@ -43,6 +43,8 @@ class Page extends Model
             // Sort by selected field //
             !empty($request->get('sort_order')) && $request->get('sort_order') === 'desc' ?
                 $query->orderByDesc($request->get('sort_by')) : $query->orderBy($request->get('sort_by'));
+        } else {
+            $query->orderByDesc('id');
         }
     }
 

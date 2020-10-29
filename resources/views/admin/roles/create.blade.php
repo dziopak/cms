@@ -12,26 +12,28 @@
 
 
 @section('before')
+
+    {{-- Open the form --}}
     @if (isset($role))
         {!! Form::model($role, ['method' => 'POST', 'action' => 'Admin\Modules\RolesController@store', 'class' => 'w-100']) !!}
     @else
         {!! Form::open(['method' => 'POST', 'action' => 'Admin\Modules\RolesController@store', 'class' => 'w-100']) !!}
     @endif
+
 @endsection
 
 
 @section('content-left')
     <x-wrapper title="admin/roles.create_left_title">
 
+        {{-- Validation report --}}
         @include('admin.partials.validation')
-        @include('partials.form-fields', ['fields' => $form['left']])
 
-        <div class="form-group">
-            <button type="submit" class="btn btn-success">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                {{ __('admin/general.create_button') }}
-            </button>
-        </div>
+        {{-- Display form --}}
+        <x-form-fields :fields="$form['left']" />
+
+        {{-- Save button --}}
+        <x-create-button />
 
     </x-wrapper>
 @endsection
@@ -39,11 +41,17 @@
 
 @section('content-right')
     <x-wrapper title="admin/roles.create_right_title">
-        @include('partials.form-fields', ['fields' => $form['right']])
+
+        {{-- Display form --}}
+        <x-form-fields :fields="$form['right']" />
+
     </x-wrapper>
 @endsection
 
 
 @section('after')
+
+    {{-- Close the form --}}
     {!! Form::close() !!}
+
 @endsection

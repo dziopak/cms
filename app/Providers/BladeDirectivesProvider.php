@@ -10,6 +10,41 @@ use Blade;
 class BladeDirectivesProvider extends ServiceProvider
 {
 
+    private $components = [
+        // Widgets
+        'widget-block' => \App\View\Components\Admin\Containers\Widgets\Block::class,
+        'new-widget' => \App\View\Components\Admin\Containers\Widgets\Create::class,
+        'dashboard-widget' => \App\View\Components\Admin\Containers\Widgets\Dashboard::class,
+
+        // Wrappers
+        'wrapper' => \App\View\Components\Admin\Containers\Wrappers\Wrapper::class,
+
+        // Tables
+        'table' => \App\View\Components\Admin\Tables\Table::class,
+        'table-headers' => \App\View\Components\Admin\Tables\Partials\Headers::class,
+        'table-fields' => \App\View\Components\Admin\Tables\Partials\Fields::class,
+        'table-filters' => \App\View\Components\Admin\Tables\Partials\Filters::class,
+        'table-actions' => \App\View\Components\Admin\Tables\Partials\Actions::class,
+        'table-action-type' => \App\View\Components\Admin\Tables\Partials\Action::class,
+        'mass-edit' => \App\View\Components\Admin\Tables\Partials\MassEdit::class,
+
+        // Buttons
+        'create-button' => \App\View\Components\Admin\Buttons\Create::class,
+        'update-button' => \App\View\Components\Admin\Buttons\Update::class,
+
+        // Forms
+        'form-fields' => \App\View\Components\Admin\Forms\Fields::class,
+    ];
+
+
+    private function registerComponents()
+    {
+        foreach ($this->components as $alias => $component) {
+            Blade::component($alias, $component);
+        }
+    }
+
+
     private function registerBladeDirectives()
     {
         // Theme data
@@ -94,5 +129,6 @@ class BladeDirectivesProvider extends ServiceProvider
     public function boot()
     {
         $this->registerBladeDirectives();
+        $this->registerComponents();
     }
 }

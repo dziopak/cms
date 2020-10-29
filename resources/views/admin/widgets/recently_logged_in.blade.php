@@ -1,4 +1,4 @@
-<x-widgetStatic :config="$config" id="recently-logged-users">
+<x-dashboard-widget :config="$config" id="recently-logged-users">
     <div class="hide-y-4">
         <ul class="list-group list-group-flush">
             @foreach($users as $user)
@@ -16,4 +16,4 @@
     <div class="widget-controls">
         <a class="btn btn-primary mt-4" href="{{ route('admin.users.index') }}">All users</a>
     </div>
-</x-widgetStatic>
+</x-dashboard-widget>

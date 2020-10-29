@@ -20,19 +20,18 @@
 @section('module-content')
     <x-wrapper title="admin/page_categories.edit_left_title">
 
-        @include('partials.form-fields', ['fields' => $form['left']])
+        {{-- Display form --}}
+        <x-form-fields :fields="$form['left']" />
+        {!! Form::hidden('type', 'page') !!}
+        {!! Form::hidden('category_id', $category->id) !!}
 
-        <!-- Custom field hooks -->
+        {{-- Hooks --}}
         @hook('page_category_edit_left_content')
         @hook('page_category_left_content')
         @hook('category_left_content')
-        <!-- End of field hooks -->
 
-        <div class="form-group">
-            {!! Form::hidden('type', 'page') !!}
-            {!! Form::hidden('category_id', $category->id) !!}
-            {!! Form::button('<i class="fa fa-home"></i>'.' '.__('admin/general.update_button'), ['class' => 'btn btn-success', 'type' => 'submit']) !!}
-        </div>
+        {{-- Save button --}}
+        <x-update-button :container="true" />
 
     </x-wrapper>
 @endsection

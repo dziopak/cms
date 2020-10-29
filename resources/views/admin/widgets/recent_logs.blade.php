@@ -1,4 +1,4 @@
-<x-widgetStatic :config="$config">
+<x-dashboard-widget :config="$config">
     @include('admin.partials.logs')
 
     <div class="widget-controls">
@@ -6,5 +6,5 @@
             {{ __('admin/widgets/recent_logs.all_logs') }}
         </a>
     </div>
-</x-widgetStatic>
+</x-dashboard-widget>
 

@@ -12,8 +12,13 @@
 
 @section('before')
 
+    {{-- Open the form --}}
     {!! Form::model($page, ['method' => 'PATCH', 'action' => ['Admin\Modules\PagesController@update', $page->id], 'class' => 'w-100', 'files' => 'true']) !!}
+
+    {{-- Validation report --}}
     @include('admin.partials.validation')
+
+    {{-- Hooks --}}
     @hook('page_edit_before')
     @hook('page_before')
 
@@ -23,9 +28,15 @@
 @section('content-left')
     <x-wrapper title="admin/pages.edit_left_title">
 
-        @include('partials.form-fields', ['fields' => $form['left']])
+        {{-- Display form --}}
+        <x-form-fields :fields="$form['left']" />
+
+        {{-- Hooks --}}
         @hook('page_edit_left_content')
         @hook('page_left_content')
+
+        {{-- Save button --}}
+        <x-update-button :container="true" />
 
     </x-wrapper>
 @endsection
@@ -34,7 +45,10 @@
 @section('content-right')
     <x-wrapper title="admin/pages.edit_right_title">
 
-        @include('partials.form-fields', ['fields' => $form['right']]) e
+        {{-- Display form --}}
+        <x-form-fields :fields="$form['right']" />
+
+        {{-- Hooks --}}
         @hook('page_edit_right_content')
         @hook('page_right_content')
 
@@ -43,30 +57,27 @@
 
 
 @section('content-bottom')
-    <div class="col">
-        <x-wrapper title="admin/pages.edit_bottom_title">
 
-            @include('partials.form-fields', ['fields' => $form['bottom']])
+    {{-- Hidden fields --}}
+    {!! Form::hidden('page_id', $page->id) !!}
 
-            <!-- Custom field hooks -->
-            @hook('page_edit_bottom_content')
-            @hook('page_bottom_content')
-            <!-- End of field hooks -->
+    {{-- Hooks --}}
+    @hook('page_edit_bottom_content')
+    @hook('page_bottom_content')
 
-
-            <div class="form-group">
-                {!! Form::hidden('page_id', $page->id) !!}
-                {!! Form::button('<i class="fa fa-home"></i>'.' '.__('admin/general.update_button'), ['class' => 'btn btn-success', 'type' => 'submit']) !!}
-            </div>
-
-        </x-wrapper>
-    </div>
 @endsection
 
 
 @section('after')
+
+    {{-- Close the form --}}
     {!! Form::close() !!}
+
+    {{-- Include TinyMCE Editor --}}
     @include('admin.partials.tinymce')
+
+    {{-- Hooks --}}
     @hook('page_edit_after')
     @hook('page_after')
+
 @endsection

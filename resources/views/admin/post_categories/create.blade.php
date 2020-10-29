@@ -12,34 +12,40 @@
 
 
 @section('before')
+
+
+    {{-- Open form --}}
     {!! Form::open(['method' => 'POST', 'action' => 'Admin\Modules\PostCategoriesController@store', 'class' => 'w-100 col-12', 'files' => 'true']) !!}
+
+    {{-- Validation report --}}
     @include('admin.partials.validation')
+
+
 @endsection
 
 
 @section('content-left')
     <x-wrapper title="admin/post_categories.create_left_title">
 
-        @include('partials.form-fields', ['fields' => $form['left']])
 
-        <!-- Custom field hooks -->
+        {{-- Display form --}}
+        <x-form-fields :fields="$form['left']" />
+
+        {{-- Hooks --}}
         @hook('post_category_create_left_content')
         @hook('post_category_left_content')
         @hook('category_left_content')
-        <!-- End of field hooks -->
 
-        <div class="form-group">
-            {!! Form::hidden('type', 'post') !!}
-            <button type="submit" class="btn btn-success">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                {{ __('admin/general.create_button') }}
-            </button>
-        </div>
+        {{-- Create button --}}
+        <x-create-button />
 
     </x-wrapper>
 @endsection
 
 
 @section('after')
+
+    {{-- Close the form --}}
     {!! Form::close() !!}
+
 @endsection

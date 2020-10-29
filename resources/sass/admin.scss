@@ -438,6 +438,8 @@ input[type="file"].image-upload {
     cursor: pointer;
     max-height: 350px;
     width: 100%;
+    object-fit: cover;
+    -o-object-fit: cover;
 }
 
 .scroll-overflow {
@@ -707,4 +709,8 @@ span.tag {
         float: unset;
         margin-left: 10px;
     }
+}
+
+.tox.tox-tinymce {
+    z-index: 0;
 }

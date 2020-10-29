@@ -15,46 +15,16 @@
     <x-wrapper title="admin/blocks/sliders.index_title">
 
         {{-- Table --}}
-            @include('admin.partials.table', ['fields' => $sliders])
-        {{-- End --}}
+        <x-table :table="$table" :fields="$sliders" />
 
-
-        {{-- Create button --}}
-        @if (Auth::user()->hasAccess('BLOCK_CREATE'))
-            <a href="{{ route('admin.blocks.sliders.create') }}" class="btn btn-success">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                {{ __('admin/general.create_button') }}
-            </a>
-        @endif
-        {{-- End --}}
-
+        {{-- Create button  --}}
+        <x-create-button access="BLOCK_CREATE" route="admin.blocks.sliders.create" />
 
         {{-- Pagination --}}
         <div class="float-right">{{ $sliders->render() }}</div>
-        {{-- End --}}
-
 
         {{-- Delete modal --}}
-        <div id="fade">
-            <div class="choice-modal" id="delete-slider-modal">
-                <div class="modal-content">
-
-                    <div class="text-center">
-                    {{-- Modal content --}}
-
-                        <h3 class="modal-title mb-3">Delete selected slider</h3>
-                        <p class="mb-4">Are you sure you want to permamently remove this slider from the database? This action is irreversible!</p>
-
-                        <div class="modal-nav">
-                            <div class="btn btn-danger" data-type="delete" id="modal-confirm">Delete</div>
-                            <div class="btn btn-primary" id="modal-cancel">Cancel</div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
+        <x-admin.modals.delete id="delete-slider-modal" title="admin/media.delete_title" message="admin/media.delete_information" />
 
     </x-wrapper>
 @endsection

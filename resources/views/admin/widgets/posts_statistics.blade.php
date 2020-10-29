@@ -1,4 +1,4 @@
-<x-widgetStatic :config="$config">
+<x-dashboard-widget :config="$config">
     <p>{{ __('admin/widgets/posts_statistics.created_within') }} {{ $config['days'] }} {{ trans_choice('admin/general.day', '2') }}</p>
 
     <canvas id="post_stats_chart" class="chart" style="height: 100%; width: 100%;"></canvas>
@@ -7,7 +7,7 @@
         <a class="btn btn-primary" href="{{ route('admin.posts.create') }}">{{ __('admin/widgets/posts_statistics.new_post') }}</a>
         <a class="btn px-3" href="{{ route('admin.posts.index') }}">{{ __('admin/widgets/posts_statistics.more_stats') }}</a>
     </div>
-</x-widgetStatic>
+</x-dashboard-widget>
 
 
 @push('scripts-bottom')

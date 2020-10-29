@@ -2,6 +2,34 @@
 
 $form = [
     'left' => [
+        'content_row' => [
+            'class' => 'form-group row',
+            'items' => [
+                'content' => [
+                    'type' => 'textarea',
+                    'class' => 'tinymce',
+                    'label' => __('admin/pages.content'),
+                    'value' => null,
+                    'required' => true,
+                    'container_class' => ''
+                ]
+            ]
+        ]
+    ],
+    'right' => [
+        'thumbnail_row' => [
+            'class' => 'form-group row',
+            'items' => [
+                'thumbnail' => [
+                    'type' => 'image',
+                    'value' => $args['thumbnail'],
+                    'label' => __('admin/pages.thumbnail'),
+                    'endpoint' => $args['thumbnail_endpoint'] ?? null,
+                    'class' => '',
+                    'container_class' => ''
+                ],
+            ],
+        ],
         'name_row' => [
             'class' => 'form-group row',
             'items' => [
@@ -64,21 +92,6 @@ $form = [
                     'container_class' => ''
                 ],
             ]
-        ]
-    ],
-    'right' => [
-        'thumbnail_row' => [
-            'class' => 'form-group row',
-            'items' => [
-                'thumbnail' => [
-                    'type' => 'image',
-                    'value' => $args['thumbnail'],
-                    'label' => __('admin/pages.thumbnail'),
-                    'endpoint' => $args['thumbnail_endpoint'] ?? null,
-                    'class' => '',
-                    'container_class' => ''
-                ],
-            ],
         ],
         'meta_title_row' => [
             'class' => 'form-group row',
@@ -117,21 +130,6 @@ $form = [
                     'class' => '',
                     'container_class' => '',
                 ],
-            ]
-        ]
-    ],
-    'bottom' => [
-        'content_row' => [
-            'class' => 'form-group row',
-            'items' => [
-                'content' => [
-                    'type' => 'textarea',
-                    'class' => 'tinymce',
-                    'label' => __('admin/pages.content'),
-                    'value' => null,
-                    'required' => true,
-                    'container_class' => ''
-                ]
             ]
         ]
     ]

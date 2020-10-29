@@ -47,10 +47,8 @@
         </div>
 
         {{-- Save button --}}
-        <button type="submit" class="btn btn-primary">
-            <i class="fa fa-home" aria-hidden="true"></i>
-            {{ __('admin/general.update_button') }}
-        </button>
+        <x-update-button />
+
     </x-wrapper>
 
     {!! Form::close() !!}

@@ -16,7 +16,7 @@
 
 
         {{-- Table --}}
-        @include('admin.partials.table', ['fields' => $categories])
+        <x-table :table="$table" :fields="$categories" />
         {{-- End --}}
 
 

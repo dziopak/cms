@@ -37,6 +37,8 @@
 
 
 @section('content-left')
+
+
     @include('admin.partials.validation')
 
     <div id="layout" class="grid-stack">
@@ -48,14 +50,24 @@
             'block_id' => 0
         ]])
     </div>
+
+
 @endsection
 
 
 @section('content-right')
-
     <x-wrapper title="admin/layouts.index_title">
-        @include('partials.form-fields', ['fields' => $form['basic_data']])
-        {!! Form::button('<i class="fa fa-home"></i>'.' '.__('admin/general.update_button'), ['class' => 'btn btn-success mt-4', 'type' => 'submit']) !!}
+
+
+        {{-- Display form --}}
+        <x-form-fields :fields="$form['basic_data']" />
+
+        {{-- Save button --}}
+        <x-create-button />
+
+        {{-- Close the form --}}
         {!! Form::close() !!}
+
+
     </x-wrapper>
 @endsection

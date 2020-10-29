@@ -25,6 +25,7 @@
 @section('content-left')
 
     <x-wrapper title="admin/blocks/menus.menu_data_title">
+
         {{-- Name input --}}
         <div class="form-group">
             {!! Form::label('name', __('admin/blocks/menus.name').':') !!}
@@ -32,10 +33,8 @@
         </div>
 
         {{-- Save button --}}
-        <button type="submit" class="btn btn-primary">
-            <i class="fa fa-home" aria-hidden="true"></i>
-            {{ __('admin/general.update_button') }}
-        </button>
+        <x-update-button />
+
     </x-wrapper>
 
 

@@ -27,13 +27,12 @@ class CategoriesRequest extends FormRequest
     public function rules()
     {
         $validation_fields = [
-            'name' => 'string|required',
+            'name' => 'string|required|unique:' . $this->request->get('type') . '_categories,name,' . $this->request->get('category_id'),
             'category_id' => 'numeric',
             'description' => 'string'
         ];
 
-        $validation_fields['slug'] = 'string|required|unique:'.$this->request->get('type').'_categories,slug,'.$this->request->get('category_id');
-        $validation_fields = Hook::get('admin'.ucfirst($this->request->get('type')).'CategoriesValidation',[$validation_fields],function($validation_fields){
+        $validation_fields = Hook::get('admin' . ucfirst($this->request->get('type')) . 'CategoriesValidation', [$validation_fields], function ($validation_fields) {
             return $validation_fields;
         });
 

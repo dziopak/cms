@@ -4,50 +4,50 @@
 <div id="layout-components" class="components-bar">
 
     <div class="add-widget" data-name="header">
-        <x-newWidget thumbnail="" title="Header">
+        <x-new-widget title="Header">
             <p>Static hero image</p>
-        </x-newWidget>
+        </x-new-widget>
     </div>
 
 
     <div class="add-widget" data-name="slider">
-        <x-newWidget thumbnail="" title="Slider">
+        <x-new-widget title="Slider">
             <p>Image slider</p>
-        </x-newWidget>
+        </x-new-widget>
     </div>
 
 
     <div class="add-widget" data-name="carousell">
-        <x-newWidget thumbnail="" title="Carousell">
+        <x-new-widget title="Carousell">
             <p>Customizable slick carousell</p>
-        </x-newWidget>
+        </x-new-widget>
     </div>
 
 
     <div class="add-widget" data-name="footer">
-        <x-newWidget thumbnail="" title="Footer">
+        <x-new-widget title="Footer">
             <p>Footer block</p>
-        </x-newWidget>
+        </x-new-widget>
     </div>
 
 
     <div class="add-widget" data-name="vertical-menu">
-        <x-newWidget thumbnail="" title="Vertical menu">
+        <x-new-widget title="Vertical menu">
             <p>Vertical navigation menu</p>
-        </x-newWidget>
+        </x-new-widget>
     </div>
 
 
     <div class="add-widget" data-name="horizontal-menu">
-        <x-newWidget thumbnail="" title="Horizontal menu">
+        <x-new-widget title="Horizontal menu">
             <p>Horizontal navigation menu</p>
-        </x-newWidget>
+        </x-new-widget>
     </div>
 
 
     <div class="add-widget" data-name="login">
-        <x-newWidget thumbnail="" title="Login box">
+        <x-new-widget title="Login box">
             <p>Displays login form for guest users</p>
-        </x-newWidget>
+        </x-new-widget>
     </div>
 </div>

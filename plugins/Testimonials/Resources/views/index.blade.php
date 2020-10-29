@@ -13,7 +13,7 @@
 
 @section('module-content')
     <x-wrapper title="Manage testimonials">
-        @include('admin.partials.table', ['fields' => $testimonials])
+        <x-table :table="$table" :fields="$testimonials" />
 
         @if (Auth::user()->hasAccess('MODULE_USE'))
             <a href="{{ route('admin.plugins.testimonials.create') }}" class="btn btn-success">Create new</a>

@@ -11,7 +11,7 @@
 
 @section('module-content')
     <x-wrapper title="Manage custom languages">
-        @include('admin.partials.table', ['fields' => $langs])
+        <x-table :table="$table" :fields="$langs" />
 
         @if (Auth::user()->hasAccess('MODULE_USE'))
             <a href="{{ route('admin.plugins.lang.create') }}" class="btn btn-success">Create new</a>

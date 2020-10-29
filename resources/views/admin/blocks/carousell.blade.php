@@ -1,1 +1,1 @@
-<x-block :config="$config" :key="$key">
+<x-widget-block :config="$config" :key="$key" />

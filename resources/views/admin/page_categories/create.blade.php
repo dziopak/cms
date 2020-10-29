@@ -20,20 +20,18 @@
 @section('module-content')
     <x-wrapper title="admin/page_categories.create_left_title">
 
-        @include('partials.form-fields', ['fields' => $form['left']])
+        {{-- Display form --}}
+        <x-form-fields :fields="$form['left']" />
+        {!! Form::hidden('type', 'page') !!}
 
-        <!-- Custom field hooks -->
+        {{-- Hooks --}}
         @hook('page_category_create_left_content')
         @hook('page_category_left_content')
         @hook('category_left_content')
-        <!-- End of field hooks -->
 
+        {{-- Save button --}}
         <div class="form-group">
-            {!! Form::hidden('type', 'page') !!}
-            <button type="submit" class="btn btn-success">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                {{ __('admin/general.create_button') }}
-            </button>
+            <x-create-button />
         </div>
 
     </x-wrapper>

@@ -169,7 +169,7 @@ return [
          * Package Service Providers...
          */
         Esemve\Hook\HookServiceProvider::class,
-        Yajra\DataTables\DataTablesServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -180,12 +180,7 @@ return [
         App\Providers\EventServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         App\Providers\SettingsServiceProvider::class,
-
-        /*
-         * View composers
-        */
         App\Providers\ThemeServiceProvider::class
     ],
 

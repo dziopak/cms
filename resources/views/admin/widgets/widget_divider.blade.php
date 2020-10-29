@@ -1,2 +1,1 @@
-<x-widgetStatic :config="$config">
-</x-widgetStatic>
+<x-dashboard-widget :config="$config" />

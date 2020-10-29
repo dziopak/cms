@@ -58,7 +58,7 @@
 
         {!! Form::model($lang, ['method' => 'PATCH', 'route' => ['admin.plugins.lang.update', $lang->id], 'class' => 'w-100', 'files' => 'true']) !!}
             @include('admin.partials.validation')
-            @include('partials.form-fields', ['fields' => $form])
+            <x-form-fields :fields="$form" />
 
             <div class="form-group">
                 {!! Form::hidden('lang_id', $lang->id) !!}

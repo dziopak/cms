@@ -20,7 +20,7 @@
 @section('module-content')
     <x-wrapper title="admin/page_categories.edit_left_title">
 
-        @include('partials.form-fields', ['fields' => $form['basic_data']])
+        <x-form-fields :fields="$form['basic_data']" />
 
         <!-- Custom field hooks -->
         @hook('page_category_edit_left_content')

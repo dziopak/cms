@@ -8,7 +8,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.2",
+        "php": "^7.3",
         "arrilot/laravel-widgets": "^3.13",
         "fideloper/proxy": "^4.0",
         "intervention/image": "^2.5",
@@ -20,7 +20,6 @@
         "rachidlaasri/laravel-installer": "^4.0",
         "spatie/laravel-query-builder": "^2.8",
         "tymon/jwt-auth": "dev-develop",
-        "yajra/laravel-datatables-oracle": "~9.0",
         "esemve/hook": "dev-master",
         "guzzlehttp/guzzle": "^7.0.1"
     },

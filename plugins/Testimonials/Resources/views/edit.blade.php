@@ -18,11 +18,11 @@
 
             <div class="row">
                 <div class="col col-3">
-                    @include('partials.form-fields', ['fields' => $form['thumbnail']])
+                    <x-form-fields :fields="$form['thumbnail']" />
                 </div>
 
                 <div class="col col-9">
-                    @include('partials.form-fields', ['fields' => $form['basic_data']])
+                    <x-form-fields :fields="$form['basic_data']" />
                 </div>
             </div>
 

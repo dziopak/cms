@@ -20,7 +20,7 @@
 @section('module-content')
     <x-wrapper title="admin/page_categories.edit_left_title">
 
-        @include('partials.form-fields', ['fields' => $form['basic_data']])
+        <x-form-fields :fields="$form['basic_data']" />
 
         <div class="form-group">
             {!! Form::button('<i class="fa fa-home"></i>'.' '.__('admin/general.update_button'), ['class' => 'btn btn-success', 'type' => 'submit']) !!}

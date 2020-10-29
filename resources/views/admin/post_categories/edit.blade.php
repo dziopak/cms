@@ -12,27 +12,33 @@
 
 
 @section('before')
+
+    {{-- Open the form  --}}
     {!! Form::model($category, ['method' => 'PATCH', 'action' => ['Admin\Modules\PostCategoriesController@update', $category->id], 'class' => 'w-100', 'files' => 'true']) !!}
+
+    {{-- Validation report --}}
     @include('admin.partials.validation')
+
 @endsection
 
 
 @section('content-left')
     <x-wrapper title="admin/post_categories.edit_left_title">
 
-        @include('partials.form-fields', ['fields' => $form['left']])
+        {{-- Display form --}}
+        <x-form-fields :fields="$form['left']" />
 
-        <!-- Custom field hooks -->
+        {{-- Hidden fields --}}
+        {!! Form::hidden('type', 'post') !!}
+        {!! Form::hidden('category_id', $category->id) !!}
+
+        {{-- Hooks --}}
         @hook('post_category_edit_left_content')
         @hook('post_category_left_content')
         @hook('category_left_content')
-        <!-- End of field hooks -->
 
-        <div class="form-group">
-            {!! Form::hidden('type', 'post') !!}
-            {!! Form::hidden('category_id', $category->id) !!}
-            {!! Form::button('<i class="fa fa-home"></i>'.' '.__('admin/general.update_button'), ['class' => 'btn btn-success', 'type' => 'submit']) !!}
-        </div>
+        {{-- Save button --}}
+        <x-update-button :container="true" />
 
     </x-wrapper>
 @endsection

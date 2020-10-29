@@ -11,6 +11,7 @@
 
 
 @section('before')
+    {{-- Open the form  --}}
     {!! Form::open(['method' => 'POST', 'action' => 'Admin\Modules\UsersController@store', 'files' => 'true']) !!}
 @endsection
 
@@ -18,15 +19,16 @@
 @section('content-left')
     <x-wrapper title="admin/users.create_left_title">
 
-        @include('admin.partials.validation')
-        @include('partials.form-fields', ['fields' => $form['left']])
 
-        <div class="form-group">
-            <button type="submit" class="btn btn-success">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                {{ __('admin/general.create_button') }}
-            </button>
-        </div>
+        {{-- Validation report --}}
+        @include('admin.partials.validation')
+
+        {{-- Display form --}}
+        <x-form-fields :fields="$form['left']" />
+
+        {{-- Save button --}}
+        <x-create-button />
+
 
     </x-wrapper>
 @endsection
@@ -35,13 +37,21 @@
 @section('content-right')
     <x-wrapper title="admin/users.create_right_title">
 
+
+        {{-- Validation report --}}
         @include('admin.partials.validation')
-        @include('partials.form-fields', ['fields' => $form['right']])
+
+        {{-- Display form --}}
+        <x-form-fields :fields="$form['right']" />
+
 
     </x-wrapper>
 @endsection
 
 
 @section('after')
+
+    {{-- Close the form --}}
     {!! Form::close() !!}
+
 @endsection

@@ -69,8 +69,13 @@
 @section('content-right')
     <x-wrapper title="admin/layouts.index_title">
 
-        @include('partials.form-fields', ['fields' => $form['basic_data']])
-        {!! Form::button('<i class="fa fa-home"></i>'.' '.__('admin/general.update_button'), ['class' => 'btn btn-success mt-4', 'type' => 'submit']) !!}
+        {{-- Display form --}}
+        <x-form-fields :fields="$form['basic_data']" />
+
+        {{-- Save button --}}
+        <x-update-button />
+
+        {{-- Close the form --}}
         {!! Form::close() !!}
 
     </x-wrapper>

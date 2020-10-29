@@ -32,12 +32,12 @@
 
         <div class="row">
             <div class="col-lg-3" style="display: flex;">
-                @include('partials.form-fields', ['fields' => $form['thumbnail']])
+                <x-form-fields :fields="$form['thumbnail']" />
             </div>
 
             {{-- Form fields --}}
             <div class="col-lg-9">
-                @include('partials.form-fields', ['fields' => $form['basic_data']])
+                <x-form-fields :fields="$form['basic_data']" />
             </div>
             {{-- End --}}
 

@@ -55,7 +55,8 @@
         {!! Form::open(['method' => 'POST', 'route' => 'admin.plugins.lang.store', 'class' => 'w-100', 'files' => 'true']) !!}
 
             @include('admin.partials.validation')
-            @include('partials.form-fields', ['fields' => $form])
+
+            <x-form-fields :fields="$form" />
 
             <div class="form-group">
                 {!! Form::submit('Update', ['class' => 'btn btn-success']) !!}

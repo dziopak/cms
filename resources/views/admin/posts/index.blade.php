@@ -11,51 +11,22 @@
 
 
 @section('module-content')
+
     <x-wrapper title="admin/posts.index_title">
 
-
         {{-- Table --}}
-        @include('admin.partials.table', ['fields' => $posts])
-        {{-- End --}}
+        <x-table :table="$table" :fields="$posts" />
 
-
-        {{-- Create button --}}
-        @if (Auth::user()->hasAccess('POST_CREATE'))
-            <a href="{{ route('admin.posts.create') }}" class="btn btn-success">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                {{ __('admin/general.create_button') }}
-            </a>
-        @endif
-        {{-- End --}}
-
+        {{-- Create button  --}}
+        <x-create-button access="POST_CREATE" route="admin.posts.create" />
 
         {{-- Pagination --}}
         <div class="float-right">{{ $posts->render() }}</div>
-        {{-- End --}}
-
 
     </x-wrapper>
 
 
     {{-- Delete modal --}}
-    <div id="fade">
-        <div class="choice-modal" id="delete-post-modal">
-            <div class="modal-content">
+    <x-admin.modals.delete id="delete-post-modal" title="admin/posts.delete_title" message="admin/posts.delete_information" />
 
-                <div class="text-center">
-                {{-- Modal content --}}
-
-                    <h3 class="modal-title mb-3">{{ __('admin/posts.delete_title') }}</h3>
-                    <p class="mb-4">{{ __('admin/posts.delete_information') }}</p>
-
-                    <div class="modal-nav">
-                        <div class="btn btn-danger" data-type="delete" id="modal-confirm">{{ __('admin/general.delete_button') }}</div>
-                        <div class="btn btn-primary" id="modal-cancel">{{ __('admin/general.back_button') }}</div>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
 @endsection

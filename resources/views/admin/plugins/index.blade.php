@@ -12,10 +12,10 @@
 
 @section('module-content')
     <x-wrapper title="admin/plugins.active">
-        @include('admin.partials.table', ['table' => $table['active'], 'fields' => $modules['active'], 'mass_edit_by' => 'name'])
+        <x-table :table="$table['active']" :fields="$modules['active']" mass-edit-by="name"/>
     </x-wrapper>
 
     <x-wrapper title="admin/plugins.inactive">
-        @include('admin.partials.table', ['table' => $table['inactive'], 'fields' => $modules['inactive'], 'mass_edit_by' => 'name'])
+        <x-table :table="$table['inactive']" :fields="$modules['inactive']" mass-edit-by="name" />
     </x-wrapper>
 @endsection

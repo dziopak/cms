@@ -11,19 +11,36 @@
 
 
 @section('before')
+
+
+    {{-- Open form --}}
     {!! Form::open(['method' => 'POST', 'action' => 'Admin\Modules\PagesController@store', 'class' => 'w-100', 'files' => 'true']) !!}
+
+    {{-- Validation report --}}
     @include('admin.partials.validation')
+
+    {{-- Hooks --}}
     @hook('page_create_before')
     @hook('page_before')
+
+
 @endsection
 
 
 @section('module-content')
     <x-wrapper title="admin/pages.create_left_title">
 
-        @include('partials.form-fields', ['fields' => $form['left']])
+
+        {{-- Display form --}}
+        <x-form-fields :fields="$form['left']" />
+
+        {{-- Hooks --}}
         @hook('page_create_left_content')
         @hook('page_left_content')
+
+        {{-- Save button --}}
+        <x-create-button />
+
 
     </x-wrapper>
 @endsection
@@ -32,40 +49,39 @@
 @section('content-right')
     <x-wrapper title="admin/pages.create_right_title">
 
-        @include('partials.form-fields', ['fields' => $form['right']])
+
+        {{-- Display form --}}
+        <x-form-fields :fields="$form['right']" />
+
+        {{-- Hooks --}}
         @hook('page_create_right_content')
         @hook('page_right_content')
+
 
     </x-wrapper>
 @endsection
 
 
 @section('content-bottom')
-    <div class="col">
-        <x-wrapper title="admin/pages.create_bottom_title">
 
+    {{-- Hooks --}}
+    @hook('page_create_bottom_content')
+    @hook('page_bottom_content')
 
-            @include('partials.form-fields', ['fields' => $form['bottom']])
-
-            <div class="form-group">
-                <button type="submit" class="btn btn-success">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                    {{ __('admin/general.create_button') }}
-                </button>
-            </div>
-
-            @hook('page_create_bottom_content')
-            @hook('page_bottom_content')
-
-
-        </x-wrapper>
-    </div>
 @endsection
 
 
 @section('after')
+
+    {{-- Close the form --}}
     {!! Form::close() !!}
+
+    {{-- Include TinyMCE Editor --}}
     @include('admin.partials.tinymce')
+
+    {{-- Hooks --}}
     @hook('page_create_after')
     @hook('page_after')
+
+
 @endsection

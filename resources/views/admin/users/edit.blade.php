@@ -16,8 +16,12 @@
 
             <div class="row">
                 <div class="col" style="max-width: 200px;">
-                    @include('partials.form-fields', ['fields' => $form['profile']['avatar']])
+
+                    {{-- Display avatar --}}
+                    <x-form-fields :fields="$form['profile']['avatar']" />
+
                 </div>
+
                 <div class="col" style="display: inline-block;">
                     <strong>{{'@'.$user->name}}</strong><br/>
 
@@ -32,30 +36,47 @@
         </x-wrapper>
 
         <x-wrapper title="admin/users.edit_left_title">
+
+            {{-- Validation report --}}
             @include('admin.partials.validation')
-            @include('partials.form-fields', ['fields' => $form['basic_data']])
 
+            {{-- Display form --}}
+            <x-form-fields :fields="$form['basic_data']" />
 
+            {{-- Save button --}}
             <div class="form-group">
                 <input type="hidden" value="{{$user->id}}" name="user_id" />
                 {!! Form::button('<i class="fa fa-home"></i>'.' '.__('admin/general.update_button'), ['class' => 'btn btn-success', 'type' => 'submit']) !!}
             </div>
+
         </x-wrapper>
     {!! Form::close() !!}
 @endsection
 
 
 @section('content-right')
+
     <x-wrapper title="admin/users.recent_actions">
+
+        {{-- Display logs --}}
         @include('admin.partials.logs')
+
     </x-wrapper>
 
     <x-wrapper title="admin/users.change_password">
+
+        {{-- Open the form --}}
         {!! Form::open(['method' => 'PUT', 'action' => ['Admin\Modules\UsersController@password', $user->id]]) !!}
 
-        @include('partials.form-fields', ['fields' => $form['password_change']])
+        {{-- Display form --}}
+        <x-form-fields :fields="$form['password_change']" />
 
-        {!! Form::button('<i class="fa fa-home"></i>'.' '.__('admin/general.update_button'), ['class' => 'btn btn-primary', 'type' => 'submit']) !!}
+        {{-- Save button --}}
+        <x-update-button />
+
+        {{-- Close the form --}}
         {!! Form::close() !!}
+
     </x-wrapper>
+
 @endsection

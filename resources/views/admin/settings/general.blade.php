@@ -11,14 +11,26 @@
 
 
 @section('content-left')
+
+
+    {{-- Open the form --}}
     {!! Form::open(['method' => 'POST', 'action' => 'Admin\Modules\SettingsController@store']) !!}
+
     <x-wrapper title="admin/settings.general_title">
 
+        {{-- Information --}}
         <p>{{ __('admin/settings.general_description') }}</p>
-        @include('partials.form-fields', ['fields' => $form['basic_data']])
 
-        {!! Form::button('<i class="fa fa-home"></i>'.' '.__('admin/general.update_button'), ['class' => 'btn btn-success mt-4', 'type' => 'submit']) !!}
+        {{-- Display form --}}
+        <x-form-fields :fields="$form['basic_data']" />
+
+        {{-- Save button --}}
+        <x-update-button />
 
     </x-wrapper>
+
+    {{-- Close the form --}}
     {!! Form::close() !!}
+
+
 @endsection

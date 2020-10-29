@@ -1,4 +1,4 @@
-<x-widgetStatic title="Content Stats" id="recent-logs" :config="$config">
+<x-dashboard-widget title="Content Stats" id="recent-logs" :config="$config">
     <div class="pt-5">
         <canvas id="content_stats_chart" width="200" style="margin: 0 auto; max-width: 320px; max-height: 80%;" class="chart"></canvas>
 
@@ -8,7 +8,7 @@
             <li><span class="legend-item" style="background-color: #706fd3"></span><br/><strong>{{ __('admin/widgets/content_statistics.users') }}</strong>: {{ $raw['users'] }}</li>
         </ul>
     </div>
-</x-widgetStatic>
+</x-dashboard-widget>
 
 @push('scripts-bottom')
     <script>

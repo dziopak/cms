@@ -17,22 +17,19 @@
 
 @section('content-left')
     {!! Form::open(['method' => 'POST', 'action' => 'Admin\Blocks\SlidersController@store', 'class' => 'w-100']) !!}
+        <x-wrapper title="admin/blocks/sliders.create_title">
 
-    <x-wrapper title="admin/blocks/sliders.create_title">
 
-        {{-- Name input --}}
-        <div class="form-group">
-            {!! Form::label('name', __('admin/blocks/sliders.name').':') !!}
-            {!! Form::text('name', null, ['class' => 'form-control']) !!}
-        </div>
+            {{-- Name input --}}
+            <div class="form-group">
+                {!! Form::label('name', __('admin/blocks/sliders.name').':') !!}
+                {!! Form::text('name', null, ['class' => 'form-control']) !!}
+            </div>
 
-        {{-- Save button --}}
-        <button type="submit" class="btn btn-primary">
-            <i class="fa fa-home" aria-hidden="true"></i>
-            {{ __('admin/general.update_button') }}
-        </button>
+            {{-- Save button --}}
+            <x-create-button />
 
-    </x-wrapper>
 
+        </x-wrapper>
     {!! Form::close() !!}
 @endsection
