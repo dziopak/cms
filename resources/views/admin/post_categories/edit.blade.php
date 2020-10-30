@@ -17,7 +17,7 @@
     {!! Form::model($category, ['method' => 'PATCH', 'action' => ['Admin\Modules\PostCategoriesController@update', $category->id], 'class' => 'w-100', 'files' => 'true']) !!}
 
     {{-- Validation report --}}
-    @include('admin.partials.validation')
+    <x-form-validation :errors="$errors" />
 
 @endsection
 

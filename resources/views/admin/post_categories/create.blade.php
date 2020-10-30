@@ -18,7 +18,7 @@
     {!! Form::open(['method' => 'POST', 'action' => 'Admin\Modules\PostCategoriesController@store', 'class' => 'w-100 col-12', 'files' => 'true']) !!}
 
     {{-- Validation report --}}
-    @include('admin.partials.validation')
+    <x-form-validation :errors="$errors" />
 
 
 @endsection

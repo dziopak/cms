@@ -12,7 +12,7 @@
 
 @section('before')
 
-    @include('admin.partials.validation')
+    <x-form-validation :errors="$errors" />
 
 @endsection
 

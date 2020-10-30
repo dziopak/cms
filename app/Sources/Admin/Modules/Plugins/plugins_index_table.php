@@ -3,7 +3,7 @@ $table['active']['headers'] = [__('admin/plugins.name') => 'name', __('admin/plu
 $table['active']['data_types'] = ['active' => 'boolean'];
 $table['active']['actions'] = [
     'Control panel' => [
-        'url' => 'admin.plugins.{slug}.index',
+        'url' => ' {slug}::index ',
         'class' => 'success',
         'access' => 'MODULE_USE',
         'iterator' => 'slug'
@@ -15,10 +15,10 @@ $table['active']['actions'] = [
         'iterator' => 'slug',
     ],
     'Delete' => [
-        'url' => 'admin.plugins.{slug}.index',
+        'url' => ' {slug}::index ',
         'class' => 'danger',
         'access' => 'MODULE_EDIT',
-        'iterator' => 'slug'
+        'iterator' => 'id'
     ],
 ];
 
@@ -31,12 +31,12 @@ $table['inactive']['actions'] = [
         'access' => 'MODULE_EDIT',
         'iterator' => 'slug'
     ],
-    'Delete' => [
-        'url' => 'admin.dashboard.index',
-        'class' => 'danger',
-        'access' => 'MODULE_EDIT',
-        'iterator' => 'slug'
-    ],
+    // 'Delete' => [
+    //     'url' => ' {slug}::index ',
+    //     'class' => 'danger',
+    //     'access' => 'MODULE_EDIT',
+    //     'iterator' => 'id'
+    // ],
 ];
 
 return $table;

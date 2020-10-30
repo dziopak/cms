@@ -16,7 +16,7 @@
     {!! Form::model($post, ['method' => 'PATCH', 'action' => ['Admin\Modules\PostsController@update', $post->id], 'class' => 'w-100', 'files' => 'true']) !!}
 
     {{-- Validation report --}}
-    @include('admin.partials.validation')
+    <x-form-validation :errors="$errors" />
 
     {{-- Hooks --}}
     @hook('post_edit_before')

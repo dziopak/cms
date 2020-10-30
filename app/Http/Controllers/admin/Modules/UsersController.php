@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Utilities\Admin\Modules\Users\UserEntity;
 use App\Http\Requests\UsersCreateRequest;
 use App\Http\Requests\NewPasswordRequest;
-use App\Http\Requests\UsersEditRequest;
+use App\Http\Requests\Users\UsersEditRequest;
 
 use Auth;
 

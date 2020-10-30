@@ -43,6 +43,7 @@
         $("#media-list-form input[name^='mass_edit']:checked").each(function() {
             slides.push($(this).val());
         });
+        console.log($('#media-list-form'));
         addSlides(slides);
     });
 

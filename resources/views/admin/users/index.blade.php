@@ -14,7 +14,7 @@
     <x-wrapper title="{{ __('admin/users.list_all') }}">
 
         {{-- Displaying data table --}}
-        <x-table :table="$table" :fields="$users" table_id="users_table"/>
+        <x-table :table="$table" :fields="$users" tableId="users_table"/>
 
         {{-- Create button  --}}
         <x-create-button access="USER_CREATE" route="admin.users.create" />

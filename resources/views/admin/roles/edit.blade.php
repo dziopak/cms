@@ -24,7 +24,7 @@
     <x-wrapper title="admin/roles.edit_left_title">
 
         {{-- Validation report --}}
-        @include('admin.partials.validation')
+        <x-form-validation :errors="$errors" />
 
         {{-- Display form --}}
         <x-form-fields :fields="$form['left']" />

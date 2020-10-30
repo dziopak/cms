@@ -51,7 +51,7 @@
                     @break
 
                     @case('image')
-                        @include('admin.partials.image-input', ['endpoint' => $item['endpoint'] ?? ""])
+                        <x-image-input :item="$item" :name="$name" :endpoint="$item['endpoint'] ?? ''" />
                     @break
 
                     @case('checkbox')

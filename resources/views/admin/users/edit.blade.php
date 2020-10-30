@@ -38,7 +38,7 @@
         <x-wrapper title="admin/users.edit_left_title">
 
             {{-- Validation report --}}
-            @include('admin.partials.validation')
+            <x-form-validation :errors="$errors" />
 
             {{-- Display form --}}
             <x-form-fields :fields="$form['basic_data']" />
@@ -59,7 +59,7 @@
     <x-wrapper title="admin/users.recent_actions">
 
         {{-- Display logs --}}
-        @include('admin.partials.logs')
+        <x-logs :data="$logs" />
 
     </x-wrapper>
 

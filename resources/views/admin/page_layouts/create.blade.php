@@ -39,7 +39,7 @@
 @section('content-left')
 
 
-    @include('admin.partials.validation')
+    <x-form-validation :errors="$errors" />
 
     <div id="layout" class="grid-stack">
         @include('admin.blocks.module', ['config' => [

@@ -10,18 +10,17 @@
     "require": {
         "php": "^7.3",
         "arrilot/laravel-widgets": "^3.13",
+        "esemve/hook": "dev-master",
         "fideloper/proxy": "^4.0",
+        "guzzlehttp/guzzle": "^7.0.1",
         "intervention/image": "^2.5",
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.4",
         "laravel/ui": "^3.0",
         "laravelcollective/html": "^6.0",
-        "nwidart/laravel-modules": "^6.2",
         "rachidlaasri/laravel-installer": "^4.0",
         "spatie/laravel-query-builder": "^2.8",
-        "tymon/jwt-auth": "dev-develop",
-        "esemve/hook": "dev-master",
-        "guzzlehttp/guzzle": "^7.0.1"
+        "tymon/jwt-auth": "dev-develop"
     },
     "repositories":[
         {

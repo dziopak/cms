@@ -1,5 +1,5 @@
 <x-dashboard-widget :config="$config">
-    @include('admin.partials.logs')
+    <x-logs :data="$logs" />
 
     <div class="widget-controls">
         <a class="btn btn-primary" href="{{ route('admin.settings.logs.index') }}">

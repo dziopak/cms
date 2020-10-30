@@ -28,12 +28,23 @@ class BladeDirectivesProvider extends ServiceProvider
         'table-action-type' => \App\View\Components\Admin\Tables\Partials\Action::class,
         'mass-edit' => \App\View\Components\Admin\Tables\Partials\MassEdit::class,
 
+        // Modals
+        'media-upload-modal' => \App\View\Components\Admin\Modals\AddMedia::class,
+
         // Buttons
         'create-button' => \App\View\Components\Admin\Buttons\Create::class,
         'update-button' => \App\View\Components\Admin\Buttons\Update::class,
 
         // Forms
         'form-fields' => \App\View\Components\Admin\Forms\Fields::class,
+        'form-validation' => \App\View\Components\Admin\Forms\Validation::class,
+
+        // Inputs
+        'image-input' => \App\View\Components\Admin\Inputs\Image::class,
+
+        // Other
+        'logs' => \App\View\Components\Admin\Logs\LogList::class,
+
     ];
 
 

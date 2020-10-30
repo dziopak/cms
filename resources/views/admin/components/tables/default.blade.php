@@ -22,10 +22,10 @@
 
             <tbody>
                 @foreach($fields as $key => $field)
-                    <tr data-row="{{ $field->id }}">
+                    <tr data-row="{{ $field->id ?? $field['id'] }}">
 
                         {{-- Mass edit checkbox --}}
-                        <td><input type="checkbox" name="mass_edit[{{ $key }}]" value="{{ $field->id }}"></td>
+                        <td><input type="checkbox" name="mass_edit[{{ $key }}]" value="{{ $field->id ?? $field['id'] }}"></td>
 
                         {{-- Display table records --}}
                         <x-table-fields :table="$table" :field="$field" />

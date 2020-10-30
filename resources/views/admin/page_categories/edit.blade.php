@@ -13,7 +13,7 @@
 
 @section('before')
     {!! Form::model($category, ['method' => 'PATCH', 'action' => ['Admin\Modules\PageCategoriesController@update', $category->id], 'class' => 'w-100']) !!}
-    @include('admin.partials.validation')
+    <x-form-validation :errors="$errors" />
 @endsection
 
 

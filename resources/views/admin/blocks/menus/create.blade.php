@@ -12,14 +12,13 @@
 
 
 @section('before')
-    @include('admin.partials.validation')
+    <x-form-validation :errors="$errors" />
 @endsection
 
 
 @section('content-left')
     {!! Form::open(['method' => 'POST', 'action' => 'Admin\Blocks\MenusController@store', 'class' => 'w-100']) !!}
         <x-wrapper title="admin/blocks/menus.menu_create_title">
-
 
             {{-- Name input --}}
             <div class="form-group">
@@ -29,7 +28,6 @@
 
             {{-- Save button --}}
             <x-create-button />
-
 
         </x-wrapper>
     {!! Form::close() !!}

@@ -16,7 +16,7 @@
         <p>{{ __('admin/logs.index_intro') }}</p>
         <div id="logs-table">
             @include('admin.logs.partials.controls')
-            @include('admin.partials.logs')
+            <x-logs :data="$logs" />
         </div>
     </x-wrapper>
 @endsection

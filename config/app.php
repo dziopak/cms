@@ -181,7 +181,8 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\SettingsServiceProvider::class,
-        App\Providers\ThemeServiceProvider::class
+        App\Providers\ThemeServiceProvider::class,
+        App\Providers\PluginsServiceProvider::class
     ],
 
     /*

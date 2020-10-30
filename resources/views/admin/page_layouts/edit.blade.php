@@ -37,7 +37,7 @@
 
 
 @section('content-left')
-    @include('admin.partials.validation')
+    <x-form-validation :errors="$errors" />
 
     <div id="layout" class="grid-stack">
         @if (!empty($layout->blocks) && count($layout->blocks) > 0)

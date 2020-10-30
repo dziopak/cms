@@ -13,7 +13,7 @@
 @section('before')
 
     {!! Form::model($file, ['method' => 'PATCH', 'action' => ['Admin\Modules\FilesController@update', $file->id], 'class' => 'w-100']) !!}
-    @include('admin.partials.validation')
+    <x-form-validation :errors="$errors" />
 
 @endsection
 

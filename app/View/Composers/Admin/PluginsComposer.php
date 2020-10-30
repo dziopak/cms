@@ -2,18 +2,18 @@
 
 namespace App\View\Composers\Admin;
 
+use App\Http\Utilities\Admin\PluginUtilities;
+
 class PluginsComposer
 {
 
     private function index($request, $view)
     {
-        \App\Entities\Module::boot();
-        $modules['active'] = \App\Entities\Module::active();
-        $modules['inactive'] = \App\Entities\Module::inactive();
-
-
         return [
-            'modules' => $modules,
+            'modules' => [
+                'active' => PluginUtilities::active(),
+                'inactive' => PluginUtilities::inactive()
+            ],
             'table' => getData('Admin/Modules/Plugins/plugins_index_table')
         ];
     }

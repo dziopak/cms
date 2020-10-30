@@ -16,7 +16,7 @@
     {!! Form::model($page, ['method' => 'PATCH', 'action' => ['Admin\Modules\PagesController@update', $page->id], 'class' => 'w-100', 'files' => 'true']) !!}
 
     {{-- Validation report --}}
-    @include('admin.partials.validation')
+    <x-form-validation :errors="$errors" />
 
     {{-- Hooks --}}
     @hook('page_edit_before')

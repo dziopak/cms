@@ -52,6 +52,6 @@
 
 @section('content-right')
     <x-wrapper title="admin/users.recent_actions">
-        @include('admin.partials.logs')
+        <x-logs :data="$logs" />
     </x-wrapper>
 @endsection

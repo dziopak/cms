@@ -21,7 +21,7 @@
 
 
         {{-- Validation report --}}
-        @include('admin.partials.validation')
+        <x-form-validation :errors="$errors" />
 
         {{-- Display form --}}
         <x-form-fields :fields="$form['left']" />
@@ -39,7 +39,7 @@
 
 
         {{-- Validation report --}}
-        @include('admin.partials.validation')
+        <x-form-validation :errors="$errors" />
 
         {{-- Display form --}}
         <x-form-fields :fields="$form['right']" />

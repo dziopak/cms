@@ -11,7 +11,7 @@ class Table extends Component
     public $filters, $controls, $actions, $mass;
     public $table_id, $form_id;
 
-    public function __construct($table, $fields, $filters = true, $controls = true, $actions = true, $mass = true, $form = true, $endpoint = null, $table_id = null, $form_id = null)
+    public function __construct($table, $fields, $filters = true, $controls = true, $actions = true, $mass = true, $form = true, $endpoint = null, $tableId = null, $formId = null)
     {
         $this->table = $table;
         $this->fields = $fields;
@@ -19,8 +19,8 @@ class Table extends Component
         $this->form = $form;
         $this->endpoint = $endpoint;
 
-        $this->table_id = $table_id;
-        $this->form_id = $form_id;
+        $this->table_id = $tableId;
+        $this->form_id = $formId;
 
         $this->actions = $actions;
         $this->filters = $filters;

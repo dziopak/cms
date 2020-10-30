@@ -19,7 +19,7 @@
             <div id="admin-main" class="col w-100 overflow-hidden">
 
                 <!-- Top navigation bar -->
-                @include('admin.partials.top-nav')
+                @include('admin.partials.top_bar.top-nav')
 
                 <div id="module" class="row py-3 pr-3">
                     <!-- Action alert -->

@@ -74,26 +74,3 @@ function getLayout($layout)
 
     return $res;
 }
-
-
-// TO DO //
-// MOVE TO PROPER FILE //
-function getUrl($id, $type)
-{
-    $url = '';
-    switch ($type) {
-
-        case 'page':
-            $url = route('front.pages.show', $id);
-            break;
-
-        case 'post':
-            $url = route('front.posts.show', $id);
-            break;
-
-        default:
-            $url = 'Not ready yet.';
-            break;
-    }
-    return $url;
-}

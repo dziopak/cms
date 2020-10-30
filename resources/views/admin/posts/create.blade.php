@@ -16,7 +16,7 @@
     {!! Form::open(['method' => 'POST', 'action' => 'Admin\Modules\PostsController@store', 'class' => 'w-100', 'files' => 'true']) !!}
 
     {{-- Validation report --}}
-    @include('admin.partials.validation')
+    <x-form-validation :errors="$errors" />
 
     {{-- Hooks --}}
     @hook('post_edit_before')
