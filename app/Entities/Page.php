@@ -4,9 +4,13 @@ namespace App\Entities;
 
 use Rennokki\QueryCache\Traits\QueryCacheable;
 use Illuminate\Database\Eloquent\Model;
+
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
+
 use App\Traits\Sluggable;
 
-class Page extends Model
+class Page extends Model implements Searchable
 {
 
     use Sluggable;
@@ -46,5 +50,14 @@ class Page extends Model
         } else {
             $query->orderByDesc('id');
         }
+    }
+
+    public function getSearchResult(): SearchResult
+    {
+        return new SearchResult(
+            $this,
+            $this->name,
+            route('admin.pages.edit', $this->id)
+        );
     }
 }

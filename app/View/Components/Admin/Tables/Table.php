@@ -11,7 +11,7 @@ class Table extends Component
     public $filters, $controls, $actions, $mass;
     public $table_id, $form_id;
 
-    public function __construct($table, $fields, $filters = true, $controls = true, $actions = true, $mass = true, $form = true, $endpoint = null, $tableId = null, $formId = null)
+    public function __construct($table, $fields, $filters = true, $controls = true, $actions = true, $mass = true, $form = true, $endpoint = null, $tableId = null, $formId = null, $type = 'default')
     {
         $this->table = $table;
         $this->fields = $fields;
@@ -26,6 +26,8 @@ class Table extends Component
         $this->filters = $filters;
         $this->mass = $mass;
 
+        $this->type = $type;
+
         if (!empty($controls) && $controls !== true) {
             $this->actions = false;
             $this->filters = false;
@@ -37,6 +39,6 @@ class Table extends Component
 
     public function render()
     {
-        return view('admin.components.tables.default');
+        return view('admin.components.tables.' . $this->type . '.table');
     }
 }

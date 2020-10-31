@@ -44,6 +44,18 @@ div#module {
   text-align: right;
 }
 
+#admin-page .table-plain tr td,
+#admin-page .table-plain tr th {
+  text-align: left;
+}
+
+#admin-page .table-plain tr td:first-child,
+#admin-page .table-plain tr td:last-child,
+#admin-page .table-plain tr th:first-child,
+#admin-page .table-plain tr th:last-child {
+  text-align: left;
+}
+
 #admin-page .table .btn {
   transition: all 0.1s linear;
 }

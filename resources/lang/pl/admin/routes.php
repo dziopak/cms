@@ -10,6 +10,7 @@ return [
     "addons" => "Dodatki",
     "media" => "Media",
     "settings" => "Ustawienia",
+    "search" => "Wyszukiwanie",
 
     "logs" => "Logi systemowe",
     "menus" => "Menu",

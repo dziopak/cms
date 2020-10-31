@@ -11,6 +11,5 @@
                 <th class="text-right">{{ __('admin/general.actions') }}</th>
             @endif
         @endif
-
     </tr>
 </thead>

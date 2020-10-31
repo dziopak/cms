@@ -14,8 +14,10 @@ use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Rennokki\QueryCache\Traits\QueryCacheable;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
 
-class User extends Authenticatable implements JWTSubject
+class User extends Authenticatable implements JWTSubject, Searchable
 {
 
     use Notifiable;
@@ -144,5 +146,14 @@ class User extends Authenticatable implements JWTSubject
         } else {
             $query->orderByDesc('id');
         }
+    }
+
+    public function getSearchResult(): SearchResult
+    {
+        return new SearchResult(
+            $this,
+            $this->name,
+            route('admin.users.edit', $this->id)
+        );
     }
 }

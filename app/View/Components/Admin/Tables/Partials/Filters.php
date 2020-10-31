@@ -8,16 +8,18 @@ class Filters extends Component
 {
 
     public $sort;
+    public $type;
 
 
-    public function __construct($sort)
+    public function __construct($sort = null, $type = "default")
     {
         $this->sort = $sort;
+        $this->type = $type;
     }
 
 
     public function render()
     {
-        return view('admin.components.tables.partials.filters');
+        return view('admin.components.tables.' . $this->type . '.partials.filters');
     }
 }

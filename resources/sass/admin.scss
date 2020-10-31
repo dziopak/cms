@@ -46,6 +46,18 @@ div#module {
             }
         }
 
+        &-plain {
+            tr td,
+            tr th {
+                text-align: left;
+
+                &:first-child,
+                &:last-child {
+                    text-align: left;
+                }
+            }
+        }
+
         .btn {
             transition: all 0.1s linear;
 

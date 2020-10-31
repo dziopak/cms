@@ -10,6 +10,7 @@ return [
     "addons" => "Addons",
     "media" => "Media",
     "settings" => "Settings",
+    "search" => "Search",
 
     "logs" => "System logs",
     "menus" => "Menus",

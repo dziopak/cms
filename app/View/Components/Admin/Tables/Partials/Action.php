@@ -8,16 +8,18 @@ class Action extends Component
 {
 
     public $key;
+    public $type;
 
 
-    public function __construct($key)
+    public function __construct($key, $type = "default")
     {
         $this->key = $key;
+        $this->type = $type;
     }
 
 
     public function render()
     {
-        return view('admin.components.tables.partials.action');
+        return view('admin.components.tables.' . $this->type . '.partials.action');
     }
 }

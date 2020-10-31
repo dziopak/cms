@@ -5,8 +5,10 @@ namespace App\Entities;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\Sluggable;
 use Rennokki\QueryCache\Traits\QueryCacheable;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
 
-class Post extends Model
+class Post extends Model implements Searchable
 {
     use Sluggable;
     use QueryCacheable;
@@ -17,20 +19,24 @@ class Post extends Model
     public $cacheFor = 3600;
     protected static $flushCacheOnUpdate = true;
 
+
     public function author()
     {
         return $this->belongsTo('App\Entities\User', 'user_id');
     }
+
 
     public function thumbnail()
     {
         return $this->belongsTo('App\Entities\File', 'file_id');
     }
 
+
     public function category()
     {
         return $this->belongsTo('App\Entities\PostCategory', 'category_id');
     }
+
 
     public function scopeFilter($query, $request)
     {
@@ -46,5 +52,15 @@ class Post extends Model
             !empty($request->get('sort_order')) && $request->get('sort_order') === 'desc' ?
                 $query->orderByDesc($request->get('sort_by')) : $query->orderBy($request->get('sort_by'));
         }
+    }
+
+
+    public function getSearchResult(): SearchResult
+    {
+        return new SearchResult(
+            $this,
+            $this->name,
+            route('admin.posts.edit', $this->id)
+        );
     }
 }
