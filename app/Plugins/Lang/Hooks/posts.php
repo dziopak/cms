@@ -3,7 +3,7 @@
 use App\Http\Utilities\Admin\PluginUtilities;
 
 // Form hooks
-Hook::listen('postsFormFields', function ($callback, $output, $form) use ($langs) {
+Hook::listen('postsFormFields', function ($callback, $output, $form) {
     empty($output) ? $output = $form : null;
 
     $output['right']['name_row']['items']['name']['container_class'] .= ' lang lang_origin';
@@ -13,7 +13,7 @@ Hook::listen('postsFormFields', function ($callback, $output, $form) use ($langs
     $output['right']['meta_title_row']['items']['meta_title']['container_class'] .= ' lang lang_origin';
     $output['right']['meta_description_row']['items']['meta_description']['container_class'] .= ' lang lang_origin';
 
-    foreach ($langs as $lang) {
+    foreach ($this->langs as $lang) {
         $tag = $lang->lang_tag;
 
         // Name fields
@@ -44,10 +44,10 @@ Hook::listen('postsFormFields', function ($callback, $output, $form) use ($langs
 }, 10);
 
 //Validation hooks
-Hook::listen('adminPostsValidation', function ($callback, $output, $validationFields) use ($langs) {
+Hook::listen('adminPostsValidation', function ($callback, $output, $validationFields) {
     empty($output) ? $output = $validationFields : null;
 
-    foreach ($langs as $lang) {
+    foreach ($this->langs as $lang) {
         $output['name_' . $lang->lang_tag] = 'required|string|max:255';
         $output['excerpt_' . $lang->lang_tag] = 'required|string|max:255';
         $output['slug_' . $lang->lang_tag] = 'required|string|max:255|unique:posts';
@@ -58,10 +58,10 @@ Hook::listen('adminPostsValidation', function ($callback, $output, $validationFi
 }, 10);
 
 
-Hook::listen('apiPostsStoreValidation', function ($callback, $output, $validationFields) use ($langs) {
+Hook::listen('apiPostsStoreValidation', function ($callback, $output, $validationFields) {
     empty($output) ? $output = $validationFields : null;
 
-    foreach ($langs as $lang) {
+    foreach ($this->langs as $lang) {
         $output['name_' . $lang->lang_tag] = 'required|string|max:255';
         $output['excerpt_' . $lang->lang_tag] = 'required|string|max:255';
         $output['slug_' . $lang->lang_tag] = 'required|string|max:255|unique:posts';
@@ -72,10 +72,10 @@ Hook::listen('apiPostsStoreValidation', function ($callback, $output, $validatio
 }, 10);
 
 
-Hook::listen('apiPostsUpdateValidation', function ($callback, $output, $validationFields) use ($langs) {
+Hook::listen('apiPostsUpdateValidation', function ($callback, $output, $validationFields) {
     empty($output) ? $output = $validationFields : null;
 
-    foreach ($langs as $lang) {
+    foreach ($this->langs as $lang) {
         $output['name_' . $lang->lang_tag] = 'string|max:255';
         $output['excerpt_' . $lang->lang_tag] = 'string|max:255';
         $output['slug_' . $lang->lang_tag] = 'string|max:255|unique:posts';
@@ -87,10 +87,10 @@ Hook::listen('apiPostsUpdateValidation', function ($callback, $output, $validati
 
 
 //Other hooks
-Hook::listen('apiPostFindSelector', function ($callback, $output, $post, $slug) use ($langs) {
+Hook::listen('apiPostFindSelector', function ($callback, $output, $post, $slug) {
     empty($output) ? $output = $post : null;
 
-    foreach ($langs as $lang) {
+    foreach ($this->langs as $lang) {
         $output = $output->orWhere(['slug_' . $lang->lang_tag => $slug]);
     }
 
@@ -99,10 +99,10 @@ Hook::listen('apiPostFindSelector', function ($callback, $output, $post, $slug) 
 
 
 // Resource Hooks
-// Hook::listen('apiPostResource', function ($callback, $output, $fields, $model) use ($langs) {
+// Hook::listen('apiPostResource', function ($callback, $output, $fields, $model)  {
 //     empty($output) ? $output = $fields : null;
 
-//     foreach ($langs as $lang) {
+//     foreach ($this->langs as $lang) {
 //         $tag = $lang->lang_tag;
 
 //         $output['name_' . $tag] = $model['name_' . $tag];

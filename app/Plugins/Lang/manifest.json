@@ -1,7 +1,7 @@
 {
     "name": "Entity Translations",
     "slug": "lang",
-    "active": false,
+    "active": true,
     "id": "1",
     "version": "1.0"
 }

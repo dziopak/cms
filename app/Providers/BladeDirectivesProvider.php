@@ -45,6 +45,10 @@ class BladeDirectivesProvider extends ServiceProvider
         // Other
         'logs' => \App\View\Components\Admin\Logs\LogList::class,
 
+        // Other
+        'user-profile' => \App\View\Components\Admin\Other\UserProfile::class,
+        'crumb' => \App\View\Components\Admin\Other\Breadcrumb::class,
+
     ];
 
 

@@ -59,6 +59,7 @@
             "app/Helpers/BlockHelpers.php",
             "app/Helpers/StringHelpers.php",
             "app/Helpers/DataArrays.php",
+            "app/Helpers/FileSystem.php",
             "app/Helpers/ArrayHelpers.php",
             "app/Helpers/DBHelpers.php",
             "app/Helpers/ThemeHelpers.php",

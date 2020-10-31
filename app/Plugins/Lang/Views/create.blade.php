@@ -2,65 +2,25 @@
 
 @section('breadcrumbs')
     <ul>
-        {{-- <li><a href="{{route('admin.dashboard.index')}}">Admin</a></li>
-        <li><a href="{{route('admin.plugins.index')}}">Modules</a></li>
-        <li><a href="{{route('admin.plugins.lang.index')}}">Custom langs</a></li>
-        <li>Create</li> --}}
+        <x-crumb route="admin.dashboard.index" name="admin/routes.admin" />
+        <x-crumb route="admin.plugins.index" name="admin/routes.modules" />
+        <x-crumb route="Lang::index" name="Lang" />
+        <x-crumb name="admin/routes.create" />
     </ul>
 @endsection
-
-@php
-    $form = [
-        [
-            'class' => 'form-group row',
-            'items' => [
-                'name' => [
-                    'type' => 'text',
-                    'label' => 'Language name',
-                    'required' => true,
-                    'value' => null,
-                    'class' => ''
-                ],
-            ],
-        ],
-        [
-            'class' => 'form-group row',
-            'items' => [
-                'origin_name' => [
-                    'type' => 'text',
-                    'label' => 'Origin name',
-                    'required' => true,
-                    'value' => null,
-                    'class' => ''
-                ],
-            ],
-        ],
-        [
-            'class' => 'form-group row',
-            'items' => [
-                'lang_tag' => [
-                    'type' => 'text',
-                    'label' => 'Language tag',
-                    'required' => true,
-                    'value' => null,
-                    'class' => ''
-                ],
-            ],
-        ],
-    ];
-@endphp
 
 @section('module-content')
     <x-wrapper title="Fill lang data">
         {!! Form::open(['method' => 'POST', 'route' => 'Lang::store', 'class' => 'w-100', 'files' => 'true']) !!}
 
+            {{-- Validation report --}}
             <x-form-validation :errors="$errors" />
 
+            {{-- Display form --}}
             <x-form-fields :fields="$form" />
 
-            <div class="form-group">
-                {!! Form::submit('Update', ['class' => 'btn btn-success']) !!}
-            </div>
+            {{-- Save button --}}
+            <x-update-button />
 
         {!! Form::close() !!}
     </x-wrapper>

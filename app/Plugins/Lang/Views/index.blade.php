@@ -2,10 +2,10 @@
 
 @section('breadcrumbs')
     <ul>
-        <li><a href="{{route('admin.dashboard.index')}}">Admin</a></li>
-        <li><a href="{{route('admin.plugins.index')}}">Modules</a></li>
-        <li>Custom langs</li>
-        <li>List all</li>
+        <x-crumb route="admin.dashboard.index" name="admin/routes.admin" />
+        <x-crumb route="admin.plugins.index" name="admin/routes.modules" />
+        <x-crumb route="Lang::index" name="Lang" />
+        <x-crumb name="admin/routes.list" />
     </ul>
 @endsection
 

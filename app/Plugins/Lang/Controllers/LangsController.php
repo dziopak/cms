@@ -16,13 +16,15 @@ class LangsController extends Controller
     {
         $langs = Lang::all();
         $table = getModuleData('lang_index_table', 'Lang');
+
         return view('Lang::index', compact('langs', 'table'));
     }
 
 
     public function create()
     {
-        return view('Lang::create');
+        $form = getModuleData('lang_form', 'lang');
+        return view('Lang::create', compact('form'));
     }
 
 
@@ -38,8 +40,9 @@ class LangsController extends Controller
 
     public function edit($lang_id)
     {
+        $form = getModuleData('lang_form', 'lang');
         $lang = Lang::findOrFail($lang_id);
-        return view('Lang::edit', compact('lang'));
+        return view('Lang::edit', compact('lang', 'form'));
     }
 
 

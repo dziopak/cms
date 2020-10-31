@@ -4,14 +4,14 @@
 
 use App\Http\Utilities\Admin\PluginUtilities;
 
-Hook::listen('pluginPortfolioFormFields', function ($callback, $output, $form) use ($langs) {
+Hook::listen('pluginPortfolioFormFields', function ($callback, $output, $form) {
 
     empty($output) ? $output = $form : null;
 
     $output['project_content']['intro_row']['items']['intro']['container_class'] .= ' lang lang_origin';
     $output['project_content']['description_row']['items']['description']['container_class'] .= ' lang lang_origin';
 
-    foreach ($langs as $lang) {
+    foreach ($this->langs as $lang) {
         $tag = $lang->lang_tag;
 
         // Intro fields
@@ -27,10 +27,10 @@ Hook::listen('pluginPortfolioFormFields', function ($callback, $output, $form) u
 
 
 // Resource Hooks
-Hook::listen('pluginPortfolioItemResource', function ($callback, $output, $fields, $model) use ($langs) {
+Hook::listen('pluginPortfolioItemResource', function ($callback, $output, $fields, $model) {
     empty($output) ? $output = $fields : null;
 
-    foreach ($langs as $lang) {
+    foreach ($this->langs as $lang) {
         $tag = $lang->lang_tag;
 
         $output['intro_' . $tag] = $model['intro_' . $tag];

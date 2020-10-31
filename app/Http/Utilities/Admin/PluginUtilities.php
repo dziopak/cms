@@ -2,9 +2,6 @@
 
 namespace App\Http\Utilities\Admin;
 
-use Hook;
-use Illuminate\Support\Facades\Route;
-
 class PluginUtilities
 {
 
@@ -92,32 +89,44 @@ class PluginUtilities
         return false;
     }
 
+    static function publishCSS($slug)
+    {
+        $css_path = base_path('app/Plugins/' . $slug . '/Assets/CSS');
+        $css = scandir($css_path);
 
-    // public static function registerPlugin($slug)
-    // {
-    //     $manifest = PluginUtilities::readManifest($slug);
-    //     Hook::listen('activePlugins', function ($callback, $output, $plugin) use ($manifest) {
-    //         if (empty($output) || !is_array($output)) $output = [];
+        foreach ($css as $file) {
+            if (is($file, 'css')) {
+                copy_to(
+                    $css_path . '/' . $file,
+                    public_path(strtolower('css\\' . $slug . '\\' . pathinfo($file)['basename']))
+                );
+            }
+        }
 
-    //         $plugin = new \App\Entities\Plugin;
-    //         $plugin->slug = $manifest['slug'];
-    //         $plugin->id = $manifest['id'];
-    //         $plugin->name = $manifest['name'];
-    //         $plugin->description = $manifest['description'];
+        return true;
+    }
 
-    //         $output[] = $plugin;
+    static function publishJS($slug)
+    {
+        $js_path = base_path('app/Plugins/' . $slug . '/Assets/JS');
+        $js = scandir($js_path);
 
-    //         return $output;
-    //     }, $manifest['id']);
-    // }
+        foreach ($js as $file) {
+            if (is($file, 'js')) {
+                copy_to(
+                    $js_path . '/' . $file,
+                    public_path(strtolower('js\\' . $slug . '\\' . pathinfo($file)['basename']))
+                );
+            }
+        }
 
+        return true;
+    }
 
-    // public static function registerRoutes($slug, $controller = null)
-    // {
-    //     if ($controller === null) $controller = ucfirst($slug) . 'Controller';
-
-    //     Route::group(['prefix' => 'admin/plugins/' . $slug, 'as' => 'admin.plugins.' . $slug . '.', 'middleware' => 'access:ADMIN_VIEW'], function () use ($slug, $controller) {
-    //         Route::get('/', $controller . '@index')->name('index');
-    //     });
-    // }
+    public static function publishAssets($slug)
+    {
+        $slug = ucfirst($slug);
+        self::publishCSS($slug);
+        self::publishJS($slug);
+    }
 }

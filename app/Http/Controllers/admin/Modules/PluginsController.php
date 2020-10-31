@@ -28,6 +28,8 @@ class PluginsController extends Controller
             return redirect()->back()->with('error', 'Couldn\'t activate selected plugin.');
         }
 
+        PluginUtilities::publishAssets($slug);
+
         return redirect()->back()->with('crud', __('admin/messages.plugins.enable.success'));
     }
 }

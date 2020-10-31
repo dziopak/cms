@@ -12,20 +12,9 @@
 
 @section('content-left')
     <x-wrapper title="admin/users.disable_top_title">
-        @if ($user->avatar)
-            <img class="rounded-circle mr-4 float-left" width="100" src="{{ getPublicPath() }}/images/{{$user->photo->path ?? 'assets/no-avatar.png'}}">
-        @endif
 
-        <div style="display: inline-block;">
-            <strong>{{'@'.$user->name}}</strong><br/>
+        <x-user-profile :user="$user" />
 
-            @if ($user->first_name && $user->last_name)
-                <span>{{$user->first_name.' '.$user->last_name}}</span><br/>
-            @endif
-
-            {{ __('admin/general.created_at') }} {{$user->created_at}}<br/>
-            <small>{{$user->role->name}}</small>
-        </div>
     </x-wrapper>
 
     <x-wrapper title="admin/users.disable_bottom_title">

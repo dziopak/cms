@@ -2,13 +2,13 @@
 
 use App\Http\Utilities\Admin\PluginUtilities;
 
-// Hook::listen('pluginTestimonialsFormFields', function ($callback, $output, $form) use ($langs) {
+// Hook::listen('pluginTestimonialsFormFields', function ($callback, $output, $form)  {
 //     empty($output) ? $output = $form : null;
 
 //     $output['basic_data']['author_row']['items']['author_title']['container_class'] .= ' lang lang_origin';
 //     $output['basic_data']['content_row']['items']['content']['container_class'] .= ' lang lang_origin';
 
-//     foreach ($langs as $lang) {
+//     foreach ($this->langs as $lang) {
 //         $tag = $lang->lang_tag;
 
 //         // Name fields
@@ -22,10 +22,10 @@ use App\Http\Utilities\Admin\PluginUtilities;
 //     return $output;
 // }, PluginUtilities::getID('lang'));
 
-// Hook::listen('pluginTestimonialResource', function ($callback, $output, $fields, $model) use ($langs) {
+// Hook::listen('pluginTestimonialResource', function ($callback, $output, $fields, $model)  {
 //     empty($output) ? $output = $fields : null;
 
-//     foreach ($langs as $lang) {
+//     foreach ($this->langs as $lang) {
 //         $tag = $lang->lang_tag;
 
 //         $output = array_merge($output, [

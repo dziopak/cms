@@ -12,27 +12,12 @@
 
 @section('content-left')
     {!! Form::model($user, ['method' => 'PATCH', 'action' => ['Admin\Modules\UsersController@update', $user->id], 'files' => 'true']) !!}
+
         <x-wrapper title="admin/users.edit_right_title">
 
-            <div class="row">
-                <div class="col" style="max-width: 200px;">
+            {{-- Display profile --}}
+            <x-user-profile :user="$user" />
 
-                    {{-- Display avatar --}}
-                    <x-form-fields :fields="$form['profile']['avatar']" />
-
-                </div>
-
-                <div class="col" style="display: inline-block;">
-                    <strong>{{'@'.$user->name}}</strong><br/>
-
-                    @if ($user->first_name && $user->last_name)
-                        <span>{{$user->first_name.' '.$user->last_name}}</span><br/>
-                    @endif
-
-                    {{ __('admin/general.created_at') }} {{$user->created_at}}<br/>
-                    <small>{{$user->role->name}}</small>
-                </div>
-            </div>
         </x-wrapper>
 
         <x-wrapper title="admin/users.edit_left_title">
@@ -43,11 +28,11 @@
             {{-- Display form --}}
             <x-form-fields :fields="$form['basic_data']" />
 
+            {{-- Hidden fields --}}
+            <input type="hidden" value="{{$user->id}}" name="user_id" />
+
             {{-- Save button --}}
-            <div class="form-group">
-                <input type="hidden" value="{{$user->id}}" name="user_id" />
-                {!! Form::button('<i class="fa fa-home"></i>'.' '.__('admin/general.update_button'), ['class' => 'btn btn-success', 'type' => 'submit']) !!}
-            </div>
+            <x-update-button />
 
         </x-wrapper>
     {!! Form::close() !!}
@@ -55,13 +40,6 @@
 
 
 @section('content-right')
-
-    <x-wrapper title="admin/users.recent_actions">
-
-        {{-- Display logs --}}
-        <x-logs :data="$logs" />
-
-    </x-wrapper>
 
     <x-wrapper title="admin/users.change_password">
 
@@ -76,6 +54,14 @@
 
         {{-- Close the form --}}
         {!! Form::close() !!}
+
+    </x-wrapper>
+
+
+    <x-wrapper title="admin/users.recent_actions">
+
+        {{-- Display logs --}}
+        <x-logs :data="$logs" />
 
     </x-wrapper>
 

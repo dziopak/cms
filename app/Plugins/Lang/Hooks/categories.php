@@ -1,14 +1,14 @@
 <?php
 
 // Form hooks
-Hook::listen('pageCategoriesFormFields', function ($callback, $output, $form) use ($langs) {
+Hook::listen('pageCategoriesFormFields', function ($callback, $output, $form) {
     empty($output) ? $output = $form : null;
 
     $output['left']['name_row']['items']['name']['container_class'] .= ' lang lang_origin';
     $output['left']['slug_category_row']['items']['slug']['container_class'] .= ' lang lang_origin';
     $output['left']['description_row']['items']['description']['container_class'] .= ' lang lang_origin';
 
-    foreach ($langs as $lang) {
+    foreach ($this->langs as $lang) {
         $tag = $lang->lang_tag;
 
         // Name fields
@@ -27,14 +27,14 @@ Hook::listen('pageCategoriesFormFields', function ($callback, $output, $form) us
 }, 10);
 
 
-Hook::listen('postCategoriesFormFields', function ($callback, $output, $form) use ($langs) {
+Hook::listen('postCategoriesFormFields', function ($callback, $output, $form) {
     empty($output) ? $output = $form : null;
 
     $output['left']['name_row']['items']['name']['container_class'] .= ' lang lang_origin';
     $output['left']['slug_category_row']['items']['slug']['container_class'] .= ' lang lang_origin';
     $output['left']['description_row']['items']['description']['container_class'] .= ' lang lang_origin';
 
-    foreach ($langs as $lang) {
+    foreach ($this->langs as $lang) {
         $tag = $lang->lang_tag;
 
         // Name fields
@@ -54,10 +54,10 @@ Hook::listen('postCategoriesFormFields', function ($callback, $output, $form) us
 
 
 // Other hooks
-Hook::listen('apiPageCategoriesStoreValidation', function ($callback, $output, $validationFields) use ($langs) {
+Hook::listen('apiPageCategoriesStoreValidation', function ($callback, $output, $validationFields) {
     empty($output) ? $output = $validationFields : null;
 
-    foreach ($langs as $lang) {
+    foreach ($this->langs as $lang) {
         $output['name_' . $lang->lang_tag] = 'required|string|max:255';
         $output['description_' . $lang->lang_tag] = 'required|string|max:255';
         $output['slug_' . $lang->lang_tag] = 'required|string|max:255|unique:pages';
@@ -67,10 +67,10 @@ Hook::listen('apiPageCategoriesStoreValidation', function ($callback, $output, $
 }, 10);
 
 
-Hook::listen('apiPageCategoriesUpdateValidation', function ($callback, $output, $validationFields) use ($langs) {
+Hook::listen('apiPageCategoriesUpdateValidation', function ($callback, $output, $validationFields) {
     empty($output) ? $output = $validationFields : null;
 
-    foreach ($langs as $lang) {
+    foreach ($this->langs as $lang) {
         $output['name_' . $lang->lang_tag] = 'string|max:255';
         $output['description_' . $lang->lang_tag] = 'string|max:255';
         $output['slug_' . $lang->lang_tag] = 'string|max:255|unique:pages';
@@ -79,10 +79,10 @@ Hook::listen('apiPageCategoriesUpdateValidation', function ($callback, $output, 
     return $output;
 }, 10);
 
-Hook::listen('adminPostCategoriesValidation', function ($callback, $output, $validationFields) use ($langs) {
+Hook::listen('adminPostCategoriesValidation', function ($callback, $output, $validationFields) {
     empty($output) ? $output = $validationFields : null;
 
-    foreach ($langs as $lang) {
+    foreach ($this->langs as $lang) {
         $output['name_' . $lang->lang_tag] = 'string|max:255';
         $output['description_' . $lang->lang_tag] = 'string|max:255';
         $output['slug_' . $lang->lang_tag] = 'string|max:255|unique:posts';
@@ -91,10 +91,10 @@ Hook::listen('adminPostCategoriesValidation', function ($callback, $output, $val
     return $output;
 }, 10);
 
-Hook::listen('adminPageCategoriesValidation', function ($callback, $output, $validationFields) use ($langs) {
+Hook::listen('adminPageCategoriesValidation', function ($callback, $output, $validationFields) {
     empty($output) ? $output = $validationFields : null;
 
-    foreach ($langs as $lang) {
+    foreach ($this->langs as $lang) {
         $output['name_' . $lang->lang_tag] = 'string|max:255';
         $output['description_' . $lang->lang_tag] = 'string|max:255';
         $output['slug_' . $lang->lang_tag] = 'string|max:255|unique:pages';
@@ -106,10 +106,10 @@ Hook::listen('adminPageCategoriesValidation', function ($callback, $output, $val
 
 
 
-Hook::listen('apiPageCategoriesFindSelector', function ($callback, $output, $category, $slug) use ($langs) {
+Hook::listen('apiPageCategoriesFindSelector', function ($callback, $output, $category, $slug) {
     empty($output) ? $output = $category : null;
 
-    foreach ($langs as $lang) {
+    foreach ($this->langs as $lang) {
         $output = $output->orWhere(['slug_' . $lang->lang_tag => $slug]);
     }
 
@@ -117,10 +117,10 @@ Hook::listen('apiPageCategoriesFindSelector', function ($callback, $output, $cat
 }, 10);
 
 
-Hook::listen('apiPostCategoriesStoreValidation', function ($callback, $output, $validationFields) use ($langs) {
+Hook::listen('apiPostCategoriesStoreValidation', function ($callback, $output, $validationFields) {
     empty($output) ? $output = $validationFields : null;
 
-    foreach ($langs as $lang) {
+    foreach ($this->langs as $lang) {
         $output['name_' . $lang->lang_tag] = 'required|string|max:255';
         $output['description_' . $lang->lang_tag] = 'required|string|max:255';
         $output['slug_' . $lang->lang_tag] = 'required|string|max:255|unique:posts';
@@ -130,10 +130,10 @@ Hook::listen('apiPostCategoriesStoreValidation', function ($callback, $output, $
 }, 10);
 
 
-Hook::listen('apiPostCategoriesUpdateValidation', function ($callback, $output, $validationFields) use ($langs) {
+Hook::listen('apiPostCategoriesUpdateValidation', function ($callback, $output, $validationFields) {
     empty($output) ? $output = $validationFields : null;
 
-    foreach ($langs as $lang) {
+    foreach ($this->langs as $lang) {
         $output['name_' . $lang->lang_tag] = 'string|max:255';
         $output['description_' . $lang->lang_tag] = 'string|max:255';
         $output['slug_' . $lang->lang_tag] = 'string|max:255|unique:posts';
@@ -143,10 +143,10 @@ Hook::listen('apiPostCategoriesUpdateValidation', function ($callback, $output, 
 }, 10);
 
 
-Hook::listen('apiPostCategoriesFindSelector', function ($callback, $output, $category, $slug) use ($langs) {
+Hook::listen('apiPostCategoriesFindSelector', function ($callback, $output, $category, $slug) {
     empty($output) ? $output = $category : null;
 
-    foreach ($langs as $lang) {
+    foreach ($this->langs as $lang) {
         $output = $output->orWhere(['slug_' . $lang->lang_tag => $slug]);
     }
 

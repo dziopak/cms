@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use App\Http\Utilities\Admin\PluginUtilities;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Route;
 
 class PluginsServiceProvider extends ServiceProvider
 {
@@ -15,12 +14,15 @@ class PluginsServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        $dir = 'app\Plugins';
-
-        $plugins = PluginUtilities::readAllManifests();
-        foreach ($plugins as $plugin) {
+        foreach (PluginUtilities::readAllManifests() as $plugin) {
             if ($plugin['active'] === true && is_file(base_path($plugin['boot'] . '.php'))) {
+
+                // Register boot provider
                 $this->app->register(ucfirst($plugin['boot']));
+
+                // Register lang namespace
+                $langPath = base_path(ucfirst($plugin['path']) . 'Translations');
+                \App::make('translator')->addNamespace(ucfirst($plugin['slug']), $langPath);
             }
         }
     }

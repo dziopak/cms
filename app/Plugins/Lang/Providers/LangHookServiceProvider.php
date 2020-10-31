@@ -14,9 +14,11 @@ class LangHookServiceProvider extends ServiceProvider
         'categories'
     ];
 
+    private $langs = [];
+
     private function registerHooks()
     {
-        $langs = Lang::all();
+        $this->langs = Lang::all();
 
         foreach ($this->hooks as $hooks) {
             require base_path('app/Plugins/Lang/Hooks/' . $hooks . '.php');
@@ -44,17 +46,20 @@ class LangHookServiceProvider extends ServiceProvider
             return $output;
         }, 10);
 
+
         Hook::listen('template.adminStylesheets', function ($callback, $output, $variables) {
-            $html = '<link href="' . asset('public/css/lang.css') . '" rel="stylesheet">';
+            $html = '<link href="/css/lang/lang.css" rel="stylesheet">';
             !empty($output) ? $output .= $html : $output = $html;
             return $output;
         });
 
+
         Hook::listen('template.adminScriptsDefer', function ($callback, $output, $variables) {
-            $html = '<script src="' . asset('js/langs.js') . '"></script>';
+            $html = '<script src="/js/lang/lang.js"></script>';
             !empty($output) ? $output .= $html : $output = $html;
             return $output;
         });
+
 
         Hook::listen('template.adminInlineScripts', function ($callback, $output, $variables) use ($langs) {
             $html = '<div class="input-lang-switcher">';

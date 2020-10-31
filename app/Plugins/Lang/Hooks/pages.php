@@ -1,6 +1,6 @@
 <?php
 // Form hooks
-Hook::listen('pagesFormFields', function ($callback, $output, $form) use ($langs) {
+Hook::listen('pagesFormFields', function ($callback, $output, $form) {
     empty($output) ? $output = $form : null;
 
     $output['right']['name_row']['items']['name']['container_class'] .= ' lang lang_origin';
@@ -10,7 +10,7 @@ Hook::listen('pagesFormFields', function ($callback, $output, $form) use ($langs
     $output['right']['meta_title_row']['items']['meta_title']['container_class'] .= ' lang lang_origin';
     $output['right']['meta_description_row']['items']['meta_description']['container_class'] .= ' lang lang_origin';
 
-    foreach ($langs as $lang) {
+    foreach ($this->langs as $lang) {
         $tag = $lang->lang_tag;
 
         // Name fields
@@ -42,10 +42,10 @@ Hook::listen('pagesFormFields', function ($callback, $output, $form) use ($langs
 
 
 //Validation hooks
-Hook::listen('apiPagesStoreValidation', function ($callback, $output, $validationFields) use ($langs) {
+Hook::listen('apiPagesStoreValidation', function ($callback, $output, $validationFields) {
     empty($output) ? $output = $validationFields : null;
 
-    foreach ($langs as $lang) {
+    foreach ($this->langs as $lang) {
         $output['name_' . $lang->lang_tag] = 'required|string|max:255';
         $output['excerpt_' . $lang->lang_tag] = 'required|string|max:255';
         $output['slug_' . $lang->lang_tag] = 'required|string|max:255|unique:pages';
@@ -55,10 +55,10 @@ Hook::listen('apiPagesStoreValidation', function ($callback, $output, $validatio
     return $output;
 }, 10);
 
-Hook::listen('apiPagesUpdateValidation', function ($callback, $output, $validationFields) use ($langs) {
+Hook::listen('apiPagesUpdateValidation', function ($callback, $output, $validationFields) {
     empty($output) ? $output = $validationFields : null;
 
-    foreach ($langs as $lang) {
+    foreach ($this->langs as $lang) {
         $output['name_' . $lang->lang_tag] = 'string|max:255';
         $output['excerpt_' . $lang->lang_tag] = 'string|max:255';
         $output['slug_' . $lang->lang_tag] = 'string|max:255|unique:pages';
@@ -68,10 +68,10 @@ Hook::listen('apiPagesUpdateValidation', function ($callback, $output, $validati
     return $output;
 }, 10);
 
-Hook::listen('adminPagesValidation', function ($callback, $output, $validationFields) use ($langs) {
+Hook::listen('adminPagesValidation', function ($callback, $output, $validationFields) {
     empty($output) ? $output = $validationFields : null;
 
-    foreach ($langs as $lang) {
+    foreach ($this->langs as $lang) {
         $output['name_' . $lang->lang_tag] = 'string|max:255';
         $output['excerpt_' . $lang->lang_tag] = 'string|max:255';
         $output['slug_' . $lang->lang_tag] = 'string|max:255|unique:pages';
@@ -83,10 +83,10 @@ Hook::listen('adminPagesValidation', function ($callback, $output, $validationFi
 
 
 //Other hooks
-Hook::listen('apiPageFindSelector', function ($callback, $output, $page, $slug) use ($langs) {
+Hook::listen('apiPageFindSelector', function ($callback, $output, $page, $slug) {
     empty($output) ? $output = $page : null;
 
-    foreach ($langs as $lang) {
+    foreach ($this->langs as $lang) {
         $output = $output->orWhere(['slug_' . $lang->lang_tag => $slug]);
     }
 
