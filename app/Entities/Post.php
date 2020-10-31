@@ -4,13 +4,18 @@ namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\Sluggable;
-
+use Rennokki\QueryCache\Traits\QueryCacheable;
 
 class Post extends Model
 {
     use Sluggable;
+    use QueryCacheable;
+
     protected $guarded = ['id', 'post_id', 'thumbnail'];
     public $fire_events = true;
+
+    public $cacheFor = 3600;
+    protected static $flushCacheOnUpdate = true;
 
     public function author()
     {

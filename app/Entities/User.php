@@ -5,17 +5,23 @@ namespace App\Entities;
 use Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 
 use JWTAuth;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
+
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Rennokki\QueryCache\Traits\QueryCacheable;
 
 class User extends Authenticatable implements JWTSubject
 {
+
     use Notifiable;
+    use QueryCacheable;
+
+
     public $fire_events = true;
 
     protected $fillable = [
@@ -27,6 +33,9 @@ class User extends Authenticatable implements JWTSubject
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public $cacheFor = 3600;
+    protected static $flushCacheOnUpdate = true;
 
 
     public function role()

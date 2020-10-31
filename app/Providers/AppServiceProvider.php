@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Console\Commands\ModelMakeCommand;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Event;
 
 class AppServiceProvider extends ServiceProvider
 {

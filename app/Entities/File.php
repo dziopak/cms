@@ -2,34 +2,45 @@
 
 namespace App\Entities;
 
+use Rennokki\QueryCache\Traits\QueryCacheable;
 use App\Events\Files\FileDestroyEvent;
 use Illuminate\Database\Eloquent\Model;
 use App\Entities\Slider;
 
 class File extends Model
 {
+    use QueryCacheable;
+
+
+    public $cacheFor = 3600;
+    protected static $flushCacheOnUpdate = true;
     protected $table = "files";
     protected $fillable = ['type', 'path', 'name', 'description'];
+
 
     public function posts()
     {
         return $this->hasMany('\App\Entities\Post', 'file_id');
     }
 
+
     public function pages()
     {
         return $this->hasMany('\App\Entities\Page', 'file_id');
     }
+
 
     public function users()
     {
         return $this->hasMany('\App\Entities\User', 'avatar');
     }
 
+
     public function sliders()
     {
         return $this->belongsToMany(Slider::class);
     }
+
 
     public function getRelated()
     {
@@ -45,6 +56,7 @@ class File extends Model
         }
         return $related;
     }
+
 
     public function scopeFilter($query, $request)
     {
@@ -63,11 +75,13 @@ class File extends Model
         }
     }
 
+
     public function countRelated()
     {
         $count = $this->withCount('posts');
         return $count;
     }
+
 
     public static function boot()
     {

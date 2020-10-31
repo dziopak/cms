@@ -1,4 +1,5 @@
 <?php
+
 $table['active']['headers'] = [__('admin/plugins.name') => 'name', __('admin/plugins.description') => 'description'];
 $table['active']['data_types'] = ['active' => 'boolean'];
 $table['active']['actions'] = [
@@ -30,13 +31,7 @@ $table['inactive']['actions'] = [
         'class' => 'success',
         'access' => 'MODULE_EDIT',
         'iterator' => 'slug'
-    ],
-    // 'Delete' => [
-    //     'url' => ' {slug}::index ',
-    //     'class' => 'danger',
-    //     'access' => 'MODULE_EDIT',
-    //     'iterator' => 'id'
-    // ],
+    ]
 ];
 
 return $table;

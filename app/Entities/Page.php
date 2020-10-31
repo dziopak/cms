@@ -2,15 +2,19 @@
 
 namespace App\Entities;
 
+use Rennokki\QueryCache\Traits\QueryCacheable;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\Sluggable;
 
 class Page extends Model
 {
-    protected $guarded = ['id', 'page_id'];
-    public $fire_events = true;
 
     use Sluggable;
+    use QueryCacheable;
+
+    protected $guarded = ['id', 'page_id'];
+    public $fire_events = true, $cacheFor = 3600;
+    protected static $flushCacheOnUpdate = true;
 
     public function author()
     {

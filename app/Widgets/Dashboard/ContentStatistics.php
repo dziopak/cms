@@ -25,7 +25,7 @@ class ContentStatistics extends AbstractWidget
         'non-resizeable' => false,
         'id' => 'contentStatistics',
         'auto' => true,
-        'header' => 'Zawartość strony',
+        'header' => 'admin/widgets/content_statistics.title',
         'icon' => 'fa fas fa-book'
     ];
 

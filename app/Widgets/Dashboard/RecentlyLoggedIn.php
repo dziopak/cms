@@ -16,7 +16,7 @@ class RecentlyLoggedIn extends AbstractWidget
         'min-h' => '1',
         'id' => 'recentlyLoggedIn',
         'auto' => true,
-        'header' => 'Recent logins',
+        'header' => 'admin/widgets/recently_logged_in.title',
         'icon' => 'fa fas fa-user-circle'
     ];
 

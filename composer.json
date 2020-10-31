@@ -19,6 +19,7 @@
         "laravel/ui": "^3.0",
         "laravelcollective/html": "^6.0",
         "rachidlaasri/laravel-installer": "^4.0",
+        "rennokki/laravel-eloquent-query-cache": "^2.4",
         "spatie/laravel-query-builder": "^2.8",
         "tymon/jwt-auth": "dev-develop"
     },
@@ -29,6 +30,7 @@
         }
     ],
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.5",
         "barryvdh/laravel-ide-helper": "^2.6",
         "facade/ignition": "^2.3.6",
         "fzaninotto/faker": "^1.4",

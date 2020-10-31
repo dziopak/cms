@@ -3,11 +3,15 @@
 namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use Rennokki\QueryCache\Traits\QueryCacheable;
 
 class Menu extends Model
 {
+    use QueryCacheable;
+
     protected $guarded = ['items'];
-    public $timestamps = false;
+    public $timestamps = false, $cacheFor = 3600;
+    protected static $flushCacheOnUpdate = true;
 
     public function items()
     {

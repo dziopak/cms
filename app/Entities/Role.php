@@ -3,12 +3,18 @@
 namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use Rennokki\QueryCache\Traits\QueryCacheable;
 
 class Role extends Model
 {
+    use QueryCacheable;
+
     public $timestamps = false;
     protected $fillable = ['name', 'access', 'description'];
+
     public $fire_events = true;
+    public $cacheFor = 3600;
+    protected static $flushCacheOnUpdate = true;
 
     public static function get_all_roles()
     {

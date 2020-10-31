@@ -2,6 +2,7 @@
 
 namespace App\Entities;
 
+use Rennokki\QueryCache\Traits\QueryCacheable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Traits\Sluggable;
@@ -9,8 +10,13 @@ use App\Traits\Sluggable;
 class PostCategory extends Model
 {
     use Sluggable;
+    use QueryCacheable;
+
     protected $guarded = ['id', 'category_id', 'type'];
     public $fire_events;
+
+    public $cacheFor = 3600;
+    protected static $flushCacheOnUpdate = true;
 
     public function posts()
     {

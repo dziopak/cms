@@ -1,6 +1,7 @@
 <?php
-    return [
-        'posts' => 'Posts',
-        'pages' => 'Pages',
-        'users' => 'Users'
-    ];
+return [
+    'title' => 'Content statistics',
+    'posts' => 'Posts',
+    'pages' => 'Pages',
+    'users' => 'Users'
+];
