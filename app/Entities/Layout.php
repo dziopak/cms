@@ -19,4 +19,13 @@ class Layout extends Model
     {
         return Layout::select('id', 'name')->pluck('name', 'id');
     }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($layout) {
+            $layout->blocks()->delete();
+        });
+    }
 }

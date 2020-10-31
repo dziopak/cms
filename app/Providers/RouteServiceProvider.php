@@ -33,6 +33,10 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot();
+        Route::model('role_id', \App\Entities\Role::class);
+        Route::model('media', \App\Entities\File::class);
+        Route::model('media_id', \App\Entities\File::class);
+        Route::model('file_id', \App\Entities\File::class);
     }
 
 

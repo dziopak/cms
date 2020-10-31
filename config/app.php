@@ -176,6 +176,7 @@ return [
         */
         App\Providers\BladeDirectivesProvider::class,
         App\Providers\AppServiceProvider::class,
+        App\Providers\ViewServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,

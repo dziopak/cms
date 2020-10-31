@@ -32,33 +32,31 @@ class PostsController extends Controller
     }
 
 
-    public function edit($id)
+    public function edit(Post $post)
     {
         Auth::user()->hasAccessOrRedirect('POST_EDIT');
-        return view('admin.posts.edit', ['post_id' => $id]);
+        return view('admin.posts.edit', ['post' => $post]);
     }
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
         Auth::user()->hasAccessOrRedirect('POST_EDIT');
-        return PostEntity::update($id, $request);
+        return PostEntity::update($post, $request);
     }
 
 
-    public function delete($id)
+    public function delete(Post $post)
     {
         Auth::user()->hasAccessOrRedirect('POST_DELETE');
-        $post = Post::findOrFail($id);
-
         return view('admin.posts.delete', compact('post'));
     }
 
 
-    public function destroy($id)
+    public function destroy(Post $post)
     {
         Auth::user()->hasAccessOrRedirect('POST_DELETE');
-        return PostEntity::destroy($id);
+        return PostEntity::destroy($post);
     }
 
     public function mass(Request $request)

@@ -23,31 +23,24 @@ class FilesController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function show(File $file)
     {
-    }
-
-
-    public function show($id)
-    {
-        $id === "0" ?
+        $file->id === "0" ?
             $path = 'assets/no-thumbnail.png' :
-            $path = \App\Entities\File::findOrFail($id)->path;
+            $path = $file->path;
 
         return response()->json(['path' => $path]);
     }
 
 
-    public function edit($id)
+    public function edit(File $file)
     {
-        $file = File::findOrFail($id);
-        return view('admin.media.edit', compact('file'));
+        return view('admin.media.edit', ['file' => $file]);
     }
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request, File $file)
     {
-        $file = File::findOrFail($id);
         $file->update([
             'name' => $request->get('name'),
             'description' => $request->get('description')
@@ -57,17 +50,16 @@ class FilesController extends Controller
     }
 
 
-    public function delete($id)
+    public function delete(File $file)
     {
-        $file = \App\Entities\File::findOrFail($id);
         return view('admin.media.delete', compact('file'));
     }
 
 
-    public function destroy($id)
+    public function destroy(File $file)
     {
-        \App\Entities\File::findOrFail($id)->delete();
-        return response()->json(['message' => __('admin/messages.files.delete.success'), 'id' => $id], 200);
+        $file->delete();
+        return response()->json(['message' => __('admin/messages.files.delete.success'), 'id' => $file->id], 200);
     }
 
 
@@ -83,18 +75,15 @@ class FilesController extends Controller
 
         if (empty($data['mass_edit'])) {
             return redirect()->back()->with('error', __('admin/messages.files.mass.errors.no_files'));
-        } else {
-            switch ($data['mass_action']) {
-                case 'delete':
-                    \App\Entities\File::whereIn('id', $data['mass_edit'])->delete();
-                    return redirect()->back()->with('crud', __('admin/messages.files.mass.delete'));
-                    break;
-
-                default:
-                    return redirect()->back();
-                    break;
-            }
         }
+
+        switch ($data['mass_action']) {
+            case 'delete':
+                File::whereIn('id', $data['mass_edit'])->delete();
+                return redirect()->back()->with('crud', __('admin/messages.files.mass.delete'));
+                break;
+        }
+
         return redirect()->back();
     }
 }

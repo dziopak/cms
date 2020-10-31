@@ -34,31 +34,31 @@ class PagesController extends Controller
     }
 
 
-    public function edit($id)
+    public function edit(Page $page)
     {
         Auth::user()->hasAccessOrRedirect('PAGE_EDIT');
-        return view('admin.pages.edit', ['page_id' => $id]);
+        return view('admin.pages.edit', ['page' => $page]);
     }
 
 
-    public function update(PagesRequest $request, $id)
+    public function update(PagesRequest $request, Page $page)
     {
         Auth::user()->hasAccessOrRedirect('PAGE_EDIT');
-        return PageEntity::update($id, $request);
+        return PageEntity::update($page, $request);
     }
 
 
-    public function delete($id)
+    public function delete(Page $page)
     {
         Auth::user()->hasAccessOrRedirect('PAGE_DELETE');
-        return view('admin.pages.delete', ['page' => Page::findOrFail($id)]);
+        return view('admin.pages.delete', compact('page'));
     }
 
 
-    public function destroy($id)
+    public function destroy(Page $page)
     {
         Auth::user()->hasAccessOrRedirect('PAGE_DELETE');
-        return PageEntity::destroy($id);
+        return PageEntity::destroy($page);
     }
 
 

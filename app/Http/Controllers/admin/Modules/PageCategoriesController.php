@@ -35,32 +35,30 @@ class PageCategoriesController extends Controller
     }
 
 
-    public function edit($id)
+    public function edit(PageCategory $category)
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_EDIT');
-        return view('admin.page_categories.edit', ['category_id' => $id]);
+        return view('admin.page_categories.edit', compact('category'));
     }
 
 
-    public function update(CategoriesRequest $request, $id)
+    public function update(CategoriesRequest $request, PageCategory $category)
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_EDIT');
-        return PageCategoryEntity::update($id, $request);
+        return PageCategoryEntity::update($category, $request);
     }
 
-    public function delete($id)
+    public function delete(PageCategory $category)
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_DELETE');
-
-        $category = PageCategory::findOrFail($id);
         return view('admin.page_categories.delete', compact('category'));
     }
 
 
-    public function destroy($id)
+    public function destroy(PageCategory $category)
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_DELETE');
-        return PageCategoryEntity::destroy($id);
+        return PageCategoryEntity::destroy($category);
     }
 
     public function mass(Request $request)

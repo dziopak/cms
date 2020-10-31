@@ -8,22 +8,13 @@ use Illuminate\Http\Request;
 
 class SettingsController extends Controller
 {
-    /**
-     * Display settings.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         return view('admin.settings.general');
     }
 
-    /**
-     * Save settings in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         return SettingsUtilities::GeneralSettingsStore($request);

@@ -20,9 +20,8 @@ class LayoutEntity
     }
 
 
-    public static function update($id, $request)
+    public static function update($layout, $request)
     {
-        $layout = Layout::findOrFail($id);
         LayoutBlocks::updateBlocks($layout, $request);
 
         $layout->update([

@@ -17,19 +17,19 @@ class RoleEntity
     }
 
 
-    public static function update($id, $request)
+    public static function update(Role $role, $request)
     {
         $data = $request->all();
         $data['access'] = RoleAccess::serializeAccess($data['access']);
 
-        Role::findOrFail($id)->update($data);
+        $role->update($data);
         return redirect(route('admin.users.roles.index'));
     }
 
 
-    public static function destroy($id)
+    public static function destroy(Role $role)
     {
-        Role::findOrFail($id)->delete();
+        $role->delete();
         return redirect(route('admin.users.roles.index'));
     }
 }

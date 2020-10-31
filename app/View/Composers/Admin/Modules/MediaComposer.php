@@ -1,6 +1,8 @@
 <?php
 
-namespace App\View\Composers\Admin;
+namespace App\View\Composers\Admin\Modules;
+
+use App\Entities\File;
 
 class MediaComposer
 {
@@ -8,17 +10,15 @@ class MediaComposer
     private function index($request, $view)
     {
         return [
-            'files' => \App\Entities\File::filter($request)->paginate(15),
+            'files' => File::filter($request)->paginate(15),
             'table' => getData('Admin/Modules/Media/media_index_table')
         ];
     }
 
     private function edit($request, $view)
     {
-        $file = \App\Entities\File::findOrFail($view->file->id);
         return [
             'form' => getData('Admin/Modules/Media/media_edit_form'),
-            'file' => $file
         ];
     }
 
@@ -27,11 +27,25 @@ class MediaComposer
 
         if (empty($view->files)) {
             return [
-                'files' => \App\Entities\File::filter($request)->get(),
+                'files' => File::filter($request)->get(),
                 'table' => getData('Admin/Modules/Media/media_index_table')
             ];
         }
         return [];
+    }
+
+
+    private function partials($request, $view)
+    {
+        $partial = explode('.', $view->getName())[3];
+
+        switch ($partial) {
+            case 'list':
+                return $this->list($request, $view);
+                break;
+        }
+
+        return false;
     }
 
 
@@ -40,24 +54,8 @@ class MediaComposer
         $request = request();
         $vw = explode('.', $view->getName())[2];
 
-        switch ($vw) {
-            case 'index':
-                $data = $this->index($request, $view);
-                break;
-
-            case 'edit':
-                $data = $this->edit($request, $view);
-                break;
-
-            case 'partials':
-                $partial = explode('.', $view->getName())[3];
-                switch ($partial) {
-                    case 'list':
-                        $data = $this->list($request, $view);
-                        break;
-                }
-                break;
-        }
+        // Boot proper method
+        $data = $this->$vw($request, $view);
 
         if (isset($data) && !empty($data)) {
             foreach ($data as $key => $row) {

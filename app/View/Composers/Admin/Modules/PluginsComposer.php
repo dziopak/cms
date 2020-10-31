@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Composers\Admin;
+namespace App\View\Composers\Admin\Modules;
 
 use App\Http\Utilities\Admin\PluginUtilities;
 
@@ -24,11 +24,7 @@ class PluginsComposer
         $request = request();
         $vw = explode('.', $view->getName())[2];
 
-        switch ($vw) {
-            case 'index':
-                $data = $this->index($request, $view);
-                break;
-        }
+        $data = $this->$vw($request, $view);
 
         if (isset($data) && !empty($data)) {
             foreach ($data as $key => $row) {

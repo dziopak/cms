@@ -1,6 +1,9 @@
 <?php
 
-namespace App\View\Composers\Admin;
+namespace App\View\Composers\Admin\Modules;
+
+use App\Entities\PostCategory;
+use App\Entities\PageCategory;
 
 class CategoriesComposer
 {
@@ -10,14 +13,14 @@ class CategoriesComposer
         switch ($type) {
             case 'post_categories':
                 $data = [
-                    'categories' => \App\Entities\PostCategory::orderByDesc('id')->filter($request)->paginate(15),
+                    'categories' => PostCategory::orderByDesc('id')->filter($request)->paginate(15),
                     'table' => getData('Admin/Modules/Categories/post_categories_index_table')
                 ];
                 break;
 
             case 'page_categories':
                 $data = [
-                    'categories' => \App\Entities\PageCategory::orderByDesc('id')->filter($request)->paginate(15),
+                    'categories' => PageCategory::orderByDesc('id')->filter($request)->paginate(15),
                     'table' => getData('Admin/Modules/Categories/page_categories_index_table')
                 ];
                 break;
@@ -29,7 +32,7 @@ class CategoriesComposer
     {
         switch ($type) {
             case 'post_categories':
-                $categories = array_merge([__('admin/post_categories.no_category')], \App\Entities\PostCategory::list_all());
+                $categories = array_merge([__('admin/post_categories.no_category')], PostCategory::list_all());
                 $data = [
                     'categories' => $categories,
                     'form' => getData('Admin/Modules/Categories/post_categories_form', ['categories' => $categories])
@@ -37,7 +40,7 @@ class CategoriesComposer
                 break;
 
             case 'page_categories':
-                $categories = array_merge([__('admin/page_categories.no_category')], \App\Entities\PageCategory::list_all());
+                $categories = array_merge([__('admin/page_categories.no_category')], PageCategory::list_all());
                 $data = [
                     'categories' => $categories,
                     'form' => getData('Admin/Modules/Categories/page_categories_form', ['categories' => $categories])
@@ -52,18 +55,16 @@ class CategoriesComposer
 
         switch ($type) {
             case 'post_categories':
-                $categories = array_merge([__('admin/post_categories.no_category')], \App\Entities\PostCategory::list_all());
+                $categories = array_merge([__('admin/post_categories.no_category')], PostCategory::list_all());
                 $data = [
-                    'category' => \App\Entities\PostCategory::findOrFail($view->category_id),
                     'categories' => $categories,
                     'form' => getData('Admin/Modules/Categories/post_categories_form', ['categories' => $categories])
                 ];
                 break;
 
             case 'page_categories':
-                $categories = array_merge([__('admin/page_categories.no_category')], \App\Entities\PageCategory::list_all());
+                $categories = array_merge([__('admin/page_categories.no_category')], PageCategory::list_all());
                 $data = [
-                    'category' => \App\Entities\PageCategory::findOrFail($view->category_id),
                     'categories' => $categories,
                     'form' => getData('Admin/Modules/Categories/page_categories_form', ['categories' => $categories])
                 ];
@@ -75,21 +76,11 @@ class CategoriesComposer
     public function compose($view)
     {
         $request = request();
-        $vw = explode('.', $view->getName());
+        $action = explode('.', $view->getName())[2];
+        $type = explode('.', $view->getName())[1];
 
-        switch ($vw[2]) {
-            case 'index':
-                $data = $this->index($request, $vw[1], $view);
-                break;
-
-            case 'edit':
-                $data = $this->edit($request, $vw[1], $view);
-                break;
-
-            case 'create':
-                $data = $this->create($request, $vw[1], $view);
-                break;
-        }
+        // Boot proper method
+        $data = $this->$action($request, $type, $view);
 
         if (isset($data) && !empty($data)) {
             foreach ($data as $key => $row) {

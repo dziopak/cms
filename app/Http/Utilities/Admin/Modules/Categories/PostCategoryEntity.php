@@ -18,22 +18,24 @@ class PostCategoryEntity
     }
 
 
-    public static function update($id, $request)
+    public static function update($category, $request)
     {
-        $category = PostCategory::findOrFail($id);
-        $data = $request->all();
-
-        $category->update($data);
+        $category->update($request->all());
         return redirect(route('admin.posts.categories.index'));
     }
 
 
-    public static function destroy($id)
+    public static function destroy(PostCategory $category)
     {
-        $category = PostCategory::findOrFail($id);
         $category->delete();
 
-        return response()->json(['message' => __('admin/messages.categories.delete.success'), 'id' => $id], 200);
+        return response()->json(
+            [
+                'message' => __('admin/messages.categories.delete.success'),
+                'id' => $category->id
+            ],
+            200
+        );
     }
 
 

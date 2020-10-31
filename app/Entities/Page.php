@@ -3,10 +3,6 @@
 namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
-
-use App\Events\Pages\PageCreateEvent;
-use App\Events\Pages\PageUpdateEvent;
-use App\Events\Pages\PageDestroyEvent;
 use App\Traits\Sluggable;
 
 class Page extends Model
@@ -46,31 +42,5 @@ class Page extends Model
         } else {
             $query->orderByDesc('id');
         }
-    }
-
-    public static function boot()
-    {
-        parent::boot();
-        $request = request();
-
-        self::created(function ($page) use ($request) {
-            if ($page->fire_events) {
-                event(new PageCreateEvent($page, $request->file('thumbnail')));
-                $request->session()->flash('crud', __('admin/messages.pages.create.success'));
-            }
-        });
-
-        self::updated(function ($page) use ($request) {
-            if ($page->fire_events) {
-                event(new PageUpdateEvent($page, $request->file('thumbnail')));
-                $request->session()->flash('crud', __('admin/messages.pages.update.success'));
-            }
-        });
-
-        self::deleted(function ($page) use ($request) {
-            if ($page->fire_events) {
-                event(new PageDestroyEvent($page));
-            }
-        });
     }
 }

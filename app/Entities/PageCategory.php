@@ -4,10 +4,6 @@ namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-
-use App\Events\Categories\CategoryCreateEvent;
-use App\Events\Categories\CategoryUpdateEvent;
-use App\Events\Categories\CategoryDestroyEvent;
 use App\Traits\Sluggable;
 
 class PageCategory extends Model
@@ -39,33 +35,5 @@ class PageCategory extends Model
             !empty($request->get('sort_order')) && $request->get('sort_order') === 'desc' ?
                 $query->orderByDesc($request->get('sort_by')) : $query->orderBy($request->get('sort_by'));
         }
-    }
-
-    public static function boot()
-    {
-        parent::boot();
-        $request = request();
-
-        self::created(function ($category) use ($request) {
-            if ($category->fire_events) event(new CategoryCreateEvent($category, 'PAGE'));
-            $request->session()->flash('crud', __('admin/messages.categories.create.success'));
-        });
-
-        self::updated(function ($category) use ($request) {
-            if ($category->fire_events) {
-                event(new CategoryUpdateEvent($category, 'PAGE'));
-                $request->session()->flash('crud', __('admin/messages.categories.update.success'));
-            }
-        });
-
-        self::deleted(function ($category) use ($request) {
-            if ($category->fire_events) {
-                event(new CategoryDestroyEvent($category, 'PAGE'));
-            }
-        });
-
-        static::deleting(function ($category) {
-            $category->pages()->update(['category_id' => 0]);
-        });
     }
 }

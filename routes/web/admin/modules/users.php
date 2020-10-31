@@ -1,10 +1,10 @@
 <?php
 Route::resource('/users', 'Admin\Modules\UsersController')->except('show');
-Route::get('/{user_id}/delete', 'Admin\Modules\UsersController@delete')->name('users.delete');
-Route::get('/{user_id}/disable', 'Admin\Modules\UsersController@disable')->name('users.disable');
-Route::put('/{user_id}/block', 'Admin\Modules\UsersController@block')->name('users.block');
-Route::put('/{user_id}/password', 'Admin\Modules\UsersController@password')->name('users.password');
-Route::post('/{user_id}/thumbnail', 'Admin\Modules\UsersController@thumbnail')->name('users.thumbnail');
+Route::get('/{user}/delete', 'Admin\Modules\UsersController@delete')->name('users.delete');
+Route::get('/{user}/disable', 'Admin\Modules\UsersController@disable')->name('users.disable');
+Route::put('/{user}/block', 'Admin\Modules\UsersController@block')->name('users.block');
+Route::put('/{user}/password', 'Admin\Modules\UsersController@password')->name('users.password');
+Route::post('/{user}/thumbnail', 'Admin\Modules\UsersController@thumbnail')->name('users.thumbnail');
 Route::post('/users/mass', 'Admin\Modules\UsersController@mass')->name('users.mass');
 
 //Roles routes//

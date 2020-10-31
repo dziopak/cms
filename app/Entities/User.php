@@ -7,14 +7,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-use App\Events\Users\UserCreateEvent;
-use App\Events\Users\UserUpdateEvent;
-use App\Events\Users\UserDestroyEvent;
-
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -67,26 +64,26 @@ class User extends Authenticatable implements JWTSubject
     {
         if (Auth::check()) {
             $user = Auth::user();
-            if ($user->role_id == "0") {
+
+            if ($user->role_id == "0") return true;
+            $access = unserialize($user->role->access);
+
+            if (in_array($permission, $access) && $user->is_active == 1) {
                 return true;
-            } else {
-                $access = unserialize($user->role->access);
-                if (in_array($permission, $access) && $user->is_active == 1) {
-                    return true;
-                } else {
-                    return false;
-                }
             }
-        } else {
-            return false;
         }
+        return false;
     }
 
 
     public function hasAccessOrRedirect($permission)
     {
         if (!$this->hasAccess($permission)) {
-            throw new \Illuminate\Http\Exceptions\HttpResponseException(redirect()->route('admin.dashboard.index')->with("error", "You don't have access to perform this action."));
+            throw new HttpResponseException(
+                redirect()
+                    ->route('admin.dashboard.index')
+                    ->with("error", "You don't have access to perform this action.")
+            );
         }
     }
 
@@ -138,42 +135,5 @@ class User extends Authenticatable implements JWTSubject
         } else {
             $query->orderByDesc('id');
         }
-    }
-
-
-    public static function boot()
-    {
-        parent::boot();
-        $request = request();
-
-        static::deleting(function ($user) {
-            $user->account_logs()->delete();
-            if ($user->avatar != "0") {
-                if (!empty($user->avatar->path)) {
-                    unlink(public_path() . '/images/' . $user->photo->path);
-                    $user->photo()->delete();
-                }
-            }
-        });
-
-        self::created(function ($user) use ($request) {
-            if ($user->fire_events) {
-                event(new UserCreateEvent($user, $request->file('avatar')));
-                $request->session()->flash('crud', __('admin/messages.users.create.success'));
-            }
-        });
-
-        self::updating(function ($user) use ($request) {
-            if ($user->fire_events) {
-                event(new UserUpdateEvent($user, $request->file('avatar')));
-                $request->session()->flash('crud', __('admin/messages.users.update.success'));
-            }
-        });
-
-        self::deleted(function ($user) use ($request) {
-            if ($user->fire_events) {
-                event(new UserDestroyEvent($user));
-            }
-        });
     }
 }

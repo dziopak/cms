@@ -20,21 +20,27 @@ class PostEntity
     }
 
 
-    public static function update($id, $request)
+    public static function update(Post $post, $request)
     {
         if ($request->get('request') === 'photo') {
-            return (new PostFiles([$id]))->updateThumbnail($request->get('file'));
+            return (new PostFiles([$post->id]))->updateThumbnail($request->get('file'));
         }
 
-        Post::findOrFail($id)->update($request->except('thumbnail'));
+        $post->update($request->except('thumbnail'));
         return redirect(route('admin.posts.index'));
     }
 
 
-    public static function destroy($id)
+    public static function destroy(Post $post)
     {
-        Post::findOrFail($id)->delete();
-        return response()->json(['message' => __('admin/messages.posts.delete.success'), 'id' => $id], 200);
+        $post->delete();
+        return response()->json(
+            [
+                'message' => __('admin/messages.posts.delete.success'),
+                'id' => $post->id
+            ],
+            200
+        );
     }
 
 

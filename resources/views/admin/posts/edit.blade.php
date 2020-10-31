@@ -37,7 +37,7 @@
         @hook('post_left_content')
 
         {{-- Save button --}}
-        </x-update-button :container="true" />
+        <x-update-button :container="true" />
 
     </x-wrapper>
 

@@ -19,21 +19,21 @@ class PageEntity
     }
 
 
-    public static function update($id, $request)
+    public static function update($page, $request)
     {
         if ($request->get('request') === 'photo') {
-            return (new PageFiles([$id]))->updateThumbnail($request->get('file'));
+            return (new PageFiles([$page->id]))->updateThumbnail($request->get('file'));
         }
 
-        Page::findOrFail($id)->update($request->except('thumbnail'));
+        $page->update($request->except('thumbnail'));
         return redirect(route('admin.pages.index'));
     }
 
 
-    public static function destroy($id)
+    public static function destroy($page)
     {
-        Page::findOrFail($id)->delete();
-        return response()->json(['message' => __('admin/messages.pages.delete.success'), 'id' => $id], 200);
+        $page->delete();
+        return response()->json(['message' => __('admin/messages.pages.delete.success'), 'id' => $page->id], 200);
     }
 
 

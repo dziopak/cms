@@ -40,7 +40,11 @@ return [
         'update' => [
             'thumbnail' => [
                 'success' => 'Successfully updated post thumbnail.'
-            ]
+            ],
+            'success' => 'Successfully updated selected post.',
+        ],
+        'create' => [
+            'success' => 'Successfully created new post.'
         ],
         'delete' => [
             'success' => 'Post deleted successfully.'
@@ -50,6 +54,22 @@ return [
             'assign_category' => 'Successfully assigned category to selected posts.',
             'errors' => [
                 'no_posts' => 'No posts selected.'
+            ]
+        ]
+    ],
+    'roles' => [
+        'update' => [
+            'success' => 'Successfully updated selected role.',
+        ],
+        'create' => [
+            'success' => 'Successfully created new role.'
+        ],
+        'delete' => [
+            'success' => 'Role successfulyl deleted.'
+        ],
+        'mass' => [
+            'errors' => [
+                'no_roles' => 'No roles selected.'
             ]
         ]
     ],

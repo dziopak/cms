@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Composers\Admin;
+namespace App\View\Composers\Admin\Modules;
 
 class DashboardComposer
 {

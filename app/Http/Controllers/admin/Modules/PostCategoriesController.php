@@ -14,22 +14,12 @@ class PostCategoriesController extends Controller
 {
 
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         return view('admin.post_categories.index');
     }
 
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_CREATE');
@@ -37,12 +27,6 @@ class PostCategoriesController extends Controller
     }
 
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(CategoriesRequest $request)
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_CREATE');
@@ -50,51 +34,31 @@ class PostCategoriesController extends Controller
     }
 
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit(PostCategory $category)
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_EDIT');
-        return view('admin.post_categories.edit', ['category_id' => $id]);
+        return view('admin.post_categories.edit', compact('category'));
     }
 
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(CategoriesRequest $request, $id)
+    public function update(CategoriesRequest $request, PostCategory $category)
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_EDIT');
-        return PostCategoryEntity::update($id, $request);
+        return PostCategoryEntity::update($category, $request);
     }
 
 
-    public function delete($id)
+    public function delete(PostCategory $category)
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_DELETE');
-        $category = PostCategory::findOrFail($id);
         return view('admin.post_categories.delete', compact('category'));
     }
 
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(PostCategory $category)
     {
         Auth::user()->hasAccessOrRedirect('CATEGORY_DELETE');
-        return PostCategoryEntity::destroy($id);
+        return PostCategoryEntity::destroy($category);
     }
 
 

@@ -32,37 +32,37 @@ class RolesController extends Controller
     }
 
 
-    public function edit($id)
+    public function edit(Role $role)
     {
         Auth::user()->hasAccessOrRedirect('ROLE_EDIT');
-        return view('admin.roles.edit', ['role_id' => $id]);
+        return view('admin.roles.edit', compact('role'));
     }
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Role $role)
     {
         Auth::user()->hasAccessOrRedirect('ROLE_EDIT');
-        return RoleEntity::update($id, $request);
+        return RoleEntity::update($role, $request);
     }
 
 
-    public function delete($id)
+    public function delete(Role $role)
     {
         Auth::user()->hasAccessOrRedirect('ROLE_DELETE');
-        return view('admin.roles.delete', ['role' => Role::findOrFail($id)]);
+        return view('admin.roles.delete', compact('role'));
     }
 
 
-    public function duplicate($id)
+    public function duplicate(Role $role)
     {
         Auth::user()->hasAccessOrRedirect('ROLE_CREATE');
-        return view('admin.roles.create', ['role_id' => $id]);
+        return view('admin.roles.create', compact('role'));
     }
 
 
-    public function destroy($id)
+    public function destroy(Role $role)
     {
         Auth::user()->hasAccessOrRedirect('ROLE_DELETE');
-        return RoleEntity::destroy($id);
+        return RoleEntity::destroy($role);
     }
 }

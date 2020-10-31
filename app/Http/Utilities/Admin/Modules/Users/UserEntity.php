@@ -22,21 +22,19 @@ class UserEntity
         return redirect(route('admin.users.index'));
     }
 
-    public static function update($id, $request)
+    public static function update(User $user, $request)
     {
         if ($request->get('request') === 'photo') {
-            return (new UserFiles($id))->updateThumbnail($request->get('file'));
+            return (new UserFiles($user->id))->updateThumbnail($request->get('file'));
         }
 
-        User::findOrFail($id)->update($request->except('avatar'));
+        $user->update($request->except('avatar'));
         return redirect(route('admin.users.index'));
     }
 
 
-    public static function setUserPassword($id, $request)
+    public static function setUserPassword(User $user, $request)
     {
-        $user = User::findOrFail($id);
-
         $user->fire_events = false;
         $user->update(['password' => Hash::make($request->password)]);
         event(new UserNewPasswordEvent($user));
@@ -45,19 +43,19 @@ class UserEntity
     }
 
 
-    public static function blockUser($id, $request)
+    public static function block(User $user, $request)
     {
-        (new UserActions($id))->setStatus($request->get('is_active'));
-        event(new UserBlockEvent(User::findOrFail($id)));
+        (new UserActions($user->id))->setStatus($request->get('is_active'));
+        event(new UserBlockEvent($user));
 
         return redirect(route('admin.users.index'));
     }
 
 
-    public static function destroy($id)
+    public static function destroy(User $user)
     {
-        User::findOrFail($id)->delete();
-        return response()->json(['message' => __('admin/messages.users.delete.success'), 'id' => $id], 200);
+        $user->delete();
+        return response()->json(['message' => __('admin/messages.users.delete.success'), 'id' => $user->id], 200);
     }
 
 

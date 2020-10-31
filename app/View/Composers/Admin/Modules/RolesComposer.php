@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Composers\Admin;
+namespace App\View\Composers\Admin\Modules;
 
 use App\Entities\Role;
 use App\Http\Utilities\RoleAccess;
@@ -18,10 +18,9 @@ class RolesComposer
 
     private function create($request, $view)
     {
-        if (!empty($view->role_id)) {
-            $role = Role::findOrFail($view->role_id);
-            $role->access = RoleAccess::unserializeAccess($role->access);
-            $data['role'] = $role;
+        if (!empty($view->role)) {
+            $view->role->access = RoleAccess::unserializeAccess($view->role->access);
+            $data['role'] = $view->role;
         }
 
         $data['form'] = getData('Admin/Modules/Roles/roles_form');
@@ -30,11 +29,10 @@ class RolesComposer
 
     private function edit($request, $view)
     {
-        $role = Role::findOrFail($view->role_id);
-        $role->access = RoleAccess::unserializeAccess($role->access);
+        $view->role->access = RoleAccess::unserializeAccess($view->role->access);
 
         return [
-            'role' => $role,
+            'role' => $view->role,
             'form' => getData('Admin/Modules/Roles/roles_form')
         ];
     }
@@ -45,19 +43,8 @@ class RolesComposer
         $request = request();
         $vw = explode('.', $view->getName())[2];
 
-        switch ($vw) {
-            case 'index':
-                $data = $this->index($request, $view);
-                break;
-
-            case 'edit':
-                $data = $this->edit($request, $view);
-                break;
-
-            case 'create':
-                $data = $this->create($request, $view);
-                break;
-        }
+        // Boot proper method
+        $data = $this->$vw($request, $view);
 
         if (isset($data) && !empty($data)) {
             foreach ($data as $key => $row) {

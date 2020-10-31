@@ -40,16 +40,36 @@ return [
         'update' => [
             'thumbnail' => [
                 'success' => 'Pomyślnie zaaktualizowano miniaturkę wybranego posta.'
-            ]
+            ],
+            'success' => 'Pomyślnie zaaktualizowano wybrany post.'
+        ],
+        'create' => [
+            'success' => 'Pomyślnie utworzono nowy post.',
         ],
         'delete' => [
-            'success' => 'Pomyślnie zaaktualizowano wybrany post.'
+            'success' => 'Pomyślnie usunięto wybrany post.'
         ],
         'mass' => [
             'title_replace_phrases' => 'Pomyślnie zaaktualizowano frazy w tytułach wybranych postów.',
             'assign_category' => 'Pomyślnie przypisano kategorię do wybranych postów.',
             'errors' => [
                 'no_posts' => 'Nie wybrano żadnych postów.'
+            ]
+        ]
+    ],
+    'role' => [
+        'update' => [
+            'success' => 'Pomyślnie zaaktualizowano wybraną rangę.'
+        ],
+        'create' => [
+            'success' => 'Pomyślnie utworzono nową rangę.',
+        ],
+        'delete' => [
+            'success' => 'Pomyślnie usunięto wybraną rangę.'
+        ],
+        'mass' => [
+            'errors' => [
+                'no_roles' => 'Nie wybrano żadnych rang..'
             ]
         ]
     ],

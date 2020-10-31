@@ -4,10 +4,6 @@ namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-use App\Events\Roles\RoleCreateEvent;
-use App\Events\Roles\RoleUpdateEvent;
-use App\Events\Roles\RoleDestroyEvent;
-
 class Role extends Model
 {
     public $timestamps = false;
@@ -44,27 +40,5 @@ class Role extends Model
     public function users()
     {
         return $this->hasMany('App\Entities\User', 'role_id');
-    }
-
-
-    public static function boot()
-    {
-        parent::boot();
-
-        static::deleting(function ($role) {
-            $role->users()->update(['role_id' => '1']);
-        });
-
-        self::created(function ($role) {
-            if ($role->fire_events) event(new RoleCreateEvent($role));
-        });
-
-        self::updated(function ($role) {
-            if ($role->fire_events) event(new RoleUpdateEvent($role));
-        });
-
-        self::deleted(function ($role) {
-            if ($role->fire_events) event(new RoleDestroyEvent($role));
-        });
     }
 }
