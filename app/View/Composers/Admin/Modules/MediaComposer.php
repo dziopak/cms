@@ -55,7 +55,9 @@ class MediaComposer
         $vw = explode('.', $view->getName())[2];
 
         // Boot proper method
-        $data = $this->$vw($request, $view);
+        if (method_exists($this, $vw)) {
+            $data = $this->$vw($request, $view);
+        }
 
         if (isset($data) && !empty($data)) {
             foreach ($data as $key => $row) {

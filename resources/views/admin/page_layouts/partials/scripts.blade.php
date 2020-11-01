@@ -1,7 +1,4 @@
 <script type="text/javascript">
-    var grid = GridStack.init();
-
-
     $('.add-widget').click(function() {
         var name = $(this).attr('data-name');
         $.get( `{{ route('admin.layouts.getwidget') }}?name=${name}`, function( html ) {

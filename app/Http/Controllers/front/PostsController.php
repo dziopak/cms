@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Helpers\ThemeHelpers;
 use App\Http\Controllers\Controller;
 use App\Entities\Post;
+use App\Entities\Layout;
 
 class PostsController extends Controller
 {
@@ -18,7 +19,7 @@ class PostsController extends Controller
 
     public function index()
     {
-        $blocks = getLayout(\App\Entities\Layout::findOrFail(1));
+        $blocks = getLayout(Layout::findOrFail(config('global')['general']['post_layout']));
         $posts = Post::orderByDesc('created_at')->orderByDesc('id')->paginate(5);
 
         return view($this->theme['url'] . '.modules.posts.index', compact('posts', 'blocks'));
@@ -32,9 +33,8 @@ class PostsController extends Controller
             $post = Post::with('author', 'category', 'thumbnail')->where(['slug' => $id])->orWhere(['slug_pl' => $id])->first();
         }
 
-        // TO DO //
-        // LAYOUT ID FROM GENERAL SETTINGS //
-        $blocks = getLayout(\App\Entities\Layout::findOrFail(1));
+        $layout_id = config('global')['general']['post_layout'];
+        $blocks = getLayout(Layout::findOrFail($layout_id));
 
         return view($this->theme['url'] . '.modules.posts.show', compact('post', 'blocks'));
     }

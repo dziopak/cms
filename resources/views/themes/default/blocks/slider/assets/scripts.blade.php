@@ -1,14 +1,12 @@
 <script>
+    var glideConfig = {
+        type: 'slideshow',
+        perView: 1,
+        gap: 0,
+        autoplay: {{ $block['autoplay'] * 1000 }}
+    };
+
     $(document).ready(function() {
-        $('#{{ $key }}.slider').slick({
-            dots: {{ $block["controls"] ? 'true' : 'false' }},
-            infinite: true,
-            speed: 500,
-            fade: true,
-            autoplay: {{ $block["autoplay"] !== "0" ? 'true' : 'false' }},
-            autoplaySpeed: {{ $block["autoplay"] }},
-            cssEase: 'linear',
-            arrows: {{ $block["controls"] ? 'true' : 'false' }}
-        });
+        var Slider = new Glide('#slider-{{ $key }}', glideConfig).mount();
     });
 </script>

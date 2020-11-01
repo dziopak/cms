@@ -1,0 +1,31 @@
+* {
+    outline: none !important;
+}
+
+body {
+    font-family: "Raleway", sans-serif;
+    line-height: 1.8;
+    font-size: 0.8rem;
+}
+
+a {
+    color: #212529;
+
+    &:hover {
+        text-decoration: none;
+        color: $blue;
+    }
+}
+
+.required {
+    font-weight: bold;
+}
+
+label {
+    font-size: 12px;
+    color: #888888;
+}
+
+.hide {
+    display: none;
+}

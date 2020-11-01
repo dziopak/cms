@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Entities\Layout;
 use Illuminate\Support\ServiceProvider;
 use App\Helpers\ThemeHelpers;
 use View;
@@ -28,15 +29,18 @@ class ViewServiceProvider extends ServiceProvider
             'App\View\Composers\Admin\Modules\RolesComposer' => 'admin.roles.*',
             'App\View\Composers\Admin\Modules\DashboardComposer' => 'admin.dashboard.*',
             'App\View\Composers\Admin\Modules\MediaComposer' => 'admin.media.*',
-            'App\View\Composers\Admin\Modules\Blocks\MenusComposer' => 'admin.blocks.menus.*',
-            'App\View\Composers\Admin\Modules\Blocks\SlidersComposer' => 'admin.blocks.sliders.*',
             'App\View\Composers\Admin\Modules\PluginsComposer' => 'admin.plugins.*',
+
+            'App\View\Composers\Admin\Blocks\MenusComposer' => 'admin.blocks.menus.*',
+            'App\View\Composers\Admin\Blocks\SlidersComposer' => 'admin.blocks.sliders.*',
         ]);
 
         view()->composer('admin.settings.general', function ($view) {
             $themes = ThemeHelpers::getThemeList();
+            $layouts = Layout::all()->pluck('name', 'id');
+
             $view->settings = \App\Entities\Setting::where(['group' => 'general'])->pluck('value', 'name')->toArray();
-            $view->form = getData('Admin/Modules/settings/general', array_merge($view->settings, ['themes' => $themes]));
+            $view->form = getData('Admin/Modules/settings/general', array_merge($view->settings, ['themes' => $themes, 'layouts' => $layouts]));
         });
 
 

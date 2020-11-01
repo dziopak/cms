@@ -7,6 +7,12 @@
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
 
+// Glide Core Stylesheet
+@import "node_modules/@glidejs/glide/src/assets/sass/glide.core";
+
+// Glide Theme Stylesheet
+@import "node_modules/@glidejs/glide/src/assets/sass/glide.theme";
+
 html {
     scroll-behavior: smooth;
 }

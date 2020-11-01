@@ -5,6 +5,12 @@
   margin-left: -10px;
 }
 
+#layout .card-title strong {
+  margin-top: -3px;
+  display: block;
+  text-align: center;
+}
+
 .grid-stack-item-content {
   border-radius: 10px;
   box-shadow: 0 0.1rem 0.25rem rgba(0, 0, 0, 0.075);
@@ -12,24 +18,16 @@
 
 .components-bar {
   width: 100%;
-  transition: all 0.2s linear;
-  padding: 10px 50px;
-  margin-top: -30px;
+  max-width: calc(100% - 100px);
+  margin: 0 auto;
+  transition: all 0.5s linear;
+  margin: 5px auto 5px auto;
   height: 0;
+  overflow: hidden;
 }
 
 .components-bar.active {
   height: 200px;
-}
-
-.components-bar.active .slick-arrow {
-  display: block;
-}
-
-.components-bar .slick-list,
-.components-bar .slick-track,
-.components-bar .slick-slide {
-  height: 100%;
 }
 
 .components-bar .slick-arrow {
@@ -71,13 +69,14 @@
   border: 0px;
   display: flex;
   cursor: pointer;
-  padding: 20px;
   height: 100%;
 }
 
 .add-widget .card,
 .existing-widget .card {
   height: 100%;
+  width: 100%;
+  padding: 40px 20px;
 }
 
 .add-widget .widget-title,
@@ -88,6 +87,7 @@
 .add-widget p,
 .existing-widget p {
   margin-bottom: 0px;
+  white-space: normal;
 }
 
 .add-widget img,

@@ -1,4 +1,5 @@
 <?php
 return [
-    'test' => 'Test message'
+    'title' => 'Translations',
+    'sidebar_title' => 'Languages'
 ];

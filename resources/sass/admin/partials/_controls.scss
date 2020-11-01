@@ -1,0 +1,112 @@
+.btn {
+    min-width: 80px;
+    margin-right: 5px;
+}
+
+.table {
+    tr td,
+    tr th {
+        vertical-align: middle;
+
+        &:first-child {
+            text-align: center;
+        }
+
+        &:last-child {
+            text-align: right;
+        }
+    }
+
+    &-plain {
+        tr td,
+        tr th {
+            text-align: left;
+
+            &:first-child,
+            &:last-child {
+                text-align: left;
+            }
+        }
+    }
+
+    .btn {
+        transition: all 0.1s linear;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+}
+
+button#toggle-components {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #c2c7d4;
+    border: 1px solid #9397a0;
+    color: #fff;
+    z-index: 92;
+    transition: all 0.15s linear;
+}
+
+button#toggle-components:hover ~ .toggle-components-up,
+.toggle-components-up {
+    bottom: 100px;
+    transition-delay: 0s;
+}
+
+button#toggle-components:hover ~ .toggle-components-left,
+.toggle-components-left {
+    right: 100px;
+    transition-delay: 0s;
+}
+
+button.toggle-components {
+    position: fixed;
+    bottom: 45px;
+    right: 45px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #c2c7d4;
+    border: 1px solid #9397a0;
+    color: #fff;
+    z-index: 90;
+    transition: all 0.15s linear;
+    transition-delay: 2s;
+}
+
+button#toggle-components.active,
+button#toggle-components:hover {
+    background: #3490dc;
+    border: 1px solid #2871ad;
+    color: #fff;
+    transform: scale(1.2);
+}
+
+textarea.small {
+    height: 100px;
+}
+
+input.form-control-blended {
+    padding: 8px 20px 11px;
+    border: 0px;
+    border-bottom: 1px solid #eeeeee;
+    width: 100%;
+}
+
+input[type="file"].image-upload {
+    display: none;
+}
+
+.image-preview {
+    height: auto;
+    cursor: pointer;
+    max-height: 350px;
+    width: 100%;
+    object-fit: cover;
+    -o-object-fit: cover;
+}

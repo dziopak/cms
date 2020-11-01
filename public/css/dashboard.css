@@ -7,57 +7,53 @@
   box-shadow: 0 0.1rem 0.25rem rgba(0, 0, 0, 0.075);
 }
 
-#dashboard-components {
+.glide__track {
+  max-height: 100%;
+}
+
+.components-bar {
   width: 100%;
-  transition: all 0.2s linear;
-  padding: 10px 50px;
-  margin-top: -30px;
+  max-width: calc(100% - 140px);
+  margin: 0 auto;
+  transition: all 0.5s linear;
+  margin: 5px auto 5px auto;
   height: 0;
+  position: relative;
 }
 
-#dashboard-components.active {
-  height: 350px;
+.components-bar.active {
+  height: 360px;
 }
 
-#dashboard-components.active .slick-arrow {
-  display: block;
-}
-
-#dashboard-components .slick-list,
-#dashboard-components .slick-track,
-#dashboard-components .slick-slide {
-  height: 100%;
-}
-
-#dashboard-components .slick-arrow {
-  display: none;
+.components-bar .glide__arrow {
   background: #fff no-repeat center;
   background-size: 12px;
   height: 30px;
   width: 30px;
   border-radius: 50%;
   transition: all 0.2s linear;
+  display: none;
 }
 
-#dashboard-components .slick-arrow.slick-prev {
-  left: 15px;
+.components-bar .glide__arrow.glide__arrow--left {
+  left: -50px;
   background-image: url(https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-left-01-512.png);
 }
 
-#dashboard-components .slick-arrow.slick-prev::before {
+.components-bar .glide__arrow.glide__arrow--left::before {
   content: "";
 }
 
-#dashboard-components .slick-arrow.slick-next {
-  right: 15px;
+.components-bar .glide__arrow.glide__arrow--right {
+  right: -50px;
   background-image: url(https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-right-01-512.png);
 }
 
-#dashboard-components .slick-arrow.slick-next::before {
+.components-bar .glide__arrow.glide__arrow--right::before {
   content: "";
 }
 
-#dashboard-components .slick-arrow:hover {
+.components-bar .glide__arrow:hover {
   transform: scale(1.2) translateY(-43%);
 }
 
@@ -67,12 +63,13 @@
   border: 0px;
   display: flex;
   cursor: pointer;
-  padding: 20px;
-  height: 100%;
+  padding: 20px 0px;
+  height: 325px;
 }
 
 .add-widget .card {
   height: 100%;
+  width: 100%;
 }
 
 .add-widget .widget-title {
@@ -81,6 +78,7 @@
 
 .add-widget p {
   margin-bottom: 0px;
+  white-space: normal;
 }
 
 .add-widget img {
@@ -88,6 +86,7 @@
   max-width: 100%;
   width: 60px;
   height: 60px;
+  display: block;
 }
 
 .ui-resizable-handle.ui-resizable-se.ui-icon.ui-icon-gripsmall-diagonal-se {

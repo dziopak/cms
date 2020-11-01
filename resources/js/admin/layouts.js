@@ -1,8 +1,47 @@
+var glideConfig = {
+    type: 'carousel',
+    startAt: 3,
+    perView: 5,
+    focusAt: 'center',
+    gap: 30,
+    breakpoints: {
+        800: { perView: 1 },
+        1300: { perView: 3 },
+    }
+};
+
+
+var gridstackConfig = {
+    acceptWidgets: true,
+    animate: true,
+    minRow: 10,
+    disableOneColumnMode: true,
+    minWidth: 300,
+    infinity: false
+}
+
+
+function triggerResize() {
+    setTimeout(function() {
+        document.querySelector('body').style.width = '100%';
+        document.querySelector('body').style.width = '100vw';
+    }, 100);
+}
+
+
 $(document).ready(function() {
-    GridStack.init({
-        acceptWidgets: true,
-        animate: true,
-        minRow: 10
+    var LayoutComponents = new Glide('#layout-components', glideConfig).mount();
+    var Grid = GridStack.init(gridstackConfig);
+
+    $(".widget-container").each(function() {
+        var container = $(this)
+            .closest(".card")
+            .find(".with-container")
+            .val();
+
+        if (container == true) {
+            $(this).addClass("active");
+        }
     });
 
     $(".grid-stack").change(function() {
@@ -85,25 +124,15 @@ $(document).ready(function() {
 
     $("#toggle-components").click(function() {
         var components = $("#layout-components, #existing-components");
-        setTimeout(function() {
-            if (!components.hasClass("active")) {
-                $("#toggle-components").addClass("active");
-                components.addClass("active");
-                components.slick("setPosition");
-                document.getElementById("layout-components").scrollIntoView();
-                setTimeout(function() {
-                    $(
-                        "#layout-components .slick-arrow, #existing-components .slick-arrow"
-                    ).fadeIn(40);
-                }, 10);
-            } else {
-                components.removeClass("active");
-                components.removeClass("active");
-                $(
-                    "#layout-components .slick-arrow, #existing-components .slick-arrow"
-                ).fadeOut(40);
-            }
-        }, 100);
+        if (!components.hasClass("active")) {
+            $("#toggle-components").addClass("active");
+            components.addClass("active");
+            // document.scrollIntoView();
+        } else {
+            components.removeClass("active");
+        }
+
+        triggerResize();
     });
 
     $('button[type="submit"]').click(function(e) {
@@ -161,24 +190,4 @@ $(document).ready(function() {
         $("#LayoutUpdateForm, #LayoutCreateForm").submit();
     });
 
-    $(".components-bar").slick({
-        infinite: true,
-        slidesToShow: 4,
-        slidesToScroll: 2,
-        arrows: true
-    });
-    $(".components-bar .slick-arrow").hide();
-});
-
-$(document).ready(function() {
-    $(".widget-container").each(function() {
-        var container = $(this)
-            .closest(".card")
-            .find(".with-container")
-            .val();
-
-        if (container == true) {
-            $(this).addClass("active");
-        }
-    });
 });

@@ -40,7 +40,7 @@ class LangHookServiceProvider extends ServiceProvider
 
             $output['settings']['items']['lang'] = [
                 'route' => 'Lang::index',
-                'custom_label' => __('lang::admin/langs.lang_settings')
+                'custom_label' => __('Lang::messages.sidebar_title')
             ];
 
             return $output;

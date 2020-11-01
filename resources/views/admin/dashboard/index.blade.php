@@ -7,14 +7,12 @@
 
     <link rel="stylesheet" href="{{asset('css/dashboard.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/gridstack.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/slick.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/slick-theme.css')}}">
 @endpush
 
 
 @push('scripts-bottom')
     <script src="{{asset('js/admin/dashboard.js')}}" defer></script>
-    <script src="{{asset('assets/js/slick.min.js')}}" defer></script>
+    <script src="{{asset('assets/js/glide.min.js')}}" defer></script>
 @endpush
 
 

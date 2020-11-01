@@ -17,6 +17,8 @@ class MenuItems
 
     public function order($items)
     {
+        $this->menu->flushQueryCache();
+
         foreach ($items as $key => $item) {
             if (!empty($item)) {
                 $this->menu->items()->findOrFail($key)->update($item);
@@ -29,6 +31,8 @@ class MenuItems
 
     public function attach($data)
     {
+        $this->menu->flushQueryCache();
+
         if (!empty($data['id'])) {
             $item = $this->menu->items()->findOrFail($data['id'])->update([
                 'label' => $data['label'],
@@ -49,7 +53,9 @@ class MenuItems
 
     public function detach($item)
     {
+        $this->menu->flushQueryCache();
         $this->menu->items()->findOrFail($item)->delete();
+
         return response()->json(['message' => __('admin/messages.blocks.menus.items.detach'), 'id' => $item], 200);
     }
 }

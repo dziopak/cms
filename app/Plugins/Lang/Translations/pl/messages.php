@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'test' => 'Testowa wiadomość'
+    'title' => 'Tłumaczenia',
+    'sidebar_title' => 'Języki'
 ];

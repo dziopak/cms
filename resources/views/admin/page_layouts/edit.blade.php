@@ -7,14 +7,12 @@
 
     <link rel="stylesheet" href="{{asset('css/layouts.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/gridstack.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/slick.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/slick-theme.css')}}">
 @endpush
 
 
 @push('scripts-bottom')
     <script src="{{asset('js/admin/layouts.js')}}" defer></script>
-    <script src="{{asset('assets/js/slick.min.js')}}" defer></script>
+    <script src="{{asset('assets/js/glide.min.js')}}" defer></script>
     @include('admin.page_layouts.partials.scripts')
 @endpush
 

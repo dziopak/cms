@@ -1,0 +1,119 @@
+.sidebar {
+    height: 100%;
+    min-height: 100vh;
+    padding-right: 0px;
+    max-width: 80px;
+    background-color: transparent;
+    border-left: 1px solid #e8e3e3;
+
+    &-sub-list {
+        background-color: #ffffff;
+        border: 1px solid #e6e9f3;
+        border-left: 0px;
+        width: 160px;
+        overflow: hidden;
+        top: -1px;
+        left: 100%;
+        display: none;
+        position: absolute;
+        padding: 5px 0;
+        z-index: 1;
+
+        & .sidebar-list-item {
+            text-align: left;
+            padding: 0;
+            text-align: left;
+            border-bottom: 0;
+
+            a {
+                padding: 5px 15px;
+                display: inline-block;
+                width: 100%;
+                color: #9499a5;
+            }
+
+            &:first-child a {
+                padding: 5px 15px;
+            }
+        }
+    }
+}
+
+.sidebar-list {
+    padding: 0;
+
+    &-item {
+        cursor: pointer;
+        list-style: none;
+        text-align: center;
+        font-size: 12px;
+        display: inline-block;
+        width: 100%;
+        position: relative;
+        color: #c2c7d4;
+        transition: color 0.1s linear;
+        border-bottom: 1px solid #f1f1f1;
+
+        &:first-child {
+            background: #fff;
+
+            a {
+                padding: 14px 0 11px;
+            }
+        }
+
+        &:hover ul.sidebar-sub-list,
+        ul.sidebar-sub-list:hover {
+            display: block;
+        }
+
+        a {
+            width: 100%;
+            padding: 10px 0px 14px;
+            display: inline-block;
+            color: #c2c7d4;
+            transition: color 0.1s linear;
+
+            &:hover {
+                color: $blue;
+            }
+        }
+
+        .fa.icon {
+            width: 100%;
+            font-size: 24px;
+            margin: 10px auto 8px;
+            border-radius: 50%;
+        }
+
+        &:hover {
+            background: #fff;
+        }
+    }
+}
+
+.sidebar-lang-switcher {
+    border-bottom: 0px;
+    text-align: center;
+    padding: 17px 0 18px;
+
+    & .lang-switcher {
+        background: #eee;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: inline-block;
+
+        img {
+            width: 100%;
+            border: 4px solid #eeeeee;
+            border-radius: 50%;
+        }
+    }
+}
+
+#version {
+    font-size: 10px;
+    text-align: center;
+    color: #484542;
+}

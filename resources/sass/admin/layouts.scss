@@ -5,6 +5,12 @@
     overflow: hidden;
     width: calc(100% + 20px);
     margin-left: -10px;
+
+    .card-title strong {
+        margin-top: -3px;
+        display: block;
+        text-align: center;
+    }
 }
 
 .grid-stack {
@@ -18,23 +24,15 @@
 
 .components-bar {
     width: 100%;
-    transition: all 0.2s linear;
-    padding: 10px 50px;
-    margin-top: -30px;
+    max-width: calc(100% - 100px);
+    margin: 0 auto;
+    transition: all 0.5s linear;
+    margin: 5px auto 5px auto;
     height: 0;
+    overflow: hidden;
 
     &.active {
         height: 200px;
-
-        .slick-arrow {
-            display: block;
-        }
-    }
-
-    .slick-list,
-    .slick-track,
-    .slick-slide {
-        height: 100%;
     }
 
     .slick-arrow {
@@ -76,11 +74,12 @@
     border: 0px;
     display: flex;
     cursor: pointer;
-    padding: 20px;
     height: 100%;
 
     .card {
         height: 100%;
+        width: 100%;
+        padding: 40px 20px;
     }
 
     .widget-title {
@@ -89,6 +88,7 @@
 
     p {
         margin-bottom: 0px;
+        white-space: normal;
     }
 
     img {

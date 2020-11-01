@@ -15,7 +15,6 @@
         "cross-env": "^5.1",
         "jquery": "^3.5",
         "laravel-mix": "^5.0.5",
-        "laravel-mix-merge-manifest": "^0.1.2",
         "lodash": "^4.17.20",
         "popper.js": "^1.12",
         "resolve-url-loader": "^2.3.1",
@@ -24,8 +23,8 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "@glidejs/glide": "^3.4.1",
         "chart.js": "^2.9.3",
-        "gridstack": "^1.2.1",
-        "slick-carousel": "^1.8.1"
+        "gridstack": "^1.2.1"
     }
 }

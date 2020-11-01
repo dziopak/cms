@@ -3,6 +3,7 @@
 namespace App\Http\Utilities\Admin\Blocks\Sliders;
 
 use App\Entities\Slider;
+use App\Entities\File;
 use Auth;
 
 class SliderItems
@@ -32,6 +33,8 @@ class SliderItems
     private function sync($data)
     {
         $this->slider->files()->sync($data, false);
+        $this->slider->files()->flushQueryCache();
+
         return $this->slider = $this->slider->fresh(['files']);
     }
 
@@ -39,6 +42,8 @@ class SliderItems
     public function attach($data)
     {
         Auth::user()->hasAccessOrRedirect('BLOCK_EDIT');
+
+        File::flushQueryCache();
 
         $this->sync($data);
         $newFiles = $this->attachedToArray($this->slider->files, $data);
@@ -55,7 +60,9 @@ class SliderItems
     {
         Auth::user()->hasAccessOrRedirect('BLOCK_EDIT');
 
+        $this->slider->files()->flushQueryCache();
         $this->slider->files()->detach($data);
+
         return response()->json(['status' => 200, 'message' => __('admin/messages.blocks.sliders.items.detach'), 'slides' => $data], 200);
     }
 }

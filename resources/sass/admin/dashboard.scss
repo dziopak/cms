@@ -13,46 +13,42 @@
     }
 }
 
-#dashboard-components {
+.glide__track {
+    max-height: 100%;
+}
+
+.components-bar {
     width: 100%;
-    transition: all 0.2s linear;
-    padding: 10px 50px;
-    margin-top: -30px;
+    max-width: calc(100% - 140px);
+    margin: 0 auto;
+    transition: all 0.5s linear;
+    margin: 5px auto 5px auto;
     height: 0;
+    position: relative;
 
     &.active {
-        height: 350px;
-
-        .slick-arrow {
-            display: block;
-        }
+        height: 360px;
     }
 
-    .slick-list,
-    .slick-track,
-    .slick-slide {
-        height: 100%;
-    }
-
-    .slick-arrow {
-        display: none;
+    .glide__arrow {
         background: #fff no-repeat center;
         background-size: 12px;
         height: 30px;
         width: 30px;
         border-radius: 50%;
         transition: all 0.2s linear;
+        display: none;
 
-        &.slick-prev {
-            left: 15px;
+        &.glide__arrow--left {
+            left: -50px;
             background-image: url(https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-left-01-512.png);
             &::before {
                 content: "";
             }
         }
 
-        &.slick-next {
-            right: 15px;
+        &.glide__arrow--right {
+            right: -50px;
             background-image: url(https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-right-01-512.png);
 
             &::before {
@@ -72,11 +68,12 @@
     border: 0px;
     display: flex;
     cursor: pointer;
-    padding: 20px;
-    height: 100%;
+    padding: 20px 0px;
+    height: 325px;
 
     .card {
         height: 100%;
+        width: 100%;
     }
 
     .widget-title {
@@ -85,6 +82,7 @@
 
     p {
         margin-bottom: 0px;
+        white-space: normal;
     }
 
     img {
@@ -92,6 +90,7 @@
         max-width: 100%;
         width: 60px;
         height: 60px;
+        display: block;
     }
 }
 

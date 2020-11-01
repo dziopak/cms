@@ -80,7 +80,9 @@ class CategoriesComposer
         $type = explode('.', $view->getName())[1];
 
         // Boot proper method
-        $data = $this->$action($request, $type, $view);
+        if (method_exists($this, $action)) {
+            $data = $this->$action($request, $type, $view);
+        }
 
         if (isset($data) && !empty($data)) {
             foreach ($data as $key => $row) {
