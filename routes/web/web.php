@@ -12,7 +12,7 @@ Route::get('/clear-cache', function () {
 });
 
 Route::get('theme/assets/{type}/{filename}', function ($type, $filename) {
-    $path = base_path() . '/resources/views/themes/' . ThemeHelpers::activeTheme() . '/assets/' . $type . "/" . $filename;
+    $path = base_path() . '/resources/themes/' . ThemeHelpers::activeTheme() . '/assets/' . $type . "/" . $filename;
 
     $file = File::get($path);
 

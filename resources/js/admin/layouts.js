@@ -31,7 +31,7 @@ function triggerResize() {
 
 $(document).ready(function() {
     var LayoutComponents = new Glide('#layout-components', glideConfig).mount();
-    var Grid = GridStack.init(gridstackConfig);
+    var grid = GridStack.init(gridstackConfig);
 
     $(".widget-container").each(function() {
         var container = $(this)

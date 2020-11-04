@@ -6,8 +6,43 @@ use App\Entities\File;
 
 class FileHandling
 {
-    public static function upload($request)
+
+    static function uploadBlob($request)
     {
+        $image = $request->file('data');
+
+        $imagesPath = 'images/';
+        $destinationPath = 'uploads/';
+
+        $path = $imagesPath . $destinationPath;
+
+        if (!file_exists($path)) {
+            mkdir($path, 0755, true);
+        }
+
+        $fileName = $request->get('fname') ?? time() . '_' . randomString() . '.png';
+
+
+        $image = file_get_contents($image);
+        file_put_contents($path . $fileName, $image);
+
+        if (empty($request->get('fname'))) {
+            $file = File::create(['path' => $destinationPath . $fileName, 'type' => 1]);
+            return response()->json(['message' => 'Successfully uploaded the file.', 'id' => $file->id]);
+        }
+
+        return response()->json(['message' => 'Override successfull.']);
+    }
+
+
+    static function upload($request, $web = false)
+    {
+
+        if (!empty($request->get('type')) && $request->get('type')) {
+            return self::uploadBlob($request);
+        }
+
+
         if ($request->hasFile('file')) {
             $imagesPath = 'images/';
             $destinationPath = 'uploads/';
@@ -25,6 +60,10 @@ class FileHandling
                 $fileName = time() . '_' . $request->file('file')->getClientOriginalName();
                 $request->file('file')->move($path, $fileName);
                 $file = File::create(['path' => $destinationPath . $fileName, 'type' => 1]);
+
+                if ($web === true) {
+                    return $file->id;
+                }
 
                 return response()->json($file->id, 200);
             } else {

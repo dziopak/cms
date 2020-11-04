@@ -9,9 +9,10 @@ class Block extends Model
 {
     use QueryCacheable;
 
-    protected static $flushCacheOnUpdate = true;
     protected $fillable = ['title', 'config', 'type', 'x', 'y', 'layout_id', 'width', 'height', 'container'];
     public $timestamps = false, $cacheFor = 3600;
+    protected static $flushCacheOnUpdate = true;
+
 
     public function layouts()
     {

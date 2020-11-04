@@ -19,6 +19,7 @@ return [
     'roles_rules' => 'User roles management',
     'categories_rules' => 'Categories management',
     'pages_rules' => 'Pages management',
+    'layouts_rules' => 'Layouts management',
     'posts_rules' => 'Posts management',
     'blocks_rules' => 'Blocks management',
 
@@ -51,4 +52,8 @@ return [
     'block_create' => 'Create new block',
     'block_edit' => 'Edit block',
     'block_delete' => 'Delete block',
+
+    'layout_create' => 'Create new layout',
+    'layout_edit' => 'Edit layout',
+    'layout_delete' => 'Delete layout',
 ];

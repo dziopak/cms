@@ -7,7 +7,7 @@ class PluginUtilities
 
     static function getManifestPath($slug)
     {
-        return base_path("app/Plugins/" . $slug . "/manifest.json");
+        return base_path("app/Plugins/" . ucfirst($slug) . "/manifest.json");
     }
 
 

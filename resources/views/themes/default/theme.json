@@ -1,6 +1,0 @@
-{
-    "name": "Default",
-    "slug": "default",
-    "description": "Default theme of D-CMS",
-    "blocks": ["horizontal-menu"]
-}

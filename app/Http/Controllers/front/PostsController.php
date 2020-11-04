@@ -19,10 +19,10 @@ class PostsController extends Controller
 
     public function index()
     {
-        $blocks = getLayout(Layout::findOrFail(config('global')['general']['post_layout']));
+        $blocks = getLayout(Layout::findOrFail(config('global')['general']['layout']));
         $posts = Post::orderByDesc('created_at')->orderByDesc('id')->paginate(5);
 
-        return view($this->theme['url'] . '.modules.posts.index', compact('posts', 'blocks'));
+        return view('Theme::modules.posts.index', compact('posts', 'blocks'));
     }
 
     public function show($id)
@@ -36,6 +36,6 @@ class PostsController extends Controller
         $layout_id = config('global')['general']['post_layout'];
         $blocks = getLayout(Layout::findOrFail($layout_id));
 
-        return view($this->theme['url'] . '.modules.posts.show', compact('post', 'blocks'));
+        return view('Theme::modules.posts.show', compact('post', 'blocks'));
     }
 }

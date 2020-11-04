@@ -1,0 +1,122 @@
+.vertical-menu {
+    margin: 20px 20px 40px 20px;
+    font-size: 0.8em;
+
+    ul {
+        padding: 0;
+
+        &.align-left {
+            text-align: left;
+        }
+
+        &.align-right {
+            text-align: right;
+        }
+
+        &.align-center {
+            text-align: center;
+        }
+
+        .sub-menu {
+            padding-left: 10px;
+        }
+    }
+
+    &-title {
+        font-weight: 500;
+        text-transform: uppercase;
+        font-size: 0.9em;
+        margin-bottom: 10px;
+    }
+
+    &.style {
+        ul {
+            margin: 0;
+
+            li {
+                transition: background-color 0.2s linear;
+
+                &:hover {
+                    a {
+                        font-weight: 400;
+                        text-decoration: none;
+                    }
+                }
+
+                a {
+                    padding: 10px 15px;
+                    width: 100%;
+                    display: inline-block;
+                }
+
+                ul {
+                    display: none;
+                }
+            }
+
+            .vertical-menu-title {
+                margin-bottom: 0px;
+                border-top: 0px;
+                padding: 8px 10px;
+
+                &:hover {
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+
+    &--style-1 {
+        background-color: $style-blue-bg;
+        border: 1px solid $style-blue-border-dark;
+
+        ul {
+            li {
+                &:hover {
+                    background-color: $style-blue-bg-lighter;
+                }
+                a {
+                    color: $style-blue-color;
+                }
+                border-top: 1px solid $style-blue-border;
+            }
+        }
+
+        .vertical-menu-title {
+            color: $style-blue-color-inverse;
+            background: $style-blue-bg-darker;
+            border-bottom: 1px solid $style-blue-border-dark;
+
+            &:hover {
+                background: $style-blue-bg-darker;
+            }
+        }
+    }
+
+    &--style-2 {
+        background-color: $style-red-bg;
+        border: 1px solid $style-red-border-dark;
+
+        ul {
+            li {
+                &:hover {
+                    background-color: $style-red-bg-lighter;
+                }
+                a {
+                    color: $style-red-color;
+                }
+                border-top: 1px solid $style-red-border;
+            }
+        }
+
+        .vertical-menu-title {
+            color: $style-red-color-inverse;
+            background: $style-red-bg-darker;
+            border-bottom: 1px solid $style-red-border-dark;
+
+            &:hover {
+                background: $style-red-bg-darker;
+            }
+        }
+    }
+}

@@ -14,8 +14,8 @@
 
 
 {{-- Dropzone --}}
-@if (!empty($modal_id))
-    <div id="{{ $modal_id }}_dropzone" action="{{ route('admin.media.upload') }}" class="dropzone"></div>
+@if (!empty($modal_id ?? ''))
+    <div id="{{ $modal_id ?? '' }}_dropzone" action="{{ route('admin.media.upload') }}" class="dropzone"></div>
 @else
     <div id="dropzone" action="{{ route('admin.media.upload') }}" class="dropzone"></div>
 @endif
@@ -23,9 +23,9 @@
 
 @push('scripts-bottom')
     <script>
-        @if (empty($modal_id))
+        @if (empty($modal_id ?? ''))
             var CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
-            var selector = "{{ $modal_id ? '#'.$modal_id.'_dropzone' : '#dropzone' }}";
+            var selector = "{{ $modal_id ?? '' ? '#'.$modal_id ?? ''.'_dropzone' : '#dropzone' }}";
             Dropzone.autoDiscover = false;
             var myDropzone = new Dropzone(selector,{
                 maxFilesize: 3,  // 3 mb

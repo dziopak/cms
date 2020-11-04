@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Http\Utilities\Admin\Modules\Users\UserEntity;
-use App\Http\Requests\UsersCreateRequest;
-use App\Http\Requests\NewPasswordRequest;
-use App\Http\Requests\Users\UsersEditRequest;
+use App\Http\Requests\Admin\Modules\Users\UsersCreateRequest;
+use App\Http\Requests\Admin\Modules\Users\NewPasswordRequest;
+use App\Http\Requests\Admin\Modules\Users\UsersEditRequest;
 use App\Entities\User;
 
 use Auth;

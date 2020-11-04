@@ -51,4 +51,8 @@ return [
     'block_create' => 'Tworzenie nowych bloków',
     'block_edit' => 'Edycja bloków',
     'block_delete' => 'Usuwanie bloków',
+
+    'layout_create' => 'Tworzenie nowych szablonów',
+    'layout_edit' => 'Edycja szablonów',
+    'layout_delete' => 'Usuwanie szablonów',
 ];

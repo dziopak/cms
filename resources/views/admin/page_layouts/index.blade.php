@@ -24,7 +24,7 @@
         {{-- Pagination --}}
         <div class="float-right">{{ $layouts->render() }}</div>
 
-        {{-- TO DO --}}
-        {{-- DELETE MODAL --}}
+        {{-- Delete modal --}}
+        <x-admin.modals.delete id="delete-layout-modal" title="admin/pages.delete_title" message="admin/pages.delete_information" />
     </x-wrapper>
 @endsection

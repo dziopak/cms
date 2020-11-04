@@ -19,9 +19,10 @@ $table['actions'] = [
         'access' => 'LAYOUT_EDIT'
     ],
     'Delete' => [
-        'url' => 'admin.pages.layouts.delete',
+        'url' => 'admin.pages.layouts.destroy',
         'class' => 'danger',
-        'access' => 'LAYOUT_DELETE'
+        'access' => 'LAYOUT_DELETE',
+        'modal' => 'delete-layout-modal'
     ]
 ];
 $table['mass_edit'] = [

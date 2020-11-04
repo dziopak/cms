@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Modules;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\PagesRequest;
+use App\Http\Requests\Admin\Modules\Pages\PagesRequest;
 use App\Http\Utilities\Admin\Modules\Pages\PageEntity;
 
 use App\Entities\Page;

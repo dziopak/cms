@@ -1,0 +1,14 @@
+.user__details {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 12px;
+
+    .user__detail {
+        display: inline-block;
+        width: 100%;
+
+        &--username {
+            font-weight: 800;
+        }
+    }
+}

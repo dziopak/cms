@@ -1,4 +1,13 @@
 <script type="text/javascript">
+    var grid = GridStack.init(gridstackConfig);
+    var gridstackConfig = {
+        acceptWidgets: true,
+        animate: true,
+        minRow: 10,
+        disableOneColumnMode: true,
+        minWidth: 300,
+        infinity: false
+    }
     $('.add-widget').click(function() {
         var name = $(this).attr('data-name');
         $.get( `{{ route('admin.layouts.getwidget') }}?name=${name}`, function( html ) {

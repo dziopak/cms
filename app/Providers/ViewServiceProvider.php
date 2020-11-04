@@ -40,7 +40,7 @@ class ViewServiceProvider extends ServiceProvider
             $layouts = Layout::all()->pluck('name', 'id');
 
             $view->settings = \App\Entities\Setting::where(['group' => 'general'])->pluck('value', 'name')->toArray();
-            $view->form = getData('Admin/Modules/settings/general', array_merge($view->settings, ['themes' => $themes, 'layouts' => $layouts]));
+            $view->form = getData('Admin/Modules/Settings/general', array_merge($view->settings, ['themes' => $themes, 'layouts' => $layouts]));
         });
 
 

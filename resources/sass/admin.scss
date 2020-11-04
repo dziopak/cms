@@ -1,4 +1,12 @@
 @import "variables";
+@import "~bootstrap/scss/bootstrap";
+
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+
+// Variables
+
+// Bootstrap
 
 @import "admin/partials/sidebar";
 @import "admin/partials/top-nav";
@@ -115,6 +123,10 @@ small.close {
     font-size: 14px;
 }
 
+div.close {
+    cursor: pointer;
+}
+
 span.tag {
     background: #eee;
     padding: 10px 15px;
@@ -126,5 +138,9 @@ span.tag {
 }
 
 .tox.tox-tinymce {
+    z-index: 0;
+}
+
+#admin-main .croppie-container .cr-boundary {
     z-index: 0;
 }

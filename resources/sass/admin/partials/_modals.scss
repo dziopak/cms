@@ -108,3 +108,15 @@
         font-weight: bold;
     }
 }
+
+#fade.darker {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+div#image-preview-modal {
+    overflow: hidden;
+}
+
+div#image-preview-container {
+    overflow-x: scroll;
+}

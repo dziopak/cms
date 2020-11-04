@@ -22,7 +22,7 @@
 
             <div class="form-group">
                 {{ Form::label('layout', 'Slider\'s layout')}}
-                {{ Form::select('config['.$key.'][layout]', ['1' => 'Hero', '2' => 'Regular', '3' => 'Regular with captions'], $config['block']->config['layout'] ?? 1, ['class' => 'form-control'])}}
+                {{ Form::select('config['.$key.'][layout]', ['1' => 'Hero', '2' => 'Regular'], $config['block']->config['layout'] ?? 1, ['class' => 'form-control'])}}
             </div>
 
             <div class="form-group">

@@ -5,17 +5,17 @@
     "/js/admin/menus.js": "/js/admin/menus.js",
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
+    "/css/admin.css": "/css/admin.css",
     "/css/dashboard.css": "/css/dashboard.css",
     "/css/layouts.css": "/css/layouts.css",
     "/css/menus.css": "/css/menus.css",
     "/css/installer.css": "/css/installer.css",
-    "/../resources/views/themes/default/assets/css/theme.css": "/../resources/views/themes/default/assets/css/theme.css",
-    "/../resources/views/themes/default/assets/css/custom.css": "/../resources/views/themes/default/assets/css/custom.css",
+    "/../resources/themes/default/assets/css/theme.css": "/../resources/themes/default/assets/css/theme.css",
+    "/../resources/themes/default/assets/css/custom.css": "/../resources/themes/default/assets/css/custom.css",
     "/assets/js/nestable.js": "/assets/js/nestable.js",
     "/assets/js/Chart.js": "/assets/js/Chart.js",
     "/assets/css/Chart.min.css": "/assets/css/Chart.min.css",
     "/assets/js/glide.min.js": "/assets/js/glide.min.js",
     "/assets/js/gridstack.all.js": "/assets/js/gridstack.all.js",
-    "/assets/css/gridstack.min.css": "/assets/css/gridstack.min.css",
-    "/css/admin.css": "/css/admin.css"
+    "/assets/css/gridstack.min.css": "/assets/css/gridstack.min.css"
 }

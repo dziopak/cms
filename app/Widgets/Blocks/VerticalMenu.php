@@ -32,7 +32,8 @@ class VerticalMenu extends AbstractWidget
     // FROM THEME SETTINGS //
     private $styles = [
         0 => 'Default',
-        1 => 'Style #1'
+        1 => 'Style #1',
+        2 => 'Style #2'
     ];
 
 

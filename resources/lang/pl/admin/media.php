@@ -26,4 +26,9 @@ return [
 
     'untitled' => 'Bez tytułu',
     'no_description' => 'Brak opisu',
+
+    'preview' => 'Podgląd',
+    'preview_title' => 'Podgląd obrazu',
+    'save_as' => 'Zapisz jako nowy',
+    'override' => 'Nadpisz'
 ];

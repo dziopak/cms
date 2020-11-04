@@ -1,8 +1,12 @@
 {{-- Table --}}
-<x-table formId="media-list-form" :table="$table" :fields="$files" :controls="false" :filters="false" :form="$form ?? true"/>
+<x-table formId="media-list-form" :table="$table" :fields="$files" :controls="false" :filters="false" :mass="$mass ?? false" :form="$form ?? true"/>
+
 
 {{-- Create button --}}
-<x-create-button access="MEDIA_UPLOAD" route="admin.media.create" />
+@if (empty($controls) || $controls === true)
+    <x-create-button access="MEDIA_UPLOAD" route="admin.media.create" />
+@endif
+
 
 {{-- Pagination --}}
 @if (method_exists($files, 'render'))

@@ -2,7 +2,7 @@ const mix = require("laravel-mix");
 require("dotenv").config();
 
 let theme = process.env.THEME || "default";
-let theme_path = "resources/views/themes/" + theme + "/";
+let theme_path = "resources/themes/" + theme + "/";
 
 mix.js("resources/js/app.js", "public/js")
     .js("resources/js/admin/dashboard.js", "public/js/admin")

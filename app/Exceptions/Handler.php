@@ -4,6 +4,8 @@ namespace App\Exceptions;
 
 use Throwable;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Session\TokenMismatchException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -48,8 +50,21 @@ class Handler extends ExceptionHandler
      *
      * @throws \Exception
      */
-    public function render($request, Throwable $exception)
+    public function render($request, Throwable $e)
     {
-        return parent::render($request, $exception);
+        return parent::render($request, $e);
+    }
+
+    protected function prepareException(Throwable $exception)
+    {
+        if ($exception instanceof TokenMismatchException) {
+            return new HttpException(
+                419,
+                "{$exception->getMessage()}. Please clear your browser cookies and try again.",
+                $exception
+            );
+        }
+
+        return parent::prepareException($exception);
     }
 }

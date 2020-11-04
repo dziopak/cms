@@ -25,5 +25,10 @@ return [
     'image_data' => 'Image data',
 
     'untitled' => 'Untitled',
-    'no_description' => 'No description'
+    'no_description' => 'No description',
+
+    'preview' => 'Preview',
+    'preview_title' => 'Image preview',
+    'save_as' => 'Save as new',
+    'override' => 'Override'
 ];

@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers\Admin\Modules;
 
-use App\Http\Requests\Admin\Pages\Layouts\CreateLayoutRequest;
-use App\Http\Requests\Admin\Pages\Layouts\UpdateLayoutRequest;
+use App\Http\Requests\Admin\Modules\Layouts\CreateLayoutRequest;
+use App\Http\Requests\Admin\Modules\Layouts\UpdateLayoutRequest;
 use App\Http\Utilities\Admin\Modules\Layouts\LayoutEntity;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Entities\Layout;
+use Auth;
+
 use Widget;
 use Exception;
-
-// TO DO //
-// LAYOUTS ROLE ACCESS //
 
 class LayoutsController extends Controller
 {
@@ -27,6 +26,8 @@ class LayoutsController extends Controller
 
     public function create()
     {
+        Auth::user()->hasAccessOrRedirect('LAYOUT_CREATE');
+
         $form = getData('Admin/Modules/Layouts/layouts_form');
         return view('admin.page_layouts.create', compact('form'));
     }
@@ -40,6 +41,8 @@ class LayoutsController extends Controller
 
     public function edit(Layout $layout)
     {
+        Auth::user()->hasAccessOrRedirect('LAYOUT_EDIT');
+
         return view('admin.page_layouts.edit', [
             'form' => getData('Admin/Modules/Layouts/layouts_form'),
             'layout' => $layout->load('blocks')
@@ -55,14 +58,14 @@ class LayoutsController extends Controller
 
     public function delete(Layout $layout)
     {
+        Auth::user()->hasAccessOrRedirect('LAYOUT_DELETE');
         return view('admin.page_layouts.delete', compact('layout'));
     }
 
 
     public function destroy(Layout $layout)
     {
-        $layout->delete();
-        return redirect(route('admin.pages.layouts.index'))->with('crud', __('admin/messages.layouts.delete.success'));
+        return LayoutEntity::destroy($layout);
     }
 
 

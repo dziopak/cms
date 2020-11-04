@@ -20,7 +20,7 @@ class LangRouteServiceProvider extends RouteServiceProvider
 
     protected function mapWebRoutes()
     {
-        foreach (glob(base_path('app/Plugins/Lang/routes/*.php')) as $file) {
+        foreach (glob(base_path('app/Plugins/Lang/Routes/*.php')) as $file) {
             Route::middleware(['web', 'guest:api'])
                 ->as('Lang::')
                 ->namespace($this->langNamespace)

@@ -36,7 +36,7 @@
         @hook('post_left_content')
 
         {{-- Save button --}}
-        </x-create-button />
+        <x-create-button />
 
     </x-wrapper>
 @endsection

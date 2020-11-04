@@ -184,7 +184,7 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\laragon\www\cms\resources\js\admin\dashboard.js */"./resources/js/admin/dashboard.js");
+module.exports = __webpack_require__(/*! E:\laragon\www\cms-master\resources\js\admin\dashboard.js */"./resources/js/admin/dashboard.js");
 
 
 /***/ })

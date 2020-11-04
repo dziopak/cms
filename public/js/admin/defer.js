@@ -891,6 +891,8 @@ $(document).ready(function () {
       autosave_restore_when_empty: false,
       autosave_retention: '2m',
       image_advtab: true,
+      font_formats: "Andale Mono=andale mono,times; Arial=arial,helvetica,sans-serif; Arial Black=arial black,avant garde; Book Antiqua=book antiqua,palatino; Comic Sans MS=comic sans ms,sans-serif; Courier New=courier new,courier; Georgia=georgia,palatino; Helvetica=helvetica; Impact=impact,chicago; Symbol=symbol; Tahoma=tahoma,arial,helvetica,sans-serif; Terminal=terminal,monaco; Times New Roman=times new roman,times; Trebuchet MS=trebuchet ms,geneva; Verdana=verdana,geneva; Webdings=webdings; Wingdings=wingdings,zapf dingbats; Nunito=Nunito,helvetica,sans-serif;",
+      fontsize_formats: "10px 12px 14px 16px 18px 20px 22px 24px 26px 28px 30px 32px 34px 36px 38px 40px",
       image_class_list: [{
         title: 'None',
         value: ''
@@ -901,6 +903,13 @@ $(document).ready(function () {
         title: 'Right-aligned',
         value: 'img-right'
       }],
+      setup: function setup(ed) {
+        ed.on('init', function () {
+          this.getDoc().body.style.fontSize = '12';
+          this.getDoc().body.style.fontFamily = 'Nunito';
+          ed.target.editorCommands.execCommand("fontName", false, "Nunito");
+        });
+      },
       importcss_append: true,
       file_picker_callback: function file_picker_callback(callback, value, meta) {
         /* Provide file and text for the link dialog */
@@ -948,7 +957,7 @@ $(document).ready(function () {
       noneditable_noneditable_class: 'mceNonEditable',
       toolbar_mode: 'sliding',
       contextmenu: 'link image imagetools table',
-      content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px } .img-left { margin-left: 0px; margin-right: 20px; } .img-right { margin-right: 0px; margin-left: 20px; }'
+      content_style: 'body { font-family:Nunito,Arial,sans-serif; font-size:16px } .img-left { margin-left: 0px; margin-right: 20px; } .img-right { margin-right: 0px; margin-left: 20px; }'
     });
   } // MASS EDIT //
 
@@ -1080,7 +1089,7 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\laragon\www\cms\resources\js\admin\defer.js */"./resources/js/admin/defer.js");
+module.exports = __webpack_require__(/*! E:\laragon\www\cms-master\resources\js\admin\defer.js */"./resources/js/admin/defer.js");
 
 
 /***/ })

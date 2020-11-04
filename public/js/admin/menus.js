@@ -881,12 +881,13 @@ var removeNode = function removeNode(el) {
 /*!********************************************!*\
   !*** ./resources/js/admin/imports/ajax.js ***!
   \********************************************/
-/*! exports provided: postCall */
+/*! exports provided: postCall, postCallBlob */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postCall", function() { return postCall; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postCallBlob", function() { return postCallBlob; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 
@@ -928,6 +929,43 @@ var postCall = /*#__PURE__*/function () {
 
   return function postCall(_x, _x2, _x3) {
     return _ref.apply(this, arguments);
+  };
+}();
+var postCallBlob = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(endpoint, data, callback) {
+    var response;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.prev = 0;
+            _context2.next = 3;
+            return axios.post(endpoint, {
+              data: data
+            }, {
+              'Content-Type': "multipart/form-data"
+            });
+
+          case 3:
+            response = _context2.sent;
+            callback(response);
+            return _context2.abrupt("return", response);
+
+          case 8:
+            _context2.prev = 8;
+            _context2.t0 = _context2["catch"](0);
+            console.error(_context2.t0);
+
+          case 11:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, null, [[0, 8]]);
+  }));
+
+  return function postCallBlob(_x4, _x5, _x6) {
+    return _ref2.apply(this, arguments);
   };
 }();
 
@@ -1102,7 +1140,7 @@ var cleanFields = function cleanFields() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\laragon\www\cms\resources\js\admin\menus.js */"./resources/js/admin/menus.js");
+module.exports = __webpack_require__(/*! E:\laragon\www\cms-master\resources\js\admin\menus.js */"./resources/js/admin/menus.js");
 
 
 /***/ })

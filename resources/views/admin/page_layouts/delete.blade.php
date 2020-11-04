@@ -8,15 +8,14 @@
         <li><a href="{{ route('admin.pages.layouts.index') }}">{{ __('admin/routes.layouts') }}</a></li>
         <li>{{ __('admin/routes.delete') }}</li>
     </ul>
-@endsection
+    @endsection
 
 
-@section('content-left')
+    @section('content-left')
     <x-wrapper title="admin/posts.delete_top_title">
 
 
         <p class="alert alert-danger">{{ __('admin/posts.delete_information') }}</p>
-
         {!! Form::open(['method' => 'DELETE', 'action' => ['Admin\Modules\LayoutsController@destroy', $layout->id]]) !!}
         <div class="form-group">
             <a href="{{route('admin.posts.index')}}" role="button" class="btn btn-success">{{ __('admin/general.back_button') }}</a>

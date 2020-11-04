@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Modules;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\CategoriesRequest;
+use App\Http\Requests\Admin\Modules\Categories\CategoriesRequest;
 use App\Http\Utilities\Admin\Modules\Categories\PostCategoryEntity;
 
 use App\Entities\PostCategory;

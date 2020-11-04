@@ -132,7 +132,7 @@ function triggerResize() {
 
 $(document).ready(function () {
   var LayoutComponents = new Glide('#layout-components', glideConfig).mount();
-  var Grid = GridStack.init(gridstackConfig);
+  var grid = GridStack.init(gridstackConfig);
   $(".widget-container").each(function () {
     var container = $(this).closest(".card").find(".with-container").val();
 
@@ -257,7 +257,7 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\laragon\www\cms\resources\js\admin\layouts.js */"./resources/js/admin/layouts.js");
+module.exports = __webpack_require__(/*! E:\laragon\www\cms-master\resources\js\admin\layouts.js */"./resources/js/admin/layouts.js");
 
 
 /***/ })

@@ -2,44 +2,45 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use App\Helpers\ThemeHelpers;
-use stdClass;
 
 class ThemeServiceProvider extends ServiceProvider
 {
-    /**
-     * Register services.
-     *
-     * @return void
-     */
-    public function register()
+
+    private function registerNamespaces($slug)
     {
-        //
+        $basePath = str_replace('\\', '/', base_path("resources/themes/" . $slug));
+
+        $this->loadViewsFrom($basePath, 'Theme');
+        $this->loadViewsFrom($basePath . '/partials', 'Partial');
+        \App::make('translator')->addNamespace('Theme', $basePath . '/lang');
     }
 
-    /**
-     * Bootstrap services.
-     *
-     * @return void
-     */
+
+    private function getSiteDetails()
+    {
+        $site = (object) [
+            'full_title' => config('global.general.title') . ' - ' . config('global.general.description'),
+            'title' => config('global.general.title'),
+            'description' => config('global.general.description')
+        ];
+
+        return $site;
+    }
+
+
     public function boot()
     {
 
         if (is_installed()) {
-            // Theme data
             $theme = (new ThemeHelpers);
             $theme->data = $theme->getThemeData();
+            $this->registerNamespaces($theme->data->slug);
 
-            $site = new stdClass();
-            $site->full_title = config('global.general.title') . ' - ' . config('global.general.description');
-            $site->title = config('global.general.title');
-            $site->description = config('global.general.description');
-
-            view()->composer($theme->data->url . '/*', function ($view) use ($theme, $site) {
+            view()->composer('Theme::*', function ($view) use ($theme) {
                 $view->with('theme', $theme);
-                $view->with('site', $site);
+                $view->with('site', $this->getSiteDetails());
             });
         }
     }

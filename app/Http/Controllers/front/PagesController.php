@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Entities\Page;
+use App\Entities\Layout;
 
 class PagesController extends Controller
 {
@@ -17,10 +18,10 @@ class PagesController extends Controller
 
     public function show($id)
     {
-        $page = Page::findBySlug('test-page');
+        $page = Page::findBySlug($id);
         if (empty($page)) redirect(route('front.posts.index'));
 
-        $blocks = getLayout(\App\Entities\Layout::findOrFail($page->layout));
+        $blocks = getLayout(Layout::findOrFail($page->layout));
         return view($this->theme['url'] . '.modules.pages.show', compact('page', 'blocks'));
     }
 }

@@ -178,6 +178,33 @@ $form = [
         ],
         [
             'class' => 'form-group',
+            'label' => __('admin/roles.layouts_rules'),
+            'items' => [
+                'access[LAYOUT_CREATE]' => [
+                    'type' => 'checkbox',
+                    'label' => __('admin/roles.layout_create'),
+                    'class' => '',
+                    'value' => null,
+                    'checked_value' => 1
+                ],
+                'access[LAYOUT_EDIT]' => [
+                    'type' => 'checkbox',
+                    'label' => __('admin/roles.layout_edit'),
+                    'class' => '',
+                    'value' => null,
+                    'checked_value' => 1
+                ],
+                'access[LAYOUT_DELETE]' => [
+                    'type' => 'checkbox',
+                    'label' => __('admin/roles.layout_delete'),
+                    'class' => '',
+                    'value' => null,
+                    'checked_value' => 1
+                ],
+            ],
+        ],
+        [
+            'class' => 'form-group',
             'label' => __('admin/roles.posts_rules'),
             'items' => [
                 'access[POST_CREATE]' => [

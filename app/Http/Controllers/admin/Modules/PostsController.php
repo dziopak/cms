@@ -6,7 +6,7 @@ use App\Http\Utilities\Admin\Modules\Posts\PostEntity;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Entities\Post;
-use App\Http\Requests\PostsRequest;
+use App\Http\Requests\Admin\Modules\Posts\PostsRequest;
 use Auth;
 
 class PostsController extends Controller

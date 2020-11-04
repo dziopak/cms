@@ -24,7 +24,7 @@ function block($block, $config, $admin_options = [], $front_options = [])
         ], $admin_options));
     }
 
-    return view(ThemeHelpers::getBlockPath($block), [
+    return view('Theme::blocks.' . $block . '.index', [
         'block' => array_merge($config['block']->config, array_merge([
             'title' => $config['block']->title
         ], $front_options))
