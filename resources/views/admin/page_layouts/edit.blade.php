@@ -35,32 +35,25 @@
 
 
 @section('content-left')
-    <x-form-validation :errors="$errors" />
 
+    {{-- Validation report --}}
+    <x-form-validation :errors="$errors" />
     <div id="layout" class="grid-stack">
-        @if (!empty($layout->blocks) && count($layout->blocks) > 0)
+
+        {{-- If not empty, display blocks --}}
+        @if (empty($layout->blocks) || !count($layout->blocks) >= 0)
             @foreach($layout->blocks as $block)
-                @widget('Blocks.'.$block['type'], [
-                    'x' => $block->x,
-                    'y' => $block->y,
-                    'w' => $block->width,
-                    'h' => $block->height,
-                    'block_id' => $block->id,
-                    'is_admin' => true,
-                    'exists' => true,
-                    'block' => $block,
-                ])
+                @set($component, "admin.blocks.".$block->type)
+                <x-dynamic-component :component="$component" :block="$block" :admin="true" :exists="true" />
             @endforeach
+
+        {{-- If empty, bring back the module --}}
         @else
-        @include('admin.blocks.module', ['config' => [
-            'x' => 0,
-            'y' => 0,
-            'w' => 6,
-            'h' => 1,
-            'block_id' => 0
-        ]])
+            <x-admin.blocks.module :admin="true" :exists="true" />
         @endif
+
     </div>
+
 @endsection
 
 

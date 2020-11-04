@@ -15,9 +15,12 @@
                         {{-- Loop through blocks --}}
                         @foreach($column['BLOCKS'] as $block)
 
-                            {{-- Display module or block --}}
+                            {{-- Display block --}}
                             @if ($block->type !== 'module')
-                                @block($block['type'], serialize($block))
+                                @set($component, 'admin.blocks.'.$block->type)
+                                <x-dynamic-component :component="$component" :block="$block" />
+
+                            {{-- Or module --}}
                             @else
                                 <div class="module">
                                     @yield('module')

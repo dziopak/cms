@@ -11,7 +11,11 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('admin.dashboard.index', ['user' => Auth::user(), 'dashboard' => Auth::user()->dashboard]);
+        return view('admin.dashboard.index', [
+            'user' => Auth::user(),
+            'dashboard' => Auth::user()->dashboard,
+            'prefix' => 'admin.widgets.'
+        ]);
     }
 
     public function getWidget(Request $request)

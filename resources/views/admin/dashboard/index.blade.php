@@ -37,15 +37,8 @@
     <div id="dashboard" class="grid-stack">
         @if ($widgets)
             @foreach($widgets as $widget)
-
-                @widget('Dashboard.'.$widget['id'], [
-                    'x' => $widget['x'],
-                    'y' => $widget['y'],
-                    'w' => $widget['w'],
-                    'h' => $widget['h'],
-                    'auto' => false
-                ])
-
+                @set($component, $prefix.$widget['id'])
+                <x-dynamic-component :component="$component" :widget="$widget" :auto="true" />
             @endforeach
         @endif
     </div>

@@ -13,22 +13,31 @@ function decodeBlockConfig($config)
 }
 
 
-function block($block, $config, $admin_options = [], $front_options = [])
+function displayAdminBlock($block, $config, $admin_options)
 {
-    if (empty($config['block']->config)) $config['block']->config = [];
+    return view('admin.blocks.' . $block, array_merge([
+        'config' => $config,
+        'key' => randomString(15),
+    ], $admin_options));
+}
 
-    if ($config['is_admin']) {
-        return view('admin.blocks.' . $block, array_merge([
-            'config' => $config,
-            'key' => randomString(15),
-        ], $admin_options));
-    }
-
+function displayBlock($block, $config, $front_options)
+{
     return view('Theme::blocks.' . $block . '.index', [
         'block' => array_merge($config['block']->config, array_merge([
             'title' => $config['block']->title
         ], $front_options))
     ]);
+}
+
+
+function block($block, $config, $admin_options = [], $front_options = [])
+{
+    if (empty($config['block']->config)) $config['block']->config = [];
+
+    return $config['is_admin'] ?
+        displayAdminBlock($block, $config, $admin_options) :
+        displayBlock($block, $config, $front_options);
 }
 
 

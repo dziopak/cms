@@ -1,20 +1,16 @@
 <?php
 
-namespace App\Widgets\Dashboard;
+namespace App\View\Components\Admin\Widgets;
 
-use Arrilot\Widgets\AbstractWidget;
 use DB;
-use Carbon;
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
+use Illuminate\View\Component;
 
-
-class ContentStatistics extends AbstractWidget
+class ContentStatistics extends Component
 {
-    /**
-     * The configuration array.
-     *
-     * @var array
-     */
-    protected $config = [
+
+    public $config = [
         'days' => 320,
         'x' => '0',
         'y' => '0',
@@ -29,15 +25,22 @@ class ContentStatistics extends AbstractWidget
         'icon' => 'fa fas fa-book'
     ];
 
-    /**
-     * Treat this method as a controller action.
-     * Return view() or other content to display.
-     */
-    public function run()
+
+    public function __construct($widget, $auto)
     {
-        $start_date = \Carbon\Carbon::now()->subDays($this->config['days'] +  1);
-        $end_date = \Carbon\Carbon::now();
-        $period = \Carbon\CarbonPeriod::create($start_date, $end_date);
+        $this->config['x'] = $widget['x'];
+        $this->config['y'] = $widget['y'];
+        $this->config['w'] = $widget['w'];
+        $this->config['h'] = $widget['h'];
+        $this->config['auto'] = $auto;
+    }
+
+
+    public function render()
+    {
+        $start_date = Carbon::now()->subDays($this->config['days'] +  1);
+        $end_date = Carbon::now();
+        $period = CarbonPeriod::create($start_date, $end_date);
 
         $data = [];
 
