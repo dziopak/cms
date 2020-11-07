@@ -27,6 +27,6 @@ class PageCategoriesController extends Controller
 
         $type = 'pages';
 
-        return view($this->theme['url'] . '.modules.categories.show', compact('category', 'blocks', 'entries', 'type'));
+        return view('Theme::modules.categories.show', compact('category', 'blocks', 'entries', 'type'));
     }
 }

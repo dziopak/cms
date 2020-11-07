@@ -8,8 +8,11 @@ Route::group(['prefix' => 'blocks', 'as' => 'blocks.'], function () {
     //SLIDERS ROUTES
     require base_path('routes/web/admin/blocks/sliders.php');
 
-    //BLOCKS ROUTES
+    //MENUS ROUTES
     require base_path('routes/web/admin/blocks/menus.php');
+
+    //MENUS ROUTES
+    require base_path('routes/web/admin/blocks/carousels.php');
 });
 
 

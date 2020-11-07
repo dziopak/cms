@@ -25,7 +25,7 @@ return [
         'menus' => 'Menu',
         'headers' => 'Headery',
         'sliders' => 'Slidery',
-        'carousells' => 'Karuzele',
+        'carousels' => 'Karuzele',
         'forms' => 'Formularze',
     ],
     'addons' => 'Dodatki',

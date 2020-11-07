@@ -16,3 +16,5 @@ yarn-error.log
 /Modules-backup
 /TO DO.txt
 /storage/installed
+/public/images/uploads
+*.psd

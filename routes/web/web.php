@@ -13,7 +13,6 @@ Route::get('/clear-cache', function () {
 
 Route::get('theme/assets/{type}/{filename}', function ($type, $filename) {
     $path = base_path() . '/resources/themes/' . ThemeHelpers::activeTheme() . '/assets/' . $type . "/" . $filename;
-
     $file = File::get($path);
 
     switch ($type) {
@@ -26,8 +25,8 @@ Route::get('theme/assets/{type}/{filename}', function ($type, $filename) {
             break;
     }
 
+    ob_end_clean();
     $response = Response::make($file, 200);
     $response->header("Content-Type", $type);
-
     return $response;
 });

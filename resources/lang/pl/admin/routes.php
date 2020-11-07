@@ -15,6 +15,7 @@ return [
     "logs" => "Logi systemowe",
     "menus" => "Menu",
     "sliders" => "Slajdery",
+    "carousels" => "Karuzele",
     "modules" => "Wtyczki",
     "roles" => "Rangi",
     "files" => "Menadżer plików",

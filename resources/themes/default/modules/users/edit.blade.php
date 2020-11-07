@@ -1,4 +1,4 @@
-@extends($theme->data->url.'.index')
+@extends('Theme::index')
 
 @section('module')
     {!! Form::model($user, ['method' => 'PATCH', 'route' => 'front.user.update', 'files' => true]) !!}

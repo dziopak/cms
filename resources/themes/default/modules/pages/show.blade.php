@@ -1,4 +1,4 @@
-@extends($theme->data->url.'.index')
+@extends('Theme::index')
 
 @set($title, $page->name)
 @set($meta_title, $page->meta_title)

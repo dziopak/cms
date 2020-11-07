@@ -17,26 +17,33 @@
 
 <div class="horizontal-menu grid-item {{ $block['classes'] ?? "" }}">
 
+    {{-- Logo --}}
+    <a href="{{ URL::to('/') }}"><img class="horizontal-menu__logo" src="{{ getAsset('img/logo.jpg') }}" /></a>
+
+    {{-- Menu --}}
     @if(!empty($block['menu']))
-        <ul class="{{ $class }}">
-            {{-- Menu item's loop --}}
-            @foreach($block['menu'] as $item)
-                <li class="{{ $item['class'] }}">
-                    <a href="{{ $item['link'] }}" title="">{{ $item['label'] }}</a>
+        <div class="horizontal-menu__container">
+            <ul class="horizontal-menu__list {{ $class }}">
+                {{-- Menu item's loop --}}
+                @foreach($block['menu'] as $item)
+                    <li class="horizontal-menu__list-item {{ $item['class'] }}">
+                        <a class="horizontal-menu__link" href="{{ $item['link'] }}" title="">{{ $item['label'] }}</a>
 
-                    {{-- 2nd level loop --}}
-                    @if(isActivePage($item['link']))
-                        <ul class="sub-menu">
-                            @foreach( $item->items as $child )
-                                <li class=""><a href="{{ $child['link'] }}" title="">{{ $child['label'] }}</a></li>
-                            @endforeach
-                        </ul>
-                    @endif
+                        {{-- 2nd level loop --}}
+                        @if(isActivePage($item['link']))
+                            <ul class="sub-menu">
+                                @foreach( $item->items as $child )
+                                    <li class=""><a href="{{ $child['link'] }}" title="">{{ $child['label'] }}</a></li>
+                                @endforeach
+                            </ul>
+                        @endif
 
-                </li>
-            @endforeach
+                    </li>
+                @endforeach
 
-        </ul>
+            </ul>
+            <div class="horizontal-menu__underline"></div>
+        </div>
     @endif
 
 </div>

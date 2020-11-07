@@ -11,7 +11,7 @@ class PostsComposer
     private function index($request, $view)
     {
         return [
-            'posts' => Post::with('author', 'thumbnail')->orderByDesc('id')->filter($request)->paginate(15),
+            'posts' => Post::with('author', 'thumbnail')->filter($request)->paginate(15),
             'categories' => array_merge([0 => __('admin/general.no_category')], PostCategory::all('id', 'name')->pluck('name', 'id')->toArray()),
             'table' => getData('Admin/Modules/Posts/posts_index_table')
         ];

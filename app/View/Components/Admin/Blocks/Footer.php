@@ -22,14 +22,16 @@ class Footer extends Component
 
     public function __construct($block, $admin = false, $exists = false)
     {
-        $this->config['x'] = $block->x;
-        $this->config['y'] = $block->y;
-        $this->config['w'] = $block->width;
-        $this->config['h'] = $block->height;
-        $this->config['block_id'] = $block->id;
+        if ($block) {
+            if (!empty($block->x)) $this->config['x'] = $block->x;
+            if (!empty($block->y)) $this->config['y'] = $block->y;
+            if (!empty($block->width)) $this->config['w'] = $block->width;
+            if (!empty($block->height)) $this->config['h'] = $block->height;
+            if (!empty($block->auto)) $this->config['auto'] = $block->auto;
+            $this->config['block'] = $block;
+        }
         $this->config['is_admin'] = $admin;
         $this->config['exists'] = $exists;
-        $this->config['block'] = $block;
     }
 
 

@@ -184,14 +184,17 @@ $(document).ready(function () {
       $('input[name="config[' + key + '][container]"]').attr("value", "false");
     }
   });
-  $("#fade, .block-settings button").click(function (e) {
+  $("#fade, #fade *, .block-settings button.btn").click(function (e) {
     e.preventDefault();
     e.stopImmediatePropagation();
+    e.stopPropagation();
     $("#fade").fadeOut("100");
     $(".block-settings").fadeOut("100");
   });
   $(".block-settings").click(function (e) {
     e.preventDefault();
+    e.stopImmediatePropagation();
+    e.stopPropagation();
   });
   $(".widget-remove").click(function () {
     $(this).closest(".grid-stack-item").remove();

@@ -61,3 +61,9 @@ function replaceRouteParam($url, $field)
 
     return $url;
 }
+
+
+function getAsset($file)
+{
+    return '/theme/assets/' . $file;
+}

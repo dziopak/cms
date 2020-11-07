@@ -14,42 +14,41 @@ class Slider extends Component
         'min-w' => '6',
         'min-h' => '1',
         'non-resizeable' => false,
-        'header' => 'Module',
+        'header' => 'Slider',
         'x' => 0,
         'y' => 0,
-        'id' => 'module-block',
+        'id' => 'slider-block',
+        'auto' => true
     ];
 
 
     public function __construct($block, $admin = false, $exists = false)
     {
-        $this->config['x'] = $block->x;
-        $this->config['y'] = $block->y;
-        $this->config['w'] = $block->width;
-        $this->config['h'] = $block->height;
+        if ($block) {
+            if (!empty($block->x)) $this->config['x'] = $block->x;
+            if (!empty($block->y)) $this->config['y'] = $block->y;
+            if (!empty($block->width)) $this->config['w'] = $block->width;
+            if (!empty($block->height)) $this->config['h'] = $block->height;
+            if (!empty($block->auto)) $this->config['auto'] = $block->auto;
+            $this->config['block'] = $block;
+        }
         $this->config['block_id'] = $block->id;
         $this->config['is_admin'] = $admin;
         $this->config['exists'] = $exists;
-        $this->config['block'] = $block;
     }
 
-    public function convertSlidersList()
-    {
-        $all = \App\Entities\Slider::all();
-        $sliders = [];
-
-        foreach ($all as $slider) {
-            $sliders[$slider->id] = $slider->name;
-        }
-
-        return $sliders;
-    }
 
 
     public function render()
     {
         $this->config = decodeBlockConfig($this->config);
+
         $slider = \App\Entities\Slider::find($this->config['block']->config['slider_id'] ?? 0);
-        return block('slider', $this->config, ['sliders' => $this->convertSlidersList()], ['slider' => $slider]);
+        $slider_list = \App\Entities\Slider::all()
+            ->pluck('name', 'id')
+            ->toArray();
+
+
+        return block('slider', $this->config, ['sliders' => $slider_list], ['slider' => $slider]);
     }
 }

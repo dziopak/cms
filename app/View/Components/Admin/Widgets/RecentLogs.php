@@ -40,6 +40,9 @@ class RecentLogs extends Component
 
     public function render()
     {
-        return view('admin.widgets.recent_logs');
+        return view('admin.widgets.recent_logs', [
+            'config' => $this->config,
+            'logs' => $this->logs
+        ]);
     }
 }

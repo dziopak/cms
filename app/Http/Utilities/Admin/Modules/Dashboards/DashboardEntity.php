@@ -10,11 +10,22 @@ class DashboardEntity
 {
     public static function getWidget($request)
     {
-        $widget = $request->get('name');
-        if (empty($widget)) return response()->json('URL parameter "name" is missing.', 404);
+
+        if (empty($request->get('name'))) return response()->json('URL parameter "name" is missing.', 404);
 
         try {
-            $widget = Widget::run('dashboard.' . $widget);
+            $name = camelCase($request->get('name'));
+            $name = 'App\View\Components\Admin\Widgets\\' . ucfirst($name);
+            $block = [
+                'id' => $request->get('name'),
+                'x' => 0,
+                'y' => 0,
+                'auto' => true,
+                'w' => 1,
+                'h' => 1
+            ];
+            $widget = new $name($block, true);
+            $widget = $widget->render();
         } catch (Exception $e) {
             return response()->json(['message' => $e->getMessage(), 'status' => '404'], 404);
         }
@@ -26,13 +37,8 @@ class DashboardEntity
     public static function update($request)
     {
         $items = $request->get('items');
-        $dashboard = Auth::user()->dashboard;
+        Auth::user()->dashboard->update(['widgets' => serialize($items ?? [])]);
 
-        if (is_array($items)) {
-            $dashboard->update(['widgets' => serialize($items)]);
-            return response()->json(['success' => true], 200);
-        }
-
-        return response()->json(['success' => false], 400);
+        return response()->json(['success' => true], 200);
     }
 }

@@ -33,10 +33,12 @@ class PostsStatistics extends Component
         $this->config['w'] = $widget['w'];
         $this->config['h'] = $widget['h'];
         $this->config['auto'] = $auto;
+
+        $this->data = $this->getData();
     }
 
 
-    private function getData()
+    public function getData()
     {
         $end_date = Carbon::now();
         $start_date = Carbon::now()->subDays($this->config['days'] +  1);
@@ -60,7 +62,8 @@ class PostsStatistics extends Component
     public function render()
     {
         return view('admin.widgets.posts_statistics', [
-            'data' => $this->getData()
+            'data' => $this->data,
+            'config' => $this->config
         ]);
     }
 }

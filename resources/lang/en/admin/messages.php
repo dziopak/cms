@@ -142,6 +142,21 @@ return [
             'mass' => [
                 'delete' => 'Successfully deleted selected sliders.'
             ]
+        ],
+        'carousels' => [
+            'items' => [
+                'attach' => 'Slides attached successfully',
+                'detach' => 'Slides detached successfully.'
+            ],
+            'update' => [
+                'success' => 'Carousel successfully updated.',
+            ],
+            'delete' => [
+                'success' => 'Carousel successfully deleted.',
+            ],
+            'mass' => [
+                'delete' => 'Successfully deleted selected carousels.'
+            ]
         ]
     ],
     'plugins' => [

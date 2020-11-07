@@ -27,16 +27,15 @@
             }
         });
     }
-    
-    $('.add-widget').click(function() {
+    $(document).on("click", '.add-widget', function(event) {
         var name = $(this).attr('data-name');
         $.get( `{{ route('admin.dashboard.getwidget') }}?name=${name}`, function( html ) {
             if (typeof html === "string") {
-                
+
                 // Append new widget and auto position it
                 $('#dashboard').append(html);
                 grid.addWidget($('#'+name));
-                
+
                 // Scroll to new widget
                 document.getElementById(name).scrollIntoView();
                 $('#'+name).removeAttr('id');

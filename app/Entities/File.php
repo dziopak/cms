@@ -41,6 +41,11 @@ class File extends Model
         return $this->belongsToMany(Slider::class);
     }
 
+    public function carousels()
+    {
+        return $this->belongsToMany(Carousel::class);
+    }
+
 
     public function getRelated()
     {

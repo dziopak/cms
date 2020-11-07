@@ -9,8 +9,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Entities\Layout;
 use Auth;
-
-use Widget;
 use Exception;
 
 class LayoutsController extends Controller
@@ -71,12 +69,19 @@ class LayoutsController extends Controller
 
     public function getBlock(Request $request)
     {
-        $widget = $request->get('name');
-
-        if (empty($widget)) return response()->json('URL parameter "name" is missing.', 404);
+        if (empty($request->get('name'))) return response()->json('URL parameter "name" is missing.', 404);
 
         try {
-            $widget = Widget::run('Blocks.' . $widget, ['is_admin' => true]);
+            $name = camelCase($request->get('name'));
+            $name = 'App\View\Components\Admin\Blocks\\' . ucfirst($name);
+            $block = (object) [
+                'id' => $request->get('name'),
+                'x' => 0,
+                'y' => 0,
+                'auto' => true
+            ];
+            $widget = new $name($block, true);
+            $widget = $widget->render();
         } catch (Exception $e) {
             return response()->json(['message' => $e->getMessage(), 'status' => '404'], 404);
         }

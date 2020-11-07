@@ -1,0 +1,13 @@
+.carousel {
+    &__container {
+        margin: 30px 80px;
+        text-align: center;
+    }
+
+    &__title {
+        font-size: 16px;
+        color: #242f51;
+        font-weight: 500;
+        margin-bottom: 20px;
+    }
+}

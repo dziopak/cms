@@ -40,6 +40,9 @@ class RecentPosts extends Component
 
     public function render()
     {
-        return view('admin.widgets.recent_posts');
+        return view('admin.widgets.recent_posts', [
+            'posts' => $this->posts,
+            'config' => $this->config
+        ]);
     }
 }

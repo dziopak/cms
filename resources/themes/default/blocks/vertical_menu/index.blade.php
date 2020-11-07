@@ -15,17 +15,17 @@
     }
 @endphp
 
-<div class="vertical-menu grid-item {{ $block['classes'] ?? "" }}{{ !empty($block['style']) ? " style vertical-menu--style-".$block['style'] : "" }}">
+<div class="vertical-menu grid-item {{ $block['classes'] ?? "" }}{{ !empty($block['style']) ? " vertical-menu--style-".$block['style'] : "" }}">
     @if(!empty($block['menu']))
-        <ul class="{{ $class }}">
+        <ul class="vertical-menu__list {{ $class }}">
 
             {{-- Nav title --}}
-            <li class="vertical-menu-title">{{ $block['title'] }}</li>
+            <li class="vertical-menu__title">{{ $block['title'] }}</li>
 
             {{-- Menu item's loop --}}
             @foreach($block['menu'] as $item)
                 <li class="{{ $item['class'] }}">
-                    <a href="{{ $item['link'] }}" title="">{{ $item['label'] }}</a>
+                    <a class="vertical-menu__link" href="{{ $item['link'] }}" title="">{{ $item['label'] }}</a>
 
                     {{-- 2nd level loop --}}
                     @if(isActivePage($item['link']))

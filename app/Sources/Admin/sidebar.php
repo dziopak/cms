@@ -59,8 +59,8 @@ $items = [
             'menus' => [
                 'route' => 'admin.blocks.menus.index'
             ],
-            'carousells' => [
-                'route' => 'admin.dashboard.index'
+            'carousels' => [
+                'route' => 'admin.blocks.carousels.index'
             ],
             'sliders' => [
                 'route' => 'admin.blocks.sliders.index'

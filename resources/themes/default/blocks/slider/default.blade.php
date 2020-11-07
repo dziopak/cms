@@ -4,14 +4,6 @@
             @foreach($block['slider']->files as $slide)
                 <div class="slide glide__slide">
                     <img src="/images/{{$slide->path}}">
-                    {{-- <div class="slide-content">
-                        <h1>{{ $slide->pivot->title ?? null}}</h1>
-                        <p>{{ $slide->pivot->description ?? null }}</p>
-
-                        @if ($slide->pivot->url)
-                        <a class="btn cta" href="{{ $slide->pivot->url }}">Read more</a>
-                        @endif
-                    </div> --}}
                 </div>
             @endforeach
         </div>

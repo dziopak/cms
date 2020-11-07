@@ -15,7 +15,7 @@ class RecentlyLoggedIn extends Component
         'w' => 4,
         'h' => 5,
         'min-w' => '4',
-        'min-h' => '1',
+        'min-h' => '5',
         'id' => 'recentlyLoggedIn',
         'auto' => true,
         'header' => 'admin/widgets/recently_logged_in.title',
@@ -40,6 +40,9 @@ class RecentlyLoggedIn extends Component
 
     public function render()
     {
-        return view('admin.widgets.recently_logged_in');
+        return view('admin.widgets.recently_logged_in', [
+            'users' => $this->users,
+            'config' => $this->config
+        ]);
     }
 }

@@ -27,7 +27,7 @@ class UsersController extends Controller
         $form = getData('Front/Modules/Users/user_update_form');
         $blocks = getLayout(Layout::findOrFail(1));
 
-        return view($this->theme['url'] . '/modules/users/edit', compact('user', 'blocks', 'form'));
+        return view('Theme::modules.users.edit', compact('user', 'blocks', 'form'));
     }
 
     public function update(UsersEditRequest $request)

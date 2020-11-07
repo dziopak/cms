@@ -22,6 +22,6 @@ class PagesController extends Controller
         if (empty($page)) redirect(route('front.posts.index'));
 
         $blocks = getLayout(Layout::findOrFail($page->layout));
-        return view($this->theme['url'] . '.modules.pages.show', compact('page', 'blocks'));
+        return view('Theme::modules.pages.show', compact('page', 'blocks'));
     }
 }

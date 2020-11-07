@@ -25,6 +25,6 @@ class WidgetDivider extends Component
 
     public function render()
     {
-        return view('admin.widgets.widget_divider');
+        return view('admin.widgets.widget_divider', ['config' => (array) $this->config]);
     }
 }

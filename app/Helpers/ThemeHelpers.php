@@ -73,3 +73,8 @@ class ThemeHelpers
         return '/theme/assets/' . $file;
     }
 }
+
+function getAsset($file)
+{
+    return '/theme/assets/' . $file;
+}

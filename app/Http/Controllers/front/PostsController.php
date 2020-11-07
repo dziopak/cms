@@ -20,7 +20,7 @@ class PostsController extends Controller
     public function index()
     {
         $blocks = getLayout(Layout::findOrFail(config('global')['general']['layout']));
-        $posts = Post::orderByDesc('created_at')->orderByDesc('id')->paginate(5);
+        $posts = Post::orderByDesc('created_at')->orderByDesc('id')->paginate(3);
 
         return view('Theme::modules.posts.index', compact('posts', 'blocks'));
     }

@@ -1,54 +1,99 @@
-.slider img {
-    min-width: 100%;
-}
+.slider {
+    &__image {
+        align-self: center;
+        min-width: 100%;
+    }
 
-.hero-slider,
-.hero-slider .glide__track,
-.glide__slide {
-    max-height: 700px;
-}
+    &--hero {
+        .slider__slide {
+            list-style: none;
 
-.hero-slider .slide-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #fff;
-    text-align: center;
-    display: none;
-}
+            &.glide__slide--active .slider__content {
+                display: block;
+            }
+        }
 
-.hero-slider .glide__slide--active .slide-content {
-    display: block;
-}
+        .slider__title {
+            color: #242f51;
+            margin-bottom: 30px;
+        }
 
-li.slide {
-    list-style: none;
-}
+        .slider__slogan {
+            margin-bottom: 30px;
+            color: #616368;
+            font-size: 18px;
+        }
 
-.glide__slides {
-    transform: none !important;
-    width: auto !important;
-    display: block;
-    height: 100%;
-}
-.glide__slide {
-    position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 0;
-    transition: opacity 1s;
-    display: flex;
-}
+        .glide__slide--active .slide-content {
+            display: block;
+        }
 
-.glide__slide img {
-    align-self: center;
-}
+        .slider__content {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            color: #000;
+            text-align: left;
+            width: 40%;
+        }
 
-.glide__slide:first-child {
-    position: relative;
-}
-.glide__slide--active {
-    z-index: 1;
-    opacity: 1;
+        .slider__bullet {
+            border: 1px solid #828181;
+
+            &:hover {
+                border: 2px solid #444;
+            }
+
+            &--active {
+                background-color: #2500f9;
+                opacity: 0.5;
+
+                &:hover {
+                    opacity: 1;
+                    border: 1px solid #828181;
+                }
+            }
+        }
+
+        .container {
+            height: 100%;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0;
+            margin: 0 60px;
+        }
+    }
+    .glide {
+        &__slides {
+            transform: none !important;
+            width: auto !important;
+            display: block;
+        }
+
+        &__slide {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            transition: opacity 2s;
+            display: flex;
+
+            &--active {
+                z-index: 1;
+                opacity: 1;
+            }
+
+            &:first-child {
+                position: relative;
+            }
+        }
+
+        &__arrow {
+            color: #000;
+        }
+    }
 }

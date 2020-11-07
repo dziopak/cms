@@ -1,19 +1,36 @@
 @extends('Theme::index')
 
 @section('module')
-    @foreach($posts as $post)
-        <div class="post">
-            @if (!empty($post->thumbnail))
-                <div class="post__thumbnail-col">
-                    <a href="{{ route('front.posts.show', ['id' => $post->id]) }}">
-                        <img class="post__thumbnail" src="/images/{{ $post->thumbnail->path }}" alt="{{ $post->name }}" width="140">
-                    </a>
-                </div>
-            @endif
-            <h3 class="post__title">{{ $post->name }}</h3>
-            <p class="post__excerpt">{!! $post->excerpt !!}</p>
-            <a href="{{ route('front.posts.show', ['id' => $post->id]) }}" class="btn btn-primary">Read more</a>
+
+
+    @set($i, 0)
+    @foreach($posts as $key => $post)
+        @php
+            $even = $i % 2;
+            $i++;
+        @endphp
+
+
+        <div class="post row">
+
+            {{-- Left column --}}
+            <div class="post__column post__column--left col">
+                @if ($even)
+                    @include('Theme::modules.posts.partials.thumbnail')
+                @else
+                    @include('Theme::modules.posts.partials.content')
+                @endif
+            </div>
+
+            {{-- Right column --}}
+            <div class="post__column post__column--right col">
+                @if ($even)
+                    @include('Theme::modules.posts.partials.content')
+                @else
+                    @include('Theme::modules.posts.partials.thumbnail')
+                @endif
+            </div>
+
         </div>
     @endforeach
-    {{ $posts->render() }}
 @endsection

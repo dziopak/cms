@@ -33,6 +33,7 @@ class ViewServiceProvider extends ServiceProvider
 
             'App\View\Composers\Admin\Blocks\MenusComposer' => 'admin.blocks.menus.*',
             'App\View\Composers\Admin\Blocks\SlidersComposer' => 'admin.blocks.sliders.*',
+            'App\View\Composers\Admin\Blocks\CarouselsComposer' => 'admin.blocks.carousels.*',
         ]);
 
         view()->composer('admin.settings.general', function ($view) {

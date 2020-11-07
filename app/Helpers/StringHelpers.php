@@ -10,3 +10,8 @@ function randomString($length = 10)
     }
     return $randomString;
 }
+
+function camelCase($string)
+{
+    return ucwords(str_replace('-', '', $string));
+}

@@ -28,7 +28,7 @@
 
 
 @section('before')
-    <div id="fade"></div>
+    <div id="fade" class="layout-edit"></div>
     @include('admin.page_layouts.partials.controls')
     {!! Form::model($layout, ['method' => 'PATCH', 'action' => ['Admin\Modules\LayoutsController@update', $layout->id], 'class' => 'w-100', 'id' => 'LayoutUpdateForm']) !!}
 @endsection

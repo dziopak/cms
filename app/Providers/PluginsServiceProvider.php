@@ -7,11 +7,6 @@ use Illuminate\Support\ServiceProvider;
 
 class PluginsServiceProvider extends ServiceProvider
 {
-
-    public function register()
-    {
-    }
-
     public function boot()
     {
         foreach (PluginUtilities::readAllManifests() as $plugin) {
@@ -20,8 +15,8 @@ class PluginsServiceProvider extends ServiceProvider
                 $this->app->register(ucfirst($plugin['boot']));
 
                 // Register lang namespace
-                $langPath = base_path(str_replace('\\', '/', $plugin['path']) . 'Translations');
-                \App::make('translator')->addNamespace($plugin['slug'], $langPath);
+                $langPath = str_replace('\\', '/', base_path($plugin['path']) . 'Translations');
+                \App::make('translator')->addNamespace(ucfirst($plugin['slug']), $langPath);
             }
         }
     }

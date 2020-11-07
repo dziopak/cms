@@ -1,4 +1,4 @@
-@extends($theme->data->url.'.index')
+@extends('Theme::index')
 @set($title, $category->name)
 
 @section('module')

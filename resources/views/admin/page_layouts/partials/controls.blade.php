@@ -20,9 +20,9 @@
             </div>
 
 
-            <div class="add-widget" data-name="carousell">
-                <x-new-widget title="Carousell">
-                    <p>Customizable slick carousell</p>
+            <div class="add-widget" data-name="carousel">
+                <x-new-widget title="Carousel">
+                    <p>Customizable slick carousel</p>
                 </x-new-widget>
             </div>
 

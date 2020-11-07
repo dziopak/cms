@@ -8,6 +8,7 @@
 @import "../../blocks/footer/style.scss";
 @import "../../blocks/header/style.scss";
 @import "../../blocks/slider/style.scss";
+@import "../../blocks/carousel/style.scss";
 @import "../../blocks/login/style.scss";
 
 // Modules
@@ -19,17 +20,22 @@
 .container-md,
 .container-sm,
 .container {
-    max-width: 1400px;
+    max-width: 1480px;
+    padding: 0px 40px;
+}
+
+.inner-container {
+    margin: 0 auto;
 }
 
 body {
-    font-family: "Nunito Sans", sans-serif;
+    font-family: "Poppins", sans-serif;
     color: #333333;
-    font-weight: 200;
+    font-weight: 300;
     line-height: 1.7;
     padding: 0;
     margin: 0;
-    background: #fff;
+    background: #fdfdff;
 }
 
 ul {
@@ -38,25 +44,16 @@ ul {
 
 a {
     text-decoration: none;
+    color: #414141;
 }
 
 img {
     max-width: 100%;
 }
 
-.block-row.row {
-    max-width: 100%;
-    margin: 0;
-}
-
-.block-row .block-col {
-    padding: 0;
-
-    .vertical-menu,
-    .login-block {
-        &:first-child {
-            margin-top: 80px;
-        }
+.block-row {
+    &__-col {
+        padding: 0;
     }
 }
 
@@ -66,11 +63,18 @@ img {
     padding: 15px 40px;
     margin: 20px auto;
     font-size: 12px;
-    font-family: Raleway;
     display: inline-block;
 
     &.cta {
-        background: #fdaf0e;
+        background: #3591dc;
+        padding: 15px 55px;
+        color: #fff;
+        border-radius: 50px;
+        font-weight: 600;
+
+        &:hover {
+            background-color: #257cc3;
+        }
     }
 }
 
@@ -93,7 +97,6 @@ h2 {
 
 h1 {
     font-size: 4em;
-    text-transform: uppercase;
     margin-top: 20px auto;
 }
 
@@ -123,20 +126,14 @@ h5 {
 }
 
 .module {
-    margin: 0 20px;
-    padding: 80px 10px 40px;
-
     h3 {
         margin-bottom: 20px;
     }
 
     p {
-        font-size: 1em;
-    }
-
-    .btn {
-        padding: 10px 25px 8px;
-        font-size: 10px;
+        font-size: 18px;
+        color: #616368;
+        line-height: 1.8;
     }
 }
 
@@ -162,4 +159,8 @@ h5 {
 
 .btn {
     padding: 10px 25px 8px;
+}
+
+.block-row {
+    margin-top: 50px;
 }
