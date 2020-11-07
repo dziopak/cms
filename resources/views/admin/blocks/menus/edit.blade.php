@@ -25,16 +25,29 @@
 @section('content-left')
 
     <x-wrapper title="admin/blocks/menus.menu_data_title">
+        {!! Form::model($menu, ['method' => 'PATCH', 'action' => ['Admin\Blocks\MenusController@update', $menu->id], 'class' => 'w-100']) !!}
 
-        {{-- Name input --}}
+            {{-- Name input --}}
+            <div class="form-group">
+                {!! Form::label('name', __('admin/blocks/menus.name').':') !!}
+                {!! Form::text('name', $menu->name, ['class' => 'form-control']) !!}
+            </div>
+
+            {{-- Save button --}}
+            <x-update-button />
+
+        {!! Form::close() !!}
+    </x-wrapper>
+
+
+    <x-wrapper title="Item type">
+        {{-- Type Checkbox --}}
         <div class="form-group">
-            {!! Form::label('name', __('admin/blocks/menus.name').':') !!}
-            {!! Form::text('name', $menu->name, ['class' => 'form-control']) !!}
+
+            {!! Form::label('type', 'Entry type:') !!}
+            {!! Form::select('type', $entities, '0', ['class' => 'form-control', 'id' => 'entry-type']) !!}
+
         </div>
-
-        {{-- Save button --}}
-        <x-update-button />
-
     </x-wrapper>
 
 
@@ -44,12 +57,6 @@
         <div class="form-group">
             {!! Form::label('item_label', __('admin/blocks/menus.item_label').':') !!}
             {!! Form::text('item_label', null, ['class' => 'form-control']) !!}
-        </div>
-
-        {{-- Link type --}}
-        <div class="form-group">
-            {!! Form::label('item_type', __('admin/blocks/menus.item_type').':') !!}
-            {!! Form::select('item_type', $item_types, null, ['class' => 'form-control']) !!}
         </div>
 
         {{-- Extra Classess --}}
@@ -63,7 +70,12 @@
             {!! Form::label('item_url', __('admin/blocks/menus.item_url').':') !!}
             {!! Form::text('item_url', null, ['class' => 'form-control']) !!}
         </div>
-        <hr/>
+
+
+        {{-- MODEL DATA --}}
+        {!! Form::hidden('item_model_id', null, ['id' => 'item_model_id']) !!}
+        {!! Form::hidden('item_model_type', null, ['id' => 'item_model_type']) !!}
+
 
 
         {{-- Search & Results --}}

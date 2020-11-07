@@ -982,6 +982,8 @@ var postCallBlob = /*#__PURE__*/function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _imports_ajax__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./imports/ajax */ "./resources/js/admin/imports/ajax.js");
 /* harmony import */ var _imports_DOMHelpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./imports/DOMHelpers */ "./resources/js/admin/imports/DOMHelpers.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
  // SEARCH FUNCTIONS
 
@@ -989,30 +991,24 @@ var searchResponse = function searchResponse(response) {
   if (response.data.items) {
     var list = $(".menu-entry-list");
     list.html("");
+    console.log(response);
     var res = response.data.items;
     res.forEach(function (el) {
-      var html = "<li class=\"list-group-item\" data-id=\"".concat(el.id, "\">\n                <button class=\"menu-add-button\" data-url=\"").concat(el.url, "\" data-label=\"").concat(el.name, "\">+</button>\n                ").concat(el.name, "\n            </li>");
+      var html = "<li class=\"list-group-item\">\n                <button class=\"menu-add-button\" data-label=\"".concat(el.name, "\" data-type=\"").concat(el.type, "\" data-id=\"").concat(el.id, "\">+</button>\n                ").concat(el.name, "\n            </li>");
       list.append(html);
     });
   }
 };
 
-$(".search-entries").click(function () {
-  var data = {
-    type: [],
-    query: $(this).closest(".menu-item-option").find(".item_search").val()
-  };
-  $(".item-type-check:checked").each(function () {
-    data.type.push($(this).val());
-  });
-  var url = endpoints.search;
-  Object(_imports_ajax__WEBPACK_IMPORTED_MODULE_0__["postCall"])(url, data, searchResponse);
-}); // ADD & UPDATE ITEM FUNCTIONS
-
 var addItemCallback = function addItemCallback(response) {
+  var _data$model_id, _data$model_type, _data$link;
+
   var id = response.data.id;
   var data = response.data.data;
-  $("#menu-items ol:first-child").append("\n        <li class=\"list-group-item dd-item\" data-id=\"".concat(id, "\" data-label=\"").concat(data.label, "\" data-url=\"").concat(data.link, "\" data-class=\"").concat(data["class"], "\">\n            <button class=\"remove\">x</button>\n            <div class=\"dd-handle\">").concat(data.label, "</div>\n        </li>\n    "));
+  console.log(data);
+  var html = "<li class=\"list-group-item dd-item\" data-id=\"".concat(id, "\" data-label=\"").concat(data.label, "\" data-relation-id=\"").concat((_data$model_id = data.model_id) !== null && _data$model_id !== void 0 ? _data$model_id : '', "\" data-relation-type=\"").concat((_data$model_type = data.model_type) !== null && _data$model_type !== void 0 ? _data$model_type : '', "\" data-url=\"").concat((_data$link = data.link) !== null && _data$link !== void 0 ? _data$link : "", "\" data-class=\"").concat(data["class"], "\">");
+  html += "\n        <button class=\"edit btn btn-primary\">Edit</button>\n        <button class=\"remove\">x</button>\n        <div class=\"dd-handle\">".concat(data.label, "</div>\n    </li>");
+  $("#menu-items ol:first-child").append(html);
   updateOutput();
 };
 
@@ -1026,88 +1022,11 @@ var updateItemCallback = function updateItemCallback(response) {
   });
 };
 
-$("#menu-add-item").click(function () {
-  if ($(this).data("action") === "update") {
-    Object(_imports_ajax__WEBPACK_IMPORTED_MODULE_0__["postCall"])(endpoints.updateItem, {
-      id: $("#menu-items button.edit.active").closest("li").data("id"),
-      label: $("#item_label").val(),
-      link: $("#item_url").val(),
-      "class": $("#item_class").val()
-    }, updateItemCallback);
-  } else {
-    Object(_imports_ajax__WEBPACK_IMPORTED_MODULE_0__["postCall"])(endpoints.addItem, {
-      label: $("#item_label").val(),
-      link: $("#item_url").val(),
-      "class": $("#item_class").val(),
-      parent: 0
-    }, addItemCallback);
-  }
-}); // REMOVE ITEM FUNCTIONS
-
-$("#menu-items").on("click", ".list-group-item .remove", function (e) {
-  var id = $(this).closest("li").attr("data-id");
-  var url = endpoints.remove;
-  url = url.replace("||ID||", id);
-  Object(_imports_ajax__WEBPACK_IMPORTED_MODULE_0__["postCall"])(url, {}, function (response) {
-    Object(_imports_DOMHelpers__WEBPACK_IMPORTED_MODULE_1__["removeNode"])($('#menu-items li[data-id="' + response.data.id + '"]'));
-  });
-}); // EDIT ITEM FUNCTIONS
-
-$("#menu-items").on("click", ".list-group-item .edit", function (e) {
-  var item = $(this).closest("li");
-  var data = item.data();
-  var button = $("#menu-add-item");
-  cleanFields();
-
-  if (!$(this).hasClass("active")) {
-    $("#menu-items li button.active").removeClass("active");
-    $(this).toggleClass("active");
-    $("#item_label").val(data.label);
-    $("#item_class").val(data["class"]);
-    $("#item_url").val(data.link);
-    button.attr("data-action", "update");
-    button.html(button.data("update-message"));
-  } else {
-    $(this).removeClass("active");
-    button.attr("data-action", "add");
-    button.html(button.data("add-message"));
-  }
-});
-/* JQUERY FUNCTIONS */
-// Set url and title of entry
-
-$(".menu-entry-list").on("click", ".menu-add-button", function (e) {
-  $(".menu-add-button").each(function () {
-    $(this).removeClass("active bg-success text-white");
-  });
-  $(this).addClass("active bg-success text-white");
-  $("#item_url").val($(this).attr("data-url"));
-  $("#item_label").val($(this).attr("data-label"));
-});
-$(document).ready(function () {
-  // Set visibility of extra tabs
-  $("#item_type").change(function () {
-    typeChange();
-  });
-  typeChange(); // Init Nestable
-
-  $("#menu-items").nestable({
-    placeClass: "list-group-item placeholder",
-    dragClass: "list-group-item",
-    collapseBtnHTML: "<button class='collapse-button' data-action='collapse'>-</button>",
-    expandBtnHTML: "<button class='collapse-button' data-action='expand'>+</button>",
-    maxDepth: 2
-  }).on("change", updateOutput);
-});
-
-var typeChange = function typeChange() {
-  var type = $("#item_type").val();
-
-  if (type === "entries") {
-    $(".menu-item-option").show();
-  } else {
-    $(".menu-item-option").hide();
-  }
+var cleanFields = function cleanFields() {
+  $('#item_url, #item_type').closest('.form-group').show();
+  $("#item_label").val("");
+  $("#item_class").val("");
+  $("#item_url").val("");
 };
 
 var updateOutput = function updateOutput() {
@@ -1125,11 +1044,112 @@ var updateOutput = function updateOutput() {
   Object(_imports_ajax__WEBPACK_IMPORTED_MODULE_0__["postCall"])(endpoints.order, data, function () {});
 };
 
-var cleanFields = function cleanFields() {
-  $("#item_label").val("");
-  $("#item_class").val("");
-  $("#item_url").val("");
+var entryTypeChange = function entryTypeChange($value) {
+  var link = $('#item_url').closest('.form-group');
+
+  if ($value == 0) {
+    link.show();
+    $('.menu-item-option').hide();
+  } else {
+    link.hide();
+    $('.menu-item-option').show();
+  }
 };
+
+$(".search-entries").click(function () {
+  var data = _defineProperty({
+    type: [],
+    query: $(this).closest(".menu-item-option").find(".item_search").val()
+  }, "type", $('#entry-type').val());
+
+  var url = endpoints.search;
+  Object(_imports_ajax__WEBPACK_IMPORTED_MODULE_0__["postCall"])(url, data, searchResponse);
+});
+$("#menu-add-item").click(function () {
+  if ($(this).data("action") === "update") {
+    Object(_imports_ajax__WEBPACK_IMPORTED_MODULE_0__["postCall"])(endpoints.updateItem, {
+      id: $("#menu-items button.edit.active").closest("li").data("id"),
+      label: $("#item_label").val(),
+      link: $("#item_url").val(),
+      "class": $("#item_class").val()
+    }, updateItemCallback);
+  } else {
+    var itemData = {
+      label: $("#item_label").val(),
+      link: $("#item_url").val(),
+      "class": $("#item_class").val(),
+      model_id: $("#item_model_id").val(),
+      model_type: $("#item_model_type").val(),
+      parent: 0
+    };
+    Object(_imports_ajax__WEBPACK_IMPORTED_MODULE_0__["postCall"])(endpoints.addItem, itemData, addItemCallback);
+  }
+}); // REMOVE ITEM FUNCTIONS
+
+$("#menu-items").on("click", ".list-group-item .remove", function (e) {
+  var id = $(this).closest("li").attr("data-id");
+  var url = endpoints.remove;
+  url = url.replace("||ID||", id);
+  Object(_imports_ajax__WEBPACK_IMPORTED_MODULE_0__["postCall"])(url, {}, function (response) {
+    Object(_imports_DOMHelpers__WEBPACK_IMPORTED_MODULE_1__["removeNode"])($('#menu-items li[data-id="' + response.data.id + '"]'));
+  });
+}); // EDIT ITEM FUNCTIONS
+
+$("#menu-items").on("click", ".list-group-item .edit", function (e) {
+  var item = $(this).closest("li");
+  var data = item.data();
+  var button = $("#menu-add-item");
+  var urlField = $('#item_url').closest('.form-group');
+  cleanFields();
+
+  if (!$(this).hasClass("active")) {
+    $("#menu-items li button.active").removeClass("active");
+    $(this).toggleClass("active");
+
+    if (item.data('relation-id') && item.data('relation-type')) {
+      urlField.hide();
+      Object(_imports_ajax__WEBPACK_IMPORTED_MODULE_0__["postCall"])(endpoints.find, {
+        'type': item.data('relation-type'),
+        'id': item.data('relation-id')
+      }, function (response) {
+        console.log(response);
+      });
+    }
+
+    $("#item_label").val(data.label);
+    $("#item_class").val(data["class"]);
+    $("#item_url").val(data.link);
+    button.attr("data-action", "update");
+    button.html(button.data("update-message"));
+  } else {
+    $(this).removeClass("active");
+    button.attr("data-action", "add");
+    button.html(button.data("add-message"));
+  }
+});
+$(".menu-entry-list").on("click", ".menu-add-button", function (e) {
+  $(".menu-add-button").each(function () {
+    $(this).removeClass("active bg-success text-white");
+  });
+  $(this).addClass("active bg-success text-white");
+  $("#item_label").val($(this).attr("data-label"));
+  $("#item_model_id").val($(this).attr("data-id"));
+  $("#item_model_type").val($(this).attr("data-type"));
+  console.log($(this).data());
+});
+$('#entry-type').change(function () {
+  entryTypeChange($(this).val());
+});
+$(document).ready(function () {
+  entryTypeChange(0);
+  $("#menu-items").nestable({
+    placeClass: "list-group-item placeholder",
+    dragClass: "list-group-item",
+    collapseBtnHTML: "<button class='collapse-button' data-action='collapse'>-</button>",
+    expandBtnHTML: "<button class='collapse-button' data-action='expand'>+</button>",
+    maxDepth: 2
+  }).on("change", updateOutput);
+});
 
 /***/ }),
 

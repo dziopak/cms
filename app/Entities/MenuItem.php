@@ -9,7 +9,7 @@ class MenuItem extends Model
 {
     use QueryCacheable;
 
-    protected $fillable = ['label', 'link', 'parent', 'sort', 'class', 'menu', 'depth'];
+    protected $guarded = [];
     public $timestamps = false, $cacheFor = 3600;
     protected static $flushCacheOnUpdate = true;
 

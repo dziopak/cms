@@ -12,20 +12,6 @@
         </div>
     </div>
 
-    {{-- Type Checkbox --}}
-    <div class="form-group">
-        {!! Form::label('type', 'Pages:') !!}
-        {!! Form::checkbox('type[]', 'page', true, ['class' => 'mr-2 item-type-check']) !!}
-
-        {!! Form::label('type', 'Posts:') !!}
-        {!! Form::checkbox('type[]', 'post', true, ['class' => 'mr-2 item-type-check']) !!}
-
-        {!! Form::label('type', 'Page categories:') !!}
-        {!! Form::checkbox('type[]', 'page_category', true, ['class' => 'mr-2 item-type-check']) !!}
-
-        {!! Form::label('type', 'Post categories:') !!}
-        {!! Form::checkbox('type[]', 'post_category', true, ['class' => 'mr-2 item-type-check']) !!}
-    </div>
 
     {{-- Search result list --}}
     <ul class="menu-entry-list mt-2">

@@ -42,7 +42,16 @@ class MenusController extends Controller
     public function edit($id)
     {
         Auth::user()->hasAccessOrRedirect('BLOCK_EDIT');
-        return view('admin.blocks.menus.edit');
+
+        $entities = [
+            '0' => 'Custom url',
+            'post' => 'Post',
+            'page' => 'Page',
+            'post_category' => 'Post category',
+            'page_category' => 'Page category'
+        ];
+
+        return view('admin.blocks.menus.edit', compact('entities'));
     }
 
 
@@ -90,6 +99,12 @@ class MenusController extends Controller
     {
         Auth::user()->hasAccessOrRedirect('BLOCK_EDIT');
         return MenuRelations::search($request->get('data'));
+    }
+
+    public function find(Request $request)
+    {
+        Auth::user()->hasAccessOrRedirect('BLOCK_EDIT');
+        return MenuRelations::find($request->get('data'));
     }
 
     public function mass(Request $request)

@@ -20,8 +20,9 @@ class PagesController extends Controller
     {
         $page = Page::findBySlug($id);
         if (empty($page)) redirect(route('front.posts.index'));
+        $layout = $page->layout || 1;
 
-        $blocks = getLayout(Layout::findOrFail($page->layout));
+        $blocks = getLayout(Layout::findOrFail($layout));
         return view('Theme::modules.pages.show', compact('page', 'blocks'));
     }
 }

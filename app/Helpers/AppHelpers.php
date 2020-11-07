@@ -1,5 +1,7 @@
 <?php
 
+use App\Entities\Page;
+
 function is_installed()
 {
     if (file_exists(base_path("/storage/installed")) && table_exists('settings')) {
@@ -29,6 +31,12 @@ function setLang($lang)
 }
 
 
+function getModel($type)
+{
+    return 'App\Entities\\' . camelCase($type);
+}
+
+
 function getUrl($id, $type)
 {
     $url = '';
@@ -40,6 +48,13 @@ function getUrl($id, $type)
 
         case 'post':
             $url = route('front.posts.show', $id);
+            break;
+
+        case 'post_category':
+            $url = route('front.posts.categories.show', $id);
+            break;
+        case 'page_category':
+            $url = route('front.pages.category.show', $id);
             break;
 
         default:

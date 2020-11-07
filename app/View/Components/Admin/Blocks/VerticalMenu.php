@@ -56,8 +56,16 @@ class VerticalMenu extends Component
         $menu = Menu::find($this->config['block']->config['menu_id'] ?? 1);
         $menu_list = Menu::all()->pluck('name', 'id')->toArray() ?? [];
 
-        if ($this->config['is_admin'] === false)
-            $items = $menu->items()->where(['parent' => 0])->get();
+        if (!$this->config['is_admin'])
+            $items = $menu->items()
+                ->where(['parent' => 0])
+                ->get()
+                ->map(function ($item) {
+                    if ($item->model_id && $item->model_type) {
+                        $item->link = getModel($item->model_type)::findOrFail($item->model_id)->getUrl();
+                    }
+                    return $item;
+                });
 
         return block('vertical_menu', $this->config, ['menus' => $menu_list, 'styles' => $this->styles], ['menu' => $items ?? null]);
     }

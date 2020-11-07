@@ -37,7 +37,7 @@ class MenuItems
             $item = $this->menu->items()->findOrFail($data['id'])->update([
                 'label' => $data['label'],
                 'link' => $data['link'],
-                'class' => $data['class']
+                'class' => $data['class'],
             ]);
             return response()->json(['message' => __('admin/messages.blocks.menus.items.update'), 'data' => $data], 200);
         } else {
@@ -45,7 +45,9 @@ class MenuItems
                 'label' => $data['label'],
                 'link' => $data['link'],
                 'parent' => $data['parent'],
-                'class' => $data['class']
+                'class' => $data['class'],
+                'model_id' => $data['model_id'],
+                'model_type' => $data['model_type']
             ]);
             return response()->json(['message' => __('admin/messages.blocks.menus.items.attach'), 'data' => $data, 'id' => $item->id], 200);
         }

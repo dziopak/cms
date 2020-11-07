@@ -2,6 +2,7 @@
 
 namespace App\Entities;
 
+use App\Traits\Linkable;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\Sluggable;
 use Rennokki\QueryCache\Traits\QueryCacheable;
@@ -11,10 +12,12 @@ use Spatie\Searchable\SearchResult;
 class Post extends Model implements Searchable
 {
     use Sluggable;
+    use Linkable;
     use QueryCacheable;
 
     protected $guarded = ['id', 'post_id', 'thumbnail'];
     public $fire_events = true;
+    protected $entity_type = 'posts';
 
     public $cacheFor = 3600;
     protected static $flushCacheOnUpdate = true;

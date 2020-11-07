@@ -2,6 +2,7 @@
 
 namespace App\Entities;
 
+use App\Traits\Linkable;
 use Rennokki\QueryCache\Traits\QueryCacheable;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,11 +15,13 @@ class Page extends Model implements Searchable
 {
 
     use Sluggable;
+    use Linkable;
     use QueryCacheable;
 
     protected $guarded = ['id', 'page_id'];
     public $fire_events = true, $cacheFor = 3600;
     protected static $flushCacheOnUpdate = true;
+    protected $entity_type = 'pages';
 
     public function author()
     {
