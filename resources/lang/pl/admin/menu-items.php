@@ -37,6 +37,7 @@ return [
     'settings' => 'Ustawienia',
     'settings_items' => [
         'general' => 'Ustawienia generalne',
+        'content' => 'Ustawienia treści',
         'seo' => 'Pozycjonowanie',
         'mail' => 'Mailing',
         'logs' => 'Logi systemowe'

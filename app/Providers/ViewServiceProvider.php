@@ -44,6 +44,13 @@ class ViewServiceProvider extends ServiceProvider
             $view->form = getData('Admin/Modules/Settings/general', array_merge($view->settings, ['themes' => $themes, 'layouts' => $layouts]));
         });
 
+        view()->composer('admin.settings.content', function ($view) {
+            $layouts = Layout::all()->pluck('name', 'id');
+
+            $view->settings = \App\Entities\Setting::where(['group' => 'content'])->pluck('value', 'name')->toArray();
+            $view->form = getData('Admin/Modules/Settings/content', array_merge($view->settings, ['layouts' => $layouts]));
+        });
+
 
         view()->composer('admin.logs.index', function ($view) {
             $view->logs = \App\Entities\Log::with('author')->orderBy('logs.id', 'desc')->get();

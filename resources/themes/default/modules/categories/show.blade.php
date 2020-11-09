@@ -1,34 +1,45 @@
-@extends('Theme::index')
+@extends('Theme::index', ['css' => 'categories'])
+
 @set($title, $category->name)
 
 @section('module')
-    <div class="module-page">
+    @set($i, 1)
 
-        {{-- Category details --}}
-        <div class="category-intro mb-5">
-            <h2>{{ $category->name }}</h2>
-            {!! $category->description !!}
+    <div class="category">
+
+        <div class="category__content-container">
+            <h3 class="category__title">{{ $category->name }}</h3>
+            <p class="category__excerpt">{!! $category->description !!}</p>
         </div>
 
-        {{-- Category content --}}
-        <div class="category-content">
-            <h3>Newest content in this category</h3>
-            @foreach($entries as $entry)
-                <div class="post">
-                    @if (!empty($entry->thumbnail))
-                        <div class="post__thumbnail-col">
-                            <a href="{{ route('front.'.$type.'.show', ['id' => $entry->slug]) }}">
-                                <img class="post__thumbnail" src="/images/{{ $entry->thumbnail->path }}" alt="{{ $entry->name }}" width="140">
-                            </a>
-                        </div>
+        @foreach($entries as $key => $entry)
+            @php
+                $even = $i % 2;
+                $i++;
+            @endphp
+
+
+            <div class="entry row">
+
+                {{-- Left column --}}
+                <div class="entry__column entry__column--left col {{ $even ? "post__column--even" : "post__column--odd" }}">
+                    @if ($even)
+                        @include('Theme::modules.categories.partials.thumbnail')
+                    @else
+                        @include('Theme::modules.categories.partials.content')
                     @endif
-                    <h3 class="post__title">{{ $entry->name }}</h3>
-                    <p class="post__excerpt">{!! $entry->excerpt !!}</p>
-                    <a href="{{ route('front.'.$type.'.show', ['id' => $entry->slug]) }}" class="btn btn-primary">Read more</a>
                 </div>
-            @endforeach
-        </div>
 
-        {{ $entries->render() }}
+                {{-- Right column --}}
+                <div class="entry__column entry__column--right col {{ $even ? "post__column--even" : "post__column--odd" }}">
+                    @if ($even)
+                        @include('Theme::modules.categories.partials.content')
+                    @else
+                        @include('Theme::modules.categories.partials.thumbnail')
+                    @endif
+                </div>
+
+            </div>
+        @endforeach
     </div>
 @endsection

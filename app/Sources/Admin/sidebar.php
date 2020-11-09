@@ -96,6 +96,9 @@ $items = [
             'general' => [
                 'route' => 'admin.settings.general.index',
             ],
+            'content' => [
+                'route' => 'admin.settings.content.index',
+            ],
             'seo' => [
                 'route' => 'admin.dashboard.index',
             ],

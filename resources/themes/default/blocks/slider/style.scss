@@ -16,12 +16,16 @@
         .slider__title {
             color: #242f51;
             margin-bottom: 30px;
+            font-size: 3.4em;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-top: 0px;
         }
 
         .slider__slogan {
             margin-bottom: 30px;
             color: #616368;
-            font-size: 18px;
+            font-size: 1em;
         }
 
         .glide__slide--active .slide-content {
@@ -94,6 +98,27 @@
 
         &__arrow {
             color: #000;
+        }
+    }
+}
+
+@media (max-width: 980px) {
+    .slider {
+        &--hero {
+            .slider__title {
+                font-size: 2.2em;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .slider {
+        &--hero {
+            .slider__slogan,
+            .btn {
+                display: none;
+            }
         }
     }
 }

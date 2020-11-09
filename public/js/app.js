@@ -37385,6 +37385,17 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+/***/ "./resources/themes/default/assets/sass/blocks.scss":
+/*!**********************************************************!*\
+  !*** ./resources/themes/default/assets/sass/blocks.scss ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/themes/default/assets/sass/custom.scss":
 /*!**********************************************************!*\
   !*** ./resources/themes/default/assets/sass/custom.scss ***!
@@ -37407,10 +37418,54 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+/***/ "./resources/themes/default/modules/categories/style.scss":
+/*!****************************************************************!*\
+  !*** ./resources/themes/default/modules/categories/style.scss ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./resources/themes/default/modules/pages/style.scss":
+/*!***********************************************************!*\
+  !*** ./resources/themes/default/modules/pages/style.scss ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./resources/themes/default/modules/posts/style.scss":
+/*!***********************************************************!*\
+  !*** ./resources/themes/default/modules/posts/style.scss ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./resources/themes/default/modules/users/style.scss":
+/*!***********************************************************!*\
+  !*** ./resources/themes/default/modules/users/style.scss ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ 0:
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/admin.scss ./resources/sass/admin/dashboard.scss ./resources/sass/admin/layouts.scss ./resources/sass/admin/menus.scss ./public/installer/css/scss/installer.scss ./resources/themes/default/assets/sass/theme.scss ./resources/themes/default/assets/sass/custom.scss ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/admin.scss ./resources/sass/admin/dashboard.scss ./resources/sass/admin/layouts.scss ./resources/sass/admin/menus.scss ./public/installer/css/scss/installer.scss ./resources/themes/default/assets/sass/theme.scss ./resources/themes/default/assets/sass/blocks.scss ./resources/themes/default/assets/sass/custom.scss ./resources/themes/default/modules/posts/style.scss ./resources/themes/default/modules/pages/style.scss ./resources/themes/default/modules/users/style.scss ./resources/themes/default/modules/categories/style.scss ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -37422,7 +37477,12 @@ __webpack_require__(/*! E:\laragon\www\cms-master\resources\sass\admin\layouts.s
 __webpack_require__(/*! E:\laragon\www\cms-master\resources\sass\admin\menus.scss */"./resources/sass/admin/menus.scss");
 __webpack_require__(/*! E:\laragon\www\cms-master\public\installer\css\scss\installer.scss */"./public/installer/css/scss/installer.scss");
 __webpack_require__(/*! E:\laragon\www\cms-master\resources\themes\default\assets\sass\theme.scss */"./resources/themes/default/assets/sass/theme.scss");
-module.exports = __webpack_require__(/*! E:\laragon\www\cms-master\resources\themes\default\assets\sass\custom.scss */"./resources/themes/default/assets/sass/custom.scss");
+__webpack_require__(/*! E:\laragon\www\cms-master\resources\themes\default\assets\sass\blocks.scss */"./resources/themes/default/assets/sass/blocks.scss");
+__webpack_require__(/*! E:\laragon\www\cms-master\resources\themes\default\assets\sass\custom.scss */"./resources/themes/default/assets/sass/custom.scss");
+__webpack_require__(/*! E:\laragon\www\cms-master\resources\themes\default\modules\posts\style.scss */"./resources/themes/default/modules/posts/style.scss");
+__webpack_require__(/*! E:\laragon\www\cms-master\resources\themes\default\modules\pages\style.scss */"./resources/themes/default/modules/pages/style.scss");
+__webpack_require__(/*! E:\laragon\www\cms-master\resources\themes\default\modules\users\style.scss */"./resources/themes/default/modules/users/style.scss");
+module.exports = __webpack_require__(/*! E:\laragon\www\cms-master\resources\themes\default\modules\categories\style.scss */"./resources/themes/default/modules/categories/style.scss");
 
 
 /***/ })

@@ -29,7 +29,7 @@ class Slider extends Component
             if (!empty($block->y)) $this->config['y'] = $block->y;
             if (!empty($block->width)) $this->config['w'] = $block->width;
             if (!empty($block->height)) $this->config['h'] = $block->height;
-            if (!empty($block->auto)) $this->config['auto'] = $block->auto;
+            if (!empty($block->auto)) $this->config['auto'] = false;
             $this->config['block'] = $block;
         }
         $this->config['block_id'] = $block->id;

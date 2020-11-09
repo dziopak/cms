@@ -14,11 +14,12 @@
         break;
     }
 @endphp
-
-<div class="horizontal-menu grid-item {{ $block['classes'] ?? "" }}">
-
+<div class="horizontal-menu__toggle"><i class="fas fa fa-bars"></i></div>
+<div class="horizontal-menu__mobile-line"></div>
+<div class="horizontal-menu horizontal-menu--main grid-item {{ $block['classes'] ?? "" }}">
+    <div class="horizontal-menu__close"><i class="far fa fa-times"></i></div>
     {{-- Logo --}}
-    <a href="{{ URL::to('/') }}"><img class="horizontal-menu__logo" src="{{ getAsset('img/logo.jpg') }}" /></a>
+    <a href="{{ URL::to('/') }}" class="horizontal-menu__logo-link"><img class="horizontal-menu__logo" src="{{ getAsset('img/logo.jpg') }}" /></a>
 
     {{-- Menu --}}
     @if(!empty($block['menu']))

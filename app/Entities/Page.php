@@ -38,6 +38,13 @@ class Page extends Model implements Searchable
         return $this->belongsTo('App\Entities\PageCategory', 'category_id');
     }
 
+    public function layout()
+    {
+        $default = config()['global']['content']['page_layout'];
+        return $this->belongsTo('App\Entities\Layout', 'layout_id')
+            ->withDefault(Layout::findOrFail($default));
+    }
+
     public function scopeFilter($query, $request)
     {
         if (!empty($request->get('search'))) {

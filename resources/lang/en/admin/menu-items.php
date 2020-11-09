@@ -37,6 +37,7 @@ return [
     'settings' => 'Settings',
     'settings_items' => [
         'general' => 'General settings',
+        'content' => 'Content settings',
         'seo' => 'SEO settings',
         'mail' => 'Mail settings',
         'logs' => 'System logs'

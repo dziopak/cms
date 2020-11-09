@@ -82,3 +82,10 @@ function getAsset($file)
 {
     return '/theme/assets/' . $file;
 }
+
+function getConfig($category, $variable)
+{
+    // TO DO //
+    // NOT READING CONFIG //
+    return !empty(config('global')) ? config('global')[$category][$variable] : 1;
+}

@@ -11,6 +11,16 @@ trait Sluggable
             ->first();
     }
 
+    public function scopeFindBySlugOrFail($query, $slug)
+    {
+        $query = $query->where('slug', $slug)
+            ->orWhere('id', $slug)
+            ->first();
+
+        if (empty($query)) return abort(404);
+        return $query;
+    }
+
     public function getSlug()
     {
         return $this->slug;

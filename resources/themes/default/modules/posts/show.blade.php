@@ -1,4 +1,4 @@
-@extends('Theme::index')
+@extends('Theme::index', ['css' => 'posts'])
 
 @set($title, $post->name)
 @set($meta_title, $post->meta_title)
@@ -8,7 +8,7 @@
         <div class="post post--show">
 
             <div class="post__excerpt-container row">
-                <div class="col">
+                <div class="col post__thumbnail-container">
                     @if (!empty($post->thumbnail))
                         <div class="post__thumbnail-col">
                             <a href="{{ route('front.posts.show', ['id' => $post->id]) }}">
@@ -21,8 +21,11 @@
                 <div class="col">
                     <h3 class="post__title">{{ $post->name }}</h3>
                     <p class="post__excerpt">{!! $post->excerpt !!}</p>
-                    <strong class="post__details-title">Category:</strong> {!! !empty($post->category) ? '<a href="'.route('front.posts.categories.show', $post->category->id).'">'.$post->category->name.'</a>' : 'No category' !!}<br/>
-                    <strong class="post__details-title">Tags:</strong> <a href="">same</a>, <a href="">up</a>, <a href="">here</a>
+
+                    <div class="post__details">
+                        <strong class="post__details-title">Category:</strong> {!! !empty($post->category) ? '<a href="'.route('front.posts.categories.show', $post->category->id).'">'.$post->category->name.'</a>' : 'No category' !!}<br/>
+                        <strong class="post__details-title">Tags:</strong> <a href="">same</a>, <a href="">up</a>, <a href="">here</a>
+                    </div>
                 </div>
             </div>
 

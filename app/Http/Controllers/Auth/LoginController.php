@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Entities\Layout;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -46,5 +47,11 @@ class LoginController extends Controller
         $user->update([
             'last_login' => Carbon::now()->toDateTimeString()
         ]);
+    }
+
+    public function showLoginForm()
+    {
+        $blocks = Layout::findOrFail(getConfig('general', 'layout'))->getLayout();
+        return view('Theme::modules.users.login', compact('blocks'));
     }
 }

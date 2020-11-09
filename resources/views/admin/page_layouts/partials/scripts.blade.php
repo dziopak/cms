@@ -8,7 +8,7 @@
         minWidth: 300,
         infinity: false
     }
-    $('.add-widget').click(function() {
+    $("#layout-components").on("click", ".add-widget", function(e) {
         var name = $(this).attr('data-name');
         $.get( `{{ route('admin.layouts.getwidget') }}?name=${name}`, function( html ) {
             if (typeof html === "string") {

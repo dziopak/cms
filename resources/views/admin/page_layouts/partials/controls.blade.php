@@ -53,6 +53,12 @@
                     <p>Displays login form for guest users</p>
                 </x-new-widget>
             </div>
+
+            <div class="add-widget" data-name="html">
+                <x-new-widget title="Custom HTML">
+                    <p>Create your own block using HTML and CSS.</p>
+                </x-new-widget>
+            </div>
         </div>
     </div>
 </div>

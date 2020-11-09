@@ -31,6 +31,26 @@ mix.js("resources/js/app.js", "public/js")
         "../" + theme_path + "assets/css"
     )
     .sass(
+        theme_path + "assets/sass/blocks.scss",
+        "../" + theme_path + "assets/css"
+    )
+    .sass(
         theme_path + "assets/sass/custom.scss",
         "../" + theme_path + "assets/css"
+    )
+    .sass(
+        theme_path + "modules/posts/style.scss",
+        "../" + theme_path + "assets/css/posts.css"
+    )
+    .sass(
+        theme_path + "modules/pages/style.scss",
+        "../" + theme_path + "assets/css/pages.css"
+    )
+    .sass(
+        theme_path + "modules/users/style.scss",
+        "../" + theme_path + "assets/css/users.css"
+    )
+    .sass(
+        theme_path + "modules/categories/style.scss",
+        "../" + theme_path + "assets/css/categories.css"
     );

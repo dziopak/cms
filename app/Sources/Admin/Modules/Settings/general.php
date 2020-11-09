@@ -62,23 +62,7 @@ $form = [
                     'value' => config('global')['general']['layout'] ?? "",
                     'class' => 'small',
                     'options' => $args['layouts']
-                ],
-                'post_layout' => [
-                    'type' => 'select',
-                    'label' => 'Single post layout',
-                    'required' => true,
-                    'value' => config('global')['general']['post_layout'] ?? "",
-                    'class' => 'small',
-                    'options' => $args['layouts']
-                ],
-                'page_layout' => [
-                    'type' => 'select',
-                    'label' => 'Default page layout',
-                    'required' => true,
-                    'value' => config('global')['general']['page_layout'] ?? "",
-                    'class' => 'small',
-                    'options' => $args['layouts']
-                ],
+                ]
             ]
         ],
     ],

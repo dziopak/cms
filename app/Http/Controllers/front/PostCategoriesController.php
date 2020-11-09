@@ -5,28 +5,26 @@ namespace App\Http\Controllers\Front;
 use App\Entities\Layout;
 use App\Entities\PostCategory;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class PostCategoriesController extends Controller
 {
-    public $theme;
+    private $layout;
 
     public function __construct()
     {
-        $this->theme['slug'] = config('global.general.theme');
-        $this->theme['url'] = 'themes.' . $this->theme['slug'];
+        $this->layout = getConfig('content', 'post_category_layout');
     }
 
-    public function show(Request $request, $category)
+    public function show($category)
     {
-        $category = PostCategory::with('posts')->findBySlug($category);
-        if (empty($category)) return redirect(route('front.posts.index'));
+        $category = PostCategory::with('posts')->findBySlugOrFail($category);
+        $entries = $category->posts()->orderByDesc('created_at')->paginate(4) ?? [];
 
-        !empty($category->posts) ? $entries = $category->posts()->paginate(10) : $entries = [];
-        $blocks = getLayout(Layout::findOrFail(1));
-
-        $type = 'posts';
-
-        return view('Theme::modules.categories.show', compact('category', 'blocks', 'entries', 'type'));
+        return view('Theme::modules.categories.show', [
+            'blocks' => Layout::findOrFail($this->layout)->getLayout(),
+            'category' => $category,
+            'entries' => $entries,
+            'type' => 'posts'
+        ]);
     }
 }

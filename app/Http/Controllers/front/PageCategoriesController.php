@@ -5,28 +5,27 @@ namespace App\Http\Controllers\Front;
 use App\Entities\Layout;
 use App\Entities\PageCategory;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class PageCategoriesController extends Controller
 {
-    public $theme;
+
+    private $layout;
 
     public function __construct()
     {
-        $this->theme['slug'] = config('global.general.theme');
-        $this->theme['url'] = 'themes.' . $this->theme['slug'];
+        $this->layout = getConfig('content', 'page_category_layout');
     }
 
-    public function show(Request $request, $category)
+    public function show($category)
     {
-        $category = PageCategory::with('pages')->findBySlug($category);
-        if (empty($category)) return redirect(route('front.posts.index'));
+        $category = PageCategory::with('pages')->findBySlugOrFail($category);
+        $entries = $category->pages()->orderByDesc('created_at')->paginate(10) ?? [];
 
-        !empty($category->pages) ? $entries = $category->pages()->paginate(10) : $entries = [];
-        $blocks = getLayout(Layout::findOrFail(1));
-
-        $type = 'pages';
-
-        return view('Theme::modules.categories.show', compact('category', 'blocks', 'entries', 'type'));
+        return view('Theme::modules.categories.show', [
+            'blocks' => Layout::findOrFail($this->layout)->getLayout(),
+            'category' => $category,
+            'entries' => $entries,
+            'type' => 'pages'
+        ]);
     }
 }

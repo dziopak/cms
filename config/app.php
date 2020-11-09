@@ -139,10 +139,9 @@ return [
     */
 
     'providers' => [
-
         /*
-         * Laravel Framework Service Providers...
-         */
+        * Laravel Framework Service Providers...
+        */
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -165,23 +164,26 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+
+        // Settings provider
+        App\Providers\SettingsServiceProvider::class,
+
         /*
-         * Package Service Providers...
+        * Package Service Providers...
          */
         Esemve\Hook\HookServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Application Service Providers...
-        */
+         */
         App\Providers\BladeDirectivesProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\ViewServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\SettingsServiceProvider::class,
         App\Providers\ThemeServiceProvider::class,
         App\Providers\PluginsServiceProvider::class,
     ],
@@ -236,10 +238,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Hook' => Esemve\Hook\Facades\Hook::class,
-        'Modules' => Nwidart\Modules\Facades\Module::class,
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
-        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
     ],
 
 ];

@@ -15,7 +15,7 @@
                 {{ Form::text('config['.$key.'][slogan]', $config['block']->config['slogan'] ?? null, ['class' => 'form-control'])}}
             </div>
 
-            {!! Form::button('<i class="fa fa-home"></i>'.' '.__('admin/general.update_button'), ['class' => 'btn btn-success mt-4', 'type' => 'submit']) !!}
+            {!! Form::button('<i class="fa fa-home"></i>'.' '.__('admin/general.update_button'), ['class' => 'btn btn-success mt-4']) !!}
         </div>
     </div>
 </x-widget-block>

@@ -120,7 +120,9 @@ var gridstackConfig = {
   minRow: 10,
   disableOneColumnMode: true,
   minWidth: 300,
-  infinity: false
+  infinity: true,
+  "float": true,
+  autoPosition: true
 };
 
 function triggerResize() {
@@ -140,41 +142,15 @@ $(document).ready(function () {
       $(this).addClass("active");
     }
   });
-  $(".grid-stack").change(function () {
-    $(".grid-stack-item").click(function () {
-      var key = $(this).attr("data-gs-key");
-      $(".block-settings").fadeOut("50");
-
-      if (key) {
-        setTimeout(function () {
-          $("#fade").fadeIn("100");
-          $('.block-settings[key="' + key + '"]').fadeIn("100");
-        }, 300);
-      }
-    });
-  });
   $(".block-title").change(function () {
     var title = $(this).val();
     var key = $(this).closest(".block-settings").attr("key");
     $('.grid-stack-item[data-gs-key="' + key + '"] .card-title strong').text(title);
   });
-  $(".grid-stack-item").click(function () {
-    var key = $(this).attr("data-gs-key");
-    $(".block-settings").fadeOut("50");
-
-    if (key) {
-      setTimeout(function () {
-        $("#fade").fadeIn("100");
-        $('.block-settings[key="' + key + '"]').fadeIn("100");
-      }, 300);
-    }
-  });
-  $(".grid-stack-item .block-settings *").click(function (event) {
-    event.stopPropagation();
-  });
-  $(".grid-stack-item .widget-container").click(function (event) {
-    event.preventDefault();
-    event.stopPropagation();
+  $("#LayoutUpdateForm").on("click", ".widget-container", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
     $(this).toggleClass("active");
     var key = $(this).attr("data-key");
 
@@ -184,17 +160,28 @@ $(document).ready(function () {
       $('input[name="config[' + key + '][container]"]').attr("value", "false");
     }
   });
-  $("#fade, #fade *, .block-settings button.btn").click(function (e) {
+  $(".grid-stack-item").on("click", ".block-settings", function (e) {
     e.preventDefault();
-    e.stopImmediatePropagation();
-    e.stopPropagation();
+  });
+  $("#module").on("click", "#fade, .block-settings button.btn", function (e) {
     $("#fade").fadeOut("100");
     $(".block-settings").fadeOut("100");
+    $(".block-settings").removeClass('active').fadeOut("50");
   });
-  $(".block-settings").click(function (e) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    e.stopPropagation();
+  $("#module").on("click", ".grid-stack-item .card-title strong", function (e) {
+    var key = $(this).closest('.grid-stack-item').attr("data-gs-key");
+
+    if (!$('.block-settings[key="' + key + '"]').hasClass('active')) {
+      $(".block-settings").removeClass('active').fadeOut("50");
+      $('.block-settings[key="' + key + '"]').addClass('active');
+
+      if (key) {
+        setTimeout(function () {
+          $("#fade").fadeIn("100");
+          $('.block-settings[key="' + key + '"]').fadeIn("100");
+        }, 300);
+      }
+    }
   });
   $(".widget-remove").click(function () {
     $(this).closest(".grid-stack-item").remove();
@@ -234,8 +221,7 @@ $(document).ready(function () {
         h: $this.attr("data-gs-height"),
         type: $this.attr("data-gs-block") || $this.attr("data-gs-widget"),
         id: $this.attr("data-gs-block-id"),
-        key: key,
-        config: config
+        key: key
       };
       items.push(data);
     });

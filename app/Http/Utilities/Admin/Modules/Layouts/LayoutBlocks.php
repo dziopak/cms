@@ -10,20 +10,22 @@ class LayoutBlocks
     {
         $data = $request->except(['_token', 'result']);
         $json = json_decode($request->get('result'), true);
+        $blocks = $request->get('config');
 
         $layout->blocks()->delete();
 
         foreach ($json as $block) {
-            $title = $block['config']['title'] ?? "Untitled";
-            $container = filter_var($block['config']['container'], FILTER_VALIDATE_BOOLEAN);
+            $config = $blocks[$block['key']];
+            $title = $config['title'] ?? "Untitled";
+            $container = filter_var($config['container'], FILTER_VALIDATE_BOOLEAN);
 
-            unset($block['config']['title']);
-            unset($block['config']['container']);
+            unset($config['title']);
+            unset($config['container']);
 
             Block::updateOrCreate(['id' => $block['id']], [
                 'title' => $title,
                 'container' => $container,
-                'config' => serialize($block['config'] ?? []),
+                'config' => serialize($config ?? []),
                 'type' => explode('-block', $block['type'])[0],
                 'x' => $block['x'],
                 'y' => $block['y'],

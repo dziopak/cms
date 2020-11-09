@@ -9,7 +9,6 @@
     data-gs-height="{{ $config['h'] }}"
     data-gs-min-height="{{ $config['min-h'] }}"
     data-gs-min-width="{{ $config['min-w'] }}"
-    data-gs-auto-position="{{ $config['auto'] ?? "true" }}"
     data-gs-no-resize="{{ $config['non-resizeable'] ?? "false" }}"
     data-gs-max-height="{{ $config['max-height'] ?? 10 }}"
     data-gs-block-id="{{ $config['block_id'] ?? 0 }}"

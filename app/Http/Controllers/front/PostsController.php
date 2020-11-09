@@ -2,28 +2,31 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Helpers\ThemeHelpers;
 use App\Http\Controllers\Controller;
 use App\Entities\Post;
 use App\Entities\Layout;
 
 class PostsController extends Controller
 {
-    public $theme;
+
+    private $listing_layout;
+    private $single_layout;
 
     public function __construct()
     {
-        $this->theme['slug'] = ThemeHelpers::activeTheme();
-        $this->theme['url'] = 'themes.' . $this->theme['slug'];
+        $this->listing_layout = getConfig('content', 'post_listing_layout');
+        $this->single_layout = getConfig('content', 'post_single_layout');
     }
+
 
     public function index()
     {
-        $blocks = getLayout(Layout::findOrFail(config('global')['general']['layout']));
-        $posts = Post::orderByDesc('created_at')->orderByDesc('id')->paginate(3);
+        $blocks = Layout::findOrFail($this->listing_layout)->getLayout();
+        $posts = Post::orderByDesc('created_at')->paginate(3);
 
         return view('Theme::modules.posts.index', compact('posts', 'blocks'));
     }
+
 
     public function show($id)
     {
@@ -32,8 +35,7 @@ class PostsController extends Controller
             ->orWhere(['id' => $id])
             ->first();
 
-        $layout_id = config('global')['general']['post_layout'];
-        $blocks = getLayout(Layout::findOrFail($layout_id));
+        $blocks = Layout::findOrFail($this->single_layout)->getLayout();
 
         return view('Theme::modules.posts.show', compact('post', 'blocks'));
     }

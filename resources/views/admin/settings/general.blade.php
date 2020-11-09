@@ -14,7 +14,7 @@
 
 
     {{-- Open the form --}}
-    {!! Form::open(['method' => 'POST', 'action' => 'Admin\Modules\SettingsController@store']) !!}
+    {!! Form::open(['method' => 'POST', 'action' => 'Admin\Modules\GeneralSettingsController@store']) !!}
 
     <x-wrapper title="admin/settings.general_title">
 

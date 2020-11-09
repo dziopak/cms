@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         @include('Partial::meta')
-        @include('Partial::head')
+        @include('Partial::head', ['css' => $css ?? null])
         @stack('scripts-top')
     </head>
 
