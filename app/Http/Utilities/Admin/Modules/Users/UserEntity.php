@@ -9,57 +9,114 @@ use App\Events\Users\UserNewPasswordEvent;
 use Illuminate\Support\Facades\Hash;
 use App\Events\Users\UserBlockEvent;
 use App\Entities\User;
+use App\Interfaces\WebEntity;
+use Auth;
 
-class UserEntity
+class UserEntity implements WebEntity
 {
 
+    private $item;
 
-    public static function store($data)
+    public function __construct($item)
     {
+        $this->item = $item;
+    }
+
+
+    static function index($request)
+    {
+        Auth::user()->hasAccessOrRedirect('ADMIN_VIEW');
+        return view('admin.users.index');
+    }
+
+
+    static function create()
+    {
+        Auth::user()->hasAccessOrRedirect('USER_CREATE');
+        return view('admin.users.create');
+    }
+
+
+    static function store($request)
+    {
+        Auth::user()->hasAccessOrRedirect('USER_CREATE');
+
+        $data = $request->all();
         $data['password'] = Hash::make($data['password']);
+
         User::create($data);
 
         return redirect(route('admin.users.index'));
     }
 
-    public static function update(User $user, $request)
+
+    public function edit()
     {
+        Auth::user()->hasAccessOrRedirect('USER_EDIT');
+        return view('admin.users.edit', [
+            'user' => $this->item
+        ]);
+    }
+
+
+    public function update($request)
+    {
+        Auth::user()->hasAccessOrRedirect('USER_EDIT');
+
         if ($request->get('request') === 'photo') {
-            return (new UserFiles($user->id))->updateThumbnail($request->get('file'));
+            return (new UserFiles($this->item->id))->updateThumbnail($request->get('file'));
         }
 
-        $user->update($request->except('avatar'));
+        $this->item->update($request->except('avatar'));
         return redirect(route('admin.users.index'));
     }
 
 
-    public static function setUserPassword(User $user, $request)
+    public function setUserPassword($request)
     {
-        $user->fire_events = false;
-        $user->update(['password' => Hash::make($request->password)]);
-        event(new UserNewPasswordEvent($user));
+        Auth::user()->hasAccessOrRedirect('USER_EDIT');
 
-        return redirect(route('admin.users.index'));
-    }
-
-
-    public static function block(User $user, $request)
-    {
-        (new UserActions($user->id))->setStatus($request->get('is_active'));
-        event(new UserBlockEvent($user));
+        $this->item->fire_events = false;
+        $this->item->update(['password' => Hash::make($request->password)]);
+        event(new UserNewPasswordEvent($this->item));
 
         return redirect(route('admin.users.index'));
     }
 
 
-    public static function destroy(User $user)
+    public function disable()
     {
-        $user->delete();
-        return response()->json(['message' => __('admin/messages.users.delete.success'), 'id' => $user->id], 200);
+        Auth::user()->hasAccessOrRedirect('USER_EDIT');
+        return view('admin.users.disable', [
+            'user' => $this->item
+        ]);
     }
 
 
-    public static function massAction($data)
+    public function block($request)
+    {
+        Auth::user()->hasAccessOrRedirect('USER_EDIT');
+
+        (new UserActions($this->item->id))->setStatus($request->get('is_active'));
+        event(new UserBlockEvent($this->item));
+
+        return redirect(route('admin.users.index'));
+    }
+
+
+    public function destroy()
+    {
+        Auth::user()->hasAccessOrRedirect('USER_DELETE');
+        $this->item->delete();
+
+        return response()->json([
+            'message' => __('admin/messages.users.delete.success'),
+            'id' => $this->item->id
+        ], 200);
+    }
+
+
+    public static function mass($data)
     {
         if (empty($data['mass_edit'])) {
             return redirect()->back()->with('error', __('admin/messages.users.mass.errors.no_users'));

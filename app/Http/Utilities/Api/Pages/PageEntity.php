@@ -9,9 +9,17 @@ use Spatie\QueryBuilder\QueryBuilder;
 use App\Http\Utilities\ModelUtilities;
 use App\Entities\User;
 use App\Entities\Page;
+use App\Interfaces\ApiEntity;
 
-class PageEntity
+class PageEntity implements ApiEntity
 {
+
+    private $item;
+
+    public function __construct($item)
+    {
+        $this->item = $item;
+    }
 
 
     static function index($request)
@@ -50,53 +58,50 @@ class PageEntity
     }
 
 
-    static function show($id)
+    public function show()
     {
-        if (is_numeric($id)) {
-            $page = Page::with('author', 'category', 'thumbnail')->find($id);
-        } else {
-            $page = Page::with('author', 'category', 'thumbnail')->where(['slug' => $id])->orWhere(['slug_pl' => $id])->first();
-        }
-
-        if (!$page) return response()->json(["status" => "404", "message" => "Page doesn't exist."], 404);
-        return new PageResource($page);
+        if (!$this->item) return response()->json(["status" => "404", "message" => "Page doesn't exist."], 404);
+        return new PageResource($this->item);
     }
 
 
-    static function update($request, $id)
+    public function update($request)
     {
         $validation = PageValidation::updateValidation($request);
-        if ($validation !== true) return $validation;
 
-        $page = Page::find($id);
-        if (!$page) return response()->json(["status" => "404", "message" => "Resource doesn't exist."], 404);
+        if ($validation !== true) return $validation;
+        if (!$this->item) return response()->json([
+            "status" => "404",
+            "message" => "Resource doesn't exist."
+        ], 404);
 
         $data = $request->all();
-        $page->update($data);
+        $this->item->update($data);
 
-        return response()->json(["status" => "201", "message" => "Successfully updated new page.", "data" => compact('page')], 201);
+        return response()->json([
+            "status" => "201",
+            "message" => "Successfully updated new page.",
+            "data" => $this->item
+        ], 201);
     }
 
 
-    static function destroy($id)
+    public function destroy()
     {
         $access = AuthResponse::hasAccess('PAGE_EDIT');
+
         if ($access !== true) return $access;
+        if (!$this->item) return response()->json([
+            "status" => "404",
+            "message" => "Resource doesn't exist."
+        ], 404);
 
-        $page = Page::find($id);
-        if (!$page) return response()->json(["status" => "404", "message" => "Resource doesn't exist."], 404);
+        $this->item->delete();
 
-        $page->delete();
-        return response()->json(["status" => "200", "message" => "Page has been successfully deleted.", "data" => compact('page')], 200);
+        return response()->json([
+            "status" => "200",
+            "message" => "Page has been successfully deleted.",
+            "data" => $this->item
+        ], 200);
     }
-
-
-    // public function store($request)
-    // {
-    //     $data = $request->all();
-    //     $data['user_id'] = Auth::user()->id;
-
-    //     Page::create($data);
-    //     return redirect(route('admin.pages.index'));
-    // }
 }

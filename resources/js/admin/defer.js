@@ -28,7 +28,6 @@ $(document).ready(function() {
                 {
                     this.getDoc().body.style.fontSize = '16';
                     this.getDoc().body.style.fontFamily = 'Poppins';
-                    ed.target.editorCommands.execCommand("fontName", false, "Poppins");
                 });
             },
             importcss_append: true,

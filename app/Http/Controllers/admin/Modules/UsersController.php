@@ -2,83 +2,63 @@
 
 namespace App\Http\Controllers\Admin\Modules;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
-use App\Http\Utilities\Admin\Modules\Users\UserEntity;
 use App\Http\Requests\Admin\Modules\Users\UsersCreateRequest;
 use App\Http\Requests\Admin\Modules\Users\NewPasswordRequest;
 use App\Http\Requests\Admin\Modules\Users\UsersEditRequest;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Entities\User;
 
-use Auth;
 
 class UsersController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.users.index');
+        return User::webIndex($request);
     }
-
 
     public function create()
     {
-        Auth::user()->hasAccessOrRedirect('USER_CREATE');
-        return view('admin.users.create');
+        return User::webCreate();
     }
-
 
     public function store(UsersCreateRequest $request)
     {
-        Auth::user()->hasAccessOrRedirect('USER_CREATE');
-        return UserEntity::store($request->all());
+        return User::webStore($request);
     }
 
-
-    public function edit(User $user)
+    public function edit($user)
     {
-        Auth::user()->hasAccessOrRedirect('USER_EDIT');
-        return view('admin.users.edit', compact('user'));
+        return User::findOrFail($user)->webEdit();
     }
 
-
-    public function update(UsersEditRequest $request, User $user)
+    public function update(UsersEditRequest $request, $user)
     {
-        Auth::user()->hasAccessOrRedirect('USER_EDIT');
-        return UserEntity::update($user, $request);
+        return User::findOrFail($user)->webUpdate($request);
     }
 
-
-    public function password(NewPasswordRequest $request, User $user)
+    public function password(NewPasswordRequest $request, $user)
     {
-        Auth::user()->hasAccessOrRedirect('USER_EDIT');
-        return UserEntity::setUserPassword($user, $request);
+        return User::findOrFail($user)->setPassword($request);
     }
 
-
-    public function disable(User $user)
+    public function disable($user)
     {
-        Auth::user()->hasAccessOrRedirect('USER_EDIT');
-        return view('admin.users.disable', ['user' => $user]);
+        return User::findOrFail($user)->disable();
     }
 
-
-    public function block(Request $request, User $user)
+    public function block(Request $request, $user)
     {
-        Auth::user()->hasAccessOrRedirect('USER_EDIT');
-        return UserEntity::block($user, $request);
+        return User::findOrFail($user)->block($request);
     }
 
-
-    public function destroy(User $user)
+    public function destroy($user)
     {
-        Auth::user()->hasAccessOrRedirect('USER_DELETE');
-        return UserEntity::destroy($user);
+        return User::findOrFail($user)->webDestroy();
     }
-
 
     public function mass(Request $request)
     {
-        return UserEntity::massAction($request->all());
+        return User::mass($request->all());
     }
 }

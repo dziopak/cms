@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Utilities\Api\Users\UserAuthentication;
-use App\Http\Utilities\Api\Users\UserEntity;
-use App\Http\Resources\UserResource;
 use App\Http\Controllers\Controller;
 use App\Http\Utilities\Api\AuthResponse;
 use Illuminate\Http\Request;
@@ -14,48 +12,40 @@ use JWTAuth;
 class UsersController extends Controller
 {
 
-
-    public function index()
+    public function index(Request $request)
     {
-        return UserResource::collection(User::orderBy('id')->paginate(15));
+        return User::apiIndex($request);
     }
-
 
     public function show($id)
     {
-        return UserEntity::show($id);
+        return User::findOrFail($id)->apiShow();
     }
-
 
     public function store(Request $request)
     {
-        return UserEntity::store($request);
+        return User::apiStore($request);
     }
-
 
     public function update(Request $request, $id)
     {
-        return UserEntity::update($request, $id);
+        return User::findOrfail($id)->update($request);
     }
-
 
     public function destroy($id)
     {
-        return UserEntity::destroy($id);
+        return User::findOrFail($id)->destroy();
     }
-
 
     public function authenticate(Request $request)
     {
         return UserAuthentication::authenticateCredentials($request->only('email', 'password'));
     }
 
-
     public function register(Request $request)
     {
         return UserAuthentication::register($request);
     }
-
 
     public function getAuthenticatedUser()
     {

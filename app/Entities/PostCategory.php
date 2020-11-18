@@ -2,19 +2,23 @@
 
 namespace App\Entities;
 
-use App\Traits\Linkable;
+use App\Http\Utilities\Admin\Modules\Categories\PostCategoryEntity;
 use Rennokki\QueryCache\Traits\QueryCacheable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use App\Traits\EntityTrait;
 use App\Traits\Sluggable;
+use App\Traits\Linkable;
 
 class PostCategory extends Model
 {
-    use Sluggable;
+    use Sluggable, Linkable;
     use QueryCacheable;
-    use Linkable;
+    use EntityTrait;
 
     protected $entity_type = 'posts.categories';
+    protected $webEntity = PostCategoryEntity::class;
+
     protected $guarded = ['id', 'category_id', 'type'];
     public $fire_events;
 

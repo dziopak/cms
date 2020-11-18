@@ -9,10 +9,18 @@ use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
 use App\Entities\User;
 use App\Entities\Post;
+use App\Interfaces\ApiEntity;
 use Hook;
 
-class PostEntity
+class PostEntity implements ApiEntity
 {
+    private $item;
+
+    public function __construct($item)
+    {
+        $this->item = $item;
+    }
+
     static function index($request)
     {
         $filters = ['created_at', 'updated_at', 'name', 'slug', AllowedFilter::exact('id')];
@@ -37,37 +45,33 @@ class PostEntity
     }
 
 
-    static function show($id)
+    public function show()
     {
-        $post = PostEntity::prepareAndFind($id);
-        if (!$post) return response()->json(["status" => "404", "message" => "Resource doesn't exist."], 404);
-
-        return new PostResource($post);
+        if (!$this->item) return response()->json(["status" => "404", "message" => "Resource doesn't exist."], 404);
+        return new PostResource($this->item);
     }
 
 
-    static function update($request, $id)
+    public function update($request)
     {
         $validation = PostValidation::updateValidation($request);
+
         if ($validation !== true) return $validation;
+        if (!$this->item) return response()->json(["status" => "404", "message" => "Post doesn't exist."], 404);
 
-        $post = PostEntity::find($id);
-        if (!$post) return response()->json(["status" => "404", "message" => "Post doesn't exist."], 404);
-
-        $post->update($request->all());
+        $this->item->update($request->all());
         return response()->json(["status" => "201", "message" => "Successfully updated post.", "data" => compact('post')], 201);
     }
 
 
-    static function destroy($id)
+    public function destroy()
     {
         $access = AuthResponse::hasAccess('POST_EDIT');
+
         if (!$access === true) return $access;
+        if (!$this->item) response()->json(["status" => "404", "message" => "Post doesn't exist."], 404);
 
-        $post = PostEntity::find($id);
-        if (!$post) response()->json(["status" => "404", "message" => "Post doesn't exist."], 404);
-
-        $post->delete();
+        $this->item->delete();
         return response()->json(["status" => "200", "message" => "Post has been successfully deleted.", "data" => compact('post')], 200);
     }
 
@@ -83,34 +87,8 @@ class PostEntity
     }
 
 
-    static function find($id)
-    {
-        if (is_numeric($id)) {
-            $post = Post::find($id);
-        } else {
-            $post = Post::where(['slug' => $id]);
-            $post = Hook::get('apiPostFindSelector', [$post, $id], function ($category, $id) {
-                return $post;
-            });
-            $post = $post->first();
-        }
-
-        return $post;
-    }
-
-
     static function prepareAndFind($id)
     {
-        if (is_numeric($id)) {
-            $post = Post::with('author', 'category', 'thumbnail')->find($id);
-        } else {
-            $post = Post::with('author', 'category', 'thumbnail')->where(['slug' => $id]);
-            $post = Hook::get('apiPostFindSelector', [$post, $id], function ($category, $id) {
-                return $post;
-            });
-            $post = $post->first();
-        }
-
-        return $post;
+        return Post::with('author', 'category', 'thumbnail')->findBySlug($id);
     }
 }

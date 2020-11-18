@@ -5,15 +5,30 @@ namespace App\Http\Utilities\Api\Menus;
 use App\Http\Utilities\Api\AuthResponse;
 use App\Entities\Menu;
 use App\Entities\MenuItem;
+use App\Interfaces\ApiEntity;
 
-class MenuEntity
+class MenuEntity implements ApiEntity
 {
-    static function show($id)
-    {
-        is_numeric($id) ? $menu = Menu::with('items')->find($id) : $menu = Menu::with('items')->where(['name' => $id])->first();
 
-        if (!$menu) return response()->json(['message' => 'Resource not found', 'status' => '404'], 404);
-        return $menu;
+    private $item;
+
+
+    public function __construct($item)
+    {
+        $this->item = $item;
+    }
+
+
+    static function index($request)
+    {
+        return Menu::with('items')->paginate(15);
+    }
+
+
+    public function show()
+    {
+        if (!$this->item) return response()->json(['message' => 'Resource not found', 'status' => '404'], 404);
+        return $this->item;
     }
 
 
@@ -22,34 +37,46 @@ class MenuEntity
         $validation = MenuValidation::storeValidation($request);
         if ($validation !== true) return $validation;
 
-        $menu = MenuEntity::create($request);
-        return response()->json(['message' => 'Successfully created menu', 'data' => $menu, 'status' => '201'], 201);
+        $menu = self::create($request);
+        return response()->json([
+            'message' => 'Successfully created menu',
+            'data' => $menu,
+            'status' => '201'
+        ], 201);
     }
 
 
-    static function update($request, $id)
+    public function update($request)
     {
         $validation = MenuValidation::updateValidation($request);
+
         if ($validation !== true) return $validation;
+        if (!$this->item) return response()->json(['message' => 'Resource not found.', 'status' => 404], 404);
 
-        $menu = Menu::find($id);
-        if (!$menu) return response()->json(['message' => 'Resource not found.', 'status' => 404], 404);
+        $this->item->update($request->all());
 
-        $menu->update($request->all());
-        return response()->json(['message' => 'Successfully updated resource', 'status' => '200', 'data' => $menu], 200);
+        return response()->json([
+            'message' => 'Successfully updated resource',
+            'status' => '200',
+            'data' => $this->item->fresh()
+        ], 200);
     }
 
 
-    static function destroy($id)
+    public function destroy()
     {
         $access = AuthResponse::hasAccess('MENU_DELETE');
+
         if (!$access === true) return $access;
+        if (!$this->item) return response()->json(['message' => 'Resource not found', 'status' => '404'], 404);
 
-        $menu = Menu::with('items')->find($id);
-        if (!$menu) return response()->json(['message' => 'Resource not found', 'status' => '404'], 404);
+        $this->item->delete();
 
-        $menu->delete();
-        return response()->json(['message' => 'Successfully deleted resource', 'status' => '200', 'data' => $menu], 200);
+        return response()->json([
+            'message' => 'Successfully deleted resource',
+            'status' => '200',
+            'data' => $this->item
+        ], 200);
     }
 
 

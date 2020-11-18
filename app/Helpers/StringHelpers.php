@@ -13,7 +13,7 @@ function randomString($length = 10)
 
 function camelCase($string)
 {
-    $string = str_replace('-', '', $string);
-    $string = str_replace('_', '', $string);
-    return ucwords($string);
+    $string = str_replace('-', ' ', $string);
+    $string = str_replace('_', ' ', $string);
+    return str_replace(' ', '', ucwords($string));
 }

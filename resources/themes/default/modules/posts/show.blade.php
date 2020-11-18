@@ -23,8 +23,8 @@
                     <p class="post__excerpt">{!! $post->excerpt !!}</p>
 
                     <div class="post__details">
-                        <strong class="post__details-title">Category:</strong> {!! !empty($post->category) ? '<a href="'.route('front.posts.categories.show', $post->category->id).'">'.$post->category->name.'</a>' : 'No category' !!}<br/>
-                        <strong class="post__details-title">Tags:</strong> <a href="">same</a>, <a href="">up</a>, <a href="">here</a>
+                        <strong class="post__details-title">{{ __('Theme::general.category') }}:</strong> {!! !empty($post->category) ? '<a href="'.$post->category->getUrl().'">'.$post->category->name.'</a>' : 'No category' !!}<br/>
+                        <strong class="post__details-title">{{ __('Theme::general.tags') }}:</strong> <a href="">same</a>, <a href="">up</a>, <a href="">here</a>
                     </div>
                 </div>
             </div>

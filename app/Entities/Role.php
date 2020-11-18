@@ -2,19 +2,24 @@
 
 namespace App\Entities;
 
+use App\Http\Utilities\Admin\Modules\Roles\RoleEntity;
 use Illuminate\Database\Eloquent\Model;
 use Rennokki\QueryCache\Traits\QueryCacheable;
+use App\Factories\EntityFactory;
+use App\Traits\EntityTrait;
 
 class Role extends Model
 {
-    use QueryCacheable;
+    use QueryCacheable, EntityTrait;
 
     public $timestamps = false;
-    protected $fillable = ['name', 'access', 'description'];
-
     public $fire_events = true;
+
     public $cacheFor = 3600;
     protected static $flushCacheOnUpdate = true;
+
+    protected $fillable = ['name', 'access', 'description'];
+    protected $webEntity = RoleEntity::class;
 
     public static function get_all_roles()
     {
@@ -46,5 +51,10 @@ class Role extends Model
     public function users()
     {
         return $this->hasMany('App\Entities\User', 'role_id');
+    }
+
+    public function duplicate()
+    {
+        return EntityFactory::build($this->webEntity, $this)->duplicate();
     }
 }

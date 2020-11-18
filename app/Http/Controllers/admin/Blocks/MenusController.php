@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin\Blocks;
 use App\Http\Requests\Admin\Blocks\Menus\CreateMenuRequest;
 use App\Http\Requests\Admin\Blocks\Menus\UpdateMenuRequest;
 use App\Http\Utilities\Admin\Blocks\Menus\MenuRelations;
-use App\Http\Utilities\Admin\Blocks\Menus\MenuEntity;
 use App\Http\Utilities\Admin\Blocks\Menus\MenuItems;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -16,63 +15,35 @@ use Auth;
 class MenusController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.blocks.menus.index');
+        return Menu::webIndex($request);
     }
-
 
     public function create()
     {
-        Auth::user()->hasAccessOrRedirect('BLOCK_CREATE');
-        return view('admin.blocks.menus.create');
+        return Menu::webCreate();
     }
-
 
     public function store(CreateMenuRequest $request)
     {
-        Auth::user()->hasAccessOrRedirect('BLOCK_CREATE');
-        $menu = Menu::create([
-            'name' => $request->get('name')
-        ]);
-        return redirect(route('admin.blocks.menus.edit', $menu->id));
+        return Menu::webStore($request);
     }
-
 
     public function edit($id)
     {
-        Auth::user()->hasAccessOrRedirect('BLOCK_EDIT');
-
-        $entities = [
-            '0' => 'Custom url',
-            'post' => 'Post',
-            'page' => 'Page',
-            'post_category' => 'Post category',
-            'page_category' => 'Page category'
-        ];
-
-        return view('admin.blocks.menus.edit', compact('entities'));
+        return Menu::findOrFail($id)->webEdit();
     }
-
 
     public function update(UpdateMenuRequest $request, $id)
     {
-        Auth::user()->hasAccessOrRedirect('BLOCK_EDIT');
-        Menu::findOrFail($id)->update([
-            'name' => $request->get('name')
-        ]);
-        return redirect(route('admin.blocks.menus.index'));
+        return Menu::findOrFail($id)->webUpdate($request);
     }
-
 
     public function destroy($id)
     {
-        Auth::user()->hasAccessOrRedirect('BLOCK_DELETE');
-        Menu::with('items')->findOrFail($id)->delete();
-
-        return response()->json(['message' => __('admin/messages.blocks.menus.delete.success'), 'id' => $id], 200);
+        return Menu::with('items')->findOrFail($id)->webDestroy();
     }
-
 
     public function order(Request $request, $id)
     {
@@ -80,20 +51,17 @@ class MenusController extends Controller
         return (new MenuItems($id))->order($request->get('data'));
     }
 
-
     public function attach(Request $request, $id)
     {
         Auth::user()->hasAccessOrRedirect('BLOCK_EDIT');
         return (new MenuItems($id))->attach($request->get('data'));
     }
 
-
     public function detach($menu_id, $item_id)
     {
         Auth::user()->hasAccessOrRedirect('BLOCK_EDIT');
         return (new MenuItems($menu_id))->detach($item_id);
     }
-
 
     public function search(Request $request)
     {
@@ -109,6 +77,6 @@ class MenusController extends Controller
 
     public function mass(Request $request)
     {
-        return MenuEntity::mass($request->all());
+        return Menu::mass($request->all());
     }
 }

@@ -15,10 +15,121 @@
     }
 
     &--login {
-        .user {
-            &__login-control {
-                max-width: 40%;
+        .user__login-intro {
+            font-size: 16px;
+            max-width: 70%;
+            margin-bottom: 50px;
+        }
+
+        .user__column {
+            &--register {
+                text-align: center;
+                text-align: -webkit-center;
+                background-color: #f9f9f9;
+                border: 1px solid #dee2e6;
+                padding: 50px 0px 100px;
+                flex-basis: 100%;
+            }
+
+            &--login {
+                margin-bottom: 40px;
             }
         }
+
+        .user {
+            &__remember-group {
+                display: flex;
+                align-items: center;
+            }
+            &__label {
+                font-size: 14px;
+                margin-top: 10px;
+            }
+            &__login-control {
+                max-width: 80%;
+                height: 45px;
+                margin-bottom: 20px;
+
+                &--checkbox {
+                    width: 20px;
+                    height: 20px;
+                    margin-right: 12px;
+                    margin-bottom: 0px;
+                    display: inline-block;
+                }
+            }
+        }
+
+        .user__social-login {
+            margin-top: 50px;
+        }
+
+        .user__social-register {
+            margin-bottom: 25px;
+        }
+
+        .user__social-login-button {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+            background: no-repeat center;
+            background-size: 70%;
+
+            &--facebook {
+                background-color: #3a5a99;
+                background-image: url("/images/fb.jpg");
+            }
+
+            &--google {
+                background-color: #dc4b3e;
+                background-image: url("/images/google.jpg");
+            }
+
+            &--github {
+                background-color: #24292e;
+                background-image: url("/images/gh.jpg");
+            }
+        }
+
+        .user__social-register-button {
+            display: block;
+            max-width: 80%;
+            padding: 6px 0;
+            color: #fff;
+            border-radius: 3px;
+            margin-top: 10px;
+            transition: filter 0.1s linear;
+
+            &:hover {
+                text-decoration: none;
+                filter: brightness(85%);
+            }
+
+            &--facebook {
+                background: #3a5a99 url("/images/fb.jpg") no-repeat 5px center;
+            }
+
+            &--google {
+                background: #dc4b3e url("/images/google.jpg") no-repeat 5px
+                    center;
+            }
+
+            &--github {
+                background: #24292e url("/images/gh.jpg") no-repeat 5px center;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .user--login .user__column--login {
+        margin-bottom: 40px;
+        text-align: center;
+        text-align: -webkit-center;
+    }
+    .user--login .user__remember-group {
+        justify-content: center;
     }
 }

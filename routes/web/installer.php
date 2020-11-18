@@ -3,14 +3,14 @@
 Route::group(['prefix' => 'install', 'as' => 'LaravelInstaller::', 'middleware' => ['web', 'install']], function () {
     Route::get('setup', [
         'as' => 'setup',
-        'uses' => 'InstallerRequirementsController@setup',
+        'uses' => 'Installer\RequirementsController@setup',
     ]);
     Route::get('requirements', [
         'as' => 'requirements',
-        'uses' => 'InstallerRequirementsController@requirements',
+        'uses' => 'Installer\RequirementsController@requirements',
     ]);
     Route::get('database/', [
         'as' => 'database',
-        'uses' => 'InstallerDatabaseController@db',
+        'uses' => 'Installer\DatabaseController@db',
     ]);
 });

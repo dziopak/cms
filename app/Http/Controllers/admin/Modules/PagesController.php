@@ -5,65 +5,44 @@ namespace App\Http\Controllers\Admin\Modules;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\Modules\Pages\PagesRequest;
-use App\Http\Utilities\Admin\Modules\Pages\PageEntity;
-
 use App\Entities\Page;
-use Auth;
 
 class PagesController extends Controller
 {
 
-
     public function index(Request $request)
     {
-        return view('admin.pages.index');
+        return Page::webIndex($request);
     }
-
 
     public function create()
     {
-        Auth::user()->hasAccessOrRedirect('PAGE_CREATE');
-        return view('admin.pages.create');
+        return Page::webCreate();
     }
-
 
     public function store(PagesRequest $request)
     {
-        Auth::user()->hasAccessOrRedirect('PAGE_CREATE');
-        return PageEntity::store($request->all());
+
+        return Page::webStore($request);
     }
 
-
-    public function edit(Page $page)
+    public function edit($page)
     {
-        Auth::user()->hasAccessOrRedirect('PAGE_EDIT');
-        return view('admin.pages.edit', ['page' => $page]);
+        return Page::findOrFail($page)->webEdit();
     }
 
-
-    public function update(PagesRequest $request, Page $page)
+    public function update(PagesRequest $request, $page)
     {
-        Auth::user()->hasAccessOrRedirect('PAGE_EDIT');
-        return PageEntity::update($page, $request);
+        return Page::findOrFail($page)->webUpdate($request);
     }
 
-
-    public function delete(Page $page)
+    public function destroy($page)
     {
-        Auth::user()->hasAccessOrRedirect('PAGE_DELETE');
-        return view('admin.pages.delete', compact('page'));
+        return Page::findOrFail($page)->webDestroy();
     }
-
-
-    public function destroy(Page $page)
-    {
-        Auth::user()->hasAccessOrRedirect('PAGE_DELETE');
-        return PageEntity::destroy($page);
-    }
-
 
     public function mass(Request $request)
     {
-        return PageEntity::massAction($request);
+        return Page::mass($request);
     }
 }

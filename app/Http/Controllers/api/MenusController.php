@@ -9,7 +9,7 @@ use App\Entities\Menu;
 
 class MenusController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         return Menu::with('items')->paginate(15);
     }
@@ -17,7 +17,7 @@ class MenusController extends Controller
 
     public function show($id)
     {
-        return MenuEntity::show($id);
+        return Menu::with('items')->findOrFail($id)->show();
     }
 
 

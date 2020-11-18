@@ -122,12 +122,20 @@ $("#menu-add-item").click(function() {
             updateItemCallback
         );
     } else {
+        let conditions = [];
+        $('.menu-condition').each(function() {
+            if ($(this).is(':checked')) {
+                conditions.push($(this).val());
+            }
+        });
+
         let itemData = {
             label: $("#item_label").val(),
             link: $("#item_url").val(),
             class: $("#item_class").val(),
             model_id: $("#item_model_id").val(),
             model_type: $("#item_model_type").val(),
+            conditions: conditions,
             parent: 0
         }
 

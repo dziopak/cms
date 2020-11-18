@@ -5,36 +5,33 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Utilities\Api\Pages\PageEntity;
 use Illuminate\Http\Request;
+use App\Entities\Page;
 
 class PagesController extends Controller
 {
 
     public function index(Request $request)
     {
-        return PageEntity::index($request);
+        return Page::apiIndex($request);
     }
-
 
     public function store(Request $request)
     {
-        return PageEntity::store($request);
+        return Page::apiStore($request);
     }
-
 
     public function show($id)
     {
-        return PageEntity::show($id);
+        return Page::findBySlug($id)->apiShow();
     }
-
 
     public function update(Request $request, $id)
     {
-        return PageEntity::update($request, $id);
+        return Page::findBySlug($id)->apiUpdate($request);
     }
-
 
     public function destroy($id)
     {
-        return PageEntity::destroy($id);
+        return Page::findBySlug($id)->apiDestroy();
     }
 }

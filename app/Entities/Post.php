@@ -2,25 +2,31 @@
 
 namespace App\Entities;
 
+use App\Http\Utilities\Admin\Modules\Posts\PostEntity as WebEntity;
+use App\Http\Utilities\Api\Posts\PostEntity as ApiEntity;
+use App\Traits\EntityTrait;
 use App\Traits\Linkable;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\Sluggable;
+use App\Traits\Thumbnail;
 use Rennokki\QueryCache\Traits\QueryCacheable;
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
 
 class Post extends Model implements Searchable
 {
-    use Sluggable;
-    use Linkable;
+    use Sluggable, Linkable;
     use QueryCacheable;
+    use Thumbnail, EntityTrait;
 
-    protected $guarded = ['id', 'post_id', 'thumbnail'];
-    public $fire_events = true;
-    protected $entity_type = 'posts';
-
-    public $cacheFor = 3600;
+    public $cacheFor = 3600, $fire_events = true;
     protected static $flushCacheOnUpdate = true;
+
+    protected $entity_type = 'posts',
+        $guarded = ['id', 'post_id', 'thumbnail'];
+
+    private $webEntity = WebEntity::class,
+        $apiEntity = ApiEntity::class;
 
 
     public function author()

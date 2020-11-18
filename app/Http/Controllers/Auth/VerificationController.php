@@ -4,39 +4,33 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use App\Entities\Layout;
 use Illuminate\Foundation\Auth\VerifiesEmails;
+use Auth;
 
 class VerificationController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Email Verification Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller is responsible for handling email verification for any
-    | user that recently registered with the application. Emails may also
-    | be re-sent if the user didn't receive the original email message.
-    |
-    */
-
     use VerifiesEmails;
 
-    /**
-     * Where to redirect users after verification.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/';
+    private $layout;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+
     public function __construct()
     {
         $this->middleware('auth');
         $this->middleware('signed')->only('verify');
         $this->middleware('throttle:6,1')->only('verify', 'resend');
+        $this->layout = getConfig('general', 'layout') ?? 1;
+    }
+
+
+    public function show()
+    {
+        if (!empty(Auth::user()->email_verified_at)) return redirect(url(route('front.user.edit')));
+
+        return view('Theme::modules.users.verify', [
+            'blocks' => Layout::findOrFail($this->layout)->getLayout()
+        ]);
     }
 }

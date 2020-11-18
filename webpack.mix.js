@@ -7,6 +7,7 @@ let theme_path = "resources/themes/" + theme + "/";
 mix.js("resources/js/app.js", "public/js")
     .js("resources/js/admin/dashboard.js", "public/js/admin")
     .js("resources/js/admin/layouts.js", "public/js/admin")
+    .js("resources/js/admin/head.js", "public/js/admin")
     .js("resources/js/admin/defer.js", "public/js/admin")
     .js("resources/js/admin/menus.js", "public/js/admin")
 
@@ -26,31 +27,33 @@ mix.js("resources/js/app.js", "public/js")
     .copy("node_modules/gridstack/dist/gridstack.all.js", "public/assets/js")
     .copy("node_modules/gridstack/dist/gridstack.min.css", "public/assets/css")
 
+    .copy("node_modules/jquery/dist/jquery.min.js", "public/assets/js")
+
     .sass(
         theme_path + "assets/sass/theme.scss",
-        "../" + theme_path + "assets/css"
+        "public/css/themes/"+theme+"/"
     )
     .sass(
         theme_path + "assets/sass/blocks.scss",
-        "../" + theme_path + "assets/css"
+        "public/css/themes/"+theme+"/"
     )
     .sass(
         theme_path + "assets/sass/custom.scss",
-        "../" + theme_path + "assets/css"
+        "public/css/themes/"+theme+"/"
     )
     .sass(
         theme_path + "modules/posts/style.scss",
-        "../" + theme_path + "assets/css/posts.css"
+        "public/css/themes/"+theme+"/posts.css"
     )
     .sass(
         theme_path + "modules/pages/style.scss",
-        "../" + theme_path + "assets/css/pages.css"
+        "public/css/themes/"+theme+"/pages.css"
     )
     .sass(
         theme_path + "modules/users/style.scss",
-        "../" + theme_path + "assets/css/users.css"
+        "public/css/themes/"+theme+"/users.css"
     )
     .sass(
         theme_path + "modules/categories/style.scss",
-        "../" + theme_path + "assets/css/categories.css"
+        "public/css/themes/"+theme+"/categories.css"
     );

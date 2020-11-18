@@ -22,8 +22,8 @@
                 <h3 class="page__title">{{ $page->name }}</h3>
                 <p class="page__excerpt">{!! $page->excerpt !!}</p>
                 <div class="page__details">
-                    <strong class="page__details-title">Category:</strong> {!! !empty($page->category) ? '<a href="'.route('front.pages.categories.show', $page->category->id).'">'.$page->category->name.'</a>' : 'No category' !!}<br/>
-                    <strong class="page__details-title">Tags:</strong> <a href="">same</a>, <a href="">up</a>, <a href="">here</a>
+                    <strong class="post__details-title">{{ __('Theme::general.category') }}:</strong> {!! !empty($page->category) ? '<a href="'.$page->category->getUrl().'">'.$page->category->name.'</a>' : 'No category' !!}<br/>
+                    <strong class="page__details-title">{{ __('Theme::general.tags') }}:</strong> <a href="">same</a>, <a href="">up</a>, <a href="">here</a>
                 </div>
             </div>
         </div>

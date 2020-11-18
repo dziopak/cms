@@ -17,4 +17,9 @@ class Menu extends Model
     {
         return $this->hasMany('App\Entities\MenuItem', 'menu')->orderBy('sort');
     }
+
+    static function find($id)
+    {
+        return self::where(['name' => $id])->orWhere(['id' => $id])->first();
+    }
 }

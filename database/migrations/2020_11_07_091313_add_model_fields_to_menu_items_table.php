@@ -15,7 +15,7 @@ class AddModelFieldsToMenuItemsTable extends Migration
     {
         Schema::table('menu_items', function (Blueprint $table) {
             $table->string('link')->nullable()->change();
-            $table->integer('model_id')->unsigned()->default(0);
+            $table->integer('model_id')->unsigned()->nullable();
             $table->string('model_type', 20)->nullable();
         });
     }

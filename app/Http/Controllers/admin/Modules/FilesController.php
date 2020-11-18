@@ -10,80 +10,43 @@ use App\Http\Utilities\Api\Files\FileHandling;
 class FilesController extends Controller
 {
 
-
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.media.index');
+        return File::webIndex($request);
     }
-
 
     public function create()
     {
-        return view('admin.media.create');
+        return File::webCreate();
     }
 
-
-    public function show(File $file)
+    public function show($file)
     {
-        $file->id === "0" ?
-            $path = 'assets/no-thumbnail.png' :
-            $path = $file->path;
-
-        return response()->json(['path' => $path]);
+        return File::findOrFail($file)->webShow();
     }
 
-
-    public function edit(File $file)
+    public function edit($file)
     {
-        return view('admin.media.edit', ['file' => $file]);
+        return File::findOrFail($file)->webEdit();
     }
 
-
-    public function update(Request $request, File $file)
+    public function update(Request $request, $file)
     {
-        $file->update([
-            'name' => $request->get('name'),
-            'description' => $request->get('description')
-        ]);
-
-        return redirect(route('admin.media.index'));
+        return File::findOrFail($file)->webUpdate($request);
     }
 
-
-    public function delete(File $file)
+    public function destroy($file)
     {
-        return view('admin.media.delete', compact('file'));
+        return File::findOrFail($file)->webDestroy();
     }
 
-
-    public function destroy(File $file)
-    {
-        $file->delete();
-        return response()->json(['message' => __('admin/messages.files.delete.success'), 'id' => $file->id], 200);
-    }
-
-
-    public function upload(Request $request)
+    public function store(Request $request)
     {
         return FileHandling::upload($request);
     }
 
-
     public function mass(Request $request)
     {
-        $data = $request->all();
-
-        if (empty($data['mass_edit'])) {
-            return redirect()->back()->with('error', __('admin/messages.files.mass.errors.no_files'));
-        }
-
-        switch ($data['mass_action']) {
-            case 'delete':
-                File::whereIn('id', $data['mass_edit'])->delete();
-                return redirect()->back()->with('crud', __('admin/messages.files.mass.delete'));
-                break;
-        }
-
-        return redirect()->back();
+        return File::mass($request);
     }
 }

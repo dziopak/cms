@@ -18,15 +18,15 @@ class LocaleMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $locale = 'en';
+        $locale = config()['app']['locale'] ?? 'en';
 
         if (!empty(session('locale'))) {
             $locale = session('locale');
-        } else if(!empty(Auth::user()->locale)) {
+        } else if (!empty(Auth::user()->locale)) {
             $locale = Auth::user()->locale;
             session(['locale' => Auth::user()->locale]);
         }
-        
+
         App::setLocale($locale);
         return $next($request);
     }

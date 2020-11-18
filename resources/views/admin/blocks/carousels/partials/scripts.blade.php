@@ -17,7 +17,6 @@
     }
 
     async function addSlides(slides) {
-        alert('troll');
         try {
             const response = await axios.post('{{ route("admin.blocks.carousels.attach", $carousel->id) }}', {
                 'files': slides,
@@ -41,7 +40,6 @@
     }
 
     $('#slider-add-existing').click(function() {
-        alert('troll');
         var slides = [];
         $("#media-list-form input[name^='mass_edit']:checked").each(function() {
             slides.push($(this).val());

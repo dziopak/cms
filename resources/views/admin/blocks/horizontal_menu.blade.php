@@ -25,6 +25,16 @@
             </div>
 
             <div class="form-group">
+                {{ Form::label('depth', 'Menu depth')}}
+                {{ Form::select('config['.$key.'][depth]', $depth, $config['block']->config['depth'] ?? 0, ['class' => 'form-control'])}}
+            </div>
+
+            <div class="form-group">
+                {{ Form::label('style', 'Style')}}
+                {{ Form::select('config['.$key.'][style]', $styles, $config['block']->config['style'] ?? 'default', ['class' => 'form-control'])}}
+            </div>
+
+            <div class="form-group">
                 {{ Form::label('align', __('admin/general.align'))}}
                 {{ Form::select('config['.$key.'][align]', $align, $config['block']->config['align'] ?? 0, ['class' => 'form-control'])}}
             </div>

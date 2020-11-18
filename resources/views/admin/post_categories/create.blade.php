@@ -31,6 +31,9 @@
         {{-- Display form --}}
         <x-form-fields :fields="$form['left']" />
 
+        {{-- Hidden fields --}}
+        {!! Form::hidden('type', 'post') !!}
+
         {{-- Hooks --}}
         @hook('post_category_create_left_content')
         @hook('post_category_left_content')

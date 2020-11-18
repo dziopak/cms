@@ -71,11 +71,35 @@
             {!! Form::text('item_url', null, ['class' => 'form-control']) !!}
         </div>
 
+        <div class="mt-4 mb-2"><strong>Conditions:</strong></div>
+
+        {{-- Conditions --}}
+        <div class="form-group">
+            <div>
+                {!! Form::checkbox('conditions[logged_in]', 'logged_in', false, ['class' => 'menu-condition']) !!}
+                {!! Form::label('conditions[logged_in]', 'Only logged in') !!}
+            </div>
+
+            <div>
+                {!! Form::checkbox('conditions[logged_out]', 'logged_out', false, ['class' => 'menu-condition']) !!}
+                {!! Form::label('conditions[logged_out]', 'Only guests') !!}
+            </div>
+
+            <div>
+                {!! Form::checkbox('conditions[is_admin]', 'is_admin', false, ['class' => 'menu-condition']) !!}
+                {!! Form::label('conditions[is_admin]', 'Admins only') !!}
+            </div>
+
+            <div>
+                {!! Form::checkbox('conditions[verified]', 'verified', false, ['class' => 'menu-condition']) !!}
+                {!! Form::label('conditions[verified]', 'Verified users only') !!}
+            </div>
+        </div>
+
 
         {{-- MODEL DATA --}}
         {!! Form::hidden('item_model_id', null, ['id' => 'item_model_id']) !!}
         {!! Form::hidden('item_model_type', null, ['id' => 'item_model_type']) !!}
-
 
 
         {{-- Search & Results --}}
@@ -88,6 +112,7 @@
         </div>
 
     </x-wrapper>
+
 @endsection
 
 

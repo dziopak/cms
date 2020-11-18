@@ -22,6 +22,18 @@ class HorizontalMenu extends Component
         'id' => 'horizontal-menu-block'
     ];
 
+    private $data = [
+        'styles' => [
+            'default' => 'Regular',
+            'main' => 'Main menu'
+        ],
+        'depth' => [
+            0 => 'No submenus',
+            1 => 'Sub-menus',
+            2 => '2nd level sub-menus'
+        ]
+    ];
+
 
     public function __construct($block, $admin = false, $exists = false)
     {
@@ -43,19 +55,20 @@ class HorizontalMenu extends Component
         $this->config = decodeBlockConfig($this->config);
 
         $menu = Menu::find($this->config['block']->config['menu_id'] ?? 1);
-        $menu_list = Menu::all()->pluck('name', 'id')->toArray();
+        $this->data['menus'] = Menu::all()->pluck('name', 'id')->toArray() ?? [];
 
-        if (!$this->config['is_admin'])
+        if (!$this->config['is_admin']) {
             $items = $menu->items()
-                ->where(['parent' => 0])
-                ->get()
-                ->map(function ($item) {
-                    if ($item->model_id && $item->model_type) {
-                        $item->link = getModel($item->model_type)::findOrFail($item->model_id)->getUrl();
-                    }
-                    return $item;
-                });
+                ->getItems();
 
-        return block('horizontal_menu', $this->config, ['menus' => $menu_list ?? []], ['menu' => $items ?? null]);
+            $items = $items->map(function ($item) {
+                if ($item->model_id && $item->model_type) {
+                    $item->link = getModel($item->model_type)::findOrFail($item->model_id)->getUrl();
+                }
+                return $item;
+            })->groupBy('parent');
+        }
+
+        return block('horizontal_menu', $this->config, $this->data, ['menu' => $items ?? null]);
     }
 }

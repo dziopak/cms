@@ -7,11 +7,22 @@ use App\Http\Utilities\Api\AuthResponse;
 use Illuminate\Support\Facades\Hash;
 
 use App\Entities\User;
+use App\Interfaces\ApiEntity;
 
-
-class UserEntity
+class UserEntity implements ApiEntity
 {
 
+    private $item;
+
+    public function __construct($item)
+    {
+        $this->item = $item;
+    }
+
+    static function index($request)
+    {
+        return UserResource::collection(User::orderBy('id')->paginate(15));
+    }
 
     static function create($request)
     {
@@ -21,18 +32,10 @@ class UserEntity
         return new UserResource(User::create($data));
     }
 
-
-    static function find($id)
+    public function show()
     {
-        is_numeric($id) ? $user = User::find($id) : $user = User::where(['email' => $id])->first();
-        return $user;
-    }
-
-
-    static function show($id)
-    {
-        $user = User::find($id);
-        return $user ? new UserResource($user) : response()->json(["status" => "404", "message" => "User doesn't exist."], 404);
+        if (empty($this->item)) return response()->json(["status" => "404", "message" => "User doesn't exist."], 404);
+        return new UserResource($this->item);
     }
 
 
@@ -41,35 +44,52 @@ class UserEntity
         $validation = UserValidation::storeValidation($request);
         if ($validation !== true) return $validation;
 
-        UserEntity::create($request);
-        return response()->json(["status" => "201", "message" => "Successfully created new user account.", "data" => compact('user')], 201);
+        User::create($request);
+        return response()->json([
+            "status" => "201",
+            "message" => "Successfully created new user account.",
+            "data" => compact('user')
+        ], 201);
     }
 
 
-    static function update($request, $id)
+    public function update($request)
     {
         $validation = UserValidation::updateValidation($request);
         if ($validation !== true) return $validation;
-
-        $user = UserEntity::find($id);
-        if (!$user) return response()->json(["status" => "404", "message" => "Resource doesn't exist."], 404);
+        if (!$this->item) return response()->json(["status" => "404", "message" => "Resource doesn't exist."], 404);
 
         $data = $request->except('avatar', 'password', 'repeat_password');
-        $user->update($data);
+        $this->item->update($data);
 
-        return response()->json(["status" => "201", "message" => "Successfully updated user account.", "data" => new UserResource($user)], 201);
+        return response()->json(
+            [
+                "status" => "201",
+                "message" => "Successfully updated user account.",
+                "data" => new UserResource($this->item->fresh())
+            ],
+            201
+        );
     }
 
 
-    static function destroy($id)
+    public function destroy()
     {
         $access = AuthResponse::hasAccess('USER_DELETE');
+
         if (!$access === true) return $access;
+        if (!$this->item) return response()->json([
+            "status" => "404",
+            "message" => "Resource doesn't exist.
+        "
+        ], 404);
 
-        $user = UserEntity::find($id);
-        if (!$user) return response()->json(["status" => "404", "message" => "Resource doesn't exist."], 404);
+        $this->item->delete();
 
-        $user->delete();
-        return response()->json(["status" => "200", "message" => "User has been successfully deleted.", "data" => new UserResource($user)], 200);
+        return response()->json([
+            "status" => "200",
+            "message" => "User has been successfully deleted.",
+            "data" => new UserResource($this->item)
+        ], 200);
     }
 }

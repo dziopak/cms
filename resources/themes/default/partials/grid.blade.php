@@ -9,7 +9,7 @@
         <div class="block-row row">
             @foreach($row as $key => $column)
                 @if ($key !== "container")
-                    <div style="overflow: hidden;" class="block-row__col col-md-{{ $column['COLUMN_WIDTH'] }}">
+                    <div class="block-row__col col-md-{{ $column['COLUMN_WIDTH'] }}">
 
 
                         {{-- Loop through blocks --}}

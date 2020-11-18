@@ -5,6 +5,10 @@
     &__column {
         align-self: center;
 
+        .post__thumbnail-col {
+            text-align: center;
+        }
+
         &--left {
             .post__thumbnail-col {
                 margin-right: 40px;
@@ -42,6 +46,7 @@
                 float: left;
                 margin-right: 60px;
                 flex-basis: 40%;
+                text-align: center;
             }
         }
     }
@@ -69,11 +74,16 @@
         }
 
         &__column {
-            &--right.post__column--odd {
-                display: none;
-            }
+            flex-basis: 100%;
+            &--right.post__column--odd,
             &--left.post__column--even {
-                display: none;
+                order: -1;
+                margin-bottom: 20px;
+
+                .post__thumbnail-col {
+                    margin: 0px 0px 20px;
+                    display: block;
+                }
             }
         }
 

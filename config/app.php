@@ -53,7 +53,7 @@ return [
     */
 
     'url' => env('APP_URL', 'http://dziopak.pl'),
-
+    'domain' => env('APP_DOMAIN', 'dziopak.pl'),
     'asset_url' => env('ASSET_URL', null),
 
     /*
@@ -153,7 +153,6 @@ return [
         Illuminate\Filesystem\FilesystemServiceProvider::class,
         Illuminate\Foundation\Providers\FoundationServiceProvider::class,
         Illuminate\Hashing\HashServiceProvider::class,
-        Illuminate\Mail\MailServiceProvider::class,
         Illuminate\Notifications\NotificationServiceProvider::class,
         Illuminate\Pagination\PaginationServiceProvider::class,
         Illuminate\Pipeline\PipelineServiceProvider::class,
@@ -164,6 +163,8 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Illuminate\Mail\MailServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
 
         // Settings provider
         App\Providers\SettingsServiceProvider::class,
@@ -240,6 +241,7 @@ return [
         'Hook' => Esemve\Hook\Facades\Hook::class,
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 
 ];

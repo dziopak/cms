@@ -1,13 +1,5 @@
-@import "variables";
 @import "~bootstrap/scss/bootstrap";
-
-// Fonts
-@import url("https://fonts.googleapis.com/css?family=Nunito");
-
-// Variables
-
-// Bootstrap
-
+@import "variables";
 @import "admin/partials/sidebar";
 @import "admin/partials/top-nav";
 @import "admin/partials/modals";

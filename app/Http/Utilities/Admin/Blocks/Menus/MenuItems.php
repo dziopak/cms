@@ -32,12 +32,12 @@ class MenuItems
     public function attach($data)
     {
         $this->menu->flushQueryCache();
-
         if (!empty($data['id'])) {
             $item = $this->menu->items()->findOrFail($data['id'])->update([
                 'label' => $data['label'],
                 'link' => $data['link'],
                 'class' => $data['class'],
+                'conditions' => serialize($data['conditions'] ?? [])
             ]);
             return response()->json(['message' => __('admin/messages.blocks.menus.items.update'), 'data' => $data], 200);
         } else {
@@ -46,8 +46,9 @@ class MenuItems
                 'link' => $data['link'],
                 'parent' => $data['parent'],
                 'class' => $data['class'],
-                'model_id' => $data['model_id'],
-                'model_type' => $data['model_type']
+                'model_id' => $data['model_id'] ?? 0,
+                'model_type' => $data['model_type'],
+                'conditions' => serialize($data['conditions'] ?? [])
             ]);
             return response()->json(['message' => __('admin/messages.blocks.menus.items.attach'), 'data' => $data, 'id' => $item->id], 200);
         }

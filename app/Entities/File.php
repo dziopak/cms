@@ -2,21 +2,24 @@
 
 namespace App\Entities;
 
+use App\Http\Utilities\Admin\Modules\Files\FileEntity;
 use Rennokki\QueryCache\Traits\QueryCacheable;
 use App\Events\Files\FileDestroyEvent;
 use Illuminate\Database\Eloquent\Model;
 use App\Entities\Slider;
+use App\Traits\EntityTrait;
 
 class File extends Model
 {
-    use QueryCacheable;
-
+    use QueryCacheable, EntityTrait;
 
     public $cacheFor = 3600;
     protected static $flushCacheOnUpdate = true;
+
     protected $table = "files";
     protected $fillable = ['type', 'path', 'name', 'description'];
 
+    protected $webEntity = FileEntity::class;
 
     public function posts()
     {

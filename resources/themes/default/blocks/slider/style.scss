@@ -115,6 +115,14 @@
 @media (max-width: 768px) {
     .slider {
         &--hero {
+            margin-left: -50px;
+            margin-right: -50px;
+            width: calc(100% + 100px);
+
+            .slider__content {
+                left: 50px;
+            }
+
             .slider__slogan,
             .btn {
                 display: none;

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin\Modules;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\Modules\Categories\CategoriesRequest;
-use App\Http\Utilities\Admin\Modules\Categories\PostCategoryEntity;
 
 use App\Entities\PostCategory;
 use Auth;
@@ -13,57 +12,38 @@ use Auth;
 class PostCategoriesController extends Controller
 {
 
-
     public function index(Request $request)
     {
-        return view('admin.post_categories.index');
+        return PostCategory::webIndex($request);
     }
-
 
     public function create()
     {
-        Auth::user()->hasAccessOrRedirect('CATEGORY_CREATE');
-        return view('admin.post_categories.create');
+        return PostCategory::webCreate();
     }
-
 
     public function store(CategoriesRequest $request)
     {
-        Auth::user()->hasAccessOrRedirect('CATEGORY_CREATE');
-        return PostCategoryEntity::store($request);
+        return PostCategory::webStore($request);
     }
 
-
-    public function edit(PostCategory $category)
+    public function edit($category)
     {
-        Auth::user()->hasAccessOrRedirect('CATEGORY_EDIT');
-        return view('admin.post_categories.edit', compact('category'));
+        return PostCategory::findOrFail($category)->webEdit();
     }
 
-
-    public function update(CategoriesRequest $request, PostCategory $category)
+    public function update(CategoriesRequest $request, $category)
     {
-        Auth::user()->hasAccessOrRedirect('CATEGORY_EDIT');
-        return PostCategoryEntity::update($category, $request);
+        return PostCategory::findOrFail($category)->webUpdate($request);
     }
 
-
-    public function delete(PostCategory $category)
+    public function destroy($category)
     {
-        Auth::user()->hasAccessOrRedirect('CATEGORY_DELETE');
-        return view('admin.post_categories.delete', compact('category'));
+        return PostCategory::findOrFail($category)->webDestroy();
     }
-
-
-    public function destroy(PostCategory $category)
-    {
-        Auth::user()->hasAccessOrRedirect('CATEGORY_DELETE');
-        return PostCategoryEntity::destroy($category);
-    }
-
 
     public function mass(Request $request)
     {
-        return PostCategoryEntity::massAction($request);
+        return PostCategory::mass($request);
     }
 }

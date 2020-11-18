@@ -14,7 +14,7 @@
                             <p class="slider__slogan">{{ $slide->pivot->description ?? null }}</p>
 
                             @if ($slide->pivot->url)
-                                <a class="btn cta" href="{{ $slide->pivot->url }}">Read more</a>
+                                <a class="btn cta" href="{{ $slide->pivot->url }}">{{ __('Theme::general.more') }}</a>
                             @endif
                         </div>
                     </div>

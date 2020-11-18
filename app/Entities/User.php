@@ -2,8 +2,10 @@
 
 namespace App\Entities;
 
+use App\Http\Utilities\Admin\Modules\Users\UserEntity;
 use Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
 
 use JWTAuth;
@@ -16,18 +18,25 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 use Rennokki\QueryCache\Traits\QueryCacheable;
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
+use App\Notifications\UserPasswordReset;
+use App\Notifications\UserEmailVerification;
+use App\Traits\EntityTrait;
+use App\Factories\EntityFactory;
+use URL;
 
-class User extends Authenticatable implements JWTSubject, Searchable
+
+class User extends Authenticatable implements JWTSubject, Searchable, MustVerifyEmail
 {
 
     use Notifiable;
     use QueryCacheable;
-
+    use EntityTrait;
 
     public $fire_events = true;
+    protected $webEntity = UserEntity::class;
 
     protected $fillable = [
-        'name', 'email', 'password', 'avatar', 'role_id', 'first_name', 'last_name', 'last_login', 'updated_at'
+        'name', 'email', 'password', 'avatar', 'role_id', 'first_name', 'last_name', 'last_login', 'updated_at', 'provider', 'provider_id'
     ];
     protected $hidden = [
         'password', 'remember_token', 'first_name', 'last_name',
@@ -78,6 +87,7 @@ class User extends Authenticatable implements JWTSubject, Searchable
 
             if ($user->role_id == "0") return true;
             $access = unserialize($user->role->access);
+            if (!is_array($access)) return false;
 
             if (in_array($permission, $access) && $user->is_active == 1) {
                 return true;
@@ -89,7 +99,7 @@ class User extends Authenticatable implements JWTSubject, Searchable
 
     public function hasAccessOrRedirect($permission)
     {
-        if (!$this->hasAccess($permission)) {
+        if (!Auth::check() || !$this->hasAccess($permission)) {
             throw new HttpResponseException(
                 redirect()
                     ->route('admin.dashboard.index')
@@ -155,5 +165,48 @@ class User extends Authenticatable implements JWTSubject, Searchable
             $this->name,
             route('admin.users.edit', $this->id)
         );
+    }
+
+    public function sendPasswordResetNotification($token): void
+    {
+        $url = route('password.reset', [
+            'token' => $token,
+            'email' => $this->getEmailForPasswordReset()
+        ]);
+        $this->notify(new UserPasswordReset($url));
+    }
+
+    public function sendEmailVerificationNotification()
+    {
+        $verifyUrl = URL::temporarySignedRoute(
+            'verification.verify',
+            \Illuminate\Support\Carbon::now()->addMinutes(\Illuminate\Support\Facades\Config::get('auth.verification.expire', 60)),
+            [
+                'id' => $this->getKey(),
+                'hash' => sha1($this->getEmailForVerification()),
+            ]
+        );
+        $this->notify(new UserEmailVerification($verifyUrl));
+    }
+
+    public function setPassword($request)
+    {
+        return EntityFactory::build($this->webEntity, $this)->setPassword($request);
+    }
+
+    public function disable()
+    {
+        return EntityFactory::build($this->webEntity, $this)->disable();
+    }
+
+    public function block()
+    {
+        return EntityFactory::build($this->webEntity, $this)->block();
+    }
+
+    static function find($id)
+    {
+        $user = self::where(['email' => $id])->orWhere(['id' => $id])->first();
+        return $user;
     }
 }

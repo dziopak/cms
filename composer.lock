@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "72b67a6b4aca17f6664962fc8b0cfeed",
+    "content-hash": "9cb24cd77481dccac7a16ec316e696b2",
     "packages": [
         {
             "name": "brick/math",
@@ -1115,16 +1115,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.11.2",
+            "version": "v8.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "8d1f25fb8d124d5a24df9714ed8d481c43f9efe6"
+                "reference": "b60139c9d3b475d5b5dc261c5dcafe8ca49b4a13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/8d1f25fb8d124d5a24df9714ed8d481c43f9efe6",
-                "reference": "8d1f25fb8d124d5a24df9714ed8d481c43f9efe6",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/b60139c9d3b475d5b5dc261c5dcafe8ca49b4a13",
+                "reference": "b60139c9d3b475d5b5dc261c5dcafe8ca49b4a13",
                 "shasum": ""
             },
             "require": {
@@ -1139,7 +1139,7 @@
                 "monolog/monolog": "^2.0",
                 "nesbot/carbon": "^2.31",
                 "opis/closure": "^3.6",
-                "php": "^7.3",
+                "php": "^7.3|^8.0",
                 "psr/container": "^1.0",
                 "psr/simple-cache": "^1.0",
                 "ramsey/uuid": "^4.0",
@@ -1203,7 +1203,7 @@
                 "guzzlehttp/guzzle": "^6.5.5|^7.0.1",
                 "league/flysystem-cached-adapter": "^1.0",
                 "mockery/mockery": "^1.4.2",
-                "orchestra/testbench-core": "^6.0",
+                "orchestra/testbench-core": "^6.5",
                 "pda/pheanstalk": "^4.0",
                 "phpunit/phpunit": "^8.5.8|^9.3.3",
                 "predis/predis": "^1.1.1",
@@ -1218,8 +1218,8 @@
                 "ext-pcntl": "Required to use all features of the queue worker.",
                 "ext-posix": "Required to use all features of the queue worker.",
                 "ext-redis": "Required to use the Redis cache and queue drivers (^4.0|^5.0).",
+                "fakerphp/faker": "Required to use the eloquent factory builder (^1.9.1).",
                 "filp/whoops": "Required for friendly error pages in development (^2.8).",
-                "fzaninotto/faker": "Required to use the eloquent factory builder (^1.9.1).",
                 "guzzlehttp/guzzle": "Required to use the HTTP Client, Mailgun mail driver and the ping methods on schedules (^6.5.5|^7.0.1).",
                 "laravel/tinker": "Required to use the tinker console command (^2.0).",
                 "league/flysystem-aws-s3-v3": "Required to use the Flysystem S3 driver (^1.0).",
@@ -1274,7 +1274,72 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2020-10-20T20:12:53+00:00"
+            "time": "2020-11-10T14:47:10+00:00"
+        },
+        {
+            "name": "laravel/socialite",
+            "version": "v5.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/socialite.git",
+                "reference": "14082c665186348028e5bde17ab33b21b36dac79"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/socialite/zipball/14082c665186348028e5bde17ab33b21b36dac79",
+                "reference": "14082c665186348028e5bde17ab33b21b36dac79",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "guzzlehttp/guzzle": "^6.0|^7.0",
+                "illuminate/http": "^6.0|^7.0|^8.0",
+                "illuminate/support": "^6.0|^7.0|^8.0",
+                "league/oauth1-client": "^1.0",
+                "php": "^7.2|^8.0"
+            },
+            "require-dev": {
+                "illuminate/contracts": "^6.0|^7.0",
+                "mockery/mockery": "^1.0",
+                "orchestra/testbench": "^4.0|^5.0|^6.0",
+                "phpunit/phpunit": "^8.0|^9.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Socialite\\SocialiteServiceProvider"
+                    ],
+                    "aliases": {
+                        "Socialite": "Laravel\\Socialite\\Facades\\Socialite"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Socialite\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "Laravel wrapper around OAuth 1 & OAuth 2 libraries.",
+            "homepage": "https://laravel.com",
+            "keywords": [
+                "laravel",
+                "oauth"
+            ],
+            "time": "2020-11-03T19:24:43+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -1763,6 +1828,77 @@
                 }
             ],
             "time": "2020-10-18T11:50:25+00:00"
+        },
+        {
+            "name": "league/oauth1-client",
+            "version": "v1.8.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/oauth1-client.git",
+                "reference": "159c3d2bf27568f9af87d6c3f4bb616a251eb12b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/oauth1-client/zipball/159c3d2bf27568f9af87d6c3f4bb616a251eb12b",
+                "reference": "159c3d2bf27568f9af87d6c3f4bb616a251eb12b",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-openssl": "*",
+                "guzzlehttp/guzzle": "^6.0|^7.0",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "ext-simplexml": "*",
+                "friendsofphp/php-cs-fixer": "^2.16.1",
+                "mockery/mockery": "^1.3",
+                "phpstan/phpstan": "^0.12.42",
+                "phpunit/phpunit": "^7.5"
+            },
+            "suggest": {
+                "ext-simplexml": "For decoding XML-based responses."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev",
+                    "dev-develop": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\OAuth1\\Client\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Corlett",
+                    "email": "bencorlett@me.com",
+                    "homepage": "http://www.webcomm.com.au",
+                    "role": "Developer"
+                }
+            ],
+            "description": "OAuth 1.0 Client Library",
+            "keywords": [
+                "Authentication",
+                "SSO",
+                "authorization",
+                "bitbucket",
+                "identity",
+                "idp",
+                "oauth",
+                "oauth1",
+                "single sign on",
+                "trello",
+                "tumblr",
+                "twitter"
+            ],
+            "time": "2020-09-28T09:39:08+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -2860,6 +2996,233 @@
                 }
             ],
             "time": "2020-09-06T20:18:27+00:00"
+        },
+        {
+            "name": "rosell-dk/image-mime-type-guesser",
+            "version": "0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rosell-dk/image-mime-type-guesser.git",
+                "reference": "204fd61ca81e3b0ba46c6165dab8f74816b1fe99"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rosell-dk/image-mime-type-guesser/zipball/204fd61ca81e3b0ba46c6165dab8f74816b1fe99",
+                "reference": "204fd61ca81e3b0ba46c6165dab8f74816b1fe99",
+                "shasum": ""
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.11",
+                "phpunit/phpunit": "^5.7.27",
+                "squizlabs/php_codesniffer": "3.*"
+            },
+            "type": "library",
+            "extra": {
+                "scripts-descriptions": {
+                    "ci": "Run tests before CI",
+                    "phpcs": "Checks coding styles (PSR2) of file/dir, which you must supply. To check all, supply 'src'",
+                    "phpcbf": "Fix coding styles (PSR2) of file/dir, which you must supply. To fix all, supply 'src'",
+                    "cs-fix-all": "Fix the coding style of all the source files, to comply with the PSR-2 coding standard",
+                    "cs-fix": "Fix the coding style of a PHP file or directory, which you must specify.",
+                    "test": "Launches the preconfigured PHPUnit"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ImageMimeTypeGuesser\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bjørn Rosell",
+                    "homepage": "https://www.bitwise-it.dk/contact",
+                    "role": "Project Author"
+                }
+            ],
+            "description": "Guess mime type of images",
+            "keywords": [
+                "image",
+                "images",
+                "mime",
+                "mime type"
+            ],
+            "time": "2019-03-29T09:33:28+00:00"
+        },
+        {
+            "name": "rosell-dk/webp-convert",
+            "version": "2.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rosell-dk/webp-convert.git",
+                "reference": "5da7989e87cc0b6c61a5fd73262ed28999be27ab"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rosell-dk/webp-convert/zipball/5da7989e87cc0b6c61a5fd73262ed28999be27ab",
+                "reference": "5da7989e87cc0b6c61a5fd73262ed28999be27ab",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 | ^7.0",
+                "rosell-dk/image-mime-type-guesser": "^0.3"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.11",
+                "phpunit/phpunit": "5.7.27",
+                "squizlabs/php_codesniffer": "3.*"
+            },
+            "suggest": {
+                "ext-gd": "to use GD extension for converting. Note: Gd must be compiled with webp support",
+                "ext-imagick": "to use Imagick extension for converting. Note: Gd must be compiled with webp support",
+                "ext-vips": "to use Vips extension for converting.",
+                "php-stan/php-stan": "Suggested for dev, in order to analyse code before committing"
+            },
+            "type": "library",
+            "extra": {
+                "scripts-descriptions": {
+                    "ci": "Run tests before CI",
+                    "phpcs": "Checks coding styles (PSR2) of file/dir, which you must supply. To check all, supply 'src'",
+                    "phpcbf": "Fix coding styles (PSR2) of file/dir, which you must supply. To fix all, supply 'src'",
+                    "cs-fix-all": "Fix the coding style of all the source files, to comply with the PSR-2 coding standard",
+                    "cs-fix": "Fix the coding style of a PHP file or directory, which you must specify.",
+                    "test": "Launches the preconfigured PHPUnit"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "WebPConvert\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bjørn Rosell",
+                    "homepage": "https://www.bitwise-it.dk/contact",
+                    "role": "Project Author"
+                },
+                {
+                    "name": "Martin Folkers",
+                    "homepage": "https://twobrain.io",
+                    "role": "Collaborator"
+                }
+            ],
+            "description": "Convert JPEG & PNG to WebP with PHP",
+            "keywords": [
+                "Webp",
+                "cwebp",
+                "gd",
+                "image conversion",
+                "images",
+                "imagick",
+                "jpg",
+                "jpg2webp",
+                "png",
+                "png2webp"
+            ],
+            "time": "2020-04-18T14:41:50+00:00"
+        },
+        {
+            "name": "silviolleite/laravelpwa",
+            "version": "2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/silviolleite/laravel-pwa.git",
+                "reference": "5f7135d2ee870af01793c9fdf6b1b932b546e20e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/silviolleite/laravel-pwa/zipball/5f7135d2ee870af01793c9fdf6b1b932b546e20e",
+                "reference": "5f7135d2ee870af01793c9fdf6b1b932b546e20e",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "LaravelPWA\\Providers\\LaravelPWAServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LaravelPWA\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Silvio Luis Leite",
+                    "email": "silviolleite@gmail.com"
+                }
+            ],
+            "description": "Looks like an app, feels like an app, but NOT an app.",
+            "keywords": [
+                "laravel",
+                "php",
+                "progressive web apps",
+                "pwa"
+            ],
+            "time": "2020-08-20T12:19:16+00:00"
+        },
+        {
+            "name": "spatie/image-optimizer",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/image-optimizer.git",
+                "reference": "f87f8328ca5bfabb3811241f5d35f17e146f7f83"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/image-optimizer/zipball/f87f8328ca5bfabb3811241f5d35f17e146f7f83",
+                "reference": "f87f8328ca5bfabb3811241f5d35f17e146f7f83",
+                "shasum": ""
+            },
+            "require": {
+                "ext-fileinfo": "*",
+                "php": "^7.2|^8.0",
+                "psr/log": "^1.0",
+                "symfony/process": "^4.2|^5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.0|^9.0",
+                "symfony/var-dumper": "^4.2|^5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\ImageOptimizer\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Easily optimize images using PHP",
+            "homepage": "https://github.com/spatie/image-optimizer",
+            "keywords": [
+                "image-optimizer",
+                "spatie"
+            ],
+            "time": "2020-11-10T13:45:49+00:00"
         },
         {
             "name": "spatie/laravel-query-builder",
