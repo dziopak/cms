@@ -22,7 +22,6 @@ class PagesController extends Controller
 
     public function store(PagesRequest $request)
     {
-
         return Page::webStore($request);
     }
 
@@ -41,8 +40,8 @@ class PagesController extends Controller
         return Page::findOrFail($page)->webDestroy();
     }
 
-    public function mass(Request $request)
+    public function mass()
     {
-        return Page::mass($request);
+        return Page::mass();
     }
 }

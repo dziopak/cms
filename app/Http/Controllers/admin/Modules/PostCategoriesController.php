@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Admin\Modules\Categories\CategoriesRequest;
 
 use App\Entities\PostCategory;
-use Auth;
 
 class PostCategoriesController extends Controller
 {
@@ -42,8 +41,8 @@ class PostCategoriesController extends Controller
         return PostCategory::findOrFail($category)->webDestroy();
     }
 
-    public function mass(Request $request)
+    public function mass()
     {
-        return PostCategory::mass($request);
+        return PostCategory::mass();
     }
 }

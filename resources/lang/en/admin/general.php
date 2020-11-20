@@ -37,5 +37,5 @@ return [
     "mass_hide" => "Disable / Hide",
     "mass_show" => "Enable / Show",
     "mass_name_replace" => "Replace string in title",
-    "mass_set_category" => "Set category",
+    "mass_set_category" => "Assign to category",
 ];

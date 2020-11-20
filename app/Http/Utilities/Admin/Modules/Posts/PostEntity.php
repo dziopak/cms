@@ -70,28 +70,15 @@ class PostEntity implements WebEntity
 
     public function destroy()
     {
-        Auth::user()->hasAccessOrRedirect('POST_DELETE');
-
-        $this->item->delete();
-        return response()->json(
-            [
-                'message' => __('admin/messages.posts.delete.success'),
-                'id' => $this->item->id
-            ],
-            200
-        );
-    }
-
-
-    public static function mass($request)
-    {
-        $data = $request->all();
-
-        if (empty($data['mass_edit'])) {
-            return redirect()->back()->with('error', __('admin/messages.posts.mass.errors.no_posts'));
+        if (!Auth::user()->hasAccess('POST_DELETE')) {
+            return redirect()->back()->with('error', 'You don\'t have rights to finish this action.');
         }
 
-        $msg = (new PostActions($data['mass_edit']))->mass($data);
-        return redirect()->back()->with('crud', $msg);
+        $this->item->delete();
+
+        return response()->json([
+            'message' => __('admin/messages.posts.delete.success'),
+            'id' => $this->item->id
+        ], 200);
     }
 }

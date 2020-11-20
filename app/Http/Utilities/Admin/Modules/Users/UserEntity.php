@@ -2,8 +2,6 @@
 
 namespace App\Http\Utilities\Admin\Modules\Users;
 
-
-use App\Http\Utilities\Admin\Modules\Users\UserActions;
 use App\Http\Utilities\Admin\Modules\Users\UserFiles;
 use App\Events\Users\UserNewPasswordEvent;
 use Illuminate\Support\Facades\Hash;
@@ -97,7 +95,7 @@ class UserEntity implements WebEntity
     {
         Auth::user()->hasAccessOrRedirect('USER_EDIT');
 
-        (new UserActions($this->item->id))->setStatus($request->get('is_active'));
+        $this->item->update(['is_active' => !$this->item->is_active]);
         event(new UserBlockEvent($this->item));
 
         return redirect(route('admin.users.index'));
@@ -106,23 +104,15 @@ class UserEntity implements WebEntity
 
     public function destroy()
     {
-        Auth::user()->hasAccessOrRedirect('USER_DELETE');
+        if (!Auth::user()->hasAccess('USER_DELETE')) {
+            return redirect()->back()->with('error', 'You don\'t have rights to finish this action.');
+        }
+
         $this->item->delete();
 
         return response()->json([
             'message' => __('admin/messages.users.delete.success'),
             'id' => $this->item->id
         ], 200);
-    }
-
-
-    public static function mass($data)
-    {
-        if (empty($data['mass_edit'])) {
-            return redirect()->back()->with('error', __('admin/messages.users.mass.errors.no_users'));
-        }
-
-        $msg = (new UserActions($data['mass_edit']))->mass($data);
-        return redirect()->back()->with('crud', $msg);
     }
 }

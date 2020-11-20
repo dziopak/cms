@@ -64,7 +64,7 @@ class LayoutEntity implements WebEntity
 
         return view('admin.page_layouts.edit', [
             'form' => getData('Admin/Modules/Layouts/layouts_form'),
-            'layout' => Layout::findOrFail($this->item)->load('blocks')
+            'layout' => $this->item->load('blocks')
         ]);
     }
 
@@ -84,9 +84,15 @@ class LayoutEntity implements WebEntity
 
     public function destroy()
     {
-        Auth::user()->hasAccessOrRedirect('LAYOUT_DELETE');
+        if (!Auth::user()->hasAccess('LAYOUT_DELETE')) {
+            return redirect()->back()->with('error', 'You don\'t have rights to finish this action.');
+        }
 
         $this->item->delete();
-        return response()->json(['message' => __('admin/messages.pages.delete.success'), 'id' => $this->item->id], 200);
+
+        return response()->json([
+            'message' => __('admin/messages.pages.delete.success'),
+            'id' => $this->item->id
+        ], 200);
     }
 }

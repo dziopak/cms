@@ -71,15 +71,4 @@ class CarouselEntity implements WebEntity
         $this->item->delete();
         return response()->json(['message' => __('admin/messages.blocks.carousels.delete.success'), 'id' => $this->item->id], 200);
     }
-
-    static function mass($request)
-    {
-        $data = $request->all();
-
-        if (empty($data['mass_edit'])) {
-            return redirect()->back();
-        }
-
-        return (new CarouselActions($data['mass_edit']))->mass($data['mass_action']);
-    }
 }

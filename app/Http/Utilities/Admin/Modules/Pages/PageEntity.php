@@ -2,6 +2,7 @@
 
 namespace App\Http\Utilities\Admin\Modules\Pages;
 
+use App\Entities\MenuItem;
 use App\Http\Utilities\Admin\Modules\Pages\PageActions;
 use App\Http\Utilities\Admin\Modules\Pages\PageFiles;
 use App\Entities\Page;
@@ -15,7 +16,7 @@ class PageEntity implements WebEntity
 
     public function __construct($item)
     {
-        $this->$item = $item;
+        $this->item = $item;
     }
 
 
@@ -70,10 +71,17 @@ class PageEntity implements WebEntity
 
     public function destroy()
     {
-        Auth::user()->hasAccessOrRedirect('PAGE_DELETE');
-        $this->item->delete();
+        if (!Auth::user()->hasAccess('PAGE_DELETE')) {
+            return redirect()->back()->with('error', 'You don\'t have rights to finish this action.');
+        }
 
-        return response()->json(['message' => __('admin/messages.pages.delete.success'), 'id' => $this->item->id], 200);
+        $this->item->delete();
+        // $items = MenuItem::where(['model_type' => 'page', 'model_id' => $this->item->id])->delete();
+
+        return response()->json([
+            'message' => __('admin/messages.pages.delete.success'),
+            'id' => $this->item->id
+        ], 200);
     }
 
 
@@ -85,7 +93,7 @@ class PageEntity implements WebEntity
             return redirect()->back()->with('error', __('admin/messages.pages.mass.errors.no_posts'));
         }
 
-        $msg = (new PageActions($data['mass_edit']))->mass($data);
-        return redirect()->back()->with('crud', $msg);
+        // $msg = (new PageActions($data['mass_edit']))->mass($data);
+        // return redirect()->back()->with('crud', $msg);
     }
 }

@@ -45,8 +45,8 @@ class FilesController extends Controller
         return FileHandling::upload($request);
     }
 
-    public function mass(Request $request)
+    public function mass()
     {
-        return File::mass($request);
+        return File::mass();
     }
 }

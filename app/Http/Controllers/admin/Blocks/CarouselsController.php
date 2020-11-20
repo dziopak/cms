@@ -53,8 +53,8 @@ class CarouselsController extends Controller
         return (new CarouselItems($id))->detach($request->get('files'));
     }
 
-    public function mass(Request $request)
+    public function mass()
     {
-        return Carousel::mass($request);
+        return Carousel::mass();
     }
 }

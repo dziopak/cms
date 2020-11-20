@@ -57,8 +57,8 @@ class UsersController extends Controller
         return User::findOrFail($user)->webDestroy();
     }
 
-    public function mass(Request $request)
+    public function mass()
     {
-        return User::mass($request->all());
+        return User::mass();
     }
 }

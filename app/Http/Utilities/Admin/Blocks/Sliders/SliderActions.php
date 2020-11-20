@@ -3,33 +3,34 @@
 namespace App\Http\Utilities\Admin\Blocks\Sliders;
 
 use App\Entities\Slider;
+use App\Events\Sliders\SliderDestroyEvent;
 use Auth;
 
 class SliderActions
 {
-    protected $sliders;
+
+    protected $items;
+    private $request;
 
 
-    public function __construct($sliders)
+    public function __construct($items, $request)
     {
-        $this->sliders = $sliders;
+        $this->items = $items;
+        $this->request = $request;
     }
 
 
-    private function delete()
+    public function delete()
     {
         Auth::user()->hasAccessOrRedirect('BLOCK_DELETE');
-        Slider::whereIn('id', $this->sliders)->delete();
+
+        dispatchEvent(SliderDestroyEvent::class, $this->items, function () {
+            $this->items->delete();
+            flushCache([
+                'Slider'
+            ]);
+        });
 
         return redirect(route('admin.blocks.sliders.index'))->with(['crud' => __('admin/messages.blocks.sliders.mass.delete')]);
-    }
-
-    public function mass($action)
-    {
-        switch ($action) {
-            case 'delete':
-                return $this->delete();
-                break;
-        }
     }
 }

@@ -10,7 +10,7 @@ $table['actions'] = [
     'Delete' => [
         'url' => 'admin.media.destroy',
         'class' => 'danger',
-        'access' => 'MEDIA_DELETE',
+        'access' => 'FILE_DELETE',
         'modal' => 'delete-media-modal'
     ]
 ];

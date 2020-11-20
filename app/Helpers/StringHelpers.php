@@ -17,3 +17,12 @@ function camelCase($string)
     $string = str_replace('_', ' ', $string);
     return str_replace(' ', '', ucwords($string));
 }
+
+function stringContains($a, $b)
+{
+    if (strpos($a, $b) !== false) {
+        return true;
+    }
+
+    return false;
+}

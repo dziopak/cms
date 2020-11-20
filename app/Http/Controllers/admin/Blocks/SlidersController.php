@@ -54,8 +54,8 @@ class SlidersController extends Controller
         return (new SliderItems($id))->detach($request->get('files'));
     }
 
-    public function mass(Request $request)
+    public function mass()
     {
-        return SliderEntity::mass($request->all());
+        return Slider::mass();
     }
 }

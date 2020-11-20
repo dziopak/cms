@@ -43,8 +43,6 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        // TO DO //
-        // ADD TO QUEUE //
         $user->sendEmailVerificationNotification();
 
         return $user;

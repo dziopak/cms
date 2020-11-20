@@ -2,6 +2,7 @@
 
 namespace App\Entities;
 
+use App\Http\Utilities\Admin\Modules\Categories\CategoryActions;
 use App\Http\Utilities\Admin\Modules\Categories\PostCategoryEntity;
 use Rennokki\QueryCache\Traits\QueryCacheable;
 use Illuminate\Database\Eloquent\Model;
@@ -9,15 +10,17 @@ use Illuminate\Support\Facades\DB;
 use App\Traits\EntityTrait;
 use App\Traits\Sluggable;
 use App\Traits\Linkable;
+use App\Traits\MassEditable;
 
 class PostCategory extends Model
 {
-    use Sluggable, Linkable;
+    use Sluggable, Linkable, MassEditable;
     use QueryCacheable;
     use EntityTrait;
 
     protected $entity_type = 'posts.categories';
     protected $webEntity = PostCategoryEntity::class;
+    protected $massActions = CategoryActions::class;
 
     protected $guarded = ['id', 'category_id', 'type'];
     public $fire_events;

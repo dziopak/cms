@@ -33,7 +33,8 @@ class CarouselItems
     private function sync($data)
     {
         $this->carousel->files()->sync($data, false);
-        $this->carousel->files()->flushQueryCache();
+        Carousel::with('files')->flushQueryCache();
+        File::flushQueryCache();
 
         return $this->carousel = $this->carousel->fresh(['files']);
     }

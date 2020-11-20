@@ -75,8 +75,8 @@ class MenusController extends Controller
         return MenuRelations::find($request->get('data'));
     }
 
-    public function mass(Request $request)
+    public function mass()
     {
-        return Menu::mass($request->all());
+        return Menu::mass();
     }
 }

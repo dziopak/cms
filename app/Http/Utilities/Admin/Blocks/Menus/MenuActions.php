@@ -3,32 +3,34 @@
 namespace App\Http\Utilities\Admin\Blocks\Menus;
 
 use Auth;
-use App\Entities\Menu;
+use App\Events\Menus\MenuDestroyEvent;
 
 class MenuActions
 {
 
-    protected $menus;
+    protected $items;
+    private $request;
 
-    public function __construct($menus)
+
+    public function __construct($items, $request)
     {
-        is_array($menus) ? $this->menus = $menus : $this->menus = [$menus];
+        $this->items = $items;
+        $this->request = $request;
     }
 
-    private function delete()
+
+    public function delete()
     {
         Auth::user()->hasAccessOrRedirect('BLOCK_DELETE');
-        Menu::with('items')->whereIn('id', $this->menus)->delete();
+
+        dispatchEvent(MenuDestroyEvent::class, $this->items, function () {
+            $this->items->with('items')->delete();
+            flushCache([
+                'Menu',
+                'MenuItem'
+            ]);
+        });
 
         return redirect(route('admin.blocks.menus.index'))->with(['crud' => __('admin/messages.blocks.menus.mass.delete')]);
-    }
-
-    public function mass($action)
-    {
-        switch ($action) {
-            case 'delete':
-                return $this->delete();
-                break;
-        }
     }
 }

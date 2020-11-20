@@ -1,5 +1,5 @@
 {{-- Table --}}
-<x-table formId="media-list-form" :table="$table" :fields="$files" :controls="false" :filters="false" :mass="$mass ?? false" :form="$form ?? true"/>
+<x-table formId="media-list-form" :table="$table" :fields="$files" :controls="false" :filters="false" :mass="true" :form="$form ?? true"/>
 
 
 {{-- Create button --}}

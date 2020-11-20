@@ -22,22 +22,22 @@ use App\Notifications\UserPasswordReset;
 use App\Notifications\UserEmailVerification;
 use App\Traits\EntityTrait;
 use App\Factories\EntityFactory;
+use App\Http\Utilities\Admin\Modules\Users\UserActions;
+use App\Traits\MassEditable;
 use URL;
 
 
 class User extends Authenticatable implements JWTSubject, Searchable, MustVerifyEmail
 {
 
-    use Notifiable;
-    use QueryCacheable;
+    use Notifiable, QueryCacheable, MassEditable;
     use EntityTrait;
 
     public $fire_events = true;
     protected $webEntity = UserEntity::class;
+    protected $massActions = UserActions::class;
 
-    protected $fillable = [
-        'name', 'email', 'password', 'avatar', 'role_id', 'first_name', 'last_name', 'last_login', 'updated_at', 'provider', 'provider_id'
-    ];
+    protected $guarded = ['user_id'];
     protected $hidden = [
         'password', 'remember_token', 'first_name', 'last_name',
     ];
@@ -199,9 +199,9 @@ class User extends Authenticatable implements JWTSubject, Searchable, MustVerify
         return EntityFactory::build($this->webEntity, $this)->disable();
     }
 
-    public function block()
+    public function block($request)
     {
-        return EntityFactory::build($this->webEntity, $this)->block();
+        return EntityFactory::build($this->webEntity, $this)->block($request);
     }
 
     static function find($id)

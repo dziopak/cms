@@ -63,15 +63,4 @@ class SliderEntity implements WebEntity
             'id' => $this->item->id
         ], 200);
     }
-
-    static function mass($request)
-    {
-        $data = $request->all();
-
-        if (empty($data['mass_edit'])) {
-            return redirect()->back();
-        }
-
-        return (new SliderActions($data['mass_edit']))->mass($data['mass_action']);
-    }
 }

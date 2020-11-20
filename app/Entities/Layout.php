@@ -5,17 +5,21 @@ namespace App\Entities;
 use Rennokki\QueryCache\Traits\QueryCacheable;
 use Illuminate\Database\Eloquent\Model;
 use App\Entities\Block;
+use App\Http\Utilities\Admin\Modules\Layouts\LayoutActions;
 use App\Http\Utilities\Admin\Modules\Layouts\LayoutEntity;
 use App\Traits\EntityTrait;
+use App\Traits\MassEditable;
 
 class Layout extends Model
 {
-    use QueryCacheable, EntityTrait;
+    use QueryCacheable, MassEditable;
+    use EntityTrait;
 
     protected static $flushCacheOnUpdate = true;
     public $cacheFor = 3600, $timestamps = false;
     protected $guarded = [];
     protected $webEntity = LayoutEntity::class;
+    protected $massActions = LayoutActions::class;
 
     public function blocks()
     {

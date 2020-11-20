@@ -17,6 +17,10 @@ $table['actions'] = [
 $table['mass_edit'] = [
     'delete' => __('admin/post_categories.mass_delete')
 ];
+$table['mass_edit_extend'] = [
+    "name_replace" => __("admin/general.mass_name_replace"),
+    "category" => __("admin/general.mass_set_category")
+];
 $table['sort_by'] = [
     'name' => __('admin/post_categories.name')
 ];

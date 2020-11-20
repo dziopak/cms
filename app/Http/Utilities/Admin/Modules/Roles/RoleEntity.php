@@ -77,15 +77,15 @@ class RoleEntity implements WebEntity
 
     public function destroy()
     {
-        Auth::user()->hasAccessOrRedirect('ROLE_DELETE');
+        if (!Auth::user()->hasAccess('ROLE_DELETE')) {
+            return redirect()->back()->with('error', 'You don\'t have rights to finish this action.');
+        }
+
         $this->item->delete();
 
-        return response()->json(
-            [
-                'message' => __('admin/messages.roles.delete.success'),
-                'id' => $this->item->id
-            ],
-            200
-        );
+        return response()->json([
+            'message' => __('admin/messages.roles.delete.success'),
+            'id' => $this->item->id
+        ], 200);
     }
 }

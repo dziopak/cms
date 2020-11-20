@@ -7,11 +7,15 @@ use Rennokki\QueryCache\Traits\QueryCacheable;
 use App\Events\Files\FileDestroyEvent;
 use Illuminate\Database\Eloquent\Model;
 use App\Entities\Slider;
+use App\Http\Utilities\Admin\Modules\Files\FileActions;
 use App\Traits\EntityTrait;
+use App\Traits\MassEditable;
 
 class File extends Model
 {
-    use QueryCacheable, EntityTrait;
+    use QueryCacheable, MassEditable;
+    use EntityTrait;
+
 
     public $cacheFor = 3600;
     protected static $flushCacheOnUpdate = true;
@@ -20,6 +24,8 @@ class File extends Model
     protected $fillable = ['type', 'path', 'name', 'description'];
 
     protected $webEntity = FileEntity::class;
+    protected $massActions = FileActions::class;
+
 
     public function posts()
     {

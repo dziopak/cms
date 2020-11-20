@@ -46,4 +46,9 @@ class LayoutsController extends Controller
     {
         return LayoutBlocks::getBlock($request);
     }
+
+    public function mass()
+    {
+        return Layout::mass();
+    }
 }

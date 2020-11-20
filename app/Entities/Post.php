@@ -4,6 +4,7 @@ namespace App\Entities;
 
 use App\Http\Utilities\Admin\Modules\Posts\PostEntity as WebEntity;
 use App\Http\Utilities\Api\Posts\PostEntity as ApiEntity;
+use App\Http\Utilities\Admin\Modules\Posts\PostActions;
 use App\Traits\EntityTrait;
 use App\Traits\Linkable;
 use Illuminate\Database\Eloquent\Model;
@@ -25,8 +26,8 @@ class Post extends Model implements Searchable
     protected $entity_type = 'posts',
         $guarded = ['id', 'post_id', 'thumbnail'];
 
-    private $webEntity = WebEntity::class,
-        $apiEntity = ApiEntity::class;
+    private $webEntity = WebEntity::class, $apiEntity = ApiEntity::class;
+    protected $massActions = PostActions::class;
 
 
     public function author()

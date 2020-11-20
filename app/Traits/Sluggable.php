@@ -14,9 +14,7 @@ trait Sluggable
     public function scopeFindBySlugOrFail($query, $slug)
     {
         $query = $query->where('slug', $slug)
-            ->orWhere('id', $slug)
-            ->first();
-
+            ->orWhere('id', $slug)->first();
         if (empty($query)) return abort(404);
         return $query;
     }

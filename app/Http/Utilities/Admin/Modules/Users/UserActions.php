@@ -3,59 +3,71 @@
 namespace App\Http\Utilities\Admin\Modules\Users;
 
 use App\Entities\User;
+use App\Events\Users\UserDestroyEvent;
+use App\Events\Users\UserUpdateEvent;
 use Auth;
 
 class UserActions
 {
-    protected $users;
+    protected $items;
+    private $request;
 
-    public function __construct($users)
+
+    public function __construct($items, $request)
     {
-        is_array($users) ? $this->users = $users : $this->users = [$users];
+        $this->items = $items;
+        $this->request = $request;
     }
 
-    private function delete()
+
+    public function delete()
     {
         Auth::user()->hasAccessOrRedirect('USER_DELETE');
-        User::whereIn('id', $this->users)->delete();
 
-        return __('admin/messages.users.mass.universal');
+        dispatchEvent(UserDestroyEvent::class, $this->items, function () {
+            $this->items->delete();
+            User::flushQueryCache();
+        });
+
+        return redirect()->back()->with('crud', __('admin/messages.users.mass.universal'));
     }
 
-    public function setStatus($status)
+
+    public function show()
     {
         Auth::user()->hasAccessOrRedirect('USER_EDIT');
-        User::whereIn('id', $this->users)->update(['is_active' => $status]);
 
-        return __('admin/messages.users.mass.universal');
+        $this->items->update(['is_active' => 1]);
+        dispatchEvent(UserUpdateEvent::class, $this->items, function () {
+            User::flushQueryCache();
+        });
+
+        return redirect()->back()->with('crud', __('admin/messages.users.mass.universal'));
     }
 
-    private function setRole($role_id)
+
+    public function hide()
     {
         Auth::user()->hasAccessOrRedirect('USER_EDIT');
-        User::whereIn('id', $this->users)->update(['role_id' => $role_id]);
 
-        return __('admin/messages.users.mass.universal');
+        $this->items->update(['is_active' => 0]);
+        dispatchEvent(UserUpdateEvent::class, $this->items, function () {
+            User::flushQueryCache();
+        });
+
+        return redirect()->back()->with('crud', __('admin/messages.users.mass.universal'));
     }
 
-    public function mass($data)
+
+    public function user_role()
     {
-        switch ($data['mass_action']) {
-            case 'delete':
-                return $this->delete();
-                break;
+        Auth::user()->hasAccessOrRedirect('USER_EDIT');
 
-            case 'hide':
-                return $this->setStatus(false);
-                break;
+        $this->items->update(['role_id' => $this->request->get('role')]);
+        dispatchEvent(UserUpdateEvent::class, $this->items, function () {
+            User::flushQueryCache();
+        });
 
-            case 'show':
-                return $this->setStatus(true);
-                break;
-
-            case 'user_role':
-                return $this->setRole($data['role_id']);
-                break;
-        }
+        return redirect()->back()->with('crud', __('admin/messages.users.mass.universal'));
     }
 }

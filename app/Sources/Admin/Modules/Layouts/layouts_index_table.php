@@ -28,6 +28,9 @@ $table['actions'] = [
 $table['mass_edit'] = [
     'delete' => __('admin/layouts.mass_delete')
 ];
+$table['mass_edit_extend'] = [
+    "name_replace" => __("admin/general.mass_name_replace"),
+];
 $table['sort_by'] = [
     'name' => __('admin/layouts.name')
 ];

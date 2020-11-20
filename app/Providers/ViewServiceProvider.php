@@ -22,6 +22,7 @@ class ViewServiceProvider extends ServiceProvider
         });
 
         $this->app->view->composers([
+            'App\View\Composers\Admin\Modules\LayoutsComposer' => '*.layouts.index',
             'App\View\Composers\Admin\Modules\CategoriesComposer' => 'admin.*_categories.*',
             'App\View\Composers\Admin\Modules\PostsComposer' => 'admin.posts.*',
             'App\View\Composers\Admin\Modules\PagesComposer' => 'admin.pages.*',
@@ -55,14 +56,17 @@ class ViewServiceProvider extends ServiceProvider
         view()->composer('admin.logs.index', function ($view) {
             $view->logs = \App\Entities\Log::with('author')->orderBy('logs.id', 'desc')->get();
         });
-    }
 
-    /**
-     * Bootstrap services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
+        view()->composer('admin.partials.massedit.category', function ($view) {
+            $name = \Request::route()->getName();
+            if (stringContains($name, 'pages')) {
+                $model = \App\Entities\PageCategory::class;
+            } elseif (stringContains($name, 'posts')) {
+                $model = \App\Entities\PostCategory::class;
+            }
+            if (!empty($model)) {
+                $view->categories = array_merge([0 => __('admin/general.no_category')], $model::all('id', 'name')->pluck('name', 'id')->toArray());
+            }
+        });
     }
 }

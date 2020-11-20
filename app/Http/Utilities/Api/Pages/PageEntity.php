@@ -101,7 +101,8 @@ class PageEntity implements ApiEntity
         return response()->json([
             "status" => "200",
             "message" => "Page has been successfully deleted.",
-            "data" => $this->item
+            "data" => $this->item,
+            "id" => $this->item->id
         ], 200);
     }
 }

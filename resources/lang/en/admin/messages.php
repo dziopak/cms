@@ -11,6 +11,7 @@ return [
             'success' => 'Category deleted successfully.'
         ],
         'mass' => [
+            'universal' => 'Successfully completed selected operations.',
             'errors' => [
                 'no_categories' => 'No categories selected.'
             ]
@@ -80,11 +81,14 @@ return [
         'create' => [
             'success' => 'Layout created successfully.'
         ],
-        'delete' => 'Layout deleted successfully.'
+        'delete' => 'Layout deleted successfully.',
+        'mass' => [
+            'universal' => 'Successfully completed selected operations.',
+        ]
     ],
     'users' => [
         'create' => [
-            'success' => 'Successfully created new user.'
+            'success' => 'Successfully created new user.',
         ],
         'update' => [
             'thumbnail' => [
@@ -96,6 +100,7 @@ return [
             'success' => 'Successfully deleted selected user.'
         ],
         'mass' => [
+            'universal' => 'Successfully completed selected operations.',
             'errors' => [
                 'no_users' => 'No users selected.'
             ]

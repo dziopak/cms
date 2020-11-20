@@ -62,7 +62,8 @@ class VerticalMenu extends Component
                 ->get()
                 ->map(function ($item) {
                     if ($item->model_id && $item->model_type) {
-                        $item->link = getModel($item->model_type)::findOrFail($item->model_id)->getUrl();
+                        $tmp = getModel($item->model_type)::find($item->model_id);
+                        !empty($tmp) ? $item->link = $tmp->getUrl() : $item->link = url('/404');
                     }
                     return $item;
                 });

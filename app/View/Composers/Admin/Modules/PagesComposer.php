@@ -13,7 +13,6 @@ class PagesComposer
     {
         return [
             'pages' => Page::with('author', 'thumbnail')->filter($request)->paginate(15),
-            'categories' => array_merge([0 => __('admin/general.no_category')], PageCategory::all('id', 'name')->pluck('name', 'id')->toArray()),
             'table' => getData('Admin/Modules/Pages/pages_index_table')
         ];
     }

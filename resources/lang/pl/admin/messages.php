@@ -11,6 +11,7 @@ return [
             'success' => 'Kategoria usunięta pomyślnie.'
         ],
         'mass' => [
+            'universal' => 'Pomyślnie wykonano wskazane operacje.',
             'errors' => [
                 'no_categories' => 'Nie wybrano żadnej kategorii.'
             ]
@@ -80,7 +81,10 @@ return [
         'create' => [
             'success' => 'Pomyślnie utworzono nowy szablon.'
         ],
-        'delete' => 'Pomyślnie usunięto wybrany szablon.'
+        'delete' => 'Pomyślnie usunięto wybrany szablon.',
+        'mass' => [
+            'universal' => 'Pomyślnie wykonano wskazane operacje.',
+        ]
     ],
     'users' => [
         'create' => [
@@ -97,6 +101,7 @@ return [
         ],
         'mass' => [
             'errors' => [
+                'universal' => 'Pomyślnie wykonano wskazane operacje.',
                 'no_users' => 'Nie wybrano żadnego użytkownika.'
             ]
         ]

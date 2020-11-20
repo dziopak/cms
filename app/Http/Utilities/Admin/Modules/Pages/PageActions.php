@@ -2,79 +2,104 @@
 
 namespace App\Http\Utilities\Admin\Modules\Pages;
 
+use App\Events\Pages\PageDestroyEvent;
+use App\Events\Pages\PageUpdateEvent;
+use App\Entities\MenuItem;
 use App\Entities\Page;
 use Auth;
 
 class PageActions
 {
-    protected $pages;
+    protected $items;
+    private $request;
 
-    public function __construct($pages)
+
+    public function __construct($items, $request)
     {
-        $this->pages = $pages;
+        $this->items = $items;
+        $this->request = $request;
     }
 
-    private function delete()
+
+    public function delete()
     {
         Auth::user()->hasAccessOrRedirect('PAGE_DELETE');
-        Page::whereIn('id', $this->pages)->delete();
 
-        return __('admin/messages.pages.mass.universal');
+        dispatchEvent(PageDestroyEvent::class, $this->items, function () {
+            $this->items->delete();
+
+            flushCache([
+                'MenuItem',
+                'Page'
+            ]);
+        });
+
+        return redirect()->back()->with('crud', __('admin/messages.pages.mass.universal'));
     }
 
-    private function setVisibility($visible)
+
+    public function hide()
     {
         Auth::user()->hasAccessOrRedirect('PAGE_EDIT');
-        Page::whereIn('id', $this->pages)->update(['is_active' => $visible]);
 
-        return __('admin/messages.pages.mass.universal');
+        $this->items->update(['is_active' => 0]);
+
+        dispatchEvent(PageUpdateEvent::class, $this->items, function () {
+            flushCache('Page');
+        });
+
+
+        return redirect()->back()->with('crud', __('admin/messages.pages.mass.universal'));
     }
 
-    private function setCategory($category_id)
+
+    public function show()
     {
         Auth::user()->hasAccessOrRedirect('PAGE_EDIT');
-        Page::whereIn('id', $this->pages)->update(['category_id' => $category_id]);
 
-        return __('admin/messages.pages.mass.assign_category');
+        $this->items->update(['is_active' => 1]);
+
+        dispatchEvent(PageUpdateEvent::class, $this->items, function () {
+            flushCache('Page');
+        });
+
+        return redirect()->back()->with('crud', __('admin/messages.pages.mass.universal'));
     }
 
-    private function replaceInName($searched, $replace)
+
+    public function category()
     {
         Auth::user()->hasAccessOrRedirect('PAGE_EDIT');
-        $pages = Page::whereIn('id', $this->pages)->get(['id', 'name']);
 
-        foreach ($pages as $key => $page) {
+        $this->items->update(['category_id' => $this->request->get('category_id')]);
+
+        dispatchEvent(PageUpdateEvent::class, $this->items, function () {
+            flushCache('Page');
+        });
+
+        return redirect()->back()->with('crud', __('admin/messages.pages.mass.assign_category'));
+    }
+
+
+    public function name_replace()
+    {
+        Auth::user()->hasAccessOrRedirect('PAGE_EDIT');
+
+        $searched = $this->request->get('name_search_string') ?? null;
+        $replace = $this->request->get('name_replace_string') ?? null;
+        $items = $this->items->get(['id', 'name']);
+
+        if (empty($searched || empty($replace))) return false;
+
+        foreach ($items as $page) {
             if (strpos($page->name, $searched) !== false) {
                 $page->name = str_replace($searched, $replace, $page->name);
                 $page->save();
             }
         }
 
-        return __('admin/messages.pages.mass.title_replace_phrases');
-    }
+        dispatchEvent(PageUpdateEvent::class, $this->items);
 
-    public function mass($data)
-    {
-        switch ($data['mass_action']) {
-            case 'delete':
-                return $this->delete();
-                break;
-
-            case 'hide':
-                return $this->setVisibility(false);
-                break;
-
-            case 'show':
-                return $this->setVisibility(true);
-                break;
-
-            case 'category':
-                return $this->setCategory($data['category_id']);
-                break;
-
-            case 'name_replace':
-                return $this->replaceInName($data['name_search_string'], $data['name_replace_string']);
-                break;
-        }
+        return redirect()->back()->with('crud', __('admin/messages.pages.mass.title_replace_phrases'));
     }
 }

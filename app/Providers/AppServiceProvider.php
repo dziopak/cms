@@ -33,8 +33,9 @@ class AppServiceProvider extends ServiceProvider
         \App\Entities\Page::observe(\App\Observers\PageObserver::class);
         \App\Entities\Post::observe(\App\Observers\PostObserver::class);
         \App\Entities\Role::observe(\App\Observers\RoleObserver::class);
-        \App\Entities\PostCategory::observe(\App\Observers\PostCategoryObserver::class);
-        \App\Entities\PageCategory::observe(\App\Observers\PageCategoryObserver::class);
+        \App\Entities\PostCategory::observe(\App\Observers\CategoryObserver::class);
+        \App\Entities\PageCategory::observe(\App\Observers\CategoryObserver::class);
+        \App\Entities\Carousel::observe(\App\Observers\CarouselObserver::class);
 
         Paginator::useBootstrap();
         $this->app->extend('command.model.make', function ($command, $app) {

@@ -11,25 +11,25 @@ class CategoryUpdateEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+
     public $category;
     public $type;
 
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
-    public function __construct($category, $type)
+
+    public function __construct($category)
     {
         $this->category = $category;
-        $this->type = $type;
+        $this->type = $this->getCategoryType();
     }
 
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return \Illuminate\Broadcasting\Channel|array
-     */
+
+    private function getCategoryType()
+    {
+        $class = (new \ReflectionClass($this->category))->getShortName();
+        return strtoupper(str_replace('Category', '', $class));
+    }
+
+
     public function broadcastOn()
     {
         return new PrivateChannel('channel-name');

@@ -24,22 +24,6 @@
 
 @section('content-left')
 
-    <x-wrapper title="admin/blocks/menus.menu_data_title">
-        {!! Form::model($menu, ['method' => 'PATCH', 'action' => ['Admin\Blocks\MenusController@update', $menu->id], 'class' => 'w-100']) !!}
-
-            {{-- Name input --}}
-            <div class="form-group">
-                {!! Form::label('name', __('admin/blocks/menus.name').':') !!}
-                {!! Form::text('name', $menu->name, ['class' => 'form-control']) !!}
-            </div>
-
-            {{-- Save button --}}
-            <x-update-button />
-
-        {!! Form::close() !!}
-    </x-wrapper>
-
-
     <x-wrapper title="Item type">
         {{-- Type Checkbox --}}
         <div class="form-group">
@@ -117,9 +101,27 @@
 
 
 @section('content-right')
+
+    {{-- Render menu --}}
     <x-wrapper title="admin/blocks/menus.menu_fields_title">
         @include('admin.blocks.menus.partials.render')
     </x-wrapper>
+
+    <x-wrapper title="admin/blocks/menus.menu_data_title">
+        {!! Form::model($menu, ['method' => 'PATCH', 'action' => ['Admin\Blocks\MenusController@update', $menu->id], 'class' => 'w-100']) !!}
+
+            {{-- Name input --}}
+            <div class="form-group">
+                {!! Form::label('name', __('admin/blocks/menus.name').':') !!}
+                {!! Form::text('name', $menu->name, ['class' => 'form-control']) !!}
+            </div>
+
+            {{-- Save button --}}
+            <x-update-button />
+
+        {!! Form::close() !!}
+    </x-wrapper>
+
 @endsection
 
 

@@ -40,8 +40,8 @@ class PostsController extends Controller
         return Post::findOrFail($post)->webDestroy();
     }
 
-    public function mass(Request $request)
+    public function mass()
     {
-        return Post::mass($request);
+        return Post::mass();
     }
 }

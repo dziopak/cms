@@ -12,16 +12,21 @@ class MenuEntity implements WebEntity
 
     private $item;
 
+
     public function __construct($item)
     {
         $this->item = $item;
     }
 
+
     static function index($request)
     {
         Auth::user()->hasAccessOrRedirect('ADMIN_VIEW');
-        return view('admin.blocks.menus.index');
+        return view('admin.blocks.menus.index', [
+            'menus' => Menu::paginate(15)
+        ]);
     }
+
 
     static function create()
     {
@@ -43,8 +48,6 @@ class MenuEntity implements WebEntity
 
     public function edit()
     {
-        // TO DO //
-        // GET VAR FROM VIEW COMPOSER //
         Auth::user()->hasAccessOrRedirect('BLOCK_EDIT');
 
         $entities = [
@@ -55,7 +58,10 @@ class MenuEntity implements WebEntity
             'page_category' => 'Page category'
         ];
 
-        return view('admin.blocks.menus.edit', compact('entities'));
+        return view('admin.blocks.menus.edit', [
+            'entities' => $entities,
+            'menu' => $this->item
+        ]);
     }
 
 
@@ -82,15 +88,5 @@ class MenuEntity implements WebEntity
             ],
             200
         );
-    }
-
-
-    static function mass($data)
-    {
-        if (empty($data['mass_edit'])) {
-            return redirect()->back();
-        }
-
-        return (new MenuActions($data['mass_edit']))->mass($data['mass_action']);
     }
 }

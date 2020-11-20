@@ -12,7 +12,7 @@ Route::group(['prefix' => 'pages', 'as' => 'pages.'], function () {
 
     Route::resource('/layouts', 'Admin\Modules\LayoutsController');
     Route::get('/layouts/{layout}/delete', 'Admin\Modules\LayoutsController@delete')->name('layouts.delete');
-    Route::post('/pages/layouts/mass', 'Admin\Modules\LayoutsController@mass')->name('layouts.mass');
+    Route::post('/layouts/mass', 'Admin\Modules\LayoutsController@mass')->name('layouts.mass');
 });
 
 Route::get('/layouts/widget', 'Admin\Modules\LayoutsController@getBlock')->name('layouts.getwidget');

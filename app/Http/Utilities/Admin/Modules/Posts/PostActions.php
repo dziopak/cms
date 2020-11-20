@@ -3,83 +3,96 @@
 namespace App\Http\Utilities\Admin\Modules\Posts;
 
 use App\Entities\Post;
+use App\Events\Posts\PostDestroyEvent;
+use App\Events\Posts\PostUpdateEvent;
 use Auth;
 
 class PostActions
 {
-    protected $posts;
 
-    public function __construct($posts)
+    protected $items;
+    private $request;
+
+
+    public function __construct($items, $request)
     {
-        is_array($posts) ? $this->posts = $posts : $this->posts = [$posts];
+        $this->items = $items;
+        $this->request = $request;
     }
 
 
-    private function delete()
+    public function delete()
     {
-        Auth::user()->hasAccessOrRedirect('PAGE_DELETE');
-        Post::whereIn('id', $this->posts)->delete();
+        Auth::user()->hasAccessOrRedirect('POST_DELETE');
 
-        return __('admin/messages.posts.mass.universal');
+        dispatchEvent(PostDestroyEvent::class, $this->items, function () {
+            $this->items->delete();
+            Post::flushQueryCache();
+        });
+
+        return redirect()->back()->with('crud', __('admin/messages.posts.mass.universal'));
     }
 
 
-    private function setVisibility($visible)
+    public function hide()
     {
-        Auth::user()->hasAccessOrRedirect('PAGE_EDIT');
-        Post::whereIn('id', $this->posts)->update(['is_active' => $visible]);
+        Auth::user()->hasAccessOrRedirect('POST_EDIT');
 
-        return __('admin/messages.posts.mass.universal');
+        $this->items->update(['is_active' => 0]);
+        dispatchEvent(PostUpdateEvent::class, $this->items, function () {
+            Post::flushQueryCache();
+        });
+
+
+        return redirect()->back()->with('crud', __('admin/messages.posts.mass.universal'));
     }
 
 
-    private function setCategory($category_id)
+    public function show()
     {
-        Auth::user()->hasAccessOrRedirect('PAGE_EDIT');
-        Post::whereIn('id', $this->posts)->update(['category_id' => $category_id]);
+        Auth::user()->hasAccessOrRedirect('POST_EDIT');
 
-        return __('admin/messages.posts.mass.assign_category');
+        $this->items->update(['is_active' => 1]);
+        dispatchEvent(PostUpdateEvent::class, $this->items, function () {
+            Post::flushQueryCache();
+        });
+
+        return redirect()->back()->with('crud', __('admin/messages.posts.mass.universal'));
     }
 
 
-    private function replaceInName($searched, $replace)
+    public function category()
     {
-        Auth::user()->hasAccessOrRedirect('PAGE_EDIT');
-        $posts = Post::whereIn('id', $this->posts)->get(['id', 'name']);
+        Auth::user()->hasAccessOrRedirect('POST_EDIT');
 
-        foreach ($posts as $key => $post) {
+        $this->items->update(['category_id' => $this->request->get('category_id')]);
+        dispatchEvent(PostUpdateEvent::class, $this->items, function () {
+            Post::flushQueryCache();
+        });
+
+        return redirect()->back()->with('crud', __('admin/messages.posts.mass.assign_category'));
+    }
+
+
+    public function name_replace()
+    {
+        Auth::user()->hasAccessOrRedirect('POST_EDIT');
+
+        $searched = $this->request->get('name_search_string') ?? null;
+        $replace = $this->request->get('name_replace_string') ?? null;
+        $items = $this->items->get(['id', 'name']);
+
+        if (empty($searched || empty($replace))) return false;
+
+        foreach ($items as $post) {
             if (strpos($post->name, $searched) !== false) {
                 $post->name = str_replace($searched, $replace, $post->name);
                 $post->save();
             }
         }
 
-        return __('admin/messages.posts.mass.title_replace_phrases');
-    }
+        dispatchEvent(PostUpdateEvent::class, $this->items);
 
-
-    public function mass($data)
-    {
-        switch ($data['mass_action']) {
-            case 'delete':
-                return $this->delete();
-                break;
-
-            case 'hide':
-                return $this->setVisibility(false);
-                break;
-
-            case 'show':
-                return $this->setVisibility(true);
-                break;
-
-            case 'category':
-                return $this->setCategory($data['category_id']);
-                break;
-
-            case 'name_replace':
-                return $this->replaceInName($data['name_search_string'], $data['name_replace_string']);
-                break;
-        }
+        return redirect()->back()->with('crud', __('admin/messages.posts.mass.title_replace_phrases'));
     }
 }

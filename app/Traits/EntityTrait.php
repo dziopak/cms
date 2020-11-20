@@ -48,13 +48,6 @@ trait EntityTrait
     }
 
 
-    static function mass($request)
-    {
-        $class = (new self)->getWebEntityClass();
-        return EntityFactory::build($class, self::class)->mass($request);
-    }
-
-
     // API METHODS
     static function apiIndex($request)
     {
@@ -86,8 +79,6 @@ trait EntityTrait
     {
         return EntityFactory::build($this->apiEntity, $this)->destroy();
     }
-
-
 
 
     // OTHER METHODS

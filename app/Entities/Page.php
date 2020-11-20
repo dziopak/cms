@@ -2,9 +2,12 @@
 
 namespace App\Entities;
 
-use App\Http\Utilities\Admin\Modules\Pages\PageEntity;
+use App\Http\Utilities\Admin\Modules\Pages\PageActions;
+use App\Http\Utilities\Admin\Modules\Pages\PageEntity as WebEntity;
+use App\Http\Utilities\Api\Pages\PageEntity as ApiEntity;
 use App\Traits\EntityTrait;
 use App\Traits\Linkable;
+use App\Traits\MassEditable;
 use Rennokki\QueryCache\Traits\QueryCacheable;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,7 +20,7 @@ use App\Traits\Thumbnail;
 class Page extends Model implements Searchable
 {
 
-    use Sluggable, Linkable;
+    use Sluggable, Linkable, MassEditable;
     use QueryCacheable;
     use Thumbnail;
     use EntityTrait;
@@ -25,7 +28,10 @@ class Page extends Model implements Searchable
     protected $guarded = ['id', 'page_id'];
     public $fire_events = true, $cacheFor = 3600;
     protected static $flushCacheOnUpdate = true;
-    protected $entity_type = 'pages', $webEntity = PageEntity::class;
+
+    protected $entity_type = 'pages';
+    protected $massActions = PageActions::class;
+    protected $webEntity = WebEntity::class, $apiEntity = ApiEntity::class;
 
     public function author()
     {

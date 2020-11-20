@@ -2,34 +2,33 @@
 
 namespace App\Http\Utilities\Admin\Blocks\Carousels;
 
-use App\Entities\Carousel;
+use App\Events\Carousels\CarouselDestroyEvent;
 use Auth;
 
 class CarouselActions
 {
-    protected $carousels;
+    protected $items;
+    private $request;
 
 
-    public function __construct($carousels)
+    public function __construct($items, $request)
     {
-        $this->carousels = $carousels;
+        $this->items = $items;
+        $this->request = $request;
     }
 
 
-    private function delete()
+    public function delete()
     {
         Auth::user()->hasAccessOrRedirect('BLOCK_DELETE');
-        Carousel::whereIn('id', $this->carousels)->delete();
 
-        return redirect(route('admin.blocks.carousels.index'))->with(['crud' => __('admin/messages.blocks.carousels.mass.delete')]);
-    }
+        dispatchEvent(CarouselDestroyEvent::class, $this->items, function () {
+            $this->items->delete();
+            flushCache('slider');
+        });
 
-    public function mass($action)
-    {
-        switch ($action) {
-            case 'delete':
-                return $this->delete();
-                break;
-        }
+        return redirect(route('admin.blocks.carousels.index'))->with([
+            'crud' => __('admin/messages.blocks.carousels.mass.delete')
+        ]);
     }
 }

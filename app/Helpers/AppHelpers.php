@@ -1,6 +1,6 @@
 <?php
 
-use App\Entities\Page;
+use Illuminate\Database\Eloquent\Model;
 
 function is_installed()
 {
@@ -88,4 +88,42 @@ function getConfig($category, $variable)
     // TO DO //
     // NOT READING CONFIG //
     return !empty(config('global')) ? config('global')[$category][$variable] : 1;
+}
+
+
+function flushCache($models = [])
+{
+    if (!empty($models)) {
+        if (!is_array($models)) $models = [$models];
+        foreach ($models as $model) {
+            $model = '\App\Entities\\' . $model;
+            if (method_exists($model, 'flushQueryCache')) {
+                $model::flushQueryCache();
+            }
+        }
+    }
+}
+
+
+function dispatchEvent($event, $collection, $callback = null)
+{
+    $args = func_get_args();
+
+    unset($args[0]);
+    unset($args[1]);
+    unset($args[2]);
+
+    if (!empty($collection)) {
+        if ($collection instanceof Model) {
+            event(new $event($collection, ...$args));
+        } else {
+            foreach ($collection->get() as $item) {
+                event(new $event($item, ...$args));
+            }
+        }
+
+        if (!empty($callback)) {
+            $callback();
+        }
+    }
 }

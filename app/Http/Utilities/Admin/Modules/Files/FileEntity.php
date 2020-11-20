@@ -6,10 +6,6 @@ use App\Interfaces\WebEntity;
 use File;
 use Auth;
 
-// TO DO //
-// MEDIA ACCESS //
-
-
 class FileEntity implements WebEntity
 {
     private $item;
@@ -46,12 +42,14 @@ class FileEntity implements WebEntity
 
     static function create()
     {
+        Auth::user()->hasAccessOrRedirect('FILE_CREATE');
         return view('admin.media.create');
     }
 
 
     public function edit()
     {
+        Auth::user()->hasAccessOrRedirect('FILE_EDIT');
         return view('admin.media.edit', [
             'file' => $this->item
         ]);
@@ -60,6 +58,7 @@ class FileEntity implements WebEntity
 
     public function update($request)
     {
+        Auth::user()->hasAccessOrRedirect('FILE_EDIT');
         $this->item->update([
             'name' => $request->get('name'),
             'description' => $request->get('description')
@@ -70,46 +69,18 @@ class FileEntity implements WebEntity
 
     public function destroy()
     {
-        $this->item->delete();
-        return redirect(route('admin.media.index'));
-    }
-
-
-    public function apiDestroy()
-    {
-        $this->item->delete();
-        return response()->json([
-            'message' => __('admin/messages.files.delete.success'),
-            'id' => $this->item->id
-        ], 200);
-    }
-
-
-    public function apiUpdate($request)
-    {
-        $this->item->update([
-            'name' => $request->get('name'),
-            'description' => $request->get('description')
-        ]);
-        return response()->json('success');
-    }
-
-
-    public function mass($request)
-    {
-        $data = $request->all();
-
-        if (empty($data['mass_edit'])) {
-            return redirect()->back()->with('error', __('admin/messages.files.mass.errors.no_files'));
+        if (!Auth::user()->hasAccess('FILE_DELETE')) {
+            return redirect()->back()->with('error', 'You don\'t have rights to finish this action.');
         }
 
-        switch ($data['mass_action']) {
-            case 'delete':
-                File::whereIn('id', $data['mass_edit'])->delete();
-                return redirect()->back()->with('crud', __('admin/messages.files.mass.delete'));
-                break;
-        }
+        $this->item->delete();
 
-        return redirect()->back();
+        return response()->json(
+            [
+                'message' => __('admin/messages.files.delete.success'),
+                'id' => $this->item->id
+            ],
+            200
+        );
     }
 }

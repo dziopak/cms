@@ -232,6 +232,33 @@ $form = [
         ],
         [
             'class' => 'form-group',
+            'label' => __('admin/roles.files_rules'),
+            'items' => [
+                'access[FILE_CREATE]' => [
+                    'type' => 'checkbox',
+                    'label' => __('admin/roles.file_create'),
+                    'class' => '',
+                    'value' => null,
+                    'checked_value' => 1
+                ],
+                'access[FILE_EDIT]' => [
+                    'type' => 'checkbox',
+                    'label' => __('admin/roles.file_edit'),
+                    'class' => '',
+                    'value' => null,
+                    'checked_value' => 1
+                ],
+                'access[FILE_DELETE]' => [
+                    'type' => 'checkbox',
+                    'label' => __('admin/roles.file_delete'),
+                    'class' => '',
+                    'value' => null,
+                    'checked_value' => 1
+                ],
+            ],
+        ],
+        [
+            'class' => 'form-group',
             'label' => __('admin/roles.blocks_rules'),
             'items' => [
                 'access[BLOCK_CREATE]' => [

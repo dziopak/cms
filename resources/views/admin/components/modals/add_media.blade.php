@@ -15,7 +15,9 @@
                 {{-- Media library --}}
                 <div class="modal-tab" data-tab="1">
                     <x-wrapper title="admin/media.edit_title">
-                        @include('admin.media.partials.list', ['endpoint' => $endpoint, 'controls' => false])
+                        {{-- Table --}}
+                        <x-table formId="media-list-form" :table="$table" :fields="$files" :controls="false" :filters="false" :mass="false" :form="false"/>
+
                     </x-wrapper>
                 </div>
 

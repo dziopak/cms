@@ -19,12 +19,18 @@ return [
     'roles_rules' => 'Uprawnienia do zarządzania rangami',
     'categories_rules' => 'Uprawnienia do zarządzania kategoriami',
     'pages_rules' => 'Uprawnienia do zarządzania podstronami',
+    'layouts_rules' => 'Uprawnienia do zarządzania szablonami',
     'posts_rules' => 'Uprawnienia do zarządzania postami',
     'blocks_rules' => 'Uprawnienia do zarządzania blokami',
+    'files_rules' => 'Uprawnienia do zarządzania plikami',
 
     'admin_view' => 'Przeglądanie panelu administracyjnego',
     'module_use' => 'Zarządzanie wtyczkami',
     'menu_edit' => 'Zarządzanie menu',
+
+    'file_create' => 'Dodawanie plików',
+    'file_edit' => 'Edycja plików',
+    'file_delete' => 'Usuwanie plików',
 
     'user_create' => 'Tworzenie kont użytkowników',
     'user_edit' => 'Edycja kont użytkowników',

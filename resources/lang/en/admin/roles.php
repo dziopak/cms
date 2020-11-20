@@ -22,10 +22,15 @@ return [
     'layouts_rules' => 'Layouts management',
     'posts_rules' => 'Posts management',
     'blocks_rules' => 'Blocks management',
+    'files_rules' => 'Media management',
 
     'admin_view' => 'Browse admin panel',
     'module_use' => 'Manage plugins',
     'menu_edit' => 'Manage menus',
+
+    'file_create' => 'Upload files',
+    'file_edit' => 'Edit files',
+    'file_delete' => 'Delete files',
 
     'user_create' => 'Create user accounts',
     'user_edit' => 'Edit user accounts',

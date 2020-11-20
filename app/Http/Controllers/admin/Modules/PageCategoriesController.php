@@ -40,8 +40,8 @@ class PageCategoriesController extends Controller
         return PageCategory::findOrFail($category)->webDestroy();
     }
 
-    public function mass(Request $request)
+    public function mass()
     {
-        return PageCategory::mass($request);
+        return PageCategory::mass();
     }
 }
