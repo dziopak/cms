@@ -166,24 +166,43 @@ return [
         Illuminate\Mail\MailServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
 
-        // Settings provider
+
+        /*
+        * Settings Service Providers...
+        */
         App\Providers\SettingsServiceProvider::class,
+
 
         /*
         * Package Service Providers...
-         */
+        */
         Esemve\Hook\HookServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
 
+
         /*
-         * Application Service Providers...
-         */
+        * Event Service Providers...
+        */
+        App\Providers\EventServiceProviders\PageEventServiceProvider::class,
+        App\Providers\EventServiceProviders\PostEventServiceProvider::class,
+        App\Providers\EventServiceProviders\RoleEventServiceProvider::class,
+        App\Providers\EventServiceProviders\UserEventServiceProvider::class,
+        App\Providers\EventServiceProviders\CategoryEventServiceProvider::class,
+        App\Providers\EventServiceProviders\LayoutEventServiceProvider::class,
+        App\Providers\EventServiceProviders\FileEventServiceProvider::class,
+        App\Providers\EventServiceProviders\CarouselEventServiceProvider::class,
+        App\Providers\EventServiceProviders\SliderEventServiceProvider::class,
+        App\Providers\EventServiceProviders\MenuEventServiceProvider::class,
+
+
+        /*
+        * Application Service Providers...
+        */
         App\Providers\BladeDirectivesProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\ViewServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\ThemeServiceProvider::class,
         App\Providers\PluginsServiceProvider::class,

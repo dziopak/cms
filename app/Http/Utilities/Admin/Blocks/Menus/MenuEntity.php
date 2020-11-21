@@ -68,6 +68,7 @@ class MenuEntity implements WebEntity
     public function update($request)
     {
         Auth::user()->hasAccessOrRedirect('BLOCK_EDIT');
+
         $this->item->update([
             'name' => $request->get('name')
         ]);

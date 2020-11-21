@@ -2,6 +2,7 @@
 
 namespace App\Http\Utilities\Admin\Modules\Layouts;
 
+use App\Events\Layouts\LayoutDestroyEvent;
 use Auth;
 
 class LayoutActions

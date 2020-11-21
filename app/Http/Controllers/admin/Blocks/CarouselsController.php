@@ -44,7 +44,6 @@ class CarouselsController extends Controller
 
     public function attach(Request $request, $id)
     {
-
         return (new CarouselItems($id))->attach($request->get('files'));
     }
 

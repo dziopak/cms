@@ -58,7 +58,9 @@ class CarouselEntity implements WebEntity
         Auth::user()->hasAccessOrRedirect('BLOCK_EDIT');
 
         File::flushQueryCache();
+
         $this->item->files()->sync($request->get('image'));
+        $this->item->update(['name' => $request->get('name')]);
 
         return redirect(route('admin.blocks.carousels.index'))->with('crud', __('admin/messages.blocks.carousels.update.success'));
     }

@@ -31,6 +31,7 @@ class SliderEntity implements WebEntity
         return view('admin.blocks.sliders.create');
     }
 
+
     static function store($request)
     {
         Auth::user()->hasAccessOrRedirect('BLOCK_CREATE');
@@ -39,19 +40,26 @@ class SliderEntity implements WebEntity
         return redirect(route('admin.blocks.sliders.edit', $slider->id));
     }
 
+
     public function edit()
     {
         Auth::user()->hasAccessOrRedirect('BLOCK_EDIT');
         return view('admin.blocks.sliders.edit', ['slider' => $this->item]);
     }
 
+
     public function update($request)
     {
         Auth::user()->hasAccessOrRedirect('BLOCK_EDIT');
+
         $this->item->files()->sync($request->get('image'));
+        $this->item->update([
+            'name' => $request->get('name')
+        ]);
 
         return redirect(route('admin.blocks.sliders.index'))->with('crud', __('admin/messages.blocks.sliders.update.success'));
     }
+
 
     public function destroy()
     {
