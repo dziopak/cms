@@ -22,7 +22,8 @@ class PostsController extends Controller
     public function index()
     {
         $blocks = Layout::findOrFail($this->listing_layout)->getLayout();
-        $posts = Post::orderByDesc('created_at')->paginate(3);
+        $perPage = config('global')['content']['front_posts_per_page'] ?? 5;
+        $posts = Post::orderByDesc('created_at')->paginate($perPage);
 
         return view('Theme::modules.posts.index', compact('posts', 'blocks'));
     }

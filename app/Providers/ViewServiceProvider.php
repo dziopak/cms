@@ -5,8 +5,8 @@ namespace App\Providers;
 use App\Entities\Layout;
 use Illuminate\Support\ServiceProvider;
 use App\Helpers\ThemeHelpers;
+use App\Entities\File;
 use View;
-
 
 class ViewServiceProvider extends ServiceProvider
 {
@@ -50,6 +50,12 @@ class ViewServiceProvider extends ServiceProvider
 
             $view->settings = \App\Entities\Setting::where(['group' => 'content'])->pluck('value', 'name')->toArray();
             $view->form = getData('Admin/Modules/Settings/content', array_merge($view->settings, ['layouts' => $layouts]));
+        });
+
+
+        view()->composer('*.add_media', function ($view) {
+            $view->files = File::paginate(15);
+            $view->table = getData('Admin/Modules/Media/media_index_table');
         });
 
 

@@ -11,7 +11,6 @@ class RolesComposer
     private function index($request, $view)
     {
         return [
-            'roles' => Role::orderBy('id')->filter($request)->paginate(15),
             'table' => getData('Admin/Modules/Roles/roles_index_table'),
         ];
     }
@@ -32,7 +31,6 @@ class RolesComposer
         $view->role->access = RoleAccess::unserializeAccess($view->role->access);
 
         return [
-            'role' => $view->role,
             'form' => getData('Admin/Modules/Roles/roles_form')
         ];
     }

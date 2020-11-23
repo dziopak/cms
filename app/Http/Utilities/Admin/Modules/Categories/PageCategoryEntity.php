@@ -21,7 +21,9 @@ class PageCategoryEntity implements WebEntity
     static function index($request)
     {
         Auth::user()->hasAccessOrRedirect('ADMIN_VIEW');
-        return view('admin.page_categories.index');
+        return view('admin.page_categories.index', [
+            'categories' => PageCategory::orderByDesc('id')->filter($request)->paginate(15)
+        ]);
     }
 
 

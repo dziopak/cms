@@ -33,13 +33,6 @@ class UserObserver
     {
         $user->account_logs()->delete();
 
-        if ($user->avatar != "0") {
-            if (!empty($user->avatar->path)) {
-                unlink(public_path() . '/images/' . $user->photo->path);
-                $user->photo()->delete();
-            }
-        }
-
         if ($user->fire_events) {
             event(new UserDestroyEvent($user));
         }

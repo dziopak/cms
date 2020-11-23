@@ -3,7 +3,7 @@
 namespace App\Http\Utilities\Admin\Modules\Files;
 
 use App\Interfaces\WebEntity;
-use File;
+use App\Entities\File;
 use Auth;
 
 class FileEntity implements WebEntity
@@ -26,7 +26,9 @@ class FileEntity implements WebEntity
     static function index($request)
     {
         Auth::user()->hasAccessOrRedirect('ADMIN_VIEW');
-        return view('admin.media.index');
+        return view('admin.media.index', [
+            'files' => File::filter($request)->paginate(15)
+        ]);
     }
 
 

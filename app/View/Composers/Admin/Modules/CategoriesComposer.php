@@ -10,22 +10,9 @@ class CategoriesComposer
 
     private function index($request, $type, $view)
     {
-        switch ($type) {
-            case 'post_categories':
-                $data = [
-                    'categories' => PostCategory::orderByDesc('id')->filter($request)->paginate(15),
-                    'table' => getData('Admin/Modules/Categories/post_categories_index_table')
-                ];
-                break;
-
-            case 'page_categories':
-                $data = [
-                    'categories' => PageCategory::orderByDesc('id')->filter($request)->paginate(15),
-                    'table' => getData('Admin/Modules/Categories/page_categories_index_table')
-                ];
-                break;
-        }
-        return $data;
+        return [
+            'table' => getData('Admin/Modules/Categories/' . $type . '_index_table')
+        ];
     }
 
     private function create($request, $type, $view)

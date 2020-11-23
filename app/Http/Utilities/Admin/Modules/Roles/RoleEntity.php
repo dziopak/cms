@@ -22,7 +22,10 @@ class RoleEntity implements WebEntity
     static function index($request)
     {
         Auth::user()->hasAccessOrRedirect('ADMIN_VIEW');
-        return view('admin.roles.index');
+
+        return view('admin.roles.index', [
+            'roles' => Role::orderBy('id')->filter($request)->paginate(15)
+        ]);
     }
 
 

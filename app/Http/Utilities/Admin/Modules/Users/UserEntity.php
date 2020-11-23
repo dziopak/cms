@@ -24,7 +24,9 @@ class UserEntity implements WebEntity
     static function index($request)
     {
         Auth::user()->hasAccessOrRedirect('ADMIN_VIEW');
-        return view('admin.users.index');
+        return view('admin.users.index', [
+            'users' => User::with('role', 'photo')->filter($request)->paginate(15)
+        ]);
     }
 
 

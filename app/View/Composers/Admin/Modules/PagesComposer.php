@@ -12,7 +12,6 @@ class PagesComposer
     private function index($request, $view)
     {
         return [
-            'pages' => Page::with('author', 'thumbnail')->filter($request)->paginate(15),
             'table' => getData('Admin/Modules/Pages/pages_index_table')
         ];
     }

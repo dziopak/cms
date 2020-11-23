@@ -2,8 +2,6 @@
 
 namespace App\Http\Utilities\Admin\Modules\Pages;
 
-use App\Entities\MenuItem;
-use App\Http\Utilities\Admin\Modules\Pages\PageActions;
 use App\Http\Utilities\Admin\Modules\Pages\PageFiles;
 use App\Entities\Page;
 use App\Interfaces\WebEntity;
@@ -23,7 +21,11 @@ class PageEntity implements WebEntity
     static function index($request)
     {
         Auth::user()->hasAccessOrRedirect('ADMIN_VIEW');
-        return view('admin.pages.index');
+        $perPage = config('global')['content']['admin_pages_per_page'] ?? 15;
+
+        return view('admin.pages.index', [
+            'pages' => Page::with('author', 'thumbnail')->filter($request)->paginate($perPage)
+        ]);
     }
 
 
@@ -82,18 +84,5 @@ class PageEntity implements WebEntity
             'message' => __('admin/messages.pages.delete.success'),
             'id' => $this->item->id
         ], 200);
-    }
-
-
-    static function mass($request)
-    {
-        $data = $request->all();
-
-        if (empty($data['mass_edit'])) {
-            return redirect()->back()->with('error', __('admin/messages.pages.mass.errors.no_posts'));
-        }
-
-        // $msg = (new PageActions($data['mass_edit']))->mass($data);
-        // return redirect()->back()->with('crud', $msg);
     }
 }

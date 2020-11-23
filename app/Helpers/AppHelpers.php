@@ -85,8 +85,6 @@ function getAsset($file)
 
 function getConfig($category, $variable)
 {
-    // TO DO //
-    // NOT READING CONFIG //
     return !empty(config('global')) ? config('global')[$category][$variable] : 1;
 }
 
@@ -126,4 +124,16 @@ function dispatchEvent($event, $collection, $callback = null)
             $callback();
         }
     }
+}
+
+
+function public_dir()
+{
+    if (config('app.env') === 'production') {
+        $path = base_path() . '/../public_html';
+        if (is_dir($path)) {
+            return $path;
+        }
+    }
+    return public_path();
 }

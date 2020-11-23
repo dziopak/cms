@@ -15,7 +15,6 @@ class LayoutsComposer
 
     public function compose($view)
     {
-        dd(\Request::route()->getName());
         $request = request();
         $vw = explode('.', $view->getName())[3];
 

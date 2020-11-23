@@ -19,7 +19,9 @@ class PostCategoryEntity implements WebEntity
     static function index($request)
     {
         Auth::user()->hasAccessOrRedirect('ADMIN_VIEW');
-        return view('admin.post_categories.index');
+        return view('admin.post_categories.index', [
+            'categories' => PostCategory::orderByDesc('id')->filter($request)->paginate(15)
+        ]);
     }
 
 

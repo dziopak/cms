@@ -29,6 +29,11 @@ trait EntityTrait
         return EntityFactory::build($class, self::class)->store($request);
     }
 
+    public function webShow()
+    {
+        return EntityFactory::build($this->webEntity, $this)->show();
+    }
+
 
     public function webEdit()
     {

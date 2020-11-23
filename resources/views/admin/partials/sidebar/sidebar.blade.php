@@ -7,7 +7,7 @@
 
         {{-- Front Office redirect --}}
         <li class="sidebar-list-item">
-            <a href="/index.php" style="color: #3490dc;">
+            <a href="/" style="color: #3490dc;">
                 <div class="fa fas fa-backward"></div>
             </a>
         </li>

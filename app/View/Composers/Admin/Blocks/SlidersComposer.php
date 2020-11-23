@@ -10,7 +10,6 @@ class SlidersComposer
     private function index($request, $view)
     {
         return [
-            'sliders' => Slider::paginate(15),
             'table' => getData('Admin/Blocks/sliders/sliders_index_table')
         ];
     }

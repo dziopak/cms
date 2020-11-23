@@ -11,11 +11,6 @@ class UserUpdateAvatarListener
     public function handle($event)
     {
         if ($event->avatar) {
-            if ($event->user->avatar && $event->user->avatar != "1") {
-                unlink(public_path() . '/images/' . $event->user->photo->path);
-                $event->user->photo()->delete();
-            }
-
             $photo = $event->avatar->getClientOriginalName();
             $name = time() . '_' . $photo;
 

@@ -29,7 +29,6 @@ $table['mass_edit_extend'] = [
 ];
 $table['sort_by'] = [
     'email' => __('admin/users.email'),
-    'name' => __('admin/users.name'),
     'created_at' => __('admin/users.creation_date')
 ];
 

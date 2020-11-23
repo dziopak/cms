@@ -21,7 +21,10 @@ class SliderEntity implements WebEntity
     static function index($request)
     {
         Auth::user()->hasAccessOrRedirect('ADMIN_VIEW');
-        return view('admin.blocks.sliders.index');
+
+        return view('admin.blocks.sliders.index', [
+            'sliders' => Slider::paginate(15)
+        ]);
     }
 
 

@@ -10,7 +10,6 @@ class CarouselsComposer
     private function index($request, $view)
     {
         return [
-            'carousels' => Carousel::paginate(15),
             'table' => getData('Admin/Blocks/carousels/carousels_index_table')
         ];
     }

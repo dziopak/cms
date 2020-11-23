@@ -2,7 +2,6 @@
 
 namespace App\Http\Utilities\Admin\Modules\Posts;
 
-use App\Http\Utilities\Admin\Modules\Posts\PostActions;
 use App\Http\Utilities\Admin\Modules\Posts\PostFiles;
 use App\Entities\Post;
 use App\Interfaces\WebEntity;
@@ -13,7 +12,6 @@ class PostEntity implements WebEntity
 
     private $item;
 
-
     public function __construct($item)
     {
         $this->item = $item;
@@ -23,7 +21,11 @@ class PostEntity implements WebEntity
     static function index($request)
     {
         Auth::user()->hasAccessOrRedirect('ADMIN_VIEW');
-        return view('admin.posts.index');
+        $perPage = config('global')['content']['admin_posts_per_page'] ?? 15;
+
+        return view('admin.posts.index', [
+            'posts' => Post::with('author', 'thumbnail')->filter($request)->paginate($perPage)->onEachSide(2)
+        ]);
     }
 
 

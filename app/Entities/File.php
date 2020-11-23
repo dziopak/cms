@@ -103,8 +103,11 @@ class File extends Model
         $request = request();
 
         self::deleted(function ($file) use ($request) {
-            unlink(public_path() . '/images/' . $file->path);
+            unlink(public_dir() . '/images/' . $file->path);
             event(new FileDestroyEvent($file));
+            // TO DO //
+            // TO LISTENER //
+            User::flushQueryCache();
         });
     }
 }

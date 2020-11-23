@@ -22,7 +22,10 @@ class CarouselEntity implements WebEntity
     static function index($request)
     {
         Auth::user()->hasAccessOrRedirect('ADMIN_VIEW');
-        return view('admin.blocks.carousels.index');
+
+        return view('admin.blocks.carousels.index', [
+            'carousels' => Carousel::paginate(15)
+        ]);
     }
 
 
@@ -49,7 +52,10 @@ class CarouselEntity implements WebEntity
     public function edit()
     {
         Auth::user()->hasAccessOrRedirect('BLOCK_EDIT');
-        return view('admin.blocks.carousels.edit', ['carousel' => $this->item]);
+
+        return view('admin.blocks.carousels.edit', [
+            'carousel' => $this->item
+        ]);
     }
 
 

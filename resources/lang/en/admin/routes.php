@@ -13,6 +13,8 @@ return [
     "search" => "Search",
 
     "logs" => "System logs",
+    "general" => "General settings",
+    "content" => "Content settings",
     "menus" => "Menus",
     "sliders" => "Sliders",
     "carousels" => "Carousels",

@@ -10,7 +10,6 @@ class MediaComposer
     private function index($request, $view)
     {
         return [
-            'files' => File::filter($request)->paginate(15),
             'table' => getData('Admin/Modules/Media/media_index_table')
         ];
     }

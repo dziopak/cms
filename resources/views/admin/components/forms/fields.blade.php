@@ -30,6 +30,10 @@
                         {!! Form::text($name, $item['value'], ['class' => 'form-control '.$item['class'], parseAttributes($item, 'attributes'), !empty($item['disabled']) ? 'disabled' : '']) !!}
                     @break
 
+                    @case('number')
+                        {!! Form::number($name, $item['value'], ['class' => 'form-control '.$item['class'], parseAttributes($item, 'attributes'), !empty($item['disabled']) ? 'disabled' : '']) !!}
+                    @break
+
                     @case('password')
                         {!! Form::password($name, ['class' => 'form-control '.$item['class'], parseAttributes($item, 'attributes')]) !!}
                     @break

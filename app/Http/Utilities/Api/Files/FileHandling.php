@@ -70,5 +70,7 @@ class FileHandling
                 return response()->json("Incorrect format", 500);
             }
         }
+
+        File::flushQueryCache();
     }
 }

@@ -12,6 +12,8 @@ return [
     "settings" => "Ustawienia",
     "search" => "Wyszukiwanie",
 
+    "general" => "Ustawienia generalne",
+    "content" => "Ustawienia treści",
     "logs" => "Logi systemowe",
     "menus" => "Menu",
     "sliders" => "Slajdery",

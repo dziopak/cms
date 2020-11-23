@@ -11,7 +11,6 @@ class UsersComposer
     private function index($request, $view)
     {
         return [
-            'users' => User::with('role', 'photo')->filter($request)->paginate(15),
             'table' => getData('Admin/Modules/Users/users_index_table')
         ];
     }

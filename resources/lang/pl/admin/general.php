@@ -37,5 +37,7 @@ return [
     "mass_hide" => "Zablokuj / Schowaj",
     "mass_show" => "Odblokuj / Pokaż",
     "mass_name_replace" => "Zmień frazy w nazwie",
-    "mass_set_category" => "Przypisz do kategorii"
+    "mass_set_category" => "Przypisz do kategorii",
+
+    'search' => 'Szukaj'
 ];

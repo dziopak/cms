@@ -65,9 +65,9 @@ $items = [
             'sliders' => [
                 'route' => 'admin.blocks.sliders.index'
             ],
-            'forms' => [
-                'route' => 'admin.dashboard.index'
-            ],
+            // 'forms' => [
+            //     'route' => 'admin.dashboard.index'
+            // ],
         ]
     ],
     'media' => [
@@ -81,30 +81,30 @@ $items = [
             'modules' => [
                 'route' => 'admin.plugins.index',
             ],
-            'bridges' => [
-                'route' => 'admin.dashboard.index',
-            ],
-            'store' => [
-                'route' => 'admin.dashboard.index',
-            ],
+            // 'bridges' => [
+            //     'route' => 'admin.dashboard.index',
+            // ],
+            // 'store' => [
+            //     'route' => 'admin.dashboard.index',
+            // ],
         ]
     ],
     'settings' => [
         'class' => 'icon fa fas fa-cogs',
-        'route' => 'admin.settings.general.index',
+        'route' => 'admin.settings.general',
         'items' => [
             'general' => [
-                'route' => 'admin.settings.general.index',
+                'route' => 'admin.settings.general',
             ],
             'content' => [
-                'route' => 'admin.settings.content.index',
+                'route' => 'admin.settings.content',
             ],
-            'seo' => [
-                'route' => 'admin.dashboard.index',
-            ],
-            'mail' => [
-                'route' => 'admin.dashboard.index',
-            ],
+            // 'seo' => [
+            //     'route' => 'admin.dashboard.index',
+            // ],
+            // 'mail' => [
+            //     'route' => 'admin.dashboard.index',
+            // ],
             'logs' => [
                 'route' => 'admin.settings.logs.index',
             ],

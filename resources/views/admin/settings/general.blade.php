@@ -3,9 +3,9 @@
 
 @section('breadcrumbs')
     <ul class="breadcrumbs">
-        <li><a href="{{ route('admin.dashboard.index') }}">{{ __('admin/routes.admin') }}</a></li>
-        <li><a href="{{ route('admin.settings.general.index') }}">{{ __('admin/routes.settings') }}</a></li>
-        <li>General</li>
+        <x-crumb route="admin.dashboard.index" name="admin/routes.admin" />
+        <x-crumb route="admin.settings.general" name="admin/routes.settings" />
+        <x-crumb name="admin/routes.general" />
     </ul>
 @endsection
 
