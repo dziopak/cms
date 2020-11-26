@@ -18,10 +18,6 @@
     {{-- Validation report --}}
     <x-form-validation :errors="$errors" />
 
-    {{-- Hooks --}}
-    @hook('page_edit_before')
-    @hook('page_before')
-
 @endsection
 
 
@@ -30,10 +26,6 @@
 
         {{-- Display form --}}
         <x-form-fields :fields="$form['left']" />
-
-        {{-- Hooks --}}
-        @hook('page_edit_left_content')
-        @hook('page_left_content')
 
         {{-- Save button --}}
         <x-update-button :container="true" />
@@ -45,13 +37,36 @@
 @section('content-right')
     <x-wrapper title="admin/pages.edit_right_title">
 
-        {{-- Display form --}}
+        {{-- Settings --}}
         <x-form-fields :fields="$form['right']" />
 
-        {{-- Hooks --}}
-        @hook('page_edit_right_content')
-        @hook('page_right_content')
+    </x-wrapper>
 
+
+    {{-- Relations --}}
+    <x-wrapper title="admin/pages.edit_right_title">
+        <x-form-fields :fields="$form['relations']" />
+
+        <div id="category-list" class="mt-4">
+            {!! Form::label('category', 'Przydzielone kategorie: ') !!}<br/>
+            @foreach($page->categories as $category)
+                <div class="tag" data-id="{{ $category->id }}">
+                    <input type="hidden" name="category[]" value="{{ $category->id }}">
+                    {{ $category->name }}
+                    <span class="close">x</span>
+                </div>
+            @endforeach
+        </div>
+
+        <div id="tag-list" class="mt-4">
+            {!! Form::label('tag', 'Przydzielone tagi: ') !!}<br/>
+        </div>
+    </x-wrapper>
+
+
+    {{-- SEO --}}
+    <x-wrapper title="SEO">
+        <x-form-fields :fields="$form['seo']" />
     </x-wrapper>
 @endsection
 
@@ -60,10 +75,6 @@
 
     {{-- Hidden fields --}}
     {!! Form::hidden('page_id', $page->id) !!}
-
-    {{-- Hooks --}}
-    @hook('page_edit_bottom_content')
-    @hook('page_bottom_content')
 
 @endsection
 
@@ -75,9 +86,5 @@
 
     {{-- Include TinyMCE Editor --}}
     @include('admin.partials.tinymce')
-
-    {{-- Hooks --}}
-    @hook('page_edit_after')
-    @hook('page_after')
 
 @endsection

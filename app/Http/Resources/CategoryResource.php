@@ -8,9 +8,9 @@ use App\Http\Resources\PostResource;
 
 class CategoryResource extends JsonResource
 {
-    
+
     static $wrap = null;
-    
+
     /**
      * Transform the resource into an array.
      *
@@ -25,12 +25,9 @@ class CategoryResource extends JsonResource
             'name' => $this->name,
             'slug' => $this->slug,
             'description' => $this->description,
-            'parent_id' => $this->parent_id,
+            'parent_id' => $this->category_id,
         ];
 
-        $category = $this;
-        return $categoryResource = Hook::get('apiCategoryResource',[$categoryResource, $category],function($categoryResource, $category) {
-            return $categoryResource;
-        });
+        return $categoryResource;
     }
 }

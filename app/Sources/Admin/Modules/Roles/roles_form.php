@@ -287,4 +287,4 @@ $form = [
     ],
 ];
 
-return $form;
+return Eventy::filter('role.sources.form', $form);

@@ -18,11 +18,6 @@
     {{-- Validation report --}}
     <x-form-validation :errors="$errors" />
 
-    {{-- Hooks --}}
-    @hook('post_edit_before')
-    @hook('post_before')
-
-
 @endsection
 
 
@@ -31,10 +26,6 @@
 
         {{-- Display form --}}
         <x-form-fields :fields="$form['left']" />
-
-        {{-- Hooks --}}
-        @hook('post_edit_left_content')
-        @hook('post_left_content')
 
         {{-- Save button --}}
         <x-update-button :container="true" />
@@ -45,16 +36,44 @@
 
 
 @section('content-right')
+
+    {{-- Settings --}}
+    <x-wrapper title="admin/posts.edit_right_title">
+        <x-form-fields :fields="$form['right']" />
+    </x-wrapper>
+
+
+    {{-- Relations --}}
     <x-wrapper title="admin/posts.edit_right_title">
 
-        {{-- Display form --}}
-        <x-form-fields :fields="$form['right']" />
+        {{-- Selects --}}
+        <x-form-fields :fields="$form['relations']" />
 
-        {{-- Hooks --}}
-        @hook('post_edit_right_content')
-        @hook('post_right_content')
+        {{-- Categories --}}
+        <div id="category-list" class="mt-4">
+            {!! Form::label('category', 'Przydzielone kategorie: ') !!}<br/>
+            @foreach($post->categories as $category)
+                <div class="tag" data-id="{{ $category->id }}">
+                    <input type="hidden" name="category[]" value="{{ $category->id }}">
+                    {{ $category->name }}
+                    <span class="close">x</span>
+                </div>
+            @endforeach
+        </div>
+
+        {{-- Tags --}}
+        <div id="tag-list" class="mt-4">
+            {!! Form::label('tag', 'Przydzielone tagi: ') !!}<br/>
+        </div>
 
     </x-wrapper>
+
+
+    {{-- SEO --}}
+    <x-wrapper title="SEO">
+        <x-form-fields :fields="$form['seo']" />
+    </x-wrapper>
+
 @endsection
 
 
@@ -62,10 +81,6 @@
 
     {{-- Hidden fields --}}
     {!! Form::hidden('post_id', $post->id) !!}
-
-    {{-- Hooks --}}
-    @hook('post_edit_bottom_content')
-    @hook('post_bottom_content')
 
 @endsection
 
@@ -77,9 +92,5 @@
 
     {{-- Include TinyMCE Editor --}}
     @include('admin.partials.tinymce')
-
-    {{-- Hooks --}}
-    @hook('post_edit_after')
-    @hook('post_after')
 
 @endsection

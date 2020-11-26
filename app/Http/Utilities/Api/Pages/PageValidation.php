@@ -22,9 +22,6 @@ class PageValidation
             'slug' => 'required|string|max:255|unique:pages',
             'content' => 'required|string'
         ];
-        $validationFields = Hook::get('apiPagesStoreValidation', [$validationFields], function ($validationFields) {
-            return $validationFields;
-        });
 
         $validator = Validator::make($request->all(), $validationFields);
         if ($validator->fails()) {
@@ -46,9 +43,6 @@ class PageValidation
             'slug' => 'string|max:255|unique:pages',
             'content' => 'string'
         ];
-        $validationFields = Hook::get('apiPagesUpdateValidation', [$validationFields], function ($validationFields) {
-            return $validationFields;
-        });
 
         $validator = Validator::make($request->all(), $validationFields);
         if ($validator->fails()) {

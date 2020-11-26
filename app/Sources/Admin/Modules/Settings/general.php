@@ -68,4 +68,4 @@ $form = [
     ],
 ];
 
-return $form;
+return Eventy::filter('settings.general.sources.form', $form);

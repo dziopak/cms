@@ -6,18 +6,25 @@
 <meta name="_token" content="{{ csrf_token() }}" />
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <title>D-CMS @yield('page_title')</title>
+
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
 <link href="{{asset('css/app.css')}}" rel="stylesheet">
 <link href="{{asset('css/admin.css')}}" rel="stylesheet">
+
 @stack('styles')
-@hook('adminStylesheets')
+@action('template.admin.styles')
+
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
 <script src="{{asset('js/admin/head.js')}}"></script>
 <script src="{{asset('js/app.js')}}"></script>
+@stack('scripts')
+
 @yield('head')
 @stack('head')
-@stack('scripts')

@@ -17,10 +17,6 @@ trait MassEditable
         $class = self::getMassActionsClass();
         $current = get_called_class();
 
-        // TO DO //
-        if (method_exists($current, 'flushQueryCache')) $current::flushQueryCache();
-        // MOVE TO EVENT AFTER MASS ACTION //
-
         return ActionFactory::build($current, $class, request());
     }
 }

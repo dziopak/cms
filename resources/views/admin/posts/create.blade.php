@@ -18,10 +18,6 @@
     {{-- Validation report --}}
     <x-form-validation :errors="$errors" />
 
-    {{-- Hooks --}}
-    @hook('post_edit_before')
-    @hook('post_before')
-
 @endsection
 
 
@@ -31,10 +27,6 @@
         {{-- Display form --}}
         <x-form-fields :fields="$form['left']" />
 
-        {{-- Hooks --}}
-        @hook('post_create_left_content')
-        @hook('post_left_content')
-
         {{-- Save button --}}
         <x-create-button />
 
@@ -43,28 +35,33 @@
 
 
 @section('content-right')
-    <x-wrapper title="admin/posts.create_right_title">
 
-
-        {{-- Display form --}}
+    {{-- Settings --}}
+    <x-wrapper title="admin/posts.edit_right_title">
         <x-form-fields :fields="$form['right']" />
-
-        {{-- Hooks --}}
-        @hook('post_create_right_content')
-        @hook('post_right_content')
-
-
     </x-wrapper>
+
+
+    {{-- Relations --}}
+    <x-wrapper title="admin/posts.edit_right_title">
+        <x-form-fields :fields="$form['relations']" />
+
+        <div id="category-list" class="mt-4">
+            {!! Form::label('category', 'Przydzielone kategorie: ') !!}<br/>
+        </div>
+
+        <div id="tag-list" class="mt-4">
+            {!! Form::label('tag', 'Przydzielone tagi: ') !!}<br/>
+        </div>
+    </x-wrapper>
+
+
+    {{-- SEO --}}
+    <x-wrapper title="SEO">
+        <x-form-fields :fields="$form['seo']" />
+    </x-wrapper>
+
 @endsection
-
-@section('content-bottom')
-
-        {{-- Hooks --}}
-        @hook('post_edit_bottom_content')
-        @hook('post_bottom_content')
-
-@endsection
-
 
 @section('after')
 
@@ -73,9 +70,5 @@
 
     {{-- Include TinyMCE Editor --}}
     @include('admin.partials.tinymce')
-
-    {{-- Hooks --}}
-    @hook('post_edit_after')
-    @hook('post_after')
 
 @endsection

@@ -7,9 +7,8 @@
         <select id="log-type" class="form-control">
             <option value="0">{{ __('admin/logs.action_types.all') }}</option>
             <option value="PAGE">{{ __('admin/logs.action_types.pages') }}</option>
-            <option value="PAGE_CATEGORY">{{ __('admin/logs.action_types.page_categories') }}</option>
+            <option value="CATEGORY">{{ __('admin/logs.action_types.categories') }}</option>
             <option value="POST">{{ __('admin/logs.action_types.posts') }}</option>
-            <option value="POST_CATEGORY">{{ __('admin/logs.action_types.post_categories') }}</option>
             <option value="USER">{{ __('admin/logs.action_types.users') }}</option>
             <option value="ROLE">{{ __('admin/logs.action_types.roles') }}</option>
             <option value="MAIL">{{ __('admin/logs.action_types.mails') }}</option>

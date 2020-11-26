@@ -20,9 +20,6 @@ class PostValidation
             'slug' => 'required|string|max:255|unique:posts',
             'content' => 'required|string'
         ];
-        $validationFields = Hook::get('apiPostsStoreValidation', [$validationFields], function ($validationFields) {
-            return $validationFields;
-        });
 
         $validator = Validator::make($request->all(), $validationFields);
         if ($validator->fails()) {
@@ -43,9 +40,6 @@ class PostValidation
             'slug' => 'string|max:255|unique:posts',
             'content' => 'string'
         ];
-        $validationFields = Hook::get('apiPostsUpdateValidation', [$validationFields], function ($validationFields) {
-            return $validationFields;
-        });
 
         $validator = Validator::make($request->all(), $validationFields);
         if ($validator->fails()) {

@@ -1,5 +1,15 @@
 {
     "name": "Default",
     "slug": "default",
-    "description": "Default theme of D-CMS"
+    "description": "Default theme of D-CMS",
+    "blocks": [
+        "footer",
+        "vertical-menu",
+        "horizontal-menu",
+        "login",
+        "html",
+        "header",
+        "slider",
+        "carousel"
+    ]
 }

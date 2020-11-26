@@ -47,15 +47,8 @@ class DatabaseActions
 
     public function createCategoryFields()
     {
-        // Post categories table
-        Schema::table('post_categories', function (Blueprint $table) {
-            $table->string('name_' . $this->tag)->nullable();
-            $table->string('slug_' . $this->tag)->index()->nullable();
-            $table->mediumText('description_' . $this->tag)->nullable();
-        });
-
-        // Page categories table
-        Schema::table('page_categories', function (Blueprint $table) {
+        // Categories table
+        Schema::table('categories', function (Blueprint $table) {
             $table->string('name_' . $this->tag)->nullable();
             $table->string('slug_' . $this->tag)->index()->nullable();
             $table->mediumText('description_' . $this->tag)->nullable();

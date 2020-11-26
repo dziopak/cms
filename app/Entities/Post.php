@@ -7,16 +7,18 @@ use App\Http\Utilities\Api\Posts\PostEntity as ApiEntity;
 use App\Http\Utilities\Admin\Modules\Posts\PostActions;
 use App\Traits\EntityTrait;
 use App\Traits\Linkable;
+use App\Traits\MassEditable;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\Sluggable;
 use App\Traits\Thumbnail;
 use Rennokki\QueryCache\Traits\QueryCacheable;
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
+use Eventy;
 
 class Post extends Model implements Searchable
 {
-    use Sluggable, Linkable;
+    use Sluggable, Linkable, MassEditable;
     use QueryCacheable;
     use Thumbnail, EntityTrait;
 
@@ -42,9 +44,9 @@ class Post extends Model implements Searchable
     }
 
 
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo('App\Entities\PostCategory', 'category_id');
+        return $this->morphToMany(Category::class, 'categorizable');
     }
 
 
@@ -73,5 +75,35 @@ class Post extends Model implements Searchable
             $this->name,
             route('admin.posts.edit', $this->id)
         );
+    }
+
+
+    public function getName()
+    {
+        return Eventy::filter('post.entity.getName', $this->attributes['name'], $this->attributes);
+    }
+
+
+    public function getExcerpt()
+    {
+        return Eventy::filter('post.entity.getExcerpt', $this->attributes['excerpt'], $this->attributes);
+    }
+
+
+    public function getContent()
+    {
+        return Eventy::filter('post.entity.getContent', $this->attributes['content'], $this->attributes);
+    }
+
+
+    public function getMetaTitle()
+    {
+        return Eventy::filter('post.entity.getMetaTitle', $this->attributes['meta_title'], $this->attributes);
+    }
+
+
+    public function getMetaDescription()
+    {
+        return Eventy::filter('post.entity.getMetaDescription', $this->attributes['meta_description'], $this->attributes);
     }
 }

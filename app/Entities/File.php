@@ -50,6 +50,7 @@ class File extends Model
         return $this->belongsToMany(Slider::class);
     }
 
+
     public function carousels()
     {
         return $this->belongsToMany(Carousel::class);
@@ -105,9 +106,6 @@ class File extends Model
         self::deleted(function ($file) use ($request) {
             unlink(public_dir() . '/images/' . $file->path);
             event(new FileDestroyEvent($file));
-            // TO DO //
-            // TO LISTENER //
-            User::flushQueryCache();
         });
     }
 }

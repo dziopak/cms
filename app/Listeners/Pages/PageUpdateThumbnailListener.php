@@ -9,7 +9,7 @@ class PageUpdateThumbnailListener
 
     public function handle($event)
     {
-        if ($event->thumbnail) {
+        if (!empty($event->thumbnail)) {
             $name = time() . '_' . $event->thumbnail->getClientOriginalName();
             $event->thumbnail->move('images/thumbnails', $name);
 

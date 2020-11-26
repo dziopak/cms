@@ -65,7 +65,15 @@
                     @break
 
                 @endswitch
+
             </div>
+            @if (!empty($item['custom']))
+                @switch($item['custom'])
+                    @case('add-button')
+                        <div class="col add-button-col"><button data-for="{{ $name }}" id="{{ $name.'-add' }}" class="add-button">+</button></div>
+                    @break
+                @endswitch
+            @endif
         @endforeach
     </div>
 @endforeach

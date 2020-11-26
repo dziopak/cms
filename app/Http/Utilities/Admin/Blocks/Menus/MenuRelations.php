@@ -15,12 +15,8 @@ class MenuRelations
                 return \App\Entities\Post::class;
                 break;
 
-            case 'post_category':
-                return \App\Entities\PostCategory::class;
-                break;
-
-            case 'page_category':
-                return \App\Entities\PageCategory::class;
+            case 'category':
+                return \App\Entities\Category::class;
                 break;
         }
     }

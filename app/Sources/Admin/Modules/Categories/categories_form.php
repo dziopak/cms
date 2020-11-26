@@ -6,7 +6,7 @@ $form = [
             'items' => [
                 'name' => [
                     'type' => 'text',
-                    'label' => __('admin/post_categories.name'),
+                    'label' => __('admin/categories.name'),
                     'required' => true,
                     'value' => null,
                     'class' => '',
@@ -19,17 +19,17 @@ $form = [
             'items' => [
                 'slug' => [
                     'type' => 'text',
-                    'label' => __('admin/post_categories.slug'),
+                    'label' => __('admin/categories.slug'),
                     'required' => true,
                     'value' => null,
                     'class' => '',
                     'container_class' => '',
                     'disabled' => true
                 ],
-                'parent_id' => [
+                'category_id' => [
                     'type' => 'select',
                     'options' => $args['categories'],
-                    'label' => __('admin/post_categories.parent'),
+                    'label' => __('admin/categories.parent'),
                     'required' => true,
                     'value' => null,
                     'class' => '',
@@ -42,7 +42,7 @@ $form = [
             'items' => [
                 'description' => [
                     'type' => 'textarea',
-                    'label' => __('admin/post_categories.description'),
+                    'label' => __('admin/categories.description'),
                     'required' => true,
                     'value' => null,
                     'class' => '',
@@ -52,9 +52,4 @@ $form = [
         ]
     ],
 ];
-
-$form = Hook::get('postCategoriesFormFields', [$form], function ($form) {
-    return $form;
-});
-
-return $form;
+return Eventy::filter('category.sources.form', $form);

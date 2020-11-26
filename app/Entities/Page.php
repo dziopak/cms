@@ -10,6 +10,7 @@ use App\Traits\Linkable;
 use App\Traits\MassEditable;
 use Rennokki\QueryCache\Traits\QueryCacheable;
 use Illuminate\Database\Eloquent\Model;
+use Eventy;
 
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
@@ -38,15 +39,18 @@ class Page extends Model implements Searchable
         return $this->belongsTo('App\Entities\User', 'user_id');
     }
 
+
     public function thumbnail()
     {
         return $this->belongsTo('App\Entities\File', 'file_id');
     }
 
-    public function category()
+
+    public function categories()
     {
-        return $this->belongsTo('App\Entities\PageCategory', 'category_id');
+        return $this->morphToMany(Category::class, 'categorizable');
     }
+
 
     public function layout()
     {
@@ -54,6 +58,7 @@ class Page extends Model implements Searchable
         return $this->belongsTo('App\Entities\Layout', 'layout_id')
             ->withDefault(Layout::findOrFail($default));
     }
+
 
     public function scopeFilter($query, $request)
     {
@@ -72,6 +77,7 @@ class Page extends Model implements Searchable
         }
     }
 
+
     public function getSearchResult(): SearchResult
     {
         return new SearchResult(
@@ -79,5 +85,34 @@ class Page extends Model implements Searchable
             $this->name,
             route('admin.pages.edit', $this->id)
         );
+    }
+
+
+    public function getName()
+    {
+        return Eventy::filter('page.entity.getName', $this->attributes['name'], $this->attributes);
+    }
+
+
+    public function getExcerpt()
+    {
+        return Eventy::filter('page.entity.getExcerpt', $this->attributes['excerpt'], $this->attributes);
+    }
+
+
+    public function getContent()
+    {
+        return Eventy::filter('page.entity.getContent', $this->attributes['content'], $this->attributes);
+    }
+
+
+    public function getMetaTitle()
+    {
+        return Eventy::filter('page.entity.getMetaTitle', $this->attributes['meta_title'], $this->attributes);
+    }
+
+    public function getMetaDescription()
+    {
+        return Eventy::filter('post.entity.getMetaDescription', $this->attributes['meta_description'], $this->attributes);
     }
 }

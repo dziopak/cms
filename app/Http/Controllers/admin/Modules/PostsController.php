@@ -27,7 +27,7 @@ class PostsController extends Controller
 
     public function edit($post)
     {
-        return Post::findOrFail($post)->webEdit();
+        return Post::with('categories')->findOrFail($post)->webEdit();
     }
 
     public function update(Request $request, $post)

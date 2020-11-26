@@ -30,7 +30,7 @@ class CategoryObserver
 
     public function deleted($category)
     {
-        $category->pages()->update(['category_id' => 0]);
+        $category->pages()->detach();
         if ($category->fire_events) {
             event(new CategoryDestroyEvent($category));
         }

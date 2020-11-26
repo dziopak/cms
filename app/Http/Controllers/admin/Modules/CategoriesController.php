@@ -5,44 +5,43 @@ namespace App\Http\Controllers\Admin\Modules;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\Modules\Categories\CategoriesRequest;
+use App\Entities\Category;
 
-use App\Entities\PostCategory;
-
-class PostCategoriesController extends Controller
+class CategoriesController extends Controller
 {
 
     public function index(Request $request)
     {
-        return PostCategory::webIndex($request);
+        return Category::webIndex($request);
     }
 
     public function create()
     {
-        return PostCategory::webCreate();
+        return Category::webCreate();
     }
 
     public function store(CategoriesRequest $request)
     {
-        return PostCategory::webStore($request);
+        return Category::webStore($request);
     }
 
     public function edit($category)
     {
-        return PostCategory::findOrFail($category)->webEdit();
+        return Category::findOrFail($category)->webEdit();
     }
 
     public function update(CategoriesRequest $request, $category)
     {
-        return PostCategory::findOrFail($category)->webUpdate($request);
+        return Category::findOrFail($category)->webUpdate($request);
     }
 
     public function destroy($category)
     {
-        return PostCategory::findOrFail($category)->webDestroy();
+        return Category::findOrFail($category)->webDestroy();
     }
 
     public function mass()
     {
-        return PostCategory::mass();
+        return Category::mass();
     }
 }

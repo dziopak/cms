@@ -25,19 +25,11 @@ class PostResource extends JsonResource
             'excerpt' => $this->excerpt,
             'thumbnail' => !empty($this->file_id) && !empty($this->thumbnail) ? env('APP_URL') . '/images/' . $this->thumbnail->path : "",
             'author' => $this->author->name ?? null,
-            'category' => $this->category->name ?? null,
-            'category_id' => $this->category_id ?? null,
-            'category_slug' => $this->category->slug ?? null,
             'meta_title' => $this->meta_title,
             'meta_description' => $this->meta_description,
             'index' => $this->index,
             'follow' => $this->follow,
         ];
-        $post = $this;
-
-        $postResource = Hook::get('apiPostResource', [$postResource, $post], function ($postResource, $post) {
-            return $postResource;
-        });
 
         return $postResource;
     }

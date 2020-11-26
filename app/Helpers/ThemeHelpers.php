@@ -4,7 +4,16 @@ namespace App\Helpers;
 
 class ThemeHelpers
 {
-    public static function getThemeList()
+
+    private $slug;
+
+    public function __construct($slug = null)
+    {
+        if (empty($slug)) $slug = config('global.general.theme');
+        $this->slug = $slug;
+    }
+
+    static function getThemeList()
     {
         $path = base_path() . '/resources/themes/';
         $dir = scandir(base_path() . '/resources/themes');
@@ -24,57 +33,59 @@ class ThemeHelpers
     }
 
 
+    public function getBlocks()
+    {
+        $data = $this->getManifest();
+        return $data['blocks'];
+    }
+
+
     public function boot($layout)
     {
         return view('Theme::partials.grid', ['layout' => $layout]);
     }
 
 
-    public function getThemeData($slug = null)
+    private function getManifest($slug = null)
     {
-        $slug = ThemeHelpers::activeTheme();
-        $manifest = base_path() . '/resources/themes/' . $slug . '/theme.json';
+        $manifest = base_path() . '/resources/themes/' . $this->slug . '/theme.json';
 
         if (is_file($manifest)) {
             $json = jsonToArray($manifest);
-
-            $theme = new \stdClass;
-            $theme->slug = $json['slug'];
-            $theme->url = 'themes.' . $theme->slug;
-            $theme->assets_url = "theme/assets/";
-
-            return $theme;
+            return $json;
         }
 
         return false;
     }
 
 
-    public function getThemePath()
+    public function getThemeData()
     {
-        return '/resources/theme/' . $this->activeTheme() . '/';
+        $json = $this->getManifest($this->slug);
+
+        $theme = new \stdClass;
+        $theme->slug = $json['slug'];
+        $theme->url = 'themes.' . $theme->slug;
+        $theme->assets_url = "theme/assets/";
+
+        return $theme;
     }
 
 
-    public static function activeTheme()
+    public function getThemePath()
+    {
+        return '/resources/theme/' . $this->slug . '/';
+    }
+
+
+    static function activeTheme()
     {
         return config('global.general.theme') ?? 'default';
     }
 
 
-    public static function getBlockPath($name, $is_admin = false)
+    static function getBlockPath($name)
     {
         return 'Theme::blocks.' . $name . '.index';
     }
-
-
-    public function getAsset($file)
-    {
-        return '/theme/assets/' . $file;
-    }
-}
-
-function getAsset($file)
-{
-    return '/theme/assets/' . $file;
 }

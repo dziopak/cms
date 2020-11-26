@@ -3,8 +3,9 @@
 namespace App\Http\Utilities\Admin\Modules\Posts;
 
 use App\Http\Utilities\Admin\Modules\Posts\PostFiles;
-use App\Entities\Post;
 use App\Interfaces\WebEntity;
+use App\Entities\Category;
+use App\Entities\Post;
 use Auth;
 
 class PostEntity implements WebEntity
@@ -42,7 +43,8 @@ class PostEntity implements WebEntity
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
 
-        Post::create($data);
+        $post = Post::create($data);
+        Category::synchronize($post, $request->get('category'));
 
         return redirect(route('admin.posts.index'));
     }
@@ -65,7 +67,9 @@ class PostEntity implements WebEntity
             return (new PostFiles([$this->item->id]))->updateThumbnail($request->get('file'));
         }
 
+        Category::synchronize($this->item, $request->get('category'));
         $this->item->update($request->except('thumbnail'));
+
         return redirect(route('admin.posts.index'));
     }
 

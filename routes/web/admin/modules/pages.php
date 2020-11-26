@@ -6,10 +6,6 @@ Route::post('/pages/{page}/thumbnail', 'Admin\Modules\PagesController@thumbnail'
 
 // Categories routes//
 Route::group(['prefix' => 'pages', 'as' => 'pages.'], function () {
-    Route::resource('/categories', 'Admin\Modules\PageCategoriesController');
-    Route::get('/categories/{category}/delete', 'Admin\Modules\PageCategoriesController@delete')->name('categories.delete');
-    Route::post('categories/mass', 'Admin\Modules\PageCategoriesController@mass')->name('categories.mass');
-
     Route::resource('/layouts', 'Admin\Modules\LayoutsController');
     Route::get('/layouts/{layout}/delete', 'Admin\Modules\LayoutsController@delete')->name('layouts.delete');
     Route::post('/layouts/mass', 'Admin\Modules\LayoutsController@mass')->name('layouts.mass');

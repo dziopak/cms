@@ -14,6 +14,10 @@ return [
         'create' => 'Create new',
         'categories' => 'Categories'
     ],
+    'categories' => [
+        'list' => 'List all',
+        'create' => 'Create new'
+    ],
     'users' => 'Users',
     'users_items' => [
         'list' => 'List all',

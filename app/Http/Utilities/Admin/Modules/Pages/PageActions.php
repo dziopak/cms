@@ -60,7 +60,7 @@ class PageActions
         $this->items->update(['is_active' => 1]);
 
         dispatchEvent(PageUpdateEvent::class, $this->items, function () {
-            flushCache('Page');
+            flushCache(['Page', 'Category']);
         });
 
         return redirect()->back()->with('crud', __('admin/messages.pages.mass.universal'));
@@ -71,10 +71,12 @@ class PageActions
     {
         Auth::user()->hasAccessOrRedirect('PAGE_EDIT');
 
-        $this->items->update(['category_id' => $this->request->get('category_id')]);
+        $this->items->get()->map(function ($item) {
+            $item->categories()->attach($this->request->get('category_id'));
+        });
 
         dispatchEvent(PageUpdateEvent::class, $this->items, function () {
-            flushCache('Page');
+            flushCache(['Page', 'Category']);
         });
 
         return redirect()->back()->with('crud', __('admin/messages.pages.mass.assign_category'));

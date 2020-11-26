@@ -13,9 +13,9 @@ class CategoryDestroyLogListener
             'user_id' => Auth::user()->id,
             'target_id' => 0,
             'target_name' => $event->category->name,
-            'type' => $event->type . '_CATEGORY',
+            'type' => 'CATEGORY',
             'crud_action' => '3',
-            'message' => 'deleted ' . strtolower($event->type) . ' category'
+            'message' => 'deleted category'
         ];
 
         Log::create($log_data);

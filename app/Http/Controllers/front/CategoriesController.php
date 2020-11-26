@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Front;
 
 use App\Entities\Layout;
-use App\Entities\PageCategory;
+use App\Entities\Category;
 use App\Http\Controllers\Controller;
 
-class PageCategoriesController extends Controller
+class CategoriesController extends Controller
 {
 
     private $layout;
@@ -18,14 +18,15 @@ class PageCategoriesController extends Controller
 
     public function show($category)
     {
-        $category = PageCategory::with('pages')->findBySlugOrFail($category);
-        $entries = $category->pages()->orderByDesc('created_at')->paginate(10) ?? [];
+        $category = Category::findBySlugOrFail($category);
+        $posts = $category->posts()->orderByDesc('created_at')->paginate(10) ?? [];
+        $pages = $category->pages()->orderByDesc('created_at')->paginate(10) ?? [];
 
         return view('Theme::modules.categories.show', [
             'blocks' => Layout::findOrFail($this->layout)->getLayout(),
             'category' => $category,
-            'entries' => $entries,
-            'type' => 'pages'
+            'posts' => $posts,
+            'pages' => $pages,
         ]);
     }
 }

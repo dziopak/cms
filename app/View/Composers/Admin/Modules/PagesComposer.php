@@ -2,8 +2,7 @@
 
 namespace App\View\Composers\Admin\Modules;
 
-use App\Entities\Page;
-use App\Entities\PageCategory;
+use App\Entities\Category;
 use App\Entities\Layout;
 
 class PagesComposer
@@ -18,7 +17,7 @@ class PagesComposer
 
     private function create($request, $view)
     {
-        $categories = array_merge(['No category'], PageCategory::list_all());
+        $categories = Category::list();
         $layouts = Layout::list();
 
         return [
@@ -29,7 +28,7 @@ class PagesComposer
 
     private function edit($request, $view)
     {
-        $categories = array_merge(['No category'], PageCategory::list_all());
+        $categories = Category::list();
         $layouts = Layout::list();
 
         return [

@@ -13,7 +13,8 @@ class PageUpdateEvent
     public $page;
     public $thumbnail;
 
-    public function __construct($page, $thumbnail)
+
+    public function __construct($page, $thumbnail = null)
     {
         $this->page = $page;
         $this->thumbnail = $thumbnail;

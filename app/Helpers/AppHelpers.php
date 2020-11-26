@@ -31,6 +31,24 @@ function setLang($lang)
 }
 
 
+function isLang()
+{
+    return getLang() !== getDefaultLang() ? true : false;
+}
+
+
+function getLang()
+{
+    return Config::get('app.locale');
+}
+
+
+function getDefaultLang()
+{
+    return Config::get('app.fallback_locale');
+}
+
+
 function getModel($type)
 {
     return 'App\Entities\\' . camelCase($type);
@@ -50,11 +68,8 @@ function getUrl($id, $type)
             $url = route('front.posts.show', $id);
             break;
 
-        case 'post_category':
-            $url = route('front.posts.categories.show', $id);
-            break;
-        case 'page_category':
-            $url = route('front.pages.category.show', $id);
+        case 'category':
+            $url = route('front.category.show', $id);
             break;
 
         default:

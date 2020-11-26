@@ -185,4 +185,4 @@ $form = [
     ],
 ];
 
-return $form;
+return Eventy::filter('settings.content.sources.form', $form);

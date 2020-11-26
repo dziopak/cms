@@ -11,7 +11,6 @@
 
 
 @section('module-content')
-
     <x-wrapper title="admin/posts.index_title">
 
         {{-- Table --}}

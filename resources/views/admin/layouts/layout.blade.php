@@ -40,10 +40,11 @@
     @stack('scripts-bottom')
 
     <script>
-        @hook('adminInlineScripts')
-        </script>
+        @action('template.admin.scripts.inline')
+    </script>
+
     <script src="{{asset('js/admin/defer.js')}}" defer></script>
-    @hook('adminScriptsDefer')
+    @action('template.admin.scripts.body')
 </body>
 
 </html>

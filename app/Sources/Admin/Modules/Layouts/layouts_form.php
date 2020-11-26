@@ -17,9 +17,4 @@ $form = [
         ],
     ],
 ];
-
-$form = Hook::get('layoutsFormFields', [$form], function ($form) {
-    return $form;
-});
-
-return $form;
+return Eventy::filter('layout.sources.form', $form);

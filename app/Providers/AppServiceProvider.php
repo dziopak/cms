@@ -5,7 +5,7 @@ namespace App\Providers;
 use App\Console\Commands\ModelMakeCommand;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Facades\Event;
+use Eventy;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -33,8 +33,7 @@ class AppServiceProvider extends ServiceProvider
         \App\Entities\Page::observe(\App\Observers\PageObserver::class);
         \App\Entities\Post::observe(\App\Observers\PostObserver::class);
         \App\Entities\Role::observe(\App\Observers\RoleObserver::class);
-        \App\Entities\PostCategory::observe(\App\Observers\CategoryObserver::class);
-        \App\Entities\PageCategory::observe(\App\Observers\CategoryObserver::class);
+        \App\Entities\Category::observe(\App\Observers\CategoryObserver::class);
         \App\Entities\Layout::observe(\App\Observers\LayoutObserver::class);
 
         \App\Entities\Carousel::observe(\App\Observers\CarouselObserver::class);

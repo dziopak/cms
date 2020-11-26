@@ -1,1 +1,129 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);#dashboard{margin:0 -8px 0 -10px}.grid-stack-item-content{border-radius:10px;box-shadow:0 .1rem .25rem rgba(0,0,0,.075)}.glide__track{max-height:100%}.components-bar{width:100%;max-width:calc(100% - 140px);transition:all .5s linear;margin:5px auto;height:0;position:relative}.components-bar.active{height:360px}.components-bar .glide__arrow{background:#fff no-repeat 50%;background-size:12px;height:30px;width:30px;border-radius:50%;transition:all .2s linear;display:none}.components-bar .glide__arrow.glide__arrow--left{left:-50px;background-image:url(https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-left-01-512.png)}.components-bar .glide__arrow.glide__arrow--left:before{content:""}.components-bar .glide__arrow.glide__arrow--right{right:-50px;background-image:url(https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-right-01-512.png)}.components-bar .glide__arrow.glide__arrow--right:before{content:""}.components-bar .glide__arrow:hover{transform:scale(1.2) translateY(-43%)}.add-widget{width:100%;border-radius:8px;border:0;display:flex;cursor:pointer;padding:20px 0;height:325px}.add-widget .card{height:100%;width:100%}.add-widget .widget-title{color:#3490dc}.add-widget p{margin-bottom:0;white-space:normal}.add-widget img{margin:40px auto;max-width:100%;width:60px;height:60px;display:block}.ui-resizable-handle.ui-resizable-se.ui-icon.ui-icon-gripsmall-diagonal-se{right:20px;bottom:12px}canvas.chart{max-height:85%}.legend{list-style:none;display:flex;flex-wrap:nowrap;margin-top:60px;padding:0}.legend li{width:100%;flex-basis:100%;text-align:center}.legend li:first-child,.legend li:last-child{margin-top:-20px}.legend-item{width:20px;height:20px;display:inline-block}
+@import url(https://fonts.googleapis.com/css?family=Nunito);#dashboard {
+  margin: 0 -8px 0 -10px;
+}
+
+.grid-stack-item-content {
+  border-radius: 10px;
+  box-shadow: 0 0.1rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.glide__track {
+  max-height: 100%;
+}
+
+.components-bar {
+  width: 100%;
+  max-width: calc(100% - 140px);
+  margin: 0 auto;
+  transition: all 0.5s linear;
+  margin: 5px auto 5px auto;
+  height: 0;
+  position: relative;
+}
+
+.components-bar.active {
+  height: 360px;
+}
+
+.components-bar .glide__arrow {
+  background: #fff no-repeat center;
+  background-size: 12px;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  transition: all 0.2s linear;
+  display: none;
+}
+
+.components-bar .glide__arrow.glide__arrow--left {
+  left: -50px;
+  background-image: url(https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-left-01-512.png);
+}
+
+.components-bar .glide__arrow.glide__arrow--left::before {
+  content: "";
+}
+
+.components-bar .glide__arrow.glide__arrow--right {
+  right: -50px;
+  background-image: url(https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-right-01-512.png);
+}
+
+.components-bar .glide__arrow.glide__arrow--right::before {
+  content: "";
+}
+
+.components-bar .glide__arrow:hover {
+  transform: scale(1.2) translateY(-43%);
+}
+
+.add-widget {
+  width: 100%;
+  border-radius: 8px;
+  border: 0px;
+  display: flex;
+  cursor: pointer;
+  padding: 20px 0px;
+  height: 325px;
+}
+
+.add-widget .card {
+  height: 100%;
+  width: 100%;
+}
+
+.add-widget .widget-title {
+  color: #3490dc;
+}
+
+.add-widget p {
+  margin-bottom: 0px;
+  white-space: normal;
+}
+
+.add-widget img {
+  margin: 40px auto;
+  max-width: 100%;
+  width: 60px;
+  height: 60px;
+  display: block;
+}
+
+.ui-resizable-handle.ui-resizable-se.ui-icon.ui-icon-gripsmall-diagonal-se {
+  right: 20px;
+  bottom: 12px;
+}
+
+/* --------------- CHARTS --------------- */
+
+canvas.chart {
+  max-height: 85%;
+}
+
+.legend {
+  list-style: none;
+  display: flex;
+  flex-wrap: nowrap;
+  margin-top: 60px;
+  padding: 0;
+}
+
+.legend li {
+  width: 100%;
+  flex-basis: 100%;
+  text-align: center;
+}
+
+.legend li:first-child,
+.legend li:last-child {
+  margin-top: -20px;
+}
+
+.legend-item {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
+
+/* ------------ END OF CHARTS ----------- */
+

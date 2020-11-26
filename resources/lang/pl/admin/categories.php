@@ -1,6 +1,6 @@
 <?php
 return [
-    'index_title' => 'Kategorie podstron',
+    'index_title' => 'Kategorie',
 
     'create_left_title' => 'Podstawowe informacje',
 

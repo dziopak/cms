@@ -33,5 +33,4 @@ $table['inactive']['actions'] = [
         'iterator' => 'slug'
     ]
 ];
-
-return $table;
+return Eventy::filter('plugin.sources.table', $table);

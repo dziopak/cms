@@ -31,7 +31,7 @@ class PostsController extends Controller
 
     public function show($id)
     {
-        $post = Post::with('author', 'category', 'thumbnail')
+        $post = Post::with('author', 'categories', 'thumbnail')
             ->where(['slug' => $id])
             ->orWhere(['id' => $id])
             ->first();

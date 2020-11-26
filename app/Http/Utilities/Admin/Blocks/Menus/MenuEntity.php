@@ -54,8 +54,7 @@ class MenuEntity implements WebEntity
             '0' => 'Custom url',
             'post' => 'Post',
             'page' => 'Page',
-            'post_category' => 'Post category',
-            'page_category' => 'Page category'
+            'category' => 'Category'
         ];
 
         return view('admin.blocks.menus.edit', [

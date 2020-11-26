@@ -11,6 +11,10 @@ class BootServiceProvider extends ServiceProvider
     {
         $this->app->register(\App\Plugins\Lang\Providers\LangRouteServiceProvider::class);
         $this->app->register(\App\Plugins\Lang\Providers\LangHookServiceProvider::class);
+        $file = base_path('\App\Plugins\Lang\Helpers\Functions.php');
+        if (file_exists($file)) {
+            require_once($file);
+        }
     }
 
 

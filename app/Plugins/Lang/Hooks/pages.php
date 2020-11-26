@@ -1,94 +1,63 @@
 <?php
+
+$langs = $this->langs;
+
 // Form hooks
-Hook::listen('pagesFormFields', function ($callback, $output, $form) {
-    empty($output) ? $output = $form : null;
+Eventy::addfilter('page.sources.form', function ($form) use ($langs) {
+    $form['right']['name_row']['items']['name']['container_class'] .= ' lang lang_origin';
+    $form['right']['slug_category_row']['items']['slug']['container_class'] .= ' lang lang_origin';
+    $form['right']['excerpt_row']['items']['excerpt']['container_class'] .= ' lang lang_origin';
+    $form['left']['content_row']['items']['content']['container_class'] .= ' lang lang_origin';
+    $form['seo']['meta_title_row']['items']['meta_title']['container_class'] .= ' lang lang_origin';
+    $form['seo']['meta_description_row']['items']['meta_description']['container_class'] .= ' lang lang_origin';
 
-    $output['right']['name_row']['items']['name']['container_class'] .= ' lang lang_origin';
-    $output['right']['slug_category_row']['items']['slug']['container_class'] .= ' lang lang_origin';
-    $output['right']['excerpt_row']['items']['excerpt']['container_class'] .= ' lang lang_origin';
-    $output['left']['content_row']['items']['content']['container_class'] .= ' lang lang_origin';
-    $output['right']['meta_title_row']['items']['meta_title']['container_class'] .= ' lang lang_origin';
-    $output['right']['meta_description_row']['items']['meta_description']['container_class'] .= ' lang lang_origin';
-
-    foreach ($this->langs as $lang) {
+    foreach ($langs as $lang) {
         $tag = $lang->lang_tag;
 
         // Name fields
         $name = addFormInput('name_' . $tag, 'text', 'admin/pages.name', true, null, '', 'hide lang', [], ['data-replace' => 'name']);
-        $output['right']['name_row']['items'] = array_push_after('name', $name, $output['right']['name_row']['items']);
+        $form['right']['name_row']['items'] = array_push_after('name', $name, $form['right']['name_row']['items']);
 
         // Slug fields
         $slug = addFormInput('slug_' . $tag, 'text', 'admin/pages.slug', true, null, '', 'hide lang', [], ['data-replace' => 'slug']);
-        $output['right']['slug_category_row']['items'] = array_push_after('slug', $slug, $output['right']['slug_category_row']['items']);
+        $form['right']['slug_category_row']['items'] = array_push_after('slug', $slug, $form['right']['slug_category_row']['items']);
 
         // Excerpt fields
         $excerpt = addFormInput('excerpt_' . $tag, 'textarea', 'admin/pages.excerpt', true, null, '', 'hide lang', [], ['data-replace' => 'excerpt']);
-        $output['right']['excerpt_row']['items'] = array_push_after('excerpt', $excerpt, $output['right']['excerpt_row']['items']);
+        $form['right']['excerpt_row']['items'] = array_push_after('excerpt', $excerpt, $form['right']['excerpt_row']['items']);
 
         // Content fields
         $content = addFormInput('content_' . $tag, 'textarea', 'admin/pages.content', true, null, 'tinymce', 'hide lang', [], ['data-replace' => 'content']);
-        $output['left']['content_row']['items'] = array_push_after('content', $content, $output['left']['content_row']['items']);
+        $form['left']['content_row']['items'] = array_push_after('content', $content, $form['left']['content_row']['items']);
 
         // Meta title fields
         $meta_title = addFormInput('meta_title_' . $tag, 'text', 'admin/pages.meta_title', false, null, '', 'hide lang', [], ['data-replace' => 'meta_title']);
-        $output['right']['meta_title_row']['items'] = array_push_after('meta_title', $meta_title, $output['right']['meta_title_row']['items']);
+        $form['seo']['meta_title_row']['items'] = array_push_after('meta_title', $meta_title, $form['seo']['meta_title_row']['items']);
 
         // Meta description fields
         $meta_description = addFormInput('meta_description_' . $tag, 'textarea', 'admin/pages.meta_description', false, null, '', 'hide lang', [], ['data-replace' => 'meta_description']);
-        $output['right']['meta_description_row']['items'] = array_push_after('meta_description', $meta_description, $output['right']['meta_description_row']['items']);
-    }
-    return $output;
-}, 10);
-
-
-//Validation hooks
-Hook::listen('apiPagesStoreValidation', function ($callback, $output, $validationFields) {
-    empty($output) ? $output = $validationFields : null;
-
-    foreach ($this->langs as $lang) {
-        $output['name_' . $lang->lang_tag] = 'required|string|max:255';
-        $output['excerpt_' . $lang->lang_tag] = 'required|string|max:255';
-        $output['slug_' . $lang->lang_tag] = 'required|string|max:255|unique:pages';
-        $output['content_' . $lang->lang_tag] = 'required|string';
+        $form['seo']['meta_description_row']['items'] = array_push_after('meta_description', $meta_description, $form['seo']['meta_description_row']['items']);
     }
 
-    return $output;
-}, 10);
+    return $form;
+});
 
-Hook::listen('apiPagesUpdateValidation', function ($callback, $output, $validationFields) {
-    empty($output) ? $output = $validationFields : null;
+Eventy::addfilter('page.entity.getName', function ($name, $attributes) {
+    return lang($attributes, 'name');
+}, 20, 2);
 
-    foreach ($this->langs as $lang) {
-        $output['name_' . $lang->lang_tag] = 'string|max:255';
-        $output['excerpt_' . $lang->lang_tag] = 'string|max:255';
-        $output['slug_' . $lang->lang_tag] = 'string|max:255|unique:pages';
-        $output['content_' . $lang->lang_tag] = 'string';
-    }
+Eventy::addfilter('page.entity.getExcerpt', function ($excerpt, $attributes) {
+    return lang($attributes, 'excerpt');
+}, 20, 2);
 
-    return $output;
-}, 10);
+Eventy::addfilter('page.entity.getContent', function ($content, $attributes) {
+    return lang($attributes, 'content');
+}, 20, 2);
 
-Hook::listen('adminPagesValidation', function ($callback, $output, $validationFields) {
-    empty($output) ? $output = $validationFields : null;
+Eventy::addfilter('page.entity.getMetaTitle', function ($title, $attributes) {
+    return lang($attributes, 'meta_title');
+}, 20, 2);
 
-    foreach ($this->langs as $lang) {
-        $output['name_' . $lang->lang_tag] = 'string|max:255';
-        $output['excerpt_' . $lang->lang_tag] = 'string|max:255';
-        $output['slug_' . $lang->lang_tag] = 'string|max:255|unique:pages';
-        $output['content_' . $lang->lang_tag] = 'string';
-    }
-
-    return $output;
-}, 10);
-
-
-//Other hooks
-Hook::listen('apiPageFindSelector', function ($callback, $output, $page, $slug) {
-    empty($output) ? $output = $page : null;
-
-    foreach ($this->langs as $lang) {
-        $output = $output->orWhere(['slug_' . $lang->lang_tag => $slug]);
-    }
-
-    return $output;
-}, 10);
+Eventy::addfilter('page.entity.getMetaDescription', function ($description, $attributes) {
+    return lang($attributes, 'meta_description');
+}, 20, 2);

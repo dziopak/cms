@@ -176,7 +176,6 @@ return [
         /*
         * Package Service Providers...
         */
-        Esemve\Hook\HookServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
 
@@ -257,7 +256,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        'Hook' => Esemve\Hook\Facades\Hook::class,
+        'Eventy' => TorMorten\Eventy\Facades\Events::class,
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,

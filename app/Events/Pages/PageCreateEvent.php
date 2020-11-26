@@ -12,12 +12,10 @@ class PageCreateEvent
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $page;
-    public $thumbnail;
 
-    public function __construct($page, $thumbnail)
+    public function __construct($page)
     {
         $this->page = $page;
-        $this->thumbnail = $thumbnail;
     }
 
     public function broadcastOn()

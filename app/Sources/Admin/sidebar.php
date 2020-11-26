@@ -1,5 +1,5 @@
 <?php
-$items = [
+$form = [
     'dashboard' => [
         'class' => 'icon fa fas fa-home',
         'route' => 'admin.dashboard.index'
@@ -13,9 +13,6 @@ $items = [
             ],
             'create' => [
                 'route' => 'admin.pages.create',
-            ],
-            'categories' => [
-                'route' => 'admin.pages.categories.index',
             ],
             'layouts' => [
                 'route' => 'admin.pages.layouts.index',
@@ -32,8 +29,17 @@ $items = [
             'create' => [
                 'route' => 'admin.posts.create',
             ],
-            'categories' => [
-                'route' => 'admin.posts.categories.index',
+        ],
+    ],
+    'categories' => [
+        'class' => 'icon fa fas fa-folder',
+        'route' => 'admin.categories.index',
+        'items' => [
+            'list' => [
+                'route' => 'admin.categories.index',
+            ],
+            'create' => [
+                'route' => 'admin.categories.create',
             ],
         ],
     ],
@@ -76,18 +82,18 @@ $items = [
     ],
     'addons' => [
         'class' => 'icon fa fas fa-plug',
-        'route' => 'admin.dashboard.index',
-        'items' => [
-            'modules' => [
-                'route' => 'admin.plugins.index',
-            ],
-            // 'bridges' => [
-            //     'route' => 'admin.dashboard.index',
-            // ],
-            // 'store' => [
-            //     'route' => 'admin.dashboard.index',
-            // ],
-        ]
+        'route' => 'admin.plugins.index',
+        // 'items' => [
+        // 'modules' => [
+        //     'route' => 'admin.plugins.index',
+        // ],
+        // 'bridges' => [
+        //     'route' => 'admin.dashboard.index',
+        // ],
+        // 'store' => [
+        //     'route' => 'admin.dashboard.index',
+        // ],
+        // ]
     ],
     'settings' => [
         'class' => 'icon fa fas fa-cogs',
@@ -112,9 +118,4 @@ $items = [
     ]
 ];
 
-
-$items = Hook::get('adminSidebarItems', [$items], function ($items) {
-    return $items;
-});
-
-return $items;
+return Eventy::filter('sources.components.sidebar', $form);

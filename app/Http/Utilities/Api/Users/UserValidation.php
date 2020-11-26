@@ -23,9 +23,6 @@ class UserValidation
             'password' => 'required|min:8',
             'repeat_password' => 'required'
         ];
-        $validationFields = Hook::get('apiUserStoreValidation', [$validationFields], function ($validationFields) {
-            return $validationFields;
-        });
 
         $validator = Validator::make($request->all(), $validationFields);
         $validator->after(function ($validator) use ($request) {
@@ -50,9 +47,6 @@ class UserValidation
             'role_id' => 'numeric',
             'password' => 'string|min:8'
         ];
-        $validationFields = Hook::get('apiUserUpdateValidation', [$validationFields], function ($validationFields) {
-            return $validationFields;
-        });
 
         $validator = Validator::make($request->all(), $validationFields);
         $validator->after(function ($validator) use ($request) {
@@ -73,9 +67,6 @@ class UserValidation
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ];
-        $validationFields = Hook::get('apiUserRegisterValidation', [$validationFields], function ($validationFields) {
-            return $validationFields;
-        });
 
         $validator = Validator::make($request->all(), $validationFields);
         if ($validator->fails()) return response()->json(['message' => 'Validation error.', 'errors' => $validator->errors()->toJson(), 'status' => '400'], 400);

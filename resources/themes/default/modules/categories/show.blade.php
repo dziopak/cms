@@ -12,7 +12,7 @@
             <p class="category__excerpt">{!! $category->description !!}</p>
         </div>
 
-        @foreach($entries as $key => $entry)
+        @foreach($posts as $key => $entry)
             @php
                 $even = $i % 2;
                 $i++;

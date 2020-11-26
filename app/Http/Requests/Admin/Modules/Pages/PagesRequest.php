@@ -38,14 +38,9 @@ class PagesRequest extends FormRequest
                     'content' => 'string|required',
                     'excerpt' => 'string|required',
                     'content' => 'string|required',
-                    'category_id' => 'numeric|required',
                 ];
                 break;
         }
-
-        $validation_fields = Hook::get('adminPagesValidation', [$validation_fields], function ($validation_fields) {
-            return $validation_fields;
-        });
 
         return $validation_fields;
     }

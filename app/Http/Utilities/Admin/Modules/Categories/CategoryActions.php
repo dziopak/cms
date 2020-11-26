@@ -2,6 +2,8 @@
 
 namespace App\Http\Utilities\Admin\Modules\Categories;
 
+use App\Events\Categories\CategoryCreateEvent;
+use App\Events\Categories\CategoryUpdateEvent;
 use App\Events\Categories\CategoryDestroyEvent;
 use Auth;
 
@@ -24,8 +26,7 @@ class CategoryActions
         dispatchEvent(CategoryDestroyEvent::class, $this->items, function () {
             $this->items->delete();
             flushCache([
-                'PageCategory',
-                'PostCategory'
+                'Category'
             ]);
         });
 
@@ -40,8 +41,7 @@ class CategoryActions
         $this->items->update(['category_id' => $this->request->get('category_id')]);
         dispatchEvent(CategoryUpdateEvent::class, $this->items, function () {
             flushCache([
-                'PageCategory',
-                'PostCategory'
+                'Category',
             ]);
         });
 

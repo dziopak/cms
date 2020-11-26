@@ -2,7 +2,7 @@
 
 namespace App\View\Composers\Admin\Modules;
 
-use App\Entities\PostCategory;
+use App\Entities\Category;
 
 class PostsComposer
 {
@@ -10,14 +10,14 @@ class PostsComposer
     private function index($request, $view)
     {
         return [
-            'categories' => array_merge([0 => __('admin/general.no_category')], PostCategory::all('id', 'name')->pluck('name', 'id')->toArray()),
+            'categories' => array_merge([0 => __('admin/general.no_category')], Category::all('id', 'name')->pluck('name', 'id')->toArray()),
             'table' => getData('Admin/Modules/Posts/posts_index_table')
         ];
     }
 
     private function create($request, $view)
     {
-        $categories = array_merge(['No category'], PostCategory::list_all());
+        $categories = Category::list();
         return [
             'categories' => $categories,
             'form' => getData('Admin/Modules/Posts/posts_form', ['categories' => $categories, 'thumbnail' => getThumbnail(null)])
@@ -26,7 +26,7 @@ class PostsComposer
 
     private function edit($request, $view)
     {
-        $categories = array_merge(['No category'], PostCategory::list_all());
+        $categories = Category::list(false);
         return [
             'form' => getData('Admin/Modules/Posts/posts_form', ['categories' => $categories, 'thumbnail' => getThumbnail($view->post->thumbnail), 'thumb_endpoint' => route('admin.posts.update', $view->post->id)])
         ];

@@ -2,6 +2,7 @@
 
 namespace App\Http\Utilities\Admin\Modules\Pages;
 
+use App\Entities\Category;
 use App\Http\Utilities\Admin\Modules\Pages\PageFiles;
 use App\Entities\Page;
 use App\Interfaces\WebEntity;
@@ -66,7 +67,9 @@ class PageEntity implements WebEntity
             return (new PageFiles([$this->item->id]))->updateThumbnail($request->get('file'));
         }
 
+        Category::synchronize($this->item, $request->get('category'));
         $this->item->update($request->except('thumbnail'));
+
         return redirect(route('admin.pages.index'));
     }
 

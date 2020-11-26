@@ -65,13 +65,17 @@ class PostActions
     {
         Auth::user()->hasAccessOrRedirect('POST_EDIT');
 
-        $this->items->update(['category_id' => $this->request->get('category_id')]);
+        $this->items->get()->map(function ($item) {
+            $item->categories()->attach($this->request->get('category_id'));
+        });
+
         dispatchEvent(PostUpdateEvent::class, $this->items, function () {
-            Post::flushQueryCache();
+            flushCache(['Post', 'Category']);
         });
 
         return redirect()->back()->with('crud', __('admin/messages.posts.mass.assign_category'));
     }
+
 
 
     public function name_replace()

@@ -12,17 +12,11 @@
 
 @section('before')
 
-
     {{-- Open form --}}
     {!! Form::open(['method' => 'POST', 'action' => 'Admin\Modules\PagesController@store', 'class' => 'w-100', 'files' => 'true']) !!}
 
     {{-- Validation report --}}
     <x-form-validation :errors="$errors" />
-
-    {{-- Hooks --}}
-    @hook('page_create_before')
-    @hook('page_before')
-
 
 @endsection
 
@@ -30,43 +24,47 @@
 @section('module-content')
     <x-wrapper title="admin/pages.create_left_title">
 
-
         {{-- Display form --}}
         <x-form-fields :fields="$form['left']" />
 
-        {{-- Hooks --}}
-        @hook('page_create_left_content')
-        @hook('page_left_content')
-
         {{-- Save button --}}
         <x-create-button />
-
 
     </x-wrapper>
 @endsection
 
 
 @section('content-right')
-    <x-wrapper title="admin/pages.create_right_title">
 
-
-        {{-- Display form --}}
+    {{-- Settings --}}
+    <x-wrapper title="admin/posts.edit_right_title">
         <x-form-fields :fields="$form['right']" />
+    </x-wrapper>
 
-        {{-- Hooks --}}
-        @hook('page_create_right_content')
-        @hook('page_right_content')
 
+    {{-- Relations --}}
+    <x-wrapper title="admin/posts.edit_right_title">
+
+        {{-- Selects --}}
+        <x-form-fields :fields="$form['relations']" />
+
+        {{-- Categories --}}
+        <div id="category-list" class="mt-4">
+            {!! Form::label('category', 'Przydzielone kategorie: ') !!}<br/>
+        </div>
+
+        {{-- Tags --}}
+        <div id="tag-list" class="mt-4">
+            {!! Form::label('tag', 'Przydzielone tagi: ') !!}<br/>
+        </div>
 
     </x-wrapper>
-@endsection
 
 
-@section('content-bottom')
-
-    {{-- Hooks --}}
-    @hook('page_create_bottom_content')
-    @hook('page_bottom_content')
+    {{-- SEO --}}
+    <x-wrapper title="SEO">
+        <x-form-fields :fields="$form['seo']" />
+    </x-wrapper>
 
 @endsection
 
@@ -78,10 +76,5 @@
 
     {{-- Include TinyMCE Editor --}}
     @include('admin.partials.tinymce')
-
-    {{-- Hooks --}}
-    @hook('page_create_after')
-    @hook('page_after')
-
 
 @endsection

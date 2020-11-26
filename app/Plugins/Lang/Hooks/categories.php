@@ -1,154 +1,28 @@
 <?php
 
+$langs = $this->langs;
+
 // Form hooks
-Hook::listen('pageCategoriesFormFields', function ($callback, $output, $form) {
-    empty($output) ? $output = $form : null;
+Eventy::addfilter('category.sources.form', function ($form) use ($langs) {
+    $form['left']['name_row']['items']['name']['container_class'] .= ' lang lang_origin';
+    $form['left']['slug_category_row']['items']['slug']['container_class'] .= ' lang lang_origin';
+    $form['left']['description_row']['items']['description']['container_class'] .= ' lang lang_origin';
 
-    $output['left']['name_row']['items']['name']['container_class'] .= ' lang lang_origin';
-    $output['left']['slug_category_row']['items']['slug']['container_class'] .= ' lang lang_origin';
-    $output['left']['description_row']['items']['description']['container_class'] .= ' lang lang_origin';
-
-    foreach ($this->langs as $lang) {
+    foreach ($langs as $lang) {
         $tag = $lang->lang_tag;
 
         // Name fields
         $name = addFormInput('name_' . $tag, 'text', 'admin/page_categories.name', true, null, '', 'hide lang', [], ['data-replace' => 'name']);
-        $output['left']['name_row']['items'] = array_push_after('name', $name, $output['left']['name_row']['items']);
+        $form['left']['name_row']['items'] = array_push_after('name', $name, $form['left']['name_row']['items']);
 
         // Slug fields
         $slug = addFormInput('slug_' . $tag, 'text', 'admin/page_categories.slug', true, null, '', 'hide lang', [], ['data-replace' => 'slug']);
-        $output['left']['slug_category_row']['items'] = array_push_after('slug', $slug, $output['left']['slug_category_row']['items']);
+        $form['left']['slug_category_row']['items'] = array_push_after('slug', $slug, $form['left']['slug_category_row']['items']);
 
         // Description fields
         $description = addFormInput('description_' . $tag, 'textarea', 'admin/page_categories.description', true, null, '', 'hide lang', [], ['data-replace' => 'description']);
-        $output['left']['description_row']['items'] = array_push_after('description', $description, $output['left']['description_row']['items']);
-    }
-    return $output;
-}, 10);
-
-
-Hook::listen('postCategoriesFormFields', function ($callback, $output, $form) {
-    empty($output) ? $output = $form : null;
-
-    $output['left']['name_row']['items']['name']['container_class'] .= ' lang lang_origin';
-    $output['left']['slug_category_row']['items']['slug']['container_class'] .= ' lang lang_origin';
-    $output['left']['description_row']['items']['description']['container_class'] .= ' lang lang_origin';
-
-    foreach ($this->langs as $lang) {
-        $tag = $lang->lang_tag;
-
-        // Name fields
-        $name = addFormInput('name_' . $tag, 'text', 'admin/post_categories.name', true, null, '', 'hide lang', [], ['data-replace' => 'name']);
-        $output['left']['name_row']['items'] = array_push_after('name', $name, $output['left']['name_row']['items']);
-
-        // Slug fields
-        $slug = addFormInput('slug_' . $tag, 'text', 'admin/post_categories.slug', true, null, '', 'hide lang', [], ['data-replace' => 'slug']);
-        $output['left']['slug_category_row']['items'] = array_push_after('slug', $slug, $output['left']['slug_category_row']['items']);
-
-        // Description fields
-        $description = addFormInput('description_' . $tag, 'textarea', 'admin/post_categories.description', true, null, '', 'hide lang', [], ['data-replace' => 'description']);
-        $output['left']['description_row']['items'] = array_push_after('description', $description, $output['left']['description_row']['items']);
-    }
-    return $output;
-}, 10);
-
-
-// Other hooks
-Hook::listen('apiPageCategoriesStoreValidation', function ($callback, $output, $validationFields) {
-    empty($output) ? $output = $validationFields : null;
-
-    foreach ($this->langs as $lang) {
-        $output['name_' . $lang->lang_tag] = 'required|string|max:255';
-        $output['description_' . $lang->lang_tag] = 'required|string|max:255';
-        $output['slug_' . $lang->lang_tag] = 'required|string|max:255|unique:pages';
+        $form['left']['description_row']['items'] = array_push_after('description', $description, $form['left']['description_row']['items']);
     }
 
-    return $output;
-}, 10);
-
-
-Hook::listen('apiPageCategoriesUpdateValidation', function ($callback, $output, $validationFields) {
-    empty($output) ? $output = $validationFields : null;
-
-    foreach ($this->langs as $lang) {
-        $output['name_' . $lang->lang_tag] = 'string|max:255';
-        $output['description_' . $lang->lang_tag] = 'string|max:255';
-        $output['slug_' . $lang->lang_tag] = 'string|max:255|unique:pages';
-    }
-
-    return $output;
-}, 10);
-
-Hook::listen('adminPostCategoriesValidation', function ($callback, $output, $validationFields) {
-    empty($output) ? $output = $validationFields : null;
-
-    foreach ($this->langs as $lang) {
-        $output['name_' . $lang->lang_tag] = 'string|max:255';
-        $output['description_' . $lang->lang_tag] = 'string|max:255';
-        $output['slug_' . $lang->lang_tag] = 'string|max:255|unique:posts';
-    }
-
-    return $output;
-}, 10);
-
-Hook::listen('adminPageCategoriesValidation', function ($callback, $output, $validationFields) {
-    empty($output) ? $output = $validationFields : null;
-
-    foreach ($this->langs as $lang) {
-        $output['name_' . $lang->lang_tag] = 'string|max:255';
-        $output['description_' . $lang->lang_tag] = 'string|max:255';
-        $output['slug_' . $lang->lang_tag] = 'string|max:255|unique:pages';
-    }
-
-    return $output;
-}, 10);
-
-
-
-
-Hook::listen('apiPageCategoriesFindSelector', function ($callback, $output, $category, $slug) {
-    empty($output) ? $output = $category : null;
-
-    foreach ($this->langs as $lang) {
-        $output = $output->orWhere(['slug_' . $lang->lang_tag => $slug]);
-    }
-
-    return $output;
-}, 10);
-
-
-Hook::listen('apiPostCategoriesStoreValidation', function ($callback, $output, $validationFields) {
-    empty($output) ? $output = $validationFields : null;
-
-    foreach ($this->langs as $lang) {
-        $output['name_' . $lang->lang_tag] = 'required|string|max:255';
-        $output['description_' . $lang->lang_tag] = 'required|string|max:255';
-        $output['slug_' . $lang->lang_tag] = 'required|string|max:255|unique:posts';
-    }
-
-    return $output;
-}, 10);
-
-
-Hook::listen('apiPostCategoriesUpdateValidation', function ($callback, $output, $validationFields) {
-    empty($output) ? $output = $validationFields : null;
-
-    foreach ($this->langs as $lang) {
-        $output['name_' . $lang->lang_tag] = 'string|max:255';
-        $output['description_' . $lang->lang_tag] = 'string|max:255';
-        $output['slug_' . $lang->lang_tag] = 'string|max:255|unique:posts';
-    }
-
-    return $output;
-}, 10);
-
-
-Hook::listen('apiPostCategoriesFindSelector', function ($callback, $output, $category, $slug) {
-    empty($output) ? $output = $category : null;
-
-    foreach ($this->langs as $lang) {
-        $output = $output->orWhere(['slug_' . $lang->lang_tag => $slug]);
-    }
-
-    return $output;
-}, 10);
+    return $form;
+});

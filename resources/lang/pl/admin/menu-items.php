@@ -14,6 +14,11 @@ return [
         'create' => 'Nowy post',
         'categories' => 'Kategorie'
     ],
+    'categories' => 'Kategorie',
+    'categories_items' => [
+        'list' => 'Wszystkie kategorie',
+        'create' => 'Nowa kategoria'
+    ],
     'users' => 'Użytkownicy',
     'users_items' => [
         'list' => 'Wszystkie konta',

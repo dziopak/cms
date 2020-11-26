@@ -2,61 +2,38 @@
 
 namespace App\View\Composers\Admin\Modules;
 
-use App\Entities\PostCategory;
-use App\Entities\PageCategory;
+use App\Entities\Category;
 
 class CategoriesComposer
 {
 
-    private function index($request, $type, $view)
+    private function index($request, $view)
     {
         return [
-            'table' => getData('Admin/Modules/Categories/' . $type . '_index_table')
+            'table' => getData('Admin/Modules/Categories/categories_index_table')
         ];
     }
 
-    private function create($request, $type, $view)
+    private function create($request, $view)
     {
-        switch ($type) {
-            case 'post_categories':
-                $categories = array_merge([__('admin/post_categories.no_category')], PostCategory::list_all());
-                $data = [
-                    'categories' => $categories,
-                    'form' => getData('Admin/Modules/Categories/post_categories_form', ['categories' => $categories])
-                ];
-                break;
 
-            case 'page_categories':
-                $categories = array_merge([__('admin/page_categories.no_category')], PageCategory::list_all());
-                $data = [
-                    'categories' => $categories,
-                    'form' => getData('Admin/Modules/Categories/page_categories_form', ['categories' => $categories])
-                ];
-                break;
-        }
+        $categories = Category::list();
+        $data = [
+            'form' => getData('Admin/Modules/Categories/categories_form', compact('categories'))
+        ];
+
         return $data;
     }
 
-    private function edit($request, $type, $view)
+    private function edit($request, $view)
     {
+        $categories = Category::list();
+        unset($categories[$view->category->id]);
 
-        switch ($type) {
-            case 'post_categories':
-                $categories = array_merge([__('admin/post_categories.no_category')], PostCategory::list_all());
-                $data = [
-                    'categories' => $categories,
-                    'form' => getData('Admin/Modules/Categories/post_categories_form', ['categories' => $categories])
-                ];
-                break;
+        $data = [
+            'form' => getData('Admin/Modules/Categories/categories_form', compact('categories'))
+        ];
 
-            case 'page_categories':
-                $categories = array_merge([__('admin/page_categories.no_category')], PageCategory::list_all());
-                $data = [
-                    'categories' => $categories,
-                    'form' => getData('Admin/Modules/Categories/page_categories_form', ['categories' => $categories])
-                ];
-                break;
-        }
         return $data;
     }
 
@@ -64,11 +41,10 @@ class CategoriesComposer
     {
         $request = request();
         $action = explode('.', $view->getName())[2];
-        $type = explode('.', $view->getName())[1];
 
         // Boot proper method
         if (method_exists($this, $action)) {
-            $data = $this->$action($request, $type, $view);
+            $data = $this->$action($request, $view);
         }
 
         if (isset($data) && !empty($data)) {

@@ -7,8 +7,9 @@ class LayoutsComposer
 
     private function index($request, $view)
     {
+        $table = getData('Admin/Modules/Layouts/layouts_index_table');
         return [
-            'table' => getData('Admin/Modules/Layouts/layouts_index_table')
+            'table' => $table
         ];
     }
 
@@ -16,7 +17,7 @@ class LayoutsComposer
     public function compose($view)
     {
         $request = request();
-        $vw = explode('.', $view->getName())[3];
+        $vw = explode('.', $view->getName())[2];
 
         // Boot proper method
         if (method_exists($this, $vw)) {

@@ -14,7 +14,7 @@ class PostUpdateEvent
     public $post;
     public $thumbnail;
 
-    public function __construct($post, $thumbnail)
+    public function __construct($post, $thumbnail = null)
     {
         $this->post = $post;
         $this->thumbnail = $thumbnail;

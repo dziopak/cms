@@ -32,8 +32,4 @@ $form = [
     ],
 ];
 
-$form = Hook::get('mediaEditFormFields', [$form], function ($form) {
-    return $form;
-});
-
-return $form;
+return Eventy::filter('media.sources.form', $form);

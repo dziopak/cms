@@ -179,4 +179,29 @@ $(document).ready(function() {
             }
         }
     });
+
+    $('.add-button').each(function() {
+        $('#'+$(this).data('for')).attr('name', '');
+
+        $('#'+$(this).data('for')+'-list').on("click", ".tag .close", function(e) {
+            $(this).closest('.tag').remove();
+        });
+    });
+});
+
+$('.add-button').click(function(e) {
+    e.preventDefault();
+    var selector = '#'+$(this).data('for');
+    var select = $(selector);
+    var list = $(selector+'-list');
+
+    if (!list.find('.tag[data-id="'+ select.val() +'"]').length > 0) {
+        list.append(
+            `<div class="tag" data-id="${ select.val() }">
+                <input type="hidden" name="${$(this).data('for')}[]" value="${select.val()}">
+                ${ $(selector + ' option:selected').text() }
+                <span class="close">x</span>
+            </div>`
+        );
+    }
 });

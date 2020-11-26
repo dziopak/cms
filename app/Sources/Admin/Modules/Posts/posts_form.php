@@ -27,7 +27,7 @@ $form = [
                 ],
             ],
         ],
-        'slug_category_row' => [
+        'slug_row' => [
             'class' => 'form-group row',
             'items' => [
                 'slug' => [
@@ -38,15 +38,6 @@ $form = [
                     'class' => '',
                     'container_class' => 'tinymce',
                     'disabled' => true
-                ],
-                'category_id' => [
-                    'type' => 'select',
-                    'options' => $args['categories'],
-                    'label' => __('admin/posts.category'),
-                    'required' => true,
-                    'value' => null,
-                    'class' => '',
-                    'container_class' => 'tinymce',
                 ],
             ],
         ],
@@ -63,6 +54,8 @@ $form = [
                 ],
             ]
         ],
+    ],
+    'seo' => [
         'meta_title_row' => [
             'class' => 'form-group row',
             'items' => [
@@ -85,9 +78,40 @@ $form = [
                     'required' => false,
                     'value' => null,
                     'class' => '',
-                    'container_class' => 'tinymce',
-                ],
+                    'container_class' => 'tinymce'
+                ]
             ]
+        ]
+    ],
+    'relations' => [
+        'category_row' => [
+            'class' => 'form-group row',
+            'items' => [
+                'category' => [
+                    'type' => 'select',
+                    'options' => $args['categories'],
+                    'label' => __('admin/posts.category'),
+                    'required' => true,
+                    'value' => null,
+                    'class' => '',
+                    'container_class' => 'tinymce',
+                    'custom' => 'add-button'
+                ],
+            ],
+        ],
+        'tag_row' => [
+            'class' => 'form-group row',
+            'items' => [
+                'tag' => [
+                    'type' => 'text',
+                    'label' => __('admin/posts.tag'),
+                    'required' => true,
+                    'value' => null,
+                    'class' => '',
+                    'container_class' => 'tinymce',
+                    'custom' => 'add-button'
+                ]
+            ],
         ],
     ],
     'left' => [
@@ -106,9 +130,4 @@ $form = [
         ]
     ]
 ];
-
-$form = Hook::get('postsFormFields', [$form], function ($form) {
-    return $form;
-});
-
-return $form;
+return Eventy::filter('post.sources.form', $form);

@@ -3,9 +3,6 @@
 namespace App\Http\Requests\Admin\Modules\Categories;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Session;
-use Hook;
-
 
 class CategoriesRequest extends FormRequest
 {
@@ -27,24 +24,11 @@ class CategoriesRequest extends FormRequest
     public function rules()
     {
         $validation_fields = [
-            'name' => 'string|required|unique:' . $this->request->get('type') . '_categories,name,' . $this->request->get('category_id'),
+            'name' => 'string|required|unique:' . 'categories,name,' . $this->request->get('category_id'),
             'category_id' => 'numeric',
             'description' => 'string'
         ];
 
-        $validation_fields = Hook::get('admin' . ucfirst($this->request->get('type')) . 'CategoriesValidation', [$validation_fields], function ($validation_fields) {
-            return $validation_fields;
-        });
-
         return $validation_fields;
-    }
-
-    public function withValidator($validator)
-    {
-        $validator->after(function ($validator) {
-            if (!$this->request->get('type')) {
-                $validator->errors()->add('type', 'Ooops, there was an error. This form is incomplete.');
-            }
-        });
     }
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9cb24cd77481dccac7a16ec316e696b2",
+    "content-hash": "a47c44e9dc1f36e948437b71ba584363",
     "packages": [
         {
             "name": "brick/math",
@@ -662,50 +662,6 @@
                 "validator"
             ],
             "time": "2020-09-26T15:48:38+00:00"
-        },
-        {
-            "name": "esemve/hook",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dziopak/Hook.git",
-                "reference": "417951568ab4648e72ff830598a753b77da175f8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dziopak/Hook/zipball/417951568ab4648e72ff830598a753b77da175f8",
-                "reference": "417951568ab4648e72ff830598a753b77da175f8",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/framework": "5.* || 6.* || 7.* || 8.*",
-                "php": ">=5.6"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Esemve\\Hook\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Bence Kádár",
-                    "email": "esemve@gmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Simple hook engine for Laravel 5.*, 6.*",
-            "keywords": [
-                "Hook",
-                "Laravel"
-            ],
-            "support": {
-                "source": "https://github.com/dziopak/Hook/tree/master"
-            },
-            "time": "2020-10-27T21:15:27+00:00"
         },
         {
             "name": "fideloper/proxy",
@@ -5665,6 +5621,72 @@
             "time": "2020-07-13T06:12:54+00:00"
         },
         {
+            "name": "tormjens/eventy",
+            "version": "0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tormjens/eventy.git",
+                "reference": "572fb638a8ce78c1bf936d6adf3ebf2a49a3a2c5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tormjens/eventy/zipball/572fb638a8ce78c1bf936d6adf3ebf2a49a3a2c5",
+                "reference": "572fb638a8ce78c1bf936d6adf3ebf2a49a3a2c5",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": ">=5.3",
+                "opis/closure": "^3.5",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpunit/phpunit": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "TorMorten\\Eventy\\EventServiceProvider",
+                        "TorMorten\\Eventy\\EventBladeServiceProvider"
+                    ],
+                    "aliases": {
+                        "Eventy": "TorMorten\\Eventy\\Facades\\Events"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TorMorten\\Eventy\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tor Morten Jensen",
+                    "homepage": "https://tormorten.no"
+                }
+            ],
+            "description": "The WordPress filter/action system in Laravel",
+            "homepage": "https://github.com/tormjens/eventy",
+            "keywords": [
+                "HOOK",
+                "action",
+                "actions",
+                "event",
+                "events",
+                "filter",
+                "filters",
+                "hooks",
+                "laravel",
+                "wordpress"
+            ],
+            "time": "2020-04-28T14:06:47+00:00"
+        },
+        {
             "name": "tymon/jwt-auth",
             "version": "dev-develop",
             "source": {
@@ -6537,6 +6559,50 @@
                 }
             ],
             "time": "2020-05-29T17:27:14+00:00"
+        },
+        {
+            "name": "esemve/hook",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dziopak/Hook.git",
+                "reference": "417951568ab4648e72ff830598a753b77da175f8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dziopak/Hook/zipball/417951568ab4648e72ff830598a753b77da175f8",
+                "reference": "417951568ab4648e72ff830598a753b77da175f8",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.* || 6.* || 7.* || 8.*",
+                "php": ">=5.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Esemve\\Hook\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bence Kádár",
+                    "email": "esemve@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Simple hook engine for Laravel 5.*, 6.*",
+            "keywords": [
+                "Hook",
+                "Laravel"
+            ],
+            "support": {
+                "source": "https://github.com/dziopak/Hook/tree/master"
+            },
+            "time": "2020-10-27T21:15:27+00:00"
         },
         {
             "name": "facade/flare-client-php",
@@ -9198,7 +9264,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "esemve/hook": 20,
         "tymon/jwt-auth": 20
     },
     "prefer-stable": true,

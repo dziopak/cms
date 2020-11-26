@@ -14,9 +14,9 @@ class CategoryCreateLogListener
             'user_id' => Auth::user()->id,
             'target_id' => $event->category->id,
             'target_name' => $event->category->name,
-            'type' => $event->type . '_CATEGORY',
+            'type' => 'CATEGORY',
             'crud_action' => '1',
-            'message' => 'created ' . strtolower($event->type) . ' category'
+            'message' => 'created category'
         ];
 
         Log::create($log_data);

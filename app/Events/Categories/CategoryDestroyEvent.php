@@ -12,20 +12,11 @@ class CategoryDestroyEvent
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $category;
-    public $type;
 
 
     public function __construct($category)
     {
         $this->category = $category;
-        $this->type = $this->getCategoryType();
-    }
-
-
-    private function getCategoryType()
-    {
-        $class = (new \ReflectionClass($this->category))->getShortName();
-        return strtoupper(str_replace('Category', '', $class));
     }
 
 

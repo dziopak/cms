@@ -25,12 +25,7 @@ class LayoutEntity implements WebEntity
 
         $layouts = Layout::orderByDesc('id')->paginate(15);
 
-        // TO DO //
-        // MOVE TO COMPOSER //
-        $table = getData('Admin/Modules/Layouts/layouts_index_table');
-        // // // //
-
-        return view('admin.page_layouts.index', compact('layouts', 'table'));
+        return view('admin.page_layouts.index', compact('layouts'));
     }
 
 

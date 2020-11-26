@@ -22,10 +22,6 @@ class RoleValidation
             'access' => 'array'
         ];
 
-        $validationFields = Hook::get('apiRolesStoreValidation', [$validationFields], function ($validationFields) {
-            return $validationFields;
-        });
-
         $validator = Validator::make($request->all(), $validationFields);
         if ($validator->fails()) return response()->json(["status" => "400", "message" => "There were errors during the validation.", "errors" => $validator->errors()], 400);
 
@@ -43,9 +39,6 @@ class RoleValidation
             'description' => 'string|max:255',
             'access' => 'array'
         ];
-        $validationFields = Hook::get('apiRoleUpdateValidation', [$validationFields], function ($validationFields) {
-            return $validationFields;
-        });
 
         $validator = Validator::make($request->all(), $validationFields);
         if ($validator->fails()) return response()->json(["status" => "400", "message" => "There were errors during the validation", "errors" => $validator->errors()], 400);
