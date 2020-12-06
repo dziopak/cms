@@ -1,4 +1,4 @@
-@extends('admin.layouts.columns-6-6')
+@extends('admin.templates.columns-6-6')
 
 
 @section('breadcrumbs')
@@ -22,7 +22,7 @@
         {{$user->is_active == 1 ? __('admin/users.disable_information') : __('admin/users.enable_information') }}
         </p>
 
-        {!! Form::open(['method' => 'PUT', 'action' => ['Admin\Modules\UsersController@block', $user->id]]) !!}
+        {!! Form::open(['method' => 'PUT', 'action' => ['Admin\Modules\Users\UserStatusController@update', $user->id]]) !!}
 
         <div class="form-group">
             <a href="{{route('admin.users.index')}}" role="button" class="btn btn-success">{{ __('admin/general.back_button') }}</a>

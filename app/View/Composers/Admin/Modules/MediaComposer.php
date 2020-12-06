@@ -23,13 +23,11 @@ class MediaComposer
 
     private function list($request, $view)
     {
+        if (empty($view->files)) return [
+            'files' => File::filter($request)->get(),
+            'table' => getData('Admin/Modules/Media/media_index_table')
+        ];
 
-        if (empty($view->files)) {
-            return [
-                'files' => File::filter($request)->get(),
-                'table' => getData('Admin/Modules/Media/media_index_table')
-            ];
-        }
         return [];
     }
 

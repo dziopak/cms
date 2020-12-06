@@ -19,6 +19,7 @@
         "laravel/tinker": "^2.4",
         "laravel/ui": "^3.0",
         "laravelcollective/html": "^6.0",
+        "mratiebatie/laravel-repositories": "^1.0",
         "rachidlaasri/laravel-installer": "^4.0",
         "rennokki/laravel-eloquent-query-cache": "^2.4",
         "rosell-dk/webp-convert": "^2.3",

@@ -1,3 +1,3 @@
 <?php
 
-Route::get('/search', 'Admin\Modules\SearchController@index')->name('search');
+Route::get('/search', 'Admin\Modules\Search\SearchController@index')->name('search');

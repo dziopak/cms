@@ -1,4 +1,4 @@
-@extends('admin.layouts.columns-4-8')
+@extends('admin.templates.columns-4-8')
 
 
 {{-- Breadcrumbs --}}
@@ -15,7 +15,7 @@
 @section('before')
 
     {{-- Open the form --}}
-    {!! Form::model($role, ['method' => 'PATCH', 'action' => ['Admin\Modules\RolesController@update', $role->id]]) !!}
+    {!! Form::model($role, ['method' => 'PATCH', 'action' => ['Admin\Modules\Roles\RolesController@update', $role->id]]) !!}
 
 @endsection
 

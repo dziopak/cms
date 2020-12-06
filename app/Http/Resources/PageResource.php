@@ -19,15 +19,18 @@ class PageResource extends JsonResource
             'id' => $this->id,
             'created_at' => $this->created_at->diffForHumans(),
             'updated_at' => $this->updated_at->diffForHumans(),
-            'name' => $this->name,
-            'slug' => $this->slug,
-            'content' => $this->content,
-            'excerpt' => $this->excerpt,
-            'thumbnail' => $this->thumbnail ? env('APP_URL') . 'images/' . $this->thumbnail->path : "",
+            'name' => $this->getName(),
+            'slug' => $this->getSlug(),
+            'content' => $this->getContent(),
+            'excerpt' => $this->getExcerpt(),
+            'thumbnail' => $this->thumbnail ? env('APP_URL') . $this->getThumbnail() : "",
             'author' => $this->author ? $this->author->name : '',
-            'meta_title' => $this->meta_title,
-            'meta_description' => $this->meta_description,
+            'meta_title' => $this->getMetaTitle(),
+            'meta_description' => $this->getMetaDescription(),
         ];
+
+        if (!empty($this->categories)) {
+        }
 
         return $pageResource;
     }

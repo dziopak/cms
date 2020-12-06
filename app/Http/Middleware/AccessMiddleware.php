@@ -3,7 +3,6 @@
 namespace App\Http\Middleware;
 
 use Auth;
-use Role;
 use Closure;
 
 class AccessMiddleware
@@ -17,20 +16,11 @@ class AccessMiddleware
      */
     public function handle($request, Closure $next, $permission)
     {
-        if (Auth::check()) {
-            $user = Auth::user();
-            if ($user->role_id == "0") {
-                return $next($request);
-            } else {
-                $access = unserialize($user->role->access);
-                if (is_array($access) && in_array($permission, $access) && $user->is_active == 1) {
-                    return $next($request);
-                } else {
-                    return redirect("/");
-                }
-            }
-        } else {
-            return redirect("/login");
-        }
+        if (!Auth::check()) return redirect('/');
+
+        $user = Auth::user();
+        if ($user->role_id == "0") return $next($request);
+        if ($user->role->hasAccess($permission) !== true) return redirect('/');
+        return $next($request);
     }
 }

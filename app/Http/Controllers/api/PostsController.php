@@ -2,39 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Entities\Post;
+use App\Services\Api\PostService;
 
-class PostsController extends Controller
+class PostsController extends BaseApiController
 {
-
-    public function index(Request $request)
+    public function __construct(PostService $service)
     {
-        return Post::apiIndex($request);
-    }
-
-
-    public function store(Request $request)
-    {
-        return Post::apiStore($request);
-    }
-
-
-    public function show($id)
-    {
-        return Post::findOrFail($id)->apiShow();
-    }
-
-
-    public function update(Request $request, $id)
-    {
-        return Post::findOrFail($id)->apiUpdate($request);
-    }
-
-
-    public function destroy($id)
-    {
-        return Post::findOrFail($id)->apiDestroy();
+        $this->service = $service;
     }
 }

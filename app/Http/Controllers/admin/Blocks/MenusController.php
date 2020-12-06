@@ -2,47 +2,26 @@
 
 namespace App\Http\Controllers\Admin\Blocks;
 
+use App\Http\Controllers\Admin\BaseAdminController;
 use App\Http\Requests\Admin\Blocks\Menus\CreateMenuRequest;
 use App\Http\Requests\Admin\Blocks\Menus\UpdateMenuRequest;
 use App\Http\Utilities\Admin\Blocks\Menus\MenuRelations;
 use App\Http\Utilities\Admin\Blocks\Menus\MenuItems;
-use App\Http\Controllers\Controller;
+use App\Services\Admin\Menus\MenuActionService;
+use App\Services\Admin\Menus\MenuService;
 use Illuminate\Http\Request;
-
-use App\Entities\Menu;
 use Auth;
 
-class MenusController extends Controller
+class MenusController extends BaseAdminController
 {
+    public $requests = [
+        'store' => CreateMenuRequest::class,
+        'update' => UpdateMenuRequest::class
+    ];
 
-    public function index(Request $request)
+    public function __construct(MenuService $service)
     {
-        return Menu::webIndex($request);
-    }
-
-    public function create()
-    {
-        return Menu::webCreate();
-    }
-
-    public function store(CreateMenuRequest $request)
-    {
-        return Menu::webStore($request);
-    }
-
-    public function edit($id)
-    {
-        return Menu::findOrFail($id)->webEdit();
-    }
-
-    public function update(UpdateMenuRequest $request, $id)
-    {
-        return Menu::findOrFail($id)->webUpdate($request);
-    }
-
-    public function destroy($id)
-    {
-        return Menu::with('items')->findOrFail($id)->webDestroy();
+        $this->service = $service;
     }
 
     public function order(Request $request, $id)
@@ -75,8 +54,8 @@ class MenusController extends Controller
         return MenuRelations::find($request->get('data'));
     }
 
-    public function mass()
+    public function mass(Request $request)
     {
-        return Menu::mass();
+        return MenuActionService::build($request);
     }
 }

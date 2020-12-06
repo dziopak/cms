@@ -2,58 +2,33 @@
 
 namespace App\Http\Controllers\Admin\Blocks;
 
-use App\Entities\Carousel;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\BaseAdminController;
 use App\Http\Requests\Admin\Blocks\Carousels\CreateCarouselRequest;
 use App\Http\Requests\Admin\Blocks\Carousels\UpdateCarouselRequest;
-use App\Http\Utilities\Admin\Blocks\Carousels\CarouselItems;
+use App\Services\Admin\Carousels\CarouselItemService;
+use App\Services\Admin\Carousels\CarouselService;
 use Illuminate\Http\Request;
 
-class CarouselsController extends Controller
+class CarouselsController extends BaseAdminController
 {
-
-    public function index(Request $request)
+    public $requests = [
+        'store' => CreateCarouselRequest::class,
+        'update' => UpdateCarouselRequest::class
+    ];
+    public function __construct(CarouselService $service)
     {
-        return Carousel::webIndex($request);
-    }
-
-    public function create()
-    {
-        return Carousel::webCreate();
-    }
-
-    public function store(CreateCarouselRequest $request)
-    {
-        return Carousel::webStore($request);
-    }
-
-    public function edit($id)
-    {
-        return Carousel::findOrFail($id)->webEdit();
-    }
-
-    public function update(UpdateCarouselRequest $request, $id)
-    {
-        return Carousel::findOrFail($id)->webUpdate($request);
-    }
-
-    public function destroy($id)
-    {
-        return Carousel::findOrFail($id)->destroy();
+        $this->service = $service;
     }
 
     public function attach(Request $request, $id)
     {
-        return (new CarouselItems($id))->attach($request->get('files'));
+        $service = CarouselItemService::build($id);
+        return $service->attach($request->get('files'));
     }
 
     public function detach(Request $request, $id)
     {
-        return (new CarouselItems($id))->detach($request->get('files'));
-    }
-
-    public function mass()
-    {
-        return Carousel::mass();
+        $service = CarouselItemService::build($id);
+        return $service->detach($request->get('files'));
     }
 }

@@ -17,7 +17,6 @@
                     <x-wrapper title="admin/media.edit_title">
                         {{-- Table --}}
                         <x-table formId="media-list-form" :table="$table" :fields="$files" :controls="false" :filters="false" :mass="false" :form="false"/>
-
                     </x-wrapper>
                 </div>
 

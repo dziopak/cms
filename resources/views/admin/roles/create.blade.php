@@ -1,4 +1,4 @@
-@extends('admin.layouts.columns-4-8')
+@extends('admin.templates.columns-4-8')
 
 
 @section('breadcrumbs')
@@ -15,9 +15,9 @@
 
     {{-- Open the form --}}
     @if (isset($role))
-        {!! Form::model($role, ['method' => 'POST', 'action' => 'Admin\Modules\RolesController@store', 'class' => 'w-100']) !!}
+        {!! Form::model($role, ['method' => 'POST', 'action' => 'Admin\Modules\Roles\RolesController@store', 'class' => 'w-100']) !!}
     @else
-        {!! Form::open(['method' => 'POST', 'action' => 'Admin\Modules\RolesController@store', 'class' => 'w-100']) !!}
+        {!! Form::open(['method' => 'POST', 'action' => 'Admin\Modules\Roles\RolesController@store', 'class' => 'w-100']) !!}
     @endif
 
 @endsection

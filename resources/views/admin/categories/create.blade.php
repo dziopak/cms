@@ -1,4 +1,4 @@
-@extends('admin.layouts.columns-8-4')
+@extends('admin.templates.columns-8-4')
 
 
 @section('breadcrumbs')
@@ -11,7 +11,7 @@
 
 
 @section('before')
-    {!! Form::open(['method' => 'POST', 'action' => 'Admin\Modules\CategoriesController@store', 'class' => 'w-100', 'files' => 'true']) !!}
+    {!! Form::open(['method' => 'POST', 'action' => 'Admin\Modules\Categories\CategoriesController@store', 'class' => 'w-100', 'files' => 'true']) !!}
     <x-form-validation :errors="$errors" />
 @endsection
 

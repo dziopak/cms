@@ -2,29 +2,19 @@
 
 namespace App\Entities;
 
-use App\Http\Utilities\Admin\Modules\Files\FileEntity;
-use Rennokki\QueryCache\Traits\QueryCacheable;
-use App\Events\Files\FileDestroyEvent;
 use Illuminate\Database\Eloquent\Model;
+use App\Events\Files\FileDestroyEvent;
+use Rennokki\QueryCache\Traits\QueryCacheable;
 use App\Entities\Slider;
-use App\Http\Utilities\Admin\Modules\Files\FileActions;
-use App\Traits\EntityTrait;
-use App\Traits\MassEditable;
 
 class File extends Model
 {
-    use QueryCacheable, MassEditable;
-    use EntityTrait;
-
+    use QueryCacheable;
 
     public $cacheFor = 3600;
-    protected static $flushCacheOnUpdate = true;
-
     protected $table = "files";
+    protected static $flushCacheOnUpdate = true;
     protected $fillable = ['type', 'path', 'name', 'description'];
-
-    protected $webEntity = FileEntity::class;
-    protected $massActions = FileActions::class;
 
 
     public function posts()
@@ -101,9 +91,8 @@ class File extends Model
     public static function boot()
     {
         parent::boot();
-        $request = request();
 
-        self::deleted(function ($file) use ($request) {
+        self::deleted(function ($file) {
             unlink(public_dir() . '/images/' . $file->path);
             event(new FileDestroyEvent($file));
         });

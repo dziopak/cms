@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Utilities\Api\Users\UserAuthentication;
+use App\Http\Utilities\Api\v1\Users\UserAuthentication;
 use App\Http\Controllers\Controller;
 use App\Http\Utilities\Api\AuthResponse;
 use Illuminate\Http\Request;

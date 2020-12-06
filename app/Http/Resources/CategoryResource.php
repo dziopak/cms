@@ -3,7 +3,6 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use Hook;
 use App\Http\Resources\PostResource;
 
 class CategoryResource extends JsonResource

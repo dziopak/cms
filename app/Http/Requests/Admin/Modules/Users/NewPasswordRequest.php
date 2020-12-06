@@ -2,25 +2,10 @@
 
 namespace App\Http\Requests\Admin\Modules\Users;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\BaseFormRequest;
 
-class NewPasswordRequest extends FormRequest
+class NewPasswordRequest extends BaseFormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
         return [
@@ -31,6 +16,7 @@ class NewPasswordRequest extends FormRequest
 
     public function withValidator($validator)
     {
+        parent::withValidator($validator);
         $validator->after(function ($validator) {
             if ($this->password !== $this->repeat_password) {
                 $validator->errors()->add('repeat_password', 'Passwords do not match.');

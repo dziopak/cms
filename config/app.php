@@ -199,6 +199,7 @@ return [
         * Application Service Providers...
         */
         App\Providers\AppServiceProvider::class,
+        App\Providers\RepositoryServiceProvider::class,
         App\Providers\BladeDirectivesProvider::class,
         App\Providers\ViewServiceProvider::class,
         App\Providers\AuthServiceProvider::class,

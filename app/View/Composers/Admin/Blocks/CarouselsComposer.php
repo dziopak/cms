@@ -18,15 +18,14 @@ class CarouselsComposer
     public function compose($view)
     {
         $request = request();
-        $vw = explode('.', $view->getName())[3];
+        $vw = explode('.', $view->getName())[2];
 
         switch ($vw) {
             case 'index':
                 $data = $this->index($request, $view);
                 break;
 
-            default:
-
+            case 'edit':
                 break;
         }
 

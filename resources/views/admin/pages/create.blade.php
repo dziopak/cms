@@ -1,4 +1,4 @@
-@extends('admin.layouts.columns-8-4')
+@extends('admin.templates.columns-8-4')
 
 
 @section('breadcrumbs')
@@ -13,7 +13,7 @@
 @section('before')
 
     {{-- Open form --}}
-    {!! Form::open(['method' => 'POST', 'action' => 'Admin\Modules\PagesController@store', 'class' => 'w-100', 'files' => 'true']) !!}
+    {!! Form::open(['method' => 'POST', 'action' => 'Admin\Modules\Pages\PagesController@store', 'class' => 'w-100', 'files' => 'true']) !!}
 
     {{-- Validation report --}}
     <x-form-validation :errors="$errors" />

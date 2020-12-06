@@ -1,4 +1,4 @@
-@extends('admin.layouts.full-width')
+@extends('admin.templates.full-width')
 
 @section('breadcrumbs')
     <ul>

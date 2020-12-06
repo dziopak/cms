@@ -1,4 +1,4 @@
-@extends('admin.layouts.columns-8-4')
+@extends('admin.templates.columns-8-4')
 
 
 @section('breadcrumbs')
@@ -13,7 +13,7 @@
 @section('before')
 
     {{-- Open the form --}}
-    {!! Form::model($page, ['method' => 'PATCH', 'action' => ['Admin\Modules\PagesController@update', $page->id], 'class' => 'w-100', 'files' => 'true']) !!}
+    {!! Form::model($page, ['method' => 'PATCH', 'action' => ['Admin\Modules\Pages\PagesController@update', $page->id], 'class' => 'w-100', 'files' => 'true']) !!}
 
     {{-- Validation report --}}
     <x-form-validation :errors="$errors" />

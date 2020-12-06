@@ -1,4 +1,4 @@
-@extends('admin.layouts.columns-6-6')
+@extends('admin.templates.columns-6-6')
 
 
 @section('breadcrumbs')
@@ -11,7 +11,7 @@
 
 
 @section('content-left')
-    {!! Form::model($user, ['method' => 'PATCH', 'action' => ['Admin\Modules\UsersController@update', $user->id], 'files' => 'true']) !!}
+    {!! Form::model($user, ['method' => 'PATCH', 'action' => ['Admin\Modules\Users\UsersController@update', $user->id], 'files' => 'true']) !!}
 
         <x-wrapper title="admin/users.edit_right_title">
 
@@ -44,7 +44,7 @@
     <x-wrapper title="admin/users.change_password">
 
         {{-- Open the form --}}
-        {!! Form::open(['method' => 'PUT', 'action' => ['Admin\Modules\UsersController@password', $user->id]]) !!}
+        {!! Form::open(['method' => 'PUT', 'action' => ['Admin\Modules\Users\UserPasswordController', $user->id]]) !!}
 
         {{-- Display form --}}
         <x-form-fields :fields="$form['password_change']" />

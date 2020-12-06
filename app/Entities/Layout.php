@@ -7,19 +7,32 @@ use Illuminate\Database\Eloquent\Model;
 use App\Entities\Block;
 use App\Http\Utilities\Admin\Modules\Layouts\LayoutActions;
 use App\Http\Utilities\Admin\Modules\Layouts\LayoutEntity;
-use App\Traits\EntityTrait;
-use App\Traits\MassEditable;
 
 class Layout extends Model
 {
-    use QueryCacheable, MassEditable;
-    use EntityTrait;
+    use QueryCacheable;
 
     protected static $flushCacheOnUpdate = true;
     public $cacheFor = 3600, $timestamps = false;
     protected $guarded = [];
-    protected $webEntity = LayoutEntity::class;
-    protected $massActions = LayoutActions::class;
+
+
+    public function scopeFilter($query, $request)
+    {
+        if (!empty($request->get('search'))) {
+            // Search in name or slug //
+            $query->where('name', 'like', '%' . $request->get('search') . '%');
+        }
+
+        if (!empty($request->get('sort_by'))) {
+            // Sort by selected field //
+            !empty($request->get('sort_order')) && $request->get('sort_order') === 'desc' ?
+                $query->orderByDesc($request->get('sort_by')) : $query->orderBy($request->get('sort_by'));
+        } else {
+            $query->orderByDesc('id');
+        }
+    }
+
 
     public function blocks()
     {

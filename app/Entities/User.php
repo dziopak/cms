@@ -2,7 +2,6 @@
 
 namespace App\Entities;
 
-use App\Http\Utilities\Admin\Modules\Users\UserEntity;
 use Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -20,23 +19,18 @@ use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
 use App\Notifications\UserPasswordReset;
 use App\Notifications\UserEmailVerification;
-use App\Traits\EntityTrait;
-use App\Factories\EntityFactory;
-use App\Http\Utilities\Admin\Modules\Users\UserActions;
-use App\Traits\MassEditable;
 use URL;
 
 
 class User extends Authenticatable implements JWTSubject, Searchable, MustVerifyEmail
 {
+    use Notifiable, QueryCacheable;
 
-    use Notifiable, QueryCacheable, MassEditable;
-    use EntityTrait;
-
+    public $cacheFor = 3600;
     public $fire_events = true;
-    protected $webEntity = UserEntity::class;
-    protected $massActions = UserActions::class;
 
+    protected static $flushCacheOnUpdate = true;
+    protected $entity_type = 'users';
     protected $guarded = ['user_id'];
     protected $hidden = [
         'password', 'remember_token', 'first_name', 'last_name',
@@ -44,9 +38,6 @@ class User extends Authenticatable implements JWTSubject, Searchable, MustVerify
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public $cacheFor = 3600;
-    protected static $flushCacheOnUpdate = true;
 
 
     public function role()
@@ -82,18 +73,10 @@ class User extends Authenticatable implements JWTSubject, Searchable, MustVerify
 
     public function hasAccess($permission)
     {
-        if (Auth::check()) {
-            $user = Auth::user();
-
-            if ($user->role_id == "0") return true;
-            $access = unserialize($user->role->access);
-            if (!is_array($access)) return false;
-
-            if (in_array($permission, $access) && $user->is_active == 1) {
-                return true;
-            }
-        }
-        return false;
+        if (!Auth::check()) return false;
+        if ($this->role_id == "0") return true;
+        if ($this->role->hasAccess($permission) !== true) return false;
+        return true;
     }
 
 
@@ -124,15 +107,14 @@ class User extends Authenticatable implements JWTSubject, Searchable, MustVerify
     static function jwtUser()
     {
         try {
-            if (!$user = JWTAuth::parseToken()->authenticate()) {
-                return response()->json(['user_not_found'], 404);
-            }
+            $user = JWTAuth::parseToken()->authenticate();
+            if (!$user) return response()->json(['message' => 'User not found', 'status' => 404], 404);
         } catch (TokenExpiredException $e) {
-            return response()->json(['token_expired'], $e->getCode());
+            return response()->json(['message' => 'Token expired', 'status' => $e->getCode()], $e->getCode());
         } catch (TokenInvalidException $e) {
-            return response()->json(['token_invalid'], $e->getCode());
+            return response()->json(['message' => 'Token invalid', 'status' => $e->getCode()], $e->getCode());
         } catch (JWTException $e) {
-            return response()->json(['token_absent'], $e->getCode());
+            return response()->json(['message' => 'Token not present', 'status' => $e->getCode()], $e->getCode());
         }
 
         return $user;
@@ -189,20 +171,20 @@ class User extends Authenticatable implements JWTSubject, Searchable, MustVerify
         $this->notify(new UserEmailVerification($verifyUrl));
     }
 
-    public function setPassword($request)
-    {
-        return EntityFactory::build($this->webEntity, $this)->setPassword($request);
-    }
+    // public function setPassword($request)
+    // {
+    //     return EntityFactory::build($this->webEntity, $this)->setPassword($request);
+    // }
 
-    public function disable()
-    {
-        return EntityFactory::build($this->webEntity, $this)->disable();
-    }
+    // public function disable()
+    // {
+    //     return EntityFactory::build($this->webEntity, $this)->disable();
+    // }
 
-    public function block($request)
-    {
-        return EntityFactory::build($this->webEntity, $this)->block($request);
-    }
+    // public function block($request)
+    // {
+    //     return EntityFactory::build($this->webEntity, $this)->block($request);
+    // }
 
     static function find($id)
     {

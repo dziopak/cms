@@ -2,13 +2,10 @@
 
 namespace App\Http\Requests\Admin\Modules\Posts;
 
-use Illuminate\Foundation\Http\FormRequest;
-use Hook;
+use App\Http\Requests\BaseFormRequest;
 
-class PostsRequest extends FormRequest
+class PostsRequest extends BaseFormRequest
 {
-
-
     public function authorize()
     {
         return true;

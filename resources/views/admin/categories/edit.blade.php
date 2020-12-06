@@ -1,4 +1,4 @@
-@extends('admin.layouts.columns-8-4')
+@extends('admin.templates.columns-8-4')
 
 
 @section('breadcrumbs')
@@ -11,7 +11,7 @@
 
 
 @section('before')
-    {!! Form::model($category, ['method' => 'PATCH', 'action' => ['Admin\Modules\CategoriesController@update', $category->id], 'class' => 'w-100']) !!}
+    {!! Form::model($category, ['method' => 'PATCH', 'action' => ['Admin\Modules\Categories\CategoriesController@update', $category->id], 'class' => 'w-100']) !!}
     <x-form-validation :errors="$errors" />
 @endsection
 

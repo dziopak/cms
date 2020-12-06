@@ -2,17 +2,23 @@
 
 namespace App\View\Composers\Admin\Modules;
 
-use App\Http\Utilities\Admin\PluginUtilities;
+use App\Services\Admin\Plugins\PluginService;
 
 class PluginsComposer
 {
+    private $service;
+
+    public function __construct(PluginService $service)
+    {
+        $this->service = $service;
+    }
 
     private function index($request, $view)
     {
         return [
             'modules' => [
-                'active' => PluginUtilities::active(),
-                'inactive' => PluginUtilities::inactive()
+                'active' => $this->service->active(),
+                'inactive' => $this->service->inactive()
             ],
             'table' => getData('Admin/Modules/Plugins/plugins_index_table')
         ];

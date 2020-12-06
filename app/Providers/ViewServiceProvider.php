@@ -22,19 +22,18 @@ class ViewServiceProvider extends ServiceProvider
         });
 
         $this->app->view->composers([
-            'App\View\Composers\Admin\Modules\LayoutsComposer' => 'admin.page_layouts.*',
+            'App\View\Composers\Admin\Modules\LayoutsComposer' => 'admin.layouts.*',
             'App\View\Composers\Admin\Modules\CategoriesComposer' => 'admin.categories.*',
             'App\View\Composers\Admin\Modules\PostsComposer' => 'admin.posts.*',
-            'App\View\Composers\Admin\Modules\PagesComposer' => 'admin.pages.*',
             'App\View\Composers\Admin\Modules\UsersComposer' => 'admin.users.*',
             'App\View\Composers\Admin\Modules\RolesComposer' => 'admin.roles.*',
             'App\View\Composers\Admin\Modules\DashboardComposer' => 'admin.dashboard.*',
             'App\View\Composers\Admin\Modules\MediaComposer' => 'admin.media.*',
             'App\View\Composers\Admin\Modules\PluginsComposer' => 'admin.plugins.*',
 
-            'App\View\Composers\Admin\Blocks\MenusComposer' => 'admin.blocks.menus.*',
-            'App\View\Composers\Admin\Blocks\SlidersComposer' => 'admin.blocks.sliders.*',
-            'App\View\Composers\Admin\Blocks\CarouselsComposer' => 'admin.blocks.carousels.*',
+            'App\View\Composers\Admin\Blocks\MenusComposer' => 'admin.menus.*',
+            'App\View\Composers\Admin\Blocks\SlidersComposer' => 'admin.sliders.*',
+            'App\View\Composers\Admin\Blocks\CarouselsComposer' => 'admin.carousels.*',
         ]);
 
         view()->composer('admin.settings.general', function ($view) {
@@ -51,13 +50,6 @@ class ViewServiceProvider extends ServiceProvider
             $view->settings = \App\Entities\Setting::where(['group' => 'content'])->pluck('value', 'name')->toArray();
             $view->form = getData('Admin/Modules/Settings/content', array_merge($view->settings, ['layouts' => $layouts]));
         });
-
-
-        view()->composer('*.add_media', function ($view) {
-            $view->files = File::paginate(15);
-            $view->table = getData('Admin/Modules/Media/media_index_table');
-        });
-
 
         view()->composer('admin.logs.index', function ($view) {
             $view->logs = \App\Entities\Log::with('author')->orderBy('logs.id', 'desc')->get();

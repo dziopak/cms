@@ -3,6 +3,7 @@
 namespace App\View\Components\Admin\Modals;
 
 use Illuminate\View\Component;
+use App\Entities\File;
 
 class AddMedia extends Component
 {
@@ -17,7 +18,7 @@ class AddMedia extends Component
         $this->single = $single;
         $this->form = $form;
         $this->table = getData('Admin/Modules/Media/media_index_table');
-        $this->files = \App\Entities\File::get(['id', 'name', 'type', 'created_at', 'path']);
+        $this->files = File::orderByDesc('id')->get(['id', 'name', 'path']);
     }
 
 

@@ -17,10 +17,10 @@ class RolesComposer
 
     private function create($request, $view)
     {
-        if (!empty($view->role)) {
-            $view->role->access = RoleAccess::unserializeAccess($view->role->access);
-            $data['role'] = $view->role;
-        }
+        // if (!empty($view->role)) {
+        //     $view->role->access = RoleAccess::unserializeAccess($view->role->access);
+        //     $data['role'] = $view->role;
+        // }
 
         $data['form'] = getData('Admin/Modules/Roles/roles_form');
         return $data;
@@ -28,8 +28,6 @@ class RolesComposer
 
     private function edit($request, $view)
     {
-        $view->role->access = RoleAccess::unserializeAccess($view->role->access);
-
         return [
             'form' => getData('Admin/Modules/Roles/roles_form')
         ];

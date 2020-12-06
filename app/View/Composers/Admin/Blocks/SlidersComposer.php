@@ -18,7 +18,7 @@ class SlidersComposer
     public function compose($view)
     {
         $request = request();
-        $vw = explode('.', $view->getName())[3];
+        $vw = explode('.', $view->getName())[2];
 
         switch ($vw) {
             case 'index':

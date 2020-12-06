@@ -1,4 +1,4 @@
-@extends('admin.layouts.columns-4-8')
+@extends('admin.templates.columns-4-8')
 
 
 @section('breadcrumbs')
@@ -13,7 +13,7 @@
 @section('content-left')
 
     {{-- Open the form --}}
-    {!! Form::open(['method' => 'POST', 'action' => 'Admin\Modules\ContentSettingsController@store']) !!}
+    {!! Form::open(['method' => 'POST', 'action' => 'Admin\Modules\Settings\ContentSettingsController@store']) !!}
 
     <x-wrapper title="admin/settings.content_title">
 

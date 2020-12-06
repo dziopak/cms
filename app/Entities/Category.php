@@ -2,35 +2,34 @@
 
 namespace App\Entities;
 
-use App\Http\Utilities\Admin\Modules\Categories\CategoryEntity;
-use App\Http\Utilities\Admin\Modules\Categories\CategoryActions;
+use App\Http\Utilities\Admin\Modules\Categories\CategoryActionService as CategoryActions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-use App\Traits\EntityTrait;
 use App\Traits\Linkable;
-use App\Traits\MassEditable;
 use App\Traits\Sluggable;
 use Rennokki\QueryCache\Traits\QueryCacheable;
 use Eventy;
 
 use App\Entities\Post;
+use App\Http\Resources\CategoryResource;
 
 class Category extends Model
 {
     use HasFactory;
-    use Sluggable, Linkable, MassEditable;
+    use Sluggable, Linkable;
     use QueryCacheable;
-    use EntityTrait;
 
     protected $entity_type = 'categories';
-    protected $webEntity = CategoryEntity::class;
-    protected $massActions = CategoryActions::class;
     protected $guarded = ['id', 'category_id', 'type'];
     public $fire_events = true, $cacheFor = 3600;
     protected static $flushCacheOnUpdate = true;
 
     public $timestamps = false;
+
+    public $resources = [
+        'collection' => CategoryResource::class
+    ];
 
 
     public function posts()

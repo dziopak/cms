@@ -2,41 +2,18 @@
 
 namespace App\Http\Requests\Admin\Modules\Users;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\BaseFormRequest;
 
-class UsersEditRequest extends FormRequest
+class UsersEditRequest extends BaseFormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
-        switch ($this->request->get('request')) {
-            case 'photo':
-                $validationFields = [
-                    'file' => 'required|numeric'
-                ];
-                break;
+        if ($this->request->get('request') == 'photo') return ['file' => 'required|numeric'];
 
-            default:
-                $validationFields =  [
-                    'email' => 'email|required|unique:users,email,' . $this->request->get('user_id'),
-                    'role_id' => 'required|numeric',
-                ];
-                break;
-        }
+        $validationFields =  [
+            'email' => 'email|required|unique:users,email,' . $this->request->get('user_id'),
+            'role_id' => 'required|numeric',
+        ];
 
         return $validationFields;
     }

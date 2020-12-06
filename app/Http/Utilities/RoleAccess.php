@@ -18,15 +18,12 @@ class RoleAccess
     }
 
 
-    static function unserializeAccess($access)
+    static function unserializeAccess($role)
     {
-        $res = [];
-        if (!empty($access)) {
-            foreach (unserialize($access) as $role_access) {
-                $res[$role_access] = 1;
-            }
+        $access = $role->permissions();
+        foreach ($access as $permission) {
+            $res[$permission->name] = true;
         }
-
         return $res;
     }
 }

@@ -7,9 +7,16 @@ class LayoutsComposer
 
     private function index($request, $view)
     {
-        $table = getData('Admin/Modules/Layouts/layouts_index_table');
         return [
-            'table' => $table
+            'table' => getData('Admin/Modules/Layouts/layouts_index_table')
+        ];
+    }
+
+
+    private function create($request, $view)
+    {
+        return [
+            'form' => getData('Admin/Modules/Layouts/layouts_form')
         ];
     }
 

@@ -2,24 +2,23 @@
 
 namespace App\Entities;
 
-use App\Http\Utilities\Admin\Modules\Roles\RoleEntity;
 use Illuminate\Database\Eloquent\Model;
 use Rennokki\QueryCache\Traits\QueryCacheable;
 use App\Factories\EntityFactory;
-use App\Traits\EntityTrait;
+use DB;
 
 class Role extends Model
 {
-    use QueryCacheable, EntityTrait;
+    use QueryCacheable;
 
     public $timestamps = false;
     public $fire_events = true;
 
     public $cacheFor = 3600;
     protected static $flushCacheOnUpdate = true;
+    protected $entity_type = 'roles';
 
     protected $fillable = ['name', 'access', 'description'];
-    protected $webEntity = RoleEntity::class;
 
     public static function get_all_roles()
     {
@@ -53,8 +52,28 @@ class Role extends Model
         return $this->hasMany('App\Entities\User', 'role_id');
     }
 
-    public function duplicate()
+    public function permissions()
     {
-        return EntityFactory::build($this->webEntity, $this)->duplicate();
+        return $this->hasMany('App\Entities\Permission', 'role_id');
+    }
+
+    public function hasAccess($access)
+    {
+        $query = $this->permissions()->where('name', $access)->first();
+        return (!empty($query)) ? true : false;
+    }
+
+    public function getPermissions()
+    {
+        return $this->permissions()->pluck('name');
+    }
+
+    public function withPermissions()
+    {
+        $this->attributes['access'] = [];
+        foreach ($this->getPermissions() as $item) {
+            $this->attributes['access'][$item] = true;
+        }
+        return $this;
     }
 }

@@ -28,7 +28,7 @@ class CategoriesComposer
     private function edit($request, $view)
     {
         $categories = Category::list();
-        unset($categories[$view->category->id]);
+        unset($categories[$request->category]);
 
         $data = [
             'form' => getData('Admin/Modules/Categories/categories_form', compact('categories'))

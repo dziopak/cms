@@ -1,4 +1,4 @@
-@extends('admin.layouts.columns-8-4')
+@extends('admin.templates.columns-8-4')
 
 
 @section('breadcrumbs')
@@ -12,7 +12,7 @@
 
 @section('before')
     {{-- Open the form  --}}
-    {!! Form::open(['method' => 'POST', 'action' => 'Admin\Modules\UsersController@store', 'files' => 'true']) !!}
+    {!! Form::open(['method' => 'POST', 'action' => 'Admin\Modules\Users\UsersController@store', 'files' => 'true']) !!}
 @endsection
 
 

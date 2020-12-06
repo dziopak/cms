@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a47c44e9dc1f36e948437b71ba584363",
+    "content-hash": "16aebb8d9395a1333b123b7915b6cb5b",
     "packages": [
         {
             "name": "brick/math",
@@ -1946,6 +1946,49 @@
                 }
             ],
             "time": "2020-07-23T08:41:23+00:00"
+        },
+        {
+            "name": "mratiebatie/laravel-repositories",
+            "version": "1.0.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MrAtiebatie/laravel-repositories.git",
+                "reference": "6ba79d974dc7aa8881bf1508fdc9e9e632a46be2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MrAtiebatie/laravel-repositories/zipball/6ba79d974dc7aa8881bf1508fdc9e9e632a46be2",
+                "reference": "6ba79d974dc7aa8881bf1508fdc9e9e632a46be2",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^5.0|^6.0|^7.0|^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "MrAtiebatie\\RepositoryServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MrAtiebatie\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sjors van Dongen",
+                    "email": "sitesjors@hotmail.com"
+                }
+            ],
+            "description": "Laravel repositories using the native Eloquent functions",
+            "time": "2020-10-29T15:32:54+00:00"
         },
         {
             "name": "namshi/jose",

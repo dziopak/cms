@@ -1,5 +1,6 @@
 <?php
 
+use App\Exceptions\NotExistingException;
 use Illuminate\Database\Eloquent\Model;
 
 function is_installed()
@@ -151,4 +152,26 @@ function public_dir()
         }
     }
     return public_path();
+}
+
+
+function isMany()
+{
+    $arr = explode('.', Route::currentRouteName());
+    return (end($arr) === "many") ? true : false;
+}
+
+function generateSlug($title)
+{
+    return strtolower(preg_replace(
+        ['/[^\w\s]+/', '/\s+/'],
+        ['', '-'],
+        $title
+    ));
+}
+
+function exists($var)
+{
+    if (empty($var) || count($var) <= 0) throw new NotExistingException();
+    return true;
 }
