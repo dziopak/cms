@@ -32,4 +32,4 @@ $form = [
     ],
 ];
 
-return Eventy::filter('media.sources.form', $form);
+return Hook::filter('media.sources.form', $form);

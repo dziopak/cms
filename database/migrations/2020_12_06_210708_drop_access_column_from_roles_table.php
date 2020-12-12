@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class DropAccessColumnFromUsersTable extends Migration
+class DropAccessColumnFromRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class DropAccessColumnFromUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('roles', function (Blueprint $table) {
             $table->dropColumn('access');
         });
     }
@@ -25,7 +25,7 @@ class DropAccessColumnFromUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('roles', function (Blueprint $table) {
             $table->mediumText('access')->nullable();
         });
     }

@@ -6,11 +6,8 @@ use App\Http\Utilities\Api\AuthResponse;
 
 class BaseApiService
 {
-
-    private $result;
-    private $steps;
+    protected $events;
     protected $repository;
-
 
     public function index()
     {
@@ -26,22 +23,19 @@ class BaseApiService
 
     public function store($data)
     {
-        ModelStoreService::build($this, $data);
-        return $this;
+        return ModelStoreService::build($this, $data);
     }
 
 
     public function update($data, $id = null)
     {
-        ModelUpdateService::build($this, $data, $id);
-        return $this;
+        return ModelUpdateService::build($this, $data, $id);
     }
 
 
     public function destroy($data, $id = null)
     {
-        ModelDestroyService::build($this, $data, $id);
-        return $this;
+        return ModelDestroyService::build($this, $data, $id);
     }
 
 
@@ -64,29 +58,14 @@ class BaseApiService
     }
 
 
-    public function log($action, $message, $status = 200, $data = [])
-    {
-        $this->steps[$action] = ['message' => $message, 'status' => $status];
-
-        $success = ($status >= 200 && $status < 300);
-
-        $this->result = response()->json([
-            'message' => $success ? 'Successfully performed selected tasks.' : "There were errors during performing selected tasks",
-            'status' => $status,
-            'actions' => $this->steps,
-            'data' => $data
-        ], $status);
-
-        return $this;
-    }
-
-    public function respond()
-    {
-        return $this->result;
-    }
-
     public function getRepository()
     {
         return $this->repository ?? null;
+    }
+
+
+    public function getEvent($event)
+    {
+        return $this->events[$event] ?? null;
     }
 }

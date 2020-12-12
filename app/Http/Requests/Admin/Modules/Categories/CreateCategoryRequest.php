@@ -3,17 +3,17 @@
 namespace App\Http\Requests\Admin\Modules\Categories;
 
 use App\Http\Requests\BaseFormRequest;
+use Hook;
 
-class CategoriesRequest extends BaseFormRequest
+class CreateCategoryRequest extends BaseFormRequest
 {
     public function rules()
     {
-        $validation_fields = [
-            'name' => 'string|required|unique:' . 'categories,name,' . $this->request->get('category_id'),
+        $fields = [
+            'name' => 'string|required|unique:categories',
             'category_id' => 'numeric',
             'description' => 'string'
         ];
-
-        return $validation_fields;
+        return Hook::filter('category.request.admin.create', $fields);
     }
 }

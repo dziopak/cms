@@ -19,6 +19,14 @@ class SettingsServiceProvider extends ServiceProvider
 
     public function registerConfig()
     {
+        config([
+            'global' => [
+                'general' => [
+                    'theme' => 'default'
+                ]
+            ]
+        ]);
+
         if (is_installed() && db_set()) {
             if (table_exists('settings')) {
                 $settings = \App\Entities\Setting::all([

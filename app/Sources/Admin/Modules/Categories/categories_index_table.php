@@ -24,4 +24,4 @@ $table['mass_edit_extend'] = [
 $table['sort_by'] = [
     'name' => __('admin/categories.name')
 ];
-return Eventy::filter('category.sources.table', $table);
+return Hook::filter('category.sources.table', $table);

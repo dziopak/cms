@@ -21,24 +21,48 @@ class ModelDestroyService
     }
 
 
+    private function dispatch($items)
+    {
+        // Dispatch events if assigned
+        if (!empty($event = $this->service->getEvent('destroy'))) {
+            foreach ($items as $item) {
+                dispatchEvent($event, $item);
+            }
+        }
+    }
+
+
     public function destroy()
     {
+        // Get items
         $items = $this->items->dontCache()->get(['id', 'slug', 'name']);
-        if (exists($items)) $delete = $this->items->delete();
 
+        // Delete records & Throw errors
+        if (exists($items)) $delete = $this->items->delete();
         if (!$delete) throw new ModelDestroyException('Failed to delete selected items', 501);
-        return $this->service->log('delete', 'Items have been successfully deleted.', 200, $items);
+
+        // Dispatch events
+        $this->dispatch($items);
+
+        // Return response
+        return response()->json([
+            'message' => 'Items have been successfully deleted.',
+            'status' => 200,
+            'items' => $items
+        ], 200);
     }
 
 
     private function getData($data, $id)
     {
-        $ids = $data['items'] ?? $id;
+        // Prepare IDs array
+        $ids = $data['items'] ?? [$id];
         foreach ($ids as $key => $row) {
             $ids[$key] = (string) $row;
         }
 
-        return $this->service->model::whereIn('id', $ids)->orWhereIn('slug', $ids);
+        // Fetch items
+        return $this->repository->whereIn('id', $ids)->orWhereIn('slug', $ids);
     }
 
 

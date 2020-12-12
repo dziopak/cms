@@ -11,25 +11,27 @@ class ModelUpdateService
 
     protected $items, $repository, $service;
 
-
     public function __construct($service, $data, $id = null, $items = null)
     {
+        // Check access
         $service->getAccess('update');
+
+        // Assign properties
         $this->service = $service;
         $this->items = $items ?? $this->getData($data, $id);
         $this->repository = $service->getRepository();
     }
 
 
-    // *************************************************** //
-    // **************** GETTERS / SETTERS **************** //
-    // *************************************************** //
+
+    // Set items
     protected function setItems($items)
     {
         $this->items = $items;
         return $this;
     }
 
+    // Get items
     protected function getItems()
     {
         return $this->items;
@@ -37,18 +39,16 @@ class ModelUpdateService
 
 
 
-    // *************************************************** //
-    // ************** ACTUAL UPDATE METHODS ************** //
-    // *************************************************** //
+    // Single item update
     protected function single($data)
     {
         $update = $this->items->first()->update($data);
-        if (!$update !== true) throw new ModelUpdateException('Internal server error', 500);
-        $this->service->log('update', 'Successfully updated single item.');
+        if ($update !== true) throw new ModelUpdateException('Internal server error', 500);
 
         return true;
     }
 
+    // Mass update - same values for multiple records
     protected function mass($data)
     {
         $update = $this->items->update($this->prepare($data));
@@ -57,13 +57,14 @@ class ModelUpdateService
         return true;
     }
 
+    // Bulk updates - individual values for multiple records
     protected function bulk($data)
     {
         $result = [];
         DB::beginTransaction();
         try {
             foreach ($data as $item) {
-                $model = $this->repository->find($item['id'] ?? $item['slug'])->respond();
+                $model = $this->repository->find($item['id'] ?? $item['slug']);
                 if (!empty($model->first())) {
                     $item = $this->prepare($item);
                     $model->update($item);
@@ -80,9 +81,8 @@ class ModelUpdateService
     }
 
 
-    // *************************************************** //
-    // ***************** DATA PREPARATION **************** //
-    // *************************************************** //
+
+    // Prepare data
     private function prepare($item)
     {
         if (!empty($item['name'])) $item['slug'] = generateSlug($item['name']);
@@ -93,7 +93,7 @@ class ModelUpdateService
         return $item;
     }
 
-
+    // Define update type
     private function getUpdateType($data)
     {
         $res = [];
@@ -103,7 +103,7 @@ class ModelUpdateService
         return empty($res) ? ['single'] : $res;
     }
 
-
+    // Get data from request
     private function getData($data, $fallback = null)
     {
         if (empty($this->items)) {
@@ -118,22 +118,24 @@ class ModelUpdateService
     }
 
 
-    // *************************************************** //
-    // ******************* BOOT METHODS ****************** //
-    // *************************************************** //
+
+    // Boot method
     public function update($request)
     {
         $this->setItems($this->items->dontCache());
 
         foreach ($this->getUpdateType($request) as $type) {
             $data = $request[$type] ?? $request;
-            $update = $this->$type($data);
-
-            if ($update !== true) throw new ModelUpdateException('Internal server error', 500);
+            $this->$type($data);
         }
 
-        return $this->service->log('update', 'Items have been successfully updated.', 200, $this->items->get()->fresh());
+        return response()->json([
+            'message' => 'Items have been successfully updated.',
+            'status' => '200',
+            'items' => $this->items->get()->fresh()
+        ], 200);
     }
+
 
 
     static function build($service, $data, $id = null)

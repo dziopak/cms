@@ -7,6 +7,7 @@ use Spatie\QueryBuilder\AllowedFilter;
 use App\Traits\Repository;
 use App\Entities\Page;
 use App\Interfaces\Repositories\PageRepositoryInterface;
+use Auth;
 
 class PageRepository implements PageRepositoryInterface
 {
@@ -27,5 +28,12 @@ class PageRepository implements PageRepositoryInterface
         // setup the model
         $this->model = app(Page::class);
         $this->filters[] = AllowedFilter::exact('id');
+    }
+
+
+    public function create($attributes)
+    {
+        $attributes['user_id'] = Auth::user()->id;
+        $this->model->create($attributes);
     }
 }

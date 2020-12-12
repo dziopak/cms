@@ -3,19 +3,15 @@
 namespace App\Http\Requests\Admin\Blocks\Menus;
 
 use App\Http\Requests\BaseFormRequest;
+use Hook;
 
 class UpdateMenuRequest extends BaseFormRequest
 {
-    public function authorize()
-    {
-        return true;
-    }
-
-
     public function rules()
     {
-        return [
+        $fields = [
             'name' => 'string|required'
         ];
+        return Hook::filter('menu.request.admin.update', $fields);
     }
 }

@@ -23,7 +23,7 @@
         <x-form-fields :fields="$form['left']" />
 
         {{-- Hidden fields --}}
-        {!! Form::hidden('category_id', $category->id) !!}
+        {!! Form::hidden('id', $category->id) !!}
 
         {{-- Save button --}}
         <x-update-button :container="true" />

@@ -19,4 +19,4 @@ $table['sort_by'] = [
     'created_at' => 'Creation date'
 ];
 
-return Eventy::filter('search.sources.table', $table);
+return Hook::filter('search.sources.table', $table);

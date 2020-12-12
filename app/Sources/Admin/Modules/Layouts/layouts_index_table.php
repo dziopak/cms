@@ -34,4 +34,4 @@ $table['mass_edit_extend'] = [
 $table['sort_by'] = [
     'name' => __('admin/layouts.name')
 ];
-return Eventy::filter('layout.sources.table', $table);
+return Hook::filter('layout.sources.table', $table);

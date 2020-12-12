@@ -3,7 +3,7 @@
 $langs = $this->langs;
 
 // Form hooks
-Eventy::addfilter('category.sources.form', function ($form) use ($langs) {
+Hook::addfilter('category.sources.form', function ($form) use ($langs) {
     $form['left']['name_row']['items']['name']['container_class'] .= ' lang lang_origin';
     $form['left']['slug_category_row']['items']['slug']['container_class'] .= ' lang lang_origin';
     $form['left']['description_row']['items']['description']['container_class'] .= ' lang lang_origin';

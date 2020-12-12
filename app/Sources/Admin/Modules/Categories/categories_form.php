@@ -52,4 +52,4 @@ $form = [
         ]
     ],
 ];
-return Eventy::filter('category.sources.form', $form);
+return Hook::filter('category.sources.form', $form);

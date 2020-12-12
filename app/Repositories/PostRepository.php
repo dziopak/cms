@@ -3,10 +3,11 @@
 namespace App\Repositories;
 
 
+use App\Interfaces\Repositories\PostRepositoryInterface;
 use Spatie\QueryBuilder\AllowedFilter;
 use App\Traits\Repository;
 use App\Entities\Post;
-use App\Interfaces\Repositories\PostRepositoryInterface;
+use Auth;
 
 class PostRepository implements PostRepositoryInterface
 {
@@ -27,5 +28,12 @@ class PostRepository implements PostRepositoryInterface
         // setup the model
         $this->model = app(Post::class);
         $this->filters[] = AllowedFilter::exact('id');
+    }
+
+
+    public function create($attributes)
+    {
+        $attributes['user_id'] = Auth::user()->id;
+        return $this->model->create($attributes);
     }
 }

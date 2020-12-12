@@ -2,11 +2,12 @@
 
 namespace App\Traits;
 
-use MrAtiebatie\Repository as MrAtiebatieRepository;
-
 trait Repository
 {
-    use MrAtiebatieRepository;
+    public function __call($method, $params)
+    {
+        return $this->model->$method(...$params);
+    }
 
     public function getModel()
     {

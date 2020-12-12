@@ -7,41 +7,47 @@ use Rennokki\QueryCache\Traits\QueryCacheable;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
-
+use App\Traits\Filterable;
 use App\Traits\Linkable;
 use App\Traits\Sluggable;
 use App\Traits\Thumbnail;
+use Hook;
 
-use Eventy;
 
 class Page extends Model implements Searchable
 {
 
-    use Sluggable, Linkable;
-    use QueryCacheable;
-    use Thumbnail;
+    /*
+     * TRAITS
+    */
+    use Thumbnail, Sluggable, Linkable, Filterable, QueryCacheable;
 
+
+    /*
+     * PROPERTIES
+    */
     protected $guarded = ['id', 'page_id'];
+    private $searchIn = ['name', 'slug'];
     public $fire_events = true, $cacheFor = 3600;
     protected static $flushCacheOnUpdate = true;
-
     protected $entity_type = 'pages';
-
     public $resources = [
         'collection' => PageResource::class
     ];
 
+
+    /*
+     * RELATIONS
+    */
     public function author()
     {
         return $this->belongsTo('App\Entities\User', 'user_id');
     }
 
-
     public function thumbnail()
     {
         return $this->belongsTo('App\Entities\File', 'file_id');
     }
-
 
     public function categories()
     {
@@ -49,32 +55,26 @@ class Page extends Model implements Searchable
     }
 
 
+    /*
+     * SCOPES
+    */
+    public function scopeIndex()
+    {
+        return $this
+            ->with(['thumbnail:id,path', 'author:id,name'])
+            ->search()->sort()->paginate(15);
+    }
+
+
+    /*
+     * OTHER
+    */
     public function layout()
     {
         $default = config()['global']['content']['page_layout'];
         return $this->belongsTo('App\Entities\Layout', 'layout_id')
             ->withDefault(Layout::findOrFail($default));
     }
-
-
-    public function scopeFilter($query)
-    {
-        $request = request();
-        if (!empty($request->get('search'))) {
-            // Search in name or slug //
-            $query->where('name', 'like', '%' . $request->get('search') . '%')
-                ->orWhere('slug', 'like', '%' . $request->get('search') . '%');
-        }
-
-        if (!empty($request->get('sort_by'))) {
-            // Sort by selected field //
-            !empty($request->get('sort_order')) && $request->get('sort_order') === 'desc' ?
-                $query->orderByDesc($request->get('sort_by')) : $query->orderBy($request->get('sort_by'));
-        } else {
-            $query->orderByDesc('id');
-        }
-    }
-
 
     public function getSearchResult(): SearchResult
     {
@@ -86,31 +86,31 @@ class Page extends Model implements Searchable
     }
 
 
+    /*
+     * GETTERS
+    */
     public function getName()
     {
-        return Eventy::filter('page.entity.getName', $this->attributes['name'], $this->attributes);
+        return Hook::filter('page.entity.getName', $this->attributes['name'], $this->attributes);
     }
-
 
     public function getExcerpt()
     {
-        return Eventy::filter('page.entity.getExcerpt', $this->attributes['excerpt'], $this->attributes);
+        return Hook::filter('page.entity.getExcerpt', $this->attributes['excerpt'], $this->attributes);
     }
-
 
     public function getContent()
     {
-        return Eventy::filter('page.entity.getContent', $this->attributes['content'], $this->attributes);
+        return Hook::filter('page.entity.getContent', $this->attributes['content'], $this->attributes);
     }
-
 
     public function getMetaTitle()
     {
-        return Eventy::filter('page.entity.getMetaTitle', $this->attributes['meta_title'], $this->attributes);
+        return Hook::filter('page.entity.getMetaTitle', $this->attributes['meta_title'], $this->attributes);
     }
 
     public function getMetaDescription()
     {
-        return Eventy::filter('post.entity.getMetaDescription', $this->attributes['meta_description'], $this->attributes);
+        return Hook::filter('post.entity.getMetaDescription', $this->attributes['meta_description'], $this->attributes);
     }
 }

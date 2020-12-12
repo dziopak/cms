@@ -3,7 +3,7 @@
 $langs = $this->langs;
 
 // Form hooks
-Eventy::addfilter('page.sources.form', function ($form) use ($langs) {
+Hook::addfilter('page.sources.form', function ($form) use ($langs) {
     $form['right']['name_row']['items']['name']['container_class'] .= ' lang lang_origin';
     $form['right']['slug_category_row']['items']['slug']['container_class'] .= ' lang lang_origin';
     $form['right']['excerpt_row']['items']['excerpt']['container_class'] .= ' lang lang_origin';
@@ -42,22 +42,22 @@ Eventy::addfilter('page.sources.form', function ($form) use ($langs) {
     return $form;
 });
 
-Eventy::addfilter('page.entity.getName', function ($name, $attributes) {
+Hook::addfilter('page.entity.getName', function ($name, $attributes) {
     return lang($attributes, 'name');
 }, 20, 2);
 
-Eventy::addfilter('page.entity.getExcerpt', function ($excerpt, $attributes) {
+Hook::addfilter('page.entity.getExcerpt', function ($excerpt, $attributes) {
     return lang($attributes, 'excerpt');
 }, 20, 2);
 
-Eventy::addfilter('page.entity.getContent', function ($content, $attributes) {
+Hook::addfilter('page.entity.getContent', function ($content, $attributes) {
     return lang($attributes, 'content');
 }, 20, 2);
 
-Eventy::addfilter('page.entity.getMetaTitle', function ($title, $attributes) {
+Hook::addfilter('page.entity.getMetaTitle', function ($title, $attributes) {
     return lang($attributes, 'meta_title');
 }, 20, 2);
 
-Eventy::addfilter('page.entity.getMetaDescription', function ($description, $attributes) {
+Hook::addfilter('page.entity.getMetaDescription', function ($description, $attributes) {
     return lang($attributes, 'meta_description');
 }, 20, 2);

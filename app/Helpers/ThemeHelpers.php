@@ -64,7 +64,7 @@ class ThemeHelpers
         $json = $this->getManifest($this->slug);
 
         $theme = new \stdClass;
-        $theme->slug = $json['slug'];
+        $theme->slug = $json['slug'] ?? 'default';
         $theme->url = 'themes.' . $theme->slug;
         $theme->assets_url = "theme/assets/";
 

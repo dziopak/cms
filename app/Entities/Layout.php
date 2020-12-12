@@ -5,33 +5,16 @@ namespace App\Entities;
 use Rennokki\QueryCache\Traits\QueryCacheable;
 use Illuminate\Database\Eloquent\Model;
 use App\Entities\Block;
-use App\Http\Utilities\Admin\Modules\Layouts\LayoutActions;
-use App\Http\Utilities\Admin\Modules\Layouts\LayoutEntity;
+use App\Traits\Filterable;
 
 class Layout extends Model
 {
-    use QueryCacheable;
+    use Filterable, QueryCacheable;
 
     protected static $flushCacheOnUpdate = true;
     public $cacheFor = 3600, $timestamps = false;
+    private $searchIn = ['name'];
     protected $guarded = [];
-
-
-    public function scopeFilter($query, $request)
-    {
-        if (!empty($request->get('search'))) {
-            // Search in name or slug //
-            $query->where('name', 'like', '%' . $request->get('search') . '%');
-        }
-
-        if (!empty($request->get('sort_by'))) {
-            // Sort by selected field //
-            !empty($request->get('sort_order')) && $request->get('sort_order') === 'desc' ?
-                $query->orderByDesc($request->get('sort_by')) : $query->orderBy($request->get('sort_by'));
-        } else {
-            $query->orderByDesc('id');
-        }
-    }
 
 
     public function blocks()

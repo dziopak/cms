@@ -2,26 +2,28 @@
 
 namespace App\Entities;
 
-use App\Http\Utilities\Admin\Modules\Categories\CategoryActionService as CategoryActions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Http\Resources\CategoryResource;
 use Illuminate\Database\Eloquent\Model;
 
+use Rennokki\QueryCache\Traits\QueryCacheable;
 use App\Traits\Linkable;
 use App\Traits\Sluggable;
-use Rennokki\QueryCache\Traits\QueryCacheable;
-use Eventy;
+use App\Traits\Filterable;
 
 use App\Entities\Post;
-use App\Http\Resources\CategoryResource;
+use App\Traits\Listable;
+use Hook;
 
 class Category extends Model
 {
-    use HasFactory;
-    use Sluggable, Linkable;
+    use HasFactory, Filterable;
+    use Sluggable, Linkable, Listable;
     use QueryCacheable;
 
     protected $entity_type = 'categories';
-    protected $guarded = ['id', 'category_id', 'type'];
+    protected $guarded = ['id', 'type'];
+    private $searchIn = ['name', 'description'];
     public $fire_events = true, $cacheFor = 3600;
     protected static $flushCacheOnUpdate = true;
 
@@ -44,34 +46,9 @@ class Category extends Model
     }
 
 
-    public function categories()
+    public function category()
     {
         return Category::where(['category_id' => $this->id])->get();
-    }
-
-
-    public function scopeList($query, $no_category = true)
-    {
-        $categories = $query->pluck('name', 'id')->toArray();
-        if (!$no_category) return $query->pluck('name', 'id')->toArray();
-
-        return array(0 => __('admin/post_categories.no_category')) + $categories;
-    }
-
-
-    public function scopeFilter($query, $request)
-    {
-        if (!empty($request->get('search'))) {
-
-            // Search in name //
-            $query->where('name', 'like', '%' . $request->get('search') . '%');
-        }
-        if (!empty($request->get('sort_by'))) {
-
-            // Sort by selected field //
-            !empty($request->get('sort_order')) && $request->get('sort_order') === 'desc' ?
-                $query->orderByDesc($request->get('sort_by')) : $query->orderBy($request->get('sort_by'));
-        }
     }
 
 
@@ -92,12 +69,12 @@ class Category extends Model
 
     public function getName()
     {
-        return Eventy::filter('category.entity.getName', $this->attributes['name'], $this->attributes);
+        return Hook::filter('category.entity.getName', $this->attributes['name'], $this->attributes);
     }
 
 
     public function getExcerpt()
     {
-        return Eventy::filter('category.entity.getDescription', $this->attributes['description'], $this->attributes);
+        return Hook::filter('category.entity.getDescription', $this->attributes['description'], $this->attributes);
     }
 }

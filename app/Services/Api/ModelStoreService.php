@@ -10,7 +10,7 @@ class ModelStoreService
     private $items;
 
 
-    public function __construct($service)
+    public function __construct($service, $validator = null)
     {
         // Check access
         $service->getAccess('store');
@@ -18,24 +18,24 @@ class ModelStoreService
         // Construct
         $this->service = $service;
         $this->repository = $service->getRepository();
+        $this->validator = $validator;
     }
 
 
     private function storeItems($items)
     {
+        $res = [];
         DB::beginTransaction();
         try {
-            foreach ($items as $item) {
-                $res[] = $this->repository->store($item);
+            foreach ($items as $key => $item) {
+                $res[] = $this->repository->create($item);
             }
             DB::commit();
         } catch (\Exception $e) {
             throw new ModelStoreException('Internal server error', 500);
             DB::rollback();
         }
-
-        $this->items = $res;
-        return true;
+        return $res;
     }
 
 
@@ -68,16 +68,37 @@ class ModelStoreService
     public function store($data)
     {
         $this->getData($data)->prepare();
+
+        $validator = $this->validate();
+        if (!empty($validator)) return response()->json($validator);
+
         $store = $this->storeItems($this->items);
 
-        if ($store !== true) throw new ModelStoreException('Internal server error', 500);
-        return $this->service->log('store', 'Items have been successfully stored.', 200, $this->items);
+        if (empty($store) || $store === false) throw new ModelStoreException('Internal server error', 500);
+        return response()->json([
+            'message' => 'Items have been successfully stored.',
+            'items' => $store
+        ], 200);
     }
 
 
-    static function build($service, $data)
+
+    private function validate()
     {
-        $class = new self($service);
+        $res = [];
+        foreach ($this->items as $item) {
+            if (!empty($this->validator)) {
+                $validation = $this->validator::validate($item);
+                if (!empty($validation)) $res[] = $validation;
+            }
+        }
+        return $res;
+    }
+
+
+    static function build($service, $data, $validator = null)
+    {
+        $class = new self($service, $validator);
         return $class->store($data);
     }
 }

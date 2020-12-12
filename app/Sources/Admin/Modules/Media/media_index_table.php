@@ -23,4 +23,4 @@ $table['sort_by'] = [
     'name' => __('admin/media.name'),
 ];
 
-return Eventy::filter('media.sources.table', $table);
+return Hook::filter('media.sources.table', $table);

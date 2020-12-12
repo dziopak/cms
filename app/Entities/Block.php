@@ -13,7 +13,6 @@ class Block extends Model
     public $timestamps = false, $cacheFor = 3600;
     protected static $flushCacheOnUpdate = true;
 
-
     public function layouts()
     {
         return $this->belongsTo(\App\Entities\Layout::class);

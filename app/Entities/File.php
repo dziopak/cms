@@ -6,15 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 use App\Events\Files\FileDestroyEvent;
 use Rennokki\QueryCache\Traits\QueryCacheable;
 use App\Entities\Slider;
+use App\Traits\Filterable;
 
 class File extends Model
 {
-    use QueryCacheable;
+    use Filterable, QueryCacheable;
 
     public $cacheFor = 3600;
     protected $table = "files";
     protected static $flushCacheOnUpdate = true;
     protected $fillable = ['type', 'path', 'name', 'description'];
+    private $searchIn = ['name', 'description'];
 
 
     public function posts()
@@ -60,24 +62,6 @@ class File extends Model
             $related = $related->merge($model);
         }
         return $related;
-    }
-
-
-    public function scopeFilter($query, $request)
-    {
-        if (!empty($request->get('search'))) {
-            // Search in name or slug //
-            $query->where('name', 'like', '%' . $request->get('search') . '%');
-        }
-
-        if (!empty($request->get('sort_by'))) {
-            // Sort by selected field //
-            !empty($request->get('sort_order')) && $request->get('sort_order') === 'asc' ?
-                $query->orderBy($request->get('sort_by')) : $query->orderByDesc($request->get('sort_by'));
-        } else {
-
-            $query->orderByDesc('id');
-        }
     }
 
 

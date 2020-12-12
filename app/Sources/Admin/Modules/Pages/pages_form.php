@@ -22,7 +22,7 @@ $form = [
             'items' => [
                 'file_id' => [
                     'type' => 'image',
-                    'value' => $args['thumbnail'],
+                    'value' => $args['thumbnail'] ?? 0,
                     'label' => __('admin/pages.thumbnail'),
                     'endpoint' => $args['thumbnail_endpoint'] ?? null,
                     'class' => '',
@@ -158,4 +158,4 @@ $form = [
         ]
     ],
 ];
-return Eventy::filter('page.sources.form', $form);
+return Hook::filter('page.sources.form', $form);

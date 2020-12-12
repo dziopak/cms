@@ -8,7 +8,7 @@ trait ThumbnailService
 {
     public function updateThumbnail($page_id, $file_id)
     {
-        $page = $this->repository->find($page_id)->respond();
+        $page = $this->repository->find($page_id);
         $page->fire_events = false;
 
         $update = $page->update(['file_id' => $file_id]);

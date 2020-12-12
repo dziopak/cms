@@ -14,5 +14,14 @@ class FileService extends BaseAdminService
     public function __construct(FileRepositoryInterface $repository)
     {
         parent::__construct($repository);
+
+        $this->queries = [
+            'index' => [
+                'table' => getData('Admin/Modules/Media/media_index_table')
+            ],
+            'edit' => [
+                'form' => getData('Admin/Modules/Media/media_edit_form')
+            ]
+        ];
     }
 }

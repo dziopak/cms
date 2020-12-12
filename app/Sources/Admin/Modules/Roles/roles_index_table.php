@@ -24,4 +24,4 @@ $table['sort_by'] = [
     'name' => __('admin/roles.name')
 ];
 
-return Eventy::filter('role.sources.table', $table);
+return Hook::filter('role.sources.table', $table);

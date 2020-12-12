@@ -14,18 +14,15 @@ class MenuItem extends Model
     public $timestamps = false, $cacheFor = 3600;
     protected static $flushCacheOnUpdate = true;
 
-
     public function menu()
     {
         return $this->belongsTo('App\Entities\Menu');
     }
 
-
     public function items()
     {
         return $this->hasMany('App\Entities\MenuItem', 'parent');
     }
-
 
     private function checkConditions()
     {
@@ -39,7 +36,6 @@ class MenuItem extends Model
         }
         return !$err ? true : false;
     }
-
 
     private function verify($condition)
     {
@@ -63,7 +59,6 @@ class MenuItem extends Model
 
         return false;
     }
-
 
     public function scopeGetItems($query)
     {

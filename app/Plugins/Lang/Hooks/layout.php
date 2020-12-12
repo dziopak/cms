@@ -2,7 +2,7 @@
 
 $langs = $this->langs;
 
-Eventy::addfilter('sources.components.sidebar', function ($form) {
+Hook::addfilter('sources.components.sidebar', function ($form) {
     $form['settings']['items']['lang'] = [
         'route' => 'Lang::index',
         'custom_label' => __('Lang::messages.sidebar_title')
@@ -12,17 +12,17 @@ Eventy::addfilter('sources.components.sidebar', function ($form) {
 });
 
 
-Eventy::addAction('template.admin.styles', function () {
+Hook::addAction('template.admin.styles', function () {
     echo '<link href="/css/lang/lang.css" rel="stylesheet">';
 });
 
 
-Eventy::addAction('template.admin.scripts.body', function () {
+Hook::addAction('template.admin.scripts.body', function () {
     echo '<script src="/js/lang/lang.js"></script>';
 });
 
 
-Eventy::addAction('template.admin.scripts.inline', function () use ($langs) {
+Hook::addAction('template.admin.scripts.inline', function () use ($langs) {
     $inputs = '';
 
     // Create lang switchers

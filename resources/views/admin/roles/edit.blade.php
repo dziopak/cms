@@ -29,6 +29,9 @@
         {{-- Display form --}}
         <x-form-fields :fields="$form['left']" />
 
+        {{-- Hidden fields --}}
+        {!! Form::hidden('role_id', $role->id) !!}
+
         {{-- Save button --}}
         <x-update-button :container="true" />
 

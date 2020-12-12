@@ -8,7 +8,6 @@ use Auth;
 
 class BaseAdminService
 {
-
     public $model;
     public $repository;
     public $queries;
@@ -33,10 +32,8 @@ class BaseAdminService
         if (!empty($params['before'])) $params['before']();
 
         // Default queries
-        if (empty($this->queries['index'])) {
-            $this->queries['index'] = [
-                static::ENTITY_PLURAL => $this->model->orderByDesc('id')->filter($request)->paginate(15)
-            ];
+        if (empty($this->queries['index']) || empty($this->queries['index'][static::ENTITY_PLURAL])) {
+            $this->queries['index'][static::ENTITY_PLURAL] = $this->model->orderByDesc('id')->filter($request)->paginate(15);
         }
 
         // Custom action after
@@ -75,7 +72,7 @@ class BaseAdminService
         if (!empty($params['before'])) $params['before']();
 
         // Create new record
-        $item = $this->repository->create($request->all());
+        $item = $this->repository->create($request->validated());
 
         // Custom action after
         if (!empty($params['after'])) $params['after']($item);
@@ -94,10 +91,8 @@ class BaseAdminService
         if (!empty($params['before'])) $params['before']();
 
         // Default query
-        if (empty($this->queries['edit'])) {
-            $this->queries['edit'] = [
-                static::ENTITY_SINGULAR => $this->repository->find($id)
-            ];
+        if (empty($this->queries['edit']) || empty($this->queries['edit'][static::ENTITY_SINGULAR])) {
+            $this->queries['edit'][static::ENTITY_SINGULAR] = $this->repository->find($id);
         }
 
         // Custom action after
@@ -117,7 +112,7 @@ class BaseAdminService
         if (!empty($params['before'])) $params['before']();
 
         // Update
-        $this->repository->find($id)->update($request->all());
+        $this->repository->find($id)->update($request->validated());
 
         // Custom action after
         if (!empty($params['after'])) $params['after']();

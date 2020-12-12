@@ -3,15 +3,17 @@
 namespace App\Http\Requests\Admin\Modules\Users;
 
 use App\Http\Requests\BaseFormRequest;
+use Hook;
 
 class NewPasswordRequest extends BaseFormRequest
 {
     public function rules()
     {
-        return [
+        $fields = [
             'password' => 'string|required|min:8',
             'repeat_password' => 'string|required'
         ];
+        return Hook::filter('user.request.admin.password', $fields);
     }
 
     public function withValidator($validator)

@@ -118,4 +118,4 @@ $form = [
     ]
 ];
 
-return Eventy::filter('sources.components.sidebar', $form);
+return Hook::filter('sources.components.sidebar', $form);

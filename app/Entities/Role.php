@@ -2,21 +2,20 @@
 
 namespace App\Entities;
 
+use App\Traits\Filterable;
 use Illuminate\Database\Eloquent\Model;
 use Rennokki\QueryCache\Traits\QueryCacheable;
-use App\Factories\EntityFactory;
-use DB;
 
 class Role extends Model
 {
-    use QueryCacheable;
+    use Filterable, QueryCacheable;
 
     public $timestamps = false;
     public $fire_events = true;
-
     public $cacheFor = 3600;
     protected static $flushCacheOnUpdate = true;
     protected $entity_type = 'roles';
+    private $searchIn = ['name'];
 
     protected $fillable = ['name', 'access', 'description'];
 
@@ -28,24 +27,6 @@ class Role extends Model
         }
         return $roles;
     }
-
-
-    public function scopeFilter($query, $request)
-    {
-        if (!empty($request->get('search'))) {
-
-            // Search in name //
-            $query->where('name', 'like', '%' . $request->get('search') . '%');
-        }
-
-        if (!empty($request->get('sort_by'))) {
-
-            // Sort by selected field //
-            !empty($request->get('sort_order')) && $request->get('sort_order') === 'desc' ?
-                $query->orderByDesc($request->get('sort_by')) : $query->orderBy($request->get('sort_by'));
-        }
-    }
-
 
     public function users()
     {

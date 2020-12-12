@@ -5,7 +5,7 @@
     </button>
 
     @if (!$endpoint)
-        {!! Form::hidden($name, null, ['id' => $name]) !!}
+        {!! Form::hidden($name, 0, ['id' => $name]) !!}
     @endif
 </div>
 

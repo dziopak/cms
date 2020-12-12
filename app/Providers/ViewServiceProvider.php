@@ -23,14 +23,10 @@ class ViewServiceProvider extends ServiceProvider
 
         $this->app->view->composers([
             'App\View\Composers\Admin\Modules\LayoutsComposer' => 'admin.layouts.*',
-            'App\View\Composers\Admin\Modules\CategoriesComposer' => 'admin.categories.*',
-            'App\View\Composers\Admin\Modules\PostsComposer' => 'admin.posts.*',
             'App\View\Composers\Admin\Modules\UsersComposer' => 'admin.users.*',
-            'App\View\Composers\Admin\Modules\RolesComposer' => 'admin.roles.*',
             'App\View\Composers\Admin\Modules\DashboardComposer' => 'admin.dashboard.*',
             'App\View\Composers\Admin\Modules\MediaComposer' => 'admin.media.*',
             'App\View\Composers\Admin\Modules\PluginsComposer' => 'admin.plugins.*',
-
             'App\View\Composers\Admin\Blocks\MenusComposer' => 'admin.menus.*',
             'App\View\Composers\Admin\Blocks\SlidersComposer' => 'admin.sliders.*',
             'App\View\Composers\Admin\Blocks\CarouselsComposer' => 'admin.carousels.*',

@@ -30,4 +30,4 @@ $table['sort_by'] = [
     'created_at' => __('admin/pages.creation_date'),
 ];
 
-return Eventy::filter('page.sources.table', $table);
+return Hook::filter('page.sources.table', $table);

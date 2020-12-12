@@ -25,18 +25,18 @@ class BaseApiController extends Controller
 
     public function store(Request $request)
     {
-        return $this->service->store($request->all())->respond();
+        return $this->service->store($request->all());
     }
 
 
     public function update(Request $request, $id = null)
     {
-        return $this->service->update($request->all(), $id)->respond();
+        return $this->service->update($request->all(), $id);
     }
 
 
     public function destroy(Request $request, $id = null)
     {
-        return $this->service->destroy($request->all(), $id)->respond();
+        return $this->service->destroy($request->all(), $id);
     }
 }

@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 8.14.0.
+ * Generated for Laravel 8.17.2.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -800,6 +800,17 @@
                         return $instance->getLocale();
         }
                     /**
+         * Get the current application locale.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function currentLocale()
+        {
+                        /** @var \Illuminate\Foundation\Application $instance */
+                        return $instance->currentLocale();
+        }
+                    /**
          * Get the current application fallback locale.
          *
          * @return string 
@@ -1187,7 +1198,7 @@
                     /**
          * An alias function name for make().
          *
-         * @param string $abstract
+         * @param string|callable $abstract
          * @param array $parameters
          * @return mixed 
          * @throws \Illuminate\Contracts\Container\BindingResolutionException
@@ -1224,6 +1235,19 @@
         {            //Method inherited from \Illuminate\Container\Container         
                         /** @var \Illuminate\Foundation\Application $instance */
                         return $instance->build($concrete);
+        }
+                    /**
+         * Register a new before resolving callback for all types.
+         *
+         * @param \Closure|string $abstract
+         * @param \Closure|null $callback
+         * @return void 
+         * @static 
+         */ 
+        public static function beforeResolving($abstract, $callback = null)
+        {            //Method inherited from \Illuminate\Container\Container         
+                        /** @var \Illuminate\Foundation\Application $instance */
+                        $instance->beforeResolving($abstract, $callback);
         }
                     /**
          * Register a new resolving callback.
@@ -2967,8 +2991,6 @@
             /**
      * 
      *
-     * @method static \Illuminate\Contracts\Cache\Lock lock(string $name, int $seconds = 0, mixed $owner = null)
-     * @method static \Illuminate\Contracts\Cache\Lock restoreLock(string $name, string $owner)
      * @see \Illuminate\Cache\CacheManager
      * @see \Illuminate\Cache\Repository
      */ 
@@ -3591,6 +3613,33 @@
         {
                         /** @var \Illuminate\Cache\FileStore $instance */
                         return $instance->getPrefix();
+        }
+                    /**
+         * Get a lock instance.
+         *
+         * @param string $name
+         * @param int $seconds
+         * @param string|null $owner
+         * @return \Illuminate\Contracts\Cache\Lock 
+         * @static 
+         */ 
+        public static function lock($name, $seconds = 0, $owner = null)
+        {
+                        /** @var \Illuminate\Cache\FileStore $instance */
+                        return $instance->lock($name, $seconds, $owner);
+        }
+                    /**
+         * Restore a lock instance using the owner identifier.
+         *
+         * @param string $name
+         * @param string $owner
+         * @return \Illuminate\Contracts\Cache\Lock 
+         * @static 
+         */ 
+        public static function restoreLock($name, $owner)
+        {
+                        /** @var \Illuminate\Cache\FileStore $instance */
+                        return $instance->restoreLock($name, $owner);
         }
          
     }
@@ -4721,6 +4770,29 @@
                         $instance->unsetEventDispatcher();
         }
                     /**
+         * Set the transaction manager instance on the connection.
+         *
+         * @param \Illuminate\Database\DatabaseTransactionsManager $manager
+         * @return \Illuminate\Database\MySqlConnection 
+         * @static 
+         */ 
+        public static function setTransactionManager($manager)
+        {            //Method inherited from \Illuminate\Database\Connection         
+                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        return $instance->setTransactionManager($manager);
+        }
+                    /**
+         * Unset the transaction manager for this connection.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function unsetTransactionManager()
+        {            //Method inherited from \Illuminate\Database\Connection         
+                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        $instance->unsetTransactionManager();
+        }
+                    /**
          * Determine if the connection is in a "dry run".
          *
          * @return bool 
@@ -4928,6 +5000,17 @@
         {            //Method inherited from \Illuminate\Database\Connection         
                         /** @var \Illuminate\Database\MySqlConnection $instance */
                         return $instance->transactionLevel();
+        }
+                    /**
+         * Execute the callback after a transaction commits.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function afterCommit($callback)
+        {            //Method inherited from \Illuminate\Database\Connection         
+                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        $instance->afterCommit($callback);
         }
          
     }
@@ -10037,6 +10120,29 @@
                         return $instance->file($key, $default);
         }
                     /**
+         * Dump the request items and end the script.
+         *
+         * @param array|mixed $keys
+         * @return void 
+         * @static 
+         */ 
+        public static function dd(...$keys)
+        {
+                        /** @var \Illuminate\Http\Request $instance */
+                        $instance->dd(...$keys);
+        }
+                    /**
+         * Dump the items.
+         *
+         * @return \Illuminate\Http\Request 
+         * @static 
+         */ 
+        public static function dump($keys = [])
+        {
+                        /** @var \Illuminate\Http\Request $instance */
+                        return $instance->dump($keys);
+        }
+                    /**
          * Register a custom macro.
          *
          * @param string $name
@@ -10372,7 +10478,7 @@
      * @method static \Illuminate\Routing\RouteRegistrar domain(string $value)
      * @method static \Illuminate\Routing\RouteRegistrar middleware(array|string|null $middleware)
      * @method static \Illuminate\Routing\RouteRegistrar name(string $value)
-     * @method static \Illuminate\Routing\RouteRegistrar namespace(string $value)
+     * @method static \Illuminate\Routing\RouteRegistrar namespace(string|null $value)
      * @method static \Illuminate\Routing\RouteRegistrar prefix(string  $prefix)
      * @method static \Illuminate\Routing\RouteRegistrar where(array  $where)
      * @see \Illuminate\Routing\Router
@@ -12339,13 +12445,14 @@
          * Assert that the given file exists.
          *
          * @param string|array $path
+         * @param string|null $content
          * @return \Illuminate\Filesystem\FilesystemAdapter 
          * @static 
          */ 
-        public static function assertExists($path)
+        public static function assertExists($path, $content = null)
         {
                         /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->assertExists($path);
+                        return $instance->assertExists($path, $content);
         }
                     /**
          * Assert that the given file does not exist.
@@ -14336,103 +14443,149 @@
      
 }
 
-    namespace Esemve\Hook\Facades { 
+    namespace TorMorten\Eventy\Facades { 
             /**
      * 
      *
      */ 
-        class Hook {
+        class Events {
                     /**
-         * Return the hook answer.
+         * Get the action instance.
+         *
+         * @return \TorMorten\Eventy\TorMorten\Events\Action 
+         * @static 
+         */ 
+        public static function getAction()
+        {
+                        /** @var \TorMorten\Eventy\Events $instance */
+                        return $instance->getAction();
+        }
+                    /**
+         * Get the action instance.
+         *
+         * @return \TorMorten\Eventy\TorMorten\Events\Filter 
+         * @static 
+         */ 
+        public static function getFilter()
+        {
+                        /** @var \TorMorten\Eventy\Events $instance */
+                        return $instance->getFilter();
+        }
+                    /**
+         * Add an action.
          *
          * @param string $hook Hook name
-         * @param array $params
-         * @param callable $callback
-         * @param string $htmlContent content wrapped by hook
-         * @return null|void 
+         * @param mixed $callback Function to execute
+         * @param int $priority Priority of the action
+         * @param int $arguments Number of arguments to accept
          * @static 
          */ 
-        public static function get($hook, $params = [], $callback = null, $htmlContent = '')
+        public static function addAction($hook, $callback, $priority = 20, $arguments = 1)
         {
-                        /** @var \Esemve\Hook\Hook $instance */
-                        return $instance->get($hook, $params, $callback, $htmlContent);
+                        /** @var \TorMorten\Eventy\Events $instance */
+                        return $instance->addAction($hook, $callback, $priority, $arguments);
         }
                     /**
-         * Stop all another hook running.
+         * Remove an action.
+         *
+         * @param string $hook Hook name
+         * @param mixed $callback Function to execute
+         * @param int $priority Priority of the action
+         * @static 
+         */ 
+        public static function removeAction($hook, $callback, $priority = 20)
+        {
+                        /** @var \TorMorten\Eventy\Events $instance */
+                        return $instance->removeAction($hook, $callback, $priority);
+        }
+                    /**
+         * Remove all actions.
          *
          * @param string $hook Hook name
          * @static 
          */ 
-        public static function stop($hook)
+        public static function removeAllActions($hook = null)
         {
-                        /** @var \Esemve\Hook\Hook $instance */
-                        return $instance->stop($hook);
+                        /** @var \TorMorten\Eventy\Events $instance */
+                        return $instance->removeAllActions($hook);
         }
                     /**
-         * Subscribe to hook.
+         * Adds a filter.
          *
          * @param string $hook Hook name
-         * @param $priority
-         * @param $function
+         * @param mixed $callback Function to execute
+         * @param int $priority Priority of the action
+         * @param int $arguments Number of arguments to accept
          * @static 
          */ 
-        public static function listen($hook, $function, $priority = null)
+        public static function addFilter($hook, $callback, $priority = 20, $arguments = 1)
         {
-                        /** @var \Esemve\Hook\Hook $instance */
-                        return $instance->listen($hook, $function, $priority);
+                        /** @var \TorMorten\Eventy\Events $instance */
+                        return $instance->addFilter($hook, $callback, $priority, $arguments);
         }
                     /**
-         * Return all registered hooks.
+         * Remove a filter.
          *
-         * @return array 
+         * @param string $hook Hook name
+         * @param mixed $callback Function to execute
+         * @param int $priority Priority of the action
          * @static 
          */ 
-        public static function getHooks()
+        public static function removeFilter($hook, $callback, $priority = 20)
         {
-                        /** @var \Esemve\Hook\Hook $instance */
-                        return $instance->getHooks();
+                        /** @var \TorMorten\Eventy\Events $instance */
+                        return $instance->removeFilter($hook, $callback, $priority);
         }
                     /**
-         * Return all listeners for hook.
+         * Remove all filters.
          *
-         * @param string $hook
-         * @return array 
+         * @param string $hook Hook name
          * @static 
          */ 
-        public static function getEvents($hook)
+        public static function removeAllFilters($hook = null)
         {
-                        /** @var \Esemve\Hook\Hook $instance */
-                        return $instance->getEvents($hook);
+                        /** @var \TorMorten\Eventy\Events $instance */
+                        return $instance->removeAllFilters($hook);
         }
                     /**
-         * For testing.
+         * Set a new action.
+         * 
+         * Actions never return anything. It is merely a way of executing code at a specific time in your code.
+         * 
+         * You can add as many parameters as you'd like.
          *
-         * @param string $name Hook name
-         * @param mixed $return Answer
+         * @param string $action Name of hook
+         * @param mixed $parameter1 A parameter
+         * @param mixed $parameter2 Another parameter
+         * @return void 
          * @static 
          */ 
-        public static function mock($name, $return)
+        public static function action()
         {
-                        /** @var \Esemve\Hook\Hook $instance */
-                        return $instance->mock($name, $return);
+                        /** @var \TorMorten\Eventy\Events $instance */
+                        $instance->action();
         }
                     /**
-         * Return the listeners.
+         * Set a new filter.
+         * 
+         * Filters should always return something. The first parameter will always be the default value.
+         * 
+         * You can add as many parameters as you'd like.
          *
-         * @return array 
+         * @param string $action Name of hook
+         * @param mixed $value The original filter value
+         * @param mixed $parameter1 A parameter
+         * @param mixed $parameter2 Another parameter
+         * @return void 
          * @static 
          */ 
-        public static function getListeners()
+        public static function filter()
         {
-                        /** @var \Esemve\Hook\Hook $instance */
-                        return $instance->getListeners();
+                        /** @var \TorMorten\Eventy\Events $instance */
+                        $instance->filter();
         }
          
     }
-     
-}
-
-    namespace TorMorten\Eventy\Facades { 
             /**
      * 
      *
@@ -18257,7 +18410,7 @@ namespace  {
                 /**
              * Add subselect queries to include the max of the relation's column.
              *
-             * @param string $relation
+             * @param string|array $relation
              * @param string $column
              * @return \Illuminate\Database\Eloquent\Builder|static 
              * @static 
@@ -18271,7 +18424,7 @@ namespace  {
                 /**
              * Add subselect queries to include the min of the relation's column.
              *
-             * @param string $relation
+             * @param string|array $relation
              * @param string $column
              * @return \Illuminate\Database\Eloquent\Builder|static 
              * @static 
@@ -18285,7 +18438,7 @@ namespace  {
                 /**
              * Add subselect queries to include the sum of the relation's column.
              *
-             * @param string $relation
+             * @param string|array $relation
              * @param string $column
              * @return \Illuminate\Database\Eloquent\Builder|static 
              * @static 
@@ -18299,7 +18452,7 @@ namespace  {
                 /**
              * Add subselect queries to include the average of the relation's column.
              *
-             * @param string $relation
+             * @param string|array $relation
              * @param string $column
              * @return \Illuminate\Database\Eloquent\Builder|static 
              * @static 
@@ -20273,8 +20426,7 @@ namespace  {
             class Validator extends \Illuminate\Support\Facades\Validator {}
             class View extends \Illuminate\Support\Facades\View {}
             class Image extends \Intervention\Image\Facades\Image {}
-            class Hook extends \Esemve\Hook\Facades\Hook {}
-            class Eventy extends \TorMorten\Eventy\Facades\Events {}
+            class Hook extends \TorMorten\Eventy\Facades\Events {}
             class JWTAuth extends \Tymon\JWTAuth\Facades\JWTAuth {}
             class JWTFactory extends \Tymon\JWTAuth\Facades\JWTFactory {}
             class Socialite extends \Laravel\Socialite\Facades\Socialite {}
@@ -20282,6 +20434,7 @@ namespace  {
             class Flare extends \Facade\Ignition\Facades\Flare {}
             class Form extends \Collective\Html\FormFacade {}
             class Html extends \Collective\Html\HtmlFacade {}
+            class Eventy extends \TorMorten\Eventy\Facades\Events {}
      
 }
 

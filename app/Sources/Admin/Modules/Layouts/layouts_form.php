@@ -17,4 +17,4 @@ $form = [
         ],
     ],
 ];
-return Eventy::filter('layout.sources.form', $form);
+return Hook::filter('layout.sources.form', $form);

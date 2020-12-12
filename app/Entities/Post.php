@@ -4,47 +4,50 @@ namespace App\Entities;
 
 use App\Http\Resources\PostResource;
 use Illuminate\Database\Eloquent\Model;
-
-use App\Http\Utilities\Admin\Modules\Posts\PostActions;
-
 use Rennokki\QueryCache\Traits\QueryCacheable;
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
+use App\Traits\Filterable;
 use App\Traits\Linkable;
 use App\Traits\Sluggable;
 use App\Traits\Thumbnail;
 
-use Eventy;
+use Hook;
 
 class Post extends Model implements Searchable
 {
-    use Sluggable, Linkable;
-    use QueryCacheable;
-    use Thumbnail;
 
+    /*
+     * TRAITS
+    */
+    use Thumbnail, Sluggable, Linkable, Filterable, QueryCacheable;
+
+
+    /*
+     * PROPERTIES
+    */
     public $cacheFor = 3600, $fire_events = true;
-
     protected static $flushCacheOnUpdate = true;
     protected $entity_type = 'posts';
     protected $guarded = ['id', 'post_id', 'thumbnail'];
-
-
+    private $searchIn = ['name', 'slug'];
     public $resources = [
         'collection' => PostResource::class
     ];
 
 
+    /*
+     * RELATIONS
+    */
     public function author()
     {
         return $this->belongsTo('App\Entities\User', 'user_id');
     }
 
-
     public function thumbnail()
     {
         return $this->belongsTo('App\Entities\File', 'file_id');
     }
-
 
     public function categories()
     {
@@ -52,25 +55,20 @@ class Post extends Model implements Searchable
     }
 
 
-    public function scopeFilter($query)
+    /*
+     * SCOPES
+    */
+    public function scopeIndex()
     {
-        $request = request();
-        if (!empty($request->get('search'))) {
-            // Search in name or slug //
-            $query->where('name', 'like', '%' . $request->get('search') . '%')
-                ->orWhere('slug', 'like', '%' . $request->get('search') . '%');
-        }
-
-        if (!empty($request->get('sort_by'))) {
-            // Sort by selected field //
-            !empty($request->get('sort_order')) && $request->get('sort_order') === 'desc' ?
-                $query->orderByDesc($request->get('sort_by')) : $query->orderBy($request->get('sort_by'));
-        } else {
-            $query->orderByDesc('created_at');
-        }
+        return $this
+            ->with(['thumbnail:id,path', 'author:id,name'])
+            ->search()->sort()->paginate(15);
     }
 
 
+    /*
+     * OTHER
+    */
     public function getSearchResult(): SearchResult
     {
         return new SearchResult(
@@ -81,32 +79,31 @@ class Post extends Model implements Searchable
     }
 
 
+    /*
+     * GETTERS
+    */
     public function getName()
     {
-        return Eventy::filter('post.entity.getName', $this->attributes['name'], $this->attributes);
+        return Hook::filter('post.entity.getName', $this->attributes['name'], $this->attributes);
     }
-
 
     public function getExcerpt()
     {
-        return Eventy::filter('post.entity.getExcerpt', $this->attributes['excerpt'], $this->attributes);
+        return Hook::filter('post.entity.getExcerpt', $this->attributes['excerpt'], $this->attributes);
     }
-
 
     public function getContent()
     {
-        return Eventy::filter('post.entity.getContent', $this->attributes['content'], $this->attributes);
+        return Hook::filter('post.entity.getContent', $this->attributes['content'], $this->attributes);
     }
-
 
     public function getMetaTitle()
     {
-        return Eventy::filter('post.entity.getMetaTitle', $this->attributes['meta_title'], $this->attributes);
+        return Hook::filter('post.entity.getMetaTitle', $this->attributes['meta_title'], $this->attributes);
     }
-
 
     public function getMetaDescription()
     {
-        return Eventy::filter('post.entity.getMetaDescription', $this->attributes['meta_description'], $this->attributes);
+        return Hook::filter('post.entity.getMetaDescription', $this->attributes['meta_description'], $this->attributes);
     }
 }

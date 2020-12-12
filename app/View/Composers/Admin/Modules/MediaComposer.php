@@ -6,21 +6,6 @@ use App\Entities\File;
 
 class MediaComposer
 {
-
-    private function index($request, $view)
-    {
-        return [
-            'table' => getData('Admin/Modules/Media/media_index_table')
-        ];
-    }
-
-    private function edit($request, $view)
-    {
-        return [
-            'form' => getData('Admin/Modules/Media/media_edit_form'),
-        ];
-    }
-
     private function list($request, $view)
     {
         if (empty($view->files)) return [

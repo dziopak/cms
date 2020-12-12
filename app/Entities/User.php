@@ -19,12 +19,12 @@ use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
 use App\Notifications\UserPasswordReset;
 use App\Notifications\UserEmailVerification;
+use App\Traits\Filterable;
 use URL;
-
 
 class User extends Authenticatable implements JWTSubject, Searchable, MustVerifyEmail
 {
-    use Notifiable, QueryCacheable;
+    use Filterable, Notifiable, QueryCacheable;
 
     public $cacheFor = 3600;
     public $fire_events = true;
@@ -38,6 +38,7 @@ class User extends Authenticatable implements JWTSubject, Searchable, MustVerify
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    private $searchIn = ['name', 'first_name', 'last_name', 'email'];
 
 
     public function role()
@@ -121,25 +122,6 @@ class User extends Authenticatable implements JWTSubject, Searchable, MustVerify
     }
 
 
-    public function scopeFilter($query, $request)
-    {
-        if (!empty($request->get('search'))) {
-
-            // Search in name, first name, last name or email //
-            $query->where('name', 'like', '%' . $request->get('search') . '%')
-                ->orWhere('first_name', 'like', '%' . $request->get('search') . '%')
-                ->orWhere('last_name', 'like', '%' . $request->get('search') . '%')
-                ->orWhere('email', 'like', '%' . $request->get('search') . '%');
-        }
-        if (!empty($request->get('sort_by'))) {
-            // Sort by selected field //
-            !empty($request->get('sort_order')) && $request->get('sort_order') === 'desc' ?
-                $query->orderByDesc($request->get('sort_by')) : $query->orderBy($request->get('sort_by'));
-        } else {
-            $query->orderByDesc('id');
-        }
-    }
-
     public function getSearchResult(): SearchResult
     {
         return new SearchResult(
@@ -170,21 +152,6 @@ class User extends Authenticatable implements JWTSubject, Searchable, MustVerify
         );
         $this->notify(new UserEmailVerification($verifyUrl));
     }
-
-    // public function setPassword($request)
-    // {
-    //     return EntityFactory::build($this->webEntity, $this)->setPassword($request);
-    // }
-
-    // public function disable()
-    // {
-    //     return EntityFactory::build($this->webEntity, $this)->disable();
-    // }
-
-    // public function block($request)
-    // {
-    //     return EntityFactory::build($this->webEntity, $this)->block($request);
-    // }
 
     static function find($id)
     {

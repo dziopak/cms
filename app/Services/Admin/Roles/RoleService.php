@@ -2,7 +2,6 @@
 
 namespace App\Services\Admin\Roles;
 
-use App\Entities\Role;
 use App\Interfaces\Repositories\RoleRepositoryInterface;
 use App\Services\Admin\BaseAdminService;
 
@@ -15,19 +14,25 @@ class RoleService extends BaseAdminService
     public function __construct(RoleRepositoryInterface $repository)
     {
         parent::__construct($repository);
+
+        $this->queries = [
+            'index' => [
+                'table' => getData('Admin/Modules/Roles/roles_index_table'),
+            ],
+            'create' => [
+                'form' => getData('Admin/Modules/Roles/roles_form')
+            ]
+        ];
     }
 
     public function edit($id, $params = null)
     {
-        $before = function () use ($id) {
-            $this->queries['edit'] = [
-                'role' => $this->repository->find($id)->withPermissions()
-            ];
-        };
+        $this->queries['edit'] = [
+            'form' => getData('Admin/Modules/Roles/roles_form'),
+            'role' => $this->repository->find($id)->withPermissions()
+        ];
 
-        return parent::edit($id, [
-            'before' => $before
-        ]);
+        return parent::edit($id, []);
     }
 
     public function store($request, $params = null)

@@ -4,7 +4,6 @@ namespace App\Plugins\Lang\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Plugins\Lang\Entities\Lang;
-use Eventy;
 use Hook;
 
 class LangHookServiceProvider extends ServiceProvider
@@ -15,8 +14,6 @@ class LangHookServiceProvider extends ServiceProvider
         'categories',
         'layout'
     ];
-
-    private $langs = [];
 
     private function registerHooks()
     {
